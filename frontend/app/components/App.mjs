@@ -2,10 +2,11 @@ import {UploadPage} from '../../upload/components/UploadPage.mjs';
 
 const React = window.React;
 const {BrowserRouter, Switch, Route, Redirect, Link} = window.ReactRouterDOM;
-import { useAuth0 } from '../react-auth0-spa.mjs';
+import {LoadingIndicator} from './LoadingIndicator.mjs';
+import {useAuth0} from '../react-auth0-spa.mjs';
 
 export const App = () => {
-    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const {loading, isAuthenticated, user, loginWithRedirect, logout} = useAuth0();
 
     return React.createElement(BrowserRouter, {basename: '/'},
         React.createElement('header', {},
@@ -18,6 +19,11 @@ export const App = () => {
                         isAuthenticated ? React.createElement(Link, {to: '/admin'}, 'Admin') : '',
                         React.createElement('button', {id: 'btn-login', disabled: isAuthenticated, onClick: handleLogin}, 'Log in'),
                         React.createElement('button', {id: 'btn-logout', disabled: !isAuthenticated, onClick: handleLogout}, 'Log out'),
+                        React.createElement('div', {className: 'profilePicture'},
+                            (loading && user)
+                                ? React.createElement(LoadingIndicator)
+                                : React.createElement('img', {src: user.picture, alt: 'Profile picture'}),
+                        ),
                     ),
                 )
             ),

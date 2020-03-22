@@ -15,6 +15,7 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
 
     useEffect(() => {
         async function initAuth0() {
+            /* API Docs on this object: https://auth0.github.io/auth0-spa-js/classes/auth0client.html */
             const auth0FromHook = await createAuth0Client(initOptions);
             setAuth0(auth0FromHook);
 
