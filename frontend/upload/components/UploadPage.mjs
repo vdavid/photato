@@ -98,6 +98,13 @@ export const UploadPage = () => {
 
     return React.createElement('section', {id: 'fileUpload'},
         React.createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
+            React.createElement('label', {}, 'Title', React.createElement('input', {
+                    type: 'text',
+                    name: 'title',
+                    maxLength: 150,
+                    disabled: status === statuses.uploading,
+                })
+            ),
             React.createElement('input', {
                 type: 'file',
                 name: 'image',
