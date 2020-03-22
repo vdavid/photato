@@ -32,6 +32,7 @@ export const UploadPage = () => {
     const [status, setStatus] = useState(statuses.readyToSelectFile);
     const [uploadProgress, setUploadProgress] = useState(0.0);
     const [weekIndex] = useState(courseDateConverter.getWeekIndex());
+    const [deadline] = useState(courseDateConverter.getWeekDeadline());
 
     // noinspection JSValidateJSDoc
     /**
@@ -100,9 +101,13 @@ export const UploadPage = () => {
         }
     }
 
+    const formattedDeadline = new Intl.DateTimeFormat('hu-HU', {
+        year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
+    }).format(deadline);
     return React.createElement('section', {id: 'fileUpload'},
         React.createElement('h1', {}, 'Upload your weekly photo!'),
-        React.createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex),
+        React.createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex
+            + ', deadline is ' + formattedDeadline + '.'),
         React.createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             React.createElement('label', {}, 'Title', React.createElement('input', {
                     type: 'text',
