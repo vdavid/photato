@@ -16,13 +16,13 @@ export const App = () => {
                     React.createElement('li', {},
                         React.createElement(Link, {to: '/'}, 'Home'),
                         React.createElement(Link, {to: '/about'}, 'About'),
-                        isAuthenticated ? React.createElement(Link, {to: '/admin'}, 'Admin') : '',
+                        isAuthenticated ? React.createElement(Link, {to: '/upload'}, 'Upload') : '',
                         React.createElement('button', {id: 'btn-login', disabled: isAuthenticated, onClick: handleLogin}, 'Log in'),
                         React.createElement('button', {id: 'btn-logout', disabled: !isAuthenticated, onClick: handleLogout}, 'Log out'),
                         React.createElement('div', {className: 'profilePicture'},
-                            (loading && user)
-                                ? React.createElement(LoadingIndicator)
-                                : React.createElement('img', {src: user.picture, alt: 'Profile picture'}),
+                            (!loading && user)
+                                ? React.createElement('img', {src: user.picture, alt: 'Profile picture'})
+                                : React.createElement(LoadingIndicator),
                         ),
                     ),
                 )
@@ -30,6 +30,7 @@ export const App = () => {
         ),
         React.createElement('main', null,
             React.createElement(Switch, null,
+                React.createElement(Route, {path: '/upload', component: () => React.createElement(UploadPage, {})}),
                 React.createElement(Route, {path: '/about', component: () => React.createElement('h2', {}, 'Hello')}),
                 React.createElement(Route, {path: '/', component: () => React.createElement(UploadPage)}),
                 React.createElement(Redirect, {path: '*', to: {...window.history, pathname: '/'}}),
