@@ -1,6 +1,9 @@
 const React = window.React;
 const {useState} = React;
 import {config} from '../../app/config.mjs';
+import CourseDateConverter from '../../app/CourseDateConverter.mjs';
+
+const courseDateConverter = new CourseDateConverter(config.course.startDateTime);
 
 const statuses = {
     readyToSelectFile: Symbol('readyToSelectFile'),
@@ -28,6 +31,7 @@ export const UploadPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [status, setStatus] = useState(statuses.readyToSelectFile);
     const [uploadProgress, setUploadProgress] = useState(0.0);
+    const [weekIndex] = useState(courseDateConverter.getWeekIndex());
 
     // noinspection JSValidateJSDoc
     /**
@@ -97,6 +101,8 @@ export const UploadPage = () => {
     }
 
     return React.createElement('section', {id: 'fileUpload'},
+        React.createElement('h1', {}, 'Upload your weekly photo!'),
+        React.createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex),
         React.createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             React.createElement('label', {}, 'Title', React.createElement('input', {
                     type: 'text',
