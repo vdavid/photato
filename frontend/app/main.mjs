@@ -1,29 +1,28 @@
 import {config} from './config.mjs';
+import {createElement, StrictMode} from '/web_modules/react.js';
+import {render} from '/web_modules/react-dom.js';
 
-const {React, ReactDOM} = window;
 import store from './reduxStore.mjs';
 import {Auth0Provider} from "./react-auth0-spa.mjs";
 import {App} from './components/App.mjs';
 
-const {StrictMode} = window.React;
-
-const {Provider} = window.ReactRedux;
+import {Provider} from '/web_modules/react-redux.js';
 
 function onRedirectCallback(appState) {
     return window.history.replaceState({}, document.title, window.location.pathname);
 //    history.push(appState && appState.targetUrl ? appState.targetUrl : window.location.pathname);
 }
 
-ReactDOM.render(
-    React.createElement(Provider, {store},
-        React.createElement(Auth0Provider, {
+render(
+    createElement(Provider, {store},
+        createElement(Auth0Provider, {
                 domain: config.auth0.domain,
                 client_id: config.auth0.clientId,
                 redirect_uri: window.location.origin,
                 onRedirectCallback,
             },
-            React.createElement(StrictMode, {},
-                React.createElement(App),
+            createElement(StrictMode, {},
+                createElement(App),
             ),
         ),
     ),

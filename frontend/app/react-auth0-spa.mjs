@@ -1,5 +1,4 @@
-const React = window.React;
-const {useState, useEffect, useContext, createContext} = React;
+import {createElement, useState, useEffect, useContext, createContext} from '/web_modules/react.js';
 
 const defaultRedirectCallback = () => window.history.replaceState({}, document.title, window.location.pathname);
 
@@ -63,7 +62,7 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
         setUser(user);
     }
 
-    return React.createElement(Auth0Context.Provider,
+    return createElement(Auth0Context.Provider,
         {
             value: {
                 isAuthenticated,

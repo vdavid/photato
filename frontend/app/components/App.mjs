@@ -1,7 +1,6 @@
 import {UploadPage} from '../../upload/components/UploadPage.mjs';
-
-const React = window.React;
-const {BrowserRouter, Switch, Route, Redirect} = window.ReactRouterDOM;
+import React from '/web_modules/react.js';
+import {BrowserRouter, Switch, Route, Redirect} from '/web_modules/react-router-dom.js';
 import NavigationBar from './NavigationBar.mjs';
 
 export const App = () => {

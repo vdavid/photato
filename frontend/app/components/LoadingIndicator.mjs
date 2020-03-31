@@ -1,14 +1,14 @@
-const React = window.React;
+import {createElement} from '/web_modules/react.js';
 
 export const LoadingIndicator = () => {
-  return React.createElement('div', {className: 'lds-roller'},
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
-      React.createElement('div'),
+  return createElement('div', {className: 'lds-roller'},
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
+      createElement('div'),
       );
 };

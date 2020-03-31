@@ -1,5 +1,4 @@
-const React = window.React;
-const {useState} = React;
+import {createElement, useState} from '/web_modules/react.js';
 import {config} from '../../app/config.mjs';
 import CourseDateConverter from '../../app/CourseDateConverter.mjs';
 
@@ -104,34 +103,34 @@ export const UploadPage = () => {
     const formattedDeadline = new Intl.DateTimeFormat('hu-HU', {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
     }).format(deadline);
-    return React.createElement('section', {id: 'fileUpload'},
-        React.createElement('h1', {}, 'Upload your weekly photo!'),
-        React.createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex
+    return createElement('section', {id: 'fileUpload'},
+        createElement('h1', {}, 'Upload your weekly photo!'),
+        createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex
             + ', deadline is ' + formattedDeadline + '.'),
-        React.createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
-            React.createElement('label', {}, 'Title', React.createElement('input', {
+        createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
+            createElement('label', {}, 'Title', createElement('input', {
                     type: 'text',
                     name: 'title',
                     maxLength: 150,
                     disabled: status === statuses.uploading,
                 })
             ),
-            React.createElement('input', {
+            createElement('input', {
                 type: 'file',
                 name: 'image',
                 accept: 'image/*',
                 onChange: handleFileSelected,
                 disabled: status === statuses.uploading,
             }),
-            React.createElement('button', {
+            createElement('button', {
                 onClick: uploadSelectedFile,
                 disabled: status !== statuses.readyToUpload,
             }, 'Upload'),
-            React.createElement('progress', {
+            createElement('progress', {
                 value: uploadProgress * 100,
                 max: 100
             }),
-            React.createElement('div', {
+            createElement('div', {
                 className: 'status'
             }, statusTexts[status]),
         ),

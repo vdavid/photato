@@ -1,4 +1,4 @@
-const React = window.React;
+import React from '/web_modules/react.js';
 import {LoadingIndicator} from './LoadingIndicator.mjs';
 import {useAuth0} from '../react-auth0-spa.mjs';
 

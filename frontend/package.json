@@ -1,0 +1,37 @@
+{
+  "name": "photato-website-frontend",
+  "version": "1.0.0",
+  "description": "This is the JS front end of the Photato website.",
+  "main": "app/main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npx snowpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdavid/photato-website-frontend.git"
+  },
+  "keywords": [
+    "photato",
+    "photo",
+    "photography",
+    "website",
+    "potato"
+  ],
+  "author": "David Veszelovszki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vdavid/photato-website-frontend/issues"
+  },
+  "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
+  "dependencies": {
+    "react": "npm:@pika/react@^16.13.1",
+    "react-dom": "npm:@pika/react-dom@^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "snowpack": "^1.6.0"
+  }
+}
