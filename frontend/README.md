@@ -4,12 +4,15 @@ This is a website meant to be put to https://photato.eu
 Technology used:
 - React
 - To be deployed with Netlify
-- Will handle auth via Auth0
-- Will call an AWS Lambda backend
+- Handles auth via Auth0
+- Call an AWS Lambda backend, deployed by Serverless.
 
 ## Installation
 
 The front end is to be deployed with Netlify.
+TODO: This is missing
+
+#### Testing locally
 
 The only setting needed is to forward all requests to nonexistent files to `index.html`.
 
