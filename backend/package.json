@@ -1,0 +1,25 @@
+{
+  "name": "photato-website-backend",
+  "version": "1.0.0",
+  "description": "This is the AWS Lambda backend for the Photato website, deployed by Serverless",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "photato",
+    "potato",
+    "photo",
+    "website",
+    "serverless",
+    "nodejs",
+    "javascript",
+    "photography"
+  ],
+  "author": "David Veszelovszki",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.650.0",
+    "serverless": "^1.67.0"
+  }
+}
