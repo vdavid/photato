@@ -1,11 +1,13 @@
 # Photato website
 This is a website meant to be put to https://photato.eu
 
-Also see the frontend's README.md
-
 Technology used:
-- Handles auth via Auth0
-- Call an AWS Lambda backend, deployed by Serverless.
+ - AWS Lambda backend via Lambda@Edge
+ - [Serverless](https://serverless.com) for the deployment.
+
+For the single-use upload URLs, got a lot of inspiration from this package: https://github.com/laardee/one-time-presigned-url
+
+See also the frontend's README.md
 
 ## Installation
 
@@ -21,7 +23,7 @@ Technology used:
    You'll need to add your AWS access key and secret to the command.
    
    If you have no user yet, set it up here:
-https://console.aws.amazon.com/iam/home?region=eu-central-1
+https://console.aws.amazon.com/iam/home?region=us-east-1
 I suppose it needs "AdministratorAccess" privileges, that's what I gave it:
 
    ```bash
@@ -36,7 +38,7 @@ I suppose it needs "AdministratorAccess" privileges, that's what I gave it:
 
 ## Development
 
-Logs are here: https://eu-central-1.console.aws.amazon.com/cloudwatch/home?region=eu-central-1#logStream:group=/aws/lambda/photato-website-backend-dev-uploadToS3;streamFilter=typeLogStreamPrefix
+Logs are here: https://us-east-1.console.aws.amazon.com/cloudwatch/home
 
 ### Adding a new back-end service
 
@@ -44,8 +46,35 @@ Use this one to create a Node.js-based AWS service
 ```bash
 sls create --template aws-nodejs --path {myService}
 ```
- 
+
+### Testing
+
+It uses Jest. To run them, just run:
+
+```bash
+npm test
+```
+
+## Deployment
+
+Be careful because things take time (can be 45 minutes) to propagate, so definitely run the tests before deploying.
+
+```bash
+npx serverless deploy
+```
+
 ## Features
+
+A number of Lambda functions.
+
+### Get signed URL
+
+Returns a signed URL 
+
+### Validate signed URL
+
+### Get image
+
 
 ## Links
 

@@ -4,7 +4,12 @@
   "description": "This is the AWS Lambda backend for the Photato website, deployed by Serverless",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest",
+    "deploy": "npx serverless deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdavid/photato-website-backend.git"
   },
   "keywords": [
     "photato",
@@ -19,7 +24,16 @@
   "author": "David Veszelovszki",
   "license": "ISC",
   "devDependencies": {
+    "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
     "aws-sdk": "^2.650.0",
+    "jest": "^25.2.4",
     "serverless": "^1.67.0"
+  },
+  "dependencies": {
+    "@types/jest": "^25.1.4",
+    "uuid-random": "^1.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
