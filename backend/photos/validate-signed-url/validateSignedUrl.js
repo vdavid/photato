@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
-const config = require('../config.json');
+const config = require('../../config.js');
 const ValidateSignedUrlHandler = require('./ValidateSignedUrlHandler.js');
-const SignatureRepository = require('./SignatureRepository.js');
+const SignatureRepository = require('../SignatureRepository.js');
 
 /**
  * Handles Lambda@Edge inputs

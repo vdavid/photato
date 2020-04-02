@@ -1,9 +1,9 @@
 const AWS = require('aws-sdk');
-const config = require('../config.json');
+const config = require('../../config.js');
 const GetSignedUrlHandler = require('./GetSignedUrlHandler.js');
-const PhotoMetadataBuilder = require('./PhotoMetadataBuilder.js');
-const PhotoRepository = require('./PhotoRepository.js');
-const SignatureRepository = require('./SignatureRepository.js');
+const PhotoMetadataBuilder = require('../PhotoMetadataBuilder.js');
+const PhotoRepository = require('../PhotoRepository.js');
+const SignatureRepository = require('../SignatureRepository.js');
 
 module.exports.handler = async (event, context) => {
     const photoMetadataBuilder = new PhotoMetadataBuilder();

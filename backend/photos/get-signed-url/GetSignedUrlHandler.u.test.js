@@ -1,8 +1,8 @@
 /* Requires */
 const GetSignedUrlHandler = require('./GetSignedUrlHandler.js');
-const PhotoMetadataBuilder = require('./PhotoMetadataBuilder.js');
-const PhotoRepository = require('./PhotoRepository.js');
-const SignatureRepository = require('./SignatureRepository.js');
+const PhotoMetadataBuilder = require('../PhotoMetadataBuilder.js');
+const PhotoRepository = require('../PhotoRepository.js');
+const SignatureRepository = require('../SignatureRepository.js');
 
 /* Constants */
 const bucketName = 'testBucket';

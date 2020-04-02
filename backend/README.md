@@ -5,7 +5,7 @@ Technology used:
  - AWS Lambda backend via Lambda@Edge
  - [Serverless](https://serverless.com) for the deployment.
 
-For the single-use upload URLs, got a lot of inspiration from this package: https://github.com/laardee/one-time-presigned-url
+For the single-use upload URLs, got a lot of inspiration from this [article](https://serverless.com/blog/s3-one-time-signed-url/) and the related [repository](https://github.com/laardee/one-time-presigned-url).
 
 See also the frontend's README.md
 

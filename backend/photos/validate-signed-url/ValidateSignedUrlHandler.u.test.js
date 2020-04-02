@@ -1,6 +1,6 @@
 /* Requires */
 const ValidateSignedUrlHandler = require('./ValidateSignedUrlHandler.js');
-const SignatureRepository = require('./SignatureRepository.js');
+const SignatureRepository = require('../SignatureRepository.js');
 
 /* Constants */
 const bucketName = 'testBucket';

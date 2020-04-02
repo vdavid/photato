@@ -35,7 +35,7 @@ provider:
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
   get-signed-url:
-    handler: photos/getSignedUrl.handler
+    handler: photos/get-signed-url/getSignedUrl.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
@@ -43,12 +43,20 @@ functions:
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
       pathPattern: '/get-signed-url'
   validate-signed-url:
-    handler: photos/validateSignedUrl.handler
+    handler: photos/validate-signed-url/validateSignedUrl.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
       distribution: CloudFront
       eventType: viewer-request
+  list-photos:
+    handler: photos/list-photos/listPhotos.handler
+    memorySize: 128
+    timeout: 5
+    lambdaAtEdge:
+      distribution: CloudFront
+      eventType: viewer-request
+      pathPattern: '/list-photos'
   get-photo:
     handler: photos/getImageFromS3.handler
     memorySize: 128
@@ -156,6 +164,19 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/get-signed-url'
+              AllowedMethods:
+                - GET
+                - HEAD
+            - TargetOriginId: S3Origin
+              ViewerProtocolPolicy: redirect-to-https
+              DefaultTTL: 0
+              MaxTTL: 0
+              MinTTL: 0
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              PathPattern: '/list-photos'
               AllowedMethods:
                 - GET
                 - HEAD
