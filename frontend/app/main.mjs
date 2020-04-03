@@ -4,7 +4,7 @@ import {render} from '/web_modules/react-dom.js';
 
 import store from './reduxStore.mjs';
 import {Auth0Provider} from "./react-auth0-spa.mjs";
-import {App} from './components/App.mjs';
+import App from './components/App.mjs';
 
 import {Provider} from '/web_modules/react-redux.js';
 

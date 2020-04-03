@@ -1,8 +1,8 @@
-import React from '/web_modules/react.js';
-import {LoadingIndicator} from './LoadingIndicator.mjs';
+import {createElement} from '/web_modules/react.js';
+import LoadingIndicator from './LoadingIndicator.mjs';
 import {useAuth0} from '../react-auth0-spa.mjs';
 
-export const AuthenticationArea = () => {
+export default function AuthenticationArea() {
     const {loading: isLoading, isAuthenticated, user, loginWithRedirect, logout} = useAuth0();
 
     function handleSignIn() {
@@ -13,16 +13,16 @@ export const AuthenticationArea = () => {
         logout({returnTo: window.location.origin});
     }
 
-    const signInButton = !isLoading && !isAuthenticated && React.createElement('a', {href: '#', onClick: handleSignIn}, 'Sign in');
-    const loadingButton = isLoading && React.createElement(LoadingIndicator);
-    const profilePicture = user && React.createElement('img', {src: user.picture, alt: 'Profile picture'});
-    const profileMenu = isAuthenticated && React.createElement('div', {className: 'menu'},
-            React.createElement('a', {href: '#', onClick: handleSignOut}, 'Sign out'));
+    const signInButton = !isLoading && !isAuthenticated && createElement('a', {href: '#', onClick: handleSignIn}, 'Sign in');
+    const loadingButton = isLoading && createElement(LoadingIndicator);
+    const profilePicture = user && createElement('img', {src: user.picture, alt: 'Profile picture'});
+    const profileMenu = isAuthenticated && createElement('div', {className: 'menu'},
+        createElement('a', {href: '#', onClick: handleSignOut}, 'Sign out'));
 
-    return React.createElement('div', {className: 'authentication'},
+    return createElement('div', {className: 'authentication'},
         loadingButton,
         profilePicture,
         profileMenu,
         signInButton
     );
-};
+}

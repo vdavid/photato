@@ -1,6 +1,6 @@
 import {createElement} from '/web_modules/react.js';
 import {NavLink} from '/web_modules/react-router-dom.js';
-import {AuthenticationArea} from './AuthenticationArea.mjs';
+import AuthenticationArea from './AuthenticationArea.mjs';
 import {useAuth0} from '../react-auth0-spa.mjs';
 
 export default function NavigationBar() {
