@@ -21,7 +21,7 @@ test('Uploads image', async () => {
     /* Assert */
     expect(result.operation).toBe('putObject');
     expect(result.bucket).toBe(bucketName);
-    expect(result.key).toBe('/photos/xx-1/week-5/test@user.com.jpg');
+    expect(result.key).toBe('photos/xx-1/week-5/test@user.com.jpg');
     expect(result.metadata['email-address']).toBe(testFields.emailAddress);
     expect(result.metadata['original-file-name']).toBe(testFields.originalFileName);
     expect(result.metadata['title']).toBe(testFields.title);

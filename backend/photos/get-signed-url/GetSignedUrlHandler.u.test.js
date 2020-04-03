@@ -10,7 +10,7 @@ const fakeQueryString = 'a=1';
 
 /* S3 mock */
 const getSignedUrlMock = jest.fn((operation, {Bucket: bucket, Key: key}) =>
-    'https://' + bucket + key + '?' + fakeQueryString);
+    'https://' + bucket + '/' + key + '?' + fakeQueryString);
 const putObjectMock = jest.fn(() => ({promise: async () => true}));
 const s3 = {
     getSignedUrl: getSignedUrlMock,

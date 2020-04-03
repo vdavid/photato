@@ -7,7 +7,7 @@ const SignatureRepository = require('../SignatureRepository.js');
 
 module.exports.handler = async (event, context) => {
     const photoMetadataBuilder = new PhotoMetadataBuilder();
-    const s3 = new AWS.S3();
+    const s3 = new AWS.S3({ region: 'us-east-1', signatureVersion: 'v4' });
     const photoRepository = new PhotoRepository(s3, config.bucket.name);
     const signatureRepository = new SignatureRepository(s3, config.bucket.name);
 

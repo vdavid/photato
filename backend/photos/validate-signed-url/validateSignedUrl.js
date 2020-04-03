@@ -10,7 +10,7 @@ const SignatureRepository = require('../SignatureRepository.js');
  * @returns {Object}
  */
 async function handler(event) {
-    const s3 = new AWS.S3();
+    const s3 = new AWS.S3({ region: 'us-east-1', signatureVersion: 'v4' });
     const signatureRepository = new SignatureRepository(s3, config.bucket.name);
     const handler = new ValidateSignedUrlHandler({signatureRepository});
     return handler.handleRequest(event);

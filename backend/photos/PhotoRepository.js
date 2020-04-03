@@ -29,7 +29,7 @@ module.exports = class PhotoRepository {
      * @returns {string}
      */
     _buildPathFromMetadata(photoMetadata) {
-        return '/photos/' + photoMetadata.courseName
+        return 'photos/' + photoMetadata.courseName
             + '/week-' + photoMetadata.weekIndex
             + '/' + photoMetadata.emailAddress
             + '.' + this._getExtensionByMimeType(photoMetadata.mimeType);
