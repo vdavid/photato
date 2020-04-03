@@ -1,50 +1,34 @@
 import {createElement, useState} from '/web_modules/react.js';
 import {config} from '../../app/config.mjs';
+import {weeklyChallengeTitles} from '../../app/challengeRepository.mjs';
+import {uploadStatuses, uploadStatusTexts} from '../uploadStatuses.mjs';
 import CourseDateConverter from '../../app/CourseDateConverter.mjs';
+import PhotoUploader from '../PhotoUploader.mjs';
+import FileSelectorWithPreview from './FileSelectorWithPreview.mjs';
 
 const courseDateConverter = new CourseDateConverter(config.course.startDateTime);
+const photoUploader = new PhotoUploader();
 
-const statuses = {
-    readyToSelectFile: Symbol('readyToSelectFile'),
-    selectedFileIsTooSmall: Symbol('selectedFileIsTooSmall'),
-    selectedFileIsTooLarge: Symbol('selectedFileIsTooLarge'),
-    readyToUpload: Symbol('readyToUpload'),
-    uploading: Symbol('uploading'),
-    uploadDone: Symbol('uploadDone'),
-    uploadFailed: Symbol('uploadFailed'),
-};
+// noinspection JSValidateJSDoc
+/**
+ * @param {File} file
+ * @returns {symbol}
+ */
+function _validateFile(file) {
+    return ((file.size > config.imageUpload.maximumSizeInBytes)
+        ? uploadStatuses.selectedFileIsTooLarge
+        : ((file.size < config.imageUpload.minimumSizeInBytes)
+            ? uploadStatuses.selectedFileIsTooSmall
+            : uploadStatuses.readyToUpload));
+}
 
-const statusTexts = {
-    [statuses.readyToSelectFile]: 'Please select your photo to upload.',
-    [statuses.selectedFileIsTooSmall]: 'The image you\'ve selected is smaller than '
-    + Math.round(config.imageUpload.minimumSizeInBytes / 1024) + ' kilobytes. Please select a higher resolution photo.',
-    [statuses.selectedFileIsTooLarge]: 'The image you\'ve selected is larger than '
-    + Math.round(config.imageUpload.minimumSizeInBytes / 1024 / 1024) + ' megabytes. Please select a smaller photo.',
-    [statuses.readyToUpload]: 'Photo is ready to upload.',
-    [statuses.uploading]: 'Uploading selected photo...',
-    [statuses.uploadDone]: 'Upload done.',
-    [statuses.uploadFailed]: 'Upload failed.',
-};
-
-export const UploadPage = () => {
+export default function UploadPage() {
+    const ONE_MINUTE = 60 * 1000;
     const [selectedFile, setSelectedFile] = useState(null);
-    const [status, setStatus] = useState(statuses.readyToSelectFile);
+    const [uploadStatus, setUploadStatus] = useState(uploadStatuses.readyToSelectFile);
     const [uploadProgress, setUploadProgress] = useState(0.0);
     const [weekIndex] = useState(courseDateConverter.getWeekIndex());
-    const [deadline] = useState(courseDateConverter.getWeekDeadline());
-
-    // noinspection JSValidateJSDoc
-    /**
-     * @param {File} file
-     * @returns {symbol}
-     */
-    function validateFile(file) {
-        return ((file.size > config.imageUpload.maximumSizeInBytes)
-            ? statuses.selectedFileIsTooLarge
-            : ((file.size < config.imageUpload.minimumSizeInBytes)
-                ? statuses.selectedFileIsTooSmall
-                : statuses.readyToUpload));
-    }
+    const [deadline] = useState(new Date(courseDateConverter.getWeekDeadline() - ONE_MINUTE));
 
     /**
      * @param {Object} event
@@ -52,50 +36,39 @@ export const UploadPage = () => {
     function handleFileSelected(event) {
         const file = event.target.files[0];
         if (file) {
-            const newStatus = validateFile(file);
-            setStatus(newStatus);
-            if (newStatus === statuses.readyToUpload) {
+            const newStatus = _validateFile(file);
+            setUploadStatus(newStatus);
+            if (newStatus === uploadStatuses.readyToUpload) {
                 setSelectedFile(file);
                 setUploadProgress(0.0);
             }
         } else {
             setSelectedFile(null);
-            setStatus(statuses.readyToSelectFile);
+            setUploadStatus(uploadStatuses.readyToSelectFile);
             setUploadProgress(0.0);
         }
     }
 
-    /**
-     * @param {string} url
-     * @param {File} file
-     * @returns {Promise<unknown>} TODO: Figure out the type
-     */
-    function uploadFile(url, file) {
-        return new Promise((resolve, reject) => {
-            const formData = new FormData();
-            formData.append('image', file);
-            const xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.upload.addEventListener('progress', event => setUploadProgress(event.loaded / event.total), false);
-            xmlHttpRequest.addEventListener('load', resolve, false);
-            xmlHttpRequest.addEventListener('error', reject, false);
-            xmlHttpRequest.addEventListener('abort', () => reject('User abort.'), false);
-            xmlHttpRequest.open('POST', url);
-            xmlHttpRequest.setRequestHeader('Content-Type', file.type);
-            xmlHttpRequest.send(formData);
-        });
-    }
-
     async function uploadSelectedFile() {
         try {
-            setStatus(statuses.uploading);
+            setUploadStatus(uploadStatuses.uploading);
 
-            const response = await uploadFile(config.backendApi.image.url, selectedFile);
+            const parameters = {
+                emailAddress: 'test@user.com',
+                courseName: 'hu-3',
+                weekIndex: '2',
+                originalFileName: 'kukutyin.jpg',
+                title: 'Test title',
+                mimeType: 'image/jpg',
+            };
+            const signedUrl = await photoUploader.getSignedUrlFromServer(config.backendApi.photoUpload.url, parameters);
+            const response = await photoUploader.uploadFile(signedUrl, selectedFile, setUploadProgress);
 
             console.log(response);
-            setStatus(statuses.uploadDone);
+            setUploadStatus(uploadStatuses.uploadDone);
             setUploadProgress(1.0);
         } catch (error) {
-            setStatus(statuses.uploadFailed);
+            setUploadStatus(uploadStatuses.uploadFailed);
             console.log(error);
         }
     }
@@ -103,28 +76,27 @@ export const UploadPage = () => {
     const formattedDeadline = new Intl.DateTimeFormat('hu-HU', {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
     }).format(deadline);
+
     return createElement('section', {id: 'fileUpload'},
         createElement('h1', {}, 'Upload your weekly photo!'),
-        createElement('p', {className: 'currentWeek'}, 'It\'s week #' + weekIndex
-            + ', deadline is ' + formattedDeadline + '.'),
+        createElement('p', {className: 'currentWeek'}, "Week #" + weekIndex),
+        createElement('h2', {}, weeklyChallengeTitles[weekIndex - 1]),
+        createElement('p','Send in your pic before ' + formattedDeadline + '.'),
         createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             createElement('label', {}, 'Title', createElement('input', {
                     type: 'text',
                     name: 'title',
                     maxLength: 150,
-                    disabled: status === statuses.uploading,
+                    disabled: uploadStatus === uploadStatuses.uploading,
                 })
             ),
-            createElement('input', {
-                type: 'file',
-                name: 'image',
-                accept: 'image/*',
-                onChange: handleFileSelected,
-                disabled: status === statuses.uploading,
+            createElement(FileSelectorWithPreview, {
+                onFileSelected: handleFileSelected,
+                isDisabled: uploadStatus === uploadStatuses.uploading,
             }),
             createElement('button', {
                 onClick: uploadSelectedFile,
-                disabled: status !== statuses.readyToUpload,
+                disabled: uploadStatus !== uploadStatuses.readyToUpload,
             }, 'Upload'),
             createElement('progress', {
                 value: uploadProgress * 100,
@@ -132,7 +104,7 @@ export const UploadPage = () => {
             }),
             createElement('div', {
                 className: 'status'
-            }, statusTexts[status]),
+            }, uploadStatusTexts[uploadStatus]),
         ),
     );
-};
+}

@@ -12,8 +12,8 @@ export const config = {
         maximumSizeInBytes: 25 * 1024 * 1024,
     },
     backendApi: {
-        image: {
-            url: 'https://lujs0psj0l.execute-api.eu-central-1.amazonaws.com/production/image',
+        photoUpload: {
+            url: 'https://d2l6ndiv9r7vhe.cloudfront.net/get-signed-url',
         }
     },
 };
