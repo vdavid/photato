@@ -67,5 +67,5 @@ test('Handles valid requests well', async () => {
     expect(getSignedUrlMock.mock.calls[0][0]).toBe('putObject');
     expect(putObjectMock).toBeCalledTimes(1);
     expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
-    expect(putObjectMock.mock.calls[0][0].Key).toBe('/signatures/valid/d43fbc0c97c3b273b3d8cadf82dc73b9ba2899ef70acf396108122e1874ce024');
+    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/valid/d43fbc0c97c3b273b3d8cadf82dc73b9ba2899ef70acf396108122e1874ce024');
 });

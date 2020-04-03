@@ -27,7 +27,7 @@ module.exports = class SignatureRepository {
      * @private
      */
     _buildKey(status, hash) {
-        return '/signatures/' + status + '/' + hash;
+        return 'signatures/' + status + '/' + hash;
     }
 
     /**

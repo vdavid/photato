@@ -38,7 +38,7 @@ afterEach(() => {
 test('Allows non-expired, valid signatures', async () => {
     /* Arrange */
     const localHeadObjectMock = jest.fn(({Key}) => ({
-        promise: () => new Promise((resolve, reject) => Key.startsWith('/signatures/valid') ? resolve() : reject())
+        promise: () => new Promise((resolve, reject) => Key.startsWith('signatures/valid') ? resolve() : reject())
     }));
     const s3 = {...defaultS3, headObject: localHeadObjectMock};
     const signatureRepository = new SignatureRepository(s3, bucketName);
@@ -48,13 +48,13 @@ test('Allows non-expired, valid signatures', async () => {
     const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
 
     /* Assert */
+    expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
+    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/expired/2762b44baf8deeab4ebef82481600782a863d875f1b4b7e17645ef3617e33dc5');
     expect(response.method).toEqual('PUT');
     expect(response.querystring).toEqual(queryString);
     expect(response.uri).toEqual(uri);
     expect(localHeadObjectMock).toBeCalledTimes(2);
     expect(putObjectMock).toBeCalledTimes(1);
-    expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
-    expect(putObjectMock.mock.calls[0][0].Key).toBe('/signatures/expired/2762b44baf8deeab4ebef82481600782a863d875f1b4b7e17645ef3617e33dc5');
 });
 
 test('Disallows expired, valid signatures', async () => {
