@@ -19,7 +19,7 @@ See also the frontend's README.md
    npm install -g serverless
    ```
 
-2. Allow it to access AWS.
+2. Allow it to access AWS.b
    You'll need to add your AWS access key and secret to the command.
    
    If you have no user yet, set it up here:
@@ -39,6 +39,8 @@ I suppose it needs "AdministratorAccess" privileges, that's what I gave it:
 ## Development
 
 Logs are here: https://us-east-1.console.aws.amazon.com/cloudwatch/home
+
+AWS JS API docs are quite useful: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS.html
 
 ### Adding a new back-end service
 

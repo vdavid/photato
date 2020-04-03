@@ -22,7 +22,7 @@ module.exports = class ValidateSignedUrlHandler {
             return request;
         } else {
             return {
-                statusCode: '403',
+                status: '403',
                 statusDescription: 'Forbidden',
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],

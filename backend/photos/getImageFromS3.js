@@ -7,7 +7,7 @@ exports.handler = async (event) => {
         Key: event.queryStringParameters.key,
     });
     return {
-        statusCode: 200,
+        status: 200,
         headers: {
             my_header: 'my_value'
         },

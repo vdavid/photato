@@ -47,7 +47,7 @@ module.exports = class GetSignedUrlHandler {
      *        API Gateway: See https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html
      *        Lambda@Edge: See https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
      * @param {Object} context See https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html
-     * @returns {Promise<{statusCode: number, statusDescription: string, headers: Object, body: string}>}
+     * @returns {Promise<{status: number, statusDescription: string, headers: Object, body: string}>}
      */
     async handleRequest(event, context) {
         try {
@@ -65,7 +65,7 @@ module.exports = class GetSignedUrlHandler {
 
             /* Return URL */
             return {
-                statusCode: 200,
+                status: 200,
                 statusDescription: 'OK',
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],
@@ -75,7 +75,7 @@ module.exports = class GetSignedUrlHandler {
             };
         } catch(error) {
             return {
-                statusCode: 400,
+                status: 400,
                 statusDescription: 'Bad Request',
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],

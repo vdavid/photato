@@ -66,7 +66,7 @@ test('Disallows expired, valid signatures', async () => {
     const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
 
     /* Assert */
-    expect(response.statusCode).toEqual('403');
+    expect(response.status).toEqual('403');
     expect(response.statusDescription).toEqual('Forbidden');
     expect(headObjectMock).toBeCalledTimes(2);
     expect(putObjectMock).toBeCalledTimes(0);

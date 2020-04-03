@@ -60,7 +60,7 @@ test('Handles valid requests well', async () => {
     expect(response.body).toEqual('https://' + host + '/photos/' + parameters.courseName + '/'
         + 'week-' + parameters.weekIndex + '/' + parameters.emailAddress + '.jpg'
         + '?' + fakeQueryString);
-    expect(response.statusCode).toEqual(200);
+    expect(response.status).toEqual(200);
     expect(response.statusDescription).toEqual('OK');
     expect(response.statusDescription).toEqual('OK');
     expect(getSignedUrlMock).toBeCalledTimes(1);
