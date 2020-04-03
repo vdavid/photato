@@ -4,7 +4,7 @@
   "description": "This is the JS front end of the Photato website.",
   "main": "app/main.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "postinstall": "npx snowpack"
   },
   "repository": {
@@ -32,6 +32,10 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "snowpack": "^1.6.0"
+    "snowpack": "^1.6.0",
+    "jest": "^25.2.4"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

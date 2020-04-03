@@ -1,4 +1,5 @@
-export default class CourseDateConverter {
+// TODO: Only for Jest. It's the same as the *.js file. Once Jest supports ESM, this can be deleted.
+module.exports = class CourseDateConverter {
     /**
      * @param {Date} courseStartDate
      */
@@ -37,4 +38,4 @@ export default class CourseDateConverter {
         deadline.setDate(this._courseStartDate.getDate() + 7 * this.getWeekIndex(date) + 1);
         return deadline;
     }
-}
+};
