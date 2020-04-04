@@ -27,6 +27,7 @@ module.exports = class ValidateSignedUrlHandler {
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],
                     'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
+                    'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
                 },
                 body: 'Forbidden',
             };

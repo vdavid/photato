@@ -70,6 +70,7 @@ module.exports = class GetSignedUrlHandler {
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],
                     'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
+                    'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
                 },
                 body: 'https://' + parameters.host + path,
             };
@@ -80,6 +81,7 @@ module.exports = class GetSignedUrlHandler {
                 headers: {
                     'content-type': [{key: 'Content-Type', value: 'text/plain'}],
                     'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
+                    'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
                 },
                 body: error.message,
             }
