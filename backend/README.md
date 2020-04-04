@@ -2,7 +2,7 @@
 This is a website meant to be put to https://photato.eu
 
 Technology used:
- - AWS Lambda backend via Lambda@Edge
+ - AWS Lambda backend via Lambda@Edge (related: [why the weird response headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-event-structure.html))
  - [Serverless](https://serverless.com) for the deployment.
 
 For the single-use upload URLs, got a lot of inspiration from this [article](https://serverless.com/blog/s3-one-time-signed-url/) and the related [repository](https://github.com/laardee/one-time-presigned-url).

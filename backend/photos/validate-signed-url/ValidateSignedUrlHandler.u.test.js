@@ -35,6 +35,39 @@ afterEach(() => {
     putObjectMock.mockClear();
 });
 
+test('Allows OPTIONS for non-expired, valid signatures', async () => {
+    /* Arrange */
+    const localHeadObjectMock = jest.fn(({Key}) => ({
+        promise: () => new Promise((resolve, reject) => Key.startsWith('signatures/valid') ? resolve() : reject())
+    }));
+    const s3 = {...defaultS3, headObject: localHeadObjectMock};
+    const signatureRepository = new SignatureRepository(s3, bucketName);
+    const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
+    const event = {
+        Records: [
+            {
+                cf: {
+                    request: {
+                        headers: {host: [{key: 'Host', value: host}]},
+                        method: 'OPTIONS',
+                        uri,
+                    },
+                },
+            },
+        ],
+    };
+
+    /*Act */
+    const response = await validateSignedUrlHandler.handleRequest(event);
+
+    /* Assert */
+    expect(response.status).toEqual('200');
+    expect(response.statusDescription).toEqual('OK');
+    expect(Object.keys(response.headers).length).toBe(1);
+    expect(localHeadObjectMock).toBeCalledTimes(2);
+    expect(putObjectMock).toBeCalledTimes(0);
+});
+
 test('Allows non-expired, valid signatures', async () => {
     /* Arrange */
     const localHeadObjectMock = jest.fn(({Key}) => ({

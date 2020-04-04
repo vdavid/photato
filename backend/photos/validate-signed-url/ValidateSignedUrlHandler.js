@@ -17,7 +17,15 @@ module.exports = class ValidateSignedUrlHandler {
         const request = event.Records[0].cf.request;
         const path = request.uri + '?' + request.querystring;
 
-        if ((request.method === 'PUT') && await this._signatureRepository.isSignatureValidForPath(path)) {
+        if ((request.method === 'OPTIONS') && await this._signatureRepository.isSignatureValidForPath(path)) {
+            return {
+                status: '200',
+                statusDescription: 'OK',
+                headers: {
+                    'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
+                },
+            };
+        } else if ((request.method === 'PUT') && await this._signatureRepository.isSignatureValidForPath(path)) {
             await this._signatureRepository.markSignatureExpiredForPath(path);
             return request;
         } else {
@@ -29,7 +37,7 @@ module.exports = class ValidateSignedUrlHandler {
                     'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
                     'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
                 },
-                body: 'Forbidden',
+                body: 'You cannot upload your stuff here, sorry.',
             };
         }
     }
