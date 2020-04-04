@@ -10,8 +10,8 @@ export default class PhotoUploader {
      */
     async getSignedUrlFromServer(url, parameters) {
         const response = await fetch(url + '?' + this._convertToQueryString(parameters), {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, *cors, same-origin
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             redirect: 'follow', // manual, *follow, error
@@ -28,16 +28,14 @@ export default class PhotoUploader {
      */
     uploadFile(url, file, setUploadProgressCallback) {
         return new Promise((resolve, reject) => {
-            const formData = new FormData();
-            formData.append('image', file);
             const xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.upload.addEventListener('progress', event => setUploadProgressCallback(event.loaded / event.total), false);
             xmlHttpRequest.addEventListener('load', resolve, false);
             xmlHttpRequest.addEventListener('error', reject, false);
             xmlHttpRequest.addEventListener('abort', () => reject('User abort.'), false);
-            xmlHttpRequest.open('POST', url);
+            xmlHttpRequest.open('PUT', url);
             xmlHttpRequest.setRequestHeader('Content-Type', file.type);
-            xmlHttpRequest.send(formData);
+            xmlHttpRequest.send(file);
         });
     }
 }

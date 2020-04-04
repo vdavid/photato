@@ -3,7 +3,7 @@ import {createElement, useState, useEffect, useContext, createContext} from '/we
 const defaultRedirectCallback = () => window.history.replaceState({}, document.title, window.location.pathname);
 
 export const Auth0Context = createContext();
-export const useAuth0 = () => useContext(Auth0Context);
+export const useAuth0 = () => useContext(Auth0Context); /* User data docs: https://auth0.com/docs/api/authentication#get-user-info */
 
 export function Auth0Provider({children, onRedirectCallback = defaultRedirectCallback, ...initOptions}) {
     const [isAuthenticated, setIsAuthenticated] = useState();
