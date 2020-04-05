@@ -1,6 +1,6 @@
 import {createElement, useState} from '/web_modules/react.js';
 import {config} from '../../app/config.mjs';
-import {useAuth0} from '../../app/react-auth0-spa.mjs';
+import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {weeklyChallengeTitles} from '../../app/challengeRepository.mjs';
 import {uploadStatuses} from '../uploadStatuses.mjs';
 import CourseDateConverter from '../../app/CourseDateConverter.mjs';

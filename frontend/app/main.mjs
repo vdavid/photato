@@ -2,7 +2,7 @@ import {config, developmentConfig, stagingConfig, productionConfig} from './conf
 import {createElement, StrictMode} from '/web_modules/react.js';
 import {render} from '/web_modules/react-dom.js';
 
-import {Auth0Provider} from "./react-auth0-spa.mjs";
+import {Auth0Provider} from "../auth/components/Auth0Provider.mjs";
 import I18nProvider from "../i18n/components/I18nProvider.mjs";
 import {getDefaultLocaleCodeByNavigatorPreferences} from '../i18n/i18nHelper.mjs';
 import {availableLocaleCodes} from '../i18n/locales.mjs'

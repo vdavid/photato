@@ -2,7 +2,7 @@ import {config} from '../config.mjs';
 import {createElement} from '/web_modules/react.js';
 import {NavLink} from '/web_modules/react-router-dom.js';
 import AuthenticationArea from './AuthenticationArea.mjs';
-import {useAuth0} from '../react-auth0-spa.mjs';
+import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
 export default function NavigationBar() {

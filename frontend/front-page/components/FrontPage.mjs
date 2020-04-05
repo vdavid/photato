@@ -2,7 +2,7 @@ import LoadingPage from '../../app/components/LoadingPage.mjs';
 import AuthenticatedFrontPage from './AuthenticatedFrontPage.mjs';
 import UnauthenticatedFrontPage from './UnauthenticatedFrontPage.mjs';
 import {createElement} from '/web_modules/react.js';
-import {useAuth0} from '../../app/react-auth0-spa.mjs';
+import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 
 export default function FrontPage() {
     const {loading: isLoading, isAuthenticated} = useAuth0();
