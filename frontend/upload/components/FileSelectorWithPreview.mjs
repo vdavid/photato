@@ -1,11 +1,14 @@
 import {createElement, useRef} from '../../web_modules/react.js';
 
 /**
- * @param {{onFileSelected: function(File): void, onFileRemoved: function, isDisabled: boolean}} props
+ * @param {string} selectedFilePreviewUrl
+ * @param {function(File): void} onFileSelected
+ * @param {function(): void} onFileRemoved
+ * @param {boolean} isDisabled
+ * @returns {*}
  * @constructor
  */
-export default function FileSelectorWithPreview(props) {
-    const {selectedFilePreviewUrl, onFileSelected, onFileRemoved, isDisabled} = props;
+export default function FileSelectorWithPreview({selectedFilePreviewUrl, onFileSelected, onFileRemoved, isDisabled}) {
     const fileInputRef = useRef(null);
 
     return createElement('div', {className: 'imageFileSelector'},

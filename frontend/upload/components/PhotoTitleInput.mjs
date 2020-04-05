@@ -1,12 +1,14 @@
 import {createElement} from '../../web_modules/react.js';
 
 /**
- * @param {{title: string, isDisabled: boolean, onChange: function(string): void}} props
+ *
+ * @param {string} title
+ * @param {boolean} isDisabled
+ * @param {function(string): void} onChange
  * @returns {*}
  * @constructor
  */
-export default function PhotoTitleInput(props) {
-    const {title, isDisabled, onChange} = props;
+export default function PhotoTitleInput({title, isDisabled, onChange}) {
     return createElement('div', {className: 'title'},
         createElement('input', {
             type: 'text',
