@@ -18,6 +18,7 @@ export const config = {
             url: 'https://d2l6ndiv9r7vhe.cloudfront.net/get-signed-url',
         }
     },
+    customerServiceEmailAddress: 'photatophotato@gmail.com',
 };
 
 export const productionConfig = {

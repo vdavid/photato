@@ -9,7 +9,7 @@ export default function UnauthenticatedFrontPage() {
     }
 
     return [
-        createElement('h1', {}, 'Welcome to Photato!'),
-        createElement('button', {onClick: handleSignIn}, 'Sign in'),
+        createElement('h1', {}, __('Welcome to Photato!')),
+        createElement('button', {onClick: handleSignIn}, __('Sign in')),
     ];
 }

@@ -1,4 +1,9 @@
 export default class I18n {
+    /**
+     * @param {string[]} availableLocaleCodes E.g. ['en-US', 'hu-HU']. The order doesn't matter.
+     * @param {string} translationFolderPath Must end with a slash
+     * @param {string} activeLocaleCode E.g. "en-US"
+     */
     constructor({availableLocaleCodes, translationFolderPath, activeLocaleCode}) {
         this._availableLocaleCodes = availableLocaleCodes;
         this._translationFolderPath = translationFolderPath;
@@ -30,7 +35,10 @@ export default class I18n {
         }
     }
 
-    getActiveLocale() {
+    /**
+     * @returns {string}
+     */
+    getActiveLocaleCode() {
         return this._activeLocaleCode;
     }
 
@@ -44,6 +52,11 @@ export default class I18n {
         return localizedString.replace(/{([\w-]+?)}/g, (match, key) => values[key] || key);
     }
 
+    /**
+     * @param {string} phrase
+     * @param {string} localeCode
+     * @private
+     */
     _logMissingPhrase(phrase, localeCode) {
         console.warn('Missing phrase: "' + phrase + '". (Tried to translate it to ' + localeCode + '.)');
     }
@@ -74,6 +87,11 @@ export default class I18n {
         }
     }
 
+    /**
+     * @param {string} localeCode
+     * @returns {Promise<Object<string, {translation:string}>>}
+     * @private
+     */
     async _loadTranslationsForLocale(localeCode) {
         const {translations} = await import(this._translationFolderPath + localeCode + '.mjs');
         return translations;

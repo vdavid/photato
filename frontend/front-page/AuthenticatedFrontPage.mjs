@@ -9,6 +9,6 @@ export default function AuthenticatedFrontPage() {
 
     return [
         createElement('h1', {}, __('Welcome to Photato, {firstName}!', {firstName: user.given_name})),
-        createElement(NavLink, {to: '/upload', activeClassName: 'active'}, 'Upload a photo here'),
+        createElement(NavLink, {to: '/upload', activeClassName: 'active'}, __('Upload your weekly photo here')),
     ];
 }

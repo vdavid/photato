@@ -36,7 +36,8 @@ render(
             createElement(I18nProvider, {
                     availableLocaleCodes,
                     translationFolderPath: '/i18n/translations/',
-                    activeLocaleCode: getDefaultLocaleCodeByNavigatorPreferences(), // TODO: Allow for language change!
+                    // TODO: Once we have the language switcher, allow overwriting this by a manual language change, e.g. by checking for cookies or something!
+                    activeLocaleCode: getDefaultLocaleCodeByNavigatorPreferences(),
                 },
                 createElement(StrictMode, {},
                     createElement(App),

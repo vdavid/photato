@@ -2,11 +2,12 @@ import {createElement, useState} from '/web_modules/react.js';
 import {config} from '../../app/config.mjs';
 import {useAuth0} from '../../app/react-auth0-spa.mjs';
 import {weeklyChallengeTitles} from '../../app/challengeRepository.mjs';
-import {uploadStatuses, uploadStatusTexts} from '../uploadStatuses.mjs';
+import {uploadStatuses} from '../uploadStatuses.mjs';
 import CourseDateConverter from '../../app/CourseDateConverter.mjs';
 import PhotoUploader from '../PhotoUploader.mjs';
 import FileSelectorWithPreview from './FileSelectorWithPreview.mjs';
 import PhotoTitleInput from './PhotoTitleInput.mjs';
+import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
 const courseDateConverter = new CourseDateConverter(config.course.startDateTime);
 const photoUploader = new PhotoUploader();
@@ -36,6 +37,7 @@ export default function UploadPage() {
     const [deadline] = useState(new Date(courseDateConverter.getWeekDeadline() - ONE_MINUTE));
 
     const {isAuthenticated, user} = useAuth0();
+    const {__, getActiveLocaleCode} = useI18n();
 
     /**
      * @param {File|null} file
@@ -57,6 +59,21 @@ export default function UploadPage() {
         setUploadStatus(uploadStatuses.readyToSelectFile);
         setSelectedFilePreviewUrl(null);
         setUploadProgress(0.0);
+    }
+
+    function getUploadStatusText(uploadStatus) {
+        const minimumSize = Math.round(config.imageUpload.minimumSizeInBytes / 1024);
+        const maximumSize = Math.round(config.imageUpload.maximumSizeInBytes / 1024 / 1024);
+        const uploadStatusTexts = {
+            [uploadStatuses.readyToSelectFile]: __('Please select your photo to upload.'),
+            [uploadStatuses.selectedFileIsTooSmall]: __('The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
+            [uploadStatuses.selectedFileIsTooLarge]: __('The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.', {maximumSize}),
+            [uploadStatuses.readyToUpload]: __('Photo is ready to upload. (Make sure you gave it a title if you wanted!)'),
+            [uploadStatuses.uploading]: __('Uploading your photo...'),
+            [uploadStatuses.uploadDone]: __('We got your photo! Remember, if you want to change it, you can upload a new one by the end of the week.'),
+            [uploadStatuses.uploadFailed]: __('Upload failed. Sorry about it. We don\'t know what\'s wrong. Please refresh the page and try again. It it keeps on failing, please drop us an email at {emailAddress}.', {emailAddress: config.customerServiceEmailAddress}),
+        };
+        return uploadStatusTexts[uploadStatus];
     }
 
     async function uploadSelectedFile() {
@@ -92,15 +109,15 @@ export default function UploadPage() {
         }
     }
 
-    const formattedDeadline = new Intl.DateTimeFormat('hu-HU', {
+    const formattedDeadline = new Intl.DateTimeFormat(getActiveLocaleCode(), {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
     }).format(deadline);
 
     return createElement('div', {id: 'fileUpload'},
-        createElement('h1', {}, 'Upload your weekly photo!'),
-        createElement('p', {className: 'currentWeek'}, "Week #" + weekIndex),
-        createElement('h2', {}, weeklyChallengeTitles[weekIndex - 1]),
-        createElement('p', 'Send in your pic before ' + formattedDeadline + '.'),
+        createElement('h1', {}, __('Upload your weekly photo!')),
+        createElement('p', {className: 'currentWeek'}, __('Week #{weekIndex}', {weekIndex})),
+        createElement('h2', {}, __(weeklyChallengeTitles[weekIndex - 1])),
+        createElement('p', {}, __('Send in your pic before {deadline}.', {deadline: formattedDeadline})),
         createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             createElement(FileSelectorWithPreview, {
                 onFileSelected: handleFileSelected,
@@ -117,14 +134,14 @@ export default function UploadPage() {
                 createElement('button', {
                     onClick: uploadSelectedFile,
                     disabled: !isAuthenticated || (uploadStatus !== uploadStatuses.readyToUpload),
-                }, 'Upload'),
+                }, __('Upload')),
             ),
             createElement('div', {className: 'uploadStatus'},
                 createElement('progress', {
                     value: uploadProgress * 100,
                     max: 100
                 }),
-                createElement('div', {}, uploadStatusTexts[uploadStatus]),
+                createElement('div', {}, getUploadStatusText(uploadStatus)),
             ),
         ),
     );

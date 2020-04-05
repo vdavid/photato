@@ -1,4 +1,5 @@
 import {createElement, useRef} from '../../web_modules/react.js';
+import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
 /**
  * @param {string} selectedFilePreviewUrl
@@ -9,6 +10,7 @@ import {createElement, useRef} from '../../web_modules/react.js';
  * @constructor
  */
 export default function FileSelectorWithPreview({selectedFilePreviewUrl, onFileSelected, onFileRemoved, isDisabled}) {
+    const {__} = useI18n();
     const fileInputRef = useRef(null);
 
     return createElement('div', {className: 'imageFileSelector'},
@@ -22,7 +24,7 @@ export default function FileSelectorWithPreview({selectedFilePreviewUrl, onFileS
                 title: 'Remove photo'
             }, 'x') : null,
             !selectedFilePreviewUrl ? createElement('div', {className: 'helpText'},
-                createElement('p', {}, 'Click here to select your photo, or drop your photo here'),
+                createElement('p', {}, __('Click here to select your photo, or drop your photo here')),
             ) : null,
             createElement('input', {
                 type: 'file',

@@ -30,7 +30,7 @@ export default function I18nProvider({children, availableLocaleCodes, translatio
         {
             value: {
                 setActiveLocale: i18n ? i18n.setActiveLocale.bind(i18n) : undefined,
-                getActiveLocale: i18n ? i18n.getActiveLocale.bind(i18n) : undefined,
+                getActiveLocaleCode: i18n ? i18n.getActiveLocaleCode.bind(i18n) : undefined,
                 areTranslationsLoaded: !!i18n,
                 __: (...args) => (i18n ? i18n.translate.apply(i18n, args) : args[0]),
             }

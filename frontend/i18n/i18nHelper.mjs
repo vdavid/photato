@@ -20,5 +20,7 @@ export function getDefaultLocaleCodeByNavigatorPreferences(navigatorPreferences 
     const preferredNavigatorLocale = navigatorPreferences.find(_getLocaleCodeByNavigatorPreference);
 
     /* Return our clean locale code */
-    return preferredNavigatorLocale ? _getLocaleCodeByNavigatorPreference(preferredNavigatorLocale) : defaultLocaleCode;
+    // TODO: Re-enable this once we have a language switcher
+    //return preferredNavigatorLocale ? _getLocaleCodeByNavigatorPreference(preferredNavigatorLocale) : defaultLocaleCode;
+    return 'hu-HU';
 }

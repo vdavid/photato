@@ -15,6 +15,7 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
     useEffect(() => {
         async function initAuth0() {
             /* API Docs on this object: https://auth0.github.io/auth0-spa-js/classes/auth0client.html */
+            // noinspection JSUnresolvedFunction – This is included in a <script> tag so WebStorm doesn't know about it.
             const auth0FromHook = await createAuth0Client(initOptions);
             setAuth0(auth0FromHook);
 
@@ -39,10 +40,11 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
         initAuth0();
     }, []);
 
-    async function loginWithPopup(params = {}) {
+    // TODO: Start using this instead of the redirect somehow?
+    async function loginWithPopup(parameters = {}) {
         setPopupOpen(true);
         try {
-            await auth0Client.loginWithPopup(params);
+            await auth0Client.loginWithPopup(parameters);
         } catch (error) {
             console.error(error);
         } finally {

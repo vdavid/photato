@@ -10,7 +10,7 @@ import AboutPage from '../../about/AboutPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
 
 export default function App() {
-    const {areTranslationsLoaded} = useI18n();
+    const {areTranslationsLoaded, __} = useI18n();
     return areTranslationsLoaded
         ? (React.createElement(BrowserRouter, {basename: '/'},
         React.createElement(NavigationBar),
@@ -23,7 +23,7 @@ export default function App() {
                 React.createElement(Redirect, {path: '*', to: {...window.history, pathname: '/'}}),
             ),
         ),
-        React.createElement('footer', null, React.createElement('span', {className: 'copyright'}, 'Made with ❤️ by the Photato team')),
+        React.createElement('footer', null, React.createElement('span', {className: 'copyright'}, __('Made with ❤️ by the Photato team'))),
     ))
         : React.createElement(FullPageLoadingIndicator);
 }
