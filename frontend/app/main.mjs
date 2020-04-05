@@ -1,4 +1,4 @@
-import {config, productionConfig, developmentConfig} from './config.mjs';
+import {config, developmentConfig, stagingConfig, productionConfig} from './config.mjs';
 import {createElement, StrictMode} from '/web_modules/react.js';
 import {render} from '/web_modules/react-dom.js';
 
@@ -8,9 +8,14 @@ import App from './components/App.mjs';
 
 import {Provider} from '/web_modules/react-redux.js';
 
+/**
+ * Moves keys from environment-specific configs to common config.
+ * This should be done at the very beginning of the app code (which is here).
+ */
 function initializeConfig() {
     const environmentSpecificConfig = window.location.host.startsWith('photato.eu')
-        ? productionConfig : developmentConfig;
+        ? productionConfig
+        : (window.location.host.startsWith('staging.photato.eu') ? stagingConfig : developmentConfig);
     config.environment = environmentSpecificConfig.environment;
     config.auth0 = environmentSpecificConfig.auth0;
 }

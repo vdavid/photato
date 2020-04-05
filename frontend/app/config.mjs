@@ -1,5 +1,5 @@
 export const config = {
-    environment: '', // Will be set to 'development' or 'production' by main.mjs
+    environment: '', // Will be set to 'development', 'staging', or 'production' by main.mjs
     auth0: {
         domain: '', // Will be set by main.mjs
         clientId: '', // Will be set by main.mjs
@@ -25,6 +25,14 @@ export const productionConfig = {
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
+    }
+};
+
+export const stagingConfig = {
+    environment: 'staging',
+    auth0: {
+        domain: 'photato.eu.auth0.com',
+        clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
     }
 };
 
