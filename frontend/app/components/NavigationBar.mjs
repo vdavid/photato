@@ -13,6 +13,7 @@ export default function NavigationBar() {
             createElement(NavLink, {to: '/', activeClassName: 'active', exact: true}, 'Home'),
             createElement(NavLink, {to: '/about', activeClassName: 'active'}, 'About'),
             isAuthenticated ? createElement(NavLink, {to: '/upload', activeClassName: 'active'}, 'Upload') : null,
+            isAuthenticated ? createElement(NavLink, {to: '/challenges', activeClassName: 'active'}, 'Challenges') : null,
         ),
         createElement(AuthenticationArea),
     );
