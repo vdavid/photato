@@ -23,6 +23,8 @@ module.exports = class ValidateSignedUrlHandler {
                 statusDescription: 'OK',
                 headers: {
                     'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
+                    'access-control-allow-methods': [{key: 'Access-Control-Allow-Methods', value: 'PUT'}],
+                    'access-control-allow-headers': [{key: 'Access-Control-Allow-Headers', value: '*'}],
                 },
             };
         } else if ((request.method === 'PUT') && await this._signatureRepository.isSignatureValidForPath(path)) {

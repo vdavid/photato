@@ -18,7 +18,7 @@ module.exports = class PhotoRepository {
     _getExtensionByMimeType(mimeType) {
         const matches = mimeType.match(/^image\/(.*)$/);
         if (matches) {
-            return matches[1];
+            return matches[1].replace('jpeg', 'jpg');
         } else {
             throw new Error('Wrong mime type: "' + mimeType + '".');
         }
@@ -47,9 +47,9 @@ module.exports = class PhotoRepository {
             Key: filePath,
             Metadata: {
                 'uuid': uuid(),
-                'email-address': photoMetadata.emailAddress,
-                'original-file-name': photoMetadata.originalFileName,
-                'title': photoMetadata.title
+                'email-address': encodeURIComponent(photoMetadata.emailAddress),
+                'original-file-name': encodeURIComponent(photoMetadata.originalFileName),
+                'title': encodeURIComponent(photoMetadata.title)
             },
             ContentType: photoMetadata.mimeType,
         };
