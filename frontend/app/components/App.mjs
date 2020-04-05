@@ -8,6 +8,8 @@ import NavigationBar from './NavigationBar.mjs';
 import FrontPage from '../../front-page/components/FrontPage.mjs';
 import AboutPage from '../../about/AboutPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
+import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
+import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 
 export default function App() {
     const {areTranslationsLoaded, __} = useI18n();
@@ -18,7 +20,8 @@ export default function App() {
             React.createElement(Switch, null,
                 React.createElement(Route, {path: '/about', component: () => React.createElement(AboutPage)}),
                 React.createElement(Route, {path: '/upload', component: () => React.createElement(UploadPage)}),
-                React.createElement(Route, {path: '/challenges', component: () => React.createElement(FrontPage)}),
+                React.createElement(Route, {path: '/challenges/:weekIndex', component: () => React.createElement(ChallengePage)}),
+                React.createElement(Route, {path: '/challenges', component: () => React.createElement(ChallengesPage)}),
                 React.createElement(Route, {path: '/', component: () => React.createElement(FrontPage)}),
                 React.createElement(Redirect, {path: '*', to: {...window.history, pathname: '/'}}),
             ),

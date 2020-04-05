@@ -35,5 +35,12 @@
   },
   "jest": {
     "testEnvironment": "jsdom"
+  },
+  "snowpack": {
+    "webDependencies": [
+      "react",
+      "react-dom",
+      "react-router-dom"
+    ]
   }
 }

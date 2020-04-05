@@ -42,7 +42,7 @@ export const stagingConfig = {
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
     },
     featureSwitches: {
-        challenges: false,
+        challenges: true,
     },
 };
 

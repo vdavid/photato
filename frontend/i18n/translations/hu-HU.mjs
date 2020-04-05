@@ -39,5 +39,6 @@ export const translations = {
     'Freestyle—take your best shot!': {translation: 'Freestyle – szabad fotózás'},
     'Give your photo a title (optional)': {translation: 'Adj címet a fotódnak (nem kötelező)'},
     'Click here to select your photo, or drop your photo here': {translation: 'Kattints ide a fotód kiválasztásához, vagy húzd ide az egérrel'},
-    'Wait a second, the page is loading...': {transition: 'Egy pillanat és betöltődik...'}
+    'Wait a second, the page is loading...': {transition: 'Egy pillanat és betöltődik...'},
+    'Week {weekIndex}:': {translation: '{weekIndex}. hét –'},
 };

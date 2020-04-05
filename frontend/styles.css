@@ -14,7 +14,7 @@
 }
 
 /* Generic styles */
-body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; background: var(--page-background-color); color: var(--light-primary-text-color); }
+body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; background: var(--page-background-color); color: var(--light-primary-text-color); line-height:1.4em; }
 input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--light-primary-color); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 button { border: none; padding: 0.5em 1em; border-radius: 2px; background-color: var(--default-primary-color); color: var(--light-primary-text-color); }
 button:hover { background: var(--dark-primary-color); }
