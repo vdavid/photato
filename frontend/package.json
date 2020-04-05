@@ -27,9 +27,7 @@
   "dependencies": {
     "react": "npm:@pika/react@^16.13.1",
     "react-dom": "npm:@pika/react-dom@^16.13.1",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "snowpack": "^1.6.0",
