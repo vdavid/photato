@@ -21,6 +21,7 @@ function initializeConfig() {
         : (window.location.host.startsWith('staging.photato.eu') ? stagingConfig : developmentConfig);
     config.environment = environmentSpecificConfig.environment;
     config.auth0 = environmentSpecificConfig.auth0;
+    config.featureSwitches = environmentSpecificConfig.featureSwitches;
 }
 
 initializeConfig();

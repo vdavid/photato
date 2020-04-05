@@ -1,3 +1,4 @@
+import {config} from '../config.mjs';
 import {createElement} from '/web_modules/react.js';
 import {NavLink} from '/web_modules/react-router-dom.js';
 import AuthenticationArea from './AuthenticationArea.mjs';
@@ -15,7 +16,7 @@ export default function NavigationBar() {
             createElement(NavLink, {to: '/', activeClassName: 'active', exact: true}, __('Home')),
             createElement(NavLink, {to: '/about', activeClassName: 'active'}, __('About')),
             isAuthenticated ? createElement(NavLink, {to: '/upload', activeClassName: 'active'}, __('Photo upload')) : null,
-            isAuthenticated ? createElement(NavLink, {to: '/challenges', activeClassName: 'active'}, __('Challenges')) : null,
+            (config.featureSwitches.challenges && isAuthenticated) ? createElement(NavLink, {to: '/challenges', activeClassName: 'active'}, __('Challenges')) : null,
         ),
         createElement(AuthenticationArea),
     );

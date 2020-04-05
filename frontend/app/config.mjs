@@ -19,6 +19,9 @@ export const config = {
         }
     },
     customerServiceEmailAddress: 'photatophotato@gmail.com',
+    featureSwitches: {
+        challenges: false,
+    },
 };
 
 export const productionConfig = {
@@ -26,7 +29,10 @@ export const productionConfig = {
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
-    }
+    },
+    featureSwitches: {
+        challenges: false,
+    },
 };
 
 export const stagingConfig = {
@@ -34,7 +40,10 @@ export const stagingConfig = {
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
-    }
+    },
+    featureSwitches: {
+        challenges: false,
+    },
 };
 
 export const developmentConfig = {
@@ -42,5 +51,8 @@ export const developmentConfig = {
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'JLFeh90tCqr0KebY2hUWYBlhHOuHXl5f'
-    }
+    },
+    featureSwitches: {
+        challenges: true,
+    },
 };
