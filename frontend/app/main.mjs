@@ -4,6 +4,9 @@ import {render} from '/web_modules/react-dom.js';
 
 import store from './reduxStore.mjs';
 import {Auth0Provider} from "./react-auth0-spa.mjs";
+import I18nProvider from "../i18n/components/I18nProvider.mjs";
+import {getDefaultLocaleCodeByNavigatorPreferences} from '../i18n/i18nHelper.mjs';
+import {availableLocaleCodes} from '../i18n/locales.mjs'
 import App from './components/App.mjs';
 
 import {Provider} from '/web_modules/react-redux.js';
@@ -20,11 +23,6 @@ function initializeConfig() {
     config.auth0 = environmentSpecificConfig.auth0;
 }
 
-function onRedirectCallback(appState) {
-    return window.history.replaceState({}, document.title, window.location.pathname);
-//    history.push(appState && appState.targetUrl ? appState.targetUrl : window.location.pathname);
-}
-
 initializeConfig();
 
 render(
@@ -33,10 +31,16 @@ render(
                 domain: config.auth0.domain,
                 client_id: config.auth0.clientId,
                 redirect_uri: window.location.origin,
-                onRedirectCallback,
+                onRedirectCallback: () => window.history.replaceState({}, document.title, window.location.pathname),
             },
-            createElement(StrictMode, {},
-                createElement(App),
+            createElement(I18nProvider, {
+                    availableLocaleCodes,
+                    translationFolderPath: '/i18n/translations/',
+                    activeLocaleCode: getDefaultLocaleCodeByNavigatorPreferences(), // TODO: Allow for language change!
+                },
+                createElement(StrictMode, {},
+                    createElement(App),
+                ),
             ),
         ),
     ),
