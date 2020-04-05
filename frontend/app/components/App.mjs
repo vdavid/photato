@@ -5,7 +5,7 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import FullPageLoadingIndicator from './FullPageLoadingIndicator.mjs';
 import NavigationBar from './NavigationBar.mjs';
 
-import FrontPage from '../../front-page/FrontPage.mjs';
+import FrontPage from '../../front-page/components/FrontPage.mjs';
 import AboutPage from '../../about/AboutPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
 
