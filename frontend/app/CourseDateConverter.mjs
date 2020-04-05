@@ -25,7 +25,7 @@ export default class CourseDateConverter {
      */
     getWeekIndex(date = new Date()) {
         const dayIndex = this.getDayIndexSinceCourseStart(date);
-        return Math.floor((dayIndex - 1) / 7) + 1;
+        return Math.floor((dayIndex - 1) / 7) + 1 - 1; // TODO: Cheating for last week
     }
 
     /**
