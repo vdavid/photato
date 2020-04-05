@@ -14,14 +14,8 @@
 }
 
 /* Generic styles */
-body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; font-size: 3vw; background: var(--page-background-color); color: var(--light-primary-text-color); }
-@media (min-width: 650px) {
-    body { font-size: 1.8vw; }
-}
-@media (min-width: 1000px) {
-    body { font-size: 1.5vw; }
-}
-input[type="text"] { border: none; outline:none; border-bottom:1px solid var(--light-primary-color); border-radius: 2px; padding-bottom:0.1em; color: var(--dark-primary-text-color); }
+body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; background: var(--page-background-color); color: var(--light-primary-text-color); }
+input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--light-primary-color); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 button { border: none; padding: 0.5em 1em; border-radius: 2px; background-color: var(--default-primary-color); color: var(--light-primary-text-color); }
 button:hover { background: var(--dark-primary-color); }
 button[disabled] { background: var(--disabled-background-color); }
@@ -42,10 +36,10 @@ a:hover, a:active { text-decoration: underline; }
 #app > header .authentication img { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
 #app > header .authentication .menu { visibility: hidden; opacity: 0; position: absolute; width: 200px; right: 0; transition: visibility 0s, opacity 0.3s ease; }
 #app > header .authentication:hover .menu { visibility: visible; opacity: 1; }
-#app > header .authentication a { text-align: left; width: 100%; box-sizing: content-box; background-color: var(--light-primary-text-color); color: var(--dark-primary-text-color); }
+#app > header .authentication a { text-align: left; background-color: var(--light-primary-text-color); color: var(--dark-primary-text-color); }
 #app > header .authentication a:hover { width: 100%; box-sizing: content-box; background-color: var(--light-primary-color); }
 
-main { width: 640px; margin: 0 auto; }
+main { width: 50vw; min-width:500px; max-width:1000px; margin: 0 auto; padding:0 20px; }
 
 footer { width: 640px; margin: 2em auto 0; text-align: center; }
 
@@ -75,7 +69,7 @@ footer { width: 640px; margin: 2em auto 0; text-align: center; }
 }
 
 /* Upload form */
-#fileUpload .title input { display: block; width: 100%; margin:1em 0; border: none; text-align: center; font-size: 1.5em; background-color: var(--page-background-color); color: var(--light-primary-text-color)}
+#fileUpload .title input { display: block; width: 100%; margin: 1em 0; border: none; text-align: center; font-size: 1.5em; background-color: var(--page-background-color); color: var(--light-primary-text-color)}
 #fileUpload .imageFileSelector { width: 50%; margin: 0 auto; }
 
 .imageFileSelector > div { position: relative; padding-top: 100%; }
@@ -86,7 +80,7 @@ footer { width: 640px; margin: 2em auto 0; text-align: center; }
 .imageFileSelector .preview { z-index: 1; display: flex; }
 .imageFileSelector .preview img { width: 100%; margin: auto; text-align: center; }
 
-.imageFileSelector .removeButton { z-index: 4; width: 30px; height: 30px; padding:0; line-height: 10px; bottom: auto; left: auto; font-size: 15px; text-align: center; border-radius: 2em; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; transition: color 0.3s ease, background-color 0.3s ease; }
+.imageFileSelector .removeButton { z-index: 4; width: 30px; height: 30px; padding: 0; line-height: 10px; bottom: auto; left: auto; font-size: 15px; text-align: center; border-radius: 2em; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; transition: color 0.3s ease, background-color 0.3s ease; }
 .imageFileSelector .removeButton:hover { background: var(--accent-color); color: var(--light-primary-text-color); }
 
 #fileUpload .uploadButton { margin-top: 1em; text-align: center; }
@@ -95,3 +89,19 @@ footer { width: 640px; margin: 2em auto 0; text-align: center; }
 #fileUpload .uploadStatus { margin-top: 1em; text-align: center; }
 #fileUpload .uploadStatus progress { width: 50%; }
 #fileUpload .uploadStatus div { margin-top: 1em; }
+
+
+/* Full-page loading animation Source: https://codepen.io/vreuling/pen/OXoVXA */
+#fullPageLoadingIndicator { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(16, 16, 16, 0.5); }
+#fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 200px; height: 200px; }
+#fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--default-primary-color); animation: spinnerAnimation 1s linear infinite; }
+#fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('./camera.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
+@keyframes spinnerAnimation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes logoAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
