@@ -2,7 +2,7 @@
   "name": "photato-website-frontend",
   "version": "1.0.0",
   "description": "This is the JS front end of the Photato website.",
-  "main": "app/main.mjs",
+  "main": "main.mjs",
   "scripts": {
     "test": "npx jest",
     "postinstall": "npx snowpack"

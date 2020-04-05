@@ -95,7 +95,7 @@ footer { width: 640px; margin: 2em auto 0; text-align: center; }
 #fullPageLoadingIndicator { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(16, 16, 16, 0.5); }
 #fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 200px; height: 200px; }
 #fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--default-primary-color); animation: spinnerAnimation 1s linear infinite; }
-#fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('./potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
+#fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
 @keyframes spinnerAnimation {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

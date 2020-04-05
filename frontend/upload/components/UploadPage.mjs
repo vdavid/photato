@@ -1,7 +1,7 @@
 import {createElement, useState} from '/web_modules/react.js';
-import {config} from '../../app/config.mjs';
+import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
-import {weeklyChallengeTitles} from '../../app/challengeRepository.mjs';
+import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
 import {uploadStatuses} from '../uploadStatuses.mjs';
 import CourseDateConverter from '../../app/CourseDateConverter.mjs';
 import PhotoUploader from '../PhotoUploader.mjs';

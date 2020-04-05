@@ -1,4 +1,4 @@
-import {config} from '../config.mjs';
+import {config} from '../../config.mjs';
 import {createElement} from '/web_modules/react.js';
 import {NavLink} from '/web_modules/react-router-dom.js';
 import AuthenticationArea from './AuthenticationArea.mjs';
