@@ -5,8 +5,8 @@ export const config = {
         clientId: '', // Will be set by main.mjs
     },
     course: {
-        name: 'hu-3',
-        startDateTime: new Date(Date.UTC(2020, 3 - 1, 12, /* Must be the Sunday morning 0:00 CET when the course started */
+        name: 'hu-3', // TODO: Fake date for testing ↓↓↓
+        startDateTime: new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
             -1 /* -2 if it was daylight saving time, -1 otherwise */)),
         weekCount: 12,
     },
