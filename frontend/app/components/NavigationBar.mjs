@@ -32,9 +32,10 @@ export default function NavigationBar() {
     }
 
     return createElement('header', {role: 'navigation'},
-        createElement('div', {className: 'logo', title: 'Photato'},
-            createElement('img', {src: '/app/potato-with-camera-logo.svg'})),
-        createElement('div', {className: 'siteTitle'}, 'Photato'),
+        createElement(NavLink, {to: '/', className: 'logo', title: 'Photato'},
+            createElement('img', {src: '/app/potato-with-camera-logo.svg'}),
+            createElement('div', {className: 'siteTitle'}, 'Photato'),
+        ),
         createElement('nav', {ref: menuRef, className: isMenuVisible ? 'visible' : '', onClick: () => { setIsMenuVisible(false); }},
             createElement(NavLink, {to: '/', activeClassName: 'active', exact: true}, __('Home')),
             createElement(NavLink, {to: '/about', activeClassName: 'active'}, __('About')),

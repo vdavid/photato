@@ -29,6 +29,7 @@ a:hover, a:active { text-decoration: underline; }
 .actionButton { display: inline-block; margin: 1em 0; padding: 1em 2em; color: var(--light-primary-text-color); background-color: var(--default-primary-color); text-decoration: none; transition: background-color 0.1s ease; cursor: pointer; }
 .actionButton:hover { background-color: var(--dark-primary-color); text-decoration: none; }
 .actionButton[disabled] { background: var(--disabled-background-color); cursor: default;}
+.preWrap { white-space: pre-wrap; } /* Non-semantic class, so it's a bit of cheating, but makes life easier. */
 
 main { min-width: 320px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
@@ -36,7 +37,7 @@ footer { margin: 2em auto 0; text-align: center; }
 
 /* Navigation */
 #app > header { display: flex; align-items: stretch; height: 47px; line-height: 1.3rem; background-color: var(--navbar-color); }
-#app > header .logo { flex-basis: 50px; }
+#app > header .logo { flex-basis: 50px; padding:0; display:flex; }
 #app > header .logo img { width: auto; height: 100%; margin: 2px 0 0 2px;}
 #app > header .siteTitle { padding: 14px 16px 14px 0; user-select: none; }
 #app > header nav { display: flex; flex-grow: 1; }
@@ -59,7 +60,7 @@ footer { margin: 2em auto 0; text-align: center; }
 }
 
 /* Upload form */
-#fileUpload .title input { display: block; width: 100%; margin: 1em 0; border: none; text-align: center; font-size: 1.5rem; background-color: var(--page-background-color); color: var(--light-primary-text-color); }
+#fileUpload .title input { display: block; width: 80%; margin: 1em auto; border: none; border-bottom: 2px solid var(--dark-primary-color); text-align: center; font-size: 1.5rem; background-color: var(--page-background-color); color: var(--light-primary-text-color); }
 #fileUpload .imageFileSelector { width: 50%; margin: 0 auto; }
 
 .imageFileSelector > div { position: relative; padding-top: 100%; }

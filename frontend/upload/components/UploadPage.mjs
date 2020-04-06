@@ -108,7 +108,7 @@ export default function UploadPage({photoUploader}) {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
     }).format(new Date(currentWeekDeadline - ONE_MINUTE));
     const courseStatusHelpText = isCourseRunning
-        ? __('Send in your pic before {deadline}.', {deadline: formattedDeadline})
+        ? __('Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
         : (isCourseOver
             ? __('The course has already ended. You can\'t upload pics anymore. ☹')
             : __('The course has not started. You can upload your photos soon! 😊'));
@@ -117,8 +117,9 @@ export default function UploadPage({photoUploader}) {
         createElement('h1', {}, __('Photo upload')),
         createElement('p', {className: 'currentWeek'}, __('Week #{weekIndex}', {weekIndex: currentWeekIndex})),
         isCourseRunning && createElement('h2', {}, __(weeklyChallengeTitles[currentWeekIndex - 1])),
-        createElement('p', {}, courseStatusHelpText),
-        isCourseRunning && createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
+        createElement('p', {className: 'preWrap'}, courseStatusHelpText),
+        isCourseRunning
+            ? createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             createElement(FileSelectorWithPreview, {
                 onFileSelected: handleFileSelected,
                 onFileRemoved: handleFileSelectionRemoved,
@@ -136,13 +137,15 @@ export default function UploadPage({photoUploader}) {
                     disabled: !isAuthenticated || (uploadStatus !== uploadStatuses.readyToUpload),
                 }, __('Upload')),
             ),
-            createElement('div', {className: 'uploadStatus'},
-                createElement('progress', {
-                    value: uploadProgress * 100,
-                    max: 100
-                }),
-                createElement('div', {}, getUploadStatusText(uploadStatus)),
-            ),
-        ),
+            ([uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus)
+                ? createElement('div', {className: 'uploadStatus'},
+                    createElement('progress', {
+                        value: uploadProgress * 100,
+                        max: 100
+                    }),
+                    createElement('div', {}, getUploadStatusText(uploadStatus)),
+                )
+                : null),
+            ) : null,
     );
 }
