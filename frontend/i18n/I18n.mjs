@@ -69,14 +69,18 @@ export default class I18n {
      */
     translate(phrase, values = {}, localeCode = this._activeLocaleCode) {
         if (this._translations[localeCode]) {
-            const localizedString = (this._translations[localeCode][phrase] || {}).translation;
-            if (localizedString !== undefined) {
-                return this._replacePlaceholdersInLocalizedString(localizedString, values);
-            } else {
-                if (localeCode !== 'en-US') { /* We don't need translations for the base language. */
-                    this._logMissingPhrase(phrase, localeCode);
+            if(typeof phrase === 'string') {
+                const localizedString = (this._translations[localeCode][phrase] || {}).translation;
+                if (localizedString !== undefined) {
+                    return this._replacePlaceholdersInLocalizedString(localizedString, values);
+                } else {
+                    if (localeCode !== 'en-US') { /* We don't need translations for the base language. */
+                        this._logMissingPhrase(phrase, localeCode);
+                    }
+                    return this._replacePlaceholdersInLocalizedString(phrase, values);
                 }
-                return this._replacePlaceholdersInLocalizedString(phrase, values);
+            } else {
+                throw new Error ('The phrase must be a string! ' + phrase + ' is not a string.');
             }
         } else {
             if (Object.keys(this._translations).length !== 0) {

@@ -1,9 +1,12 @@
-export default class CourseDateConverter {
+// TODO: Only for Jest. It's the same as the *.js file. Once Jest supports ESM, this can be deleted.
+module.exports = class CourseDateConverter {
     /**
      * @param {Date} courseStartDate
+     * @param {int} weekCount Total number of weeks in the course
      */
-    constructor(courseStartDate) {
-        this._courseStartDate = courseStartDate
+    constructor(courseStartDate, weekCount) {
+        this._courseStartDate = courseStartDate;
+        this._weekCount = weekCount;
     }
 
     /**
@@ -25,7 +28,7 @@ export default class CourseDateConverter {
      */
     getWeekIndex(date = new Date()) {
         const dayIndex = this.getDayIndexSinceCourseStart(date);
-        return Math.floor((dayIndex - 1) / 7) + 1 - 1; // TODO: Cheating for last week
+        return Math.floor((dayIndex - 1) / 7) + 1;
     }
 
     /**
@@ -37,4 +40,16 @@ export default class CourseDateConverter {
         deadline.setDate(this._courseStartDate.getDate() + 7 * this.getWeekIndex(date) + 1);
         return deadline;
     }
-}
+
+    hasCourseStarted(date = new Date()) {
+        return this.getWeekIndex(date) >= 1;
+    }
+
+    isCourseOver(date = new Date()) {
+        return this.getWeekIndex(date) > this._weekCount
+    }
+
+    isCourseRunning(date = new Date()) {
+        return this.hasCourseStarted(date) && !this.isCourseOver(date);
+    }
+};

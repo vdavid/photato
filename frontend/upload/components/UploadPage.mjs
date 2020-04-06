@@ -3,14 +3,10 @@ import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
 import {uploadStatuses} from '../uploadStatuses.mjs';
-import CourseDateConverter from '../../app/CourseDateConverter.mjs';
-import PhotoUploader from '../PhotoUploader.mjs';
 import FileSelectorWithPreview from './FileSelectorWithPreview.mjs';
 import PhotoTitleInput from './PhotoTitleInput.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-
-const courseDateConverter = new CourseDateConverter(config.course.startDateTime);
-const photoUploader = new PhotoUploader();
+import {useCourseData} from '../../challenges/components/CourseDataProvider.mjs';
 
 // noinspection JSValidateJSDoc
 /**
@@ -25,19 +21,18 @@ function _validateFile(file) {
             : uploadStatuses.readyToUpload));
 }
 
-export default function UploadPage() {
+export default function UploadPage({photoUploader}) {
     const ONE_MINUTE = 60 * 1000;
+
+    const {isAuthenticated, user} = useAuth0();
+    const {__, getActiveLocaleCode} = useI18n();
+    const {currentWeekIndex, currentWeekDeadline, isCourseOver, isCourseRunning} = useCourseData();
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFilePreviewUrl, setSelectedFilePreviewUrl] = useState(null);
     const [uploadStatus, setUploadStatus] = useState(uploadStatuses.readyToSelectFile);
     const [uploadProgress, setUploadProgress] = useState(0.0);
     const [title, setTitle] = useState('');
-    const [weekIndex] = useState(courseDateConverter.getWeekIndex());
-    const [deadline] = useState(new Date(courseDateConverter.getWeekDeadline() - ONE_MINUTE));
-
-    const {isAuthenticated, user} = useAuth0();
-    const {__, getActiveLocaleCode} = useI18n();
 
     /**
      * @param {File|null} file
@@ -83,7 +78,7 @@ export default function UploadPage() {
             const parameters = {
                 emailAddress: user.email,
                 courseName: config.course.name,
-                weekIndex,
+                weekIndex: currentWeekIndex,
                 originalFileName: selectedFile.name,
                 title,
                 mimeType: selectedFile.type,
@@ -92,7 +87,7 @@ export default function UploadPage() {
             if (signedUrl) {
                 const response = await photoUploader.uploadFile(signedUrl, selectedFile, setUploadProgress);
 
-                if(response.target.status === 200) {
+                if (response.target.status === 200) {
                     setUploadStatus(uploadStatuses.uploadDone);
                     setUploadProgress(1.0);
                 } else {
@@ -111,14 +106,19 @@ export default function UploadPage() {
 
     const formattedDeadline = new Intl.DateTimeFormat(getActiveLocaleCode(), {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
-    }).format(deadline);
+    }).format(new Date(currentWeekDeadline - ONE_MINUTE));
+    const courseStatusHelpText = isCourseRunning
+        ? __('Send in your pic before {deadline}.', {deadline: formattedDeadline})
+        : (isCourseOver
+            ? __('The course has already ended. You can\'t upload pics anymore. ☹')
+            : __('The course has not started. You can upload your photos soon! 😊'));
 
     return createElement('div', {id: 'fileUpload'},
-        createElement('h1', {}, __('Upload your weekly photo!')),
-        createElement('p', {className: 'currentWeek'}, __('Week #{weekIndex}', {weekIndex})),
-        createElement('h2', {}, __(weeklyChallengeTitles[weekIndex - 1])),
-        createElement('p', {}, __('Send in your pic before {deadline}.', {deadline: formattedDeadline})),
-        createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
+        createElement('h1', {}, __('Photo upload')),
+        createElement('p', {className: 'currentWeek'}, __('Week #{weekIndex}', {weekIndex: currentWeekIndex})),
+        isCourseRunning && createElement('h2', {}, __(weeklyChallengeTitles[currentWeekIndex - 1])),
+        createElement('p', {}, courseStatusHelpText),
+        isCourseRunning && createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
             createElement(FileSelectorWithPreview, {
                 onFileSelected: handleFileSelected,
                 onFileRemoved: handleFileSelectionRemoved,

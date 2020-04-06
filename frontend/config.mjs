@@ -6,8 +6,9 @@ export const config = {
     },
     course: {
         name: 'hu-3',
-        startDateTime: new Date(Date.UTC(2020, 1 - 1, 12, /* Must be the Sunday morning 0:00 CET when the course started */
+        startDateTime: new Date(Date.UTC(2020, 3 - 1, 12, /* Must be the Sunday morning 0:00 CET when the course started */
             -1 /* -2 if it was daylight saving time, -1 otherwise */)),
+        weekCount: 12,
     },
     imageUpload: {
         minimumSizeInBytes: 50 * 1024,

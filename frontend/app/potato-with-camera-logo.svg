@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="100%" height="100%" viewBox="0 0 1920 1920" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g id="potato">
-        <path id="body" d="M1536.32,1261.84C1526.32,1033.94 1462.39,1002.73 1441.84,808.966C1431.13,707.945 1471.27,627.484 1447.13,505.057C1398.6,258.992 1210.62,157.885 1040,160C594.943,165.517 371.527,661.413 363.678,1010.81C348.555,1684.04 854.684,1730.31 1045.29,1731.03C1178.07,1731.54 1550.83,1592.38 1536.32,1261.84Z" style="fill:rgb(178,118,70);stroke:rgb(74,49,29);stroke-width:24.23px;"/>
-        <g id="left-eye" transform="matrix(1.10777,0,0,1,-126.106,7.81653)">
-            <ellipse cx="1023.79" cy="660" rx="129.795" ry="160" style="fill:white;fill-opacity:0.98;"/>
+    <g id="serious-potato-with-camera">
+        <g id="serious-potato">
+            <path id="body" d="M1536.32,1261.84C1526.32,1033.94 1462.39,1002.73 1441.84,808.966C1431.13,707.945 1471.27,627.484 1447.13,505.057C1398.6,258.992 1210.62,157.885 1040,160C594.943,165.517 371.527,661.413 363.678,1010.81C348.555,1684.04 854.684,1730.31 1045.29,1731.03C1178.07,1731.54 1550.83,1592.38 1536.32,1261.84Z" style="fill:rgb(178,118,70);stroke:rgb(74,49,29);stroke-width:80.13px;"/>
+            <g id="left-eye" transform="matrix(1.10777,0,0,1,-126.106,7.81653)">
+                <ellipse cx="1023.79" cy="660" rx="129.795" ry="160" style="fill:white;fill-opacity:0.98;"/>
+            </g>
+            <g id="left-eye-inside" transform="matrix(2.44345,0,0,2.53972,-828.156,-1210.63)">
+                <ellipse cx="766.396" cy="754.823" rx="26.396" ry="25.177" style="fill:rgb(88,59,35);"/>
+            </g>
+            <g id="right-eye" transform="matrix(0.956405,0.550132,-0.513319,0.892406,373.083,-325.307)">
+                <ellipse cx="715.732" cy="666.777" rx="115.732" ry="146.777" style="fill:white;fill-opacity:0.98;"/>
+            </g>
+            <g id="right-eye-inside" transform="matrix(0.696359,0.746821,-0.731385,0.681965,740.102,-337.032)">
+                <ellipse cx="745.383" cy="704.767" rx="54.617" ry="64.767" style="fill:rgb(88,59,35);"/>
+            </g>
+            <path id="mouth" d="M610,925C797.835,990.137 934.025,1011.93 1097,855L1070,837C1070,837 1103.34,823.009 1125,835C1155.75,852.027 1150,885 1150,885L1115,865C1115,865 887.676,1174.37 610,925Z" style="fill:rgb(88,59,35);"/>
+            <g id="forehead-highlight" transform="matrix(1,0,0,1,-7.40264,58.552)">
+                <path d="M690,335.353C691.657,320.359 887.545,204.492 990,204.479C1146.79,204.46 1217.92,250.374 1244.81,290C1244.81,290 1003.78,277.289 723.838,340C701.4,345.026 690,335.353 690,335.353Z" style="fill:rgb(190,134,90);"/>
+            </g>
         </g>
-        <g id="left-eye-inside" transform="matrix(2.44345,0,0,2.53972,-828.156,-1210.63)">
-            <ellipse cx="766.396" cy="754.823" rx="26.396" ry="25.177" style="fill:rgb(88,59,35);"/>
-        </g>
-        <g id="right-eye" transform="matrix(0.956405,0.550132,-0.513319,0.892406,373.083,-325.307)">
-            <ellipse cx="715.732" cy="666.777" rx="115.732" ry="146.777" style="fill:white;fill-opacity:0.98;"/>
-        </g>
-        <g id="right-eye-inside" transform="matrix(0.696359,0.746821,-0.731385,0.681965,740.102,-337.032)">
-            <ellipse cx="745.383" cy="704.767" rx="54.617" ry="64.767" style="fill:rgb(88,59,35);"/>
-        </g>
-        <path id="mouth" d="M610,925C797.835,990.137 934.025,1011.93 1097,855L1070,837C1070,837 1103.34,823.009 1125,835C1155.75,852.027 1150,885 1150,885L1115,865C1115,865 887.676,1174.37 610,925Z" style="fill:rgb(88,59,35);"/>
-    </g>
-    <g id="Camera_Flat_Icon_Vector" transform="matrix(0.9,0,0,0.9,967.403,1218)">
-        <g id="camera">
-            <g id="Camera_Flat_Icon_Vector1" transform="matrix(1,0,0,1,-480,-480)">
-                <clipPath id="_clip1">
-                    <rect x="0" y="0" width="960" height="960"/>
-                </clipPath>
-                <g clip-path="url(#_clip1)">
+        <g id="Camera_Flat_Icon_Vector" transform="matrix(1.30417,0,0,1.30417,950.04,1124)">
+            <g id="camera">
+                <g id="Camera_Flat_Icon_Vector1" transform="matrix(1,0,0,1,-480,-480)">
                     <g id="Layer_1_1_" transform="matrix(1.56581,0,0,1.56581,-271.512,-271.621)">
                         <g>
                             <path d="M761,675.5L199,675.5C184.9,675.5 173.5,664.1 173.5,650L173.5,338.8C173.5,324.7 184.9,313.3 199,313.3L761,313.3C775.1,313.3 786.5,324.7 786.5,338.8L786.5,650C786.6,664.1 775.1,675.5 761,675.5Z" style="fill:rgb(48,63,159);fill-rule:nonzero;"/>
@@ -35,6 +35,8 @@
                             <rect x="675.5" y="342.8" width="69.4" height="27.6" style="fill:rgb(197,202,233);"/>
                         </g>
                     </g>
+                </g>
+                <g id="Camera_Flat_Icon_Vector2">
                 </g>
             </g>
         </g>

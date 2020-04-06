@@ -4,9 +4,16 @@ import {render} from '/web_modules/react-dom.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
 import I18nProvider from "./i18n/components/I18nProvider.mjs";
+import CourseDataProvider from './challenges/components/CourseDataProvider.mjs';
+
 import {getDefaultLocaleCodeByNavigatorPreferences} from './i18n/i18nHelper.mjs';
-import {availableLocaleCodes} from './i18n/locales.mjs'
+import {availableLocaleCodes} from './i18n/locales.mjs';
+
 import App from './app/components/App.mjs';
+
+import CourseDateConverter from './challenges/CourseDateConverter.mjs';
+
+const courseDateConverter = new CourseDateConverter(config.course.startDateTime, config.course.weekCount);
 
 /**
  * Moves keys from environment-specific configs to common config.
@@ -36,8 +43,12 @@ render(
                 // TODO: Once we have the language switcher, allow overwriting this by a manual language change, e.g. by checking for cookies or something!
                 activeLocaleCode: getDefaultLocaleCodeByNavigatorPreferences(),
             },
-            createElement(StrictMode, {},
-                createElement(App),
+            createElement(CourseDataProvider, {
+                    courseDateConverter,
+                },
+                createElement(StrictMode, {},
+                    createElement(App),
+                ),
             ),
         ),
     ),

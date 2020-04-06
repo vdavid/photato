@@ -22,13 +22,13 @@ test('Calculates day indexes correctly', async () => {
     const firstDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 1 - 1, 13, 12, 0)));
     const seventhDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 1 - 1, 19, 12, 0)));
     const twentiethDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 2 - 1, 1, 12, 0)));
-    const lastDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 4 - 1, 5, 12, 0)));
+    const lastDayOf12WeekCourseIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 4 - 1, 5, 12, 0)));
 
     /* Assert */
     expect(firstDayIndex).toBe(1);
     expect(seventhDayIndex).toBe(7);
     expect(twentiethDayIndex).toBe(20);
-    expect(lastDayIndex).toBe(12 * 7);
+    expect(lastDayOf12WeekCourseIndex).toBe(12 * 7);
 });
 
 test('Calculates day indexes correctly', async () => {

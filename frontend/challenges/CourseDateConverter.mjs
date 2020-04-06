@@ -1,10 +1,11 @@
-// TODO: Only for Jest. It's the same as the *.js file. Once Jest supports ESM, this can be deleted.
-module.exports = class CourseDateConverter {
+export default class CourseDateConverter {
     /**
      * @param {Date} courseStartDate
+     * @param {int} weekCount Total number of weeks in the course
      */
-    constructor(courseStartDate) {
-        this._courseStartDate = courseStartDate
+    constructor(courseStartDate, weekCount) {
+        this._courseStartDate = courseStartDate;
+        this._weekCount = weekCount;
     }
 
     /**
@@ -37,5 +38,17 @@ module.exports = class CourseDateConverter {
         const deadline = new Date(this._courseStartDate);
         deadline.setDate(this._courseStartDate.getDate() + 7 * this.getWeekIndex(date) + 1);
         return deadline;
+    }
+
+    hasCourseStarted(date = new Date()) {
+        return this.getWeekIndex(date) >= 1;
+    }
+
+    isCourseOver(date = new Date()) {
+        return this.getWeekIndex(date) > this._weekCount
+    }
+
+    isCourseRunning(date = new Date()) {
+        return this.hasCourseStarted(date) && !this.isCourseOver(date);
     }
 };

@@ -26,8 +26,7 @@ export default function I18nProvider({children, availableLocaleCodes, translatio
         loadTranslations();
     }, []);
 
-    return createElement(I18nContext.Provider,
-        {
+    return createElement(I18nContext.Provider, {
             value: {
                 setActiveLocale: i18n ? i18n.setActiveLocale.bind(i18n) : undefined,
                 getActiveLocaleCode: i18n ? i18n.getActiveLocaleCode.bind(i18n) : undefined,

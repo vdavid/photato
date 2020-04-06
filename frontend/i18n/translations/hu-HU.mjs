@@ -1,5 +1,7 @@
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 export const translations = {
+    'Photato': {translation: 'Photato'},
+    '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
     'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
     'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
     'Made with ❤️ by the Photato team': {translation: 'Készítette szeretettel ❤️ a Photato csapat'},
@@ -10,8 +12,7 @@ export const translations = {
     'Sign in': {translation: 'Bejelentkezés'},
     'Sign out': {translation: 'Kijelentkezés'},
     'Profile picture': {translation: 'Profilkép'},
-    'Upload your weekly photo here': {translation: 'Tölsd fel a heti fotód itt'},
-    'Upload your weekly photo!': {translation: 'Tölsd fel a heti fotód!'},
+    'Upload your weekly photo': {translation: 'Töltsd fel a heti fotód'},
     'Week #{weekIndex}': {translation: '{weekIndex}. hét'},
     'Send in your pic before {deadline}.': {translation: 'Küldd be a fotód {deadline} előtt.'},
     'Upload': {translation: 'Feltöltés'},
@@ -41,4 +42,8 @@ export const translations = {
     'Click here to select your photo, or drop your photo here': {translation: 'Kattints ide a fotód kiválasztásához, vagy húzd ide az egérrel'},
     'Wait a second, the page is loading...': {transition: 'Egy pillanat és betöltődik...'},
     'Week {weekIndex}:': {translation: '{weekIndex}. hét –'},
+    'Back to the challenge list': {translation: 'Vissza a feladatok listájához'},
+    'The course has already ended. You can\'t upload pics anymore. ☹': {translation: 'A kurzus véget ért. Már nem tudsz fotókat feltölteni. ☹'},
+    'The course has not started. You can upload your photos soon! 😊': {translation: 'A kurzus még nem kezdődött el. Hamarosan feltöltheted a fotóid! 😊'},
+    'This is the current week\'s challenge!': {translation: 'Ez az aktuális heti feladat!'},
 };
