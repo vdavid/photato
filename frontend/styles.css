@@ -1,34 +1,50 @@
-:root { /* All colors are from here: https://www.materialpalette.com/colors */
-    --page-background-color: #263238; /* BLUE GREY 900 */
-    --navbar-color: #455a64; /* BLUE GREY 700 */
-    --dark-primary-color: #303f9f; /* INDIGO 700 */
-    --default-primary-color: #3f51b5; /* INDIGO 500 */
-    --light-primary-color: #c5cae9; /* INDIGO 100 */
-    --light-primary-text-color: #fff; /* WHITE */
+/*
+ * Primary and accent colors are from here: https://material-ui.com/customization/color/#color-tool
+ * Background and text colors are from here: https://uxplanet.org/8-tips-for-dark-theme-design-8dfc2f8f7ab6
+ */
+:root {
+    --google-recommended-dark-background-color: #121212;
+    --paper-background-color: #424242;
+    --primary-color-dark: #1769aa;
+    --primary-color-main: #2196f3;
+    --primary-color-light: #4dabf5;
+    --accent-color-dark: #b28900;
+    --accent-color-main: #ffc400;
+    --accent-color-light: #ffcf33;
+    --disabled-color: #404040;
+    --light-text-color-high-emphasis: rgba(255,255,255, 0.87);
+    --light-text-color-medium-emphasis: rgba(255,255,255, 0.60);
+    --light-text-color-disabled: rgba(255,255,255, 0.38);
+}
+
+:root {
+    --page-background-color: var(--google-recommended-dark-background-color);
+    --main-background-color: var(--paper-background-color);
+    --navbar-color: var(--primary-color-dark);
     --dark-primary-text-color: #000; /* BLACK */
+    --error-color: #ff5722; /* DEEP ORANGE 500 */
     --accent-color: #ff5722; /* DEEP ORANGE 500 */
-    --disabled-background-color: #757575; /* GREY 600 */
     --light-disabled-text-color: #fafafa; /* GREY 50 */
     --divider-color: #bdbdbd; /* GREY 400 */
     --card-background-color: #fafafa; /* GREY 50 */
 }
 
 /* Generic styles */
-body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; font-size: 1rem; line-height: 1.8rem; background: var(--page-background-color); color: var(--light-primary-text-color); }
+body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; font-size: 1rem; line-height: 1.8rem; background: var(--page-background-color); color: var(--light-text-color-medium-emphasis); }
 
 h1, h2, h3, h4, h5, h6 { margin: 1em 0 0.5em; font-family: 'Roboto Slab', serif; line-height: 1.2em; }
 
 input { font-size: 1rem; }
-input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--light-primary-color); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
+input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--primary-color-light); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 
-button { border: none; padding: 0.5em 1em; border-radius: 2px; font-size: 1rem; background-color: var(--default-primary-color); color: var(--light-primary-text-color); }
-button:hover { background: var(--dark-primary-color); }
-button[disabled] { background: var(--disabled-background-color); }
-a, a:visited { color: var(--light-primary-color); text-decoration: none; }
+button { border: none; padding: 0.5em 1em; border-radius: 2px; font-size: 1rem; background-color: var(--primary-color-main); color: var(--light-text-color-high-emphasis); }
+button:hover { background: var(--primary-color-dark); }
+button[disabled] { background: var(--disabled-color); color:var(--light-text-color-disabled); }
+a, a:visited { color: var(--primary-color-light); text-decoration: none; }
 a:hover, a:active { text-decoration: underline; }
-.actionButton { display: inline-block; margin: 1em 0; padding: 1em 2em; color: var(--light-primary-text-color); background-color: var(--default-primary-color); text-decoration: none; transition: background-color 0.1s ease; cursor: pointer; }
-.actionButton:hover { background-color: var(--dark-primary-color); text-decoration: none; }
-.actionButton[disabled] { background: var(--disabled-background-color); cursor: default;}
+.actionButton { display: inline-block; margin: 1em 0; padding: 1em 2em; color: var(--light-text-color-high-emphasis); background-color: var(--primary-color-main); text-decoration: none; transition: background-color 0.1s ease; cursor: pointer; }
+.actionButton:hover { background-color: var(--primary-color-dark); text-decoration: none; }
+.actionButton[disabled] { background: var(--disabled-color);  color:var(--light-text-color-disabled); cursor: default;}
 .preWrap { white-space: pre-wrap; } /* Non-semantic class, so it's a bit of cheating, but makes life easier. */
 
 main { min-width: 320px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
@@ -42,10 +58,10 @@ footer { margin: 2em auto 0; text-align: center; }
 #app > header .siteTitle { padding: 14px 16px 14px 0; user-select: none; }
 #app > header nav { display: flex; flex-grow: 1; }
 #app > header hr { flex-grow: 1; border: 0; }
-#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-primary-text-color); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
-#app > header a:hover { background-color: var(--light-primary-color); color: var(--dark-primary-text-color); }
-#app > header a.active { background-color: var(--default-primary-color); }
-#app > header a.active:hover { background-color: var(--default-primary-color); color: var(--light-primary-text-color); }
+#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
+#app > header a:hover { background-color: var(--primary-color-light); color: var(--dark-primary-text-color); }
+#app > header a.active { background-color: var(--primary-color-main); }
+#app > header a.active:hover { background-color: var(--primary-color-main); color: var(--light-text-color-high-emphasis); }
 
 #app > header .authentication img { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; }
 @media screen and (max-width: 730px) {
@@ -53,31 +69,35 @@ footer { margin: 2em auto 0; text-align: center; }
     #app > header hr { display: block; height: 1.5px; margin: 0 3em 0 16px; background-color: var(--dark-primary-text-color); }
     #app > header nav { display: none; position: absolute; z-index: 50; background: white; top: 47px; right: 0; flex-direction: column; }
     #app > header nav.visible { display: block; }
-    #app > header a { text-align:left; background-color: var(--light-primary-text-color); color: var(--dark-primary-text-color); }
-    #app > header a.active { color: var(--light-primary-text-color); }
-    #app > header a:hover { background-color: var(--light-primary-color); color: var(--dark-primary-text-color); }
+    #app > header a { text-align:left; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
+    #app > header a.active { color: var(--light-text-color-high-emphasis); }
+    #app > header a:hover { background-color: var(--primary-color-light); color: var(--dark-primary-text-color); }
     #app > header .authentication { cursor: pointer; }
 }
 
 /* Upload form */
-#fileUpload .title input { display: block; width: 80%; margin: 1em auto; border: none; border-bottom: 2px solid var(--dark-primary-color); text-align: center; font-size: 1.5rem; background-color: var(--page-background-color); color: var(--light-primary-text-color); }
+#fileUpload .title input { display: block; width: 80%; margin: 1em auto; border: none; border-bottom: 2px solid var(--primary-color-dark); text-align: center; font-size: 1.5rem; background-color: var(--page-background-color); color: var(--light-text-color-high-emphasis); }
 #fileUpload .imageFileSelector { width: 50%; margin: 0 auto; }
 
 .imageFileSelector > div { position: relative; padding-top: 100%; }
 .imageFileSelector > div > * { position: absolute; width: 100%; top: 0; right: 0; bottom: 0; left: 0; }
 .imageFileSelector input { z-index: 3; opacity: 0; cursor: pointer; }
-.imageFileSelector .helpText { z-index: 2; display: flex; border: 2px dashed var(--light-primary-text-color); box-sizing: border-box; }
+.imageFileSelector .helpText { z-index: 2; display: flex; border: 2px dashed var(--light-text-color-high-emphasis); box-sizing: border-box; }
 .imageFileSelector .helpText > * { margin: auto; padding: 20%; text-align: center; }
 .imageFileSelector .preview { z-index: 1; display: flex; }
-.imageFileSelector .preview img { width: 100%; margin: auto; text-align: center; }
+.imageFileSelector .preview img { max-width:100%; max-height: 100%; margin: auto; text-align: center; }
 
 .imageFileSelector .removeButton { z-index: 4; width: 30px; height: 30px; padding: 0; line-height: 10px; bottom: auto; left: auto; font-size: 15px; text-align: center; border-radius: 2em; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; transition: color 0.3s ease, background-color 0.3s ease; }
-.imageFileSelector .removeButton:hover { background: var(--accent-color); color: var(--light-primary-text-color); }
+.imageFileSelector .removeButton:hover { background: var(--accent-color); color: var(--light-text-color-high-emphasis); }
+
+#fileUpload .selectionStatus { margin-top: 1em; text-align: center; }
+#fileUpload .selectionStatus.error { color: var(--error-color); }
 
 #fileUpload .uploadButton { margin-top: 1em; text-align: center; }
 #fileUpload .uploadButton button { font-size: 1.5rem; }
 
 #fileUpload .uploadStatus { margin-top: 1em; text-align: center; }
+#fileUpload .uploadStatus.error { color: var(--error-color); }
 #fileUpload .uploadStatus progress { width: 50%; }
 #fileUpload .uploadStatus div { margin-top: 1em; }
 @media screen and (max-width: 920px) {
@@ -88,7 +108,7 @@ footer { margin: 2em auto 0; text-align: center; }
 /* Full-page loading animation – Source: https://codepen.io/vreuling/pen/OXoVXA */
 #fullPageLoadingIndicator { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(16, 16, 16, 0.5); }
 #fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 200px; height: 200px; }
-#fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--default-primary-color); animation: spinnerAnimation 1s linear infinite; }
+#fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--primary-color-main); animation: spinnerAnimation 1s linear infinite; }
 #fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
 @keyframes spinnerAnimation {
     0% { transform: rotate(0deg); }
@@ -99,3 +119,5 @@ footer { margin: 2em auto 0; text-align: center; }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+
+

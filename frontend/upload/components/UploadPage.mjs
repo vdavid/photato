@@ -2,7 +2,7 @@ import {createElement, useState} from '/web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
-import {uploadStatuses} from '../uploadStatuses.mjs';
+import {uploadStatuses, selectionStatuses} from '../uploadPageStatuses.mjs';
 import FileSelectorWithPreview from './FileSelectorWithPreview.mjs';
 import PhotoTitleInput from './PhotoTitleInput.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
@@ -11,14 +11,14 @@ import {useCourseData} from '../../challenges/components/CourseDataProvider.mjs'
 // noinspection JSValidateJSDoc
 /**
  * @param {File} file
- * @returns {symbol}
+ * @returns {{name: string, isError: boolean}}
  */
-function _validateFile(file) {
+function _validateSelectedFile(file) {
     return ((file.size > config.imageUpload.maximumSizeInBytes)
-        ? uploadStatuses.selectedFileIsTooLarge
+        ? selectionStatuses.selectedFileIsTooLarge
         : ((file.size < config.imageUpload.minimumSizeInBytes)
-            ? uploadStatuses.selectedFileIsTooSmall
-            : uploadStatuses.readyToUpload));
+            ? selectionStatuses.selectedFileIsTooSmall
+            : selectionStatuses.readyToUpload));
 }
 
 export default function UploadPage({photoUploader}) {
@@ -30,7 +30,8 @@ export default function UploadPage({photoUploader}) {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFilePreviewUrl, setSelectedFilePreviewUrl] = useState(null);
-    const [uploadStatus, setUploadStatus] = useState(uploadStatuses.readyToSelectFile);
+    const [selectionStatus, setSelectionStatus] = useState(selectionStatuses.readyToSelectFile);
+    const [uploadStatus, setUploadStatus] = useState(uploadStatuses.notStarted);
     const [uploadProgress, setUploadProgress] = useState(0.0);
     const [title, setTitle] = useState('');
 
@@ -39,9 +40,9 @@ export default function UploadPage({photoUploader}) {
      */
     function handleFileSelected(file) {
         if (file) {
-            const newStatus = _validateFile(file);
-            setUploadStatus(newStatus);
-            if (newStatus === uploadStatuses.readyToUpload) {
+            const newStatus = _validateSelectedFile(file);
+            setSelectionStatus(newStatus);
+            if (newStatus === selectionStatuses.readyToUpload) {
                 setSelectedFile(file);
                 setSelectedFilePreviewUrl(URL.createObjectURL(file));
                 setUploadProgress(0.0);
@@ -51,24 +52,39 @@ export default function UploadPage({photoUploader}) {
 
     function handleFileSelectionRemoved() {
         setSelectedFile(null);
-        setUploadStatus(uploadStatuses.readyToSelectFile);
+        setSelectionStatus(selectionStatuses.readyToSelectFile);
         setSelectedFilePreviewUrl(null);
         setUploadProgress(0.0);
     }
 
-    function getUploadStatusText(uploadStatus) {
+    /**
+     * @param {{name: string, isError: boolean}} selectionStatus
+     * @returns {string}
+     */
+    function getSelectionStatusText(selectionStatus) {
         const minimumSize = Math.round(config.imageUpload.minimumSizeInBytes / 1024);
         const maximumSize = Math.round(config.imageUpload.maximumSizeInBytes / 1024 / 1024);
         const uploadStatusTexts = {
-            [uploadStatuses.readyToSelectFile]: __('Please select your photo to upload.'),
-            [uploadStatuses.selectedFileIsTooSmall]: __('The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
-            [uploadStatuses.selectedFileIsTooLarge]: __('The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.', {maximumSize}),
-            [uploadStatuses.readyToUpload]: __('Photo is ready to upload. (Make sure you gave it a title if you wanted!)'),
-            [uploadStatuses.uploading]: __('Uploading your photo...'),
-            [uploadStatuses.uploadDone]: __('We got your photo! Remember, if you want to change it, you can upload a new one by the end of the week.'),
-            [uploadStatuses.uploadFailed]: __('Upload failed. Sorry about it. We don\'t know what\'s wrong. Please refresh the page and try again. It it keeps on failing, please drop us an email at {emailAddress}.', {emailAddress: config.customerServiceEmailAddress}),
+            [selectionStatuses.readyToSelectFile.name]: __('Please select your photo to upload.'),
+            [selectionStatuses.selectedFileIsTooSmall.name]: __('The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
+            [selectionStatuses.selectedFileIsTooLarge.name]: __('The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.', {maximumSize}),
+            [selectionStatuses.readyToUpload.name]: __('Photo is ready to upload. (Make sure you gave it a title if you wanted!)'),
         };
-        return uploadStatusTexts[uploadStatus];
+        return uploadStatusTexts[selectionStatus.name];
+    }
+
+    /**
+     * @param {{name: string, isError: boolean}} uploadStatus
+     * @returns {string}
+     */
+    function getUploadStatusText(uploadStatus) {
+        const uploadStatusTexts = {
+            [uploadStatuses.notStarted.name]: '',
+            [uploadStatuses.uploading.name]: __('Uploading your photo...'),
+            [uploadStatuses.uploadDone.name]: __('We got your photo! Remember, if you want to change it, you can upload a new one by the end of the week.'),
+            [uploadStatuses.uploadFailed.name]: __('Upload failed. Sorry about it. We don\'t know what\'s wrong. Please refresh the page and try again. It it keeps on failing, please drop us an email at {emailAddress}.', {emailAddress: config.customerServiceEmailAddress}),
+        };
+        return uploadStatusTexts[uploadStatus.name];
     }
 
     async function uploadSelectedFile() {
@@ -119,33 +135,34 @@ export default function UploadPage({photoUploader}) {
         isCourseRunning && createElement('h2', {}, __(weeklyChallengeTitles[currentWeekIndex - 1])),
         createElement('p', {className: 'preWrap'}, courseStatusHelpText),
         isCourseRunning
-            ? createElement('form', {target: '', encType: 'multipart/form-data', method: 'post'},
-            createElement(FileSelectorWithPreview, {
-                onFileSelected: handleFileSelected,
-                onFileRemoved: handleFileSelectionRemoved,
-                isDisabled: !isAuthenticated || (uploadStatus === uploadStatuses.uploading),
-                selectedFilePreviewUrl,
-            }),
-            createElement(PhotoTitleInput, {
-                title,
-                isDisabled: uploadStatus === uploadStatuses.uploading,
-                onChange: newTitle => setTitle(newTitle),
-            }),
-            createElement('div', {className: 'uploadButton'},
-                createElement('button', {
-                    onClick: uploadSelectedFile,
-                    disabled: !isAuthenticated || (uploadStatus !== uploadStatuses.readyToUpload),
-                }, __('Upload')),
-            ),
-            ([uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus)
-                ? createElement('div', {className: 'uploadStatus'},
-                    createElement('progress', {
-                        value: uploadProgress * 100,
-                        max: 100
-                    }),
+            ? [
+                createElement(FileSelectorWithPreview, {
+                    onFileSelected: handleFileSelected,
+                    onFileRemoved: handleFileSelectionRemoved,
+                    isDisabled: !isAuthenticated || (uploadStatus === uploadStatuses.uploading),
+                    selectedFile,
+                    selectedFilePreviewUrl,
+                }),
+                createElement(PhotoTitleInput, {
+                    title,
+                    isDisabled: uploadStatus === uploadStatuses.uploading,
+                    onChange: newTitle => setTitle(newTitle),
+                }),
+                createElement('div', {className: 'selectionStatus' + (selectionStatus.isError ? ' error' : '')}, getSelectionStatusText(selectionStatus)),
+                createElement('div', {className: 'uploadButton'},
+                    createElement('button', {
+                        onClick: uploadSelectedFile,
+                        disabled: !isAuthenticated || (selectionStatus !== selectionStatuses.readyToUpload),
+                    }, __('Upload')),
+                ),
+                createElement('div', {className: 'uploadStatus' + (selectionStatus.isError ? ' error' : '')},
+                    ([uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus)
+                        ? createElement('progress', {
+                            value: uploadProgress * 100,
+                            max: 100
+                        }) : null),
                     createElement('div', {}, getUploadStatusText(uploadStatus)),
-                )
-                : null),
-            ) : null,
+                ),
+            ] : null,
     );
 }

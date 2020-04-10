@@ -47,4 +47,5 @@ export const translations = {
     'The course has not started. You can upload your photos soon! 😊': {translation: 'A kurzus még nem kezdődött el. Hamarosan feltöltheted a fotóid! 😊'},
     'This is the current week\'s challenge!': {translation: 'Ez az aktuális heti feladat!'},
     'You\'ll need to sign in to upload a photo.': {translation: 'Fotó feltöltéséhez be kell jelentkezned.'},
+    'Loading...': {translation: 'Betöltés folyamatban...'},
 };
