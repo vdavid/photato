@@ -14,7 +14,7 @@ export const translations = {
     'Profile picture': {translation: 'Profilkép'},
     'Upload your weekly photo': {translation: 'Töltsd fel a heti fotód'},
     'Week #{weekIndex}': {translation: '{weekIndex}. hét'},
-    'Send in your pic before {deadline}. Reminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt. Ne feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
+    'Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt.\nNe feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
     'Upload': {translation: 'Feltöltés'},
     'Please select your photo to upload.': {translation: 'Válaszd ki a feltöltendő fotót.'},
     'The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.':
