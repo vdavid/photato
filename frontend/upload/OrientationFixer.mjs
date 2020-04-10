@@ -3,18 +3,10 @@ export default class OrientationFixer {
      * @param {File} file
      * @returns {Promise<int>}
      */
-    determineOrientation(file) {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.onloadend = progressEvent => {
-                try {
-                    resolve(this._handleOnLoadEndEvent.bind(this)(progressEvent.target.result));
-                } catch (error) {
-                    reject(error);
-                }
-            };
-            fileReader.readAsArrayBuffer(file);
-        });
+    async determineOrientation(file) {
+        const data = await this._readFileToArrayBuffer(file);
+        const dataView = new DataView(data);
+        return this._isJpegFile(data, dataView) ? (this._getOrientationValueFromJpegData(dataView) || 1) : 1;
     };
 
     /**
@@ -39,13 +31,22 @@ export default class OrientationFixer {
     }
 
     /**
-     * @param {ArrayBuffer} data
+     * @param {File} file
+     * @returns {Promise<ArrayBuffer>}
      * @private
      */
-    _handleOnLoadEndEvent(data) {
-        const dataView = new DataView(data);
-
-        return this._isJpegFile(data, dataView) ? (this._getOrientationValueFromJpegData(dataView) || 1) : 1;
+    _readFileToArrayBuffer(file) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.onloadend = progressEvent => {
+                try {
+                    resolve(progressEvent.target.result);
+                } catch (error) {
+                    reject(error);
+                }
+            };
+            fileReader.readAsArrayBuffer(file);
+        });
     }
 
     /**
