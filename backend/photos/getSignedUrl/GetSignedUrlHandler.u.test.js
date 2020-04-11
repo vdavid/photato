@@ -7,6 +7,8 @@ const SignatureRepository = require('../SignatureRepository.js');
 /* Constants */
 const bucketName = 'testBucket';
 const fakeQueryString = 'a=1';
+const testEmailAddress = 'test@user.com';
+const testBearerToken = 'testToken';
 
 /* S3 mock */
 const getSignedUrlMock = jest.fn((operation, {Bucket: bucket, Key: key}) =>
@@ -32,7 +34,7 @@ test('Handles valid requests well', async () => {
     const host = 'temp.cloudfront.net';
     const parameters = {
         environment: 'development',
-        emailAddress: 'test@user.com',
+        emailAddress: testEmailAddress,
         courseName: 'hu-3',
         weekIndex: '2',
         originalFileName: 'kukutyin.jpg',
@@ -44,7 +46,12 @@ test('Handles valid requests well', async () => {
             {
                 cf: {
                     request: {
-                        headers: {host: [{key: 'Host', value: host}]},
+                        headers: {
+                            host: [
+                                {key: 'Host', value: host},
+                                {key: 'Authorization', value: 'Bearer ' + testBearerToken},
+                            ]
+                        },
                         method: 'GET',
                         querystring: _convertToQueryString(parameters),
                         uri: '/',
@@ -55,7 +62,7 @@ test('Handles valid requests well', async () => {
     };
 
     /*Act */
-    const response = await getSignedUrlHandler.handleRequest(event, {});
+    const response = await getSignedUrlHandler.handleRequest(event, {}, {email: testEmailAddress});
 
     /* Assert */
     expect(response.body).toEqual('https://' + host + '/development/photos/' + parameters.courseName + '/'

@@ -17,6 +17,9 @@ module.exports = class PhotoRepository {
      * @returns {string}
      */
     getSignedUrl(environment, photoMetadata) {
+        if (photoMetadata.mimeType !== 'image/jpeg') {
+            throw new Error('Bad mime type.');
+        }
         const filePath = this._buildPathFromMetadata(environment, photoMetadata);
         const parameters = {
             Bucket: this._bucketName,
@@ -42,6 +45,5 @@ module.exports = class PhotoRepository {
             + '/week-' + photoMetadata.weekIndex
             + '/' + photoMetadata.emailAddress
             + '.jpg';
-
     }
 };

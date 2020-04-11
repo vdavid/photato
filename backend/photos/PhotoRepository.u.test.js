@@ -45,5 +45,5 @@ test('Throws on bad mime type', async () => {
     const photoRepository = new PhotoRepository(s3Mock, bucketName);
 
     /* Act & assert */
-    expect(() => photoRepository.getSignedUrl(environment, testFields)).toThrow();
+    expect(() => photoRepository.getSignedUrl(environment, testFields)).toThrow('Bad mime type.');
 });
