@@ -1,4 +1,9 @@
 export default class PhotoUploader {
+    /**
+     * @param {object} object
+     * @returns {string}
+     * @private
+     */
     _convertToQueryString(object) {
         return Object.keys(object).map(key => key + '=' + object[key]).join('&');
     }
