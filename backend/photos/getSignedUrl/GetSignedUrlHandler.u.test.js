@@ -37,7 +37,7 @@ test('Handles valid requests well', async () => {
         weekIndex: '2',
         originalFileName: 'kukutyin.jpg',
         title: 'Test title',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
     };
     const event = {
         Records: [

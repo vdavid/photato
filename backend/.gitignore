@@ -7,3 +7,4 @@ jspm_packages
 
 #Serverless temporary files
 /s_*.js
+/serverless_sdk

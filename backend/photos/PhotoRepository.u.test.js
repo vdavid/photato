@@ -10,7 +10,7 @@ test('Uploads image', async () => {
         weekIndex: 5,
         originalFileName: 'test.jpg',
         title: 'Some title',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
     };
 
     const s3Mock = {getSignedUrl: (operation, parameters) => ({operation, bucket: parameters.Bucket, key: parameters.Key, metadata: parameters.Metadata, contentType: parameters.ContentType})};

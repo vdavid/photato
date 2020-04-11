@@ -5,7 +5,7 @@
  * @property {int} weekIndex Zero-based
  * @property {string} originalFileName The original file name at the upload
  * @property {string|undefined} title Maximum 150 characters
- * @property {string} mimeType Must be "image/"...
+ * @property {string} mimeType Must be "image/jpeg"
  */
 
 module.exports = class PhotoMetadataBuilder {
@@ -24,7 +24,7 @@ module.exports = class PhotoMetadataBuilder {
                 originalFileName: fields.originalFileName,
                 title: fields.title,
                 mimeType: fields.mimeType,
-            }
+            };
         } else {
             throw new Error('Wrong input from "' + fields.emailAddress.toString().substring(0, 100) + '".');
         }
@@ -40,7 +40,7 @@ module.exports = class PhotoMetadataBuilder {
             && (fields.weekIndex !== undefined) && fields.weekIndex >= 0 && (fields.weekIndex <= 12)
             && fields.originalFileName && fields.originalFileName.length > 0 && fields.originalFileName.length <= 255
             && (!fields.title || fields.title.length <= 150)
-            && fields.mimeType.startsWith('image/')
+            && (fields.mimeType === 'image/jpeg');
     }
 
     /**

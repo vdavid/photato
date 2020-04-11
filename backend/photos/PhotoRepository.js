@@ -41,20 +41,7 @@ module.exports = class PhotoRepository {
         return environment + '/photos/' + photoMetadata.courseName
             + '/week-' + photoMetadata.weekIndex
             + '/' + photoMetadata.emailAddress
-            + '.' + this._getExtensionByMimeType(photoMetadata.mimeType);
+            + '.jpg';
 
-    }
-
-    /**
-     * @param {string} mimeType
-     * @returns {string|null}
-     */
-    _getExtensionByMimeType(mimeType) {
-        const matches = mimeType.match(/^image\/(.*)$/);
-        if (matches) {
-            return matches[1].replace('jpeg', 'jpg');
-        } else {
-            throw new Error('Wrong mime type: "' + mimeType + '".');
-        }
     }
 };
