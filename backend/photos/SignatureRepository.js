@@ -12,22 +12,38 @@ module.exports = class SignatureRepository {
     }
 
     /**
+     * @param {string} path
+     * @returns {Promise}
+     */
+    createValidSignatureForPath(path) {
+        return this._createSignature('valid', this._getSHA256Hash(path));
+    }
+
+    /**
+     * @param {string} path
+     * @returns {Promise<boolean>}
+     */
+    async isSignatureValidForPath(path) {
+        const hash = this._getSHA256Hash(path);
+        return await this._doesSignatureExist('valid', hash)
+         && !(await this._doesSignatureExist('expired', hash))
+    }
+
+    /**
+     * @param {string} path
+     * @returns {Promise}
+     */
+    markSignatureExpiredForPath(path) {
+        return this._createSignature('expired', this._getSHA256Hash(path));
+    }
+
+    /**
      * @param {string} string Any string to get its hash
      * @returns {string} The hash.
      * @private
      */
     _getSHA256Hash(string) {
         return crypto.createHash('sha256').update(string).digest('hex');
-    }
-
-    /**
-     * @param {'valid'|'expired'} status
-     * @param {string} hash
-     * @returns {string}
-     * @private
-     */
-    _buildKey(status, hash) {
-        return 'signatures/' + status + '/' + hash;
     }
 
     /**
@@ -62,28 +78,12 @@ module.exports = class SignatureRepository {
     }
 
     /**
-     * @param {string} path
-     * @returns {Promise}
+     * @param {'valid'|'expired'} status
+     * @param {string} hash
+     * @returns {string}
+     * @private
      */
-    createValidSignatureForPath(path) {
-        return this._createSignature('valid', this._getSHA256Hash(path));
-    }
-
-    /**
-     * @param {string} path
-     * @returns {Promise}
-     */
-    markSignatureExpiredForPath(path) {
-        return this._createSignature('expired', this._getSHA256Hash(path));
-    }
-
-    /**
-     * @param {string} path
-     * @returns {Promise<boolean>}
-     */
-    async isSignatureValidForPath(path) {
-        const hash = this._getSHA256Hash(path);
-        return await this._doesSignatureExist('valid', hash)
-         && !(await this._doesSignatureExist('expired', hash))
+    _buildKey(status, hash) {
+        return 'signatures/' + status + '/' + hash;
     }
 };
