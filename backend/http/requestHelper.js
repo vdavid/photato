@@ -27,13 +27,9 @@ function _parseQueryString(queryString) {
         (key, value) => (key === '') ? value : decodeURIComponent(value)) : {};
 }
 
-function validateEnvironment(environmentInput) {
+function isEnvironmentValid(environmentInput) {
     const knownEnvironments = ['development', 'staging', 'production'];
-    if (knownEnvironments.includes(environmentInput)) {
-        return environmentInput;
-    } else {
-        throw new Error('Invalid environment.');
-    }
+    return knownEnvironments.includes(environmentInput);
 }
 
 /**
@@ -48,5 +44,5 @@ function _extractBearerToken(request) {
 
 module.exports = {
     getRequestDataFromLambdaEdgeEvent,
-    validateEnvironment,
+    isEnvironmentValid,
 };

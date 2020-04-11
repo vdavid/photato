@@ -30,6 +30,37 @@ function _convertToQueryString(object) {
     return Object.keys(object).map(key => key + '=' + object[key]).join('&');
 }
 
+test('Handles valid OPTIONS requests well', async () => {
+    /* Arrange */
+    const host = 'temp.cloudfront.net';
+    const event = {
+        Records: [
+            {
+                cf: {
+                    request: {
+                        headers: {
+                            host: [
+                                {key: 'Host', value: host},
+                            ],
+                        },
+                        method: 'OPTIONS',
+                        uri: '/get-signed-url',
+                    },
+                },
+            },
+        ],
+    };
+
+    /*Act */
+    const response = await getSignedUrlHandler.handleRequest(event, {});
+
+    /* Assert */
+    expect(response.status).toEqual(200);
+    expect(response.statusDescription).toEqual('OK');
+    expect(getSignedUrlMock).toBeCalledTimes(0);
+    expect(putObjectMock).toBeCalledTimes(0);
+});
+
 test('Handles valid PUT requests well', async () => {
     /* Arrange */
     const host = 'temp.cloudfront.net';
@@ -57,7 +88,7 @@ test('Handles valid PUT requests well', async () => {
                         },
                         method: 'GET',
                         querystring: _convertToQueryString(parameters),
-                        uri: '/',
+                        uri: '/get-signed-url',
                     },
                 },
             },
@@ -65,7 +96,7 @@ test('Handles valid PUT requests well', async () => {
     };
 
     /*Act */
-    const response = await getSignedUrlHandler.handleRequest(event, {}, {email: testEmailAddress});
+    const response = await getSignedUrlHandler.handleRequest(event, {});
 
     /* Assert */
     expect(response.body).toEqual('https://' + host + '/development/photos/' + parameters.courseName + '/'
