@@ -58,6 +58,7 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
     async function handleRedirectCallback() {
         setLoading(true);
         await auth0Client.handleRedirectCallback();
+        auth0Client.getUser().getTokenSilently()
         const user = await auth0Client.getUser();
         setLoading(false);
         setIsAuthenticated(true);

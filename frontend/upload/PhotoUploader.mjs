@@ -10,10 +10,11 @@ export default class PhotoUploader {
 
     /**
      * @param {string} url
+     * @param {string} accessToken The JWT to pass as the authorization Bearer
      * @param {Object} parameters
      * @returns {Promise<string>} The URL.
      */
-    async getSignedUrlFromServer(url, parameters) {
+    async getSignedUrlFromServer(url, accessToken, parameters) {
         const response = await fetch(url + '?' + this._convertToQueryString(parameters), {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -21,6 +22,9 @@ export default class PhotoUploader {
             credentials: 'same-origin', // include, *same-origin, omit
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *client
+            headers: {
+                Authorization: 'Bearer ' + accessToken
+            },
         });
         return response.text();
     }

@@ -1,4 +1,4 @@
-import {createElement, useState} from '/web_modules/react.js';
+import {createElement, useState, useEffect} from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
@@ -24,16 +24,27 @@ function _validateSelectedFile(file) {
 export default function UploadPage({photoUploader}) {
     const ONE_MINUTE = 60 * 1000;
 
-    const {isAuthenticated, user} = useAuth0();
+    const {isAuthenticated, user, getTokenSilently} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
     const {currentWeekIndex, currentWeekDeadline, isCourseOver, isCourseRunning} = useCourseData();
 
+    const [accessToken, setAccessToken] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedFilePreviewUrl, setSelectedFilePreviewUrl] = useState(null);
     const [selectionStatus, setSelectionStatus] = useState(selectionStatuses.readyToSelectFile);
     const [uploadStatus, setUploadStatus] = useState(uploadStatuses.notStarted);
     const [uploadProgress, setUploadProgress] = useState(0.0);
     const [title, setTitle] = useState('');
+
+    useEffect(() => {
+        async function setupAccessToken() {
+            const token = await getTokenSilently();
+            setAccessToken(token);
+        }
+
+        // noinspection JSIgnoredPromiseFromCall
+        setupAccessToken();
+    }, []);
 
     /**
      * @param {File|null} file
@@ -104,7 +115,7 @@ export default function UploadPage({photoUploader}) {
                 title,
                 mimeType: selectedFile.type,
             };
-            const signedUrl = await photoUploader.getSignedUrlFromServer(config.backendApi.photoUpload.url, parameters);
+            const signedUrl = await photoUploader.getSignedUrlFromServer(config.backendApi.photoUpload.url, accessToken, parameters);
             if (signedUrl) {
                 const response = await photoUploader.uploadFile(signedUrl, selectedFile, setUploadProgress);
 
