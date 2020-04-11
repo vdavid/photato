@@ -19,6 +19,23 @@ function buildResponse(statusCode, body) {
     };
 }
 
+/**
+ * @param {string[]} allowedMethods
+ * @returns {Object}
+ */
+function buildOptionsResponse(allowedMethods) {
+    return {
+        status: 200,
+        statusDescription: 'OK',
+        headers: {
+            'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
+            'access-control-allow-methods': [{key: 'Access-Control-Allow-Methods', value: allowedMethods.join(', ')}],
+            'access-control-allow-headers': [{key: 'Access-Control-Allow-Headers', value: '*'}],
+        },
+    };
+}
+
 module.exports = {
     buildResponse,
+    buildOptionsResponse,
 }

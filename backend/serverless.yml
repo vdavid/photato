@@ -151,4 +151,5 @@ resources:
               PathPattern: '/get-signed-url'
               AllowedMethods:
                 - GET
+                - OPTIONS
                 - HEAD

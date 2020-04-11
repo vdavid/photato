@@ -11,7 +11,7 @@
 module.exports = class PhotoMetadataBuilder {
 
     /**
-     * @param {PhotoMetadata} fields The raw fields got from the user
+     * @param {Object<string, string>} fields The raw fields got from the user
      * @returns {PhotoMetadata} A well-formed metadata
      */
     createFromRawFields(fields) {
@@ -31,7 +31,7 @@ module.exports = class PhotoMetadataBuilder {
     }
 
     /**
-     * @param {PhotoMetadata} fields
+     * @param {Object<string, string>} fields
      * @returns {boolean}
      */
     _validateInput(fields) {

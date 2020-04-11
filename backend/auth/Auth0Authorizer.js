@@ -1,18 +1,9 @@
 const HttpsConnector = require('../http/HttpsConnector.js');
 const httpsConnector = new HttpsConnector();
 
-module.exports = class Authorizer {
+module.exports = class Auth0Authorizer {
     constructor(auth0UserInfoEndpoint) {
         this._auth0UserInfoEndpoint = auth0UserInfoEndpoint;
-    }
-
-    /**
-     * @param {Object} event Must have a header called "Authorization" with a value like "Bearer {token}"
-     * @returns {string}
-     */
-    extractBearerToken(event) {
-        const authorizationHeader = event.headers.Authorization;
-        return authorizationHeader.substring(authorizationHeader.indexOf(' ') + 1);
     }
 
     /**

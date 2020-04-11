@@ -20,16 +20,17 @@ const s3 = {
 };
 
 /* External objects */
+const auth0Authorizer = {getAuth0UserData: async token => token === testBearerToken ? {email: testEmailAddress} : undefined};
 const photoMetadataBuilder = new PhotoMetadataBuilder();
 const photoRepository = new PhotoRepository(s3, bucketName);
 const signatureRepository = new SignatureRepository(s3, bucketName);
-const getSignedUrlHandler = new GetSignedUrlHandler({photoMetadataBuilder, photoRepository, signatureRepository});
+const getSignedUrlHandler = new GetSignedUrlHandler({auth0Authorizer, photoMetadataBuilder, photoRepository, signatureRepository});
 
 function _convertToQueryString(object) {
     return Object.keys(object).map(key => key + '=' + object[key]).join('&');
 }
 
-test('Handles valid requests well', async () => {
+test('Handles valid PUT requests well', async () => {
     /* Arrange */
     const host = 'temp.cloudfront.net';
     const parameters = {
@@ -49,8 +50,10 @@ test('Handles valid requests well', async () => {
                         headers: {
                             host: [
                                 {key: 'Host', value: host},
+                            ],
+                            authorization: [
                                 {key: 'Authorization', value: 'Bearer ' + testBearerToken},
-                            ]
+                            ],
                         },
                         method: 'GET',
                         querystring: _convertToQueryString(parameters),
