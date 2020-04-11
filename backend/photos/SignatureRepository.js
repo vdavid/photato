@@ -1,13 +1,14 @@
-const crypto = require('crypto');
-
+const HashProvider = require('./HashProvider.js');
 module.exports = class SignatureRepository {
     /**
      * @param {S3} s3
+     * @param {HashProvider} [hashProvider]
      * @param {string} bucketName The name of the S3 bucket to use
      * @return {ManagedUpload}
      */
-    constructor(s3, bucketName) {
+    constructor(s3, bucketName, {hashProvider} = {}) {
         this._s3 = s3;
+        this._hashProvider = hashProvider || new HashProvider();
         this._bucketName = bucketName;
     }
 
@@ -16,7 +17,7 @@ module.exports = class SignatureRepository {
      * @returns {Promise}
      */
     createValidSignatureForPath(path) {
-        return this._createSignature('valid', this._getSHA256Hash(path));
+        return this._createSignature('valid', this._hashProvider.getSHA256Hash(path));
     }
 
     /**
@@ -24,7 +25,7 @@ module.exports = class SignatureRepository {
      * @returns {Promise<boolean>}
      */
     async isSignatureValidForPath(path) {
-        const hash = this._getSHA256Hash(path);
+        const hash = this._hashProvider.getSHA256Hash(path);
         return await this._doesSignatureExist('valid', hash)
          && !(await this._doesSignatureExist('expired', hash))
     }
@@ -34,17 +35,9 @@ module.exports = class SignatureRepository {
      * @returns {Promise}
      */
     markSignatureExpiredForPath(path) {
-        return this._createSignature('expired', this._getSHA256Hash(path));
+        return this._createSignature('expired', this._hashProvider.getSHA256Hash(path));
     }
 
-    /**
-     * @param {string} string Any string to get its hash
-     * @returns {string} The hash.
-     * @private
-     */
-    _getSHA256Hash(string) {
-        return crypto.createHash('sha256').update(string).digest('hex');
-    }
 
     /**
      * @param {'valid'|'expired'} status
