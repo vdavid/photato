@@ -18,7 +18,7 @@ function _validateSelectedFile(file) {
         ? selectionStatuses.selectedFileIsTooLarge
         : ((file.size < config.imageUpload.minimumSizeInBytes)
             ? selectionStatuses.selectedFileIsTooSmall
-            : selectionStatuses.readyToUpload));
+            : ((file.type !== 'image/jpeg') ? selectionStatuses.wrongFileType : selectionStatuses.readyToUpload)));
 }
 
 export default function UploadPage({photoUploader}) {
@@ -45,8 +45,11 @@ export default function UploadPage({photoUploader}) {
             if (newStatus === selectionStatuses.readyToUpload) {
                 setSelectedFile(file);
                 setSelectedFilePreviewUrl(URL.createObjectURL(file));
-                setUploadProgress(0.0);
+            } else {
+                setSelectedFile(null);
+                setSelectedFilePreviewUrl(null);
             }
+            setUploadProgress(0.0);
         }
     }
 
@@ -64,13 +67,14 @@ export default function UploadPage({photoUploader}) {
     function getSelectionStatusText(selectionStatus) {
         const minimumSize = Math.round(config.imageUpload.minimumSizeInBytes / 1024);
         const maximumSize = Math.round(config.imageUpload.maximumSizeInBytes / 1024 / 1024);
-        const uploadStatusTexts = {
+        const selectionStatusTexts = {
             [selectionStatuses.readyToSelectFile.name]: __('Please select your photo to upload.'),
             [selectionStatuses.selectedFileIsTooSmall.name]: __('The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
             [selectionStatuses.selectedFileIsTooLarge.name]: __('The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.', {maximumSize}),
+            [selectionStatuses.wrongFileType.name]: __('The image you\'ve selected is not a JPEG. Please select a JPEG file.', {maximumSize}),
             [selectionStatuses.readyToUpload.name]: __('Photo is ready to upload. (Make sure you gave it a title if you wanted!)'),
         };
-        return uploadStatusTexts[selectionStatus.name];
+        return selectionStatusTexts[selectionStatus.name];
     }
 
     /**

@@ -1,4 +1,3 @@
-
 /**
  * @type {Object<string, {name: string, isError: boolean}>}
  */
@@ -6,6 +5,7 @@ export const selectionStatuses = {
     readyToSelectFile: {name: 'readyToSelectFile', isError: false},
     selectedFileIsTooSmall: {name: 'selectedFileIsTooSmall', isError: true},
     selectedFileIsTooLarge: {name: 'selectedFileIsTooLarge', isError: true},
+    wrongFileType: {name: 'wrongFileType', isError: true},
     readyToUpload: {name: 'readyToUpload', isError: false},
 };
 

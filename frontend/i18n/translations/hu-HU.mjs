@@ -21,6 +21,7 @@ export const translations = {
         {translation: 'A kiválasztott képed kisebb, mint {minimumSize} kilobájt. Ez sajnos túl kicsi. Kérlek, válassz egy kicsit jobb felbontású fotót.'},
     'The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.':
         {translation: 'A kiválasztott képed nagyobb, mint {maximumSize} megabájt. Sajnos ekkora képet nem tudunk kezelni. Kérlek, válassz egy kisebb fotót.'},
+    'The image you\'ve selected is not a JPEG. Please select a JPEG file.': {translation: 'A kiválasztott fájl nem egy JPEG kép. Jelenleg sajnos csak JPEG képeket tudunk elfogadni. Kérlek, alakítsd át a képed JPEG formátumra.'},
     'Photo is ready to upload. (Make sure you gave it a title if you wanted!)': {translation: 'A fotó készen áll a feltöltésre. (Ne felejtsd el megadni a címet, ha szeretnéd!)'},
     'Uploading your photo...': {translation: 'A fotód épp töltődik felfelé...'},
     'We got your photo! Remember, if you want to change it, you can upload a new one by the end of the week.': {translation: 'Megkaptuk a fotód! Ne feledd, a hét végéig módosíthatod a döntésed: ha változtatnál, csak tölts fel egy új képet.'},

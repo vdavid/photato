@@ -59,7 +59,7 @@ export default function FileSelectorWithPreview({selectedFile, selectedFilePrevi
             createElement('input', {
                 type: 'file',
                 name: 'image',
-                accept: 'image/*',
+                accept: 'image/jpeg',
                 onChange: event => onFileSelected(event.target.files[0]),
                 disabled: isDisabled,
                 ref: fileInputRef,
