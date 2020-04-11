@@ -16,7 +16,7 @@ export const config = {
     },
     backendApi: {
         photoUpload: {
-            url: 'https://d2l6ndiv9r7vhe.cloudfront.net/get-signed-url',
+            url: 'https://d2rw8z9jy7vx22.cloudfront.net/get-signed-url',
         }
     },
     customerServiceEmailAddress: 'photatophotato@gmail.com',
