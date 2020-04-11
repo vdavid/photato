@@ -6,7 +6,7 @@ const SignatureRepository = require('../SignatureRepository.js');
 const bucketName = 'testBucket';
 const host = 'temp.cloudfront.net';
 const queryString = 'a=1';
-const uri = '/photos/xx-1/week-5/test@user.com.jpg';
+const uri = 'development/photos/xx-1/week-5/test@user.com.jpg';
 const defaultEvent = {
     Records: [
         {
@@ -63,7 +63,7 @@ test('Allows OPTIONS for non-expired, valid signatures', async () => {
     /* Assert */
     expect(response.status).toEqual('200');
     expect(response.statusDescription).toEqual('OK');
-    expect(Object.keys(response.headers).length).toBe(1);
+    expect(Object.keys(response.headers).length).toBe(3);
     expect(localHeadObjectMock).toBeCalledTimes(2);
     expect(putObjectMock).toBeCalledTimes(0);
 });
@@ -82,7 +82,7 @@ test('Allows non-expired, valid signatures', async () => {
 
     /* Assert */
     expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
-    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/expired/2762b44baf8deeab4ebef82481600782a863d875f1b4b7e17645ef3617e33dc5');
+    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/expired/760f639343dd04b36ee536867ad9663bfde630553f79653e9f6d463195e895c1');
     expect(response.method).toEqual('PUT');
     expect(response.querystring).toEqual(queryString);
     expect(response.uri).toEqual(uri);

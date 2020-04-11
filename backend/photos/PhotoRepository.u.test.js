@@ -3,6 +3,7 @@ const PhotoRepository = require('./PhotoRepository.js');
 test('Uploads image', async () => {
     /* Assemble */
     const bucketName = 'test-bucket';
+    const environment = 'development';
     const testFields = {
         emailAddress: 'test@user.com',
         courseName: 'xx-1',
@@ -16,21 +17,22 @@ test('Uploads image', async () => {
     const photoRepository = new PhotoRepository(s3Mock, bucketName);
 
     /* Act */
-    const result = await photoRepository.getSignedUrl(testFields);
+    const result = await photoRepository.getSignedUrl(environment, testFields);
 
     /* Assert */
     expect(result.operation).toBe('putObject');
     expect(result.bucket).toBe(bucketName);
-    expect(result.key).toBe('photos/xx-1/week-5/test@user.com.jpg');
-    expect(result.metadata['email-address']).toBe(testFields.emailAddress);
-    expect(result.metadata['original-file-name']).toBe(testFields.originalFileName);
-    expect(result.metadata['title']).toBe(testFields.title);
+    expect(result.key).toBe('development/photos/xx-1/week-5/test@user.com.jpg');
+    expect(result.metadata['email-address']).toBe(encodeURIComponent(testFields.emailAddress));
+    expect(result.metadata['original-file-name']).toBe(encodeURIComponent(testFields.originalFileName));
+    expect(result.metadata['title']).toBe(encodeURIComponent(testFields.title));
     expect(result.contentType).toBe(testFields.mimeType);
 });
 
 test('Throws on bad mime type', async () => {
     /* Assemble */
     const bucketName = 'test-bucket';
+    const environment = 'development';
     const testFields = {
         emailAddress: 'test@user.com',
         courseName: 'xx-2',
@@ -43,5 +45,5 @@ test('Throws on bad mime type', async () => {
     const photoRepository = new PhotoRepository(s3Mock, bucketName);
 
     /* Act & assert */
-    expect(() => photoRepository.getSignedUrl(testFields)).toThrow();
+    expect(() => photoRepository.getSignedUrl(environment, testFields)).toThrow();
 });

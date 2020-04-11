@@ -25,11 +25,12 @@ module.exports = class PhotoRepository {
     }
 
     /**
+     * @param {string} environment "development", "staging", or "production"
      * @param {PhotoMetadata} photoMetadata
      * @returns {string}
      */
-    _buildPathFromMetadata(photoMetadata) {
-        return 'photos/' + photoMetadata.courseName
+    _buildPathFromMetadata(environment, photoMetadata) {
+        return environment + '/photos/' + photoMetadata.courseName
             + '/week-' + photoMetadata.weekIndex
             + '/' + photoMetadata.emailAddress
             + '.' + this._getExtensionByMimeType(photoMetadata.mimeType);
@@ -37,11 +38,12 @@ module.exports = class PhotoRepository {
     }
 
     /**
+     * @param {string} environment "development", "staging", or "production"
      * @param {PhotoMetadata} photoMetadata
      * @returns {string}
      */
-    getSignedUrl(photoMetadata) {
-        const filePath = this._buildPathFromMetadata((photoMetadata));
+    getSignedUrl(environment, photoMetadata) {
+        const filePath = this._buildPathFromMetadata(environment, photoMetadata);
         const parameters = {
             Bucket: this._bucketName,
             Key: filePath,

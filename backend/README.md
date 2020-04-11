@@ -11,6 +11,13 @@ See also the frontend's README.md
 
 ## Installation
 
+### Set up AWS
+
+- Log in to the Serverless Dashboard and connect it to AWS
+- Follow [this article](https://www.albertgao.xyz/2020/02/26/how-to-resolve-require-the-cfnrole-option-warning-for-serverless-framework/)
+  to create this role: `arn:aws:iam::633371514237:role/cloudformation-role` that has to be added as the `cfnRole`
+  in `serverless.yml` to avoid a warning. 
+
 ### Set up Serverless
 
 1. Install Serverless globally:

@@ -31,6 +31,7 @@ test('Handles valid requests well', async () => {
     /* Arrange */
     const host = 'temp.cloudfront.net';
     const parameters = {
+        environment: 'development',
         emailAddress: 'test@user.com',
         courseName: 'hu-3',
         weekIndex: '2',
@@ -57,7 +58,7 @@ test('Handles valid requests well', async () => {
     const response = await getSignedUrlHandler.handleRequest(event, {});
 
     /* Assert */
-    expect(response.body).toEqual('https://' + host + '/photos/' + parameters.courseName + '/'
+    expect(response.body).toEqual('https://' + host + '/development/photos/' + parameters.courseName + '/'
         + 'week-' + parameters.weekIndex + '/' + parameters.emailAddress + '.jpg'
         + '?' + fakeQueryString);
     expect(response.status).toEqual(200);
@@ -67,5 +68,5 @@ test('Handles valid requests well', async () => {
     expect(getSignedUrlMock.mock.calls[0][0]).toBe('putObject');
     expect(putObjectMock).toBeCalledTimes(1);
     expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
-    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/valid/d43fbc0c97c3b273b3d8cadf82dc73b9ba2899ef70acf396108122e1874ce024');
+    expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/valid/6c311f0e5c17eb06d08cd1bc313a0bc1b892bb18dc8e69c15a42b5dbf6620b06');
 });

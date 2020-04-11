@@ -31,40 +31,25 @@ provider:
       Resource:
         - 'arn:aws:s3:::${self:custom.config.bucket.name}'
         - 'arn:aws:s3:::${self:custom.config.bucket.name}/*'
+  cfnRole: arn:aws:iam::633371514237:role/cloudformation-role
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
-  get-signed-url:
-    handler: photos/get-signed-url/getSignedUrl.handler
+  getSignedUrl:
+    handler: photos/getSignedUrl/getSignedUrl.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
       distribution: CloudFront
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
       pathPattern: '/get-signed-url'
-  validate-signed-url:
-    handler: photos/validate-signed-url/validateSignedUrl.handler
+  validateSignedUrl:
+    handler: photos/validateSignedUrl/validateSignedUrl.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
       distribution: CloudFront
       eventType: viewer-request
-  list-photos:
-    handler: photos/list-photos/listPhotos.handler
-    memorySize: 128
-    timeout: 5
-    lambdaAtEdge:
-      distribution: CloudFront
-      eventType: viewer-request
-      pathPattern: '/list-photos'
-  get-photo:
-    handler: photos/getImageFromS3.handler
-    memorySize: 128
-    timeout: 5
-    lambdaAtEdge:
-      distribution: CloudFront
-      eventType: viewer-request
-      pathPattern: '/get-photo'
 
 # Plugins for extended functions, such as Lambda@Edge use
 plugins:
@@ -164,32 +149,6 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/get-signed-url'
-              AllowedMethods:
-                - GET
-                - HEAD
-            - TargetOriginId: S3Origin
-              ViewerProtocolPolicy: redirect-to-https
-              DefaultTTL: 0
-              MaxTTL: 0
-              MinTTL: 0
-              ForwardedValues:
-                QueryString: 'false'
-                Cookies:
-                  Forward: none
-              PathPattern: '/list-photos'
-              AllowedMethods:
-                - GET
-                - HEAD
-            - TargetOriginId: S3Origin
-              ViewerProtocolPolicy: redirect-to-https
-              DefaultTTL: 0
-              MaxTTL: 0
-              MinTTL: 0
-              ForwardedValues:
-                QueryString: 'false'
-                Cookies:
-                  Forward: none
-              PathPattern: '/get-photo'
               AllowedMethods:
                 - GET
                 - HEAD
