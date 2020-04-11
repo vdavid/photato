@@ -1,23 +1,28 @@
+const AWS = require('aws-sdk');
+const config = require('../../config.js');
+const Auth0Authorizer = require('../../auth/Auth0Authorizer.js');
+const PhotoMetadataBuilder = require('../PhotoMetadataBuilder.js');
+const PhotoRepository = require('../PhotoRepository.js');
+const SignatureRepository = require('../SignatureRepository.js');
+
 const url = require('url');
 const {getRequestDataFromLambdaEdgeEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
 const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
 
 module.exports = class GetSignedUrlHandler {
     /**
-     * @param {Auth0Authorizer} auth0Authorizer
-     * @param {PhotoMetadataBuilder} photoMetadataBuilder
-     * @param {PhotoRepository} photoRepository
-     * @param {SignatureRepository} signatureRepository
+     * @param {Auth0Authorizer} [auth0Authorizer] For mocking
+     * @param {PhotoMetadataBuilder} [photoMetadataBuilder] For mocking
+     * @param {PhotoRepository} [photoRepository] For mocking
+     * @param {SignatureRepository} [signatureRepository] For mocking
      */
-    constructor({auth0Authorizer, photoMetadataBuilder, photoRepository, signatureRepository}) {
-        /** @type {Auth0Authorizer} */
-        this._auth0Authorizer = auth0Authorizer;
-        /** @type {PhotoMetadataBuilder} */
-        this._photoMetadataBuilder = photoMetadataBuilder;
-        /** @type {PhotoRepository} */
-        this._photoRepository = photoRepository;
-        /** @type {SignatureRepository} */
-        this._signatureRepository = signatureRepository;
+    constructor({auth0Authorizer, photoMetadataBuilder, photoRepository, signatureRepository} = {}) {
+        this._auth0Authorizer = auth0Authorizer || new Auth0Authorizer(config.auth0.userInfoEndpoint);
+        this._photoMetadataBuilder = photoMetadataBuilder || new PhotoMetadataBuilder();
+        /* Create an S3 object only if we'll need it */
+        const s3 = (!photoRepository || !signatureRepository) ? new AWS.S3({ region: 'us-east-1', signatureVersion: 'v4' }) : null;
+        this._photoRepository = photoRepository || new PhotoRepository(s3, config.bucket.name);
+        this._signatureRepository = signatureRepository || new SignatureRepository(s3, config.bucket.name);
     }
 
     /**

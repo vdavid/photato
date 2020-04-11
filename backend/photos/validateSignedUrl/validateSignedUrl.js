@@ -1,7 +1,4 @@
-const AWS = require('aws-sdk');
-const config = require('../../config.js');
 const ValidateSignedUrlHandler = require('./ValidateSignedUrlHandler.js');
-const SignatureRepository = require('../SignatureRepository.js');
 
 /**
  * Handles Lambda@Edge inputs
@@ -10,9 +7,7 @@ const SignatureRepository = require('../SignatureRepository.js');
  * @returns {Object}
  */
 async function handler(event) {
-    const s3 = new AWS.S3({ region: 'us-east-1', signatureVersion: 'v4' });
-    const signatureRepository = new SignatureRepository(s3, config.bucket.name);
-    const handler = new ValidateSignedUrlHandler({signatureRepository});
+    const handler = new ValidateSignedUrlHandler();
     return handler.handleRequest(event);
 }
 

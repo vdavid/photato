@@ -6,15 +6,15 @@ const SignatureRepository = require('../SignatureRepository.js');
 
 /* Constants */
 const bucketName = 'testBucket';
-const fakeQueryString = 'a=1';
+const fakeResponseQueryString = 'a=1';
 const testEmailAddress = 'test@user.com';
 const testBearerToken = 'testToken';
 
 /* S3 mock */
 const getSignedUrlMock = jest.fn((operation, {Bucket: bucket, Key: key}) =>
-    'https://' + bucket + '/' + key + '?' + fakeQueryString);
+    'https://' + bucket + '/' + key + '?' + fakeResponseQueryString);
 const putObjectMock = jest.fn(() => ({promise: async () => true}));
-const s3 = {
+const s3Mock = {
     getSignedUrl: getSignedUrlMock,
     putObject: putObjectMock,
 };
@@ -22,8 +22,8 @@ const s3 = {
 /* External objects */
 const auth0Authorizer = {getAuth0UserData: async token => token === testBearerToken ? {email: testEmailAddress} : undefined};
 const photoMetadataBuilder = new PhotoMetadataBuilder();
-const photoRepository = new PhotoRepository(s3, bucketName);
-const signatureRepository = new SignatureRepository(s3, bucketName);
+const photoRepository = new PhotoRepository(s3Mock, bucketName);
+const signatureRepository = new SignatureRepository(s3Mock, bucketName);
 const getSignedUrlHandler = new GetSignedUrlHandler({auth0Authorizer, photoMetadataBuilder, photoRepository, signatureRepository});
 
 function _convertToQueryString(object) {
@@ -101,7 +101,7 @@ test('Handles valid PUT requests well', async () => {
     /* Assert */
     expect(response.body).toEqual('https://' + host + '/development/photos/' + parameters.courseName + '/'
         + 'week-' + parameters.weekIndex + '/' + parameters.emailAddress + '.jpg'
-        + '?' + fakeQueryString);
+        + '?' + fakeResponseQueryString);
     expect(response.status).toEqual(200);
     expect(response.statusDescription).toEqual('OK');
     expect(response.statusDescription).toEqual('OK');

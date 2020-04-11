@@ -1,13 +1,16 @@
+const AWS = require('aws-sdk');
+const config = require('../../config.js');
+const SignatureRepository = require('../SignatureRepository.js');
 const {getRequestDataFromLambdaEdgeEvent} = require('../../http/requestHelper.js');
 const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
 
 module.exports = class ValidateSignedUrlHandler {
     /**
-     * @param {SignatureRepository} signatureRepository
+     * @param {SignatureRepository} [signatureRepository]
      */
-    constructor({signatureRepository}) {
-        /** @type {SignatureRepository} */
-        this._signatureRepository = signatureRepository;
+    constructor({signatureRepository} = {}) {
+        const s3 = !this._signatureRepository ? new AWS.S3({ region: 'us-east-1', signatureVersion: 'v4' }) : null;
+        this._signatureRepository = signatureRepository || new SignatureRepository(s3, config.bucket.name);
     }
 
     /**
