@@ -1,4 +1,4 @@
-import {createElement} from '/web_modules/react.js';
+import {createElement} from '../../web_modules/react.js';
 
 export default function AboutPage() {
     return [

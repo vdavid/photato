@@ -49,4 +49,7 @@ export const translations = {
     'This is the current week\'s challenge!': {translation: 'Ez az aktuális heti feladat!'},
     'You\'ll need to sign in to upload a photo.': {translation: 'Fotó feltöltéséhez be kell jelentkezned.'},
     'Loading...': {translation: 'Betöltés folyamatban...'},
+    '404 error': {translation: '404-es hiba'},
+    'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
+    'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
 };
