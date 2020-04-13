@@ -1,4 +1,5 @@
-<p><strong>Röviden:</strong></p>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong></p>
 
 <ul>
     <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</li>
@@ -92,11 +93,12 @@
     <li><a href="https://www.facebook.com/events/688185368187546/">Margitszigeti fotózás</a></li>
 </ul>
 
-<p>A legjobb gyorsan mozgó képedet július 8. 23:59-ig, <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</p>
+<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</p>
 
 <p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w4">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

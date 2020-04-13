@@ -1,4 +1,5 @@
-<p><strong>Röviden:</strong></p>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong></p>
 
 <p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w4">itt tudsz feltölteni</a>.</p>
 
@@ -8,7 +9,7 @@
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
 
-<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet július 1. 23:59-ig, <a href="https://bit.ly/phhu3w4">itt tudod feltölteni</a>.</p>
+<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w4">itt tudod feltölteni</a>.</p>
 
 <p><strong>Mi az utcai fotózás?</strong></p>
 
@@ -66,4 +67,5 @@
 <p>Jó fotózást,</p>
 
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

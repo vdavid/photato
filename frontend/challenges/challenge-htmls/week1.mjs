@@ -1,8 +1,10 @@
-<p>Az első hét témája: <strong>gasztrofotó</strong>!</p>
+export function getMaterial({formattedDeadline}) {
+    return `<
+}p>Az első hét témája: <strong>gasztrofotó</strong>!</p>
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/34187a74-1735-4b91-8f4c-6da400f58c32.jpg" alt="pizza" style="width:100%; max-width:800px;" /></p>
 <p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben azért még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
 
-<p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és {formattedDeadline}-ig feltölteni <a href="https://bit.ly/phhu3w1">ezen a linken</a>. A beazonosításhoz fontos, hogy a kép neve az email címed legyen: pl. “krumplipuree12@gmail.com.jpg”.</p>
+<p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és ${formattedDeadline}-ig feltölteni <a href="https://bit.ly/phhu3w1">ezen a linken</a>. A beazonosításhoz fontos, hogy a kép neve az email címed legyen: pl. “krumplipuree12@gmail.com.jpg”.</p>
 
 <p>Hogy mikor jó egy gasztrofotó? Ha aki látja, legszívesebben azonnal beleharapna az ételbe.</p>
 
@@ -40,4 +42,12 @@
     <li><a href="https://nlc.hu/eletmod/20161114/profi-etelfoto-trukkok/">5 tipp csaláshoz</a> – a “kajának kinéző dolog, ami nem is kaja” ötletre elég jól rezonál.</li>
 </ul>
 
-<p>További profi galériák, nyálcsorgatásra és inspirációul: <a href="https://hu.pinterest.com/search/pins/?rs=ac&len=2&q=food%20photography&eq=food%20ph&etslf=5905&term_meta[]=food%7Cautocomplete%7Cundefined&term_meta[]=photography%7Cautocomplete%7Cundefined">Pinterest kajafotók</a> | <a href="http://libbyvision.com/">Libby Vision Studio</a> | <a href="https://www.francescotonelli.com/">Francesco Tonelli</a> | <a href="http://foodphotography.co.uk/">David Munns</a> | <a href="https://www.mittongtarestudio.com/">Mittongtare Studio</a> | <a href="http://clarebarboza.com/">Clare Barboza</a> | <a href="http://www.keikooikawa.com/food#0">Keiko Oikawa</a> | <a href="http://www.timhillfoodphotographer.com/">Tim Hill</a></p>
+<p>További profi galériák, nyálcsorgatásra és inspirációul: <a href="https://hu.pinterest.com/search/pins/?rs=ac&len=2&q=food%20photography&eq=food%20ph&etslf=5905&term_meta[]=food%7Cautocomplete%7Cundefined&term_meta[]=photography%7Cautocomplete%7Cundefined">Pinterest kajafotók</a>
+| <a href="http://libbyvision.com/">Libby Vision Studio</a>
+| <a href="https://www.francescotonelli.com/">Francesco Tonelli</a>
+| <a href="http://foodphotography.co.uk/">David Munns</a>
+| <a href="https://www.mittongtarestudio.com/">Mittongtare Studio</a>
+| <a href="http://clarebarboza.com/">Clare Barboza</a>
+| <a href="http://www.keikooikawa.com/food#0">Keiko Oikawa</a>
+| <a href="http://www.timhillfoodphotographer.com/">Tim Hill</a></p>`;
+}

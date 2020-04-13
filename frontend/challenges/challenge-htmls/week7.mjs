@@ -1,4 +1,5 @@
-<p><strong>Röviden:</strong></p>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong></p>
 
 <p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w7">itt tudsz feltölteni</a>. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
 
@@ -6,7 +7,7 @@
 
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/687caa85-7e73-4c61-be2a-2a60d28a1f5a.gif" alt="Zsófi az utcán" style="width:100%; max-width:800px;" /></p>
 
-<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet július 22. 23:59-ig, <a href="https://bit.ly/phhu3w7">itt tudod feltölteni</a>.</p>
+<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w7">itt tudod feltölteni</a>.</p>
 
 <p>Ezt úgy fogjuk elérni, hogy <strong>hosszan</strong> nyitva tartjuk a zárat. Emlékeztetőül, itt az összefoglaló kép az 5. hétről:</p>
 
@@ -75,4 +76,5 @@
 <p>Jó fotózást,</p>
 
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

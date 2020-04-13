@@ -27,7 +27,6 @@
   "dependencies": {
     "react": "npm:@pika/react@^16.13.1",
     "react-dom": "npm:@pika/react-dom@^16.13.1",
-    "react-jsx-parser": "^1.21.0",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
@@ -41,8 +40,7 @@
     "webDependencies": [
       "react",
       "react-dom",
-      "react-router-dom",
-      "react-jsx-parser"
+      "react-router-dom"
     ]
   }
 }

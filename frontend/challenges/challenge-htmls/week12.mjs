@@ -1,7 +1,8 @@
-<p><strong>Röviden:</strong>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong>
 </p>
 <ul>
-    <li>Ezen a héten a legjobb <strong><em>bármilyen</em></strong> képedet várjuk tőled. <a href="https://bit.ly/phhu3w12">Itt tudod majd feltölteni</a>, április 5. 23:59-ig.</li>
+    <li>Ezen a héten a legjobb <strong><em>bármilyen</em></strong> képedet várjuk tőled. <a href="https://bit.ly/phhu3w12">Itt tudod majd feltölteni</a>, ${formattedDeadline}-ig.</li>
     <li>Mindjárt vége a tanfolyamnak, de adunk pár ötletet a folytatáshoz.</li>
     <li>Hamarosan indul a következő kurzus, ajánld azoknak, akik örülnének neki.</li>
 </ul>
@@ -38,7 +39,7 @@
     <li><strong>Melyik téma volt a kedvenced?</strong> Ezek voltak: gasztrofotó; épületek; makrók; utcai fotózás; sportfotók, gyors dolgok; hosszú exponálási idő; csendélet; állatok, növények; portré; eseményfotózás; önarckép. Akár végigmehetsz a galériákon, és ihletet meríthetsz mások beküldött képeiből. A fotózásban még a másolás sem ciki, hiszen, minden igyekezet ellenére, nincs két egyforma fénykép.</li>
     <li><strong>Fotózz krumplikat.</strong> Ha egyik fenti kérdés sem hozott ihletet, és egészen nincs ötleted, fotózz krumplikat. Krumplik mindenütt vannak, és mint a fotók esetében, a krumplik közül is mindegyik más. 😊 🥔🥔</li>
 </ul>
-<p>A legjobb képedet augusztus 26. vasárnap 23:59-ig, <a href="https://bit.ly/phhu3w12">itt tudod majd feltölteni</a>.</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w12">itt tudod majd feltölteni</a>.</p>
 <p><strong>Arról, hogy hogyan folytasd a tanulást:</strong>
 </p>
 <p>Úgy gondoljuk, ha tetszett ez a 12 hetes tanfolyam, talán szívesen folytatnád a tanulást (most vagy később) hasonló napi/heti kihívásokkal és kurzusokkal. Összeszedtünk neked néhányat a legjobbak közül, viszont sajnos nem találtunk másik magyar nyelvű ingyenes tanfolyamot, így ezek mind vagy fizetősek, vagy angol nyelvűek – de mind színvonalasak. Reméljük, ha folytatnád a tanulást, találsz közülük szimpatikusat.</p>
@@ -79,4 +80,5 @@
 <p>Az e heti képeket pedig <a href="https://bit.ly/phhu3w12">itt</a> várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

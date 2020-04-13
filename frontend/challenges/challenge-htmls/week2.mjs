@@ -1,4 +1,5 @@
-<p><strong>Röviden:</strong></p>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong></p>
 <p>A második hét témája: <strong>épületfotók</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>
 <p>A legjobb képedet <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
@@ -7,7 +8,7 @@
 
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/ea78eb3e-9f0c-46a9-b4fc-21e2f45cf523.jpg" alt="Nyugati tér" style="width:100%; max-width:800px;" /></p>
 
-<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet június 17. 23:59-ig, <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
+<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
 
 <p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket:</p>
 
@@ -48,4 +49,5 @@
 <p>Jó fotózást,</p>
 
 <p>-- <br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

@@ -1,4 +1,5 @@
-<p><strong>Röviden:</strong></p>
+export function getMaterial({formattedDeadline}) {
+    return `<p><strong>Röviden:</strong></p>
 <p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w8">itt tudsz feltölteni</a>.</p>
 <p><strong>Hosszabban:</strong></p>
 
@@ -64,7 +65,8 @@
 </ul>
 <p><strong>Inspiráció:</strong> <a href="https://hu.pinterest.com/search/pins/?q=still%20life%20photography">Pinterest csendéletek</a> | <a href="https://www.pexels.com/search/still%20life/">Pexels</a> | Mobile Photo Awards épületfotó győztesek: <a href="https://mobilephotoawards.com/3rd-annual-mobile-photography-awards-winners-honorable-mentions/">2013</a> | <a href="https://mobilephotoawards.com/still-life-2014-mpa-results/">2014</a> <a href="https://mobilephotoawards.com/still-life/">2015</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-7th-annual-mpa/">2017</a></p>
 <p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w7">megteheted</a>. 🕚</p>
-<p>A csendéleteket pedig április 22. 23:59-ig, <a href="https://bit.ly/phhu3w8">itt tudod feltölteni</a>.</p>
+<p>A csendéleteket pedig ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w8">itt tudod feltölteni</a>.</p>
 <p>Jó fotózást,</p>
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}

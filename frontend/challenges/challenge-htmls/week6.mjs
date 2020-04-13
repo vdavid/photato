@@ -1,4 +1,5 @@
-<p>Kedves *|FNAME|*,</p>
+export function getMaterial({formattedDeadline}) {
+    return `<p>Kedves *|FNAME|*,</p>
 <p><strong>Röviden:</strong></p>
 <p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="https://bit.ly/phhu3w6">Itt tudod feltölteni</a>.</p>
 <p><strong>Hosszabban:</strong></p>
@@ -14,7 +15,7 @@
     <li><strong>Mobillal:</strong> Ha mobillal fotózol, a legtöbb kamera appban ha rápöttyintesz a képernyőre a kis virsli ujjaddal, a kamera ráélesít a képnek arra a részére, amit megérintettél.</li>
 </ol>
 
-<p>A legjobb képedet július 15. 23:59-ig, <a href="https://bit.ly/phhu3w6">itt tudod feltölteni</a>. (Megjegyzés: időről időre előfordul, hogy valaki egynél több képet küld be egy héten. Az igazságosság jegyében – hogy legyen lehetőséged javítani, de ne osszunk meg egy embertől több képet – ilyenkor a legutoljára beküldött képet szoktuk betenni a galériába.)</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w6">itt tudod feltölteni</a>. (Megjegyzés: időről időre előfordul, hogy valaki egynél több képet küld be egy héten. Az igazságosság jegyében – hogy legyen lehetőséged javítani, de ne osszunk meg egy embertől több képet – ilyenkor a legutoljára beküldött képet szoktuk betenni a galériába.)</p>
 <p>Tehát állatok és növények. A feladatot értelmezd, ahogyan szeretnéd: fotózhatsz csemegeuborkától hangyákon át elefántfókákig bármit. 😊</p>
 
 <p>Tippek, cikkek:</p>
@@ -32,4 +33,5 @@
 <p>Az élőlényeket pedig még egyszer, <a href="https://bit.ly/phhu3w6">itt</a> várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
-    a Photato csapata</p>
+    a Photato csapata</p>`;
+}
