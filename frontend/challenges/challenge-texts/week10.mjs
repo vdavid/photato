@@ -1,8 +1,8 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
-<p>${createFullWidthImage('concert.jpg', 'Koncert Buffalo WY')}</p>
+<p>${createFullWidthLocalImage('concert.jpg', 'Koncert Buffalo WY')}</p>
 <p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p>Eseményt fotózni lehet résztvevőként, vagy meghívott fotósként. A két felállás elég különböző; igyekeztünk olyan tippeket válogatni, amik mindkét esetben hasznodra válnak. Ők azok:</p>
 <ol>

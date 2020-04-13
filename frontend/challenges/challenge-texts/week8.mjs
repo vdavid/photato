@@ -1,9 +1,9 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;">${createFullWidthImage('jama.jpg', 'Jama')}<br />
+<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;">${createFullWidthLocalImage('jama.jpg', 'Jama')}<br />
     © <a href="https://hu.wikipedia.org/wiki/Farkas_Antal_(fot%C3%B3m%C5%B1v%C3%A9sz)">Farkas Antal Jama</a></p>
 
 <p>Az elmúlt 3 hétben sokan kültéren, komfortzónán kívüli helyzetekben fotóztatok dinamikus, nehéz témákat. Tudjuk, hogy ez gyakran trükkös volt, és ezúton gratulálunk a bátor próbálkozásokhoz és a jól sikerült fotókhoz!</p>
@@ -13,7 +13,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 <p>Képzelj el egy fehérre festett házat. Képzeld el, hogy ránézel erre a házra egy nap négyszer: hajnalban, déli napfényben, felhős délutáni időben és szürkületben. A házról a szemedbe jutó fény a négy esetben egészen különböző lesz, mégis, mind a négy alkalommal fehérnek fogod látni a házat.</p>
 <p>Ez azért van, mert az agyad a fényviszonyoknak megfelelően, automatikusan korrigálja, hogy milyen színűnek látja a környezeted. Mint pl. ebben a klasszikus optikai illúzióban:</p>
 
-<p>${createFullWidthImage('illusion.png', 'Optikai illúzió')}</p>
+<p>${createFullWidthLocalImage('illusion.png', 'Optikai illúzió')}</p>
 
 <p>Az “A” és “B” négyszög színe pontosan ugyanaz, valószínűleg mégis jóval sötétebbnek látod az “A”-t, mert az agyad értelmezi a képet és korrigál. Ez az optikai illúzió ennek a képességnek a határait mutatja be, de ez a képesség a hétköznapokban nagyon hasznos: például a napszaktól függetlenül meg tudod állapítani, hogy a fentebb elképzelt házad fehér. 😀</p>
 <p>Amit a szemed/agyad ilyen remekül megold, azt a fényképezőgépedben egy közepesen okos automatika próbálja lekövetni. Ez időnként hibázik, és ilyenkor a géped segítségre szorul: kézzel kell megtalálnod a tiszta fehér színt, hogy az elkészült kép színei hűek legyenek a fotótémád valódi színeihez. Ezt hívják fehéregyensúly-beállításnak.</p>
@@ -29,7 +29,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 </ul>
 <p>Itt van pl. ugyanaz a karó különböző fehéregyensúly-beállításokkal fényképezve, napos időben:</p>
 
-<p>${createFullWidthImage('temperature.jpg', 'Oszlopok')}</p>
+<p>${createFullWidthLocalImage('temperature.jpg', 'Oszlopok')}</p>
 
 <p>Ahhoz, hogy helyes színeket kapj, a gép fehéregyensúlyát a fényforrásnak megfelelően kell beállítani. A legtöbb esetben a gép AWB (Automatic White Balance – automatikus fehéregyensúly) beállítása jól működik. A leggyakrabban mesterséges fényforrásoknál szokott hibázni: itt érdemes kézzel kiválasztani a megfelelő alapbeállítást, vagy ha egyik sem stimmel, egyéni (“custom”) fehéregyensúlyt választani.</p>
 <p>Ha többféle fényforrás van egy helyen (pl. lámpa és az ablakon besütő napfény, vagy lámpa és TV), az még nehezebb eset. Ilyenkor érdemes elfogadni, hogy nem lesz tökéletes a kép, és eldönteni, hogy melyik fényforráshoz igazítod (manuálisan) a fehéregyensúlyt; vagy ha Photoshop-guru vagy, akkor utómunkával megoldani.</p>

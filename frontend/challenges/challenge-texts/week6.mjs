@@ -1,9 +1,9 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p>Kedves *|FNAME|*,</p>
 <p><strong>Röviden:</strong></p>
 <p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. ${createPhotoUploadLink('Itt tudod feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
-<p>${createFullWidthImage('jellyfish.jpg', 'Medúza.')}</p>
+<p>${createFullWidthLocalImage('jellyfish.jpg', 'Medúza.')}</p>
 <p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, csak a fókuszáláshoz adunk pár egyszerű tippet. 😊</p>
 
 <p>Tippek fókuszáláshoz:</p>

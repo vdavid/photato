@@ -1,28 +1,28 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthImage('mustache-guy.jpg', 'Bajszos csávó')}</p>
+<p>${createFullWidthLocalImage('mustache-guy.jpg', 'Bajszos csávó')}</p>
 
 <p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p><strong>Egy kis elmélet azoknak, akik fényképezőgéppel fotóznak, meg akiket érdekel:</strong></p>
 <p>Volt már szó futólag a látószögről és a gyújtótávolságról. Előbbit fokban, utóbbit milliméterben mérjük, és itt van egy elég beszédes <a href="/challenges/linked-images/fov-and-focal-distance.jpg">illusztráció</a>, hogy hogyan függenek össze. Most röviden megnézzük, mit jelentenek ezek a gyakorlatban, a portréval kapcsolatban.</p>
 <p>A legfontosabb, hogy az objektív a látószögétől függően torzítja a testet, az arcot. Ez jelenik meg, amikor “kövérít” a kamera, vagy viccesen megnöveli az orrot. Itt egy kép, amin 16mm és 200mm között változik a beállított gyújtótávolság:</p>
 
-<p>${createFullWidthImage('16mm-200mm.gif', '16mm-200mm')}</p>
+<p>${createFullWidthLocalImage('16mm-200mm.gif', '16mm-200mm')}</p>
 
 <p>Figyeld meg, hogy ahogy csökken a gyújtótávolság (egészen 16mm-ig), egyre többet látsz a kissrác környezetéből, viszont egyre torzabb a feje és nagyobb az orra. A másik irányban, a 200mm-es végén viszont már kb. semmit nem látsz a mögötte lévő térből, a srác feje pedig kilapul.</p>
 <p>Itt egy másik, stúdióban készült képsorozat is:</p>
 
-<p>${createFullWidthImage('20mm-200mm.gif', '20mm-200mm')}</p>
+<p>${createFullWidthLocalImage('20mm-200mm.gif', '20mm-200mm')}</p>
 
 <p><a href="/challenges/linked-images/fov-portrait.png">ugyanez állóképként, 20-85mm-ig</a></p>
 <p>Na de hány mm-es beállítás a leghűebb a valósághoz? Erre sajnos nincs egyértelmű válaszunk, mert ez a gépedben lévő érzékelő méretétől függ.</p>
 <p>Volt régen a hagyományos, “analóg”, filmes gép. Hosszú ideig az volt a szabvány méret, amekkorában ezek a fényképezőgépek a képet (negatívot) készítették. Ezt hívják “full frame”-nek, azaz teljes méretű képnek. Egy full frame-es gépnél az <strong>50mm-es</strong> gyújtótávolság a leghűebb a valósághoz, mert ez felel meg legjobban az emberi szem látószögéhez. Tehát ha a géped full frame-es, akkor 50mm-es objektívvel a legszerencsésebb portrét fotóznod.</p>
 <p>Egy full frame-es gép viszont elég drága, a te géped érzékelője nagy valószínűséggel ennél kisebb. Itt van néhány tipikus érzékelő-méret:</p>
 
-<p>${createFullWidthImage('sensor-sizes.jpg', 'Érzékelők')}</p>
+<p>${createFullWidthLocalImage('sensor-sizes.jpg', 'Érzékelők')}</p>
 
 <p>A képen a zöld a full frame, a sárga a legtöbb tükörreflexes gép érzékelő-mérete, a piros is gyakori a közepes gépeknél, a két kék pedig a tipikus kompakt kamerák ill. az iPhone 6 szenzormérete.</p>
 <p>Ha tudni akarod, hogy a te gépednél mi az emberi szemnek leginkább megfelelő zoom-beállítás, keresd ki a géped érzékelőjének méretét a gép használati utasításában vagy az interneten, aztán keresd ki az érzékelő-méretednek megfelelő oszlopot <a href="/challenges/linked-images/sensor-size-table.jpg">ebben a táblázatban</a>, és nézd meg a “Normal” sorban lévő értéket. Ezzel a gyújtótávolság-beállítással lesz a legtermészetesebb a portréd.</p>

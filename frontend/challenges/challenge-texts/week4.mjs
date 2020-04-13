@@ -1,11 +1,11 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 
 <p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthImage('lomo.jpg', 'Lomo')}</p>
+<p>${createFullWidthLocalImage('lomo.jpg', 'Lomo')}</p>
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
 

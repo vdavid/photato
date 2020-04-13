@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong>
 </p>
 <ul>
@@ -8,7 +8,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 </ul>
 <p><strong>Hosszabban:</strong>
 </p>
-<p>${createFullWidthImage('cranes.jpg', 'Darvak')}
+<p>${createFullWidthLocalImage('cranes.jpg', 'Darvak')}
 </p>
 <p>Tekintsünk vissza, mit csináltunk az elmúlt 12 héten:</p>
 <ol>

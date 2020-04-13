@@ -1,6 +1,6 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p>Az első hét témája: <strong>gasztrofotó</strong>!</p>
-<p>${createFullWidthImage('pizza.jpg', 'pizza')}</p>
+<p>${createFullWidthLocalImage('pizza.jpg', 'pizza')}</p>
 <p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben azért még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
 
 <p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és ${formattedDeadline}-ig feltölteni ${createPhotoUploadLink('ezen a linken')}. A beazonosításhoz fontos, hogy a kép neve az email címed legyen: pl. “krumplipuree12@gmail.com.jpg”.</p>

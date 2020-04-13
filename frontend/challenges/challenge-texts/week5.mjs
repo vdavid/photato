@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 
 <ul>
@@ -9,7 +9,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthImage('biker.jpg', 'Motoros')}</p>
+<p>${createFullWidthLocalImage('biker.jpg', 'Motoros')}</p>
 
 <p>Valószínűleg sokszor tapasztaltad már, hogy amikor gyorsan le akarsz kapni valamit (pl. sportrendezvény, koncert, gyerekek/állatok fotózása, autóból kifényképezés), a képek gyakran elmosódottak lesznek. Ez azért van, mert az alatt az idő alatt, amíg a fénykép készül – tehát amíg a kamera rekesze nyitva van – elmozdul a fotótéma. Ezen a héten azt fogjuk gyakorolni, hogy hogyan lehet ezt minél inkább elkerülni, és szép, éles képeket készíteni ezekben a helyzetekben.</p>
 
@@ -27,7 +27,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 
 <p>Itt egy ábra is ezekről. A felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alul pedig az <strong>ISO érték</strong>:</p>
 
-<p>${createFullWidthImage('settings.jpg', 'Beállítások')}</p>
+<p>${createFullWidthLocalImage('settings.jpg', 'Beállítások')}</p>
 
 <p>Ha a képre nézve az volt az első gondolatod, hogy “fú, ez bonyolultnak néz ki”, akkor jó hírünk van: ha rászánsz most egy kis időt, pár perc múlva már nem lesz ijesztő ez a kép. 😊 Ezt a 3-4 dolgot csináld meg:</p>
 
@@ -47,7 +47,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
     <li><strong>ISO érték:</strong> Figyeld meg, hogy ahogy növeled az ISO értéket, egyre világosodik, de zajosodik a kép.</li>
 </ul>
 
-<p>${createFullWidthImage('horse.jpg', 'Ló.')}</p>
+<p>${createFullWidthLocalImage('horse.jpg', 'Ló.')}</p>
 
 <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
 
@@ -68,7 +68,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
     <li>Megelégszel egy rövidebb záridővel, és megpróbálod a kevésbé gyors pillanatokat elkapni.</li>
 </ol>
 
-<p>${createFullWidthImage('glass.jpg', 'Pohár.')}</p>
+<p>${createFullWidthLocalImage('glass.jpg', 'Pohár.')}</p>
 
 <p><strong>Néhány tipp és variáció mindenkinek:</strong></p>
 <ol>

@@ -27,7 +27,7 @@ export default function ChallengePage() {
         const html = await response.getMaterial({
             formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
             createPhotoUploadLink: label => `<a href="/upload" class="uploadLink">${label}</a>`,
-            createFullWidthImage: (fileName, altText) => `<img src="/challenges/illustrations/${fileName}" alt="${altText}" style="width:100%;" />`,
+            createFullWidthLocalImage: (fileName, altText) => `<img src="/challenges/illustrations/${fileName}" alt="${altText}" style="width:100%;" />`,
         });
         setPageContentHtml(html);
     }

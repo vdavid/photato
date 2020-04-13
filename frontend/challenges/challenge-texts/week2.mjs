@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A második hét témája: <strong>épületfotók</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>
@@ -6,7 +6,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthImage('taj-mahal.jpg', 'Nyugati tér')}</p>
+<p>${createFullWidthLocalImage('taj-mahal.jpg', 'Nyugati tér')}</p>
 
 <p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 

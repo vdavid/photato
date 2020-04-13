@@ -1,17 +1,17 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 
 <p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthImage('zsofi.gif', 'Zsófi az utcán')}</p>
+<p>${createFullWidthLocalImage('zsofi.gif', 'Zsófi az utcán')}</p>
 
 <p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p>Ezt úgy fogjuk elérni, hogy <strong>hosszan</strong> nyitva tartjuk a zárat. Emlékeztetőül, itt az összefoglaló kép az 5. hétről:</p>
 
-<p>${createFullWidthImage('settings.jpg', 'Beállítások')}</p>
+<p>${createFullWidthLocalImage('settings.jpg', 'Beállítások')}</p>
 
 <p>(Ismétlésképp: a felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alatta az <strong>ISO érték</strong>)</p>
 
