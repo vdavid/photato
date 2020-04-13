@@ -1,14 +1,14 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong>
 </p>
 <ul>
-    <li>Ezen a héten a legjobb <strong><em>bármilyen</em></strong> képedet várjuk tőled. ${await createPhotoUploadLink('Itt tudod majd feltölteni')}, ${formattedDeadline}-ig.</li>
+    <li>Ezen a héten a legjobb <strong><em>bármilyen</em></strong> képedet várjuk tőled. ${createPhotoUploadLink('Itt tudod majd feltölteni')}, ${formattedDeadline}-ig.</li>
     <li>Mindjárt vége a tanfolyamnak, de adunk pár ötletet a folytatáshoz.</li>
     <li>Hamarosan indul a következő kurzus, ajánld azoknak, akik örülnének neki.</li>
 </ul>
 <p><strong>Hosszabban:</strong>
 </p>
-<p><img src="/challenges/illustrations/cranes.jpg" alt="Darvak" style="width:100%; max-width:800px;" />
+<p>${createFullWidthImage('cranes.jpg', 'Darvak')}
 </p>
 <p>Tekintsünk vissza, mit csináltunk az elmúlt 12 héten:</p>
 <ol>
@@ -39,7 +39,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li><strong>Melyik téma volt a kedvenced?</strong> Ezek voltak: gasztrofotó; épületek; makrók; utcai fotózás; sportfotók, gyors dolgok; hosszú exponálási idő; csendélet; állatok, növények; portré; eseményfotózás; önarckép. Akár végigmehetsz a galériákon, és ihletet meríthetsz mások beküldött képeiből. A fotózásban még a másolás sem ciki, hiszen, minden igyekezet ellenére, nincs két egyforma fénykép.</li>
     <li><strong>Fotózz krumplikat.</strong> Ha egyik fenti kérdés sem hozott ihletet, és egészen nincs ötleted, fotózz krumplikat. Krumplik mindenütt vannak, és mint a fotók esetében, a krumplik közül is mindegyik más. 😊 🥔🥔</li>
 </ul>
-<p>A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p><strong>Arról, hogy hogyan folytasd a tanulást:</strong>
 </p>
 <p>Úgy gondoljuk, ha tetszett ez a 12 hetes tanfolyam, talán szívesen folytatnád a tanulást (most vagy később) hasonló napi/heti kihívásokkal és kurzusokkal. Összeszedtünk neked néhányat a legjobbak közül, viszont sajnos nem találtunk másik magyar nyelvű ingyenes tanfolyamot, így ezek mind vagy fizetősek, vagy angol nyelvűek – de mind színvonalasak. Reméljük, ha folytatnád a tanulást, találsz közülük szimpatikusat.</p>
@@ -76,8 +76,8 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 <p>És még egy dolog:</p>
 <p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <a href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</a> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>
 <p>Hát, így. 😊</p>
-<p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>Az e heti képeket pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Az e heti képeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

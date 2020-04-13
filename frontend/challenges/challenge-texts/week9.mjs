@@ -1,28 +1,28 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
-<p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
+<p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/mustache-guy.jpg" alt="Bajszos csávó" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('mustache-guy.jpg', 'Bajszos csávó')}</p>
 
-<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
+<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p><strong>Egy kis elmélet azoknak, akik fényképezőgéppel fotóznak, meg akiket érdekel:</strong></p>
 <p>Volt már szó futólag a látószögről és a gyújtótávolságról. Előbbit fokban, utóbbit milliméterben mérjük, és itt van egy elég beszédes <a href="https://static.bhphotovideo.com/explora/sites/default/files/styles/960/public/10_8.jpg">illusztráció</a>, hogy hogyan függenek össze. Most röviden megnézzük, mit jelentenek ezek a gyakorlatban, a portréval kapcsolatban.</p>
 <p>A legfontosabb, hogy az objektív a látószögétől függően torzítja a testet, az arcot. Ez jelenik meg, amikor “kövérít” a kamera, vagy viccesen megnöveli az orrot. Itt egy kép, amin 16mm és 200mm között változik a beállított gyújtótávolság:</p>
 
-<p><img src="/challenges/illustrations/16mm-200mm.gif" alt="16mm-200mm" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('16mm-200mm.gif', '16mm-200mm')}</p>
 
 <p>Figyeld meg, hogy ahogy csökken a gyújtótávolság (egészen 16mm-ig), egyre többet látsz a kissrác környezetéből, viszont egyre torzabb a feje és nagyobb az orra. A másik irányban, a 200mm-es végén viszont már kb. semmit nem látsz a mögötte lévő térből, a srác feje pedig kilapul.</p>
 <p>Itt egy másik, stúdióban készült képsorozat is:</p>
 
-<p><img src="/challenges/illustrations/20mm-200mm.gif" alt="20mm-200mm" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('20mm-200mm.gif', '20mm-200mm')}</p>
 
 <p><a href="https://s23527.pcdn.co/wp-content/uploads/2017/01/20.png">ugyanez állóképként, 20-85mm-ig</a></p>
 <p>Na de hány mm-es beállítás a leghűebb a valósághoz? Erre sajnos nincs egyértelmű válaszunk, mert ez a gépedben lévő érzékelő méretétől függ.</p>
 <p>Volt régen a hagyományos, “analóg”, filmes gép. Hosszú ideig az volt a szabvány méret, amekkorában ezek a fényképezőgépek a képet (negatívot) készítették. Ezt hívják “full frame”-nek, azaz teljes méretű képnek. Egy full frame-es gépnél az <strong>50mm-es</strong> gyújtótávolság a leghűebb a valósághoz, mert ez felel meg legjobban az emberi szem látószögéhez. Tehát ha a géped full frame-es, akkor 50mm-es objektívvel a legszerencsésebb portrét fotóznod.</p>
 <p>Egy full frame-es gép viszont elég drága, a te géped érzékelője nagy valószínűséggel ennél kisebb. Itt van néhány tipikus érzékelő-méret:</p>
 
-<p><img src="/challenges/illustrations/sensor-sizes.jpg" alt="Érzékelők" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('sensor-sizes.jpg', 'Érzékelők')}</p>
 
 <p>A képen a zöld a full frame, a sárga a legtöbb tükörreflexes gép érzékelő-mérete, a piros is gyakori a közepes gépeknél, a két kék pedig a tipikus kompakt kamerák ill. az iPhone 6 szenzormérete.</p>
 <p>Ha tudni akarod, hogy a te gépednél mi az emberi szemnek leginkább megfelelő zoom-beállítás, keresd ki a géped érzékelőjének méretét a gép használati utasításában vagy az interneten, aztán keresd ki az érzékelő-méretednek megfelelő oszlopot <a href="https://canonusa.i.lithium.com/t5/image/serverpage/image-id/7693i6F647A5F5F924B9B/">ebben a táblázatban</a>, és nézd meg a “Normal” sorban lévő értéket. Ezzel a gyújtótávolság-beállítással lesz a legtermészetesebb a portréd.</p>
@@ -50,8 +50,8 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li><a href="https://www.onlinefototanfolyam.hu/aktualis-cikkek/mi-a-gyujtotavolsag-szorzo-/47545/">Mi a gyújtótávolság-szorzó?</a> – további elmélet a onlinefototanfolyam.hu-n</li>
 </ul>
 <p><strong>Inspiráció:</strong> <a href="https://hu.pinterest.com/search/pins/?q=portrait%20photography">Pinterest</a> | <a href="https://www.boredpanda.com/top-10-photographers-for-travel-portraits/">Bored Panda</a> | <a href="https://filtergrade.com/best-portrait-photographers-to-inspire-you/">Filtergrade</a> | Mobile Photography Awards <a href="https://mobilephotoawards.com/portraits/">2015</a> | <a href="https://mobilephotoawards.com/portraits-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/portraits-winner-honorable-mentions-7th-annual-mpa/">2017</a></p>
-<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>A portrékat pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>A portrékat pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

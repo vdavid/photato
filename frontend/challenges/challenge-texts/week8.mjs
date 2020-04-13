@@ -1,9 +1,9 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
+<p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;"><img style="width:100%;" src="/challenges/illustrations/jama.jpg" alt="Jama" /><br />
+<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;">${createFullWidthImage('jama.jpg', 'Jama')}<br />
     © <a href="https://hu.wikipedia.org/wiki/Farkas_Antal_(fot%C3%B3m%C5%B1v%C3%A9sz)">Farkas Antal Jama</a></p>
 
 <p>Az elmúlt 3 hétben sokan kültéren, komfortzónán kívüli helyzetekben fotóztatok dinamikus, nehéz témákat. Tudjuk, hogy ez gyakran trükkös volt, és ezúton gratulálunk a bátor próbálkozásokhoz és a jól sikerült fotókhoz!</p>
@@ -13,7 +13,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 <p>Képzelj el egy fehérre festett házat. Képzeld el, hogy ránézel erre a házra egy nap négyszer: hajnalban, déli napfényben, felhős délutáni időben és szürkületben. A házról a szemedbe jutó fény a négy esetben egészen különböző lesz, mégis, mind a négy alkalommal fehérnek fogod látni a házat.</p>
 <p>Ez azért van, mert az agyad a fényviszonyoknak megfelelően, automatikusan korrigálja, hogy milyen színűnek látja a környezeted. Mint pl. ebben a klasszikus optikai illúzióban:</p>
 
-<p><img src="/challenges/illustrations/illusion.png" alt="Optikai illúzió" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('illusion.png', 'Optikai illúzió')}</p>
 
 <p>Az “A” és “B” négyszög színe pontosan ugyanaz, valószínűleg mégis jóval sötétebbnek látod az “A”-t, mert az agyad értelmezi a képet és korrigál. Ez az optikai illúzió ennek a képességnek a határait mutatja be, de ez a képesség a hétköznapokban nagyon hasznos: például a napszaktól függetlenül meg tudod állapítani, hogy a fentebb elképzelt házad fehér. 😀</p>
 <p>Amit a szemed/agyad ilyen remekül megold, azt a fényképezőgépedben egy közepesen okos automatika próbálja lekövetni. Ez időnként hibázik, és ilyenkor a géped segítségre szorul: kézzel kell megtalálnod a tiszta fehér színt, hogy az elkészült kép színei hűek legyenek a fotótémád valódi színeihez. Ezt hívják fehéregyensúly-beállításnak.</p>
@@ -29,7 +29,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 </ul>
 <p>Itt van pl. ugyanaz a karó különböző fehéregyensúly-beállításokkal fényképezve, napos időben:</p>
 
-<p><img src="/challenges/illustrations/temperature.jpg" alt="Oszlopok" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('temperature.jpg', 'Oszlopok')}</p>
 
 <p>Ahhoz, hogy helyes színeket kapj, a gép fehéregyensúlyát a fényforrásnak megfelelően kell beállítani. A legtöbb esetben a gép AWB (Automatic White Balance – automatikus fehéregyensúly) beállítása jól működik. A leggyakrabban mesterséges fényforrásoknál szokott hibázni: itt érdemes kézzel kiválasztani a megfelelő alapbeállítást, vagy ha egyik sem stimmel, egyéni (“custom”) fehéregyensúlyt választani.</p>
 <p>Ha többféle fényforrás van egy helyen (pl. lámpa és az ablakon besütő napfény, vagy lámpa és TV), az még nehezebb eset. Ilyenkor érdemes elfogadni, hogy nem lesz tökéletes a kép, és eldönteni, hogy melyik fényforráshoz igazítod (manuálisan) a fehéregyensúlyt; vagy ha Photoshop-guru vagy, akkor utómunkával megoldani.</p>
@@ -64,8 +64,8 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li><a href="https://hu.pinterest.com/pin/439171401157788730/">Lebegő tárgyak</a></li>
 </ul>
 <p><strong>Inspiráció:</strong> <a href="https://hu.pinterest.com/search/pins/?q=still%20life%20photography">Pinterest csendéletek</a> | <a href="https://www.pexels.com/search/still%20life/">Pexels</a> | Mobile Photo Awards épületfotó győztesek: <a href="https://mobilephotoawards.com/3rd-annual-mobile-photography-awards-winners-honorable-mentions/">2013</a> | <a href="https://mobilephotoawards.com/still-life-2014-mpa-results/">2014</a> <a href="https://mobilephotoawards.com/still-life/">2015</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-7th-annual-mpa/">2017</a></p>
-<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>A csendéleteket pedig ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>A csendéleteket pedig ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

@@ -3,7 +3,6 @@ import {useParams} from '../../web_modules/react-router-dom.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useHistory} from '/web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
-import {renderReactElement} from '../../app/react-helper.js';
 
 import {useCourseData} from './CourseDataProvider.mjs';
 import {weeklyChallengeTitles} from '../challengeRepository.mjs';
@@ -27,12 +26,12 @@ export default function ChallengePage() {
         const response = await import('../challenge-texts/week' + weekIndex + '.mjs');
         const html = await response.getMaterial({
             formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
-            createPhotoUploadLink: async (label) => {
-                return renderReactElement(createElement('a', {href: '/upload', className: 'uploadLink'}, label));
-            }
+            createPhotoUploadLink: label => `<a href="/upload" class="uploadLink">${label}</a>`,
+            createFullWidthImage: (fileName, altText) => `<img src="/challenges/illustrations/${fileName}" alt="${altText}" style="width:100%;" />`,
         });
         setPageContentHtml(html);
     }
+
     useEffect(() => {
         setPageContentHtml(null);
         // noinspection JSIgnoredPromiseFromCall
@@ -55,14 +54,13 @@ export default function ChallengePage() {
     /* Render page */
     return [
         createElement('h1', {}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
-        createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}},
-            (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
-                to: '/upload',
-                className: 'actionButton',
-                disabled: !isAuthenticated,
-                title: !isAuthenticated ? __('You\'ll need to sign in to upload a photo.') : '',
-            }, __('Upload your weekly photo')) : null,
-        ),
+        createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}}),
+        (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
+            to: '/upload',
+            className: 'actionButton',
+            disabled: !isAuthenticated,
+            title: !isAuthenticated ? __('You\'ll need to sign in to upload a photo.') : '',
+        }, __('Upload your weekly photo')) : null,
         createElement(NavLinkButton, {to: '/challenges', className: 'actionButton'}, '← ' + __('Back to the challenge list')),
     ];
 }

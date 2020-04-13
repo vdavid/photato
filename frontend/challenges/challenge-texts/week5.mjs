@@ -1,15 +1,15 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
 
 <ul>
-    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és ${await createPhotoUploadLink('itt tudod feltölteni')}.</li>
+    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és ${createPhotoUploadLink('itt tudod feltölteni')}.</li>
     <li>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból.</li>
     <li>Július 4-én (szerdán) 18:00-kor <strong>közös fotózás</strong> lesz a Margitszigeten. <a href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt!</a></li>
 </ul>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/biker.jpg" alt="Motoros" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('biker.jpg', 'Motoros')}</p>
 
 <p>Valószínűleg sokszor tapasztaltad már, hogy amikor gyorsan le akarsz kapni valamit (pl. sportrendezvény, koncert, gyerekek/állatok fotózása, autóból kifényképezés), a képek gyakran elmosódottak lesznek. Ez azért van, mert az alatt az idő alatt, amíg a fénykép készül – tehát amíg a kamera rekesze nyitva van – elmozdul a fotótéma. Ezen a héten azt fogjuk gyakorolni, hogy hogyan lehet ezt minél inkább elkerülni, és szép, éles képeket készíteni ezekben a helyzetekben.</p>
 
@@ -27,7 +27,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 
 <p>Itt egy ábra is ezekről. A felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alul pedig az <strong>ISO érték</strong>:</p>
 
-<p><img src="/challenges/illustrations/settings.jpg" alt="Beállítások" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('settings.jpg', 'Beállítások')}</p>
 
 <p>Ha a képre nézve az volt az első gondolatod, hogy “fú, ez bonyolultnak néz ki”, akkor jó hírünk van: ha rászánsz most egy kis időt, pár perc múlva már nem lesz ijesztő ez a kép. 😊 Ezt a 3-4 dolgot csináld meg:</p>
 
@@ -47,7 +47,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li><strong>ISO érték:</strong> Figyeld meg, hogy ahogy növeled az ISO értéket, egyre világosodik, de zajosodik a kép.</li>
 </ul>
 
-<p><img src="/challenges/illustrations/horse.jpg" alt="Ló." style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('horse.jpg', 'Ló.')}</p>
 
 <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
 
@@ -68,7 +68,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li>Megelégszel egy rövidebb záridővel, és megpróbálod a kevésbé gyors pillanatokat elkapni.</li>
 </ol>
 
-<p><img src="/challenges/illustrations/glass.jpg" alt="Pohár." style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('glass.jpg', 'Pohár.')}</p>
 
 <p><strong>Néhány tipp és variáció mindenkinek:</strong></p>
 <ol>
@@ -93,9 +93,9 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     <li><a href="https://www.facebook.com/events/688185368187546/">Margitszigeti fotózás</a></li>
 </ul>
 
-<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
-<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
 
 <p>Jó fotózást,</p>
 

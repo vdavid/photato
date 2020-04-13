@@ -1,15 +1,15 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
 
-<p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
+<p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/lomo.jpg" alt="Lomo" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('lomo.jpg', 'Lomo')}</p>
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
 
-<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p><strong>Mi az utcai fotózás?</strong></p>
 
@@ -60,9 +60,9 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 
 <p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=street%20photography&rs=typed&term_meta[]=street%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</a> | Mobile Photo Awards street photography: <a href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-2015-mpa/">2015</a> | <a href="https://mobilephotoawards.com/street-photography-2014-mpa-results/">2014</a> People: <a href="https://mobilephotoawards.com/people-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/people-photos/">2015</a> | <a href="https://mobilephotoawards.com/people-2014-mpa-results/">2014</a></p>
 
-<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
 
-<p>Az utcai fotókat pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>Az utcai fotókat pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 
 <p>Jó fotózást,</p>
 

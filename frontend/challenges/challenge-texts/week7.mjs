@@ -1,17 +1,17 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
 
-<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
+<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/zsofi.gif" alt="Zsófi az utcán" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('zsofi.gif', 'Zsófi az utcán')}</p>
 
-<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p>Ezt úgy fogjuk elérni, hogy <strong>hosszan</strong> nyitva tartjuk a zárat. Emlékeztetőül, itt az összefoglaló kép az 5. hétről:</p>
 
-<p><img src="settings.jpg" alt="Beállítások" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('settings.jpg', 'Beállítások')}</p>
 
 <p>(Ismétlésképp: a felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alatta az <strong>ISO érték</strong>)</p>
 
@@ -67,9 +67,9 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 
 <p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=long%20exposure">Pinterest hosszú exponálási idő</a> | <a href="https://hu.pinterest.com/search/pins/?q=light%20painting%20photography">Pinterest fényfestés</a> | <a href="https://pixinfo.com/cikkek/igy-fotozz-este-es-ejszaka/">Pixinfo: fotózás sötétben</a></p>
 
-<p>Ha még nem küldted be a múlt heti (állatos/növényes) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (állatos/növényes) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
 
-<p>A hosszú záridős képeket pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>A hosszú záridős képeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 
 <p>TODO
 

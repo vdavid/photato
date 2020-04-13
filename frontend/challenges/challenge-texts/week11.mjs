@@ -1,11 +1,11 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. ${await createPhotoUploadLink('Itt tudod feltölteni')}.</p>
+<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. ${createPhotoUploadLink('Itt tudod feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/gyuri.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('gyuri.jpg', 'Gyuri összeverve')}</p>
 
-<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
+<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p>Egy önarckép lehet egy pillanatkép az életedből; az épp aktuális identitásod képi megfogalmazása; egy időszak összefoglalása; vagy egy mélyebb szembenézés magaddal. Te döntöd el, mit osztasz meg magadról, és hogy ezt hogyan fejezed ki a képpel. Hoztunk neked ehhez 8 tippet és egy csomó ötletet.</p>
 <p><strong>Tippek:</strong></p>
 <ol>
@@ -29,8 +29,8 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 <ul>
     <li><a href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</a> az expertphotography.com-tól</li>
 </ul>
-<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>Az önarcképeket pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Az önarcképeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 
 <p>Jó fotózást,</p>
 

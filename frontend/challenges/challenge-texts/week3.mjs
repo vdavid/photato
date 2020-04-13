@@ -1,14 +1,14 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthImage}) {
     return `<p><strong>Röviden:</strong></p>
 
-<p>A harmadik héten egy <strong>makró fotót</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
+<p>A harmadik héten egy <strong>makró fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="/challenges/illustrations/mosquitoes.jpg" alt="Légyott" style="width:100%; max-width:800px;" /></p>
+<p>${createFullWidthImage('mosquitoes.jpg', 'Légyott')}</p>
 
 <p>Ezen a héten megtanuljuk, mi az a makró, és hogyan érdemes 5 centiről krumplit fotózni.</p>
-<p>A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p>A makró fotózás a köznyelvben egyszerűen azt jelenti, hogy közelről fotózunk dolgokat. Ezzel a definícióval most meg is elégszünk. Szóval ezen a héten a részletekre megyünk rá, kültéren vagy beltéren fotózunk élő vagy élettelen témát; a lényeg, hogy közelről.</p>
 
@@ -41,9 +41,9 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
 
 <p>Inspiráció: <a href="https://www.pinterest.com/explore/close-up-photography/">Pinterest</a> | <a href="https://mobilephotoawards.com/macro-details-winner-honorable-mentions-6th-annual-mpa/">Mobile Photo Awards</a> | <a href="https://500px.com/krisztinmrkus">Márkus Krisztián bogarai</a> | <a href="https://www.smashingmagazine.com/2009/06/35-examples-of-stunning-macro-photography/">Smashing Magazine</a></p>
 
-<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
 
-<p>A makrós képeket pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
+<p>A makrós képeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
 
 <p>Jó fotózást,</p>
 <p>--<br />
