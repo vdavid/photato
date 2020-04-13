@@ -22,11 +22,9 @@ function _validateSelectedFile(file) {
 }
 
 export default function UploadPage({photoUploader}) {
-    const ONE_MINUTE = 60 * 1000;
-
     const {isAuthenticated, user, getTokenSilently} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
-    const {currentWeekIndex, currentWeekDeadline, isCourseOver, isCourseRunning} = useCourseData();
+    const {currentWeekIndex, isCourseOver, isCourseRunning, getFormattedDeadline} = useCourseData();
 
     const [accessToken, setAccessToken] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -136,9 +134,7 @@ export default function UploadPage({photoUploader}) {
         }
     }
 
-    const formattedDeadline = new Intl.DateTimeFormat(getActiveLocaleCode(), {
-        year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
-    }).format(new Date(currentWeekDeadline - ONE_MINUTE));
+    const formattedDeadline = getFormattedDeadline(currentWeekIndex, getActiveLocaleCode());
     const courseStatusHelpText = isCourseRunning
         ? __('Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
         : (isCourseOver

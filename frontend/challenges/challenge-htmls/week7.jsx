@@ -4,13 +4,13 @@
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/687caa85-7e73-4c61-be2a-2a60d28a1f5a.gif" alt="Zsófi az utcán" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/687caa85-7e73-4c61-be2a-2a60d28a1f5a.gif" alt="Zsófi az utcán" style="width:100%; max-width:800px;" /></p>
 
 <p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép c vagy annak bizonyos részei. A legjobb képedet július 22. 23:59-ig, <a href="https://bit.ly/phhu3w7">itt tudod feltölteni</a>.</p>
 
 <p>Ezt úgy fogjuk elérni, hogy <strong>hosszan</strong> nyitva tartjuk a zárat. Emlékeztetőül, itt az összefoglaló kép az 5. hétről:</p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/64bd339c-f669-4ed9-a5f7-a124d6ebbc5d.jpg" alt="Beállítások" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/64bd339c-f669-4ed9-a5f7-a124d6ebbc5d.jpg" alt="Beállítások" style="width:100%; max-width:800px;" /></p>
 
 <p>(Ismétlésképp: a felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alatta az <strong>ISO érték</strong>)</p>
 
@@ -35,8 +35,8 @@
 <ol>
     <li><strong>Használj fényképezőgépet.</strong> Vagy jó mobilt. A legtöbb mobil maximum 1 másodpercig tud exponálni. Alternatíva lehet még egy pro mobil kamera app (<a href="https://play.google.com/store/apps/details?id=com.flavionet.android.camera.lite">Camera FV-5</a>, <a href="https://apps.apple.com/us/app/procam-4-manual-camera-raw/id730712409">ProCam 5</a>)</li>
     <li><strong>Használj állványt.</strong> Vagy tedd le a gépet egy stabil helyre. Ha nincs állványod, használd a 2. héten tanult pulcsis trükköt, vagy egy kis babzsákot.</li>
-    <li><strong>Állítsd manuális módba.</strong> Ha van a gépeden manuális (“M”) üzemmód, állítsd be azt.<br><em>Megjegyzés:</em> Ha túl bonyolult a manuális mód, választhatod a záridőelőválasztás módot is (“S” vagy “Tv”, gépe válogatja). Így kicsit kisebb a szabadságod, de a blendét automatikusan beállítja neked a gép.</li>
-    <li><strong>Válassz alacsony ISO értéket.</strong> Állítsd a legalacsonyabbra (pl. 100).<br><em>Megyjegyzés:</em> Ha nagyon sötét van, akkor a legalacsonyabb ISO értékkel nagyon sokat kell várnod, mire elkészül egy kép. Megoldásul beállíthatsz valamivel magasabb ISO értéket (pl. 200, esetleg 400), de ügyelj rá, hogy ha túl magasra állítod, szemcsés lesz a kép. Kísérletezz!</li>
+    <li><strong>Állítsd manuális módba.</strong> Ha van a gépeden manuális (“M”) üzemmód, állítsd be azt.<br /><em>Megjegyzés:</em> Ha túl bonyolult a manuális mód, választhatod a záridőelőválasztás módot is (“S” vagy “Tv”, gépe válogatja). Így kicsit kisebb a szabadságod, de a blendét automatikusan beállítja neked a gép.</li>
+    <li><strong>Válassz alacsony ISO értéket.</strong> Állítsd a legalacsonyabbra (pl. 100).<br /><em>Megyjegyzés:</em> Ha nagyon sötét van, akkor a legalacsonyabb ISO értékkel nagyon sokat kell várnod, mire elkészül egy kép. Megoldásul beállíthatsz valamivel magasabb ISO értéket (pl. 200, esetleg 400), de ügyelj rá, hogy ha túl magasra állítod, szemcsés lesz a kép. Kísérletezz!</li>
     <li><strong>Szűkítsd a blendét.</strong> Ha világos van, állítsd a blendét szűkre (pl. f/8, f/16), de ne túl szűkre. Nagyon szűk blendénél a fényelhajlás jelensége miatt <a href="https://www.tripont.hu/problog/2625/capture_one_pro_10__a_fenyelhajlas_tobbe_nem_okoz_gondot">életlen lehet a kép</a>. Ha nagyon sötét van, akkor is lehet, hogy tágabb blendével jársz jól. Kísérletezz ezzel is bátran.</li>
     <li><strong>Állítsd be a hosszú záridőt.</strong> Ízlés szerint 1–30 másodpercre, vagy “B” (“Bulb”) módra. Bulb módban egészen addig nyitva marad a zár, ameddig lenyomva tartod az exponáló gombot.</li>
     <li><strong>Ellenőrizd a beállításokat.</strong> Figyelj a gép ajánlására, hogy a beállított záridővel, blendével és ISO értékkel helyesen exponáld a képet: hogy ne legyen se túl sötét, se túl világos. Ha nem tökéletes, játssz elsősorban a záridővel.</li>
@@ -74,5 +74,5 @@
 
 <p>Jó fotózást,</p>
 
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

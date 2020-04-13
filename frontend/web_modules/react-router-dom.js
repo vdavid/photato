@@ -1,15 +1,10 @@
 import React, { Component } from './react.js';
+import { c as createCommonjsModule, a as commonjsGlobal } from './common/_commonjsHelpers-6a48b99e.js';
 
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
   subClass.__proto__ = superClass;
-}
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
 var reactIs_development = createCommonjsModule(function (module, exports) {
@@ -3572,7 +3567,7 @@ function useRouteMatch(path) {
 
 {
   if (typeof window !== "undefined") {
-    var global$1 = window;
+    var global = window;
     var key$1 = "__react_router_build__";
     var buildNames = {
       cjs: "CommonJS",
@@ -3580,15 +3575,15 @@ function useRouteMatch(path) {
       umd: "UMD"
     };
 
-    if (global$1[key$1] && global$1[key$1] !== "esm") {
-      var initialBuildName = buildNames[global$1[key$1]];
+    if (global[key$1] && global[key$1] !== "esm") {
+      var initialBuildName = buildNames[global[key$1]];
       var secondaryBuildName = buildNames["esm"]; // TODO: Add link to article that explains in detail how to avoid
       // loading 2 different builds.
 
       throw new Error("You are loading the " + secondaryBuildName + " build of React Router " + ("on a page that is already running the " + initialBuildName + " ") + "build, so things won't work right.");
     }
 
-    global$1[key$1] = "esm";
+    global[key$1] = "esm";
   }
 }
 

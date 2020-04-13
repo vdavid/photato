@@ -4,7 +4,7 @@
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/3eb20f38-23a8-4774-a889-081d7f86426d.jpg" alt="Lomo" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/3eb20f38-23a8-4774-a889-081d7f86426d.jpg" alt="Lomo" style="width:100%; max-width:800px;" /></p>
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
 
@@ -65,5 +65,5 @@
 
 <p>Jó fotózást,</p>
 
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

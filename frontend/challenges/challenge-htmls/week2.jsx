@@ -5,7 +5,7 @@
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/ea78eb3e-9f0c-46a9-b4fc-21e2f45cf523.jpg" alt="Nyugati tér" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/ea78eb3e-9f0c-46a9-b4fc-21e2f45cf523.jpg" alt="Nyugati tér" style="width:100%; max-width:800px;" /></p>
 
 <p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet június 17. 23:59-ig, <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
 
@@ -13,7 +13,7 @@
 
 <ol>
     <li><strong>Nézz körül.</strong> Figyeld meg a környezeted. A legtöbben nem vesszük észre, milyen király épületek mellett megyünk el mindennap. Nézz magasabbra, mint szoktál!</li>
-    <li><strong>Tanulj egy kis elméletet.</strong> Ha tisztában vagy a fényképezés alapjaival, sokkal több lehetőséged lesz érdekes képeket csinálni. Különösen, ha fényképezőgépet használsz, vagy van profi kamera alkalmazás a telefonodon (Camera FV-5 Androidra – <a href="https://play.google.com/store/apps/details?id=com.flavionet.android.camera.lite">0ft</a> / <a href="https://play.google.com/store/apps/details?id=com.flavionet.android.camera.pro">899ft</a>, <a href="https://apps.apple.com/us/app/procam-7/id730712409">ProCam 7 iOS-re</a> – 2290ft).<br>Remek kiindulópont ez a 10 perces cikk, érdemes elolvasni: <a href="https://fotozasblog.hu/digitalis-fotozas/">Fotózás alapok: zoom, blende, záridő</a>.</li>
+    <li><strong>Tanulj egy kis elméletet.</strong> Ha tisztában vagy a fényképezés alapjaival, sokkal több lehetőséged lesz érdekes képeket csinálni. Különösen, ha fényképezőgépet használsz, vagy van profi kamera alkalmazás a telefonodon (Camera FV-5 Androidra – <a href="https://play.google.com/store/apps/details?id=com.flavionet.android.camera.lite">0ft</a> / <a href="https://play.google.com/store/apps/details?id=com.flavionet.android.camera.pro">899ft</a>, <a href="https://apps.apple.com/us/app/procam-7/id730712409">ProCam 7 iOS-re</a> – 2290ft).<br />Remek kiindulópont ez a 10 perces cikk, érdemes elolvasni: <a href="https://fotozasblog.hu/digitalis-fotozas/">Fotózás alapok: zoom, blende, záridő</a>.</li>
     <li><strong>Menj messzebb.</strong> Ha a teljes épületet akarod fotózni, figyelj rá, hogy valóban az egész épület beleférjen a képbe. Ha <a href="https://fotozasblog.hu/digitalis-fotozas/#optikaizoom">nagy látószögű</a> optikád van, könnyű a dolgod, de ha nincs, érdemes hátrébb menni.</li>
     <li><strong>Keresd meg a nézőpontod.</strong> Sétálj körbe, találd meg a magasságot. Nézz körül, honnan fotózhatsz még, ami nem magától értetődő: szomszédos épületről, távolról rázoomolva stb.</li>
     <li><strong>Állítsd be a kamerád.</strong> Ha kell, használj szűkebb <a href="https://fotozasblog.hu/digitalis-fotozas/#melysegelesseg">blende</a> beállítást, hogy nagyobb legyen az éles tartomány. Itt egy <a href="https://i.imgur.com/IFRun0e.gif">gif a mélységélességről</a>.</li>
@@ -47,5 +47,5 @@
 
 <p>Jó fotózást,</p>
 
-<p>-- <br>
+<p>-- <br />
     a Photato csapata</p>

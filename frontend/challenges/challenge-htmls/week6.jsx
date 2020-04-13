@@ -2,7 +2,7 @@
 <p><strong>Röviden:</strong></p>
 <p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="https://bit.ly/phhu3w6">Itt tudod feltölteni</a>.</p>
 <p><strong>Hosszabban:</strong></p>
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2a87b24f-ec5a-4b0b-8086-f2a37a2d7659.jpg" alt="Medúza." style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2a87b24f-ec5a-4b0b-8086-f2a37a2d7659.jpg" alt="Medúza." style="width:100%; max-width:800px;" /></p>
 <p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, csak a fókuszáláshoz adunk pár egyszerű tippet. 😊</p>
 
 <p>Tippek fókuszáláshoz:</p>
@@ -31,5 +31,5 @@
 <p>Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w5">megteheted</a>. 🕚</p>
 <p>Az élőlényeket pedig még egyszer, <a href="https://bit.ly/phhu3w6">itt</a> várjuk!</p>
 <p>Jó fotózást,</p>
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

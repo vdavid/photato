@@ -5,7 +5,7 @@
   "main": "main.mjs",
   "scripts": {
     "test": "npx jest",
-    "postinstall": "npx snowpack"
+    "postinstall": "npx snowpack --clean"
   },
   "repository": {
     "type": "git",
@@ -27,11 +27,12 @@
   "dependencies": {
     "react": "npm:@pika/react@^16.13.1",
     "react-dom": "npm:@pika/react-dom@^16.13.1",
+    "react-jsx-parser": "^1.21.0",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "snowpack": "^1.6.0",
-    "jest": "^25.2.4"
+    "jest": "^25.3.0"
   },
   "jest": {
     "testEnvironment": "jsdom"
@@ -40,7 +41,8 @@
     "webDependencies": [
       "react",
       "react-dom",
-      "react-router-dom"
+      "react-router-dom",
+      "react-jsx-parser"
     ]
   }
 }

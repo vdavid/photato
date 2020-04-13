@@ -5,31 +5,37 @@ import {weeklyChallengeTitles} from '../challengeRepository.mjs';
 import NavLinkButton from '../../app/components/NavLinkButton.mjs';
 import {useCourseData} from './CourseDataProvider.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
+import JsxParser from '../../web_modules/react-jsx-parser.js';
 
 export default function ChallengePage() {
     const {weekIndex} = useParams();
 
     const {isAuthenticated} = useAuth0();
-    const {__} = useI18n();
-    const {currentWeekIndex} = useCourseData();
+    const {__, getActiveLocaleCode} = useI18n();
+    const {currentWeekIndex, getFormattedDeadline} = useCourseData();
 
-    const [pageContentHtml, setPageContentHtml] = useState(null);
+    const [pageContent, setPageContent] = useState(null);
 
     async function fetchPageContent() {
-        const response = await fetch('/challenges/challenge-htmls/week' + weekIndex + '.html', {mode: 'no-cors'});
+        const response = await fetch('/challenges/challenge-htmls/week' + weekIndex + '.jsx', {mode: 'no-cors'});
         const html = await response.text();
-        setPageContentHtml(html);
+        setPageContent(html);
     }
 
     useEffect(() => {
-        setPageContentHtml(null);
+        setPageContent(null);
         // noinspection JSIgnoredPromiseFromCall
         fetchPageContent();
     }, [weekIndex]);
 
     return [
         createElement('h1', {}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
-        createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}}),
+        createElement(JsxParser, {bindings: {
+                formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
+            },
+            components: {},
+            jsx: pageContent,
+        }),
         createElement('div',  {},
         (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
             to: '/upload',

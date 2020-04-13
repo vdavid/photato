@@ -4,7 +4,7 @@
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/04a48ad0-de0e-461d-afce-13c221a8d051.jpg" alt="Légyott" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/04a48ad0-de0e-461d-afce-13c221a8d051.jpg" alt="Légyott" style="width:100%; max-width:800px;" /></p>
 
 <p>Ezen a héten megtanuljuk, mi az a makró, és hogyan érdemes 5 centiről krumplit fotózni.</p>
 <p>A legjobb képedet június 24. 23:59-ig, <a href="https://bit.ly/phhu3w3">itt tudod feltölteni</a>.</p>
@@ -45,5 +45,5 @@
 <p>A makrós képeket pedig <a href="https://bit.ly/phhu3w3">itt</a> várjuk!</p>
 
 <p>Jó fotózást,</p>
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

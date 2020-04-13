@@ -8,7 +8,7 @@
 
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/dfb27e72-f787-4d66-a9bf-167d5f1f6637.jpg" alt="Motoros" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/dfb27e72-f787-4d66-a9bf-167d5f1f6637.jpg" alt="Motoros" style="width:100%; max-width:800px;" /></p>
 
 <p>Valószínűleg sokszor tapasztaltad már, hogy amikor gyorsan le akarsz kapni valamit (pl. sportrendezvény, koncert, gyerekek/állatok fotózása, autóból kifényképezés), a képek gyakran elmosódottak lesznek. Ez azért van, mert az alatt az idő alatt, amíg a fénykép készül – tehát amíg a kamera rekesze nyitva van – elmozdul a fotótéma. Ezen a héten azt fogjuk gyakorolni, hogy hogyan lehet ezt minél inkább elkerülni, és szép, éles képeket készíteni ezekben a helyzetekben.</p>
 
@@ -26,7 +26,7 @@
 
 <p>Itt egy ábra is ezekről. A felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alul pedig az <strong>ISO érték</strong>:</p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/64bd339c-f669-4ed9-a5f7-a124d6ebbc5d.jpg" alt="Beállítások" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/64bd339c-f669-4ed9-a5f7-a124d6ebbc5d.jpg" alt="Beállítások" style="width:100%; max-width:800px;" /></p>
 
 <p>Ha a képre nézve az volt az első gondolatod, hogy “fú, ez bonyolultnak néz ki”, akkor jó hírünk van: ha rászánsz most egy kis időt, pár perc múlva már nem lesz ijesztő ez a kép. 😊 Ezt a 3-4 dolgot csináld meg:</p>
 
@@ -46,7 +46,7 @@
     <li><strong>ISO érték:</strong> Figyeld meg, hogy ahogy növeled az ISO értéket, egyre világosodik, de zajosodik a kép.</li>
 </ul>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/f14f4496-a5a5-4a0f-b3ee-39d3dea3aa7b.jpg" alt="Ló." style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/f14f4496-a5a5-4a0f-b3ee-39d3dea3aa7b.jpg" alt="Ló." style="width:100%; max-width:800px;" /></p>
 
 <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
 
@@ -55,7 +55,7 @@
 <p>Most pedig gondoljuk végül együtt, hogyan érdemes beállítani ezeket az értékeket gyorsan mozgó dolgok fényképezéséhez.</p>
 
 <ol>
-    <li><strong>Ne mozduljon be a kép.</strong> Ez a legfontosabb dolog, ennek kulcsa pedig a <strong>rövid záridő,</strong> tehát hogy rövid idő alatt készüljön el a kép. Ökölszabályként, sportfotózáshoz  az <strong>1/1250 másodperc</strong>es záridő az ideális – de az abszolút maximum az 1/300 másodperc.<br>Továbbra is záridő-előválasztás (“S” vagy “Tv”) módban tartva a géped, állítsd be a záridőt <strong>1/500 másodpercre</strong>.</li>
+    <li><strong>Ne mozduljon be a kép.</strong> Ez a legfontosabb dolog, ennek kulcsa pedig a <strong>rövid záridő,</strong> tehát hogy rövid idő alatt készüljön el a kép. Ökölszabályként, sportfotózáshoz  az <strong>1/1250 másodperc</strong>es záridő az ideális – de az abszolút maximum az 1/300 másodperc.<br />Továbbra is záridő-előválasztás (“S” vagy “Tv”) módban tartva a géped, állítsd be a záridőt <strong>1/500 másodpercre</strong>.</li>
     <li><strong>Engedj be sok fényt.</strong> Ezzel most nincs dolgod, “S”/“Tv” üzemmódban a blende-beállítást elvégzi helyetted a gép a fényviszonyok függvényében.</li>
     <li><strong>Állítsd nagyra az érzékenységet.</strong> Ha túl sötét a kép, növeld az ISO értéket addig, amíg szépen kivilágosodik. A fényviszonyoktól függően lehet, hogy ez az érték nagyon magas lesz (6400 vagy még több), különösen, ha éppen beltérben próbálgatod. De napos időben megúszhatod 400-as vagy még kisebb ISO-val is.</li>
     <li><strong>Finomhangolj.</strong> Ha jók a fényviszonyok és a fentiek alapján beállított ISO érték alacsony, akkor növelheted a záridőt, hogy még rövidebb pillanatot kaphass el. Ez után az ISO értéket növeld ismét addig, hogy a gép szerint “pont megfelelően fényes” legyen a kép. 1/1250 másodpercnél rövidebb záridőt ritkán érdemes használni. Ha ezt eléred, akkor inkább az ISO-t csökkentsd, hogy minél tisztább, zajmentesebb legyen a kép. Ha még így is túl világos lenne, a gép majd megnöveli a blende értéket, hogy pont jó legyen.</li>
@@ -67,15 +67,15 @@
     <li>Megelégszel egy rövidebb záridővel, és megpróbálod a kevésbé gyors pillanatokat elkapni.</li>
 </ol>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/9e568b9f-e21d-4909-b35b-29ed31c2ada6.jpg" alt="Pohár." style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/9e568b9f-e21d-4909-b35b-29ed31c2ada6.jpg" alt="Pohár." style="width:100%; max-width:800px;" /></p>
 
 <p><strong>Néhány tipp és variáció mindenkinek:</strong></p>
 <ol>
     <li><strong>Komponálj előre.</strong> Ha kiszámítható pályán halad a fotótémád, akkor állj be egy jó helyre, találd meg a kompozíciót, végezd el a beállításokat ha kell, aztán csak várd a megfelelő pillanatot.</li>
-    <li><strong></strong><strong>Készíts sorozatfelvételt.</strong> Ne sajnáld a memóriakártyád, majd később kiválogatod a képeket. Gyorsan zajló eseményeknél a profik is így csinálják. Sokszor a legbiztosabb módja annak, hogy legyen 1 jó képed az, ha csinálsz 50-et.</li>
-    <li><strong>Úsztatás (“svenkelés”/”behúzás”).</strong> Azt jelenti, hogy a kamerát folyamatosan mozgatva követed a fotótémád mozgását. Ezzel elérheted, hogy a tárgyad éles lesz, míg a háttér elmosódik. Ez <a href="https://hu.pinterest.com/search/pins/?q=panning%20photography">nagyon menőn tud kinézni</a>.<br>
-        Állítsd be előre a géped: egy hosszabb, nagyságrendileg 1/80 körüli záridő lesz a nyerő – a pontos érték a témától, az ügyességedtől és az ízlésedtől függ.<br>
-        Amikor feltűnik a fotótémád, nyomd le az exponáló gombot és közben fordulj a tárgyad után úgy, mintha videót készítenél róla.<br>
+    <li><strong>Készíts sorozatfelvételt.</strong> Ne sajnáld a memóriakártyád, majd később kiválogatod a képeket. Gyorsan zajló eseményeknél a profik is így csinálják. Sokszor a legbiztosabb módja annak, hogy legyen 1 jó képed az, ha csinálsz 50-et.</li>
+    <li><strong>Úsztatás (“svenkelés”/”behúzás”).</strong> Azt jelenti, hogy a kamerát folyamatosan mozgatva követed a fotótémád mozgását. Ezzel elérheted, hogy a tárgyad éles lesz, míg a háttér elmosódik. Ez <a href="https://hu.pinterest.com/search/pins/?q=panning%20photography">nagyon menőn tud kinézni</a>.<br />
+        Állítsd be előre a géped: egy hosszabb, nagyságrendileg 1/80 körüli záridő lesz a nyerő – a pontos érték a témától, az ügyességedtől és az ízlésedtől függ.<br />
+        Amikor feltűnik a fotótémád, nyomd le az exponáló gombot és közben fordulj a tárgyad után úgy, mintha videót készítenél róla.<br />
         Ez a módszer csak akkor működik, ha tudod előre, hogy milyen pályán fog mozogni a témád. Emellett érdemes tudni, hogy ez a nehezebb technikák egyike: keveseknek sikerül elsőre jó képekeket készíteni vele. De ha tetszik, érdemes gyakorolnod, és előbb-utóbb ráérezel.</li>
     <li><strong>Chronophotography.</strong> Itt a mozgás több fázisát kombinálod utómunka során egy képpé, <a href="https://hu.pinterest.com/search/pins/?q=chronophotograpy%20sport">valahogy így</a>. Ehhez állványról kell fotóznod és a sima sportfotózáshoz hasonlóan rövid záridővel sorozatfelvételt készítened az akcióról. A több elkészült képet utána egy képszerkesztő programmal (pl. <a href="https://www.gimp.org/downloads/">GIMP</a>, Photoshop) összekombinálhatod egy képpé. Ennek a pontos mikéntjére itt sajnos terjedelmi okokból nem tudunk kitérni, de ha tudsz angolul, az internetek segítenek neked. 😀</li>
     <li><strong>Válassz témát szabadon.</strong> Lehet, hogy a héten nem mész sporteseményre, vagy rossz idő lesz, vagy csak nem ihlet meg téged a sport. Nyugodtan engedd el. Valószínűleg rengeteg más mozgó dolog van a környékeden. Néhány ötlet, amit fotózhatsz: autók, mozóglépcső, hintázó gyerekek, repülő labdák. További ötletekért nézd meg az "Inspiráció" részt lejjebb.</li>
@@ -98,5 +98,5 @@
 
 <p>Jó fotózást,</p>
 
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

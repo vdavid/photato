@@ -1,7 +1,7 @@
 <p><strong>Röviden:</strong></p>
 <p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <a href="https://bit.ly/phhu3w10">itt tudod feltölteni</a>.</p>
 <p><strong>Hosszabban:</strong></p>
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2493480e-d958-4ffd-91c3-8e9f1e26d163.jpg" alt="Koncert Buffalo WY" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2493480e-d958-4ffd-91c3-8e9f1e26d163.jpg" alt="Koncert Buffalo WY" style="width:100%; max-width:800px;" /></p>
 <p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed május 13. 23:59-ig, <a href="https://bit.ly/phhu3w10">itt tudod majd feltölteni</a>.</p>
 <p>Eseményt fotózni lehet résztvevőként, vagy meghívott fotósként. A két felállás elég különböző; igyekeztünk olyan tippeket válogatni, amik mindkét esetben hasznodra válnak. Ők azok:</p>
 <ol>
@@ -28,5 +28,5 @@
 <p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w9">megteheted</a>. 🕚</p>
 <p>Az eseményfotókat pedig <a href="https://bit.ly/phhu3w10">itt várjuk</a>!</p>
 <p>Jó fotózást,</p>
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

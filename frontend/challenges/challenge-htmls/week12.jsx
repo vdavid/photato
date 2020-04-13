@@ -7,7 +7,7 @@
 </ul>
 <p><strong>Hosszabban:</strong>
 </p>
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/acb96b96-547c-413d-85cf-fdb83b6164b4.jpg" alt="Darvak" style="width:100%; max-width:800px;">
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/acb96b96-547c-413d-85cf-fdb83b6164b4.jpg" alt="Darvak" style="width:100%; max-width:800px;" />
 </p>
 <p>Tekintsünk vissza, mit csináltunk az elmúlt 12 héten:</p>
 <ol>
@@ -30,7 +30,7 @@
 <p>Most, hogy megtanultál mindent, amit csak a fényképezésről tudni lehet 😉, szabadjára engedünk, fotózz, amit csak szeretnél. A cél, hogy bemutathasd, mit tanultál, és mi jelenleg a kedvenc stílusod. Ha ez segít, gondolj rá úgy, mint egy diplomamunkára. Ha ez inkább frusztrál, akkor ne gondolj rá úgy. 😀 Talán mostanra kialakult benned egy érzés, hogy melyik téma állt legközelebb hozzád az elmúlt hetekben. Vagy valami, amit nem érintettünk, de jó lett volna?</p>
 <p>Pár tipp, hogyan találd meg a témád:</p>
 <ul>
-    <li><strong></strong><strong>Mi érdekel most a legjobban? </strong>Van olyan, ami rögtön eszedbe jut erre a kérdésre? Vagy érzed valamivel kapcsolatban a bizsergést, hogy „De jó lenne lefotózni”? (Ha nem, semmi gond, van még néhány ötletünk a tarsolyban.)</li>
+    <li><strong>Mi érdekel most a legjobban? </strong>Van olyan, ami rögtön eszedbe jut erre a kérdésre? Vagy érzed valamivel kapcsolatban a bizsergést, hogy „De jó lenne lefotózni”? (Ha nem, semmi gond, van még néhány ötletünk a tarsolyban.)</li>
     <li><strong>Mi az üzeneted?</strong> Mit tartasz fontosnak? Mi áll hozzád közel? A pandák megmentése? Szegénység az utcákon? Fel akarod vidítani az embereket? (Ha most épp nem fedezel fel magadban különösebb mondanivalót, olvass tovább.)</li>
     <li><strong>Milyen esztétika mozgat meg?</strong> A mozgás, akció? Az emberi testek vagy arcok? Különböző életérzések? Sorsok? Épített geometria? A hétköznapi élet örömei? Apró teremtmények? Természet, természeti jelenségek? A divat?</li>
     <li><strong>Mit fotóznál rendszeresen? </strong>Milyen témában érzed azt, hogy érdekel annyira, hogy akár napi vagy heti szinten fotóznád és nem éreznéd megterhelőnek, inkább érdekesnek? Mit tudnál elképzelni, hogy a szokásoddá váljon?</li>
@@ -60,8 +60,8 @@
 <p>Köszi, hogy részt vettél a kurzuson! Mi nagyon élveztük, örültünk a rengeteg pozitív visszajelzésnek és konstruktív kritikának. 😊 Még nem búcsúzkodunk, hiszen még van egy hét, és egy fotókiállítás, amiről hamarosan írunk! Viszont akartunk szólni, hogy hamarosan újabb tanfolyamot indítunk. Sokan írtátok, hogy szívesen ajánlanátok a Photatot a barátaitoknak/kollégáitoknak. Gondoltuk, ez egy remek alkalom, hogy lehetőséget adjunk erre.</p>
 <p>Itt van pl. egy rövid üzenet, amit átküldhetsz azoknak, akiket szerinted érdekelhet:</p>
 <hr>
-<p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb kurzusuk!<br>
-    Arra gondoltam, téged is érdekelhet a fotózás.<br>
+<p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb kurzusuk!<br />
+    Arra gondoltam, téged is érdekelhet a fotózás.<br />
     Ha így van, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <a href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
 </p>
 <hr>
@@ -78,5 +78,5 @@
 <p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w11">megteheted</a>. 🕚</p>
 <p>Az e heti képeket pedig <a href="https://bit.ly/phhu3w12">itt</a> várjuk!</p>
 <p>Jó fotózást,</p>
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>

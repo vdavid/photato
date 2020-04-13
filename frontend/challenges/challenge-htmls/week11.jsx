@@ -2,7 +2,7 @@
 <p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. <a href="https://bit.ly/phhu3w11">Itt tudod feltölteni</a>.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/a14fcdaa-b0a2-494d-a785-7dbc6a8cc7c7.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;"></p>
+<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/a14fcdaa-b0a2-494d-a785-7dbc6a8cc7c7.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;" /></p>
 
 <p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet május 20. 23:59-ig, <a href="https://bit.ly/phhu3w11">itt tudod majd feltölteni</a>.</p>
 <p>Egy önarckép lehet egy pillanatkép az életedből; az épp aktuális identitásod képi megfogalmazása; egy időszak összefoglalása; vagy egy mélyebb szembenézés magaddal. Te döntöd el, mit osztasz meg magadról, és hogy ezt hogyan fejezed ki a képpel. Hoztunk neked ehhez 8 tippet és egy csomó ötletet.</p>
@@ -33,5 +33,5 @@
 
 <p>Jó fotózást,</p>
 
-<p>--<br>
+<p>--<br />
     a Photato csapata</p>
