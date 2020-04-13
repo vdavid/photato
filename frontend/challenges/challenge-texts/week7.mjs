@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
+export async function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 
 <p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>

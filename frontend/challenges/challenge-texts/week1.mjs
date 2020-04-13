@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
+export async function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p>Az első hét témája: <strong>gasztrofotó</strong>!</p>
 <p>${createFullWidthLocalImage('pizza.jpg', 'pizza')}</p>
 <p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben azért még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>

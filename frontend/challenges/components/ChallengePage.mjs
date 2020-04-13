@@ -25,6 +25,7 @@ export default function ChallengePage() {
     async function fetchPageContent() {
         const response = await import('../challenge-texts/week' + weekIndex + '.mjs');
         const html = await response.getMaterial({
+            baseUrl: '',
             formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
             createPhotoUploadLink: label => `<a href="/upload" class="uploadLink">${label}</a>`,
             createFullWidthLocalImage: (fileName, altText) => `<img src="/challenges/illustrations/${fileName}" alt="${altText}" style="width:100%;" />`,

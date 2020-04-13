@@ -1,4 +1,4 @@
-export async function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
+export async function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
@@ -16,7 +16,7 @@ export async function getMaterial({formattedDeadline, createPhotoUploadLink, cre
 <ul>
     <li><strong>Apró interakciók.</strong> Koccintás, ölelés, kézfogás, összenézés.</li>
     <li><strong>Beszédes csendéletek.</strong> Pohártornyok, kábelhalmok, székek egymás mellett, egy csokor a széken / egy csokor az árokban.</li>
-    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <a href="/challenges/linked-images/long-exposure-with-flash.jpg">mint ez</a>.</li>
+    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <a href="${baseUrl}/challenges/linked-images/long-exposure-with-flash.jpg">mint ez</a>.</li>
     <li><strong>Keress furcsa szögeket.</strong> Felállhatsz valahová magasra (létra, mászóka, teherautó-plató) vagy lefekhetsz a földre. A magas pontról fotózás járulékos előnye, hogy ha a fotózott emberek mind fölfelé, rád néznek, senkinek nem lesz tokája a képen.</li>
 </ul>
 <p>További tippek:</p>
