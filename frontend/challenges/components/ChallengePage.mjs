@@ -24,7 +24,7 @@ export default function ChallengePage() {
 
     /* Fetch page content asynchronously when the week index changes */
     async function fetchPageContent() {
-        const response = await import('/challenges/challenge-htmls/week' + weekIndex + '.mjs');
+        const response = await import('../challenge-texts/week' + weekIndex + '.mjs');
         const html = await response.getMaterial({
             formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
             createPhotoUploadLink: async (label) => {
