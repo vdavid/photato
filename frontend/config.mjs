@@ -21,7 +21,6 @@ export const config = {
     },
     customerServiceEmailAddress: 'photatophotato@gmail.com',
     featureSwitches: {
-        challenges: false,
     },
 };
 
@@ -32,7 +31,6 @@ export const productionConfig = {
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
     },
     featureSwitches: {
-        challenges: false,
     },
 };
 
@@ -43,7 +41,6 @@ export const stagingConfig = {
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
     },
     featureSwitches: {
-        challenges: true,
     },
 };
 
@@ -54,6 +51,5 @@ export const developmentConfig = {
         clientId: 'JLFeh90tCqr0KebY2hUWYBlhHOuHXl5f'
     },
     featureSwitches: {
-        challenges: true,
     },
 };

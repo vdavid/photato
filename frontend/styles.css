@@ -6,15 +6,16 @@
     --google-recommended-dark-background-color: #121212;
     --paper-background-color: #424242;
     --primary-color-dark: #1769aa;
-    --primary-color-main: #2196f3;
+    --primary-color-main: #2196f3; /* BLUE 500 */
     --primary-color-light: #4dabf5;
+    --primary-color-lighter: #cee8fc;
     --accent-color-dark: #b28900;
-    --accent-color-main: #ffc400;
+    --accent-color-main: #ffc400; /* AMBER A400 */
     --accent-color-light: #ffcf33;
     --disabled-color: #404040;
-    --light-text-color-high-emphasis: rgba(255,255,255, 0.87);
-    --light-text-color-medium-emphasis: rgba(255,255,255, 0.60);
-    --light-text-color-disabled: rgba(255,255,255, 0.38);
+    --light-text-color-high-emphasis: rgba(255, 255, 255, 0.87);
+    --light-text-color-medium-emphasis: rgba(255, 255, 255, 0.60);
+    --light-text-color-disabled: rgba(255, 255, 255, 0.38);
 }
 
 :root {
@@ -33,19 +34,21 @@
 body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; font-size: 1rem; line-height: 1.8rem; background: var(--page-background-color); color: var(--light-text-color-medium-emphasis); }
 
 h1, h2, h3, h4, h5, h6 { margin: 1em 0 0.5em; font-family: 'Roboto Slab', serif; line-height: 1.2em; }
+img { display: inline-block; }
 
 input { font-size: 1rem; }
 input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--primary-color-light); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 
 button { border: none; padding: 0.5em 1em; border-radius: 2px; font-size: 1rem; background-color: var(--primary-color-main); color: var(--light-text-color-high-emphasis); }
 button:hover { background: var(--primary-color-dark); }
-button[disabled] { background: var(--disabled-color); color:var(--light-text-color-disabled); }
+button[disabled] { background: var(--disabled-color); color: var(--light-text-color-disabled); }
 a, a:visited { color: var(--primary-color-light); text-decoration: none; }
 a:hover, a:active { text-decoration: underline; }
 .actionButton { display: inline-block; margin: 1em 0; padding: 1em 2em; color: var(--light-text-color-high-emphasis); background-color: var(--primary-color-main); text-decoration: none; transition: background-color 0.1s ease; cursor: pointer; }
 .actionButton:hover { background-color: var(--primary-color-dark); text-decoration: none; }
-.actionButton[disabled] { background: var(--disabled-color);  color:var(--light-text-color-disabled); cursor: default;}
-.preWrap { white-space: pre-wrap; } /* Non-semantic class, so it's a bit of cheating, but makes life easier. */
+.actionButton[disabled] { background: var(--disabled-color); color: var(--light-text-color-disabled); cursor: default;}
+.preWrap { white-space: pre-wrap; }
+/* Non-semantic class, so it's a bit of cheating, but makes life easier. */
 
 main { min-width: 320px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
@@ -53,26 +56,46 @@ footer { margin: 2em auto 0; text-align: center; }
 
 /* Navigation */
 #app > header { display: flex; align-items: stretch; height: 47px; line-height: 1.3rem; background-color: var(--navbar-color); }
-#app > header .logo { flex-basis: 50px; padding:0; display:flex; }
+#app > header .logo { flex-basis: 50px; padding: 0; display: flex; }
 #app > header .logo img { width: auto; height: 100%; margin: 2px 0 0 2px;}
 #app > header .siteTitle { padding: 14px 16px 14px 0; user-select: none; }
-#app > header nav { display: flex; flex-grow: 1; }
-#app > header hr { flex-grow: 1; border: 0; }
-#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
-#app > header a:hover { background-color: var(--primary-color-light); color: var(--dark-primary-text-color); }
-#app > header a.active { background-color: var(--primary-color-main); }
-#app > header a.active:hover { background-color: var(--primary-color-main); color: var(--light-text-color-high-emphasis); }
+#app > header img.profilePicture { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; cursor: pointer; }
+#app > header .menuToggle { display: none; cursor: pointer; font-size: 47px; }
 
-#app > header .authentication img { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; }
+#app > header nav { display: flex; flex-grow: 1; }
+#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
+#app > header nav a:hover { background-color: var(--primary-color-lighter);  color: var(--dark-primary-text-color); }
+#app > header nav a.active { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
+#app > header nav a.active:hover { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
+#app > header nav hr { border: none; flex-grow: 1; }
+#app > header nav.signedIn { flex-direction: row; visibility: visible; position: unset; background-color: var(--primary-color-dark); }
+#app > header nav.signedIn.visible { visibility: visible; }
+#app > header nav.signedIn a { display: flex; }
+#app > header nav.signedIn a span.icon { display: none; }
+#app > header nav.signedIn a span.profile img { width: 25px; height: 25px; margin: 0; }
+#app > header nav.signedIn a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
+#app > header nav.signedIn a.active { background-color: var(--primary-color-light); }
+#app > header nav.signedIn hr { display: block; height: 1.5px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
+#app > header nav.signedIn .menuItem.signOut { display: none;}
+#app > header nav.authenticationMenu { visibility: hidden; }
+#app > header nav.authenticationMenu.visible { visibility: visible; }
+#app > header nav.authenticationMenu { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
+#app > header nav.authenticationMenu a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
+#app > header nav.authenticationMenu a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
+#app > header nav.authenticationMenu a .title { display: flex; padding: 14px 16px 14px 0; }
+#app > header nav.authenticationMenu a span.icon { display: inline-block; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
+
 @media screen and (max-width: 730px) {
-    #app > header .siteTitle { flex-grow: 1; }
-    #app > header hr { display: block; height: 1.5px; margin: 0 3em 0 16px; background-color: var(--dark-primary-text-color); }
-    #app > header nav { display: none; position: absolute; z-index: 50; background: white; top: 47px; right: 0; flex-direction: column; }
-    #app > header nav.visible { display: block; }
-    #app > header a { text-align:left; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
-    #app > header a.active { color: var(--light-text-color-high-emphasis); }
-    #app > header a:hover { background-color: var(--primary-color-light); color: var(--dark-primary-text-color); }
-    #app > header .authentication { cursor: pointer; }
+    #app > header nav.authenticationMenu.visible { visibility: hidden; }
+    #app > header .spacer { flex-grow: 1; }
+    #app > header > img.profilePicture { display: none;}
+    #app > header .menuToggle { display: block; color: var(--light-text-color-high-emphasis); }
+    #app > header nav.signedIn { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
+    #app > header nav.signedIn a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
+    #app > header nav.signedIn a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
+    #app > header nav.signedIn a .title { display: flex; padding: 14px 16px 14px 0; }
+    #app > header nav.signedIn a span.icon { display: inline-block; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
+    #app > header nav.signedIn .menuItem.signOut { display: flex;}
 }
 
 /* Upload form */
@@ -85,7 +108,7 @@ footer { margin: 2em auto 0; text-align: center; }
 .imageFileSelector .helpText { z-index: 2; display: flex; border: 2px dashed var(--light-text-color-high-emphasis); box-sizing: border-box; }
 .imageFileSelector .helpText > * { margin: auto; padding: 20%; text-align: center; }
 .imageFileSelector .preview { z-index: 1; display: flex; }
-.imageFileSelector .preview img { max-width:100%; max-height: 100%; margin: auto; text-align: center; }
+.imageFileSelector .preview img { max-width: 100%; max-height: 100%; margin: auto; text-align: center; }
 
 .imageFileSelector .removeButton { z-index: 4; width: 30px; height: 30px; padding: 0; line-height: 10px; bottom: auto; left: auto; font-size: 15px; text-align: center; border-radius: 2em; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; transition: color 0.3s ease, background-color 0.3s ease; }
 .imageFileSelector .removeButton:hover { background: var(--accent-color); color: var(--light-text-color-high-emphasis); }
