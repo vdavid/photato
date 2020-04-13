@@ -1,7 +1,7 @@
-export function getMaterial({formattedDeadline}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     return `<p>Kedves *|FNAME|*,</p>
 <p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="https://bit.ly/phhu3w6">Itt tudod feltölteni</a>.</p>
+<p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. ${await createPhotoUploadLink('Itt tudod feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2a87b24f-ec5a-4b0b-8086-f2a37a2d7659.jpg" alt="Medúza." style="width:100%; max-width:800px;" /></p>
 <p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, csak a fókuszáláshoz adunk pár egyszerű tippet. 😊</p>
@@ -15,7 +15,7 @@ export function getMaterial({formattedDeadline}) {
     <li><strong>Mobillal:</strong> Ha mobillal fotózol, a legtöbb kamera appban ha rápöttyintesz a képernyőre a kis virsli ujjaddal, a kamera ráélesít a képnek arra a részére, amit megérintettél.</li>
 </ol>
 
-<p>A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w6">itt tudod feltölteni</a>. (Megjegyzés: időről időre előfordul, hogy valaki egynél több képet küld be egy héten. Az igazságosság jegyében – hogy legyen lehetőséged javítani, de ne osszunk meg egy embertől több képet – ilyenkor a legutoljára beküldött képet szoktuk betenni a galériába.)</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}. (Megjegyzés: időről időre előfordul, hogy valaki egynél több képet küld be egy héten. Az igazságosság jegyében – hogy legyen lehetőséged javítani, de ne osszunk meg egy embertől több képet – ilyenkor a legutoljára beküldött képet szoktuk betenni a galériába.)</p>
 <p>Tehát állatok és növények. A feladatot értelmezd, ahogyan szeretnéd: fotózhatsz csemegeuborkától hangyákon át elefántfókákig bármit. 😊</p>
 
 <p>Tippek, cikkek:</p>
@@ -29,8 +29,8 @@ export function getMaterial({formattedDeadline}) {
 </ul>
 
 <p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=animal%20photography">Pinterest: állatok</a> | <a href="https://hu.pinterest.com/search/pins/?q=pet%20photography">Pinterest: háziállatok</a> | <a href="https://hu.pinterest.com/search/pins/?q=plant%20photography">Pinterest: növények</a> | <a href="https://mobilephotoawards.com/nature-wildlife-winner-honorable-mentions-7th-annual-mpa/">Mobile Photo Awards 2017</a> | <a href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</a></p>
-<p>Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w5">megteheted</a>. 🕚</p>
-<p>Az élőlényeket pedig még egyszer, <a href="https://bit.ly/phhu3w6">itt</a> várjuk!</p>
+<p>Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Az élőlényeket pedig még egyszer, ${await createPhotoUploadLink('itt')} várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

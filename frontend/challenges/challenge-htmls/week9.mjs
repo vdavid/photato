@@ -1,11 +1,11 @@
-export function getMaterial({formattedDeadline}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     return `<p><strong>Röviden:</strong></p>
-<p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w9">itt tudsz feltölteni</a>.</p>
+<p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/d259a400-6e49-485b-8297-a652cd3e05a3.jpg" alt="Bajszos csávó" style="width:100%; max-width:800px;" /></p>
 
-<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w9">itt tudod majd feltölteni</a>.</p>
+<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
 <p><strong>Egy kis elmélet azoknak, akik fényképezőgéppel fotóznak, meg akiket érdekel:</strong></p>
 <p>Volt már szó futólag a látószögről és a gyújtótávolságról. Előbbit fokban, utóbbit milliméterben mérjük, és itt van egy elég beszédes <a href="https://static.bhphotovideo.com/explora/sites/default/files/styles/960/public/10_8.jpg">illusztráció</a>, hogy hogyan függenek össze. Most röviden megnézzük, mit jelentenek ezek a gyakorlatban, a portréval kapcsolatban.</p>
 <p>A legfontosabb, hogy az objektív a látószögétől függően torzítja a testet, az arcot. Ez jelenik meg, amikor “kövérít” a kamera, vagy viccesen megnöveli az orrot. Itt egy kép, amin 16mm és 200mm között változik a beállított gyújtótávolság:</p>
@@ -50,8 +50,8 @@ export function getMaterial({formattedDeadline}) {
     <li><a href="https://www.onlinefototanfolyam.hu/aktualis-cikkek/mi-a-gyujtotavolsag-szorzo-/47545/">Mi a gyújtótávolság-szorzó?</a> – további elmélet a onlinefototanfolyam.hu-n</li>
 </ul>
 <p><strong>Inspiráció:</strong> <a href="https://hu.pinterest.com/search/pins/?q=portrait%20photography">Pinterest</a> | <a href="https://www.boredpanda.com/top-10-photographers-for-travel-portraits/">Bored Panda</a> | <a href="https://filtergrade.com/best-portrait-photographers-to-inspire-you/">Filtergrade</a> | Mobile Photography Awards <a href="https://mobilephotoawards.com/portraits/">2015</a> | <a href="https://mobilephotoawards.com/portraits-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/portraits-winner-honorable-mentions-7th-annual-mpa/">2017</a></p>
-<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w8">megteheted</a>. 🕚</p>
-<p>A portrékat pedig <a href="https://bit.ly/phhu3w9">itt</a> várjuk!</p>
+<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>A portrékat pedig ${await createPhotoUploadLink('itt')} várjuk!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

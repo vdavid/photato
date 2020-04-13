@@ -1,14 +1,14 @@
-export function getMaterial({formattedDeadline}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A második hét témája: <strong>épületfotók</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>
-<p>A legjobb képedet <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
+<p>A legjobb képedet ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
 <p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/ea78eb3e-9f0c-46a9-b4fc-21e2f45cf523.jpg" alt="Nyugati tér" style="width:100%; max-width:800px;" /></p>
 
-<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
+<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
 <p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket:</p>
 
@@ -42,9 +42,9 @@ export function getMaterial({formattedDeadline}) {
 
 <p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=building%20photography">Pinterest</a> | <a href="https://hu.pinterest.com/search/pins/?q=budapest%20buildings">Pinterest / Budapest</a> | Mobile Photo Awards épületfotó győztesek: <a href="https://mobilephotoawards.com/architecture-design-winners-8th-annual-mpa/">2018</a> | <a href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-7th-annual-mpa/">2017</a> | <a href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-6th-mpa/">2016</a> | <a href="https://mobilephotoawards.com/architecture-design/">2015</a> | <a href="https://mobilephotoawards.com/architecture-design-2014-mpa-results/">2014</a> | <a href="https://mobilephotoawards.com/2013-mobile-photography-awards-architecturedesign-category-winners/">2013</a></p>
 
-<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w1">megteheted</a>. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
 
-<p>Az épületes képeket pedig <a href="https://bit.ly/phhu3w2">ide</a> várjuk!</p>
+<p>Az épületes képeket pedig ${await createPhotoUploadLink('ide')} várjuk!</p>
 
 <p>Jó fotózást,</p>
 

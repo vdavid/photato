@@ -1,6 +1,6 @@
-export function getMaterial({formattedDeadline}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     return `<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w8">itt tudsz feltölteni</a>.</p>
+<p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit ${await createPhotoUploadLink('itt tudsz feltölteni')}.</p>
 <p><strong>Hosszabban:</strong></p>
 
 <p style="width:100%; max-width:800px; text-align:center; font-size:smaller;"><img style="width:100%;" src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/6d431dc0-f4c0-4e8d-a7d3-61c302e71e98.jpg" alt="Jama" /><br />
@@ -64,8 +64,8 @@ export function getMaterial({formattedDeadline}) {
     <li><a href="https://hu.pinterest.com/pin/439171401157788730/">Lebegő tárgyak</a></li>
 </ul>
 <p><strong>Inspiráció:</strong> <a href="https://hu.pinterest.com/search/pins/?q=still%20life%20photography">Pinterest csendéletek</a> | <a href="https://www.pexels.com/search/still%20life/">Pexels</a> | Mobile Photo Awards épületfotó győztesek: <a href="https://mobilephotoawards.com/3rd-annual-mobile-photography-awards-winners-honorable-mentions/">2013</a> | <a href="https://mobilephotoawards.com/still-life-2014-mpa-results/">2014</a> <a href="https://mobilephotoawards.com/still-life/">2015</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-7th-annual-mpa/">2017</a></p>
-<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w7">megteheted</a>. 🕚</p>
-<p>A csendéleteket pedig ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w8">itt tudod feltölteni</a>.</p>
+<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>A csendéleteket pedig ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

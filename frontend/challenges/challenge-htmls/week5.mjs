@@ -1,8 +1,8 @@
-export function getMaterial({formattedDeadline}) {
+export async function getMaterial({formattedDeadline, createPhotoUploadLink}) {
     return `<p><strong>Röviden:</strong></p>
 
 <ul>
-    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</li>
+    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és ${await createPhotoUploadLink('itt tudod feltölteni')}.</li>
     <li>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból.</li>
     <li>Július 4-én (szerdán) 18:00-kor <strong>közös fotózás</strong> lesz a Margitszigeten. <a href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt!</a></li>
 </ul>
@@ -93,9 +93,9 @@ export function getMaterial({formattedDeadline}) {
     <li><a href="https://www.facebook.com/events/688185368187546/">Margitszigeti fotózás</a></li>
 </ul>
 
-<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</p>
+<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, ${await createPhotoUploadLink('itt tudod feltölteni')}.</p>
 
-<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w4">megteheted</a>. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is ${await createPhotoUploadLink('megteheted')}. 🕚</p>
 
 <p>Jó fotózást,</p>
 
