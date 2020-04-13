@@ -11,20 +11,18 @@ import {weeklyChallengeTitles} from '../challengeRepository.mjs';
 import NavLinkButton from '../../app/components/NavLinkButton.mjs';
 
 export default function ChallengePage() {
+    /* Get page parameters */
     const {weekIndex} = useParams();
 
+    /* Create references to helpers */
     const {isAuthenticated} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
-    const history = useHistory();
-
     const {currentWeekIndex, getFormattedDeadline} = useCourseData();
 
+    /* Set up state */
     const [pageContentHtml, setPageContentHtml] = useState(null);
-    const clickEventListenerRef = useRef((event) => {
-        event.preventDefault();
-        history.push('/upload');
-    });
 
+    /* Fetch page content asynchronously when the week index changes */
     async function fetchPageContent() {
         const response = await import('/challenges/challenge-htmls/week' + weekIndex + '.mjs');
         const html = await response.getMaterial({
@@ -35,13 +33,18 @@ export default function ChallengePage() {
         });
         setPageContentHtml(html);
     }
-
     useEffect(() => {
         setPageContentHtml(null);
         // noinspection JSIgnoredPromiseFromCall
         fetchPageContent();
     }, [weekIndex]);
 
+    /* Set upload links to dynamic (in-React, no page refresh) links at each page content change */
+    const history = useHistory();
+    const clickEventListenerRef = useRef((event) => {
+        event.preventDefault();
+        history.push('/upload');
+    });
     useEffect(() => {
         document.querySelectorAll('a.uploadLink').forEach(a => a.addEventListener('click', clickEventListenerRef.current));
         return (() => {
@@ -49,6 +52,7 @@ export default function ChallengePage() {
         });
     }, [pageContentHtml]);
 
+    /* Render page */
     return [
         createElement('h1', {}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
         createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}},
