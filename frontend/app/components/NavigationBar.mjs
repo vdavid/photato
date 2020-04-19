@@ -33,28 +33,19 @@ export default function NavigationBar() {
         logout({returnTo: window.location.origin});
     }
 
-    function createPublicMenu() {
-        return createElement('nav', {className: 'public'},
-            createElement(NavLink, {to: '/', activeClassName: 'active', exact: true}, __('Home')),
-            createElement(NavLink, {to: '/about', activeClassName: 'active'}, __('About')),
-            createElement('hr'),
-            createElement('a', {href: '#', className: 'signInLink', onClick: handleSignIn}, __('Sign in')),
-        );
-    }
-
-    function createLoggedInMenu() {
+    function createMainMenu() {
         return createElement('nav', {
-                ref: menuRef, className: 'signedIn' + (isMenuVisible ? ' visible' : ''),
+                ref: menuRef, className: (isMenuVisible ? ' visible' : ''),
                 onClick: () => { setIsMenuVisible(false); }
             },
             createElement(NavLinkMenuItemWithIcon, {to: '/', exact: true, activeClassName: 'active', iconName: 'home'}, __('Home')),
             createElement(NavLinkMenuItemWithIcon, {to: '/about', activeClassName: 'active', iconName: 'help'}, __('About')),
-            createElement(NavLinkMenuItemWithIcon, {to: '/upload', activeClassName: 'active', iconName: 'cloud_upload'}, __('Photo upload')),
-            createElement(NavLinkMenuItemWithIcon, {to: '/challenges', activeClassName: 'active', iconName: 'casino'}, __('Challenges')),
-            createElement('div', {className: 'menuItem'},
+            isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/upload', activeClassName: 'active', iconName: 'cloud_upload'}, __('Photo upload')),
+            isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/challenges', activeClassName: 'active', iconName: 'casino'}, __('Challenges')),
+            isAuthenticated && createElement('div', {className: 'menuItem'},
                 createElement('span', {className: 'material-icons'}, ''),
                 createElement('hr')),
-            createElement('a', {href: '#', className: 'menuItem signOut', onClick: handleSignOut},
+            isAuthenticated && createElement('a', {href: '#', className: 'menuItem signOut', onClick: handleSignOut},
                 createElement('span', {className: 'profile icon'},
                     createElement('img', {src: user.picture, alt: __('Profile picture'), className: 'profilePicture'})),
                 createElement('span', {className: 'title'}, __('Sign out'))
@@ -79,13 +70,11 @@ export default function NavigationBar() {
             createElement('img', {src: '/app/potato-with-camera-logo.svg'}),
             createElement('div', {className: 'siteTitle'}, 'Photato'),
         ),
-        !isAuthenticated
-            ? createPublicMenu()
-            : [
-                createLoggedInMenu(),
-                createAuthenticationMenu(),
-                createElement('div', {className: 'spacer'}),
-                createElement('img', {src: user.picture, alt: __('Profile picture'), onClick: () => { setIsMenuVisible(!isMenuVisible);}, className: 'profilePicture'}),
-                createElement('div', {className: 'material-icons menuToggle', onClick: () => { setIsMenuVisible(!isMenuVisible);}}, 'menu'),
-            ]);
+            createMainMenu(),
+            createElement('div', {className: 'spacer'}),
+            !isAuthenticated && createElement('a', {href: '#', className: 'signInLink', onClick: handleSignIn}, __('Sign in')),
+            createElement('div', {className: 'material-icons hamburgerMenu', onClick: () => { setIsMenuVisible(!isMenuVisible);}}, 'menu'),
+            isAuthenticated && createElement('img', {src: user.picture, alt: __('Profile picture'), onClick: () => { setIsMenuVisible(!isMenuVisible);}, className: 'profilePicture'}),
+            isAuthenticated && createAuthenticationMenu(),
+        );
 }

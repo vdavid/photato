@@ -1,3 +1,5 @@
+/* ======================= All colors ======================= */
+
 /*
  * Primary and accent colors are from here: https://material-ui.com/customization/color/#color-tool
  * Background and text colors are from here: https://uxplanet.org/8-tips-for-dark-theme-design-8dfc2f8f7ab6
@@ -30,7 +32,8 @@
     --card-background-color: #fafafa; /* GREY 50 */
 }
 
-/* Generic styles */
+/* ======================= Generic styles ======================= */
+
 body { margin: 0; padding: 0; display: flex; flex-direction: column; font-family: 'Roboto', 'Open Sans', 'Arial', sans-serif; font-size: 1rem; line-height: 1.8rem; background: var(--page-background-color); color: var(--light-text-color-medium-emphasis); }
 
 h1, h2, h3, h4, h5, h6 { margin: 1em 0 0.5em; font-family: 'Roboto Slab', serif; line-height: 1.2em; }
@@ -44,39 +47,66 @@ button:hover { background: var(--primary-color-dark); }
 button[disabled] { background: var(--disabled-color); color: var(--light-text-color-disabled); }
 a, a:visited { color: var(--primary-color-light); text-decoration: none; }
 a:hover, a:active { text-decoration: underline; }
+
 .actionButton { display: inline-block; margin: 1em 0; padding: 1em 2em; color: var(--light-text-color-high-emphasis); background-color: var(--primary-color-main); text-decoration: none; transition: background-color 0.1s ease; cursor: pointer; }
 .actionButton:hover { background-color: var(--primary-color-dark); text-decoration: none; }
 .actionButton[disabled] { background: var(--disabled-color); color: var(--light-text-color-disabled); cursor: default;}
-.preWrap { white-space: pre-wrap; }
+
 /* Non-semantic class, so it's a bit of cheating, but makes life easier. */
+.preWrap { white-space: pre-wrap; }
 
 main { min-width: 320px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
 footer { margin: 2em auto 0; text-align: center; }
 
-/* Navigation */
+/* ======================= Site header ======================= */
+
+/* The site header and its links */
 #app > header { display: flex; align-items: stretch; height: 47px; line-height: 1.3rem; background-color: var(--navbar-color); }
+#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
+#app > header a.active { background-color: var(--primary-color-light); }
+#app > header a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
+#app > header a.active { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
+#app > header a.active:hover { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
+
+/* Logo and site title */
 #app > header .logo { flex-basis: 50px; padding: 0; display: flex; }
 #app > header .logo img { width: auto; height: 100%; margin: 2px 0 0 2px;}
+#app > header a.logo.active { background-color: var(--primary-color-dark); color: var(--light-text-color-high-emphasis);}
+#app > header a.logo.active:hover { background-color: var(--primary-color-dark); color: var(--light-text-color-high-emphasis); }
 #app > header .siteTitle { padding: 14px 16px 14px 0; user-select: none; }
-#app > header img.profilePicture { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; cursor: pointer; }
-#app > header .menuToggle { display: none; cursor: pointer; font-size: 47px; }
 
-#app > header nav { display: flex; flex-grow: 1; }
-#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
-#app > header nav a:hover { background-color: var(--primary-color-lighter);  color: var(--dark-primary-text-color); }
-#app > header nav a.active { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
-#app > header nav a.active:hover { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
+/* Menu (a fixed menu for desktops, a popup for narrow screens) */
+#app > header nav { display: flex; flex-direction: row; visibility: visible; position: unset; background-color: var(--primary-color-dark); }
+#app > header nav a { display: flex; }
 #app > header nav hr { border: none; flex-grow: 1; }
-#app > header nav.signedIn { flex-direction: row; visibility: visible; position: unset; background-color: var(--primary-color-dark); }
-#app > header nav.signedIn.visible { visibility: visible; }
-#app > header nav.signedIn a { display: flex; }
-#app > header nav.signedIn a span.icon { display: none; }
-#app > header nav.signedIn a span.profile img { width: 25px; height: 25px; margin: 0; }
-#app > header nav.signedIn a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
-#app > header nav.signedIn a.active { background-color: var(--primary-color-light); }
-#app > header nav.signedIn hr { display: block; height: 1.5px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
-#app > header nav.signedIn .menuItem.signOut { display: none;}
+#app > header nav a span.icon { display: none; }
+#app > header nav a span.profile img { width: 25px; height: 25px; margin: 0; }
+#app > header nav a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
+#app > header nav hr { display: block; height: 1.5px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
+#app > header nav .menuItem.signOut { display: none;}
+@media screen and (max-width: 730px) {
+    #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
+    #app > header nav.visible { visibility: visible; }
+    #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
+    #app > header nav a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
+    #app > header nav a .title { display: flex; padding: 14px 16px 14px 0; }
+    #app > header nav a span.icon { display: inline-block; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
+    #app > header nav .menuItem.signOut { display: flex;}
+}
+
+/* Spacer between left-aligned and right-aligned items */
+#app > header .spacer { flex-grow: 1; }
+
+/* Hamburger menu icon */
+#app > header .hamburgerMenu { display: none; cursor: pointer; font-size: 47px; }
+#app > header .hamburgerMenu:hover { background-color: var(--primary-color-lighter); color: var(--primary-color-dark); transition: color 0.3s ease, background-color 0.3s ease; }
+@media screen and (max-width: 730px) {
+    #app > header .hamburgerMenu { display: block; color: var(--light-text-color-high-emphasis); }
+}
+
+/* Authentication menu */
+#app > header img.profilePicture { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; cursor: pointer; }
 #app > header nav.authenticationMenu { visibility: hidden; }
 #app > header nav.authenticationMenu.visible { visibility: visible; }
 #app > header nav.authenticationMenu { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
@@ -84,19 +114,13 @@ footer { margin: 2em auto 0; text-align: center; }
 #app > header nav.authenticationMenu a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu a .title { display: flex; padding: 14px 16px 14px 0; }
 #app > header nav.authenticationMenu a span.icon { display: inline-block; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
-
+#app > header nav.authenticationMenu .menuItem.signOut { display: flex;}
 @media screen and (max-width: 730px) {
-    #app > header nav.authenticationMenu.visible { visibility: hidden; }
-    #app > header .spacer { flex-grow: 1; }
     #app > header > img.profilePicture { display: none;}
-    #app > header .menuToggle { display: block; color: var(--light-text-color-high-emphasis); }
-    #app > header nav.signedIn { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
-    #app > header nav.signedIn a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
-    #app > header nav.signedIn a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
-    #app > header nav.signedIn a .title { display: flex; padding: 14px 16px 14px 0; }
-    #app > header nav.signedIn a span.icon { display: inline-block; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
-    #app > header nav.signedIn .menuItem.signOut { display: flex;}
+    #app > header nav.authenticationMenu.visible { visibility: hidden; }
 }
+
+/* ======================= Upload page ======================= */
 
 /* Upload form */
 #fileUpload .title input { display: block; width: 80%; margin: 1em auto; border: none; border-bottom: 2px solid var(--primary-color-dark); text-align: center; font-size: 1.5rem; background-color: var(--page-background-color); color: var(--light-text-color-high-emphasis); }
@@ -133,6 +157,9 @@ footer { margin: 2em auto 0; text-align: center; }
 #fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 200px; height: 200px; }
 #fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--primary-color-main); animation: spinnerAnimation 1s linear infinite; }
 #fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
+
+/* ======================= Loading screen ======================= */
+
 @keyframes spinnerAnimation {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -143,4 +170,5 @@ footer { margin: 2em auto 0; text-align: center; }
     100% { transform: scale(1); }
 }
 
+/* ======================= Other stuff ======================= */
 
