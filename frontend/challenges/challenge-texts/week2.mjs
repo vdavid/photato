@@ -1,4 +1,8 @@
-export async function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
+/**
+ * @param {ChallengeGetMaterialArguments}
+ * @returns {string}
+ */
+export function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
     return `<p><strong>Röviden:</strong></p>
 <p>A második hét témája: <strong>épületfotók</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>

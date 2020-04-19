@@ -1,5 +1,6 @@
 import {createElement, useEffect, useState} from '../../web_modules/react.js';
 import {BrowserRouter, Switch, Route} from '/web_modules/react-router-dom.js';
+import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
 import PhotoUploader from '../../upload/PhotoUploader.mjs';
@@ -13,7 +14,8 @@ import AboutPage from '../../about/components/AboutPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
 import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
-import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
+import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
+import MaterialPage from '../../materials/components/MaterialPage.mjs';
 
 const photoUploader = new PhotoUploader();
 
@@ -40,8 +42,10 @@ export default function App() {
                     createElement(Route, {path: '/', exact: true, component: () => createElement(FrontPage)}),
                     createElement(Route, {path: '/about', component: () => createElement(AboutPage)}),
                     createElement(Route, {path: '/upload', component: () => createElement(UploadPage, {photoUploader})}),
+                    createElement(Route, {path: '/challenges', exact: true, component: () => createElement(ChallengesPage)}),
                     createElement(Route, {path: '/challenges/:weekIndex', component: () => createElement(ChallengePage)}),
-                    createElement(Route, {path: '/challenges', component: () => createElement(ChallengesPage)}),
+                    createElement(Route, {path: '/materials', component: () => createElement(MaterialsPage)}),
+                    createElement(Route, {path: '/external-article/:slug', component: () => createElement(MaterialPage)}),
                     createElement(Route, {path: '/', component: () => createElement(Error404Page)}),
                 ),
             ),

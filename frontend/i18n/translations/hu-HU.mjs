@@ -52,4 +52,23 @@ export const translations = {
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
+    'Materials': {translation: 'Tananyag'},
+    'Loading article...': {translation: 'Töltjük a cikket...'},
+    'Loading articles...': {translation: 'Töltjük a cikkeket...'},
+    'Back to the list of materials': {translation: 'Vissza a tananyagok listájához'},
+    'Author': {translation: 'Szerző'},
+    'Publication date': {translation: 'Dátum'},
+    'Original article': {translation: 'Eredeti cikk'},
+    [`On this page we list articles that we found useful.<br />
+        <em>We didn't write these articles.</em> We just like them very much.<br />
+        Sadly, these great articles tend to disappear from the internet over the years. To protect them, we created cached copies for some.<br />
+        Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`]:
+        {
+            translation: `Olyan cikkeket szedtünk össze ide, amiket mi hasznosnak találtunk.<br />
+        <em>Ezeket a cikkeket nem mi írtuk.</em> Csak szerintünk nagyon jók.<br />
+        Sajnos azt tapasztaltuk, ezek a remek cikkek az évek alatt gyakran eltűnnek az internetről. Hogy később is meglegyenek, elmentettük a másolataikat ide az oldalra.<br />
+        Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.`
+        },
+    'Articles about photography': {translation: 'Cikkek fotózás témában'},
+    'Cached version on Photato': {translation: 'Mentett verzió a Photaton'},
 };

@@ -10,6 +10,19 @@ import {weeklyChallengeTitles} from '../challengeRepository.mjs';
 import NavLinkButton from '../../app/components/NavLinkButton.mjs';
 import Error404Page from '../../website/components/Error404Page.mjs';
 
+/**
+ * @typedef {Object} ChallengeGetMaterialArguments
+ * @property {string} baseUrl
+ * @property {string} formattedDeadline
+ * @property {function(string): string} createPhotoUploadLink
+ * @property {function(string, string): string} createFullWidthLocalImage
+ */
+
+/**
+ * @typedef {Object} ChallengeData
+ * @property {function(ChallengeGetMaterialArguments): string} getMaterial
+ */
+
 export default function ChallengePage() {
     /* Get page parameters */
     const {weekIndex} = useParams();
@@ -25,7 +38,7 @@ export default function ChallengePage() {
     /* Fetch page content asynchronously when the week index changes */
     async function fetchPageContent() {
         const response = await import('../challenge-texts/week' + weekIndex + '.mjs');
-        const html = await response.getMaterial({
+        const html = response.getMaterial({
             baseUrl: '',
             formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
             createPhotoUploadLink: label => `<a href="/upload" class="uploadLink">${label}</a>`,
@@ -55,7 +68,7 @@ export default function ChallengePage() {
 
     /* Render page */
     return (currentWeekIndex >= weekIndex)
-        ? [
+        ? createElement('article', {},
             createElement('h1', {}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
             createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}}),
             (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
@@ -65,6 +78,6 @@ export default function ChallengePage() {
                 title: !isAuthenticated ? __('You\'ll need to sign in to upload a photo.') : '',
             }, __('Upload your weekly photo')) : null,
             createElement(NavLinkButton, {to: '/challenges', className: 'actionButton'}, '← ' + __('Back to the challenge list')),
-        ]
+        )
         : createElement(Error404Page);
 }
