@@ -16,8 +16,11 @@ export const config = {
     },
     backendApi: {
         photoUpload: {
-            url: 'https://d2rw8z9jy7vx22.cloudfront.net/get-signed-url',
+            url: 'https://d2rw8z9jy7vx22.cloudfront.net/get-signed-url', /* Must have no trailing slash */
         }
+    },
+    contentImages: {
+        externalArticlesBaseUrl: 'https://photato-photos-bucket.s3.us-east-1.amazonaws.com/external-articles/', /* Must have a trailing slash */
     },
     customerServiceEmailAddress: 'photatophotato@gmail.com',
     featureSwitches: {

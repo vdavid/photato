@@ -66,6 +66,13 @@ footer { margin: 2em auto 0; text-align: center; }
 
 /* ======================= Site header ======================= */
 
+/*                          Logo | menu | spacer | Sign in button | Hamburger menu | Profile pic
+ mobile, unauthenticated     x    popup     x            x                x
+ desktop, unauthenticated    x    fixed     x            x
+ mobile, authenticated       x    popup     x                             x
+ desktop, authenticated      x    fixed     x                                            x
+*/
+
 /* The site header and its links */
 #app > header { display: flex; align-items: stretch; height: 47px; line-height: 1.3rem; background-color: var(--navbar-color); }
 #app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
@@ -90,7 +97,7 @@ footer { margin: 2em auto 0; text-align: center; }
 #app > header nav a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
 #app > header nav hr { display: block; height: 1.5px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
 #app > header nav .menuItem.signOut { display: none;}
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 830px) { /* If narrow screen, make menu a popup */
     #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
     #app > header nav.visible { visibility: visible; }
     #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
@@ -103,14 +110,14 @@ footer { margin: 2em auto 0; text-align: center; }
 /* Spacer between left-aligned and right-aligned items */
 #app > header .spacer { flex-grow: 1; }
 
-/* Hamburger menu icon */
+/* Hamburger menu icon – displayed only if narrow screen */
 #app > header .hamburgerMenu { display: none; cursor: pointer; font-size: 47px; }
 #app > header .hamburgerMenu:hover { background-color: var(--primary-color-lighter); color: var(--primary-color-dark); transition: color 0.3s ease, background-color 0.3s ease; }
 @media screen and (max-width: 830px) {
     #app > header .hamburgerMenu { display: block; color: var(--light-text-color-high-emphasis); }
 }
 
-/* Authentication menu */
+/* Authentication menu – only on narrow screens, if signed in */
 #app > header img.profilePicture { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; cursor: pointer; }
 #app > header nav.authenticationMenu { visibility: hidden; }
 #app > header nav.authenticationMenu.visible { visibility: visible; }
@@ -177,3 +184,6 @@ footer { margin: 2em auto 0; text-align: center; }
 /* ======================= Other stuff ======================= */
 
 .articleMetadata { padding-left: 5%; font-size: 70%; line-height: 1.6em; }
+.twoImages { display:flex; width:fit-content; max-width:100%; margin:0 auto; }
+.twoImages img { transition: transform ease-in-out 0.3s; }
+.twoImages img:hover { transform: scale(1.2); }

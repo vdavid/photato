@@ -5,7 +5,7 @@ import {NavLink} from '../../web_modules/react-router-dom.js';
 
 /**
  * @typedef {Object} ArticleMetadata
- * @property {string} photatoSlug
+ * @property {string} slug
  * @property {string} title
  * @property {string|null} author
  * @property {Date} publishDate
@@ -16,7 +16,7 @@ import {NavLink} from '../../web_modules/react-router-dom.js';
 /**
  * @typedef {Object} ThirdPartyArticle
  * @property {function(): ArticleMetadata} getMetadata
- * @property {function(): string} getContentHtml
+ * @property {function(ArticleElementHelper): string} getContentHtml
  */
 
 export default function MaterialsPage() {
@@ -59,7 +59,7 @@ export default function MaterialsPage() {
         return createElement('li', {className: metadata.isOriginalUrlBroken ? 'broken' : ''}, [
             createElement('a', {href: metadata.originalUrl, target: '_blank'}, metadata.title),
             ' [',
-            createElement(NavLink, {to: '/external-article/' + metadata.photatoSlug}, __('Cached version on Photato')),
+            createElement(NavLink, {to: '/external-article/' + metadata.slug}, __('Cached version on Photato')),
             ']'
         ]);
     }
