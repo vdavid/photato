@@ -16,11 +16,11 @@ export default class ArticleElementHelper {
 
     /**
      * @param {FigureDefinition} figureDefinition1
-     * @param {FigureDefinition} figureDefinition2
+     * @param {FigureDefinition} [figureDefinition2]
      * @returns {string}
      */
-    createTwoEnlargeableImagesSideBySide(figureDefinition1, figureDefinition2) {
-        return `<div class="twoImages">`
+    createOneOrTwoFigures(figureDefinition1, figureDefinition2) {
+        return `<div class="figures">`
             + this._createFigure(figureDefinition1)
             + this._createFigure(figureDefinition2)
             + `</div>`;
@@ -32,12 +32,12 @@ export default class ArticleElementHelper {
      * @private
      */
     _createFigure({thumbnailFileName, fullSizeFileName, altText, caption}) {
-        return `<figure class="enlargeable">`
-            + `<a href = "${this._assembleImageUrl(fullSizeFileName)}">`
+        return `<div class="enlargeable"><figure>`
+            + `<a href="${this._assembleImageUrl(fullSizeFileName)}">`
             + `<img src="${this._assembleImageUrl(thumbnailFileName || fullSizeFileName)}" alt="${altText}" />`
             + `</a>`
             + (caption ? `<figcaption>${caption}</figcaption>` : '')
-            + `</figure>`;
+            + `</figure></div>`;
     }
 
     /**
