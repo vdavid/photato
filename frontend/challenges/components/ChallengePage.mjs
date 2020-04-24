@@ -1,7 +1,6 @@
-import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
+import {createElement, useEffect, useState} from '../../web_modules/react.js';
 import {useParams} from '../../web_modules/react-router-dom.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-import {useHistory} from '/web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 
 import {useCourseData} from './CourseDataProvider.mjs';
@@ -11,66 +10,40 @@ import NavLinkButton from '../../app/components/NavLinkButton.mjs';
 import Error404Page from '../../website/components/Error404Page.mjs';
 
 /**
- * @typedef {Object} ChallengeGetMaterialArguments
- * @property {string} baseUrl
- * @property {string} formattedDeadline
- * @property {function(string): string} createPhotoUploadLink
- * @property {function(string, string): string} createFullWidthLocalImage
- */
-
-/**
  * @typedef {Object} ChallengeData
- * @property {function(ChallengeGetMaterialArguments): string} getMaterial
+ * @property {function(): string} getMaterial
  */
 
 export default function ChallengePage() {
     /* Get page parameters */
     const {weekIndex} = useParams();
 
+    const [challenge, setChallenge] = useState({isLoaded: false, component: null});
+
     /* Create references to helpers */
     const {isAuthenticated} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
     const {currentWeekIndex, getFormattedDeadline} = useCourseData();
 
-    /* Set up state */
-    const [pageContentHtml, setPageContentHtml] = useState(null);
-
-    /* Fetch page content asynchronously when the week index changes */
-    async function fetchPageContent() {
-        const response = await import('../challenge-texts/week' + weekIndex + '.mjs');
-        const html = response.getMaterial({
-            baseUrl: '',
-            formattedDeadline: getFormattedDeadline(weekIndex, getActiveLocaleCode()),
-            createPhotoUploadLink: label => `<a href="/upload" class="uploadLink">${label}</a>`,
-            createFullWidthLocalImage: (fileName, altText) => `<img src="/challenges/illustrations/${fileName}" alt="${altText}" style="width:100%;" />`,
-        });
-        setPageContentHtml(html);
-    }
+    const formattedDeadline = getFormattedDeadline(weekIndex, getActiveLocaleCode());
 
     useEffect(() => {
-        setPageContentHtml(null);
-        // noinspection JSIgnoredPromiseFromCall
-        fetchPageContent();
+        setChallenge({isLoaded: false, component: null});
+
+        async function loadChallenge() {
+            setChallenge({isLoaded: true, component: (await import('./Week' + weekIndex + 'Challenge.mjs')).default});
+        }
+
+        loadChallenge().then(() => {});
     }, [weekIndex]);
-
-    /* Set upload links to dynamic (in-React, no page refresh) links at each page content change */
-    const history = useHistory();
-    const clickEventListenerRef = useRef((event) => {
-        event.preventDefault();
-        history.push('/upload');
-    });
-    useEffect(() => {
-        document.querySelectorAll('a.uploadLink').forEach(a => a.addEventListener('click', clickEventListenerRef.current));
-        return (() => {
-            document.querySelectorAll('a.uploadLink').forEach(a => a.removeEventListener('click', clickEventListenerRef.current));
-        });
-    }, [pageContentHtml]);
 
     /* Render page */
     return (currentWeekIndex >= weekIndex)
         ? createElement('article', {},
             createElement('h1', {}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
-            createElement('div', {dangerouslySetInnerHTML: {__html: pageContentHtml}}),
+            challenge.isLoaded
+                ? createElement('div', {}, createElement(challenge.component, {formattedDeadline, baseUrl: ''}))
+                : __('Loading challenge...'),
             (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
                 to: '/upload',
                 className: 'actionButton',

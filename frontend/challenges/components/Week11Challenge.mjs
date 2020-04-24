@@ -1,15 +1,22 @@
+import {createElement} from '../../web_modules/react.js';
+import htm from '../../web_modules/htm.js';
+
+const html = htm.bind(createElement);
+import FullWidthLocalImage from './FullWidthLocalImage.mjs';
+import PhotoUploadLink from './PhotoUploadLink.mjs';
 /**
- * @param {ChallengeGetMaterialArguments}
- * @returns {string}
+ * @param {string} formattedDeadline
+ * @returns {React.ReactElement}
  */
-export function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
-    return `<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. ${createPhotoUploadLink('Itt tudod feltölteni')}.</p>
+export default function Week11Challenge({formattedDeadline}) {
+// noinspection SpellCheckingInspection
+    return html`<p><strong>Röviden:</strong></p>
+<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. <${PhotoUploadLink} label="Itt tudod feltölteni" />.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthLocalImage('gyuri.jpg', 'Gyuri összeverve')}</p>
+<${FullWidthLocalImage} fileName="gyuri.jpg" altText="Gyuri összeverve" />
 
-<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
+<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod majd feltölteni" />.</p>
 <p>Egy önarckép lehet egy pillanatkép az életedből; az épp aktuális identitásod képi megfogalmazása; egy időszak összefoglalása; vagy egy mélyebb szembenézés magaddal. Te döntöd el, mit osztasz meg magadról, és hogy ezt hogyan fejezed ki a képpel. Hoztunk neked ehhez 8 tippet és egy csomó ötletet.</p>
 <p><strong>Tippek:</strong></p>
 <ol>
@@ -33,8 +40,8 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
 <ul>
     <li><a href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</a> az expertphotography.com-tól</li>
 </ul>
-<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>Az önarcképeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
+<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
+<p>Az önarcképeket pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 

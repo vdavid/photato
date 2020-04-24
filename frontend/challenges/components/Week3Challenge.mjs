@@ -1,18 +1,25 @@
-/**
- * @param {ChallengeGetMaterialArguments}
- * @returns {string}
- */
-export function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
-    return `<p><strong>Röviden:</strong></p>
+import {createElement} from '../../web_modules/react.js';
+import htm from '../../web_modules/htm.js';
 
-<p>A harmadik héten egy <strong>makró fotót</strong> várunk tőled, amit ${createPhotoUploadLink('itt tudsz feltölteni')}.</p>
+const html = htm.bind(createElement);
+import FullWidthLocalImage from './FullWidthLocalImage.mjs';
+import PhotoUploadLink from './PhotoUploadLink.mjs';
+/**
+ * @param {string} formattedDeadline
+ * @returns {React.ReactElement}
+ */
+export default function Week3Challenge({formattedDeadline}) {
+// noinspection SpellCheckingInspection
+    return html`<p><strong>Röviden:</strong></p>
+
+<p>A harmadik héten egy <strong>makró fotót</strong> várunk tőled, amit <${PhotoUploadLink} label="itt tudsz feltölteni" />.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthLocalImage('mosquitoes.jpg', 'Légyott')}</p>
+<${FullWidthLocalImage} fileName="mosquitoes.jpg" altText="Légyott" />
 
 <p>Ezen a héten megtanuljuk, mi az a makró, és hogyan érdemes 5 centiről krumplit fotózni.</p>
-<p>A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A legjobb képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
 
 <p>A makró fotózás a köznyelvben egyszerűen azt jelenti, hogy közelről fotózunk dolgokat. Ezzel a definícióval most meg is elégszünk. Szóval ezen a héten a részletekre megyünk rá, kültéren vagy beltéren fotózunk élő vagy élettelen témát; a lényeg, hogy közelről.</p>
 
@@ -45,9 +52,9 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
 
 <p>Inspiráció: <a href="https://www.pinterest.com/explore/close-up-photography/">Pinterest</a> | <a href="https://mobilephotoawards.com/macro-details-winner-honorable-mentions-6th-annual-mpa/">Mobile Photo Awards</a> | <a href="https://500px.com/krisztinmrkus">Márkus Krisztián bogarai</a> | <a href="https://www.smashingmagazine.com/2009/06/35-examples-of-stunning-macro-photography/">Smashing Magazine</a></p>
 
-<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 
-<p>A makrós képeket pedig ${createPhotoUploadLink('itt')} várjuk!</p>
+<p>A makrós képeket pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 <p>--<br />

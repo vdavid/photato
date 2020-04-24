@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
   "dependencies": {
+    "htm": "^3.0.4",
     "react": "npm:@pika/react@^16.13.1",
     "react-dom": "npm:@pika/react-dom@^16.13.1",
     "react-router-dom": "^5.1.2"
@@ -40,7 +41,8 @@
     "webDependencies": [
       "react",
       "react-dom",
-      "react-router-dom"
+      "react-router-dom",
+      "htm"
     ]
   }
 }

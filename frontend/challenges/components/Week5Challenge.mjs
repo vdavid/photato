@@ -1,19 +1,26 @@
+import {createElement} from '../../web_modules/react.js';
+import htm from '../../web_modules/htm.js';
+
+const html = htm.bind(createElement);
+import FullWidthLocalImage from './FullWidthLocalImage.mjs';
+import PhotoUploadLink from './PhotoUploadLink.mjs';
 /**
- * @param {ChallengeGetMaterialArguments}
- * @returns {string}
+ * @param {string} formattedDeadline
+ * @returns {React.ReactElement}
  */
-export function getMaterial({formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
-    return `<p><strong>Röviden:</strong></p>
+export default function Week5Challenge({formattedDeadline}) {
+// noinspection SpellCheckingInspection
+    return html`<p><strong>Röviden:</strong></p>
 
 <ul>
-    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és ${createPhotoUploadLink('itt tudod feltölteni')}.</li>
+    <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és <${PhotoUploadLink} label="itt tudod feltölteni" />.</li>
     <li>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból.</li>
     <li>Július 4-én (szerdán) 18:00-kor <strong>közös fotózás</strong> lesz a Margitszigeten. <a href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt!</a></li>
 </ul>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthLocalImage('biker.jpg', 'Motoros')}</p>
+<${FullWidthLocalImage} fileName="biker.jpg" altText="Motoros" />
 
 <p>Valószínűleg sokszor tapasztaltad már, hogy amikor gyorsan le akarsz kapni valamit (pl. sportrendezvény, koncert, gyerekek/állatok fotózása, autóból kifényképezés), a képek gyakran elmosódottak lesznek. Ez azért van, mert az alatt az idő alatt, amíg a fénykép készül – tehát amíg a kamera rekesze nyitva van – elmozdul a fotótéma. Ezen a héten azt fogjuk gyakorolni, hogy hogyan lehet ezt minél inkább elkerülni, és szép, éles képeket készíteni ezekben a helyzetekben.</p>
 
@@ -31,7 +38,7 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
 
 <p>Itt egy ábra is ezekről. A felső 2 sorban a <strong>blende</strong> és a vele járó mélységélesség, alatta a <strong>záridő</strong>, alul pedig az <strong>ISO érték</strong>:</p>
 
-<p>${createFullWidthLocalImage('settings.jpg', 'Beállítások')}</p>
+<${FullWidthLocalImage} fileName="settings.jpg" altText="Beállítások" />
 
 <p>Ha a képre nézve az volt az első gondolatod, hogy “fú, ez bonyolultnak néz ki”, akkor jó hírünk van: ha rászánsz most egy kis időt, pár perc múlva már nem lesz ijesztő ez a kép. 😊 Ezt a 3-4 dolgot csináld meg:</p>
 
@@ -51,7 +58,7 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
     <li><strong>ISO érték:</strong> Figyeld meg, hogy ahogy növeled az ISO értéket, egyre világosodik, de zajosodik a kép.</li>
 </ul>
 
-<p>${createFullWidthLocalImage('horse.jpg', 'Ló.')}</p>
+<${FullWidthLocalImage} fileName="horse.jpg" altText="Ló." />
 
 <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
 
@@ -72,7 +79,7 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
     <li>Megelégszel egy rövidebb záridővel, és megpróbálod a kevésbé gyors pillanatokat elkapni.</li>
 </ol>
 
-<p>${createFullWidthLocalImage('glass.jpg', 'Pohár.')}</p>
+<${FullWidthLocalImage} fileName="glass.jpg" altText="Pohár." />
 
 <p><strong>Néhány tipp és variáció mindenkinek:</strong></p>
 <ol>
@@ -97,9 +104,9 @@ export function getMaterial({formattedDeadline, createPhotoUploadLink, createFul
     <li><a href="https://www.facebook.com/events/688185368187546/">Margitszigeti fotózás</a></li>
 </ul>
 
-<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
 
-<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 
 <p>Jó fotózást,</p>
 

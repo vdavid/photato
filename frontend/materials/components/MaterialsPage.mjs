@@ -16,7 +16,7 @@ import {NavLink} from '../../web_modules/react-router-dom.js';
 /**
  * @typedef {Object} ThirdPartyArticle
  * @property {function(): ArticleMetadata} getMetadata
- * @property {function(ArticleElementHelper): string} getContentHtml
+ * @property {function(): string} getContent
  */
 
 export default function MaterialsPage() {

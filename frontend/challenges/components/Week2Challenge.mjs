@@ -1,18 +1,26 @@
+import {createElement} from '../../web_modules/react.js';
+import htm from '../../web_modules/htm.js';
+
+const html = htm.bind(createElement);
+import FullWidthLocalImage from './FullWidthLocalImage.mjs';
+import PhotoUploadLink from './PhotoUploadLink.mjs';
 /**
- * @param {ChallengeGetMaterialArguments}
- * @returns {string}
+ * @param {string} formattedDeadline
+ * @param {string} baseUrl
+ * @returns {React.ReactElement}
  */
-export function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
-    return `<p><strong>Röviden:</strong></p>
+export default function Week2Challenge({formattedDeadline, baseUrl = ''}) {
+// noinspection SpellCheckingInspection
+    return html`<p><strong>Röviden:</strong></p>
 <p>A második hét témája: <strong>épületfotók</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>
-<p>A legjobb képedet ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>A legjobb képedet <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<p>${createFullWidthLocalImage('taj-mahal.jpg', 'Nyugati tér')}</p>
+<${FullWidthLocalImage} fileName="taj-mahal.jpg" altText="Nyugati tér" />
 
-<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
+<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
 
 <p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket:</p>
 
@@ -46,9 +54,9 @@ export function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, 
 
 <p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=building%20photography">Pinterest</a> | <a href="https://hu.pinterest.com/search/pins/?q=budapest%20buildings">Pinterest / Budapest</a> | Mobile Photo Awards épületfotó győztesek: <a href="https://mobilephotoawards.com/architecture-design-winners-8th-annual-mpa/">2018</a> | <a href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-7th-annual-mpa/">2017</a> | <a href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-6th-mpa/">2016</a> | <a href="https://mobilephotoawards.com/architecture-design/">2015</a> | <a href="https://mobilephotoawards.com/architecture-design-2014-mpa-results/">2014</a> | <a href="https://mobilephotoawards.com/2013-mobile-photography-awards-architecturedesign-category-winners/">2013</a></p>
 
-<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 
-<p>Az épületes képeket pedig ${createPhotoUploadLink('ide')} várjuk!</p>
+<p>Az épületes képeket pedig <${PhotoUploadLink} label="ide" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 

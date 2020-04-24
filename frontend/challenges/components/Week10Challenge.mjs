@@ -1,13 +1,21 @@
+import {createElement} from '../../web_modules/react.js';
+import htm from '../../web_modules/htm.js';
+
+const html = htm.bind(createElement);
+import FullWidthLocalImage from './FullWidthLocalImage.mjs';
+import PhotoUploadLink from './PhotoUploadLink.mjs';
 /**
- * @param {ChallengeGetMaterialArguments}
- * @returns {string}
+ * @param {string} formattedDeadline
+ * @param {string} baseUrl
+ * @returns {React.ReactElement}
  */
-export function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, createFullWidthLocalImage}) {
-    return `<p><strong>Röviden:</strong></p>
-<p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, ${createPhotoUploadLink('itt tudod feltölteni')}.</p>
+export default function Week10Challenge({formattedDeadline, baseUrl = ''}) {
+// noinspection SpellCheckingInspection
+    return html`<p><strong>Röviden:</strong></p>
+<p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
 <p><strong>Hosszabban:</strong></p>
-<p>${createFullWidthLocalImage('concert.jpg', 'Koncert Buffalo WY')}</p>
-<p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed ${formattedDeadline}-ig, ${createPhotoUploadLink('itt tudod majd feltölteni')}.</p>
+<${FullWidthLocalImage} fileName="concert.jpg" altText="Koncert Buffalo WY" />
+<p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod majd feltölteni" />.</p>
 <p>Eseményt fotózni lehet résztvevőként, vagy meghívott fotósként. A két felállás elég különböző; igyekeztünk olyan tippeket válogatni, amik mindkét esetben hasznodra válnak. Ők azok:</p>
 <ol>
     <li><strong>Ismerd a helyszínt és a programot.</strong> Hasznos, ha az esemény előtt/elején be tudod járni a teljes helyszínt. Képzeld el előre, mi fog történni, hová kell állnod, hogy elkapd a jelentős pillanatokat. Légy készenlétben.</li>
@@ -30,8 +38,8 @@ export function getMaterial({baseUrl, formattedDeadline, createPhotoUploadLink, 
     <li><a href="https://hvg.hu/tudomany/20071221_karacsonyifoto">Tippek a karácsonyi fotózáshoz</a> – Pont aktuális – ja nem. 😀 De a cikkben leírt 14 tipp jól alkalmazható bármilyen bulira, családi eseményre.</li>
 </ul>
 <p>Inspiráció: <a href="https://www.pexels.com/search/event/">Pexels</a> | Pinterest: <a href="https://hu.pinterest.com/search/pins/?q=party%20photography">buli</a>, <a href="https://hu.pinterest.com/search/pins/?q=wedding%20photography">esküvő</a>, <a href="https://hu.pinterest.com/search/pins/?q=concert%20photography">koncert</a></p>
-<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is ${createPhotoUploadLink('megteheted')}. 🕚</p>
-<p>Az eseményfotókat pedig ${createPhotoUploadLink('itt várjuk')}!</p>
+<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
+<p>Az eseményfotókat pedig <${PhotoUploadLink} label="itt várjuk" />!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
     a Photato csapata</p>`;

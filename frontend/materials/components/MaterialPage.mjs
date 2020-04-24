@@ -1,10 +1,8 @@
-import {config} from '../../config.mjs';
 import {createElement, useEffect, useState} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useParams} from '../../web_modules/react-router-dom.js';
 
 import NavLinkButton from '../../app/components/NavLinkButton.mjs';
-import ArticleElementHelper from '../ArticleElementHelper.mjs';
 
 export default function MaterialPage() {
     /* Get page parameters */
@@ -14,17 +12,21 @@ export default function MaterialPage() {
     const languageCode = getActiveLocaleCode().substring(0, 2);
 
     /* Load article */
-    const [/** @type {ThirdPartyArticle} */ article, setArticle] = useState(undefined);
+    const [article, setArticle] = useState({isLoaded: false, metadata: {}, component: null});
+
     useEffect(() => {
+        setArticle({isLoaded: false, metadata: {}, component: null});
+
         async function loadArticle() {
-            setArticle(await import('../content/' + languageCode + '/' + slug + '.mjs'));
+            const content = await import('../content/' + languageCode + '/' + slug + '.mjs');
+            setArticle({isLoaded: true, metadata:content.getMetadata(), component: content.default});
         }
 
         loadArticle().then(() => {});
-    }, []);
+    }, [slug]);
 
     useEffect(() => {
-        if (article) {
+        if (article.isLoaded) {
             document.querySelectorAll('.enlargeable figure').forEach(element => element.addEventListener('click', fullscreenClick));
             document.addEventListener('keydown', exitFullscreenOnEscape);
 
@@ -113,18 +115,13 @@ export default function MaterialPage() {
         }
     }, [article]);
 
-    const metadata = article ? article.getMetadata() : {};
-    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
-    const articleElementHelper = new ArticleElementHelper({imageBaseUrl});
-    const contentHtml = article ? article.getContentHtml(articleElementHelper) : '';
-
-    return article ? createElement('article', {},
-        createElement('h1', {}, metadata.title),
-        createElement('p', {className: 'articleMetadata'}, __('Author') + ': ' + metadata.author, ' — ',
-            __('Publication date') + ': ' + metadata.publishDate.toLocaleDateString(getActiveLocaleCode()), ' — ',
-            createElement('a', {href: metadata.originalUrl, target: '_blank'}, __('Original article')),
+    return article.isLoaded ? createElement('article', {},
+        createElement('h1', {}, article.metadata.title),
+        createElement('p', {className: 'articleMetadata'}, __('Author') + ': ' + article.metadata.author, ' — ',
+            __('Publication date') + ': ' + article.metadata.publishDate.toLocaleDateString(getActiveLocaleCode()), ' — ',
+            createElement('a', {href: article.metadata.originalUrl, target: '_blank'}, __('Original article')),
         ),
-        createElement('div', {dangerouslySetInnerHTML: {__html: contentHtml}}),
+        createElement('div', {}, createElement(article.component, {})),
         createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
     ) : [
         __('Loading article...'),
