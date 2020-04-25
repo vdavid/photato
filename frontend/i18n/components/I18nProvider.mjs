@@ -2,14 +2,14 @@ import {createContext, createElement, useState, useEffect, useContext} from '../
 import I18n from '../I18n.mjs';
 
 export const I18nContext = createContext();
-export const useI18n = () => useContext(I18nContext); /* User data docs: https://auth0.com/docs/api/authentication#get-user-info */
+export const useI18n = () => useContext(I18nContext);
 
 /**
  * @param children
  * @param {string[]} availableLocaleCodes E.g. ["en-US", "hu-HU"], the order doesn't matter.
  * @param [string] translationFolderPath With a trailing slash please.
  * @param {string} activeLocaleCode E.g. "en-US"
- * @returns {*}
+ * @returns {React.ReactElement}
  * @constructor
  */
 export default function I18nProvider({children, availableLocaleCodes, translationFolderPath, activeLocaleCode}) {

@@ -6,7 +6,7 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
  * @param {string} title
  * @param {boolean} isDisabled
  * @param {function(string): void} onChange
- * @returns {*}
+ * @returns {React.ReactElement}
  * @constructor
  */
 export default function PhotoTitleInput({title, isDisabled, onChange}) {

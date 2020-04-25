@@ -45,7 +45,7 @@ export default class I18n {
     /**
      * @param {string} localizedString
      * @param {Object<string, string>} values
-     * @returns {*}
+     * @returns {string}
      * @private
      */
     _replacePlaceholdersInLocalizedString(localizedString, values) {

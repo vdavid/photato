@@ -2,12 +2,12 @@ import {createContext, createElement, useContext} from '../../web_modules/react.
 
 export const CourseDataContext = createContext();
 
-export const useCourseData = () => useContext(CourseDataContext); /* User data docs: https://auth0.com/docs/api/authentication#get-user-info */
+export const useCourseData = () => useContext(CourseDataContext);
 
 /**
  * @param children
  * @param {CourseDateConverter} courseDateConverter
- * @returns {*}
+ * @returns {React.ReactElement}
  * @constructor
  */
 export default function CourseDataProvider({children, courseDateConverter}) {

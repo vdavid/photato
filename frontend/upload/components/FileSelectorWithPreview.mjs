@@ -8,7 +8,7 @@ import OrientationFixer from '../OrientationFixer.mjs';
  * @param {function(File): void} onFileSelected
  * @param {function(): void} onFileRemoved
  * @param {boolean} isDisabled
- * @returns {*}
+ * @returns {React.ReactElement}
  * @constructor
  */
 export default function FileSelectorWithPreview({selectedFile, selectedFilePreviewUrl, onFileSelected, onFileRemoved, isDisabled}) {

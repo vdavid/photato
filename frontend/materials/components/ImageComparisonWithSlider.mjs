@@ -6,7 +6,7 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
  * @param {string} fileName1
  * @param {string} fileName2
  * @param {string?} width Optional CSS width parameter. Default is "600px".
- * @returns {*}
+ * @returns {React.ReactElement}
  * @constructor
  */
 export default function ImageComparisonWithSlider({fileName1, fileName2, width = '600px'}) {
