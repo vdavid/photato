@@ -201,9 +201,9 @@ article .simpleFigure img { width: 100%; }
 
 /* Figures that pop up a bit on mouse hover */
 article .figures { display: flex; width: fit-content; max-width: 100%; margin: 0 auto; }
-article img.zoomOnHover { width: 100%; height: 100%; transition: transform ease-in-out 0.3s; }
-article img.zoomOnHover:hover { transform: scale(1.2); }
-article .enlargeable.fullscreen img.zoomOnHover:hover { transform: none; }
+article .zoomOnHover img { width: 100%; height: 100%; transition: transform ease-in-out 0.3s; }
+article .zoomOnHover img:hover { transform: scale(1.2); }
+article .zoomOnHover.enlargeable.fullscreen img:hover { transform: none; }
 
 /* Enlargeable elements */
 article .enlargeable { display: inline-block; width: 300px; margin: 0 30px; transition: all 1s ease-in-out; }

@@ -9,7 +9,7 @@ const html = htm.bind(createElement);
  */
 export function getMetadata() {
     return {
-        slug: 'varosok-megorokitese',
+        slug: 'sg-varosok-megorokitese',
         title: 'Városok megörökítése',
         author: 'Gábor Zoltán',
         publishDate: new Date('2006-04-05'),
