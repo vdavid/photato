@@ -9,6 +9,7 @@ const html = htm.bind(createElement);
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'canon-varosi-fotok-keszitese',
         title: 'Városi fotók készítése',

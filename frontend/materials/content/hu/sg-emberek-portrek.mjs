@@ -8,6 +8,7 @@ const html = htm.bind(createElement);
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'sg-emberek-portrek',
         title: 'Emberek, portrék',

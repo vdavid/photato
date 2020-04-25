@@ -8,6 +8,7 @@ const html = htm.bind(createElement);
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'pixinfo-fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek',
         title: 'Fekete hattyú az utcán – avagy mi a titka a “street photography”-nek',

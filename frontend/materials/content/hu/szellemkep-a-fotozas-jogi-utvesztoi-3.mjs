@@ -8,6 +8,7 @@ const html = htm.bind(createElement);
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'szellemkep-a-fotozas-jogi-utvesztoi-3',
         title: 'A fotózás jogi útvesztői, III. rész: Az engedély nélküli legális fotózás esetei',

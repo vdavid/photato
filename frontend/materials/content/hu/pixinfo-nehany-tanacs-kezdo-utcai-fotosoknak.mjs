@@ -9,6 +9,7 @@ const html = htm.bind(createElement);
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'pixinfo-nehany-tanacs-kezdo-utcai-fotosoknak',
         title: 'Néhány tanács kezdő utcai fotósoknak',
