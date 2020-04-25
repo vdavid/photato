@@ -10,5 +10,8 @@ export const articleSlugsByLanguage = {
         'pixinfo-nehany-tanacs-kezdo-utcai-fotosoknak',
         'pixinfo-fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek',
         'pixinfo-objektiv-szurokrol-egyszeruen',
+        'szellemkep-a-fotozas-jogi-utvesztoi-1',
+        'szellemkep-a-fotozas-jogi-utvesztoi-2',
+        'szellemkep-a-fotozas-jogi-utvesztoi-3',
     ]
 };
