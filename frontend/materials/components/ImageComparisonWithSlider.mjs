@@ -1,6 +1,7 @@
 import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
+import {useMaterialContext} from './MaterialContextProvider.mjs';
 
 /**
  * @param {string} fileName1
@@ -13,7 +14,8 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, width =
     /* Get external data */
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
-    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + 'varosok-megorokitese' + '/';
+    const {metadata} = useMaterialContext();
+    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
 
     /* Element refs */
     const primaryImageRef = useRef({});

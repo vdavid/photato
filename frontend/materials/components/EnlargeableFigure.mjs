@@ -1,6 +1,7 @@
 import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
-import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {config} from '../../config.mjs';
+import {useI18n} from '../../i18n/components/I18nProvider.mjs';
+import {useMaterialContext} from './MaterialContextProvider.mjs';
 
 const fullscreenStatuses = {
     notFullscreen: 'notFullscreen',
@@ -16,14 +17,22 @@ const fullscreenStatuses = {
  * @private
  */
 export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, altText, caption}) {
+    /* Get external data */
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
-    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + 'varosok-megorokitese' + '/';
-    const [fullscreenStatus, setFullscreenStatus] = useState(fullscreenStatuses.notFullscreen);
-    const [isFullSizeImagePreloaded, setFullSizeImagePreloaded] = useState(false);
-    const figureRef = useRef({});
+    const {metadata} = useMaterialContext();
+    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
+
+    /* Process arguments */
     const fullSizeImageUrl = assembleImageUrl(fullSizeFileName);
     const thumbnailImageUrl = assembleImageUrl(thumbnailFileName || fullSizeFileName);
+
+    /* Element refs */
+    const figureRef = useRef({});
+
+    /* States */
+    const [fullscreenStatus, setFullscreenStatus] = useState(fullscreenStatuses.notFullscreen);
+    const [isFullSizeImagePreloaded, setFullSizeImagePreloaded] = useState(false);
     const isFullscreen = fullscreenStatus !== fullscreenStatuses.notFullscreen;
 
     /* Handles exiting the full-size image by pressing Escape */
@@ -53,22 +62,6 @@ export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, 
     }, [fullscreenStatus]);
     const imageSrc = ((!isFullscreen || !isFullSizeImagePreloaded) ? thumbnailImageUrl : fullSizeImageUrl);
 
-    /**/
-    function getFigureStyle() {
-        const html = document.querySelector('html');
-        const fullscreenStatusToFigureStyleMap = {
-            [fullscreenStatuses.notFullscreen]: {left: '', top: '', width: '', height: ''},
-            [fullscreenStatuses.goingToFullscreen]: {
-                left: (figureRef.current.offsetLeft - html.scrollLeft) + 'px',
-                top: (figureRef.current.offsetTop - html.scrollTop) + 'px',
-                width: figureRef.current.offsetWidth + 'px',
-                height: figureRef.current.offsetHeight + 'px'
-            },
-            [fullscreenStatuses.fullscreen]: {left: '0', top: '0', width: '100%', height: '100%'},
-        };
-        return fullscreenStatusToFigureStyleMap[fullscreenStatus];
-    }
-
     return createElement('div', {className: 'enlargeable' + (isFullscreen ? ' fullscreen' : '')},
         createElement('figure', {ref: figureRef, onClick: !isFullscreen ? fullscreenClick : exitFullscreen, style: getFigureStyle()},
             createElement('a', {href: !isFullscreen ? fullSizeImageUrl : ''},
@@ -85,6 +78,24 @@ export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, 
      */
     function assembleImageUrl(fileName) {
         return imageBaseUrl + fileName;
+    }
+
+    /**
+     * @returns {{top: string, left: string, width: string, height: string}}
+     */
+    function getFigureStyle() {
+        const html = document.querySelector('html');
+        const fullscreenStatusToFigureStyleMap = {
+            [fullscreenStatuses.notFullscreen]: {left: '', top: '', width: '', height: ''},
+            [fullscreenStatuses.goingToFullscreen]: {
+                left: (figureRef.current.offsetLeft - html.scrollLeft) + 'px',
+                top: (figureRef.current.offsetTop - html.scrollTop) + 'px',
+                width: figureRef.current.offsetWidth + 'px',
+                height: figureRef.current.offsetHeight + 'px'
+            },
+            [fullscreenStatuses.fullscreen]: {left: '0', top: '0', width: '100%', height: '100%'},
+        };
+        return fullscreenStatusToFigureStyleMap[fullscreenStatus];
     }
 
     function fullscreenClick(event) {
