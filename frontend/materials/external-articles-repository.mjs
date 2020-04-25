@@ -1,3 +1,4 @@
+// noinspection SpellCheckingInspection (Hungarian text)
 export const articleSlugsByLanguage = {
     'hu': [
         'sg-varosok-megorokitese',
@@ -13,5 +14,8 @@ export const articleSlugsByLanguage = {
         'szellemkep-a-fotozas-jogi-utvesztoi-1',
         'szellemkep-a-fotozas-jogi-utvesztoi-2',
         'szellemkep-a-fotozas-jogi-utvesztoi-3',
+        'fotosuli-hogyan-keszitsunk-szep-portrefotot',
+        'fotosuli-unja-a-telet-keszuljon-fel-a-tavaszra-1',
+        'fotopiac-bemozdulni-vagy-bemozditani'
     ]
 };
