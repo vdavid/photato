@@ -43,7 +43,7 @@ export default function NavigationBar() {
             createElement(NavLinkMenuItemWithIcon, {to: '/about', activeClassName: 'active', iconName: 'help'}, __('About')),
             isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/upload', activeClassName: 'active', iconName: 'cloud_upload'}, __('Photo upload')),
             isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/challenges', activeClassName: 'active', iconName: 'casino'}, __('Challenges')),
-            isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/materials', activeClassName: 'active', iconName: 'book'}, __('Materials')),
+            createElement(NavLinkMenuItemWithIcon, {to: '/materials', activeClassName: 'active', iconName: 'book'}, __('Materials')),
             isAuthenticated && createElement('div', {className: 'menuItem'},
                 createElement('span', {className: 'material-icons'}, ''),
                 createElement('hr')),
