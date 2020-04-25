@@ -13,8 +13,8 @@ const fullscreenStatuses = {
  * @param {string} fullSizeFileName
  * @param {string} altText
  * @param {string} [caption]
- * @returns {string}
- * @private
+ * @returns {React.ReactElement}
+ * @constructor
  */
 export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, altText, caption}) {
     /* Get external data */

@@ -7,5 +7,8 @@ export const articleSlugsByLanguage = {
         'canon-varosi-fotok-keszitese',
         'canon-tippek-makrofotozashoz',
         'canon-az-expozicio-beallitasa',
+        'pixinfo-nehany-tanacs-kezdo-utcai-fotosoknak',
+        'pixinfo-fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek',
+        'pixinfo-objektiv-szurokrol-egyszeruen',
     ]
 };

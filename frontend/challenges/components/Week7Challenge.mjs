@@ -12,7 +12,7 @@ export default function Week7Challenge({formattedDeadline}) {
 // noinspection SpellCheckingInspection
     return html`<p><strong>Röviden:</strong></p>
 
-<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit <${PhotoUploadLink} label="itt tudsz feltölteni" />. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
+<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit <${PhotoUploadLink} label="itt tudsz feltölteni" />. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a></p>
 
 <p><strong>Hosszabban:</strong></p>
 

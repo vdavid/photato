@@ -10,9 +10,9 @@ const html = htm.bind(createElement);
 export function getMetadata() {
     return {
         slug: 'sg-emberek-portrek',
-        title: 'Portréok megörökítése',
+        title: 'Emberek, portrék',
         author: 'Gábor Zoltán',
-        publishDate: new Date('2006-06-22'),
+        publishDate: new Date('2014-06-22'),
         publisherName: 'Sg.hu',
         originalUrl: 'https://sg.hu/cikkek/it-tech/45404/hogyan-fotozzunk-emberek-portrek',
         isOriginalUrlBroken: false,

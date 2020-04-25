@@ -6,11 +6,12 @@ import {useMaterialContext} from './MaterialContextProvider.mjs';
 /**
  * @param {string} fileName1
  * @param {string} fileName2
+ * @param {string?} caption Figure caption (optional)
  * @param {string?} width Optional CSS width parameter. Default is "600px".
  * @returns {React.ReactElement}
  * @constructor
  */
-export default function ImageComparisonWithSlider({fileName1, fileName2, width = '600px'}) {
+export default function ImageComparisonWithSlider({fileName1, fileName2, caption, width = '600px'}) {
     /* Get external data */
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
@@ -26,7 +27,7 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, width =
     const [imageWidth, setImageWidth] = useState(0);
     const imageWidthRef = useRef();
     imageWidthRef.current = imageWidth;
-    const [imageHeight, setImageHeight]  = useState(0);
+    const [imageHeight, setImageHeight] = useState(0);
     const [sliderXPercent, setSliderXPercent] = useState(0.5);
     const [componentX, setComponentX] = useState(0);
     const componentXRef = useRef();
@@ -55,13 +56,16 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, width =
 
     console.log(sliderX);
     return createElement('div', {className: 'imageComparison', style: {width}},
-        createElement('div', { className: 'primary'},
-            createElement('img', {ref: primaryImageRef, src: imageBaseUrl + fileName1, onLoad: updateImageDimensions})
+        createElement('figure', {},
+            createElement('div', {className: 'primary'},
+                createElement('img', {ref: primaryImageRef, src: imageBaseUrl + fileName1, onLoad: updateImageDimensions})
+            ),
+            createElement('div', {ref: sliderRef, className: 'slider', style: {left: sliderX + 'px', top: sliderTop + 'px'}}),
+            createElement('div', {ref: overlayImageRef, className: 'overlay', style: overlayStyle},
+                createElement('img', {src: imageBaseUrl + fileName2})
+            ),
         ),
-        createElement('div', {ref: sliderRef, className: 'slider', style: {left: sliderX + 'px', top: sliderTop + 'px'}}),
-        createElement('div', {ref: overlayImageRef, className: 'overlay', style: overlayStyle},
-            createElement('img', {src: imageBaseUrl + fileName2})
-        ),
+        caption && createElement('figcaption', {}, caption)
     );
 
     function updateImageDimensions() {

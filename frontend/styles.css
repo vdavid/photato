@@ -206,18 +206,20 @@ article .zoomOnHover img:hover { transform: scale(1.2); }
 article .zoomOnHover.enlargeable.fullscreen img:hover { transform: none; }
 
 /* Enlargeable elements */
-article .enlargeable { display: inline-block; width: 300px; margin: 0 30px; transition: all 1s ease-in-out; }
+article .enlargeable { display:table; margin: 0 auto; }
+article .figures .enlargeable { display: inline-block; width: 300px; margin: 0 30px; transition: all 1s ease-in-out; }
 article .enlargeable figure { background-color: var(--page-background-color); }
 article .enlargeable.fullscreen figure { position: fixed; z-index: 1; cursor: pointer; transition: all 0.3s ease-in-out; }
 article .enlargeable.fullscreen figcaption { position: absolute; bottom: 0.2em; width: 50%; left: 50%; transform: translateX(-50%); padding: 0.2em; z-index: 2; text-align: center; font-size: 1rem; line-height: 1.8rem; background: #0005; color: var(--light-text-color-high-emphasis); transition: all 0.5s ease-in-out; }
 article .enlargeable.fullscreen img { object-fit: contain; }
 
 /* Image comparison */
-.imageComparison { position: relative; overflow: hidden; margin: 0 auto; max-width: 100%; --slider-size: 40px; }
-.imageComparison > .primary img { display: block; width: 100%; }
-.imageComparison > .overlay { position: absolute; width: 100%; top: 0; bottom: 0; }
-.imageComparison > .overlay img { width: 100%; height: 100%; object-fit: cover; object-position: left; }
-.imageComparison > .slider { position: absolute; z-index: 2; width: var(--slider-size); height: var(--slider-size); background-color: var(--primary-color-dark); opacity: 0.7; border-radius: 50%; transform: translateX(-50%); cursor: ew-resize; }
+.imageComparison { margin: 0 auto; max-width: 100%; --slider-size: 40px; }
+.imageComparison figure { position: relative; display: block; overflow: hidden; width: 100%; }
+.imageComparison figure > .primary img { display: block; width: 100%; }
+.imageComparison figure > .overlay { position: absolute; width: 100%; top: 0; bottom: 0; }
+.imageComparison figure > .overlay img { width: 100%; height: 100%; object-fit: cover; object-position: right; }
+.imageComparison figure > .slider { position: absolute; z-index: 2; width: var(--slider-size); height: var(--slider-size); background-color: var(--primary-color-dark); opacity: 0.7; border-radius: 50%; transform: translateX(-50%); cursor: ew-resize; }
 
 /* Notes and tips */
 article .note { padding: 15px; margin-bottom: 28px; border: 1px solid #ffc7e3; border-radius: 2px; background-color: #ffe0eb; }
