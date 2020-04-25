@@ -9,14 +9,14 @@ const fullscreenStatuses = {
     fullscreen: 'fullscreen',
 };
 /**
+ * @param {string} fileName The file name for the full size file.
  * @param {string} [thumbnailFileName] If omitted, full size file name will be used.
- * @param {string} fullSizeFileName
  * @param {string} altText
  * @param {string} [caption]
  * @returns {React.ReactElement}
  * @constructor
  */
-export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, altText, caption}) {
+export default function EnlargeableFigure({fileName, thumbnailFileName, altText, caption}) {
     /* Get external data */
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
@@ -24,8 +24,8 @@ export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, 
     const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
 
     /* Process arguments */
-    const fullSizeImageUrl = assembleImageUrl(fullSizeFileName);
-    const thumbnailImageUrl = assembleImageUrl(thumbnailFileName || fullSizeFileName);
+    const fullSizeImageUrl = assembleImageUrl(fileName);
+    const thumbnailImageUrl = assembleImageUrl(thumbnailFileName || fileName);
 
     /* Element refs */
     const figureRef = useRef({});
