@@ -3,13 +3,14 @@ import htm from '../../../web_modules/htm.js';
 import TwoEnlargeableFigures from '../../components/TwoEnlargeableFigures.mjs';
 const html = htm.bind(createElement);
 
+// noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
  * @returns {ArticleMetadata}
  */
 export function getMetadata() {
     return {
         slug: 'varosok-megorokitese',
-        title: 'Hogyan fotózzunk - Városok megörökítése',
+        title: 'Városok megörökítése',
         author: 'Gábor Zoltán',
         publishDate: new Date('2006-04-05'),
         publisherName: 'Sg.hu',
@@ -18,11 +19,12 @@ export function getMetadata() {
     };
 }
 
+// noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
  * @returns {React.ReactElement}
  */
 export default function Article() {
-    // noinspection SpellCheckingInspection
+    // noinspection SpellCheckingInspection (It's in Hungarian.)
     return html`<div>
     <p>A digitális géppel rendelkező fotósok legtöbbje városban él, illetve városokat látogat meg utazásai során, így a városok, nevezetességek fotózása az egyik legkedveltebb téma. Lássuk, hogyan oldjuk meg a feladatot!</p>
     <h2>Beállítások, alapszabályok</h2>

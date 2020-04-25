@@ -62,7 +62,7 @@ export default function EnlargeableFigure({thumbnailFileName, fullSizeFileName, 
     }, [fullscreenStatus]);
     const imageSrc = ((!isFullscreen || !isFullSizeImagePreloaded) ? thumbnailImageUrl : fullSizeImageUrl);
 
-    return createElement('div', {className: 'enlargeable' + (isFullscreen ? ' fullscreen' : '')},
+    return createElement('div', {className: 'zoomOnHover enlargeable' + (isFullscreen ? ' fullscreen' : '')},
         createElement('figure', {ref: figureRef, onClick: !isFullscreen ? fullscreenClick : exitFullscreen, style: getFigureStyle()},
             createElement('a', {href: !isFullscreen ? fullSizeImageUrl : ''},
                 createElement('img', {src: imageSrc, alt: altText}),

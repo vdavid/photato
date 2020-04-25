@@ -57,7 +57,7 @@ export default function MaterialsPage() {
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
         return createElement('li', {className: metadata.isOriginalUrlBroken ? 'broken' : ''}, [
-            createElement('a', {href: metadata.originalUrl, target: '_blank'}, metadata.title),
+            createElement('a', {href: metadata.originalUrl, target: '_blank'}, metadata.publisherName + ': ' + metadata.title),
             ' [',
             createElement(NavLink, {to: '/external-article/' + metadata.slug}, __('Cached version on Photato')),
             ']'
