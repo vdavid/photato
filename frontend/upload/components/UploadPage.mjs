@@ -160,7 +160,8 @@ export default function UploadPage({photoUploader}) {
                     isDisabled: uploadStatus === uploadStatuses.uploading,
                     onChange: newTitle => setTitle(newTitle),
                 }),
-                createElement('div', {className: 'selectionStatus' + (selectionStatus.isError ? ' error' : '')}, getSelectionStatusText(selectionStatus)),
+                (uploadStatus === uploadStatuses.notStarted) && createElement('div',
+                    {className: 'selectionStatus' + (selectionStatus.isError ? ' error' : '')}, getSelectionStatusText(selectionStatus)),
                 createElement('div', {className: 'uploadButton'},
                     createElement('button', {
                         onClick: uploadSelectedFile,
