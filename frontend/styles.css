@@ -47,6 +47,7 @@
 :root {
     --minimum-site-width: 320px;
     --maximum-content-width: 1000px;
+    --site-header-height: 47px;
     --page-vertical-padding-size: 20px;
 }
 
@@ -62,7 +63,7 @@ input, button { font-family: var(--ui-font); font-size: 1.5rem; }
     input, button { font-size: 4vw; }
     footer { font-size: 3.5vw; }
 }
-@media screen and (max-width: var(--minimum-site-width)) {
+@media screen and (max-width: 320px) {
     main { font-size: 0.8rem; }
     input, button { font-size: 0.8rem; }
     footer { font-size: 0.7rem; }
@@ -77,14 +78,13 @@ footer { font-family: var(--ui-font); line-height: 1.3rem; }
 
 body { margin: 0; padding: 0; display: flex; flex-direction: column; background: var(--page-background-color); color: var(--light-text-color-medium-emphasis); }
 
-h1, h2, h3, h4, h5, h6 { margin-block-start: 1em; margin-block-end: 0.5em; }
+h1, h2, h3, h4, h5, h6, p { margin-block-start: 1em; margin-block-end: 0.5em; }
+ul, ol {margin-block-start: 0.5em; margin-block-end: 0.5em; }
+li { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 figure { margin: 0; }
 figcaption { text-align: center; }
 img { display: inline-block; }
 * {box-sizing: border-box;}
-p { margin-block-start: 1em; margin-block-end: 0.5em; }
-ul, ol {margin-block-start: 0.5em; margin-block-end: 0.5em; }
-li { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 
 input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--primary-color-light); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 
@@ -113,12 +113,12 @@ main { box-sizing: border-box; min-width: var(--minimum-site-width); max-width: 
 */
 
 /* The site header and its links */
-#app > header { display: flex; align-items: stretch; min-width: var(--minimum-site-width); height: 47px; background-color: var(--navbar-color); }
+#app > header { display: flex; align-items: stretch; min-width: var(--minimum-site-width); height: var(--site-header-height); background-color: var(--navbar-color); }
 @media screen and (min-height: 500px) {
     #app > header { position: fixed; width: 100%; z-index: 10; }
-    #app > main { padding-top:47px; }
+    #app > main { padding-top: var(--site-header-height); }
 }
-#app > header a { display: block; box-sizing: border-box; height: 47px; padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
+#app > header a { display: block; box-sizing: border-box; height: var(--site-header-height); padding: 14px 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
 #app > header a.active { background-color: var(--primary-color-light); }
 #app > header a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
 #app > header a.active { background-color: var(--primary-color-main); color: var(--dark-primary-text-color); }
@@ -140,9 +140,9 @@ main { box-sizing: border-box; min-width: var(--minimum-site-width); max-width: 
 #app > header nav a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
 #app > header nav hr { display: block; height: 2px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
 #app > header nav .menuItem.signOut { display: none;}
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 850px) {
     /* If narrow screen, make menu a popup */
-    #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
+    #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: var(--site-header-height); right: 0; }
     #app > header nav.visible { visibility: visible; }
     #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
     #app > header nav a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
@@ -155,9 +155,9 @@ main { box-sizing: border-box; min-width: var(--minimum-site-width); max-width: 
 #app > header .spacer { flex-grow: 1; }
 
 /* Hamburger menu icon – displayed only if narrow screen */
-#app > header .hamburgerMenu { display: none; cursor: pointer; font-size: 47px; }
+#app > header .hamburgerMenu { display: none; cursor: pointer; font-size: var(--site-header-height); }
 #app > header .hamburgerMenu:hover { background-color: var(--primary-color-lighter); color: var(--primary-color-dark); transition: color 0.3s ease, background-color 0.3s ease; }
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 850px) {
     #app > header .hamburgerMenu { display: block; color: var(--light-text-color-high-emphasis); }
 }
 
@@ -165,13 +165,13 @@ main { box-sizing: border-box; min-width: var(--minimum-site-width); max-width: 
 #app > header img.profilePicture { width: 40px; height: 40px; margin: 3px 4px 4px 4px; border-radius: 50%; cursor: pointer; }
 #app > header nav.authenticationMenu { visibility: hidden; }
 #app > header nav.authenticationMenu.visible { visibility: visible; }
-#app > header nav.authenticationMenu { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: 47px; right: 0; }
+#app > header nav.authenticationMenu { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: var(--site-header-height); right: 0; }
 #app > header nav.authenticationMenu a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu a .title { display: flex; padding: 14px 16px 14px 0; }
 #app > header nav.authenticationMenu a span.icon { display: inline-block; box-sizing: content-box; width: 30px; padding: 11px 8px 11px; text-align: center; color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu .menuItem.signOut { display: flex;}
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 850px) {
     #app > header > img.profilePicture { display: none;}
     #app > header nav.authenticationMenu.visible { visibility: hidden; }
 }
@@ -215,13 +215,21 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
     .imageFileSelector .helpText > * { padding: 5%; }
 }
 
+/* ======================= Loading screen ======================= */
+
+/* Variables */
+#fullPageLoadingIndicator {--indicatorSize: 200px; --spinnerSize: 160px; --logoSize: 80px; }
+
 /* Full-page loading animation – Source: https://codepen.io/vreuling/pen/OXoVXA */
 #fullPageLoadingIndicator { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(16, 16, 16, 0.5); }
-#fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 200px; height: 200px; }
-#fullPageLoadingIndicator .spinner { position: absolute; display: block; width: 160px; height: 160px; top: 20px; left: 20px; border-radius: 80px; box-shadow: 0 6px 0 0 var(--primary-color-main); animation: spinnerAnimation 1s linear infinite; }
-#fullPageLoadingIndicator .logo { position: absolute; display: block; width: 80px; height: 80px; top: 60px; left: 60px; background: url('app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
-
-/* ======================= Loading screen ======================= */
+#fullPageLoadingIndicator > div { margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+    width: var(--indicatorSize); height: var(--indicatorSize); }
+#fullPageLoadingIndicator .spinner { position: absolute; display: block; width: var(--spinnerSize); height: var(--spinnerSize);
+    top: calc((var(--indicatorSize) - var(--spinnerSize)) / 2); left: calc((var(--indicatorSize) - var(--spinnerSize)) / 2);
+    border-radius: calc(var(--spinnerSize) / 2); box-shadow: 0 6px 0 0 var(--primary-color-main); animation: spinnerAnimation 1s linear infinite; }
+#fullPageLoadingIndicator .logo { position: absolute; display: block; width: var(--logoSize); height: var(--logoSize);
+    top: calc((var(--indicatorSize) - var(--logoSize)) / 2); left: calc((var(--indicatorSize) - var(--logoSize)) / 2);
+    background: url('app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
 
 @keyframes spinnerAnimation {
     0% { transform: rotate(0deg); }
@@ -258,16 +266,18 @@ article .enlargeable.fullscreen figcaption { position: absolute; bottom: 0.2em; 
 article .enlargeable.fullscreen img { object-fit: contain; }
 
 /* Image comparison */
-.imageComparison { margin: 0 auto; max-width: 100%; --slider-size: 40px; }
+.imageComparison { --slider-size: 40px; }
+.imageComparison { margin: 0 auto; max-width: 100%; }
 .imageComparison figure { position: relative; display: block; overflow: hidden; width: 100%; }
 .imageComparison figure > .primary img { display: block; width: 100%; }
 .imageComparison figure > .overlay { position: absolute; width: 100%; top: 0; bottom: 0; }
 .imageComparison figure > .overlay img { width: 100%; height: 100%; object-fit: cover; object-position: right; }
-.imageComparison figure > .slider { position: absolute; z-index: 2; width: var(--slider-size); height: var(--slider-size); background-color: var(--primary-color-dark); opacity: 0.7; border-radius: 50%; transform: translateX(-50%); cursor: ew-resize; }
+.imageComparison figure > .slider { position: absolute; z-index: 2; width: var(--slider-size); height: var(--slider-size);
+    background-color: var(--primary-color-dark); opacity: 0.7; border-radius: 50%; transform: translateX(-50%); cursor: ew-resize; }
 
 /* Notes and tips */
-article .note { padding: 15px; margin-bottom: 28px; border: 1px solid var(--primary-color-main); border-radius: 2px; background-color: var(--primary-color-dark); }
-article .tip { padding: 15px; margin-bottom: 28px; border: 1px solid var(--accent-color-main); border-radius: 2px; background-color: var(--accent-color-dark); }
+article .note { padding: 15px; border: 1px solid var(--primary-color-main); border-radius: 2px; background-color: var(--primary-color-dark); }
+article .tip { padding: 15px; border: 1px solid var(--accent-color-main); border-radius: 2px; background-color: var(--accent-color-dark); }
 
 /* ======================= Other stuff ======================= */
 
