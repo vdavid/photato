@@ -16,16 +16,18 @@ import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
+import Footer from './Footer.mjs';
 
 const photoUploader = new PhotoUploader();
 
 export default function App() {
-    const {areTranslationsLoaded, __} = useI18n();
+    const {areTranslationsLoaded} = useI18n();
     const [areFontsReady, setFontsReady] = useState(false);
     const {loading: isAuthLoading} = useAuth0();
 
     useEffect(() => {
         async function checkFontsLoaded() {
+            // noinspection JSUnresolvedVariable (It actually exists.)
             await document.fonts.ready;
             setFontsReady(true);
         }
@@ -49,7 +51,7 @@ export default function App() {
                     createElement(Route, {path: '/', component: () => createElement(Error404Page)}),
                 ),
             ),
-            createElement('footer', null, createElement('span', {className: 'copyright'}, __('Made with ❤️ by the Photato team'))),
+            createElement(Footer),
         ))
         : createElement(FullPageLoadingIndicator);
 }

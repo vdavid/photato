@@ -78,9 +78,9 @@ export default function UploadPage({photoUploader}) {
         const maximumSize = Math.round(config.imageUpload.maximumSizeInBytes / 1024 / 1024);
         const selectionStatusTexts = {
             [selectionStatuses.readyToSelectFile.name]: __('Please select your photo to upload.'),
-            [selectionStatuses.selectedFileIsTooSmall.name]: __('The image you\'ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
-            [selectionStatuses.selectedFileIsTooLarge.name]: __('The image you\'ve selected is larger than {maximumSize} megabytes. We can\'t handle a photo this big. Please select a smaller photo.', {maximumSize}),
-            [selectionStatuses.wrongFileType.name]: __('The image you\'ve selected is not a JPEG. Please select a JPEG file.', {maximumSize}),
+            [selectionStatuses.selectedFileIsTooSmall.name]: __('The image you’ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
+            [selectionStatuses.selectedFileIsTooLarge.name]: __('The image you’ve selected is larger than {maximumSize} megabytes. We can’t handle a photo this big. Please select a smaller photo.', {maximumSize}),
+            [selectionStatuses.wrongFileType.name]: __('The image you’ve selected is not a JPEG. Please select a JPEG file.', {maximumSize}),
             [selectionStatuses.readyToUpload.name]: __('Photo is ready to upload. (Make sure you gave it a title if you wanted!)'),
         };
         return selectionStatusTexts[selectionStatus.name];
@@ -95,7 +95,7 @@ export default function UploadPage({photoUploader}) {
             [uploadStatuses.notStarted.name]: '',
             [uploadStatuses.uploading.name]: __('Uploading your photo...'),
             [uploadStatuses.uploadDone.name]: __('We got your photo! Remember, if you want to change it, you can upload a new one by the end of the week.'),
-            [uploadStatuses.uploadFailed.name]: __('Upload failed. Sorry about it. We don\'t know what\'s wrong. Please refresh the page and try again. It it keeps on failing, please drop us an email at {emailAddress}.', {emailAddress: config.customerServiceEmailAddress}),
+            [uploadStatuses.uploadFailed.name]: __('Upload failed. Sorry about it. We don’t know what’s wrong. Please refresh the page and try again. It it keeps on failing, please drop us an email at {emailAddress}.', {emailAddress: config.customerServiceEmailAddress}),
         };
         return uploadStatusTexts[uploadStatus.name];
     }
@@ -138,7 +138,7 @@ export default function UploadPage({photoUploader}) {
     const courseStatusHelpText = isCourseRunning
         ? __('Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
         : (isCourseOver
-            ? __('The course has already ended. You can\'t upload pics anymore. ☹')
+            ? __('The course has already ended. You can’t upload pics anymore. ☹')
             : __('The course has not started. You can upload your photos soon! 😊'));
 
     return createElement('div', {id: 'fileUpload'},

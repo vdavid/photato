@@ -11,7 +11,7 @@ export default function ChallengeList() {
     const weekIndexes = Array.from(Array(Math.min(currentWeekIndex, config.course.weekCount)), (value, key) => key + 1);
     const challengeLinks = weekIndexes.map(weekIndex => createElement('li', {},
         createElement(NavLink, {to: '/challenges/' + weekIndex}, __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])),
-        (weekIndex === currentWeekIndex) ? (' ← ' + __('This is the current week\'s challenge!')) : null,
+        (weekIndex === currentWeekIndex) ? (' ← ' + __('This is the current week’s challenge!')) : null,
     ));
     return createElement('ul', {className: 'challengeList'}, challengeLinks);
 }

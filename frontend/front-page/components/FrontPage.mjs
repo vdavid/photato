@@ -21,7 +21,7 @@ export default function FrontPage() {
                 to: '/upload',
                 className: 'actionButton',
                 disabled: !isAuthenticated,
-                title: !isAuthenticated ? __('You\'ll need to sign in to upload a photo.') : '',
+                title: !isAuthenticated ? __('You’ll need to sign in to upload a photo.') : '',
             }, __('Upload your weekly photo')),
         ),
         createElement('div', {},

@@ -48,7 +48,7 @@ export default function ChallengePage() {
                 to: '/upload',
                 className: 'actionButton',
                 disabled: !isAuthenticated,
-                title: !isAuthenticated ? __('You\'ll need to sign in to upload a photo.') : '',
+                title: !isAuthenticated ? __('You’ll need to sign in to upload a photo.') : '',
             }, __('Upload your weekly photo')) : null,
             createElement(NavLinkButton, {to: '/challenges', className: 'actionButton'}, '← ' + __('Back to the challenge list')),
         )

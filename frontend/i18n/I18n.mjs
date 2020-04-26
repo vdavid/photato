@@ -86,7 +86,7 @@ export default class I18n {
             if (Object.keys(this._translations).length !== 0) {
                 throw new Error('Invalid locale code for translation: ' + localeCode);
             } else {
-                throw new Error('Translations haven\'t been loaded yet!');
+                throw new Error('Translations haven’t been loaded yet!');
             }
         }
     }
