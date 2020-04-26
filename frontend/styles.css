@@ -222,8 +222,8 @@ article .enlargeable.fullscreen img { object-fit: contain; }
 .imageComparison figure > .slider { position: absolute; z-index: 2; width: var(--slider-size); height: var(--slider-size); background-color: var(--primary-color-dark); opacity: 0.7; border-radius: 50%; transform: translateX(-50%); cursor: ew-resize; }
 
 /* Notes and tips */
-article .note { padding: 15px; margin-bottom: 28px; border: 1px solid #ffc7e3; border-radius: 2px; background-color: #ffe0eb; }
-article .tip { padding: 15px; margin-bottom: 28px; border: 1px solid #ffe0c7; border-radius: 2px; background-color: #fff3e0; }
+article .note { padding: 15px; margin-bottom: 28px; border: 1px solid var(--primary-color-main); border-radius: 2px; background-color: var(--primary-color-dark); }
+article .tip { padding: 15px; margin-bottom: 28px; border: 1px solid var(--accent-color-main); border-radius: 2px; background-color: var(--accent-color-dark); }
 
 /* ======================= Other stuff ======================= */
 
