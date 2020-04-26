@@ -100,9 +100,9 @@ export default function Article() {
     <p><strong>Fényerős optika előnyei:</strong></p>
     <ul>
         <li>Fényszegény körülmények között, <strong>alacsonyabb ISO és/vagy rövidebb záridőt</strong> tudsz beállítani. Így <strong>nem lesz annyira zajos</strong> a kép és/vagy <strong>nem mozdul be</strong> a felvétel</li>
-        <li>A blende hatással van a mélységélességre (Mélységélesség anyaghoz <a title="Mélységélesség" href="http://www.fotobetyar.hu/interaktivanyagok/melysegelesseg/" target="_blank">kattints ide</a>), fényerős optikának tágabb a blendéje &gt;&gt; kisebb a mélységélessége, <strong>szebben tudsz kiemelni</strong></li>
+        <li>A blende hatással van a mélységélességre (Mélységélesség anyaghoz <a title="Mélységélesség" href="http://www.fotobetyar.hu/interaktivanyagok/melysegelesseg/">kattints ide</a>), fényerős optikának tágabb a blendéje &gt;&gt; kisebb a mélységélessége, <strong>szebben tudsz kiemelni</strong></li>
         <li><strong>Vakuzásnál</strong>, világításnál<strong> kisebb villanás</strong>, fényerő szükséges</li>
     </ul>
-    <p>A jó minőségű optikai üveg alapanyaga nagyon drága. <strong>A nagy fényerőhöz, nagy átmérő &gt;&gt; sok üveg</strong> szükségeltetik. Ezért a jó minőségű optika, ami nagy fényerejű igen borsos árcetlivel érkezik. Ha érdekel ez kis összefüggés, egy erről szóló cikkünket ajánljuk figyelmedbe. Eléréséhez csak <a href="http://www.fotobetyar.hu/az-objektivek-genetikaja/" target="_blank" rel="noopener noreferrer">kattints ide</a> &gt;&gt;</p>
+    <p>A jó minőségű optikai üveg alapanyaga nagyon drága. <strong>A nagy fényerőhöz, nagy átmérő &gt;&gt; sok üveg</strong> szükségeltetik. Ezért a jó minőségű optika, ami nagy fényerejű igen borsos árcetlivel érkezik. Ha érdekel ez kis összefüggés, egy erről szóló cikkünket ajánljuk figyelmedbe. Eléréséhez csak <a href="http://www.fotobetyar.hu/az-objektivek-genetikaja/">kattints ide</a> &gt;&gt;</p>
 </div>`;
 }

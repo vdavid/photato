@@ -3,6 +3,7 @@ import htm from '../../../web_modules/htm.js';
 import TwoEnlargeableFigures from '../../components/TwoEnlargeableFigures.mjs';
 import EnlargeableFigure from '../../components/EnlargeableFigure.mjs';
 import ImageComparisonWithSlider from '../../components/ImageComparisonWithSlider.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -60,7 +61,7 @@ export default function Article() {
     <${EnlargeableFigure} fileName="fotozz_230942.jpg" altText="Középfölde" caption="Fotó: Solymosi Réka (Nanuq)" />
     
     <h2>Effekt szűrők</h2>
-    <p>Különleges szűrőket sorolhatunk az effekt szűrők kategóriába, ahol az objektívre feltekerhető szűrőkön kívül meg kell említenünk a <a href="https://pixinfo.com/cikkek/cokin_filter" target="_blank">lapszűrőket</a> is. Az effekt szűrők között átmenetes szürke, vagy átmenetes színes szűrőket találhatunk, amelyekkel pl. az égbolt felső részét sötétíthetjük, vagy színezhetjük ki, míg a horizont alatti területet érintetlenül hagyhatjuk. Az ilyen feladatokra mozgathatóságuk miatt a lapszűrők alkalmasabbak.</p>
+    <p>Különleges szűrőket sorolhatunk az effekt szűrők kategóriába, ahol az objektívre feltekerhető szűrőkön kívül meg kell említenünk a <${ExternalLink} href="https://pixinfo.com/cikkek/cokin_filter">lapszűrőket</a> is. Az effekt szűrők között átmenetes szürke, vagy átmenetes színes szűrőket találhatunk, amelyekkel pl. az égbolt felső részét sötétíthetjük, vagy színezhetjük ki, míg a horizont alatti területet érintetlenül hagyhatjuk. Az ilyen feladatokra mozgathatóságuk miatt a lapszűrők alkalmasabbak.</p>
     <${EnlargeableFigure} thumbnailFileName="Cokin_filters02_500a.jpg" fileName="Cokin_filters02_oa.jpg" altText="Különböző átmenetes szűrők" caption="Különböző átmenetes szűrők" />
     <p>Az átmenetes szűrők használatakor ugyanazok a szabályok érvényesek, mint a polarizációs szűrőknél, azaz az expozíciót érdemes a szűrőzés előtt beállítani, vagy expozíció eltolást használni.</p>
     <${EnlargeableFigure} fileName="fotozz_230942.jpg" altText="Sunshine" caption="Fotó: Gál Zoltán (Yoachim)" />

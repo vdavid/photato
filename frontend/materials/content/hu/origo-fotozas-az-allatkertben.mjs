@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -52,6 +53,6 @@ export default function Article() {
     <p>A cserélhető optikás fotógépeknél ilyen gond természetesen nincs, és a polárszűrő forgatásával a csillogás, tükröződés egy része eltüntethető az üvegfelületről, így jobban átlátszik az üveg mögötti látvány. Bár nem érdemes csodára számítani (bizonyos üvegtípusok esetében ez a szűrő sem segít), de sok esetben megkönnyítheti a szép fotók készítését a polárszűrő.</p>
     
     <h2>5. Nézze meg a programfüzetet!</h2>
-    <p>Bár az állatkerti állatok életritmusa jócskán eltér vadon élő társaikétól, ez nem jelenti azt, hogy a reggeli nyitástól a délutáni zárásig produkálni is fogják magukat a látogatók előtt. Noha bizonyára egy alvó oroszlánról is készülhet ötletes fotó, például egy zugába visszahúzódott pingvinről még a legjobb állatfotós sem képes izgalmas képet exponálni. Az állatokat valamilyen aktivitás közben érdemes lefotózni, például etetés, vagy bemutató közben. A legtöbb park tájékoztatófüzetében ezekről a programokról könnyen találni tájékoztatást, a <a href="http://www.zoo-budapest.com/info/legy_ott/index.php" target="_blank">fővárosi állatkert honlapjáról például letölthető</a> egy ilyen katalógus.</p>
+    <p>Bár az állatkerti állatok életritmusa jócskán eltér vadon élő társaikétól, ez nem jelenti azt, hogy a reggeli nyitástól a délutáni zárásig produkálni is fogják magukat a látogatók előtt. Noha bizonyára egy alvó oroszlánról is készülhet ötletes fotó, például egy zugába visszahúzódott pingvinről még a legjobb állatfotós sem képes izgalmas képet exponálni. Az állatokat valamilyen aktivitás közben érdemes lefotózni, például etetés, vagy bemutató közben. A legtöbb park tájékoztatófüzetében ezekről a programokról könnyen találni tájékoztatást, a <${ExternalLink} href="http://www.zoo-budapest.com/info/legy_ott/index.php">fővárosi állatkert honlapjáról például letölthető</a> egy ilyen katalógus.</p>
 </div>`;
 }

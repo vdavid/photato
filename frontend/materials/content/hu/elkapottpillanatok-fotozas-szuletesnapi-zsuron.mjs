@@ -1,5 +1,6 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -39,7 +40,7 @@ export default function Article() {
     <p>Hogy mitől lesznek az én képeim izgalmasak és egyediek? Gyakran fotózok <strong>szokatlan helyekről</strong>, irányokból, változtatom a fényképezés látószögét. Felállok egy székre – ez kiváló megoldás nagy csoportképekhez, vagy lehasalok a padlóra – ez a gyermekarcok megörökítésére tökéletes. Nagy látószöggel megörökítem az egész termet, majd a kis részletekre fókuszálva egy-egy gyermek, egy-egy apróság is lencsevégre kerül. Ezeket a technikákat keverve alakul ki végül a teljes születésnapi fotóalbum.</p>
     
     <h2>4. Részletek</h2>
-    <p>A hagyományos <a href="http://www.elkapottpillanatok.hu/baba-mama-fotozas/szuletesnapi-fotozas" target="_blank">születésnapi fotózás</a> általában csoportképekből áll. Természetesen én is elkészítem ezeket a képeket, de szeretek kicsit foglalkozni az <strong>apró részletekkel</strong> is, hiszen a kész albumot ezek teszik majd izgalmassá. Az ilyen jellegű fényképeket még a vendégek érkezése előtt szoktam elkészíteni: lufik, a <strong>dekoráció egyes részletei</strong>, a becsomagolt ajándékok, a szépen megterített asztal. Szeretem ezeket egészen közelről fotózni, valami apró dologgal kitölteni a teljes képet, ez gyakran egészen absztrakt kompozíciókat eredményez. Ezek a fotók a dobják fel igazán a kész albumot – némi változatosság a sok arckép között.</p>
+    <p>A hagyományos <${ExternalLink} href="http://www.elkapottpillanatok.hu/baba-mama-fotozas/szuletesnapi-fotozas">születésnapi fotózás</a> általában csoportképekből áll. Természetesen én is elkészítem ezeket a képeket, de szeretek kicsit foglalkozni az <strong>apró részletekkel</strong> is, hiszen a kész albumot ezek teszik majd izgalmassá. Az ilyen jellegű fényképeket még a vendégek érkezése előtt szoktam elkészíteni: lufik, a <strong>dekoráció egyes részletei</strong>, a becsomagolt ajándékok, a szépen megterített asztal. Szeretem ezeket egészen közelről fotózni, valami apró dologgal kitölteni a teljes képet, ez gyakran egészen absztrakt kompozíciókat eredményez. Ezek a fotók a dobják fel igazán a kész albumot – némi változatosság a sok arckép között.</p>
     
     <h2>5. Programterv</h2>
     <p>Hogy ne maradjak le semmiről, előre tudnom kell, várhatóan mikor <strong>mi és hol történik</strong>. Mikor érkeznek a vendégek, mikor ülnek le enni, mikor és honnan érkezik a torta, jön-e bohóc, mikor kapja az ünnepelt az ajándékokat, hol fogja kibontani - ezek olyan részletek, melyeket nem lehet kihagyni a fotózásból. Az egyeztetés során mondjátok el alaposan a programtervet, így a jelentősebb pillanatokra előre fel tudok készülni, és időben elfoglalom a fotózáshoz szükséges legjobb helyet. A vendégek érkezése előtt szeretem megismerni a helyszínt, ilyenkor van lehetőség a további egyeztetésre is.</p>

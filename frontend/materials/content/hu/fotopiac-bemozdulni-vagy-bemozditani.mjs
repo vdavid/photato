@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -28,7 +29,7 @@ export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return html`<div>
     <h2>A hosszú expozíció és a mozgás ábrázolása fényképen</h2>
-    <p>A művészet megajándékozott bennünket azzal a lehetőséggel, hogy a pillanatnak nem kell feltétlenül egy pillanatig tartania. Hiszen egy regényben, vagy filmben is – annak ellenére, hogy általában az idő sűrítéséről van leginkább szó bennük – vannak elnyújtott cselekménysorok, amelyek a valóságosnál hosszabb ideig tartanak akár olvasva, vagy nézve is. A filmművészet egyik legjellemzőbb kifejező formája a lassítás. A fotográfia pedig valójában a pillanat művészete, azonban a legképtelenebb rövid idejű <a href="http://fotopiac.hu/az-expozicio-a-fotozasban/" target="_blank">expozíció</a>k mellett azzal az egyedülálló lehetőséggel is rendelkezik, hogy tetszőleges hosszúságú időfolyamatot képes egyetlen képbe sűríteni. A hosszú expozíció különleges látványokat teremthet.</p>
+    <p>A művészet megajándékozott bennünket azzal a lehetőséggel, hogy a pillanatnak nem kell feltétlenül egy pillanatig tartania. Hiszen egy regényben, vagy filmben is – annak ellenére, hogy általában az idő sűrítéséről van leginkább szó bennük – vannak elnyújtott cselekménysorok, amelyek a valóságosnál hosszabb ideig tartanak akár olvasva, vagy nézve is. A filmművészet egyik legjellemzőbb kifejező formája a lassítás. A fotográfia pedig valójában a pillanat művészete, azonban a legképtelenebb rövid idejű <${ExternalLink} href="http://fotopiac.hu/az-expozicio-a-fotozasban/">expozíció</a>k mellett azzal az egyedülálló lehetőséggel is rendelkezik, hogy tetszőleges hosszúságú időfolyamatot képes egyetlen képbe sűríteni. A hosszú expozíció különleges látványokat teremthet.</p>
     <${SimpleFigure} fileName="fotopiac_hu-hosszu-expozicio-mozgas-abrazolasa-fenykepen-sarga-falevelek.jpg" altText="Sárga falevelek" caption="A hosszú expozíció és a mozgás ábrázolása fényképen. Egy montázshoz készítettem a képet. A kissé borult időben ISO 200-ra állítottam az érzékenységet és 16-os rekeszt állítottam a nagy mélységélesség miatt. Így lett az expozíciós idő 1/15 s. A mozgás ábrázolása tökéletesen sikeredett, a 28 mm-esnek megfelelő gyújtótávolságú objektívnek köszönhetően a nagyon közel lévő levelek a kis szél ellenére is látványosan bemozdultak." />
 
     <h2>Mi számít hosszú expozíciónak?</h2>

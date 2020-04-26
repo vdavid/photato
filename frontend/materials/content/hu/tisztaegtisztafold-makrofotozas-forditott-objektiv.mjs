@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import EnlargeableFigure from '../../components/EnlargeableFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -28,14 +29,14 @@ export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return html`<div>
     <p class="note"><strong>Csíkos István</strong> fotóival először a facebookon találkoztam. Hihetetlen világot tárt a szemem elé, és a képekhez fűzött szövegeiből sugárzott a természet, az Élet szeretete. Úgy éreztem, Ő az az ember, akinek munkássága és szellemisége megérdemli a nagyobb figyelmet. Így megkértem, hogy írjon az általa használt technikáról és szemléletéről a blogon. Fogadd szeretettel. – Mayer Miklós</p>
-    <p>Üdvözlök mindenkit, a nevem Csíkos István! <a href="http://www.csikosistvan.com/" target="_blank">Makrofotózással foglalkozom szabadidőmben</a>, méghozzá egy viszonylag kevésbé elterjedt módjával, a fordított objektíves technikával. Erről fogok most leírni pár gondolatot.</p>
+    <p>Üdvözlök mindenkit, a nevem Csíkos István! <${ExternalLink} href="http://www.csikosistvan.com/">Makrofotózással foglalkozom szabadidőmben</a>, méghozzá egy viszonylag kevésbé elterjedt módjával, a fordított objektíves technikával. Erről fogok most leírni pár gondolatot.</p>
     <${EnlargeableFigure} fileName="makrofotozas-forditott-objektivvel.jpg" altText="makrofotozas forditott objektivvel" caption="Makrófotózás fordított objektivvel" />
     
     <h2>Alapok</h2>
     <p>Nagyjából 6 évvel ezelőtt kezdtem el fotózni, és az elejétől fogva a makró világ szippantott be leginkább. A vágy hogy felfedezzem ezt a körülöttünk lévő, mégis láthatatlannak tűnő világot olyan erős volt, hogy minden egyes fotózás után azon gondolkodtam hogy tudnék még mélyebbre jutni.</p>
     <p>Eleinte sok mindent kipróbáltam, egész drága objektívekre is összekapartam a rávalót (használtam Canon Ef 100mm f2.8L macro és végül Canon MP-E 65 obikat is), szereztem körvakut, és egy Canon MT 24-EX makrovakut is.</p>
     <p>Annak ellenére hogy a Canon MP-E65 objektívje gyakorlatilag csak makrofényképezésre használható, és tényleg elképesztő lencse, valahogy mégsem éreztem magaménak ezt az utat.</p>
-    <p>Hihetetlen leképzés (1:1 és 5:1 között !!!), remek felépítés és optikai teljesítmény, és mégis idegennek éreztem az egészet. Ez nem azt jelenti hogy ne lenne más számára közel tökéletes lencse, de nekem másra volt szükségem. És ekkor láttam először <a href="http://thomasshahan.com/#photos" target="_blank">Thomas Shahan képeit</a> (2012 környékén).</p>
+    <p>Hihetetlen leképzés (1:1 és 5:1 között !!!), remek felépítés és optikai teljesítmény, és mégis idegennek éreztem az egészet. Ez nem azt jelenti hogy ne lenne más számára közel tökéletes lencse, de nekem másra volt szükségem. És ekkor láttam először <${ExternalLink} href="http://thomasshahan.com/#photos">Thomas Shahan képeit</a> (2012 környékén).</p>
     
     <h2>Megérkeztem</h2>
     <p>Thomas fotóit látva tudtam, hogy mire van szükségem. Ez olyas fajta tudás, amit nem az elméjével tud az ember. Ahhoz hasonló, mikor feljössz a víz alól és levegőhöz jutsz. Nem kell gondolkodnod rajta, hogy ez jó-e neked vagy sem….</p>
@@ -213,13 +214,13 @@ export default function Article() {
     
     <h2>….talán itt az ideje emlékeznünk!</h2>
     <p>Köszönöm a lehetőséget a vendégírásra, remélem néhány ember kedvet kap a makrofotózáshoz, és remek képek születnek majd.</p>
-    <p>Még több fordított objektíves makrót és más egyéb fotóimat <a href="http://www.csikosistvan.com/" target="_blank">itt tudjátok megtekinteni</a>.</p>
+    <p>Még több fordított objektíves makrót és más egyéb fotóimat <${ExternalLink} href="http://www.csikosistvan.com/">itt tudjátok megtekinteni</a>.</p>
     <p>Üdvözlettel: Csíkos István</p>
     
     <h2 id="Egyeb_forrasok_forditott_objektives_makrofotozas_temaban">Egyéb források fordított objektíves makrófotózás témában</h2>
-    <p><a href="https://500px.com/krisztinmrkus" target="_blank">Márkus Krisztián 500px oldala</a></p>
-    <p><a href="http://kocsisgaborfoto.blogspot.hu/2014/02/makro-kicsit-megkozelebbrol-2resz.html" target="_blank">Kocsis Gábor technikai jellegű írása a fordított objektívekről</a></p>
-    <p><a href="http://kovadrifoto.blogger.hu/2013/10/04/makrofotozas-forditott-objektivvel-2" target="_blank">Kovács Adrienn írása</a></p>
-    <p><a href="http://thomasshahan.com/#photos" target="_blank">Thomas Shahan képei </a>és <a href="https://www.youtube.com/user/terser" target="_blank">videói</a></p>
+    <p><${ExternalLink} href="https://500px.com/krisztinmrkus">Márkus Krisztián 500px oldala</a></p>
+    <p><${ExternalLink} href="http://kocsisgaborfoto.blogspot.hu/2014/02/makro-kicsit-megkozelebbrol-2resz.html">Kocsis Gábor technikai jellegű írása a fordított objektívekről</a></p>
+    <p><${ExternalLink} href="http://kovadrifoto.blogger.hu/2013/10/04/makrofotozas-forditott-objektivvel-2">Kovács Adrienn írása</a></p>
+    <p><${ExternalLink} href="http://thomasshahan.com/#photos">Thomas Shahan képei </a>és <${ExternalLink} href="https://www.youtube.com/user/terser">videói</a></p>
 </div>`;
 }

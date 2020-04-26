@@ -2,6 +2,7 @@ import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
 import EnlargeableFigure from '../../components/EnlargeableFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -80,18 +81,18 @@ export default function Article() {
     <p>Másik példa a napraforgó, melynek magjai Fibonacci-spirálokba rendeződnek (ami az arany spirálnak felel meg). A balra és jobbra hajló spirálok száma mindig a Fibonacci sorozat tagjai közül valók.</p>
     <${EnlargeableFigure} fileName="napraforgo-fibonacci-szamok-2.jpg" altText="Napraforgó spirálok számai Fibonacci számok" caption="Fotó: Mayer Miklós" />
     <p>A fenti virágon 55 darab spirál helyezkedik el az óramutató járásával egyezően, és 89 óramutató járásával ellentétesen. Nem kevés időmbe telt, míg leszámoltam… Megkönnyebbültem a végére, hogy a napraforgó is tudta, hogyan kell nőnie 🙂</p>
-    <p>Azért rendeződnek Fibonacci-spirálba a szemek, mert ilyen elosztásban optimálisan betöltik a teret. És mindig, mindegyik új magnak azonosan egy szögben kell elfordulnia. Ez a szög pontosan megegyezik azzal, ha egy kört az aranymetszésnek megfelelően osztok fel. Akit komolyabban érdekel, az elvicceskedhet az <a href="https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html" target="_blank">ezen az oldalon</a> található kalkulátorral.</p>
+    <p>Azért rendeződnek Fibonacci-spirálba a szemek, mert ilyen elosztásban optimálisan betöltik a teret. És mindig, mindegyik új magnak azonosan egy szögben kell elfordulnia. Ez a szög pontosan megegyezik azzal, ha egy kört az aranymetszésnek megfelelően osztok fel. Akit komolyabban érdekel, az elvicceskedhet az <${ExternalLink} href="https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html">ezen az oldalon</a> található kalkulátorral.</p>
     <p>Vissza a fotózáshoz!</p>
-    <p>Klasszikus példa az aranymetszésre <strong><a href="http://mezofoldfoto.hu/" target="_blank">Krizák István</a></strong> <em>Éjjeli őrjárat</em> című fényképe.</p>
+    <p>Klasszikus példa az aranymetszésre <strong><${ExternalLink} href="http://mezofoldfoto.hu/">Krizák István</a></strong> <em>Éjjeli őrjárat</em> című fényképe.</p>
     <${EnlargeableFigure} fileName="Aranymetszes-Kizak-Istvan-ejjeli-orjarat.jpg" altText="Aranymetszés Krizák István" caption="Fotó: Krizák István / mezofoldfoto.hu" />
     <blockquote>
         <p>Az éjszakázóhelyére érkező, megkésett darucsapat ábrázolásánál egyértelmű volt számomra, hogy kedvenc kompozíciós szabályom, az aranymetszés alkalmazásával helyezem el a teliholdat a fényképezőgép keresőjében. Már csak a madarak érkezésére kellett várnom.</p>
         <p>A hosszú záridő miatt a csapat mozgása is érzékelhetővé vált, szerencsés elrendeződésükkel pedig (további kompozíciós elemként) majdnem tökéletes átlóban megfelezik a képet, sötét és világos részre osztva azt.</p>
-        <p><cite><a href="http://mezofoldfoto.hu/" target="_blank">Krizák István</a></cite></p>
+        <p><cite><${ExternalLink} href="http://mezofoldfoto.hu/">Krizák István</a></cite></p>
     </blockquote>
     <p>Ha egy tégalalapot folyamatosan aranymetszés szerint osztok, és mindig kört rajzolok a metszéspontokból, megkapom az ún arany-spirált:</p>
     <${EnlargeableFigure} fileName="goldenspiral4.png" altText="aranyspirál" />
-    <p>Az aranyspirált követő kompozícióra álljon itt <strong><a href="http://www.selmeczidaniel.com/" target="_blank">Selmeczi Dániel</a></strong> fényképe:</p>
+    <p>Az aranyspirált követő kompozícióra álljon itt <strong><${ExternalLink} href="http://www.selmeczidaniel.com/">Selmeczi Dániel</a></strong> fényképe:</p>
     <${EnlargeableFigure} fileName="selmeczi-aranymetszes-spiral-odarajzolva.jpg" altText="selmeczi aranymetszes spiral odarajzolva" caption="Fotó: Selmeczi Dániel / www.selmeczidaniel.com" />
 
     <h2 id="2_Harmadolas">2. Harmadolás</h2>
@@ -103,7 +104,7 @@ export default function Article() {
     <${EnlargeableFigure} fileName="harmadolas-tajkepen-budai-varbol.jpg" altText="harmadolas tajkepen budai varbol" caption="Fotó: Mayer Miklós" />
     <${EnlargeableFigure} fileName="harmadolas-naplemente.jpg" altText="harmadolas naplemente" caption="Fotó: Mayer Miklós, részlet egy timelapse videómból" />
     <p>Amikor 2011 januárjának egyik hajnalán, a Hármashatár-hegyen járva elém tárult a ködbe borított város, a kilógó Főtáv kéménnyel, én is “ösztönösen” jobbra, a harmadolásnak megfelelően komponáltam. De fogalmam sincs, hogy miért a jobb oldalra, valahogy így volt jó érzés ránézni.</p>
-    <p>Részletes <a href="https://tisztaegtisztafold.hu/budapest-kodben-timelapse-video/" target="_blank">sztori és timelapse videó itt</a>.</p>
+    <p>Részletes <${ExternalLink} href="https://tisztaegtisztafold.hu/budapest-kodben-timelapse-video/">sztori és timelapse videó itt</a>.</p>
     <${EnlargeableFigure} fileName="hármashatár-hegy-IMG_7669.jpg" altText="Budapest ködben hármashatár hegyről, csak a Főtáv kémény látszik ki." caption="Fotó: Mayer Miklós" />
     <p>Kiváló példa <strong>Vadász Anna</strong> <em>Tavaszi ébredés</em> című fényképe is:</p>
     <${EnlargeableFigure} fileName="Vadasz-Anna-Tavasz-szuletik-harmadolas.jpg" altText="Harmadolási szabály Vadász Anna fényképén" caption="Fotó: Vadász Anna / Anna Vadász Photography" />
@@ -112,9 +113,9 @@ export default function Article() {
         <p>A tavasz születik című képemet pár éve március közepén készítettem Szeged közelében a virágzó tarka sáfrányokról.
             <br /> Sokan egyből nekiláttak volna egy-egy szálat makrózni, én viszont igyekeztem megörökíteni a virágszőnyeg egy nagyobb darabját, mivel ritkán láthatóak ilyen sűrűségben (ezért is volt szerencsés az az év). Próbáltam az erdő hangulatát a háttérben lévő fákkal is szemléltetve visszaadni, így mindenképp szerettem volna őket a fotómba komponálni.</p>
         <p>A kép készítésekor a harmadolási szabályt alkalmaztam, amitől úgy gondolom egy letisztult, harmonikus eredményt kaptam, miközben a kis mélységélesség segített kiemelni az egyik legkorábban nyíló, védett tavaszi vadvirágunkat.</p>
-        <p><cite><a href="https://www.facebook.com/AnnaVadaszPhotography/" target="_blank">Vadász Anna</a></cite></p>
+        <p><cite><${ExternalLink} href="https://www.facebook.com/AnnaVadaszPhotography/">Vadász Anna</a></cite></p>
     </blockquote>
-    <p><a href="https://www.facebook.com/klararajnaiphotography/" target="_blank"><strong>Rajnai Klára</strong></a> csodálatos fényképével először bajban voltam: melyik ponthoz illesszem be? Mert hiába jó érzés nézni, nem tudtam hol megfogni a leírást.</p>
+    <p><${ExternalLink} href="https://www.facebook.com/klararajnaiphotography/"><strong>Rajnai Klára</strong></a> csodálatos fényképével először bajban voltam: melyik ponthoz illesszem be? Mert hiába jó érzés nézni, nem tudtam hol megfogni a leírást.</p>
     <p>Aztán rájöttem, hogy itt is a harmadolás-aranymetszés szabálya játszik, amit az alkotó azzal spékelt meg, hogy direkt középre komponálta a fát. Ezáltal az elhúzó madárraj egy érdekes feszültséget ad a képnek, míg a talaj és a fa koronájának elhelyezése egyensúlyt.</p>
     <${EnlargeableFigure} fileName="Rajnai-Klara-white-dream.jpg" altText="Rajnai Klára white dream" caption="Fotó: Rajnai Klára / Klara Rajnai Photography" />
     
@@ -137,21 +138,21 @@ export default function Article() {
     <${EnlargeableFigure} fileName="geometria-atlos-vonal-erszebet-hid-ejjel.jpg" altText="Elisabeth bridge in Budapest at night" caption="Fotó: Mayer Miklós" />
     <p>Tipp: a képek döntése embereknél is sokat segít!</p>
     <p>Mégis ki vesz észre ilyet, kinek jut ilyen eszébe?</p>
-    <p>Például hazánk neves Photoshop művészének, <strong><a href="http://www.floraborsi.com/" target="_blank">Borsi Flórának</a></strong>. Én a fejemet fogtam, amikor ezt a fotót megláttam: vajon hányszor láttam már ilyet, de egyszer sem vettem így észre???</p>
-    <p>Nem földi, hanem égi példa <strong><a href="http://pleiades.hu" target="_blank">Fényes Lóránd</a></strong> gyönyörű fotója az <em>Ádám teremtése</em> nevezetű mély-ég objektumról:</p>
+    <p>Például hazánk neves Photoshop művészének, <strong><${ExternalLink} href="http://www.floraborsi.com/">Borsi Flórának</a></strong>. Én a fejemet fogtam, amikor ezt a fotót megláttam: vajon hányszor láttam már ilyet, de egyszer sem vettem így észre???</p>
+    <p>Nem földi, hanem égi példa <strong><${ExternalLink} href="http://pleiades.hu">Fényes Lóránd</a></strong> gyönyörű fotója az <em>Ádám teremtése</em> nevezetű mély-ég objektumról:</p>
     <${EnlargeableFigure} fileName="Adam-teremtese-Fenyes-Lorand.jpg" altText="Ádám teremtése Fényes Loránd" caption="Forrás: Fényes Lóránd / fenyeslorand.hu" />
     <blockquote>
         <p>A kompozíció kérdése azért nagyon érdekes, mert az asztrofotográfia látszólag egy statikus világ bemutatására tett kísérlet, ahol – szemben a földi fotográfiával nem a jelenben, az általunk is érzékelhető időben való mozgásban – hanem a mi időnkhöz képest “megkövült” állapotban, a múltba nézve örökítünk meg dolgokat.</p>
         <p>Pedig ennél nagyobbat nem is tévedhetnénk!</p>
         <p>Az univerzum nagyon gazdag és számos kompozíciós játékra ad lehetőséget ez az elképesztően hatalmas világ. Az űrben rejlő objektumok minden átfogásban más arcukat mutatják. Átlók, metszéspontok, súlyok, geometriai formák… ennél gazdagabb kompozíciós lehetőséget elképzelni is nehéz. Két fő területet tudnék kiemelni a kérdésedre.</p>
-        <p>Az egyik azoknak a képeknek a sora, ahol csillagászati értelemben nem különösebben gazdag a kép, ám a csillagok elhelyezkedése kifejezetten esztétikus, a fotográfiai kompozíciós szabályoknak szerint nyújt vizuális élményt. Erre példa az <a href="http://fenyeslorand.hu/gyemantok-a-csillagtengerben/" target="_blank">M7 csillaghalmaz</a>, ahol a tenger csillagmező előtt ragyogó, aranymetszés közelében elhelyezkedő kék csoportot a sötét porködök zárójele öleli körbe, vagy az <a href="http://fenyeslorand.hu/csillaghalmaz-csillaglanc/" target="_blank">NGC 2547</a> nyílthalmaz, ahol három téma is feszül a képen: a névadó csoport bal alul aranymetszés közelében, a különös, egyenes aszterizmus nyílegyenes csillaglánca és a nagy méretű kék és sárga csillagok bal felső sarokból a jobb alsóba tartó íve.</p>
-        <p>A másik nagy területet azok a képek fedik le, ahol a fényképen a szemlélő – eleresztve a fantáziáját – a kompozíció miatt földi témákra hajazó formákat azonosíthat be a fényképen. Valahogy úgy, ahogy a felhőkben is megtaláljuk azokat a formákat, amik valamilyen létező dologra emlékeztetnek minket. Erre jó példa a <a href="http://fenyeslorand.hu/sziv-kod/" target="_blank">Szív-köd</a>, vagy az <a href="http://fenyeslorand.hu/a-lelek-kod/" target="_blank">Embrió-köd</a>. Talán a legizgalmasabb ilyen kompozícióm az Ádám teremtése című kép. Michelangelo mesterműve a Sixtusi-kápolnából nagyon hasonló mozdulatot ragad meg, mint amit a vörös emissziós ködök mutatnak: mint két egymás felé nyúló kéz, ami mögött a kék reflexiós köd megnyugtató hátteret ad.</p>
-        <p><cite> <a href="http://fenyeslorand.hu/" target="_blank">Fényes Lóránd</a></cite></p>
+        <p>Az egyik azoknak a képeknek a sora, ahol csillagászati értelemben nem különösebben gazdag a kép, ám a csillagok elhelyezkedése kifejezetten esztétikus, a fotográfiai kompozíciós szabályoknak szerint nyújt vizuális élményt. Erre példa az <${ExternalLink} href="http://fenyeslorand.hu/gyemantok-a-csillagtengerben/">M7 csillaghalmaz</a>, ahol a tenger csillagmező előtt ragyogó, aranymetszés közelében elhelyezkedő kék csoportot a sötét porködök zárójele öleli körbe, vagy az <${ExternalLink} href="http://fenyeslorand.hu/csillaghalmaz-csillaglanc/">NGC 2547</a> nyílthalmaz, ahol három téma is feszül a képen: a névadó csoport bal alul aranymetszés közelében, a különös, egyenes aszterizmus nyílegyenes csillaglánca és a nagy méretű kék és sárga csillagok bal felső sarokból a jobb alsóba tartó íve.</p>
+        <p>A másik nagy területet azok a képek fedik le, ahol a fényképen a szemlélő – eleresztve a fantáziáját – a kompozíció miatt földi témákra hajazó formákat azonosíthat be a fényképen. Valahogy úgy, ahogy a felhőkben is megtaláljuk azokat a formákat, amik valamilyen létező dologra emlékeztetnek minket. Erre jó példa a <${ExternalLink} href="http://fenyeslorand.hu/sziv-kod/">Szív-köd</a>, vagy az <${ExternalLink} href="http://fenyeslorand.hu/a-lelek-kod/">Embrió-köd</a>. Talán a legizgalmasabb ilyen kompozícióm az Ádám teremtése című kép. Michelangelo mesterműve a Sixtusi-kápolnából nagyon hasonló mozdulatot ragad meg, mint amit a vörös emissziós ködök mutatnak: mint két egymás felé nyúló kéz, ami mögött a kék reflexiós köd megnyugtató hátteret ad.</p>
+        <p><cite> <${ExternalLink} href="http://fenyeslorand.hu/">Fényes Lóránd</a></cite></p>
     </blockquote>
     
     <h2 id="4_Keretbe_foglalas">4. Keretbe foglalás</h2>
     <p>Keretbe foglalva bármilyen unalmas kompozíciót fel lehet dobni. Csak arra kell figyelni, hogy a keret maga is harmóniában legyen a bekeretezett témával.</p>
-    <p>Jó példák erre HDR fényképész barátom, <strong><a href="http://hdrshooter.com" target="_blank">Miroslav Petrasko</a></strong> fotói az Eiffel toronyról:</p>
+    <p>Jó példák erre HDR fényképész barátom, <strong><${ExternalLink} href="http://hdrshooter.com">Miroslav Petrasko</a></strong> fotói az Eiffel toronyról:</p>
     <${EnlargeableFigure} fileName="kereteze-Eiffel-torony-Paris_DSC0579-web-X2.jpg" altText="Eiffel-torony keretbe foglalva" caption="Forrás: Miroslav Petrasko / HDRshooter.com" />
     <${EnlargeableFigure} fileName="keretezes-Eiffel-torony-Paris_DSC0479-web-X2.jpg" altText="Eiffel torony keretben" caption="Forrás: Miroslav Petrasko / HDRshooter.com" />
     
@@ -160,7 +161,7 @@ export default function Article() {
     <${EnlargeableFigure} fileName="Vaci-Dom-ejjel.jpg" altText="Egyensúly a kompozicíóban" />
     <p>A fenti képen a váci Dómot ellensúlyozza a bal oldalon lévő lámpa. A dóm középről nézve is jól néz ki, de ott nincs benne semmi izgalmas szög:</p>
     <${EnlargeableFigure} fileName="vaci-dom-ejjel-szembol.jpg" altText="Váci Dóm éjjel, szemből" />
-    <p>Az egyensúly megléte tökéletesen látható <strong><a href="http://www.csikosistvan.com/" target="_blank">Csíkos István</a></strong> panorámáján, melyet a Vadálló-kövekről készített:</p>
+    <p>Az egyensúly megléte tökéletesen látható <strong><${ExternalLink} href="http://www.csikosistvan.com/">Csíkos István</a></strong> panorámáján, melyet a Vadálló-kövekről készített:</p>
     <${EnlargeableFigure} fileName="Csikos-Istvan-egyensuly.jpg" altText="Egyensúly a kompozícióban" caption="Fotó: Csíkos István / csikosistvan.com" />
     <blockquote>
         <p>Azt hiszem ez lesz az a kép amit leginkább szeretek kompozíció szempontjából.<br />
@@ -178,7 +179,7 @@ export default function Article() {
         Innen egy kicsit visszakanyarodva a fény veszi át a téma vezetését, ami már megfoghatatlan, csodálatos, és elvezet a végső témához ami pedig ugye a nap, illetve az a határtalannak és felfoghatatlannak tűnő energia (a képen fény) gombolyag amit az elme mér nem képes feldarabolni, felosztani, felfogni vagy megragadni.</p>
         <p>Végül oda jut a tekintet ahová a kép szeretné elvezetni.</p>
         <p>Szerintem ilyen szempontból nekem ez egy sikeres kép, még akkor is ha nem olyan a fogadtatása amilyenre számítottam.</p>
-        <p>Persze mivel én ott voltam nekem nyilván többet jelent, felidéz egy élményt. <cite><a href="http://www.csikosistvan.com/" target="_blank">Csíkos István</a></cite></p>
+        <p>Persze mivel én ott voltam nekem nyilván többet jelent, felidéz egy élményt. <cite><${ExternalLink} href="http://www.csikosistvan.com/">Csíkos István</a></cite></p>
     </blockquote>
     
     <h2 id="Komponalasi_erzek_fejlesztese">Komponálási érzék fejlesztése</h2>
@@ -195,7 +196,7 @@ export default function Article() {
     <h3 id="Fotozas_fix_objektivvel">Fotózás fix objektívvel</h3>
     <p>Az egyik legjobb fotós agyfejlesztő játék fix gyújtótávolságú objektívvel fotózni. Nem zoomolással, egy helyben állva oldani meg a feladatot, hanem a fix látószög adta keretet kihasználva gondolkodásra és mozgásra késztetni magamat.</p>
     <p>Saját sztorim:</p>
-    <p>2011-ben a Kanári szigeteken jártam, hogy <a href="https://tisztaegtisztafold.hu/timelapse-video-tenerife-szigeterol/" target="_blank">timelapse videót</a> készítsek.</p>
+    <p>2011-ben a Kanári szigeteken jártam, hogy <${ExternalLink} href="https://tisztaegtisztafold.hu/timelapse-video-tenerife-szigeterol/">timelapse videót</a> készítsek.</p>
     <p>Ez állandó állványcipelést és rendszeres objektívcserét követelt meg. Aztán az utolsó napomon megelégeltem, hogy nem tudok csak úgy lazán kirándulni… Feltettem hát az 50mm f/1,4-s fixet, és azzal játszadoztam, hogy a tájat és az út mentén elszáradt bokrokat, füveket miként tudom lefotózni.</p>
     <div class="figures">
         <${EnlargeableFigure} fileName="Tenerife-kozel-tavol.jpg" altText="Tenerife" />
@@ -209,7 +210,7 @@ export default function Article() {
     <p>Kedvencem erre a célra a fényerős fix 50 mm-s objektívek. Élesek, könnyűek, se nem nagy, se nem kicsi a látómező.</p>
     
     <h3 id="Rajzolas">Rajzolás</h3>
-    <p>Ezt nem próbáltam ki, hanem csak Elena Shumilovától olvastam. Ő az az orosz hölgy, aki azokat varázslatos természetközeli gyerekportrékat készíti, és akiről <a href="https://tisztaegtisztafold.hu/elena-shumilova-tanacsai-gyerekfotozashoz/">én is írtam itt a blogon</a>.</p>
+    <p>Ezt nem próbáltam ki, hanem csak Elena Shumilovától olvastam. Ő az az orosz hölgy, aki azokat varázslatos természetközeli gyerekportrékat készíti, és akiről <${ExternalLink} href="https://tisztaegtisztafold.hu/elena-shumilova-tanacsai-gyerekfotozashoz/">én is írtam itt a blogon</a>.</p>
     <${EnlargeableFigure} fileName="elena-shumilova-kutyás.jpg" altText="elena shumilova gyerekfotó" />
     <p>Ő mesélte egy interjúban, hogy minden képét előre megrajzolja. Nem festői szinten, hanem csak a formákat és kompozíciót vázolja fel, és ez segít neki a helyszínen a fotózás alatt.</p>
     <p>Az írás végét egy magamnak is szánt emlékeztetővel zárom:</p>

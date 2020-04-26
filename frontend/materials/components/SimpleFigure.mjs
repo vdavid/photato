@@ -9,7 +9,7 @@ import {useMaterialContext} from './MaterialContextProvider.mjs';
  * @param {string} [titleText]
  * @param {string} [caption]
  * @param {string} [width] CSS width for the element. Default is "100%".
- * @returns {string}
+ * @returns {React.ReactElement}
  * @private
  */
 export default function SimpleFigure({fileName, altText, titleText, caption, width = '100%'}) {

@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -99,7 +100,7 @@ export default function Article() {
     
     <h3>Alkalmazások</h3>
     <p<${SimpleFigure} fileName="PlayMemories-1024x843-1024x843.jpg" alt="Illusztráció" />
-    <p>Keresd fel a <a href="https://www.playmemoriescameraapps.com/portal/" target="_blank">Play Memories Camera Apps</a> -t további infókért!</p>
+    <p>Keresd fel a <${ExternalLink} href="https://www.playmemoriescameraapps.com/portal/">Play Memories Camera Apps</a> -t további infókért!</p>
     <p>Ez a két applikáció igazán hasznos lehet (ha Te is Sony fényképezőgépet használsz).
     <ul>
         <li>Smart Remote (FREE)</li>
@@ -181,6 +182,6 @@ export default function Article() {
     <${SimpleFigure} fileName="20150303_Norway_8212-1024x684-1024x684.jpg" alt="Illusztráció" />
     <p><strong>Hagyd, hogy az ég uralkodjon a képen:</strong> Colby szereti ha az éjszakai kép nagy részét az ég teszi ki, persze fontos, hogy valami érdekes izgalmas téma legyen az előtérbe. Emiatt előszeretettel használ nagy látószögű objektívet.</p>
     <${SimpleFigure} fileName="20160306_Iceland_2417-Edit-Edit-684x1024-684x1024.jpg" alt="Illusztráció" />
-    <p><a href="http://pushfurther.indurogear.com/2017/07/18/learn-the-fundamentals-of-long-exposure-photography/" target="_blank">Az eredeti cikket itt olvashatod!</a></p>
+    <p><${ExternalLink} href="http://pushfurther.indurogear.com/2017/07/18/learn-the-fundamentals-of-long-exposure-photography/">Az eredeti cikket itt olvashatod!</a></p>
 </div>`;
 }

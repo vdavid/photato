@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -29,7 +30,7 @@ export default function Article() {
     return html`<div>
     <p>Kedvencünk - legyen az kutya, macska, degu, papagáj vagy bármi egyéb háziállat - hamar belopja magukat a szívünkbe, és fel sem tűnik, hogy már több száz fotót készítettünk róla. De vajon hogyan készíthetünk tökéletes képeket? Olvasd el és alkalmazd tippjeinket, és neked is szuper fotóid lesznek háziállatodról!</p>
     <h2>Hogyan fotózzuk kedvenceinket?</h2>
-    <p>A <a href="http://www.haziallat.hu/kutya/kutyafajtak/" target="_blank">kutyák</a>, <a href="http://www.haziallat.hu/macska/macskafajtak/" target="_blank">macskák</a> és egyéb házikedvencek fotózása nem mindig könnyű feladat: ők nem értik, mi történik ilyenkor és nem várhatjuk, hogy pózoljanak kameránk előtt! Szerencsére léteznek egyszerű praktikák, melyeket bárki alkalmazhat. Összegyűjtöttük a 9 legegyszerűbb trükköt:</p>
+    <p>A <${ExternalLink} href="http://www.haziallat.hu/kutya/kutyafajtak/">kutyák</a>, <${ExternalLink} href="http://www.haziallat.hu/macska/macskafajtak/">macskák</a> és egyéb házikedvencek fotózása nem mindig könnyű feladat: ők nem értik, mi történik ilyenkor és nem várhatjuk, hogy pózoljanak kameránk előtt! Szerencsére léteznek egyszerű praktikák, melyeket bárki alkalmazhat. Összegyűjtöttük a 9 legegyszerűbb trükköt:</p>
     
     <h2>1. Használj természetes fényt!</h2>
     <p>Amikor csak lehet, természetes fénynél fotózz! A vaku használata nem tanácsos: nem csak a vörös szem-effektus miatt, hanem azért sem, mert megijesztheti az állatot.<strong> </strong>A szabadban késő délután a legszebbek a fények, a déli tűző napsütés nem ideális a fotózáshoz.</p>

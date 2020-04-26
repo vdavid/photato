@@ -5,7 +5,7 @@ import {createElement} from '../../web_modules/react.js';
  * @param {int} [width] Default is 560.
  * @param {int} [height] Default is 315.
  * @param {Object} [props] Any other properties, they'll be applied to the iframe element
- * @returns {string}
+ * @returns {React.ReactElement}
  * @private
  */
 export default function YouTubeVideo({src, width = 560, height = 315, ...props}) {
