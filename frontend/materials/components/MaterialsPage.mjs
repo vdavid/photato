@@ -1,7 +1,8 @@
-import {articleSlugsByLanguage} from '../external-articles-repository.mjs';
+import {articleSlugsByLanguageAndByWeek} from '../external-articles-repository.mjs';
 import {createElement, useState, useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
+import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
 
 /**
  * @typedef {Object} ArticleMetadata
@@ -23,17 +24,29 @@ export default function MaterialsPage() {
     const {getActiveLocaleCode, __} = useI18n();
 
     const languageCode = getActiveLocaleCode().substring(0, 2);
-    const slugs = articleSlugsByLanguage[languageCode];
+    const slugsByWeek = articleSlugsByLanguageAndByWeek[languageCode];
 
     /* Load articles */
 
-    const [/** @type {ThirdPartyArticle[]} */ articles, setArticles] = useState([]);
+    const [/** @type {ThirdPartyArticle[]} */ articlesByWeek, setArticlesByWeek] = useState({});
     useEffect(() => {
-        async function loadArticles() {
-            setArticles(await Promise.all(slugs.map(slug => import('../content/' + languageCode + '/' + slug + '.mjs'))));
+        /**
+         * @param {string[]} slugs
+         * @returns {Promise<ThirdPartyArticle[]>}
+         */
+        function loadArticlesForOneWeek(slugs) {
+            return Promise.all(slugs.map(slug => import('../content/' + languageCode + '/' + slug + '.mjs')));
         }
 
-        loadArticles().then(() => {});
+        async function loadArticlesForAllWeeks() {
+            /** @type {{weekIndex: string, articles: ThirdPartyArticle[]}[]} */
+            const articlePromisesForEachWeek = Object.entries(slugsByWeek).map(async ([weekIndex, slugs]) => ({weekIndex, articles: await loadArticlesForOneWeek(slugs)}));
+            /** @type {Object<int, ThirdPartyArticle[]>} */
+            const articlesForEachWeek = (await Promise.all(articlePromisesForEachWeek)).reduce((object, {weekIndex, articles}) => ({...object, [weekIndex]: articles}), {});
+            setArticlesByWeek(articlesForEachWeek);
+        }
+
+        loadArticlesForAllWeeks().then(() => {});
     }, []);
 
     return [
@@ -46,10 +59,22 @@ export default function MaterialsPage() {
         Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`)
             }
         }),
-        articles.length
-            ? createElement('ul', {}, articles.map(renderArticleToListElement))
+        Object.keys(articlesByWeek).length
+            ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
             : __('Loading articles...'),
     ];
+
+    /**
+     * @param {int} weekIndex
+     * @param {ThirdPartyArticle[]} articles
+     * @returns {React.ReactElement[]|null}
+     */
+    function renderOneWeek(weekIndex, articles) {
+        return articles.length ? [
+            createElement('h2', {}, __(weeklyChallengeTitles[weekIndex - 1])),
+            createElement('ul', {}, articles.map(renderArticleToListElement)),
+        ] : null;
+    }
 
     /**
      * @param {ThirdPartyArticle} article
@@ -57,10 +82,11 @@ export default function MaterialsPage() {
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
         return createElement('li', {className: metadata.isOriginalUrlBroken ? 'broken' : ''}, [
-            createElement('a', {href: metadata.originalUrl, target: '_blank'}, metadata.publisherName + ': ' + metadata.title),
-            ' [',
-            createElement(NavLink, {to: '/external-article/' + metadata.slug}, __('Cached version on Photato')),
-            ']'
+            '[',
+            createElement(NavLink, {to: '/external-article/' + metadata.slug}, __('🥔 cached version')),
+            '] ',
+            createElement('a', {href: metadata.originalUrl, target: '_blank', className: metadata.isOriginalUrlBroken ? 'brokenLink' : ''}, metadata.publisherName + ': ' + metadata.title),
+            metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'
         ]);
     }
 }

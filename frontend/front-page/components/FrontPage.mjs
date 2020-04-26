@@ -19,13 +19,12 @@ export default function FrontPage() {
         createElement('div', {},
             createElement(NavLinkButton, {
                 to: '/upload',
-                className: 'actionButton',
                 disabled: !isAuthenticated,
                 title: !isAuthenticated ? __('You’ll need to sign in to upload a photo.') : '',
             }, __('Upload your weekly photo')),
         ),
         createElement('div', {},
-            !isAuthenticated ? createElement('button', {className: 'actionButton', onClick: handleSignIn}, __('Sign in')) : null
+            !isAuthenticated ? createElement('button', {onClick: handleSignIn}, __('Sign in')) : null
         ),
     ];
 }

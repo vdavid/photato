@@ -71,7 +71,7 @@ export const translations = {
         Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.`
         },
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
-    'Cached version on Photato': {translation: 'Mentett verzió a Photaton'},
+    '🥔 cached version': {translation: '🥔 mentett verzió'},
     'Photato’s Facebook page': {translation: 'A Photato Facebook oldala'},
     'Photato’s Instagram': {translation: 'A Photato Instagram oldala'},
 };

@@ -33,7 +33,7 @@ export default function MaterialPage() {
     }, [article]);
 
     return article.isLoaded ? createElement(MaterialContextProvider, {metadata: article.metadata},
-        createElement(NavLinkButton, {to: '/materials', className: 'actionButton'}, '←' + __('Back to the list of materials')),
+        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
         createElement('article', {},
             createElement('header', {},
                 createElement('h1', {}, article.metadata.title),
@@ -44,9 +44,9 @@ export default function MaterialPage() {
             ),
             createElement(article.component, {}),
         ),
-        createElement(NavLinkButton, {to: '/materials', className: 'actionButton'}, '←' + __('Back to the list of materials')),
+        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
     ) : [
         __('Loading article...'),
-        createElement(NavLinkButton, {to: '/materials', className: 'actionButton'}, '←' + __('Back to the list of materials')),
+        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
     ];
 }

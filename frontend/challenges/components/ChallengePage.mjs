@@ -46,11 +46,10 @@ export default function ChallengePage() {
                 : __('Loading challenge...'),
             (parseInt(weekIndex) === currentWeekIndex) ? createElement(NavLinkButton, {
                 to: '/upload',
-                className: 'actionButton',
                 disabled: !isAuthenticated,
                 title: !isAuthenticated ? __('You’ll need to sign in to upload a photo.') : '',
             }, __('Upload your weekly photo')) : null,
-            createElement(NavLinkButton, {to: '/challenges', className: 'actionButton'}, '← ' + __('Back to the challenge list')),
+            createElement(NavLinkButton, {to: '/challenges'}, '← ' + __('Back to the challenge list')),
         )
         : createElement(Error404Page);
 }
