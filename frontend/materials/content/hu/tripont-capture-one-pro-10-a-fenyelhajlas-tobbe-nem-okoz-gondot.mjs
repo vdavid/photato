@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -48,7 +49,7 @@ export default function Article() {
         </tbody>
     </table>
     
-    <h2>Egy példa a fényelhajlásra<a href="http: //blog.phaseone.com/compensate-lost-sharpness-small-apertures/skaermbillede-2017-01-26-kl-14-11-23/"><br /></a></h2>
+    <h2>Egy példa a fényelhajlásra<${ExternalLink} href="http: //blog.phaseone.com/compensate-lost-sharpness-small-apertures/skaermbillede-2017-01-26-kl-14-11-23/"><br /></a></h2>
     <p>Szeretném, hogy lásd, mennyi élességet és kontrasztot is veszítesz a fényelhajlás miatt! A teszthez a Phase One XF 100MP kamerarendszert használtam AF 45mm objektívvel. Ez a fényképezőgép alacsony remegési móddal rendelkezik, amely az elektronikus első függöny és a beépített vibrációérzékelők segítségével elmozdulásmentes expozíciót biztosít. Azaz minden életlenség, amit az alábbi példában látsz, kizárólag a fényelhajlás miatt jött létre.</p>
     <${SimpleFigure} fileName="fenyelhajlas-kompenzalasa-Capture-One-Pro-10-1.jpg" alt="Illusztráció" caption="A fényelhajlás hatása a fotón" />
     <${SimpleFigure} fileName="fenyelhajlas-kompenzalasa-Capture-One-Pro-10-2.jpg" alt="Illusztráció" caption="200%-os zoomolás a kép közepébe" />

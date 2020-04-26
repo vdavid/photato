@@ -2,6 +2,7 @@ import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
 import EnlargeableFigure from '../../components/EnlargeableFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 const html = htm.bind(createElement);
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
@@ -103,6 +104,6 @@ export default function Article() {
         <li>A blende hatással van a mélységélességre (Mélységélesség anyaghoz <a title="Mélységélesség" href="http://www.fotobetyar.hu/interaktivanyagok/melysegelesseg/">kattints ide</a>), fényerős optikának tágabb a blendéje &gt;&gt; kisebb a mélységélessége, <strong>szebben tudsz kiemelni</strong></li>
         <li><strong>Vakuzásnál</strong>, világításnál<strong> kisebb villanás</strong>, fényerő szükséges</li>
     </ul>
-    <p>A jó minőségű optikai üveg alapanyaga nagyon drága. <strong>A nagy fényerőhöz, nagy átmérő &gt;&gt; sok üveg</strong> szükségeltetik. Ezért a jó minőségű optika, ami nagy fényerejű igen borsos árcetlivel érkezik. Ha érdekel ez kis összefüggés, egy erről szóló cikkünket ajánljuk figyelmedbe. Eléréséhez csak <a href="http://www.fotobetyar.hu/az-objektivek-genetikaja/">kattints ide</a> &gt;&gt;</p>
+    <p>A jó minőségű optikai üveg alapanyaga nagyon drága. <strong>A nagy fényerőhöz, nagy átmérő &gt;&gt; sok üveg</strong> szükségeltetik. Ezért a jó minőségű optika, ami nagy fényerejű igen borsos árcetlivel érkezik. Ha érdekel ez kis összefüggés, egy erről szóló cikkünket ajánljuk figyelmedbe. Eléréséhez csak <${ExternalLink} href="http://www.fotobetyar.hu/az-objektivek-genetikaja/">kattints ide</a> &gt;&gt;</p>
 </div>`;
 }

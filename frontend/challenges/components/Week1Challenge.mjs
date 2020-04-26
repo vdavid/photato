@@ -1,9 +1,9 @@
 import {createElement} from '../../web_modules/react.js';
 import htm from '../../web_modules/htm.js';
-
-const html = htm.bind(createElement);
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
+import ExternalLink from '../../materials/components/ExternalLink.mjs';
+const html = htm.bind(createElement);
 
 /**
  * @param {string} formattedDeadline
@@ -46,19 +46,19 @@ export default function Week1Challenge({formattedDeadline}) {
 
 <p>5 link az érdeklődőknek mások még jobb gasztrofotó-tippjeire:</p>
 <ul>
-    <li><a href="http://www.mindmegette.hu/az-etelfotozas-fortelyai-47232/">7 tipp a mindmegette.hu-tól</a> – ha valaki, ők értenek a kajákhoz.</li>
-    <li><a href="http://blog.fotosarok.hu/2018/11/etelfotos-trukkok-foodstyling-alapok/">10 tipp Jay P. Morgan fotóstól</a> – mobillal fotózóknak különösen ajánlott.</li>
-    <li>2-in-1: Tippek <a href="https://blogokrolneked.cafeblog.hu/2015/07/10/gasztro-fotozas-alapjai-12-pontban/">kezdőknek</a> és <a href="https://blogokrolneked.cafeblog.hu/2015/07/24/igy-alapozd-meg-gasztrofotoid-sikeret/">haladóknak</a> – 12+10 tipp, szép képekkel.</li>
-    <li>3-in-1: Három gyönyörű videó: <a href="https://vimeo.com/133158982">Környezet és fények</a> [2p], <a href="https://vimeo.com/132959943">Stílus és kiegészítők</a> [1p], <a href="https://vimeo.com/132959942">Komponálás és keretezés</a> [1p]</li>
-    <li><a href="https://nlc.hu/eletmod/20161114/profi-etelfoto-trukkok/">5 tipp csaláshoz</a> – a “kajának kinéző dolog, ami nem is kaja” ötletre elég jól rezonál.</li>
+    <li><${ExternalLink} href="http://www.mindmegette.hu/az-etelfotozas-fortelyai-47232/">7 tipp a mindmegette.hu-tól</a> – ha valaki, ők értenek a kajákhoz.</li>
+    <li><${ExternalLink} href="http://blog.fotosarok.hu/2018/11/etelfotos-trukkok-foodstyling-alapok/">10 tipp Jay P. Morgan fotóstól</a> – mobillal fotózóknak különösen ajánlott.</li>
+    <li>2-in-1: Tippek <${ExternalLink} href="https://blogokrolneked.cafeblog.hu/2015/07/10/gasztro-fotozas-alapjai-12-pontban/">kezdőknek</a> és <${ExternalLink} href="https://blogokrolneked.cafeblog.hu/2015/07/24/igy-alapozd-meg-gasztrofotoid-sikeret/">haladóknak</a> – 12+10 tipp, szép képekkel.</li>
+    <li>3-in-1: Három gyönyörű videó: <${ExternalLink} href="https://vimeo.com/133158982">Környezet és fények</a> [2p], <${ExternalLink} href="https://vimeo.com/132959943">Stílus és kiegészítők</a> [1p], <${ExternalLink} href="https://vimeo.com/132959942">Komponálás és keretezés</a> [1p]</li>
+    <li><${ExternalLink} href="https://nlc.hu/eletmod/20161114/profi-etelfoto-trukkok/">5 tipp csaláshoz</a> – a “kajának kinéző dolog, ami nem is kaja” ötletre elég jól rezonál.</li>
 </ul>
 
-<p>További profi galériák, nyálcsorgatásra és inspirációul: <a href="https://hu.pinterest.com/search/pins/?rs=ac&len=2&q=food%20photography&eq=food%20ph&etslf=5905&term_meta[]=food%7Cautocomplete%7Cundefined&term_meta[]=photography%7Cautocomplete%7Cundefined">Pinterest kajafotók</a>
-| <a href="http://libbyvision.com/">Libby Vision Studio</a>
-| <a href="https://www.francescotonelli.com/">Francesco Tonelli</a>
-| <a href="http://foodphotography.co.uk/">David Munns</a>
-| <a href="https://www.mittongtarestudio.com/">Mittongtare Studio</a>
-| <a href="http://clarebarboza.com/">Clare Barboza</a>
-| <a href="http://www.keikooikawa.com/food#0">Keiko Oikawa</a>
-| <a href="http://www.timhillfoodphotographer.com/">Tim Hill</a></p>`;
+<p>További profi galériák, nyálcsorgatásra és inspirációul: <${ExternalLink} href="https://hu.pinterest.com/search/pins/?rs=ac&len=2&q=food%20photography&eq=food%20ph&etslf=5905&term_meta[]=food%7Cautocomplete%7Cundefined&term_meta[]=photography%7Cautocomplete%7Cundefined">Pinterest kajafotók</a>
+| <${ExternalLink} href="http://libbyvision.com/">Libby Vision Studio</a>
+| <${ExternalLink} href="https://www.francescotonelli.com/">Francesco Tonelli</a>
+| <${ExternalLink} href="http://foodphotography.co.uk/">David Munns</a>
+| <${ExternalLink} href="https://www.mittongtarestudio.com/">Mittongtare Studio</a>
+| <${ExternalLink} href="http://clarebarboza.com/">Clare Barboza</a>
+| <${ExternalLink} href="http://www.keikooikawa.com/food#0">Keiko Oikawa</a>
+| <${ExternalLink} href="http://www.timhillfoodphotographer.com/">Tim Hill</a></p>`;
 }

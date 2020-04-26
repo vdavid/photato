@@ -1,9 +1,10 @@
 import {createElement} from '../../web_modules/react.js';
 import htm from '../../web_modules/htm.js';
-
-const html = htm.bind(createElement);
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
+import ExternalLink from '../../materials/components/ExternalLink.mjs';
+const html = htm.bind(createElement);
+
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
@@ -31,14 +32,14 @@ export default function Week11Challenge({formattedDeadline}) {
 </ol>
 <p><strong>Rengeteg ötlet és inspiráció:</strong></p>
 <ul>
-    <li><a href="https://iso.500px.com/creative-self-portraits/">50 önarckép-ötlet</a> az 500px-en</li>
-    <li>Mobile Photography Awards nyertesek: <a href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-7th-annual-mpa/">2017</a> | <a href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <a href="https://mobilephotoawards.com/self-portraits/">2015</a></li>
-    <li><a href="https://hu.pinterest.com/search/pins/?q=self%20portrait%20photography&rs=typed&term_meta[]=self%7Ctyped&term_meta[]=portrait%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</a> önarcképek</li>
-    <li><a href="http://www.bwvision.com/top-10-self-portraits/">8 fotós (és két festő) önarcképe</a></li>
+    <li><${ExternalLink} href="https://iso.500px.com/creative-self-portraits/">50 önarckép-ötlet</a> az 500px-en</li>
+    <li>Mobile Photography Awards nyertesek: <${ExternalLink} href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-7th-annual-mpa/">2017</a> | <${ExternalLink} href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <${ExternalLink} href="https://mobilephotoawards.com/self-portraits/">2015</a></li>
+    <li><${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=self%20portrait%20photography&rs=typed&term_meta[]=self%7Ctyped&term_meta[]=portrait%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</a> önarcképek</li>
+    <li><${ExternalLink} href="http://www.bwvision.com/top-10-self-portraits/">8 fotós (és két festő) önarcképe</a></li>
 </ul>
 <p><strong>Linkek:</strong></p>
 <ul>
-    <li><a href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</a> az expertphotography.com-tól</li>
+    <li><${ExternalLink} href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</a> az expertphotography.com-tól</li>
 </ul>
 <p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 <p>Az önarcképeket pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>

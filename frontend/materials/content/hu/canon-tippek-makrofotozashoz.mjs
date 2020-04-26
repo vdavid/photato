@@ -1,6 +1,7 @@
 import {createElement} from '../../../web_modules/react.js';
 import htm from '../../../web_modules/htm.js';
 import SimpleFigure from '../../components/SimpleFigure.mjs';
+import ExternalLink from '../../components/ExternalLink.mjs';
 
 const html = htm.bind(createElement);
 
@@ -58,6 +59,6 @@ export default function Article() {
     <p>Ha állványt használsz a fényképezéshez, néhány egyszerű trükkel még stabilabbá teheted a fényképezőgépet. Az exponálógomb elnyomása a fényképezőgép bemozdulását okozhatja. Ha nincs különösebb jelentősége annak, hogy melyik pillanatban készül el a kép, állítsd be az önkioldót 2 másodpercre, mert ez alatt az idő alatt megszűnik a mozgás. Ha fontos az időzítés, használj távkioldót. Így pontosan abban a pillanatban készítheted el a képet, amikor szeretnéd, mégsem kell hozzáérned a fényképezőgéphez.</p>
     <${SimpleFigure} fileName="PCA-Macro%20in%20motion-tip-macro-in-motion-SanderMeertinsPhotography-shutterstock_1200x800_tcm128-1374047.jpg" altText="Illusztráció" />
     <h2>Végső simítások</h2>
-    <p>Most már nagyjából tudod, hogyan készíthetsz jó makrofotókat. Így már ajánlatos RAW formátumban fotózni, és a Canon Digital Photography Professional (<a href="/support/Camera_Software/">DPP</a>) programjával elvégezni a finombeállításokat. Például az objektívkorrekció, a fehéregyensúly-beállítás és a vágás funkció használatával igazán lenyűgöző képeket készíthetsz.</p>
+    <p>Most már nagyjából tudod, hogyan készíthetsz jó makrofotókat. Így már ajánlatos RAW formátumban fotózni, és a Canon Digital Photography Professional (<${ExternalLink} href="https://www.canon.hu/support/Camera_Software/">DPP</a>) programjával elvégezni a finombeállításokat. Például az objektívkorrekció, a fehéregyensúly-beállítás és a vágás funkció használatával igazán lenyűgöző képeket készíthetsz.</p>
 </div>`;
 }

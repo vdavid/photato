@@ -1,9 +1,10 @@
 import {createElement} from '../../web_modules/react.js';
 import htm from '../../web_modules/htm.js';
-
-const html = htm.bind(createElement);
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
+import ExternalLink from '../../materials/components/ExternalLink.mjs';
+const html = htm.bind(createElement);
+
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
@@ -32,14 +33,14 @@ export default function Week6Challenge({formattedDeadline}) {
 <p>Tippek, cikkek:</p>
 <ul>
     <li>Ha szép, tiszta az idő, valószínűleg kültéri fotókkal jársz a legjobban. Ha borús az idő, próbálkozz állatok helyett növényekkel.</li>
-    <li>Ha a kiskutyád/kiscicád/kismalacod fotóznád: <a href="https://www.haziallat.hu/allati-trendi/technika/allatok-fotozasa-trukkok/1897/">haziallat.hu</a></li>
-    <li>Ha az állatkertbe mennél: <a href="https://www.origo.hu/techbazis/20080426-fotozas-az-allatkertben.html">origo</a></li>
-    <li>Ha növényeket fotóznál: <a href="https://fotosuli.blog.hu/2017/01/25/unja_a_telet_keszuljon_fel_a_tavaszra_i_resz">fotosuli.blog.hu</a></li>
-    <li>Egy profi növényfotós egy napja: <a href="https://vimeo.com/90952372">Vimeo</a>
+    <li>Ha a kiskutyád/kiscicád/kismalacod fotóznád: <${ExternalLink} href="https://www.haziallat.hu/allati-trendi/technika/allatok-fotozasa-trukkok/1897/">haziallat.hu</a></li>
+    <li>Ha az állatkertbe mennél: <${ExternalLink} href="https://www.origo.hu/techbazis/20080426-fotozas-az-allatkertben.html">origo</a></li>
+    <li>Ha növényeket fotóznál: <${ExternalLink} href="https://fotosuli.blog.hu/2017/01/25/unja_a_telet_keszuljon_fel_a_tavaszra_i_resz">fotosuli.blog.hu</a></li>
+    <li>Egy profi növényfotós egy napja: <${ExternalLink} href="https://vimeo.com/90952372">Vimeo</a>
     </li>
 </ul>
 
-<p>Inspiráció: <a href="https://hu.pinterest.com/search/pins/?q=animal%20photography">Pinterest: állatok</a> | <a href="https://hu.pinterest.com/search/pins/?q=pet%20photography">Pinterest: háziállatok</a> | <a href="https://hu.pinterest.com/search/pins/?q=plant%20photography">Pinterest: növények</a> | <a href="https://mobilephotoawards.com/nature-wildlife-winner-honorable-mentions-7th-annual-mpa/">Mobile Photo Awards 2017</a> | <a href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</a></p>
+<p>Inspiráció: <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=animal%20photography">Pinterest: állatok</a> | <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=pet%20photography">Pinterest: háziállatok</a> | <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=plant%20photography">Pinterest: növények</a> | <${ExternalLink} href="https://mobilephotoawards.com/nature-wildlife-winner-honorable-mentions-7th-annual-mpa/">Mobile Photo Awards 2017</a> | <${ExternalLink} href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</a></p>
 <p>Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 <p>Az élőlényeket pedig még egyszer, <${PhotoUploadLink} label="itt" /> várjuk!</p>
 <p>Jó fotózást,</p>

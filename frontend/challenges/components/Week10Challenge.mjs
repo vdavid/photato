@@ -1,9 +1,10 @@
 import {createElement} from '../../web_modules/react.js';
 import htm from '../../web_modules/htm.js';
-
-const html = htm.bind(createElement);
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
+import ExternalLink from '../../materials/components/ExternalLink.mjs';
+const html = htm.bind(createElement);
+
 /**
  * @param {string} formattedDeadline
  * @param {string} baseUrl
@@ -28,16 +29,16 @@ export default function Week10Challenge({formattedDeadline, baseUrl = ''}) {
 <ul>
     <li><strong>Apró interakciók.</strong> Koccintás, ölelés, kézfogás, összenézés.</li>
     <li><strong>Beszédes csendéletek.</strong> Pohártornyok, kábelhalmok, székek egymás mellett, egy csokor a széken / egy csokor az árokban.</li>
-    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <a href="${baseUrl}/challenges/linked-images/long-exposure-with-flash.jpg">mint ez</a>.</li>
+    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <${ExternalLink} href="${baseUrl}/challenges/linked-images/long-exposure-with-flash.jpg">mint ez</a>.</li>
     <li><strong>Keress furcsa szögeket.</strong> Felállhatsz valahová magasra (létra, mászóka, teherautó-plató) vagy lefekhetsz a földre. A magas pontról fotózás járulékos előnye, hogy ha a fotózott emberek mind fölfelé, rád néznek, senkinek nem lesz tokája a képen.</li>
 </ul>
 <p>További tippek:</p>
 <ul>
-    <li><a href="http://blog.fotosarok.hu/2013/04/hogyan-fotozzunk-buliban/">Hogyan fotózzunk buliban?</a> – 7+1 tipp a FotóSarok Blogról.</li>
-    <li><a href="http://www.elkapottpillanatok.hu/tippek/fotozas-szuletesnapi-zsuron">Fotózás születésnapi zsúron</a> – 11 tipp, ötlet egy profi fotóstól.</li>
-    <li><a href="https://hvg.hu/tudomany/20071221_karacsonyifoto">Tippek a karácsonyi fotózáshoz</a> – Pont aktuális – ja nem. 😀 De a cikkben leírt 14 tipp jól alkalmazható bármilyen bulira, családi eseményre.</li>
+    <li><${ExternalLink} href="http://blog.fotosarok.hu/2013/04/hogyan-fotozzunk-buliban/">Hogyan fotózzunk buliban?</a> – 7+1 tipp a FotóSarok Blogról.</li>
+    <li><${ExternalLink} href="http://www.elkapottpillanatok.hu/tippek/fotozas-szuletesnapi-zsuron">Fotózás születésnapi zsúron</a> – 11 tipp, ötlet egy profi fotóstól.</li>
+    <li><${ExternalLink} href="https://hvg.hu/tudomany/20071221_karacsonyifoto">Tippek a karácsonyi fotózáshoz</a> – Pont aktuális – ja nem. 😀 De a cikkben leírt 14 tipp jól alkalmazható bármilyen bulira, családi eseményre.</li>
 </ul>
-<p>Inspiráció: <a href="https://www.pexels.com/search/event/">Pexels</a> | Pinterest: <a href="https://hu.pinterest.com/search/pins/?q=party%20photography">buli</a>, <a href="https://hu.pinterest.com/search/pins/?q=wedding%20photography">esküvő</a>, <a href="https://hu.pinterest.com/search/pins/?q=concert%20photography">koncert</a></p>
+<p>Inspiráció: <${ExternalLink} href="https://www.pexels.com/search/event/">Pexels</a> | Pinterest: <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=party%20photography">buli</a>, <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=wedding%20photography">esküvő</a>, <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=concert%20photography">koncert</a></p>
 <p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 <p>Az eseményfotókat pedig <${PhotoUploadLink} label="itt várjuk" />!</p>
 <p>Jó fotózást,</p>

@@ -1,9 +1,10 @@
 import {createElement} from '../../web_modules/react.js';
 import htm from '../../web_modules/htm.js';
-
-const html = htm.bind(createElement);
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
+import ExternalLink from '../../materials/components/ExternalLink.mjs';
+const html = htm.bind(createElement);
+
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
@@ -55,16 +56,16 @@ export default function Week12Challenge({formattedDeadline}) {
 <p>Úgy gondoljuk, ha tetszett ez a 12 hetes tanfolyam, talán szívesen folytatnád a tanulást (most vagy később) hasonló napi/heti kihívásokkal és kurzusokkal. Összeszedtünk neked néhányat a legjobbak közül, viszont sajnos nem találtunk másik magyar nyelvű ingyenes tanfolyamot, így ezek mind vagy fizetősek, vagy angol nyelvűek – de mind színvonalasak. Reméljük, ha folytatnád a tanulást, találsz közülük szimpatikusat.</p>
 <p>Napi/heti kihívások:</p>
 <ul>
-    <li><a href="https://www.flickr.com/groups/365days/">365 önarckép</a> (angol) – egy kis közösség, akik minden nap beküldenek egy önarcképet.</li>
-    <li><a href="https://www.techradar.com/how-to/52-photography-projects-a-great-technique-to-try-every-week-of-the-year">52 heti fotóötlet</a> (angol, de képekkel) – ha a Photato koncepcióját folytatnád.</li>
-    <li><a href="https://digital-photography-school.com/7-photography-projects-to-jumpstart-your-creativity/">7 projekt-ötlet</a> (angol) – 7 további ötlet: napi önarckép; heti fotós séta; 100 fotó ismeretlen emberekről; egy fotó az abc minden betűjére (a „Q” egész trükkös lehet); sok fotó egy témáról; napi fekete-fehér fotó egy hónapig; listaírás és végigfotózás.</li>
+    <li><${ExternalLink} href="https://www.flickr.com/groups/365days/">365 önarckép</a> (angol) – egy kis közösség, akik minden nap beküldenek egy önarcképet.</li>
+    <li><${ExternalLink} href="https://www.techradar.com/how-to/52-photography-projects-a-great-technique-to-try-every-week-of-the-year">52 heti fotóötlet</a> (angol, de képekkel) – ha a Photato koncepcióját folytatnád.</li>
+    <li><${ExternalLink} href="https://digital-photography-school.com/7-photography-projects-to-jumpstart-your-creativity/">7 projekt-ötlet</a> (angol) – 7 további ötlet: napi önarckép; heti fotós séta; 100 fotó ismeretlen emberekről; egy fotó az abc minden betűjére (a „Q” egész trükkös lehet); sok fotó egy témáról; napi fekete-fehér fotó egy hónapig; listaírás és végigfotózás.</li>
 </ul>
 <p>Tanfolyamok:</p>
 <ul>
-    <li><a href="https://www.onlinefototanfolyam.hu/">Online fotótanfolyam</a> (magyar, 19.900 ft) – A 67 leckéből az első 5 ingyen van, így ingyen megnézheted, tetszik-e.</li>
-    <li><a href="https://fotozasblog.hu/">Fotózás lépésről lépésre</a> (magyar, 4.500 ft) – Egy blog, leírásokkal és magyarázatokkal, melyeknek egy része ingyenes, más része egy online megvásárolható digitális könyvben elérhető.</li>
-    <li><a href="https://digital-photography-school.com/">Digital Photography School</a> (angol) – Fotós suli heti tippekkel és hasznos cikkekkel kezdőtől profi szintig.</li>
-    <li><a href="https://gurushots.com/">Gurushots</a> (angol) – Szépen felépített, játékos oldal folyamatos kihívásokkal és akár pénzdíjas versenyekkel.</li>
+    <li><${ExternalLink} href="https://www.onlinefototanfolyam.hu/">Online fotótanfolyam</a> (magyar, 19.900 ft) – A 67 leckéből az első 5 ingyen van, így ingyen megnézheted, tetszik-e.</li>
+    <li><${ExternalLink} href="https://fotozasblog.hu/">Fotózás lépésről lépésre</a> (magyar, 4.500 ft) – Egy blog, leírásokkal és magyarázatokkal, melyeknek egy része ingyenes, más része egy online megvásárolható digitális könyvben elérhető.</li>
+    <li><${ExternalLink} href="https://digital-photography-school.com/">Digital Photography School</a> (angol) – Fotós suli heti tippekkel és hasznos cikkekkel kezdőtől profi szintig.</li>
+    <li><${ExternalLink} href="https://gurushots.com/">Gurushots</a> (angol) – Szépen felépített, játékos oldal folyamatos kihívásokkal és akár pénzdíjas versenyekkel.</li>
 </ul>
 <p><strong>A Photatoról:</strong>
 </p>
@@ -73,18 +74,18 @@ export default function Week12Challenge({formattedDeadline}) {
 <hr>
 <p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb kurzusuk!<br />
     Arra gondoltam, téged is érdekelhet a fotózás.<br />
-    Ha így van, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <a href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
+    Ha így van, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <${ExternalLink} href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
 </p>
 <hr>
 <p>Vagy kiírhatsz valami ilyesmit a faladra:</p>
 <hr>
-<p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő kurzusuk, ajánlom mindenkinek! Ha érdekel, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <a href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
+<p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő kurzusuk, ajánlom mindenkinek! Ha érdekel, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <${ExternalLink} href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
 </p>
 <hr>
-<p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <a href="http://bit.ly/12712signupc1">http://bit.ly/12712signupc1</a>
+<p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <${ExternalLink} href="http://bit.ly/12712signupc1">http://bit.ly/12712signupc1</a>
 </p>
 <p>És még egy dolog:</p>
-<p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <a href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</a> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>
+<p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <${ExternalLink} href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</a> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>
 <p>Hát, így. 😊</p>
 <p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
 <p>Az e heti képeket pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>

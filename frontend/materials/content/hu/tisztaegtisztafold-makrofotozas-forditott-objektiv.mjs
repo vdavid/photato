@@ -50,26 +50,26 @@ export default function Article() {
     
     <h2>Tartalom</h2>
     <ul>
-        <li><a href="#Epitkezes">Építkezés</a></li>
-        <li><a href="#Felepites">Felépítés</a></li>
-        <li><a href="#Mukodes">Működés</a></li>
-        <li><a href="#Objektivek">Objektívek</a></li>
-        <li><a href="#Expozicio_es_vaku_beallitasa">Expozíció és vaku beállítása</a></li>
-        <li><a href="#Hatranyok">Hátrányok</a></li>
-        <li><a href="#Fokuszeltolas">Fókuszeltolás</a>
+        <li><${ExternalLink} href="#Epitkezes">Építkezés</a></li>
+        <li><${ExternalLink} href="#Felepites">Felépítés</a></li>
+        <li><${ExternalLink} href="#Mukodes">Működés</a></li>
+        <li><${ExternalLink} href="#Objektivek">Objektívek</a></li>
+        <li><${ExternalLink} href="#Expozicio_es_vaku_beallitasa">Expozíció és vaku beállítása</a></li>
+        <li><${ExternalLink} href="#Hatranyok">Hátrányok</a></li>
+        <li><${ExternalLink} href="#Fokuszeltolas">Fókuszeltolás</a>
             <ul>
-                <li><a href="#Pelda_fokusz_eltolasra">Példa fókusz eltolásra</a></li>
+                <li><${ExternalLink} href="#Pelda_fokusz_eltolasra">Példa fókusz eltolásra</a></li>
             </ul>
         </li>
-        <li><a href="#A_gyakorlatban">A gyakorlatban</a></li>
-        <li><a href="#Ennyit_a_geprol_beszeljunk_a_lenyegrol8230">Ennyit a gépről, beszéljünk a lényegről…</a>
+        <li><${ExternalLink} href="#A_gyakorlatban">A gyakorlatban</a></li>
+        <li><${ExternalLink} href="#Ennyit_a_geprol_beszeljunk_a_lenyegrol8230">Ennyit a gépről, beszéljünk a lényegről…</a>
             <ul>
-                <li><a href="#Aprocska_vilag">Aprócska világ</a></li>
-                <li><a href="#Az_elet">Az élet</a></li>
+                <li><${ExternalLink} href="#Aprocska_vilag">Aprócska világ</a></li>
+                <li><${ExternalLink} href="#Az_elet">Az élet</a></li>
             </ul>
         </li>
-        <li><a href="#Jo_tanacs">Jó tanács</a></li>
-        <li><a href="#Egyeb_forrasok_forditott_objektives_makrofotozas_temaban">Egyéb források fordított objektíves makrófotózás témában</a></li>
+        <li><${ExternalLink} href="#Jo_tanacs">Jó tanács</a></li>
+        <li><${ExternalLink} href="#Egyeb_forrasok_forditott_objektives_makrofotozas_temaban">Egyéb források fordított objektíves makrófotózás témában</a></li>
     </ul>
     
     <h2 id="Epitkezes">Építkezés</h2>

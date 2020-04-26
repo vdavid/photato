@@ -38,16 +38,16 @@ export default function Article() {
     
     <h2>Tartalom</h2>
     <ul>
-        <li><a href="#1_Aranymetszes">1. Aranymetszés</a></li>
-        <li><a href="#2_Harmadolas">2. Harmadolás</a></li>
-        <li><a href="#3_Sokszogek_es_atlok_hasznalata">3. Sokszögek és átlók használata</a></li>
-        <li><a href="#4_Keretbe_foglalas">4. Keretbe foglalás</a></li>
-        <li><a href="#5_Egyensuly_legyen">5. Egyensúly legyen</a></li>
-        <li><a href="#Komponalasi_erzek_fejlesztese">Komponálási érzék fejlesztése</a>
+        <li><${ExternalLink} href="#1_Aranymetszes">1. Aranymetszés</a></li>
+        <li><${ExternalLink} href="#2_Harmadolas">2. Harmadolás</a></li>
+        <li><${ExternalLink} href="#3_Sokszogek_es_atlok_hasznalata">3. Sokszögek és átlók használata</a></li>
+        <li><${ExternalLink} href="#4_Keretbe_foglalas">4. Keretbe foglalás</a></li>
+        <li><${ExternalLink} href="#5_Egyensuly_legyen">5. Egyensúly legyen</a></li>
+        <li><${ExternalLink} href="#Komponalasi_erzek_fejlesztese">Komponálási érzék fejlesztése</a>
             <ul>
-                <li><a href="#Fenykepek_es_festmenyek_tanulmanyozasa">Fényképek és festmények tanulmányozása</a></li>
-                <li><a href="#Fotozas_fix_objektivvel">Fotózás fix objektívvel</a></li>
-                <li><a href="#Rajzolas">Rajzolás</a></li>
+                <li><${ExternalLink} href="#Fenykepek_es_festmenyek_tanulmanyozasa">Fényképek és festmények tanulmányozása</a></li>
+                <li><${ExternalLink} href="#Fotozas_fix_objektivvel">Fotózás fix objektívvel</a></li>
+                <li><${ExternalLink} href="#Rajzolas">Rajzolás</a></li>
             </ul>
         </li>
     </ul>
