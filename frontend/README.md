@@ -6,6 +6,7 @@ Technology used:
 - To be deployed with Netlify
 - Handles auth via Auth0
 - Call an AWS Lambda backend, deployed by Serverless.
+- Babel
 
 ## Installation
 

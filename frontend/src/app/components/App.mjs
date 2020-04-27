@@ -1,5 +1,5 @@
 import {createElement, useEffect, useState} from '../../web_modules/react.js';
-import {BrowserRouter, Switch, Route} from '/web_modules/react-router-dom.js';
+import {BrowserRouter, Switch, Route} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 

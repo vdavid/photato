@@ -1,4 +1,4 @@
-import {createElement, useState, useEffect, useContext, createContext} from '/web_modules/react.js';
+import {createElement, useState, useEffect, useContext, createContext} from '../../web_modules/react.js';
 
 const defaultRedirectCallback = () => window.history.replaceState({}, document.title, window.location.pathname);
 

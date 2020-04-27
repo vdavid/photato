@@ -1,6 +1,6 @@
 import {config, developmentConfig, stagingConfig, productionConfig} from './config.mjs';
-import {createElement, StrictMode} from '/web_modules/react.js';
-import {render} from '/web_modules/react-dom.js';
+import {createElement, StrictMode} from './web_modules/react.js';
+import {render} from './web_modules/react-dom.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
 import I18nProvider from "./i18n/components/I18nProvider.mjs";

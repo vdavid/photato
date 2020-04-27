@@ -1,8 +1,7 @@
-import {createElement} from '/web_modules/react.js';
-import {NavLink} from '/web_modules/react-router-dom.js';
+import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
+import {NavLink} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-import {useEffect, useRef, useState} from '../../web_modules/react.js';
 import NavLinkMenuItemWithIcon from './NavLinkMenuItemWithIcon.mjs';
 
 export default function NavigationBar() {

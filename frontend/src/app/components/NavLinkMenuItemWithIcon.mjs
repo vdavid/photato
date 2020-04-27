@@ -1,4 +1,4 @@
-import {createElement} from '/web_modules/react.js';
+import {createElement} from '../../web_modules/react.js';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 
 /**

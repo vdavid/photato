@@ -1,2 +1,3 @@
 node_modules
-/auth/auth0-spa-js.development.js
+/src/auth/auth0-spa-js.development.js
+/public

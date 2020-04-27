@@ -2,10 +2,11 @@
   "name": "photato-website-frontend",
   "version": "2.0.0",
   "description": "This is the JS front end of the Photato website.",
-  "main": "main.mjs",
+  "main": "src/main.mjs",
   "scripts": {
     "test": "npx jest",
-    "postinstall": "npx snowpack --clean"
+    "postinstall": "npx snowpack --clean",
+    "build": "babel src --out-dir public --delete-dir-on-start --keep-file-extension --source-maps --copy-files --no-copy-ignored"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,10 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "snowpack": "^1.6.0",
-    "jest": "^25.3.0"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "jest": "^25.4.0",
+    "snowpack": "^1.7.1"
   },
   "jest": {
     "testEnvironment": "jsdom"
