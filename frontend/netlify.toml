@@ -1,3 +1,5 @@
+# See this for help: https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
+
 # These settings are applied to all contexts unless overridden by specific contexts.
 [build]
 

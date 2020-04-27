@@ -55,3 +55,4 @@ Just deploy it and visit the website at https://photato.eu.
 ## Links
 
  - GitHub: https://github.com/vdavid/photato-website-v3/
+ - Docs for [babel-plugin-transform-react-jsx](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx)
