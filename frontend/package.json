@@ -1,6 +1,6 @@
 {
   "name": "photato-website-frontend",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This is the JS front end of the Photato website.",
   "main": "main.mjs",
   "scripts": {
