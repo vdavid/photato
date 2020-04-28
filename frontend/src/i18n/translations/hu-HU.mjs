@@ -76,4 +76,5 @@ export const translations = {
     'Photato’s Instagram': {translation: 'A Photato Instagram oldala'},
     'FAQ': {translation: 'GYIK'},
     'Contact': {translation: 'Kapcsolat'},
+    'Sorry, this challenge hasn’t been translated to your language yet.': {translation: 'Ezt a feladatot sajnos még nem fordítottuk le a te nyelvedre.'},
 };

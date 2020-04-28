@@ -1,14 +1,15 @@
-import React from '../../web_modules/react.js';
-import FullWidthLocalImage from './FullWidthLocalImage.mjs';
-import PhotoUploadLink from './PhotoUploadLink.mjs';
-import ExternalLink from '../../materials/components/ExternalLink.mjs';
+import React from '../../../web_modules/react.js';
+import FullWidthLocalImage from '../../components/FullWidthLocalImage.mjs';
+import PhotoUploadLink from '../../components/PhotoUploadLink.mjs';
+import ExternalLink from '../../../materials/components/ExternalLink.mjs';
+
+// noinspection JSUnusedGlobalSymbols (It's imported dynamically.)
 /**
  * @param {string} formattedDeadline
  * @param {string} baseUrl
  * @returns {React.ReactElement}
  */
 export default function Week10Challenge({formattedDeadline, baseUrl = ''}) {
-// noinspection SpellCheckingInspection
     return <>
 <p><strong>Röviden:</strong></p>
 <p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <PhotoUploadLink label="itt tudod feltölteni" />.</p>

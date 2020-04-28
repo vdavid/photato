@@ -1,14 +1,14 @@
-import React from '../../web_modules/react.js';
-import FullWidthLocalImage from './FullWidthLocalImage.mjs';
-import PhotoUploadLink from './PhotoUploadLink.mjs';
-import ExternalLink from '../../materials/components/ExternalLink.mjs';
+import React from '../../../web_modules/react.js';
+import FullWidthLocalImage from '../../components/FullWidthLocalImage.mjs';
+import PhotoUploadLink from '../../components/PhotoUploadLink.mjs';
+import ExternalLink from '../../../materials/components/ExternalLink.mjs';
 
+// noinspection JSUnusedGlobalSymbols (It's imported dynamically.)
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
  */
 export default function Week1Challenge({formattedDeadline}) {
-    // noinspection SpellCheckingInspection
     return <>
         <p>Az első hét témája: <strong>gasztrofotó</strong>!
         </p>

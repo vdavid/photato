@@ -26,13 +26,18 @@ export default function ChallengePage() {
     const {currentWeekIndex, getFormattedDeadline} = useCourseData();
 
     const formattedDeadline = getFormattedDeadline(weekIndex, getActiveLocaleCode());
+    const languageCode = getActiveLocaleCode().substring(0, 2);
 
     useEffect(() => {
         if ((weekIndex >= 1) && (currentWeekIndex >= weekIndex)) {
             setChallenge({isLoaded: false, component: null});
 
             async function loadChallenge() {
-                setChallenge({isLoaded: true, component: (await import('./Week' + weekIndex + 'Challenge.mjs')).default});
+                try {
+                    setChallenge({isLoaded: true, component: (await import('../content/' + languageCode + '/Week' + weekIndex + 'Challenge.mjs')).default});
+                } catch(error) {
+                    setChallenge({isLoaded: true, component: <p>{__('Sorry, this challenge hasn’t been translated to your language yet.')}</p>})
+                }
             }
 
             loadChallenge().then(() => {});
