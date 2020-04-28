@@ -30,7 +30,6 @@ export default function Article() {
         <p>Nem elég viszont elkészíteni a jó fotót, fel kell készülnünk a fogadtatásra is. No nem a képünk fogadtatására, hanem fotónk alanyának reakciójára. Nem ritka ugyanis a nemtetszés, vagy éppen a felháborodás. Ilyen esetben javasolja az azonnali cselekvést, az elismerést, bocsánatkérést, majd gyors távozást, mielőtt bármi komolyabb incidens történne.</p>
         <p>Szerencsére nem csak rémtörténeteket mesél, de biztat is. Hiába érezzük úgy, hogy nem vagyunk sikeresek ezen a téren, érdemes tovább próbálkozni, egyszer nekünk is eljöhet az a bizonyos fekete hattyú.</p>
         <SimpleFigure fileName="6090242691_5c7d496662_z.jpg" altText="Illusztráció" caption="Fotó: Kramer O’Neill"/>
-        <p>További tanácsok és sok-sok jó fotó <ExternalLink href="http://erickimphotography.com/blog/2012/01/what-the-black-swan-unpredictability-can-teach-you-about-street-photography/#more-5219">Eric Kim blogján</>.
-        </p>
+        <p>További tanácsok és sok-sok jó fotó <ExternalLink href="http://erickimphotography.com/blog/2012/01/what-the-black-swan-unpredictability-can-teach-you-about-street-photography/#more-5219">Eric Kim blogján</ExternalLink></p>.
     </>;
 }
