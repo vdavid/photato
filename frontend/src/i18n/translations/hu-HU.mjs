@@ -74,4 +74,6 @@ export const translations = {
     '🥔 cached version': {translation: '🥔 mentett verzió'},
     'Photato’s Facebook page': {translation: 'A Photato Facebook oldala'},
     'Photato’s Instagram': {translation: 'A Photato Instagram oldala'},
+    'FAQ': {translation: 'GYIK'},
+    'Contact': {translation: 'Kapcsolat'},
 };

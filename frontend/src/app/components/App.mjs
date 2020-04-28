@@ -11,6 +11,8 @@ import NavigationBar from './NavigationBar.mjs';
 import Error404Page from '../../website/components/Error404Page.mjs';
 import FrontPage from '../../front-page/components/FrontPage.mjs';
 import AboutPage from '../../about/components/AboutPage.mjs';
+import FaqPage from '../../faq/components/FaqPage.mjs';
+import ContactPage from '../../contact/components/ContactPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
 import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
@@ -47,6 +49,12 @@ export default function App() {
                     </Route>
                     <Route path='/about'>
                         <AboutPage/>
+                    </Route>
+                    <Route path='/faq'>
+                        <FaqPage/>
+                    </Route>
+                    <Route path='/contact'>
+                        <ContactPage/>
                     </Route>
                     <Route path='/upload'>
                         <UploadPage photoUploader={photoUploader}/>

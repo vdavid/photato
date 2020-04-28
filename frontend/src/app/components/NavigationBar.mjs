@@ -39,6 +39,8 @@ export default function NavigationBar() {
         }}>
             <NavLinkMenuItemWithIcon to='/' exact={true} activeClassName='active' iconName='home'>{__('Home')}</NavLinkMenuItemWithIcon>
             <NavLinkMenuItemWithIcon to='/about' activeClassName='active' iconName='help'>{__('About')}</NavLinkMenuItemWithIcon>
+            <NavLinkMenuItemWithIcon to='/faq' activeClassName='active' iconName='help'>{__('FAQ')}</NavLinkMenuItemWithIcon>
+            <NavLinkMenuItemWithIcon to='/contact' activeClassName='active' iconName='help'>{__('Contact')}</NavLinkMenuItemWithIcon>
             {isAuthenticated &&
             <NavLinkMenuItemWithIcon to='/upload' activeClassName='active' iconName='cloud_upload'>{__('Photo upload')}</NavLinkMenuItemWithIcon>}
             {isAuthenticated &&
