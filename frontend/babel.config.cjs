@@ -3,6 +3,7 @@ module.exports = function (api) {
 
     return {
         "plugins": [
+//            "transform-react-createelement-to-jsx"
             ["@babel/plugin-transform-react-jsx", {}] /* Docs: https://babeljs.io/docs/en/babel-plugin-transform-react-jsx */
         ]
     };

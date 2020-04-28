@@ -1,4 +1,4 @@
-import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
+import React, {useEffect, useRef, useState} from '../../web_modules/react.js';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
@@ -34,48 +34,52 @@ export default function NavigationBar() {
 
     function createMainMenu() {
         /* List of icons: https://material.io/resources/icons/?style=baseline */
-        return createElement('nav', {
-                ref: menuRef, className: (isMenuVisible ? ' visible' : ''),
-                onClick: () => { setIsMenuVisible(false); }
-            },
-            createElement(NavLinkMenuItemWithIcon, {to: '/', exact: true, activeClassName: 'active', iconName: 'home'}, __('Home')),
-            createElement(NavLinkMenuItemWithIcon, {to: '/about', activeClassName: 'active', iconName: 'help'}, __('About')),
-            isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/upload', activeClassName: 'active', iconName: 'cloud_upload'}, __('Photo upload')),
-            isAuthenticated && createElement(NavLinkMenuItemWithIcon, {to: '/challenges', activeClassName: 'active', iconName: 'casino'}, __('Challenges')),
-            createElement(NavLinkMenuItemWithIcon, {to: '/materials', activeClassName: 'active', iconName: 'book'}, __('Materials')),
-            isAuthenticated && createElement('div', {className: 'menuItem'},
-                createElement('span', {className: 'material-icons'}, ''),
-                createElement('hr')),
-            isAuthenticated && createElement('a', {href: '#', className: 'menuItem signOut', onClick: handleSignOut},
-                createElement('span', {className: 'profile icon'},
-                    createElement('img', {src: user.picture, alt: __('Profile picture'), className: 'profilePicture'})),
-                createElement('span', {className: 'title'}, __('Sign out'))
-            ),
-        );
+        return <nav ref={menuRef} className={isMenuVisible ? ' visible' : ''} onClick={() => {
+            setIsMenuVisible(false);
+        }}>
+            <NavLinkMenuItemWithIcon to='/' exact={true} activeClassName='active' iconName='home'>{__('Home')}</NavLinkMenuItemWithIcon>
+            <NavLinkMenuItemWithIcon to='/about' activeClassName='active' iconName='help'>{__('About')}</NavLinkMenuItemWithIcon>
+            {isAuthenticated &&
+            <NavLinkMenuItemWithIcon to='/upload' activeClassName='active' iconName='cloud_upload'>{__('Photo upload')}</NavLinkMenuItemWithIcon>}
+            {isAuthenticated &&
+            <NavLinkMenuItemWithIcon to='/challenges' activeClassName='active' iconName='casino'>{__('Challenges')}</NavLinkMenuItemWithIcon>}
+            <NavLinkMenuItemWithIcon to='/materials' activeClassName='active' iconName='book'>{__('Materials')}</NavLinkMenuItemWithIcon>
+            {isAuthenticated &&
+            <div className='menuItem'>
+                <span className='material-icons'/>
+                <hr/>
+            </div>}
+            {isAuthenticated &&
+            <a href='#' className='menuItem signOut' onClick={handleSignOut}><span className='profile icon'><img src={user.picture} alt={__('Profile picture')} className='profilePicture'/></span><span className='title'>{__('Sign out')}</span></a>}
+        </nav>;
     }
 
     function createAuthenticationMenu() {
-        return createElement('nav', {
-                ref: authenticationMenuRef, className: 'authenticationMenu' + (isMenuVisible ? ' visible' : ''),
-                onClick: () => { setIsMenuVisible(false); }
-            },
-            createElement('a', {href: '#', className: 'menuItem signOut', onClick: handleSignOut},
-                createElement('span', {className: 'icon material-icons'}, 'exit_to_app'),
-                createElement('span', {className: 'title'}, __('Sign out'))
-            ),
-        );
+        const className = 'authenticationMenu' + (isMenuVisible ? ' visible' : '');
+
+        function hideMenu() {
+            setIsMenuVisible(false);
+        }
+
+        return <nav ref={authenticationMenuRef} className={className} onClick={hideMenu}>
+            <a href='#' className='menuItem signOut' onClick={handleSignOut}><span className='icon material-icons'>exit_to_app</span><span className='title'>{__('Sign out')}</span></a>
+        </nav>;
     }
 
-    return createElement('header', {role: 'navigation'},
-        createElement(NavLink, {to: '/', className: 'logo', title: 'Photato'},
-            createElement('img', {src: '/app/potato-with-camera-logo.svg'}),
-            createElement('div', {className: 'siteTitle'}, 'Photato'),
-        ),
-            createMainMenu(),
-            createElement('div', {className: 'spacer'}),
-            !isAuthenticated && createElement('a', {href: '#', className: 'signInLink', onClick: handleSignIn}, __('Sign in')),
-            createElement('div', {className: 'material-icons hamburgerMenu', onClick: () => { setIsMenuVisible(!isMenuVisible);}}, 'menu'),
-            isAuthenticated && createElement('img', {src: user.picture, alt: __('Profile picture'), onClick: () => { setIsMenuVisible(!isMenuVisible);}, className: 'profilePicture'}),
-            isAuthenticated && createAuthenticationMenu(),
-        );
+    function toggleMenuVisibility() {
+        setIsMenuVisible(!isMenuVisible);
+    }
+
+    // noinspection HtmlUnknownTarget
+    return <header role='navigation'>
+        <NavLink to='/' className='logo' title='Photato'><img src='/app/potato-with-camera-logo.svg' alt="logo"/>
+            <div className='siteTitle'>Photato</div>
+        </NavLink>{createMainMenu()}
+        <div className='spacer'/>
+        {!isAuthenticated && <a href='#' className='signInLink' onClick={handleSignIn}>{__('Sign in')}</a>}
+        <div className='material-icons hamburgerMenu' onClick={toggleMenuVisibility}>menu
+        </div>
+        {isAuthenticated &&
+        <img src={user.picture} alt={__('Profile picture')} onClick={toggleMenuVisibility} className='profilePicture'/>}{isAuthenticated && createAuthenticationMenu()}
+    </header>;
 }

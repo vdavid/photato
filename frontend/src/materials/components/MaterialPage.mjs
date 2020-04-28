@@ -1,4 +1,4 @@
-import {createElement, useEffect, useState} from '../../web_modules/react.js';
+import React, {useEffect, useState} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useParams} from '../../web_modules/react-router-dom.js';
 
@@ -32,21 +32,23 @@ export default function MaterialPage() {
         }
     }, [article]);
 
-    return article.isLoaded ? createElement(MaterialContextProvider, {metadata: article.metadata},
-        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
-        createElement('article', {},
-            createElement('header', {},
-                createElement('h1', {}, article.metadata.title),
-                createElement('p', {className: 'articleMetadata'}, __('Author') + ': ' + article.metadata.author, ' — ',
-                    __('Publication date') + ': ' + article.metadata.publishDate.toLocaleDateString(getActiveLocaleCode()), ' — ',
-                    createElement('a', {href: article.metadata.originalUrl, target: '_blank'}, __('Original article')),
-                ),
-            ),
-            createElement(article.component, {}),
-        ),
-        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
-    ) : [
-        __('Loading article...'),
-        createElement(NavLinkButton, {to: '/materials'}, '←' + __('Back to the list of materials')),
-    ];
+    return article.isLoaded
+        ? <MaterialContextProvider metadata={article.metadata}>
+            <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            <article>
+                <header>
+                    <h1>{article.metadata.title}</h1>
+                    <p className='articleMetadata'>{__('Author') + ': ' + article.metadata.author} — {__('Publication date') + ': ' + article.metadata.publishDate.toLocaleDateString(getActiveLocaleCode())} — <a href={article.metadata.originalUrl} target='_blank'>{__('Original article')}</a>
+                    </p>
+                </header>
+                <article.component/>
+            </article>
+            <NavLinkButton to='/materials'>
+                {'←' + __('Back to the list of materials')}
+            </NavLinkButton>
+        </MaterialContextProvider>
+        : <>
+            __('Loading article...')
+            <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+        </>;
 }

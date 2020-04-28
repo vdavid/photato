@@ -1,4 +1,4 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 
 /**
  * @param {string} src Full YouTube embed URL, but without parameters!
@@ -10,7 +10,12 @@ import {createElement} from '../../web_modules/react.js';
  */
 export default function YouTubeVideo({src, width = 560, height = 315, ...props}) {
     // See https://developers.google.com/youtube/player_parameters?csw=1 for more options
-    return createElement('div', {className: 'youTubeVideoContainer'},
-        createElement('iframe', {width, height, src: src + '?cc_load_policy=1&cc_lang_pref=hu', allow: 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; ', allowFullScreen: true, ...props}),
-    );
+    return <div className='youTubeVideoContainer'>
+        <iframe width={width}
+                height={height}
+                src={src + '?cc_load_policy=1&cc_lang_pref=hu'}
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; '
+                allowFullScreen={true}
+                {...props} />
+    </div>;
 }

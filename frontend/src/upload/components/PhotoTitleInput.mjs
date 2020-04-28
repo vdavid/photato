@@ -1,4 +1,4 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
 /**
@@ -12,15 +12,13 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 export default function PhotoTitleInput({title, isDisabled, onChange}) {
     const {__} = useI18n();
 
-    return createElement('div', {className: 'title'},
-        createElement('input', {
-            type: 'text',
-            name: 'title',
-            maxLength: 150,
-            placeholder: __('Give your photo a title (optional)'),
-            disabled: isDisabled,
-            value: title,
-            onChange: event => onChange(event.target.value)
-        })
-    );
+    return <div className='title'>
+        <input type='text'
+               name='title'
+               maxLength={150}
+               placeholder={__('Give your photo a title (optional)')}
+               disabled={isDisabled}
+               value={title}
+               onChange={event => onChange(event.target.value)}/>
+    </div>;
 }

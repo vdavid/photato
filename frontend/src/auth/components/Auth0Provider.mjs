@@ -1,4 +1,4 @@
-import {createElement, useState, useEffect, useContext, createContext} from '../../web_modules/react.js';
+import React, {useState, useEffect, useContext, createContext} from '../../web_modules/react.js';
 
 const defaultRedirectCallback = () => window.history.replaceState({}, document.title, window.location.pathname);
 
@@ -65,20 +65,17 @@ export function Auth0Provider({children, onRedirectCallback = defaultRedirectCal
         setUser(user);
     }
 
-    return createElement(Auth0Context.Provider,
-        {
-            value: {
-                isAuthenticated,
-                user,
-                loading,
-                popupOpen,
-                loginWithPopup,
-                handleRedirectCallback,
-                getIdTokenClaims: (...parameters) => auth0Client.getIdTokenClaims(...parameters),
-                loginWithRedirect: (...parameters) => auth0Client.loginWithRedirect(...parameters),
-                getTokenSilently: (...parameters) => auth0Client.getTokenSilently(...parameters),
-                getTokenWithPopup: (...parameters) => auth0Client.getTokenWithPopup(...parameters),
-                logout: (...parameters) => auth0Client.logout(...parameters)
-            }
-        }, children);
+    return <Auth0Context.Provider value={{
+        isAuthenticated,
+        user,
+        loading,
+        popupOpen,
+        loginWithPopup,
+        handleRedirectCallback,
+        getIdTokenClaims: (...parameters) => auth0Client.getIdTokenClaims(...parameters),
+        loginWithRedirect: (...parameters) => auth0Client.loginWithRedirect(...parameters),
+        getTokenSilently: (...parameters) => auth0Client.getTokenSilently(...parameters),
+        getTokenWithPopup: (...parameters) => auth0Client.getTokenWithPopup(...parameters),
+        logout: (...parameters) => auth0Client.logout(...parameters)
+    }}>{children}</Auth0Context.Provider>;
 }

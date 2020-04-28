@@ -1,27 +1,25 @@
-import {createElement} from '../../web_modules/react.js';
-import htm from '../../web_modules/htm.js';
+import React from '../../web_modules/react.js';
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
-const html = htm.bind(createElement);
-
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
  */
 export default function Week4Challenge({formattedDeadline}) {
 // noinspection SpellCheckingInspection
-    return html`<p><strong>Röviden:</strong></p>
+    return <>
+<p><strong>Röviden:</strong></p>
 
-<p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit <${PhotoUploadLink} label="itt tudsz feltölteni" />.</p>
+<p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit <PhotoUploadLink label="itt tudsz feltölteni" />.</p>
 
 <p><strong>Hosszabban:</strong></p>
 
-<${FullWidthLocalImage} fileName="lomo.jpg" altText="Lomo" />
+<FullWidthLocalImage fileName="lomo.jpg" altText="Lomo" />
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
 
-<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
+<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet ${formattedDeadline}-ig, <PhotoUploadLink label="itt tudod feltölteni" />.</p>
 
 <p><strong>Mi az utcai fotózás?</strong></p>
 
@@ -31,7 +29,7 @@ export default function Week4Challenge({formattedDeadline}) {
 
 <p>Röviden: jogilag nem, de figyelj arra, hogy tisztelettel bánj embertársaiddal, és ne bánts meg és ne hozz zavarba senkit. Ha mégis így történik, oldd fel a helyzetet, pl. kérj elnézést, töröld ki a képet, vegyél nekik virágot stb.</p>
 
-<p>Bővebben (<${ExternalLink} href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben//">forrás</a>):</p>
+<p>Bővebben (<ExternalLink href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben//">forrás</ExternalLink>):</p>
 <ul>
     <li>Közterületen szabad embereket fotózni, kivéve közfeladatot ellátó személy arcát vagy azonosító számát.</li>
     <li>Ha egyszerre sok ember van a képen, gond nélkül publikálhatod is a képeket.</li>
@@ -63,21 +61,22 @@ export default function Week4Challenge({formattedDeadline}) {
 
 <p>Linkek:</p>
 <ul>
-    <li>Három angol nyelvű cikk rövid kivonata a pixinfo-n: <${ExternalLink} href="https://pixinfo.com/hirek/2012/01/19/nehany-tanacs-kezdo-utcai-fotosoknak/">John Batdorff tippjei</a> | <${ExternalLink} href="https://pixinfo.com/hirek/2012/01/03/fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek/">Eric Kim tippjei</a> | <${ExternalLink} href="https://www.canon.hu/get-inspired/stories/street-photography/">A Canon inspirációs oldala</a></li>
-    <li><${ExternalLink} href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben/">Az utcai fotózás jogi háttere Magyarországon</a> (3 részes cikk)</li>
-    <li><${ExternalLink} href="https://petapixel.com/2016/08/06/15-street-photography-techniques-tips/">Eric Kim 15 tippje</a> [angol]</li>
-    <li><${ExternalLink} href="http://www.erickimphotography.com/Downloads/Books/100LessonsFromtheMastersofStreetPhotography/100%20Lessons%20From%20the%20Masters%20of%20Street%20Photography.pdf">Eric Kim 100 tippje utcai fotózáshoz</a> [angol pdf]</li>
-    <li>Filmajánló: Everybody Street [<${ExternalLink} href="https://www.imdb.com/title/tt2784462/">imdb</a>] [<${ExternalLink} href="https://vimeo.com/ondemand/everybodystreet/70639661">trailer</a>] – egy dokumentumfilm new yorki utcai fotósokról.</li>
+    <li>Három angol nyelvű cikk rövid kivonata a pixinfo-n: <ExternalLink href="https://pixinfo.com/hirek/2012/01/19/nehany-tanacs-kezdo-utcai-fotosoknak/">John Batdorff tippjei</ExternalLink> | <ExternalLink href="https://pixinfo.com/hirek/2012/01/03/fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek/">Eric Kim tippjei</ExternalLink> | <ExternalLink href="https://www.canon.hu/get-inspired/stories/street-photography/">A Canon inspirációs oldala</ExternalLink></li>
+    <li><ExternalLink href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben/">Az utcai fotózás jogi háttere Magyarországon</ExternalLink> (3 részes cikk)</li>
+    <li><ExternalLink href="https://petapixel.com/2016/08/06/15-street-photography-techniques-tips/">Eric Kim 15 tippje</ExternalLink> [angol]</li>
+    <li><ExternalLink href="http://www.erickimphotography.com/Downloads/Books/100LessonsFromtheMastersofStreetPhotography/100%20Lessons%20From%20the%20Masters%20of%20Street%20Photography.pdf">Eric Kim 100 tippje utcai fotózáshoz</ExternalLink> [angol pdf]</li>
+    <li>Filmajánló: Everybody Street [<ExternalLink href="https://www.imdb.com/title/tt2784462/">imdb</ExternalLink>] [<ExternalLink href="https://vimeo.com/ondemand/everybodystreet/70639661">trailer</ExternalLink>] – egy dokumentumfilm new yorki utcai fotósokról.</li>
 </ul>
 
-<p>Inspiráció: <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=street%20photography&rs=typed&term_meta[]=street%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</a> | Mobile Photo Awards street photography: <${ExternalLink} href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <${ExternalLink} href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-2015-mpa/">2015</a> | <${ExternalLink} href="https://mobilephotoawards.com/street-photography-2014-mpa-results/">2014</a> People: <${ExternalLink} href="https://mobilephotoawards.com/people-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <${ExternalLink} href="https://mobilephotoawards.com/people-photos/">2015</a> | <${ExternalLink} href="https://mobilephotoawards.com/people-2014-mpa-results/">2014</a></p>
+<p>Inspiráció: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=street%20photography&rs=typed&term_meta[]=street%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</ExternalLink> | Mobile Photo Awards street photography: <ExternalLink href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-6th-annual-mpa/">2016</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/street-photography-winner-honorable-mentions-2015-mpa/">2015</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/street-photography-2014-mpa-results/">2014</ExternalLink> People: <ExternalLink href="https://mobilephotoawards.com/people-winner-honorable-mentions-6th-annual-mpa/">2016</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/people-photos/">2015</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/people-2014-mpa-results/">2014</ExternalLink></p>
 
-<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
+<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is <PhotoUploadLink label="megteheted" />. 🕚</p>
 
-<p>Az utcai fotókat pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>
+<p>Az utcai fotókat pedig <PhotoUploadLink label="itt" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 
 <p>--<br />
-    a Photato csapata</p>`;
+    a Photato csapata</p>
+</>;
 }

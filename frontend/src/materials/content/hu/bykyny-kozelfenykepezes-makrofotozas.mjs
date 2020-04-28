@@ -1,6 +1,4 @@
-import {createElement} from '../../../web_modules/react.js';
-import htm from '../../../web_modules/htm.js';
-const html = htm.bind(createElement);
+import React from '../../../web_modules/react.js';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -25,6 +23,6 @@ export function getMetadata() {
  */
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
-    return html`<div>
-</div>`;
+    return <>
+    </>;
 }

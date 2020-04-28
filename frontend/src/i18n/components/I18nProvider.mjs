@@ -1,4 +1,4 @@
-import {createContext, createElement, useState, useEffect, useContext} from '../../web_modules/react.js';
+import React, {createContext, useState, useEffect, useContext} from '../../web_modules/react.js';
 import I18n from '../I18n.mjs';
 
 export const I18nContext = createContext();
@@ -26,12 +26,10 @@ export default function I18nProvider({children, availableLocaleCodes, translatio
         loadTranslations();
     }, []);
 
-    return createElement(I18nContext.Provider, {
-            value: {
-                setActiveLocale: i18n ? i18n.setActiveLocale.bind(i18n) : undefined,
-                getActiveLocaleCode: i18n ? i18n.getActiveLocaleCode.bind(i18n) : undefined,
-                areTranslationsLoaded: !!i18n,
-                __: (...args) => (i18n ? i18n.translate.apply(i18n, args) : args[0]),
-            }
-        }, children);
+    return <I18nContext.Provider value={{
+        setActiveLocale: i18n ? i18n.setActiveLocale.bind(i18n) : undefined,
+        getActiveLocaleCode: i18n ? i18n.getActiveLocaleCode.bind(i18n) : undefined,
+        areTranslationsLoaded: !!i18n,
+        __: (...args) => i18n ? i18n.translate.apply(i18n, args) : args[0]
+    }}>{children}</I18nContext.Provider>;
 }

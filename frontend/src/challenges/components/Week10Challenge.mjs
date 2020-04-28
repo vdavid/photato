@@ -1,10 +1,7 @@
-import {createElement} from '../../web_modules/react.js';
-import htm from '../../web_modules/htm.js';
+import React from '../../web_modules/react.js';
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
-const html = htm.bind(createElement);
-
 /**
  * @param {string} formattedDeadline
  * @param {string} baseUrl
@@ -12,11 +9,12 @@ const html = htm.bind(createElement);
  */
 export default function Week10Challenge({formattedDeadline, baseUrl = ''}) {
 // noinspection SpellCheckingInspection
-    return html`<p><strong>Röviden:</strong></p>
-<p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <${PhotoUploadLink} label="itt tudod feltölteni" />.</p>
+    return <>
+<p><strong>Röviden:</strong></p>
+<p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <PhotoUploadLink label="itt tudod feltölteni" />.</p>
 <p><strong>Hosszabban:</strong></p>
-<${FullWidthLocalImage} fileName="concert.jpg" altText="Koncert Buffalo WY" />
-<p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod majd feltölteni" />.</p>
+<FullWidthLocalImage fileName="concert.jpg" altText="Koncert Buffalo WY" />
+<p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed ${formattedDeadline}-ig, <PhotoUploadLink label="itt tudod majd feltölteni" />.</p>
 <p>Eseményt fotózni lehet résztvevőként, vagy meghívott fotósként. A két felállás elég különböző; igyekeztünk olyan tippeket válogatni, amik mindkét esetben hasznodra válnak. Ők azok:</p>
 <ol>
     <li><strong>Ismerd a helyszínt és a programot.</strong> Hasznos, ha az esemény előtt/elején be tudod járni a teljes helyszínt. Képzeld el előre, mi fog történni, hová kell állnod, hogy elkapd a jelentős pillanatokat. Légy készenlétben.</li>
@@ -29,19 +27,20 @@ export default function Week10Challenge({formattedDeadline, baseUrl = ''}) {
 <ul>
     <li><strong>Apró interakciók.</strong> Koccintás, ölelés, kézfogás, összenézés.</li>
     <li><strong>Beszédes csendéletek.</strong> Pohártornyok, kábelhalmok, székek egymás mellett, egy csokor a széken / egy csokor az árokban.</li>
-    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <${ExternalLink} href="${baseUrl}/challenges/linked-images/long-exposure-with-flash.jpg">mint ez</a>.</li>
+    <li><strong>Exponálj hosszan, vakuval.</strong> Ezt viszonylag sötét helyen tudod megcsinálni. Állítsd a géped manuális (“M”) módba és állítsd hosszúra az exponálási időt, de kapcsold be a vakut is. Így kaphatsz elmosódott, de ugyanakkor éles képeket, pl. <ExternalLink href={baseUrl + '/challenges/linked-images/long-exposure-with-flash.jpg'}>mint ez</ExternalLink>.</li>
     <li><strong>Keress furcsa szögeket.</strong> Felállhatsz valahová magasra (létra, mászóka, teherautó-plató) vagy lefekhetsz a földre. A magas pontról fotózás járulékos előnye, hogy ha a fotózott emberek mind fölfelé, rád néznek, senkinek nem lesz tokája a képen.</li>
 </ul>
 <p>További tippek:</p>
 <ul>
-    <li><${ExternalLink} href="http://blog.fotosarok.hu/2013/04/hogyan-fotozzunk-buliban/">Hogyan fotózzunk buliban?</a> – 7+1 tipp a FotóSarok Blogról.</li>
-    <li><${ExternalLink} href="http://www.elkapottpillanatok.hu/tippek/fotozas-szuletesnapi-zsuron">Fotózás születésnapi zsúron</a> – 11 tipp, ötlet egy profi fotóstól.</li>
-    <li><${ExternalLink} href="https://hvg.hu/tudomany/20071221_karacsonyifoto">Tippek a karácsonyi fotózáshoz</a> – Pont aktuális – ja nem. 😀 De a cikkben leírt 14 tipp jól alkalmazható bármilyen bulira, családi eseményre.</li>
+    <li><ExternalLink href="http://blog.fotosarok.hu/2013/04/hogyan-fotozzunk-buliban/">Hogyan fotózzunk buliban?</ExternalLink> – 7+1 tipp a FotóSarok Blogról.</li>
+    <li><ExternalLink href="http://www.elkapottpillanatok.hu/tippek/fotozas-szuletesnapi-zsuron">Fotózás születésnapi zsúron</ExternalLink> – 11 tipp, ötlet egy profi fotóstól.</li>
+    <li><ExternalLink href="https://hvg.hu/tudomany/20071221_karacsonyifoto">Tippek a karácsonyi fotózáshoz</ExternalLink> – Pont aktuális – ja nem. 😀 De a cikkben leírt 14 tipp jól alkalmazható bármilyen bulira, családi eseményre.</li>
 </ul>
-<p>Inspiráció: <${ExternalLink} href="https://www.pexels.com/search/event/">Pexels</a> | Pinterest: <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=party%20photography">buli</a>, <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=wedding%20photography">esküvő</a>, <${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=concert%20photography">koncert</a></p>
-<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
-<p>Az eseményfotókat pedig <${PhotoUploadLink} label="itt várjuk" />!</p>
+<p>Inspiráció: <ExternalLink href="https://www.pexels.com/search/event/">Pexels</ExternalLink> | Pinterest: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=party%20photography">buli</ExternalLink>, <ExternalLink href="https://hu.pinterest.com/search/pins/?q=wedding%20photography">esküvő</ExternalLink>, <ExternalLink href="https://hu.pinterest.com/search/pins/?q=concert%20photography">koncert</ExternalLink></p>
+<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <PhotoUploadLink label="megteheted" />. 🕚</p>
+<p>Az eseményfotókat pedig <PhotoUploadLink label="itt várjuk" />!</p>
 <p>Jó fotózást,</p>
 <p>--<br />
-    a Photato csapata</p>`;
+    a Photato csapata</p>
+</>;
 }

@@ -1,9 +1,9 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 
 /**
  * @returns {React.ReactElement}
  * @private
  */
 export default function ExternalLink({children, ...props}) {
-    return createElement('a', {className: 'external', target: '_blank', rel: 'noopener', ...props}, children);
+    return <a className='external' target='_blank' rel='noopener' {...props}>{children}</a>;
 }

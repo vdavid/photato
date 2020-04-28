@@ -1,4 +1,4 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 
 /**
@@ -9,8 +9,5 @@ import {NavLink} from '../../web_modules/react-router-dom.js';
  * @constructor
  */
 export default function NavLinkMenuItemWithIcon({iconName, children, ...props} = {}) {
-    return createElement(NavLink, {className: 'menuItem', ...props},
-        createElement('span', {className: 'icon material-icons'}, iconName),
-        createElement('span', {className: 'title'}, children),
-    );
+    return <NavLink className='menuItem' {...props}><span className='icon material-icons'>{iconName}</span><span className='title'>{children}</span></NavLink>;
 }

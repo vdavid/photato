@@ -1,4 +1,4 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useMaterialContext} from './MaterialContextProvider.mjs';
@@ -19,10 +19,10 @@ export default function SimpleFigure({fileName, altText, titleText, caption, wid
     const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
     const imageUrl = imageBaseUrl + fileName;
 
-    return createElement('div', {className: 'simpleFigure'},
-        createElement('figure', {style: {width}},
-            createElement('img', {src: imageUrl, alt: altText, title: titleText}),
-            caption && createElement('figcaption', {}, caption)
-        ),
-    );
+    return <div className='simpleFigure'>
+        <figure style={{width}}>
+            <img src={imageUrl} alt={altText} title={titleText}/>{caption &&
+        <figcaption>{caption}</figcaption>}
+        </figure>
+    </div>;
 }

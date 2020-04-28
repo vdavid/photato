@@ -1,4 +1,4 @@
-import {createElement, createContext, useContext} from '../../web_modules/react.js';
+import React, {createContext, useContext} from '../../web_modules/react.js';
 
 export const MaterialContext = createContext();
 export const useMaterialContext = () => useContext(MaterialContext);
@@ -10,9 +10,5 @@ export const useMaterialContext = () => useContext(MaterialContext);
  * @constructor
  */
 export default function MaterialContextProvider({children, metadata}) {
-    return createElement(MaterialContext.Provider, {
-        value: {
-            metadata,
-        }
-    }, children);
+    return <MaterialContext.Provider value={{metadata}}>{children}</MaterialContext.Provider>;
 }

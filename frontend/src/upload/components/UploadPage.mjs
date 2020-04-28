@@ -1,4 +1,4 @@
-import {createElement, useState, useEffect} from '../../web_modules/react.js';
+import React, {useState, useEffect} from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
@@ -141,41 +141,36 @@ export default function UploadPage({photoUploader}) {
             ? __('The course has already ended. You can’t upload pics anymore. ☹')
             : __('The course has not started. You can upload your photos soon! 😊'));
 
-    return createElement('div', {id: 'fileUpload'},
-        createElement('h1', {}, __('Photo upload')),
-        createElement('p', {className: 'currentWeek'}, __('Week #{weekIndex}', {weekIndex: currentWeekIndex})),
-        isCourseRunning && createElement('h2', {}, __(weeklyChallengeTitles[currentWeekIndex - 1])),
-        createElement('p', {className: 'preWrap'}, courseStatusHelpText),
-        isCourseRunning
-            ? [
-                createElement(FileSelectorWithPreview, {
-                    onFileSelected: handleFileSelected,
-                    onFileRemoved: handleFileSelectionRemoved,
-                    isDisabled: !isAuthenticated || (uploadStatus === uploadStatuses.uploading),
-                    selectedFile,
-                    selectedFilePreviewUrl,
-                }),
-                createElement(PhotoTitleInput, {
-                    title,
-                    isDisabled: uploadStatus === uploadStatuses.uploading,
-                    onChange: newTitle => setTitle(newTitle),
-                }),
-                (uploadStatus === uploadStatuses.notStarted) && createElement('div',
-                    {className: 'selectionStatus' + (selectionStatus.isError ? ' error' : '')}, getSelectionStatusText(selectionStatus)),
-                createElement('div', {className: 'uploadButton'},
-                    createElement('button', {
-                        onClick: uploadSelectedFile,
-                        disabled: !isAuthenticated || (selectionStatus !== selectionStatuses.readyToUpload),
-                    }, __('Upload')),
-                ),
-                createElement('div', {className: 'uploadStatus' + (selectionStatus.isError ? ' error' : '')},
-                    ([uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus)
-                        ? createElement('progress', {
-                            value: uploadProgress * 100,
-                            max: 100
-                        }) : null),
-                    createElement('div', {}, getUploadStatusText(uploadStatus)),
-                ),
-            ] : null,
-    );
+    return <div id='fileUpload'>
+        <h1>{__('Photo upload')}</h1>
+        <p className='currentWeek'>{__('Week #{weekIndex}', {weekIndex: currentWeekIndex})}</p>
+        {isCourseRunning &&
+        <h2>{__(weeklyChallengeTitles[currentWeekIndex - 1])}</h2>}
+        <p className='preWrap'>{courseStatusHelpText}</p>
+        {isCourseRunning && [
+            <FileSelectorWithPreview onFileSelected={handleFileSelected}
+                                     onFileRemoved={handleFileSelectionRemoved}
+                                     isDisabled={!isAuthenticated || uploadStatus === uploadStatuses.uploading}
+                                     selectedFile={selectedFile}
+                                     selectedFilePreviewUrl={selectedFilePreviewUrl}/>,
+            <PhotoTitleInput title={title}
+                             isDisabled={uploadStatus === uploadStatuses.uploading}
+                             onChange={newTitle => setTitle(newTitle)}/>, uploadStatus === uploadStatuses.notStarted &&
+            <div className={'selectionStatus' + (selectionStatus.isError ? ' error' : '')}>
+                {getSelectionStatusText(selectionStatus)}
+            </div>,
+            <div className='uploadButton'>
+                <button onClick={uploadSelectedFile}
+                        disabled={!isAuthenticated || selectionStatus !== selectionStatuses.readyToUpload}>
+                    {__('Upload')}
+                </button>
+            </div>,
+            <div className={'uploadStatus' + (selectionStatus.isError ? ' error' : '')}>
+                {[uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus) &&
+                <progress value={uploadProgress * 100} max={100}/>}
+                <div>
+                    {getUploadStatusText(uploadStatus)}
+                </div>
+            </div>]}
+    </div>;
 }

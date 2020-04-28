@@ -1,5 +1,5 @@
 import {articleSlugsByLanguageAndByWeek} from '../external-articles-repository.mjs';
-import {createElement, useState, useEffect} from '../../web_modules/react.js';
+import React, {useState, useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
@@ -49,20 +49,14 @@ export default function MaterialsPage() {
         loadArticlesForAllWeeks().then(() => {});
     }, []);
 
-    return [
-        createElement('h1', {}, __('Articles about photography')),
-        createElement('p', {
-            dangerouslySetInnerHTML: {
-                __html: __(`On this page we list articles that we found useful.<br />
+    return <>
+        <h1>{__('Articles about photography')}</h1>,
+        <p>{__(`On this page we list articles that we found useful.<br />
         <em>We didn't write these articles.</em> We just like them very much.<br />
         Sadly, these great articles tend to disappear from the internet over the years. To protect them, we created cached copies for some.<br />
-        Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`)
-            }
-        }),
-        Object.keys(articlesByWeek).length
-            ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
-            : __('Loading articles...'),
-    ];
+        Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`)}</p>
+        {Object.keys(articlesByWeek).length ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles)) : __('Loading articles...')}
+        </>;
 
     /**
      * @param {int} weekIndex
@@ -70,10 +64,10 @@ export default function MaterialsPage() {
      * @returns {React.ReactElement[]|null}
      */
     function renderOneWeek(weekIndex, articles) {
-        return articles.length ? [
-            createElement('h2', {}, __(weeklyChallengeTitles[weekIndex - 1])),
-            createElement('ul', {}, articles.map(renderArticleToListElement)),
-        ] : null;
+        return articles.length && <>
+            <h2>{__(weeklyChallengeTitles[weekIndex - 1])}</h2>,
+            <ul>{articles.map(renderArticleToListElement)}</ul>
+        </>;
     }
 
     /**
@@ -81,12 +75,12 @@ export default function MaterialsPage() {
      */
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
-        return createElement('li', {className: metadata.isOriginalUrlBroken ? 'broken' : ''}, [
-            '[',
-            createElement(NavLink, {to: '/external-article/' + metadata.slug}, __('🥔 cached version')),
-            '] ',
-            createElement('a', {href: metadata.originalUrl, target: '_blank', className: metadata.isOriginalUrlBroken ? 'brokenLink' : ''}, metadata.publisherName + ': ' + metadata.title),
-            metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'
-        ]);
+        return <li className={metadata.isOriginalUrlBroken ? 'broken' : ''}>
+            [<NavLink to={'/external-article/' + metadata.slug}>{__('🥔 cached version')}</NavLink>]
+            <a href={metadata.originalUrl}
+               target='_blank'
+               className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</a>
+            {metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'}
+        </li>;
     }
 }

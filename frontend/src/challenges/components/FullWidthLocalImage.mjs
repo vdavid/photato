@@ -1,12 +1,17 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 
 export default function FullWidthLocalImage({fileName, altText, caption, captionLink}) {
     if (caption) {
-        return createElement('p', {style: {width: '100%', maxWidth: '800px', textAlign: 'center', fontSize: 'smaller'}},
-            createElement('img', {src: '/challenges/illustrations/' + fileName, alt: altText, style: {width:'100%'}}),
-            createElement('a', {href: captionLink}, caption)
-        );
+        return <p style={{
+            width: '100%',
+            maxWidth: '800px',
+            textAlign: 'center',
+            fontSize: 'smaller'
+        }}>
+            <img src={'/challenges/illustrations/' + fileName} alt={altText} style={{width: '100%'}}/>
+            <a href={captionLink}>{caption}</a>
+        </p>;
     } else {
-        return createElement('img', {src: '/challenges/illustrations/' + fileName, alt: altText, style: {width:'100%'}});
+        return <img src={'/challenges/illustrations/' + fileName} alt={altText} style={{width: '100%'}}/>;
     }
 }

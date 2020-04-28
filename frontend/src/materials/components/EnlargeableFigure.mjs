@@ -1,4 +1,4 @@
-import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
+import React, {useEffect, useRef, useState} from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useMaterialContext} from './MaterialContextProvider.mjs';
@@ -62,14 +62,14 @@ export default function EnlargeableFigure({fileName, thumbnailFileName, altText,
     }, [fullscreenStatus]);
     const imageSrc = ((!isFullscreen || !isFullSizeImagePreloaded) ? thumbnailImageUrl : fullSizeImageUrl);
 
-    return createElement('div', {className: 'zoomOnHover enlargeable' + (isFullscreen ? ' fullscreen' : '')},
-        createElement('figure', {ref: figureRef, onClick: !isFullscreen ? fullscreenClick : exitFullscreen, style: getFigureStyle()},
-            createElement('a', {href: !isFullscreen ? fullSizeImageUrl : ''},
-                createElement('img', {src: imageSrc, alt: altText}),
-            ),
-            caption && createElement('figcaption', {}, caption)
-        ),
-    );
+    return <div className={'zoomOnHover enlargeable' + (isFullscreen ? ' fullscreen' : '')}>
+        <figure ref={figureRef}
+                onClick={!isFullscreen ? fullscreenClick : exitFullscreen}
+                style={getFigureStyle()}>
+            <a href={!isFullscreen ? fullSizeImageUrl : ''}><img src={imageSrc} alt={altText}/></a>
+            {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+    </div>;
 
     /**
      * @param {string} fileName

@@ -1,23 +1,21 @@
-import {createElement} from '../../web_modules/react.js';
-import htm from '../../web_modules/htm.js';
+import React from '../../web_modules/react.js';
 import FullWidthLocalImage from './FullWidthLocalImage.mjs';
 import PhotoUploadLink from './PhotoUploadLink.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
-const html = htm.bind(createElement);
-
 /**
  * @param {string} formattedDeadline
  * @returns {React.ReactElement}
  */
 export default function Week11Challenge({formattedDeadline}) {
 // noinspection SpellCheckingInspection
-    return html`<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. <${PhotoUploadLink} label="Itt tudod feltölteni" />.</p>
+    return <>
+<p><strong>Röviden:</strong></p>
+<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. <PhotoUploadLink label="Itt tudod feltölteni" />.</p>
 <p><strong>Hosszabban:</strong></p>
 
-<${FullWidthLocalImage} fileName="gyuri.jpg" altText="Gyuri összeverve" />
+<FullWidthLocalImage fileName="gyuri.jpg" altText="Gyuri összeverve" />
 
-<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, <${PhotoUploadLink} label="itt tudod majd feltölteni" />.</p>
+<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet ${formattedDeadline}-ig, <PhotoUploadLink label="itt tudod majd feltölteni" />.</p>
 <p>Egy önarckép lehet egy pillanatkép az életedből; az épp aktuális identitásod képi megfogalmazása; egy időszak összefoglalása; vagy egy mélyebb szembenézés magaddal. Te döntöd el, mit osztasz meg magadról, és hogy ezt hogyan fejezed ki a képpel. Hoztunk neked ehhez 8 tippet és egy csomó ötletet.</p>
 <p><strong>Tippek:</strong></p>
 <ol>
@@ -32,20 +30,21 @@ export default function Week11Challenge({formattedDeadline}) {
 </ol>
 <p><strong>Rengeteg ötlet és inspiráció:</strong></p>
 <ul>
-    <li><${ExternalLink} href="https://iso.500px.com/creative-self-portraits/">50 önarckép-ötlet</a> az 500px-en</li>
-    <li>Mobile Photography Awards nyertesek: <${ExternalLink} href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-7th-annual-mpa/">2017</a> | <${ExternalLink} href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-6th-annual-mpa/">2016</a> | <${ExternalLink} href="https://mobilephotoawards.com/self-portraits/">2015</a></li>
-    <li><${ExternalLink} href="https://hu.pinterest.com/search/pins/?q=self%20portrait%20photography&rs=typed&term_meta[]=self%7Ctyped&term_meta[]=portrait%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</a> önarcképek</li>
-    <li><${ExternalLink} href="http://www.bwvision.com/top-10-self-portraits/">8 fotós (és két festő) önarcképe</a></li>
+    <li><ExternalLink href="https://iso.500px.com/creative-self-portraits/">50 önarckép-ötlet</ExternalLink> az 500px-en</li>
+    <li>Mobile Photography Awards nyertesek: <ExternalLink href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-7th-annual-mpa/">2017</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/self-portraits-winner-honorable-mentions-6th-annual-mpa/">2016</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/self-portraits/">2015</ExternalLink></li>
+    <li><ExternalLink href="https://hu.pinterest.com/search/pins/?q=self%20portrait%20photography&rs=typed&term_meta[]=self%7Ctyped&term_meta[]=portrait%7Ctyped&term_meta[]=photography%7Ctyped">Pinterest</ExternalLink> önarcképek</li>
+    <li><ExternalLink href="http://www.bwvision.com/top-10-self-portraits/">8 fotós (és két festő) önarcképe</ExternalLink></li>
 </ul>
 <p><strong>Linkek:</strong></p>
 <ul>
-    <li><${ExternalLink} href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</a> az expertphotography.com-tól</li>
+    <li><ExternalLink href="https://expertphotography.com/how-to-take-flattering-self-portraits/">Tippek angolul</ExternalLink> az expertphotography.com-tól</li>
 </ul>
-<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <${PhotoUploadLink} label="megteheted" />. 🕚</p>
-<p>Az önarcképeket pedig <${PhotoUploadLink} label="itt" /> várjuk!</p>
+<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <PhotoUploadLink label="megteheted" />. 🕚</p>
+<p>Az önarcképeket pedig <PhotoUploadLink label="itt" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 
 <p>--<br />
-    a Photato csapata</p>`;
+    a Photato csapata</p>
+</>;
 }

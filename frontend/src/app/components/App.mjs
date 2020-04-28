@@ -1,4 +1,4 @@
-import {createElement, useEffect, useState} from '../../web_modules/react.js';
+import React, {useEffect, useState} from '../../web_modules/react.js';
 import {BrowserRouter, Switch, Route} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
@@ -36,22 +36,40 @@ export default function App() {
         checkFontsLoaded();
     }, []);
 
-    return (areTranslationsLoaded && areFontsReady && !isAuthLoading)
-        ? (createElement(BrowserRouter, {basename: '/'},
-            createElement(NavigationBar),
-            createElement('main', null,
-                createElement(Switch, null,
-                    createElement(Route, {path: '/', exact: true, component: () => createElement(FrontPage)}),
-                    createElement(Route, {path: '/about', component: () => createElement(AboutPage)}),
-                    createElement(Route, {path: '/upload', component: () => createElement(UploadPage, {photoUploader})}),
-                    createElement(Route, {path: '/challenges', exact: true, component: () => createElement(ChallengesPage)}),
-                    createElement(Route, {path: '/challenges/:weekIndex', component: () => createElement(ChallengePage)}),
-                    createElement(Route, {path: '/materials', component: () => createElement(MaterialsPage)}),
-                    createElement(Route, {path: '/external-article/:slug', component: () => createElement(MaterialPage)}),
-                    createElement(Route, {path: '/', component: () => createElement(Error404Page)}),
-                ),
-            ),
-            createElement(Footer),
-        ))
-        : createElement(FullPageLoadingIndicator);
+    return areTranslationsLoaded && areFontsReady && !isAuthLoading
+        ?
+        <BrowserRouter basename='/'>
+            <NavigationBar/>
+            <main>
+                <Switch>
+                    <Route path='/' exact={true}>
+                        <FrontPage/>
+                    </Route>
+                    <Route path='/about'>
+                        <AboutPage/>
+                    </Route>
+                    <Route path='/upload'>
+                        <UploadPage photoUploader={photoUploader}/>
+                    </Route>
+                    <Route path='/challenges' exact={true}>
+                        <ChallengesPage/>
+                    </Route>
+                    <Route path='/challenges/:weekIndex'>
+                        <ChallengePage/>
+                    </Route>
+                    <Route path='/materials'>
+                        <MaterialsPage/>
+                    </Route>
+                    <Route path='/external-article/:slug'>
+                        <MaterialPage/>
+                    </Route>
+                    <Route path='/'>
+                        <Error404Page/>
+                    </Route>
+                </Switch>
+            </main>
+            <Footer/>
+        </BrowserRouter>
+        :
+        <FullPageLoadingIndicator/>;
 }

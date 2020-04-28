@@ -1,4 +1,4 @@
-import {createElement, useEffect, useRef, useState} from '../../web_modules/react.js';
+import React, {useEffect, useRef, useState} from '../../web_modules/react.js';
 import {config} from '../../config.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useMaterialContext} from './MaterialContextProvider.mjs';
@@ -55,18 +55,19 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, caption
     const overlayStyle = {left: sliderX + 'px', width: imageWidth - sliderX + 'px'};
 
     console.log(sliderX);
-    return createElement('div', {className: 'imageComparison', style: {width}},
-        createElement('figure', {},
-            createElement('div', {className: 'primary'},
-                createElement('img', {ref: primaryImageRef, src: imageBaseUrl + fileName1, onLoad: updateImageDimensions})
-            ),
-            createElement('div', {ref: sliderRef, className: 'slider', style: {left: sliderX + 'px', top: sliderTop + 'px'}}),
-            createElement('div', {ref: overlayImageRef, className: 'overlay', style: overlayStyle},
-                createElement('img', {src: imageBaseUrl + fileName2})
-            ),
-        ),
-        caption && createElement('figcaption', {}, caption)
-    );
+    return <div className='imageComparison' style={{width}}>
+        <figure>
+            <div className='primary'>
+                <img ref={primaryImageRef} src={imageBaseUrl + fileName1} alt='Image 1' onLoad={updateImageDimensions} />
+            </div>
+            <div ref={sliderRef} className='slider' style={{left: sliderX + 'px', top: sliderTop + 'px'}}/>
+            <div ref={overlayImageRef} className='overlay' style={overlayStyle}>
+                <img src={imageBaseUrl + fileName2} alt="Image 2" />
+            </div>
+        </figure>
+        {caption &&
+        <figcaption>{caption}</figcaption>}
+    </div>;
 
     function updateImageDimensions() {
         setComponentX(primaryImageRef.current.getBoundingClientRect().left);

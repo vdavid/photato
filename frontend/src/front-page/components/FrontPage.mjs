@@ -1,4 +1,4 @@
-import {createElement} from '../../web_modules/react.js';
+import React from '../../web_modules/react.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ChallengeList from '../../challenges/components/ChallengeList.mjs';
@@ -12,19 +12,18 @@ export default function FrontPage() {
         loginWithRedirect({});
     }
 
-    return [
-        createElement('h1', {}, __('Photato') + ' – ' + __('12 weeks, 12 pics')),
-        createElement('h2', {}, __('Challenges')),
-        createElement(ChallengeList),
-        createElement('div', {},
-            createElement(NavLinkButton, {
-                to: '/upload',
-                disabled: !isAuthenticated,
-                title: !isAuthenticated ? __('You’ll need to sign in to upload a photo.') : '',
-            }, __('Upload your weekly photo')),
-        ),
-        createElement('div', {},
-            !isAuthenticated ? createElement('button', {onClick: handleSignIn}, __('Sign in')) : null
-        ),
-    ];
+    return <>
+        <h1>{__('Photato') + ' – ' + __('12 weeks, 12 pics')}</h1>
+        <h2>{__('Challenges')}</h2>
+        <ChallengeList/>
+        <div>
+            <NavLinkButton to='/upload'
+                           disabled={!isAuthenticated}
+                           title={!isAuthenticated ? __('You’ll need to sign in to upload a photo.') : ''}>
+                {__('Upload your weekly photo')}
+            </NavLinkButton>
+        </div>
+        <div>{!isAuthenticated ?
+            <button onClick={handleSignIn}>{__('Sign in')}</button> : null}</div>
+    </>;
 }

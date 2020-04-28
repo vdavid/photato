@@ -1,5 +1,5 @@
 import {config, developmentConfig, stagingConfig, productionConfig} from './config.mjs';
-import {createElement, StrictMode} from './web_modules/react.js';
+import React, {StrictMode} from './web_modules/react.js';
 import {render} from './web_modules/react-dom.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
@@ -30,27 +30,23 @@ function initializeConfig() {
 
 initializeConfig();
 
+function onRedirectCallback() {
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
 render(
-    createElement(Auth0Provider, {
-            domain: config.auth0.domain,
-            client_id: config.auth0.clientId,
-            redirect_uri: window.location.origin,
-            onRedirectCallback: () => window.history.replaceState({}, document.title, window.location.pathname),
-        },
-        createElement(I18nProvider, {
-                availableLocaleCodes,
-                translationFolderPath: '/i18n/translations/',
-                // TODO: Once we have the language switcher, allow overwriting this by a manual language change, e.g. by checking for cookies or something!
-                activeLocaleCode: getDefaultLocaleCodeByNavigatorPreferences(),
-            },
-            createElement(CourseDataProvider, {
-                    courseDateConverter,
-                },
-                createElement(StrictMode, {},
-                    createElement(App),
-                ),
-            ),
-        ),
-    ),
-    document.getElementById('app')
-);
+    <Auth0Provider domain={config.auth0.domain}
+                   client_id={config.auth0.clientId}
+                   redirect_uri={window.location.origin}
+                   onRedirectCallback={onRedirectCallback}>
+        <I18nProvider availableLocaleCodes={availableLocaleCodes}
+                      translationFolderPath='/i18n/translations/'
+            // TODO: Once we have the language switcher, allow overwriting this by a manual language change, e.g. by checking for cookies or something!
+                      activeLocaleCode={getDefaultLocaleCodeByNavigatorPreferences()}>
+            <CourseDataProvider courseDateConverter={courseDateConverter}>
+                <StrictMode>
+                    <App/>
+                </StrictMode>
+            </CourseDataProvider>
+        </I18nProvider>
+    </Auth0Provider>, document.getElementById('app'));
