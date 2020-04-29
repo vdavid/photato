@@ -42,7 +42,7 @@ export default function Article() {
 
         <h2>3. Játék a fehéregyensúllyal</h2>
         <p>Az állatkertek belső terekben gyakran mesterséges világítást alkalmaznak, melyek gyakorta nem is hagyományos izzók, hanem például a trópusi napfényt imitáló fényforrások. Ezek esetében a fényképezők automata fehéregyensúly-szabályzója sokszor nem tudja pontosan beállítani a színhőmérsékletet, így a kész fotó színei nem lesznek helyesek, a valóságoshoz hasonlóak. Ennek kiküszöbölésére már a belépőszintű gépeken is lehetőség van a gyárilag megadott értékeket (neoncső, hagyományos izzó, stb.) választani, amelyekkel jobb eredmény érhető el.</p>
-        <SimpleFigure fileName="20080426allatkert3.jpg" altText="Forrás: [origo]" caption="Baloldalt automata, jobbra &quot;zsebkendővel hangolt&quot; fehéregyensúllyal"/>
+        <SimpleFigure fileName="20080426allatkert3.jpg" altText="Forrás: [origo]" caption='Baloldalt automata, jobbra "zsebkendővel hangolt" fehéregyensúllyal'/>
         <p>Szerencsésebb helyzetben manuális kalibrálásra is lehetőség van, ehhez mindössze egy fehér felületet kell lefotózni a speciális lámpa fénye előtt - mi erre egy egyszerű papírzsebkendőt használtunk - mint a lenti fotón is látszik, sikerrel.</p>
 
         <h2>4. Polárszűrő: tükröződés, csillogás kiküszübölésére</h2>
