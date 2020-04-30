@@ -31,7 +31,7 @@ export default function Week12Challenge({formattedDeadline}) {
             <li><strong>Hosszan exponált képek</strong>kel gyakoroltuk a gépünk manuális („M”) üzemmódját használni, és gyakoroltuk az előző héten tanult elméletet.</li>
             <li><strong>Csendélet</strong>fotózással folytattuk, és a fehéregyensúly beállításait tanultuk meg.</li>
             <li><strong>Portrék</strong>at fotóztunk, ahol megpróbáltuk mások személyiségét, hangulatát elkapni és megörökíteni.</li>
-            <li><strong>Eseményfotózás</strong>t tanultunk, hogy a party- és családi fotóink is profitáljanak a kurzusból.</li>
+            <li><strong>Eseményfotózás</strong>t tanultunk, hogy a party- és családi fotóink is profitáljanak a tanfolyamból.</li>
             <li><strong>Önarckép</strong>et készítettünk a múlt héten, újabb bátorságpróbaként 😊</li>
             <li>A héten pedig <strong>szabadon fotózunk</strong>.</li>
         </ol>
@@ -68,20 +68,20 @@ export default function Week12Challenge({formattedDeadline}) {
         </ul>
         <p><strong>A Photatoról:</strong>
         </p>
-        <p>Köszi, hogy részt vettél a kurzuson! Mi nagyon élveztük, örültünk a rengeteg pozitív visszajelzésnek és konstruktív kritikának. 😊 Még nem búcsúzkodunk, hiszen még van egy hét, és egy fotókiállítás, amiről hamarosan írunk! Viszont akartunk szólni, hogy hamarosan újabb tanfolyamot indítunk. Sokan írtátok, hogy szívesen ajánlanátok a Photatot a barátaitoknak/kollégáitoknak. Gondoltuk, ez egy remek alkalom, hogy lehetőséget adjunk erre.</p>
+        <p>Köszi, hogy részt vettél a tanfolyamon! Mi nagyon élveztük, örültünk a rengeteg pozitív visszajelzésnek és konstruktív kritikának. 😊 Még nem búcsúzkodunk, hiszen még van egy hét, és egy fotókiállítás, amiről hamarosan írunk! Viszont akartunk szólni, hogy hamarosan újabb tanfolyamot indítunk. Sokan írtátok, hogy szívesen ajánlanátok a Photatot a barátaitoknak/kollégáitoknak. Gondoltuk, ez egy remek alkalom, hogy lehetőséget adjunk erre.</p>
         <p>Itt van pl. egy rövid üzenet, amit átküldhetsz azoknak, akiket szerinted érdekelhet:</p>
         <hr />
-        <p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb kurzusuk!<br />
+        <p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb tanfolyamuk!<br />
             Arra gondoltam, téged is érdekelhet a fotózás.<br />
-            Ha így van, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <ExternalLink href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</ExternalLink></em>
+            Ha így van, jelentkezz itt: <ExternalLink href="https://bit.ly/2tB1hpR">https://bit.ly/2tB1hpR</ExternalLink></em>
         </p>
         <hr />
         <p>Vagy kiírhatsz valami ilyesmit a faladra:</p>
         <hr />
-        <p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő kurzusuk, ajánlom mindenkinek! Ha érdekel, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <ExternalLink href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</ExternalLink></em>
+        <p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő tanfolyamuk, ajánlom mindenkinek! Ha érdekel, jelentkezz itt: <ExternalLink href="https://bit.ly/2tB1hpR">https://bit.ly/2tB1hpR</ExternalLink></em>
         </p>
         <hr />
-        <p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <ExternalLink href="http://bit.ly/12712signupc1">http://bit.ly/12712signupc1</ExternalLink>
+        <p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <ExternalLink href="https://bit.ly/2tB1hpR">https://bit.ly/2tB1hpR</ExternalLink>
         </p>
         <p>És még egy dolog:</p>
         <p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <ExternalLink href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</ExternalLink> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>

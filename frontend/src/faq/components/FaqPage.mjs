@@ -8,10 +8,25 @@ export default function FaqPage() {
     const {getActiveLocaleCode, __} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
 
+    const questionsAndAnswers = getSingleLanguageContent(languageCode);
+
     return <>
         <h1>{__('Frequently asked questions')}</h1>
-        <p><ExternalLink href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink></p>
-        <QuestionsAndAnswersList questionsAndAnswers={getSingleLanguageContent(languageCode)} />
-        <p><ExternalLink href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink></p>
+        <div className="faqSummary">
+            <ul>
+                {getTocItems(questionsAndAnswers)}
+            </ul>
+        </div>
+        <QuestionsAndAnswersList questionsAndAnswers={questionsAndAnswers}/>
+        <p>
+            <ExternalLink href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink>
+        </p>
     </>;
+
+    function getTocItems(questionsAndAnswers) {
+        return questionsAndAnswers.map(questionAndAnswer =>
+            <li>
+                <a href={'#' + questionAndAnswer.id}>{questionAndAnswer.question}</a>
+            </li>);
+    }
 }

@@ -86,14 +86,15 @@ const uploadPageTranslations = {
     'Give your photo a title (optional)': {translation: 'Adj címet a fotódnak (nem kötelező)'},
     'Click here to select your photo, or drop your photo here': {translation: 'Kattints ide a fotód kiválasztásához, vagy húzd ide az egérrel'},
     'Week {weekIndex}:': {translation: '{weekIndex}. hét –'},
-    'The course has already ended. You can’t upload pics anymore. ☹': {translation: 'A kurzus véget ért. Már nem tudsz fotókat feltölteni. ☹'},
-    'The course has not started. You can upload your photos soon! 😊': {translation: 'A kurzus még nem kezdődött el. Hamarosan feltöltheted a fotóid! 😊'},
+    'The course has already ended. You can’t upload pics anymore. ☹': {translation: 'A tanfolyam véget ért. Már nem tudsz fotókat feltölteni. ☹'},
+    'The course has not started. You can upload your photos soon! 😊': {translation: 'A tanfolyam még nem kezdődött el. Hamarosan feltöltheted a fotóid! 😊'},
     'You’ll need to sign in to upload a photo.': {translation: 'Fotó feltöltéséhez be kell jelentkezned.'},
     'Loading...': {translation: 'Betöltés folyamatban...'},
 };
 
 const otherTranslations = {
-    'Sign up for the next course': {translation: 'Feliratkozás a következő kurzusra'},
+    'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
+    'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
     /* 404 page */
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
