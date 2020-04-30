@@ -1,13 +1,15 @@
+# This file is for Netlify to know stuff about building and redirects.
 # See this for help: https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 
 # These settings are applied to all contexts unless overridden by specific contexts.
 [build]
-
-# Specific branch context: all deploys from this specific branch will inherit
-# these settings.
-[context.staging]
   command = "npm run build"
   publish = "public/"
+
+# Specific branch context: all deploys from this specific branch will inherit these settings.
+[context.master]
+
+[context.staging]
 
 # Redirect all to index.html
 [[redirects]]
