@@ -66,6 +66,7 @@ export default class I18n {
      *        May contain placeholders in curly braces like in "Hello {name}!"
      * @param {Object<string, string>} [values]
      * @param {string} [localeCode] The locale to translate to.
+     * @return {string|Component}
      */
     translate(phrase, values = {}, localeCode = this._activeLocaleCode) {
         if (this._translations[localeCode]) {
