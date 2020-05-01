@@ -4,6 +4,14 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 export default function ContactPage() {
     const {getActiveLocaleCode} = useI18n();
     return (getActiveLocaleCode() === 'hu-HU') ? getHungarianPage() : getEnglishPage();
+
+    /*
+    No phone or physical address, no company
+    Email address
+    Link to the team info and FAQ
+    Becoming a mentor
+
+     */
 }
 
 function getHungarianPage() {
