@@ -37,9 +37,9 @@
 /* ----------------------- Fonts ----------------------- */
 
 :root {
-    --ui-font: 'Montserrat', sans-serif;
-    --header-font: 'Montserrat', sans-serif;
-    --content-font: 'Merriweather', serif;
+    --ui-font: 'IBM Plex Sans', sans-serif;
+    --header-font: 'IBM Plex Sans', sans-serif;
+    --content-font: 'IBM Plex Sans', sans-serif;
 }
 
 /* ----------------------- Sizes ----------------------- */
