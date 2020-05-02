@@ -12,10 +12,10 @@ export default function ChallengeList() {
     const weekIndexes = Array.from(Array(Math.min(currentWeekIndex, weekCount)), (value, key) => key + 1);
     const challengeLinks = weekIndexes.map(weekIndex =>
         <li>
+            {(weekIndex === currentWeekIndex) && (__('Current challenge') + ' → ')}
             <NavLink to={'/challenges/' + weekIndex}>
                 {__('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])}
             </NavLink>
-            {(weekIndex === currentWeekIndex) && (' ← ' + __('This is the current week’s challenge!'))}
         </li>);
     return <ul className='challengeList'>{challengeLinks}</ul>;
 }
