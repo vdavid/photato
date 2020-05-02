@@ -3,15 +3,16 @@ const {getStatusDescription} = require('./statusCodes.js');
 /**
  * @param {int} statusCode
  * @param {string} body
+ * @param {string} [contentType] Default is 'text/plain'.
  * @returns {object}
  * @private
  */
-function buildResponse(statusCode, body) {
+function buildResponse(statusCode, body, {contentType = 'text/plain'} = {}) {
     return {
         status: statusCode,
         statusDescription: getStatusDescription(statusCode),
         headers: {
-            'content-type': [{key: 'Content-Type', value: 'text/plain'}],
+            'content-type': [{key: 'Content-Type', value: contentType}],
             'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
             'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
         },

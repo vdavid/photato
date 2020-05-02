@@ -50,6 +50,14 @@ functions:
     lambdaAtEdge:
       distribution: CloudFront
       eventType: viewer-request
+  adminGetAllMessages:
+    handler: messages/getAllMessages/getAllMessages.handler
+    memorySize: 128
+    timeout: 5
+    lambdaAtEdge:
+      distribution: CloudFront
+      eventType: viewer-request
+      pathPattern: '/get-all-messages'
 
 # Plugins for extended functions, such as Lambda@Edge use
 plugins:
@@ -149,6 +157,20 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/get-signed-url'
+              AllowedMethods:
+                - GET
+                - OPTIONS
+                - HEAD
+            - TargetOriginId: S3Origin
+              ViewerProtocolPolicy: redirect-to-https
+              DefaultTTL: 0
+              MaxTTL: 0
+              MinTTL: 0
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              PathPattern: '/get-all-messages'
               AllowedMethods:
                 - GET
                 - OPTIONS
