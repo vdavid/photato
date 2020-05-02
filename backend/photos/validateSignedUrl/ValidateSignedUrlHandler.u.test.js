@@ -57,7 +57,7 @@ test('Allows OPTIONS for non-expired, valid signatures', async () => {
         ],
     };
 
-    /*Act */
+    /* Act */
     const response = await validateSignedUrlHandler.handleRequest(event);
 
     /* Assert */
@@ -77,7 +77,7 @@ test('Allows non-expired, valid signatures', async () => {
     const signatureRepository = new SignatureRepository(s3, bucketName);
     const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
 
-    /*Act */
+    /* Act */
     const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
 
     /* Assert */
@@ -95,7 +95,7 @@ test('Disallows expired, valid signatures', async () => {
     const signatureRepository = new SignatureRepository(defaultS3, bucketName);
     const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
 
-    /*Act */
+    /* Act */
     const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
 
     /* Assert */

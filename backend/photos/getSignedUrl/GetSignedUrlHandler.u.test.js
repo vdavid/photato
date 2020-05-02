@@ -51,7 +51,7 @@ test('Handles valid OPTIONS requests well', async () => {
         ],
     };
 
-    /*Act */
+    /* Act */
     const response = await getSignedUrlHandler.handleRequest(event, {});
 
     /* Assert */
@@ -61,7 +61,7 @@ test('Handles valid OPTIONS requests well', async () => {
     expect(putObjectMock).toBeCalledTimes(0);
 });
 
-test('Handles valid PUT requests well', async () => {
+test('Handles valid GET requests well', async () => {
     /* Arrange */
     const host = 'temp.cloudfront.net';
     const parameters = {
@@ -95,7 +95,7 @@ test('Handles valid PUT requests well', async () => {
         ],
     };
 
-    /*Act */
+    /* Act */
     const response = await getSignedUrlHandler.handleRequest(event, {});
 
     /* Assert */
@@ -103,7 +103,6 @@ test('Handles valid PUT requests well', async () => {
         + 'week-' + parameters.weekIndex + '/' + parameters.emailAddress + '.jpg'
         + '?' + fakeResponseQueryString);
     expect(response.status).toEqual(200);
-    expect(response.statusDescription).toEqual('OK');
     expect(response.statusDescription).toEqual('OK');
     expect(getSignedUrlMock).toBeCalledTimes(1);
     expect(getSignedUrlMock.mock.calls[0][0]).toBe('putObject');
