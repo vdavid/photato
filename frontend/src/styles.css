@@ -231,6 +231,8 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
     top: calc((var(--indicatorSize) - var(--logoSize)) / 2); left: calc((var(--indicatorSize) - var(--logoSize)) / 2);
     background: url('./app/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
 
+#fullPageLoadingIndicator .loadingTakingLong { top:400px; width:400px; max-width:100%; text-align: center; animation:appearAnimation 0.2s ease-in-out; }
+
 @keyframes spinnerAnimation {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -241,7 +243,10 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
     100% { transform: scale(1); }
 }
 
-#fullPageLoadingIndicator .loadingTakingLong { top:400px; width:400px; max-width:100%; text-align: center; }
+@keyframes appearAnimation {
+    0% { opacity:0; }
+    100% { opacity:1; }
+}
 
 
 /* ======================= Article elements ======================= */

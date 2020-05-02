@@ -192,7 +192,7 @@ function getMultiLanguageContent() {
             answer: {
                 en: <>Several ways:
                     <ul>
-                        <li>If you know basic photography, join us as a mentor. (You don’t need to be a pro, just be willing to be kind to people and give feedback.) More info on the <NavLink to={'/contact'}>contact page</NavLink>.
+                        <li>If you know basic photography, join us as a mentor. (You don’t need to be a pro, just be willing to be kind to people and give feedback.) Apply in a short email here: <a href="mailto:photatophotato@gmail.com?subject=Interested in helping with my feedback">photatophotato@gmail.com</a>.
                         </li>
                         <li>If you know some web development or graphics design, you can help with the website. <NavLink to={'/contact'}>Contact us</NavLink>.
                         </li>
@@ -203,7 +203,7 @@ function getMultiLanguageContent() {
                 </>,
                 hu: <>Többféleképp is:
                     <ul>
-                        <li>Ha megvannak a fotózás alapjai, csatlakozz mentorként. (Nem kell profinak lenned. Ha tudsz kedves visszajelzéseket írni az embereknek, az elég.) Több infó a <NavLink to={'/contact'}>kapcsolat</NavLink> oldalon.
+                        <li>Ha megvannak a fotózás alapjai, csatlakozz mentorként. (Nem kell profinak lenned. Ha tudsz kedves visszajelzéseket írni az embereknek, az elég.) Jelentkezz egy rövid e-mailben itt: <a href="mailto:photatophotato@gmail.com?subject=Visszajelzésekkel segítenék">photatophotato@gmail.com</a>.
                         </li>
                         <li>Ha értesz a webfejlesztéshez vagy –designhoz, tudsz segíteni a honlappal. <NavLink to={'/contact'}>Kontakt</NavLink>.
                         </li>

@@ -78,7 +78,7 @@ export default function MaterialsPage() {
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
         return <li className={metadata.isOriginalUrlBroken ? 'broken' : ''}>
-            [<NavLink to={'/external-article/' + metadata.slug}>{__('🥔 cached version')}</NavLink>]
+            [<NavLink to={'/external-article/' + metadata.slug}>{__('🥔 cached version')}</NavLink>]&nbsp;
             <a href={metadata.originalUrl}
                target='_blank'
                className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</a>
