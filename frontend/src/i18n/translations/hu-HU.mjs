@@ -1,3 +1,5 @@
+import React from '../../web_modules/react.js';
+
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const siteHeaderAndFooterTranslations = {
     'Photato': {translation: 'Photato'},
@@ -95,6 +97,8 @@ const uploadPageTranslations = {
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
+    /* Loading page */
+    'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format:'jsx'},
     /* 404 page */
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},

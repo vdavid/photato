@@ -73,7 +73,11 @@ export default class I18n {
             if(typeof phrase === 'string') {
                 const localizedString = (this._translations[localeCode][phrase] || {}).translation;
                 if (localizedString !== undefined) {
-                    return this._replacePlaceholdersInLocalizedString(localizedString, values);
+                    if(typeof localizedString === 'string') {
+                        return this._replacePlaceholdersInLocalizedString(localizedString, values);
+                    } else { /* JSX, placeholder replace is not supported. */
+                        return localizedString;
+                    }
                 } else {
                     if (localeCode !== 'en-US') { /* We don't need translations for the base language. */
                         this._logMissingPhrase(phrase, localeCode);
