@@ -16,8 +16,8 @@ const auth0Authorizer = {
         : (token === ordinaryBearerToken ? {email: ordinaryEmailAddress} : undefined)
 };
 const permissionHelper = new PermissionHelper();
-const messageRepository = {getAllMessages: async () => mockMessages};
-const getAllMessagesHandler = new GetAllMessagesHandler({auth0Authorizer, permissionHelper, messageRepository});
+const photatoMessageRepository = {getAllMessages: () => mockMessages};
+const getAllMessagesHandler = new GetAllMessagesHandler({auth0Authorizer, permissionHelper, photatoMessageRepository});
 
 function _convertToQueryString(object) {
     return Object.keys(object).map(key => key + '=' + object[key]).join('&');

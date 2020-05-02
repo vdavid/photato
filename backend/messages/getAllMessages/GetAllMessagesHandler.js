@@ -1,7 +1,7 @@
 const config = require('../../config.js');
 const Auth0Authorizer = require('../../auth/Auth0Authorizer.js');
 const PermissionHelper = require('../../auth/PermissionHelper.js');
-const MessageRepository = require('../MessageRepository.js');
+const PhotatoMessageRepository = require('../PhotatoMessageRepository.js');
 
 const {getRequestDataFromLambdaEdgeEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
 const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
@@ -10,12 +10,12 @@ module.exports = class GetSignedUrlHandler {
     /**
      * @param {Auth0Authorizer} [auth0Authorizer] For mocking
      * @param {PermissionHelper} [permissionHelper] For mocking
-     * @param {MessageRepository} [messageRepository] For mocking
+     * @param {PhotatoMessageRepository} [photatoMessageRepository] For mocking
      */
-    constructor({auth0Authorizer, permissionHelper, messageRepository} = {}) {
+    constructor({auth0Authorizer, permissionHelper, photatoMessageRepository} = {}) {
         this._auth0Authorizer = auth0Authorizer || new Auth0Authorizer(config.auth0.userInfoEndpoint);
         this._permissionHelper = permissionHelper || new PermissionHelper();
-        this._messageRepository = messageRepository || new MessageRepository();
+        this._photatoMessageRepository = photatoMessageRepository || new PhotatoMessageRepository();
     }
 
     /**
@@ -52,7 +52,7 @@ module.exports = class GetSignedUrlHandler {
             if (userData) {
                 const isAdmin = this._permissionHelper.isAdmin(userData.email);
                 if (isAdmin) {
-                    const allMessages = await this._messageRepository.getAllMessages();
+                    const allMessages = this._photatoMessageRepository.getAllMessages();
                     return buildResponse(200, JSON.stringify(allMessages), {contentType: 'application/json'});
                 } else {
                     return buildResponse(403, 'Not an admin.');
