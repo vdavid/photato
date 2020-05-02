@@ -54,16 +54,13 @@ const articlePageTranslations = {
     'Author': {translation: 'Szerző'},
     'Publication date': {translation: 'Dátum'},
     'Original article': {translation: 'Eredeti cikk'},
-    [`On this page we list articles that we found useful.<br />
-        <em>We didn't write these articles.</em> We just like them very much.<br />
-        Sadly, these great articles tend to disappear from the internet over the years. To protect them, we created cached copies for some.<br />
-        Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`]:
-        {
-            translation: `Olyan cikkeket szedtünk össze ide, amiket mi hasznosnak találtunk.<br />
-        <em>Ezeket a cikkeket nem mi írtuk.</em> Csak szerintünk nagyon jók.<br />
-        Sajnos azt tapasztaltuk, ezek a remek cikkek az évek alatt gyakran eltűnnek az internetről. Hogy később is meglegyenek, elmentettük a másolataikat ide az oldalra.<br />
-        Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.`
-        },
+    'On this page we list articles that we found useful. [...]': {
+        translation: <>
+            Olyan cikkeket szedtünk össze ide, amiket mi hasznosnak találtunk.<br/>
+            <em>Ezeket a cikkeket nem mi írtuk.</em> Csak szerintünk nagyon jók.<br/>
+            Sajnos azt tapasztaltuk, ezek a remek cikkek az évek alatt gyakran eltűnnek az internetről. Hogy később is meglegyenek, elmentettük a másolataikat ide az oldalra.<br/>
+            Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.</>, format: 'jsx'
+    },
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
     '🥔 cached version': {translation: '🥔 mentett verzió'},
 };
@@ -98,12 +95,12 @@ const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
     /* Loading page */
-    'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format:'jsx'},
+    'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
     /* 404 page */
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
-}
+};
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 export const translations = {

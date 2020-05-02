@@ -51,10 +51,7 @@ export default function MaterialsPage() {
 
     return <>
         <h1>{__('Articles about photography')}</h1>
-        <p>{__(`On this page we list articles that we found useful.<br />
-        <em>We didn't write these articles.</em> We just like them very much.<br />
-        Sadly, these great articles tend to disappear from the internet over the years. To protect them, we created cached copies for some.<br />
-        Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.`)}</p>
+        <p>{__('On this page we list articles that we found useful. [...]')}</p>
         {Object.keys(articlesByWeek).length
             ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
             : __('Loading articles...')}
