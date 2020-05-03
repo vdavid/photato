@@ -1,5 +1,6 @@
 /**
  * @typedef {Object} PhotatoMessage
+ * @property {string} slug Unique identifier of the message
  * @property {string} title Not used publicly, it's just to recognize the message.
  * @property {int} courseDayIndex The index of the day the message should be sent. Can be negative. 0 is the first Sunday.
  * @property {string} channel One of the `channels` constants
@@ -39,6 +40,7 @@ const channels = {
 // noinspection HtmlUnknownTarget
 const photatoMessages = [
     {
+        slug: 'coming-soon-facebook-page-message',
         title: '“Coming soon” – course starts in 13 days',
         courseDayIndex: -13,
         channel: channels.facebook,
@@ -53,6 +55,7 @@ Ha már részt vettél tanfolyamon, de nem csináltad végig, bátran iratkozz b
 Ha már ismered a Photatot és tudod, milyen király, ajánld a barátaidak. A tanfolyam ingyenes, reklámra nem tudunk költeni, ezért a te megosztásodra számítunk. ❤️`,
     },
     {
+        slug: 'minus-10-days-facebook-page-message',
         title: 'Course starts in 10 days',
         courseDayIndex: -10,
         channel: channels.facebook,
@@ -70,6 +73,7 @@ Ha szeretnéd a barátaidat is meghívni, még nem késő nekik is csatlakozniuk
 Kattints a Megosztás gombra az oldal tetején, hogy megoszd a Photato oldalt a saját faladon vagy Messengeren.`,
     },
     {
+        slug: 'minus-5-days-facebook-page-message',
         title: 'Course starts in 5 days',
         courseDayIndex: -5,
         channel: channels.facebook,
@@ -85,6 +89,7 @@ Ha csatlakoznál, töltsd ki a jelentkezésed itt: {signUpUrl}, majd lépj be a 
 Ha szeretnéd a barátaidat is meghívni, kattints a Megosztás gombra az oldal tetején. Az a tapasztalat, hogy akik együtt tanulnak, messzebbre jutnak. 😊`,
     },
     {
+        slug: 'welcome-facebook-group-message',
         title: 'Welcome to the group',
         courseDayIndex: -5,
         channel: channels.facebook,
@@ -104,6 +109,7 @@ Izgalmas 12 hét elé nézünk, reméljük Ti is nagyon várjátok! Ha még nem 
 Visszaszámlálás indul!`,
     },
     {
+        slug: 'old-group-closing-facebook-previous-group-message',
         title: 'Old Facebook team closing',
         courseDayIndex: -4,
         channel: channels.facebook,
@@ -115,6 +121,7 @@ Sokan jelentkeztetek ebbe a csoportba, ám szeretnénk erre az évre egy újat i
 Szeretnénk kérni, hogy jelentkezzetek be oda is, mivel ott történik majd az izgalom! 😎 Várunk szeretettel!`,
     },
     {
+        slug: 'minus-3-days-email-current-students-message',
         title: 'Course starts in 3 days',
         courseDayIndex: -3,
         channel: channels.email,
@@ -144,6 +151,7 @@ Tanuljunk együtt, jelentkezz gyorsan itt: <a href="{signUpUrl}">{signUpUrl}</a>
 <p>-- <br />a Photato csapata</p>`,
     },
     {
+        slug: 'minus-2-days-facebook-group-message',
         title: 'Course starts in 2 days',
         courseDayIndex: -2,
         channel: channels.facebook,
@@ -160,6 +168,7 @@ Itt van pl. egy rövid üzenet, amit küldhetsz nekik:
 “Helló! Képzeld, beiratkoztam egy elég királynak ígérkező, ingyenes fotós tanfolyamra, ami 3 nap múlva indul! Ha van kedved neked is jönni, jelentkezz gyorsan itt: {signUpUrl}”`,
     },
     {
+        slug: 'welcome-email-mentors-message',
         title: 'Welcome mentors',
         courseDayIndex: -2,
         channel: channels.email,
@@ -184,6 +193,7 @@ Itt van pl. egy rövid üzenet, amit küldhetsz nekik:
 <p>Dávid</p>`,
     },
     {
+        slug: 'minus-1-day-email-current-students-message',
         title: 'Course starts in 1 day',
         courseDayIndex: -1,
         channel: channels.email,
@@ -217,6 +227,7 @@ a Photato csapata</p>
 `,
     },
     {
+        slug: 'minus-1-day-facebook-page-message',
         title: 'Course starts in 1 day',
         courseDayIndex: -1,
         channel: channels.facebook,
@@ -230,6 +241,7 @@ Fotózásra fel! 📸
 `,
     },
     {
+        slug: '1st-challenge-email-current-students-message',
         title: '1st challenge: Food photos',
         courseDayIndex: 0,
         channel: channels.email,
@@ -240,6 +252,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '1st-challenge-facebook-group-message',
         title: '1st challenge: Food photos',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -249,6 +262,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '1st-challenge-reminder-facebook-group-message',
         title: '1st challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -258,6 +272,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '2nd-challenge-email-current-students-message',
         title: '2nd challenge: Buildings',
         courseDayIndex: 0,
         channel: channels.email,
@@ -268,6 +283,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '2nd-challenge-facebook-group-message',
         title: '2nd challenge: Buildings',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -277,6 +293,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'instructions-email-mentors-message',
         title: 'Instructions for mentors',
         courseDayIndex: -2,
         channel: channels.email,
@@ -287,6 +304,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '1st-challenge-voting-facebook-group-message',
         title: '1st challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -296,6 +314,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'facebook-group-reminder-email-mentors-message',
         title: 'Facebook group reminder',
         courseDayIndex: -2,
         channel: channels.email,
@@ -306,6 +325,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '2nd-challenge-reminder-facebook-group-message',
         title: '2nd challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -315,6 +335,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '3rd-challenge-email-current-students-message',
         title: '3rd challenge: Macro',
         courseDayIndex: 0,
         channel: channels.email,
@@ -325,6 +346,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '3rd-challenge-facebook-group-message',
         title: '3rd challenge: Macro',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -334,6 +356,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '2nd-challenge-voting-facebook-group-message',
         title: '2nd challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -343,6 +366,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '3rd-challenge-reminder-facebook-group-message',
         title: '3rd challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -352,6 +376,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '4th-challenge-email-current-students-message',
         title: '4th challenge: Street photography',
         courseDayIndex: 0,
         channel: channels.email,
@@ -362,6 +387,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '4th-challenge-facebook-group-message',
         title: '4th challenge: Street photography',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -371,6 +397,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '3rd-challenge-voting-facebook-group-message',
         title: '3rd challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -380,6 +407,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '4th-challenge-reminder-facebook-group-message',
         title: '4th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -389,6 +417,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'live-event-summer-facebook-group-message',
         title: 'Live photo event (summer)',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -398,6 +427,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '5th-challenge-email-current-students-message',
         title: '5th challenge: Sports photos / Fast objects',
         courseDayIndex: 0,
         channel: channels.email,
@@ -408,6 +438,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '5th-challenge-facebook-group-message',
         title: '5th challenge: Sports photos / Fast objects',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -417,6 +448,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '4th-challenge-voting-facebook-group-message',
         title: '4th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -426,6 +458,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '5th-challenge-reminder-facebook-group-message',
         title: '5th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -435,6 +468,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '6th-challenge-email-current-students-message',
         title: '6th challenge: Animals, plants',
         courseDayIndex: 0,
         channel: channels.email,
@@ -445,6 +479,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '6th-challenge-facebook-group-message',
         title: '6th challenge: Animals, plants',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -454,6 +489,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'live-event-winter-facebook-group-message',
         title: 'Live photo event (winter)',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -463,6 +499,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '5th-challenge-voting-facebook-group-message',
         title: '5th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -472,6 +509,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '6th-challenge-reminder-facebook-group-message',
         title: '6th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -481,6 +519,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '7th-challenge-email-current-students-message',
         title: '7th challenge: Long exposure',
         courseDayIndex: 0,
         channel: channels.email,
@@ -491,6 +530,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '7th-challenge-facebook-group-message',
         title: '7th challenge: Long exposure',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -500,6 +540,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'mid-time-survey-email-current-students-message',
         title: 'Mid-time survey',
         courseDayIndex: 0,
         channel: channels.email,
@@ -510,6 +551,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '6th-challenge-voting-facebook-group-message',
         title: '6th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -519,6 +561,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '7th-challenge-reminder-facebook-group-message',
         title: '7th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -528,6 +571,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '8th-challenge-email-current-students-message',
         title: '8th challenge: Still life',
         courseDayIndex: 0,
         channel: channels.email,
@@ -538,6 +582,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '8th-challenge-facebook-group-message',
         title: '8th challenge: Still life',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -547,6 +592,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '7th-challenge-voting-facebook-group-message',
         title: '7th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -556,6 +602,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '8th-challenge-reminder-facebook-group-message',
         title: '8th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -565,6 +612,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '9th-challenge-email-current-students-message',
         title: '9th challenge: Portrait',
         courseDayIndex: 0,
         channel: channels.email,
@@ -575,6 +623,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '9th-challenge-facebook-group-message',
         title: '9th challenge: Portrait',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -584,6 +633,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '8th-challenge-voting-facebook-group-message',
         title: '8th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -593,6 +643,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '9th-challenge-reminder-facebook-group-message',
         title: '9th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -602,6 +653,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '10th-challenge-email-current-students-message',
         title: '10th challenge: Events',
         courseDayIndex: 0,
         channel: channels.email,
@@ -612,6 +664,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '10th-challenge-facebook-group-message',
         title: '10th challenge: Events',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -621,6 +674,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '9th-challenge-voting-facebook-group-message',
         title: '9th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -630,6 +684,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '10th-challenge-reminder-facebook-group-message',
         title: '10th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -639,6 +694,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '11th-challenge-email-current-students-message',
         title: '11th challenge: Self portrait',
         courseDayIndex: 0,
         channel: channels.email,
@@ -649,6 +705,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '11th-challenge-facebook-group-message',
         title: '11th challenge: Self portrait',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -658,6 +715,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '10th-challenge-voting-facebook-group-message',
         title: '10th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -667,6 +725,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '11th-challenge-reminder-facebook-group-message',
         title: '11th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -676,6 +735,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '12th-challenge-email-current-students-message',
         title: '12th challenge: Freestyle',
         courseDayIndex: 0,
         channel: channels.email,
@@ -686,6 +746,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '12th-challenge-facebook-group-message',
         title: '12th challenge: Freestyle',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -695,6 +756,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '11th-challenge-voting-facebook-group-message',
         title: '11th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -704,6 +766,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '12th-challenge-reminder-facebook-group-message',
         title: '12th challenge reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -713,6 +776,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'exhibition-facebook-group-message',
         title: 'Exhibition (Facebook event)',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -722,6 +786,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: '12th-challenge-voting-facebook-group-message',
         title: '12th challenge voting',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -731,6 +796,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'exhibition-reminder-facebook-group-message',
         title: 'Event reminder',
         courseDayIndex: 0,
         channel: channels.facebook,
@@ -740,6 +806,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'exhibition-invitation-email-winners-message',
         title: 'Exhibition for winners',
         courseDayIndex: 0,
         channel: channels.email,
@@ -750,6 +817,7 @@ Fotózásra fel! 📸
         content: ``,
     },
     {
+        slug: 'farewell-email-winners-message',
         title: 'Farewell',
         courseDayIndex: 0,
         channel: channels.email,
