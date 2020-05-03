@@ -54,7 +54,7 @@ export default function ChallengePage() {
                 <div>
                     <challenge.component formattedDeadline={formattedDeadline} baseUrl=''/>
                 </div>
-                : __('Loading challenge...')
+                : <p>{__('Loading challenge...')}</p>
             }
             {(parseInt(weekIndex) === currentWeekIndex) &&
             <NavLinkButton to='/upload'

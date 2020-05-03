@@ -91,6 +91,13 @@ const uploadPageTranslations = {
     'Loading...': {translation: 'Betöltés folyamatban...'},
 };
 
+const adminTranslations = {
+    'Messages': {translation: 'Üzenetek'},
+    'Re-download all messages': {translation: 'Újratöltés a szerverről'},
+    'Loading message...': {translation: 'Az üzenet betöltése folyamatban...'},
+    'Back to the list of messages': {translation: 'Vissza az üzenetek listájához'},
+};
+
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
@@ -109,5 +116,6 @@ export const translations = {
     ...challengePageTranslations,
     ...articlePageTranslations,
     ...uploadPageTranslations,
+    ...adminTranslations,
     ...otherTranslations,
 };

@@ -54,7 +54,7 @@ export default function MaterialsPage() {
         <p>{__('On this page we list articles that we found useful. [...]')}</p>
         {Object.keys(articlesByWeek).length
             ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
-            : __('Loading articles...')}
+            : <p>{__('Loading articles...')}</p>}
         </>;
 
     /**

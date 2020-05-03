@@ -1,27 +1,29 @@
 import React, {useEffect, useState} from '../../../web_modules/react.js';
-import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
-import PhotatoMessageRemoteRepository from '../../PhotatoMessageRemoteRepository.mjs';
 import {config} from '../../../config.mjs';
 import {useAuth0} from '../../../auth/components/Auth0Provider.mjs';
+import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
+import PhotatoMessageRemoteRepository from '../PhotatoMessageRemoteRepository.mjs';
+import PhotatoMessageLocalRepository from '../PhotatoMessageLocalRepository.mjs';
+
+const photatoMessageLocalRepository = new PhotatoMessageLocalRepository();
+const photatoMessageRemoteRepository = new PhotatoMessageRemoteRepository();
 
 export default function PhotatoMessagesPage() {
     const {getTokenSilently} = useAuth0();
     const {__} = useI18n();
-    const [messages, setMessages] = useState(null);
+    const [/** @type {PhotatoMessage[]} */messages, setMessages] = useState(null);
 
     /* Load messages on component start */
-    useEffect(loadMessages, []);
+    useEffect(() => {
+        loadMessages().then(() => {});
+    }, []);
 
     /* Render */
-    const messageListItems = messages ? messages.map(message =>
-        <li>{message.title}</li>) : null;
-
     return <>
         <h1>{__('Messages')}</h1>
-        <button onClick={() => loadMessages(true)}>Re-download all messages</button>
-        <ul>
-            {messageListItems || <li>Loading items...</li>}
-        </ul>
+        <button onClick={() => loadMessages(true)}>{__('Re-download all messages')}</button>
+        {messages ? buildMessagesTable() : <p>Loading items...</p>}
     </>;
 
     /**
@@ -30,9 +32,9 @@ export default function PhotatoMessagesPage() {
      */
     async function loadMessages(forceDownload = false) {
         setMessages(null);
-        const locallyStoredMessagesAsString = !forceDownload && sessionStorage.getItem('photatoMessages');
-        if (locallyStoredMessagesAsString) {
-            setMessages(JSON.parse(locallyStoredMessagesAsString));
+        const localMessages = !forceDownload && await photatoMessageLocalRepository.getAllMessages();
+        if (localMessages) {
+            setMessages(localMessages);
         } else {
             await _loadAndStoreMessagesFromRemote();
         }
@@ -40,8 +42,9 @@ export default function PhotatoMessagesPage() {
 
     async function _loadAndStoreMessagesFromRemote() {
         try {
-            const messagesFromRemote = await _getMessagesFromRemote();
-            sessionStorage.setItem('photatoMessages', JSON.stringify(messagesFromRemote));
+            const accessToken = await getTokenSilently();
+            const messagesFromRemote = await photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.environment});
+            await photatoMessageLocalRepository.saveMessages(messagesFromRemote);
             setMessages(messagesFromRemote);
         } catch (error) {
             console.error('Could not load messages from remote:');
@@ -49,12 +52,28 @@ export default function PhotatoMessagesPage() {
         }
     }
 
-    async function _getMessagesFromRemote() {
-        const photatoMessageRemoteRepository = new PhotatoMessageRemoteRepository();
-
-        const accessToken = await getTokenSilently();
-
-        return photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.environment});
+    function buildMessagesTable() {
+        return <table>
+            <thead>
+            <th>Week #</th>
+            <th>Day #</th>
+            <th>Channel</th>
+            <th>Audience</th>
+            <th>Title</th>
+            </thead>
+            <tbody>
+            {messages.map(message => <tr>
+                <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
+                <td>{message.courseDayIndex}</td>
+                <td>{message.channel}</td>
+                <td>{message.audience}</td>
+                <td><NavLink to={'/admin/message/' + message.slug}>{message.title}</NavLink></td>
+            </tr>)}
+            </tbody>
+        </table>;
     }
 
+    function getWeekIndexByDayIndex(dayIndex) {
+        return Math.floor((dayIndex - 1) / 7) + 1;
+    }
 }

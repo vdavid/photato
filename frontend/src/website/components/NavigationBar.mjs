@@ -49,7 +49,7 @@ export default function NavigationBar() {
             {isAuthenticated ?
             <NavLinkMenuItemWithIcon to='/challenges' activeClassName='active' iconName='casino'>{__('Challenges')}</NavLinkMenuItemWithIcon> : null}
             <NavLinkMenuItemWithIcon to='/materials' activeClassName='active' iconName='book'>{__('Materials')}</NavLinkMenuItemWithIcon>
-            {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/messages' activeClassName='active' iconName='book'>{__('Messages')}</NavLinkMenuItemWithIcon> : null}
+            {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/admin/messages' activeClassName='active' iconName='book'>{__('Messages')}</NavLinkMenuItemWithIcon> : null}
             {isAuthenticated ?
             <div className='menuItem'>
                 <span className='material-icons'/>
