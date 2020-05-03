@@ -1,21 +1,15 @@
-export default class PhotoUploader {
-    /**
-     * @param {object} object
-     * @returns {string}
-     * @private
-     */
-    _convertToQueryString(object) {
-        return Object.keys(object).map(key => key + '=' + object[key]).join('&');
-    }
+import {convertObjectToQueryString} from '../app/httpHelper.mjs';
 
+export default class PhotoUploader {
     /**
      * @param {string} url
      * @param {string} accessToken The JWT to pass as the authorization Bearer
-     * @param {Object} parameters
+     * @param {{environment: string, emailAddress: string, courseName: string, weekIndex: int, originalFileName: string,
+     *        title: string, mimeType: string}} parameters
      * @returns {Promise<string>} The URL.
      */
     async getSignedUrlFromServer(url, accessToken, parameters) {
-        const response = await fetch(url + '?' + this._convertToQueryString(parameters), {
+        const response = await fetch(url + '?' + convertObjectToQueryString(parameters), {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
