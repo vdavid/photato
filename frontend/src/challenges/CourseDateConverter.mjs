@@ -1,3 +1,5 @@
+import {formatDateWithWeekDayAndTime} from '../website/dateTimeHelper.mjs';
+
 export default class CourseDateConverter {
     /**
      * @param {Date} courseStartDate 00:00 of the zeroth day of the course, a Sunday.
@@ -13,11 +15,10 @@ export default class CourseDateConverter {
      * @param {string} [localeCode] Default is "en-US".
      * @returns {string} A fully qualified, printable date.
      */
-    getFormattedDeadline(weekIndex, localeCode = "en-US") {
+    getFormattedDeadline(weekIndex, localeCode = 'en-US') {
         const ONE_MINUTE = 60 * 1000;
-        return new Intl.DateTimeFormat(localeCode, {
-            year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
-        }).format(new Date(this.getStartDateOfWeek(parseInt(weekIndex) + 1) - ONE_MINUTE));
+        const deadline = new Date(this.getStartDateOfWeek(parseInt(weekIndex) + 1) - ONE_MINUTE);
+        return formatDateWithWeekDayAndTime(deadline, localeCode);
     }
 
     /**

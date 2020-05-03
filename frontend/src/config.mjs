@@ -8,9 +8,14 @@ export const config = {
     },
     course: {
         name: 'hu-3', // TODO: Fake date for testing ↓↓↓
+        title: '2020. őszi Photato tanfolyam',
         startDateTime: new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
             -1 /* -2 if it was daylight saving time, -1 otherwise */)),
         weekCount: 12,
+        subscribedStudentCount: 27,
+        signupFormUrl: 'https://bit.ly/2tB1hpR',
+        facebookGroupUrl: 'https://bit.ly/2T2E76b',
+        timeZone: 'Europe/Budapest',
     },
     imageUpload: {
         minimumSizeInBytes: 50 * 1024,
@@ -32,8 +37,7 @@ export const config = {
         'veszelovszki@gmail.com',
         'dorah.nemeth@gmail.com',
     ],
-    featureSwitches: {
-    },
+    featureSwitches: {},
 };
 
 export const productionConfig = {
@@ -42,8 +46,7 @@ export const productionConfig = {
         domain: 'photato.eu.auth0.com',
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
     },
-    featureSwitches: {
-    },
+    featureSwitches: {},
 };
 
 export const stagingConfig = {
@@ -52,8 +55,7 @@ export const stagingConfig = {
         domain: 'photato.eu.auth0.com',
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
     },
-    featureSwitches: {
-    },
+    featureSwitches: {},
 };
 
 export const developmentConfig = {
@@ -62,6 +64,5 @@ export const developmentConfig = {
         domain: 'photato.eu.auth0.com',
         clientId: 'JLFeh90tCqr0KebY2hUWYBlhHOuHXl5f'
     },
-    featureSwitches: {
-    },
+    featureSwitches: {},
 };

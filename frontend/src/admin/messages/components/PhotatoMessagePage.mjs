@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from '../../../web_modules/react.js';
+import React, {useEffect, useRef, useState} from '../../../web_modules/react.js';
 import {config} from '../../../config.mjs';
 import {useAuth0} from '../../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
@@ -7,6 +7,7 @@ import {useParams} from '../../../web_modules/react-router-dom.js';
 import NavLinkButton from '../../../website/components/NavLinkButton.mjs';
 import PhotatoMessageRemoteRepository from '../PhotatoMessageRemoteRepository.mjs';
 import PhotatoMessageLocalRepository from '../PhotatoMessageLocalRepository.mjs';
+import PhotatoMessageLiveContentReplacer from '../PhotatoMessageLiveContentReplacer.mjs';
 
 const photatoMessageLocalRepository = new PhotatoMessageLocalRepository();
 const photatoMessageRemoteRepository = new PhotatoMessageRemoteRepository();
@@ -16,14 +17,22 @@ export default function PhotatoMessagePage() {
     const {slug} = useParams();
 
     const {getTokenSilently} = useAuth0();
-    const {__} = useI18n();
+    const {__, getActiveLocaleCode} = useI18n();
     const [message, setMessage] = useState(null);
+    const photatoMessageLiveContentReplacerRef = useRef(new PhotatoMessageLiveContentReplacer({
+        courseStartDate: config.course.startDateTime,
+        signedUpCount: config.course.subscribedStudentCount, // TODO: Make this dynamic someday
+        signUpUrl: config.course.signupFormUrl,
+        facebookGroupUrl: config.course.facebookGroupUrl,
+        courseTitle: config.course.title,
+    }));
 
     useEffect(() => {
         setMessage(null);
 
         async function loadMessage() {
             const message = await loadMessageFromLocalOrRemote(slug);
+            message.content = photatoMessageLiveContentReplacerRef.current.replace(message.content, getActiveLocaleCode());
             setMessage(message);
         }
 
@@ -36,9 +45,10 @@ export default function PhotatoMessagePage() {
             <article>
                 <header>
                     <h1>{message.title}</h1>
+                    <div className="metadata"></div>
                 </header>
-                <pre>
-                {message.content}
+                <pre className="photatoMessageContent">
+                    {message.content}
                 </pre>
             </article>
             <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>

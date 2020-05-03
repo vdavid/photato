@@ -5,6 +5,7 @@ import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../../web_modules/react-router-dom.js';
 import PhotatoMessageRemoteRepository from '../PhotatoMessageRemoteRepository.mjs';
 import PhotatoMessageLocalRepository from '../PhotatoMessageLocalRepository.mjs';
+import {addDaysToDate, toISODateStringWithHHMM} from '../../../website/dateTimeHelper.mjs';
 
 const photatoMessageLocalRepository = new PhotatoMessageLocalRepository();
 const photatoMessageRemoteRepository = new PhotatoMessageRemoteRepository();
@@ -13,6 +14,7 @@ export default function PhotatoMessagesPage() {
     const {getTokenSilently} = useAuth0();
     const {__} = useI18n();
     const [/** @type {PhotatoMessage[]} */messages, setMessages] = useState(null);
+    console.log(config.course.startDateTime);
 
     /* Load messages on component start */
     useEffect(() => {
@@ -53,9 +55,10 @@ export default function PhotatoMessagesPage() {
     }
 
     function buildMessagesTable() {
-        return <table>
+        return <table className="photatoMessages">
             <thead>
             <th>Week #</th>
+            <th>Date</th>
             <th>Day #</th>
             <th>Channel</th>
             <th>Audience</th>
@@ -64,6 +67,7 @@ export default function PhotatoMessagesPage() {
             <tbody>
             {messages.map(message => <tr>
                 <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
+                <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
                 <td>{message.courseDayIndex}</td>
                 <td>{message.channel}</td>
                 <td>{message.audience}</td>
@@ -75,5 +79,12 @@ export default function PhotatoMessagesPage() {
 
     function getWeekIndexByDayIndex(dayIndex) {
         return Math.floor((dayIndex - 1) / 7) + 1;
+    }
+
+    function getSendingTimeByDayIndex(dayIndex) {
+        const date = addDaysToDate(config.course.startDateTime, dayIndex);
+        date.setHours(8);
+        date.setMinutes(0);
+        return toISODateStringWithHHMM(date, config.course.timeZone);
     }
 }
