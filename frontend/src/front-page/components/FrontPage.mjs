@@ -2,7 +2,7 @@ import React from '../../web_modules/react.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ChallengeList from '../../challenges/components/ChallengeList.mjs';
-import NavLinkButton from '../../app/components/NavLinkButton.mjs';
+import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
 
 export default function FrontPage() {

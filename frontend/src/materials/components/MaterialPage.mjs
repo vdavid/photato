@@ -2,7 +2,7 @@ import React, {useEffect, useState} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useParams} from '../../web_modules/react-router-dom.js';
 
-import NavLinkButton from '../../app/components/NavLinkButton.mjs';
+import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import MaterialContextProvider from './MaterialContextProvider.mjs';
 
 export default function MaterialPage() {

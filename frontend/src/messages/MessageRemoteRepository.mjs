@@ -1,4 +1,4 @@
-import {convertObjectToQueryString} from '../app/httpHelper.mjs';
+import {convertObjectToQueryString} from '../website/httpHelper.mjs';
 
 export default class MessageRemoteRepository {
     /**

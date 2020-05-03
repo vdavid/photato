@@ -8,7 +8,7 @@ import PhotoUploader from '../../upload/PhotoUploader.mjs';
 import FullPageLoadingIndicator from './FullPageLoadingIndicator.mjs';
 import NavigationBar from './NavigationBar.mjs';
 
-import Error404Page from '../../website/components/Error404Page.mjs';
+import Error404Page from './Error404Page.mjs';
 import FrontPage from '../../front-page/components/FrontPage.mjs';
 import AboutPage from '../../about/components/AboutPage.mjs';
 import FaqPage from '../../faq/components/FaqPage.mjs';

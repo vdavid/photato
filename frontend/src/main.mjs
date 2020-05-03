@@ -9,7 +9,7 @@ import CourseDataProvider from './challenges/components/CourseDataProvider.mjs';
 import {getDefaultLocaleCodeByNavigatorPreferences} from './i18n/i18nHelper.mjs';
 import {availableLocaleCodes} from './i18n/locales.mjs';
 
-import App from './app/components/App.mjs';
+import App from './website/components/App.mjs';
 
 import CourseDateConverter from './challenges/CourseDateConverter.mjs';
 

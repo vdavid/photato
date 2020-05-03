@@ -6,7 +6,7 @@ import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useCourseData} from './CourseDataProvider.mjs';
 import {weeklyChallengeTitles} from '../challengeRepository.mjs';
 
-import NavLinkButton from '../../app/components/NavLinkButton.mjs';
+import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import Error404Page from '../../website/components/Error404Page.mjs';
 
 /**
