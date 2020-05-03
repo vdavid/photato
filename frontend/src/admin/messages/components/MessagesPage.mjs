@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from '../../web_modules/react.js';
-import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-import MessageRemoteRepository from '../MessageRemoteRepository.mjs';
-import {config} from '../../config.mjs';
-import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
+import React, {useEffect, useState} from '../../../web_modules/react.js';
+import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
+import MessageRemoteRepository from '../../MessageRemoteRepository.mjs';
+import {config} from '../../../config.mjs';
+import {useAuth0} from '../../../auth/components/Auth0Provider.mjs';
 
 export default function MessagesPage() {
     const {getTokenSilently} = useAuth0();

@@ -19,7 +19,7 @@ import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
 import Footer from './Footer.mjs';
-import MessagesPage from '../../messages/components/MessagesPage.mjs';
+import MessagesPage from '../../admin/messages/components/MessagesPage.mjs';
 
 const photoUploader = new PhotoUploader();
 
