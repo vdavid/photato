@@ -19,7 +19,7 @@ import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
 import Footer from './Footer.mjs';
-import MessagesPage from '../../admin/messages/components/MessagesPage.mjs';
+import PhotatoMessagesPage from '../../admin/messages/components/PhotatoMessagesPage.mjs';
 
 const photoUploader = new PhotoUploader();
 
@@ -73,7 +73,7 @@ export default function App() {
                         <MaterialPage/>
                     </Route>
                     <Route path='/messages'>
-                        <MessagesPage/>
+                        <PhotatoMessagesPage/>
                     </Route>
                     <Route path='/'>
                         <Error404Page/>

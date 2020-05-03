@@ -1,13 +1,13 @@
 import {convertObjectToQueryString} from '../website/httpHelper.mjs';
 
-export default class MessageRemoteRepository {
+export default class PhotatoMessageRemoteRepository {
     /**
      * @param {string} url
      * @param {string} accessToken The JWT to pass as the authorization Bearer
      * @param {{environment: string}} parameters "development", "staging", or "production".
      * @returns {Promise<string>}
      */
-    async getAllMessagesFromServer(url, accessToken, parameters) {
+    async getAllPhotatoMessagesFromServer(url, accessToken, parameters) {
         const response = await fetch(url + '?' + convertObjectToQueryString(parameters), {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
