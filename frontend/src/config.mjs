@@ -2,6 +2,7 @@ const cloudFrontBackUrl = 'https://d2rw8z9jy7vx22.cloudfront.net';
 
 export const config = {
     environment: '', // Will be set to 'development', 'staging', or 'production' by main.mjs
+    baseUrl: '', // Will be set by main.mjs. E.g. "https://photato.eu". Will not contain a slash at the end.
     auth0: {
         domain: '', // Will be set by main.mjs
         clientId: '', // Will be set by main.mjs
@@ -42,6 +43,7 @@ export const config = {
 
 export const productionConfig = {
     environment: 'production',
+    baseUrl: 'https://photato.eu',
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
@@ -51,6 +53,7 @@ export const productionConfig = {
 
 export const stagingConfig = {
     environment: 'staging',
+    baseUrl: 'https://staging.photato.eu',
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
@@ -60,6 +63,7 @@ export const stagingConfig = {
 
 export const developmentConfig = {
     environment: 'development',
+    baseUrl: 'http://localhost:3080',
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'JLFeh90tCqr0KebY2hUWYBlhHOuHXl5f'

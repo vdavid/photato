@@ -300,3 +300,5 @@ dl.faqList dd { margin-left:0; }
 table.photatoMessages { border:1px solid white; font-size:80%; }
 table.photatoMessages td { text-align:center; }
 table.photatoMessages td:nth-child(6) { text-align:left; }
+
+pre.sitemap { white-space: pre-wrap; }

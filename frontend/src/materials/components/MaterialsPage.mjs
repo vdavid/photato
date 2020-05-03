@@ -24,7 +24,7 @@ export default function MaterialsPage() {
     const {getActiveLocaleCode, __} = useI18n();
 
     const languageCode = getActiveLocaleCode().substring(0, 2);
-    const slugsByWeek = articleSlugsByLanguageAndByWeek[languageCode];
+    const slugsByLanguageAndByWeek = articleSlugsByLanguageAndByWeek[languageCode];
 
     /* Load articles */
 
@@ -40,7 +40,7 @@ export default function MaterialsPage() {
 
         async function loadArticlesForAllWeeks() {
             /** @type {{weekIndex: string, articles: ThirdPartyArticle[]}[]} */
-            const articlePromisesForEachWeek = Object.entries(slugsByWeek).map(async ([weekIndex, slugs]) => ({weekIndex, articles: await loadArticlesForOneWeek(slugs)}));
+            const articlePromisesForEachWeek = Object.entries(slugsByLanguageAndByWeek).map(async ([weekIndex, slugs]) => ({weekIndex, articles: await loadArticlesForOneWeek(slugs)}));
             /** @type {Object<int, ThirdPartyArticle[]>} */
             const articlesForEachWeek = (await Promise.all(articlePromisesForEachWeek)).reduce((object, {weekIndex, articles}) => ({...object, [weekIndex]: articles}), {});
             setArticlesByWeek(articlesForEachWeek);

@@ -34,7 +34,7 @@ export default function PhotatoMessagePage() {
         async function loadMessage() {
             const message = await loadMessageFromLocalOrRemote(slug);
             message.content = photatoMessageLiveContentReplacerRef.current.replace(message.content, getActiveLocaleCode());
-            document.title = message.title + ' - Photato';
+            document.title = message.title + ' - Photato admin';
             setMessage(message);
         }
 

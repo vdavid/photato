@@ -21,6 +21,8 @@ import MaterialPage from '../../materials/components/MaterialPage.mjs';
 import Footer from './Footer.mjs';
 import PhotatoMessagesPage from '../../admin/messages/components/PhotatoMessagesPage.mjs';
 import PhotatoMessagePage from '../../admin/messages/components/PhotatoMessagePage.mjs';
+import SitemapGeneratorPage from '../../admin/sitemap-generator/components/SitemapGeneratorPage.mjs';
+import AdminPage from '../../admin/components/AdminPage.mjs';
 
 const photoUploader = new PhotoUploader();
 
@@ -73,11 +75,17 @@ export default function App() {
                     <Route path='/external-article/:slug'>
                         <MaterialPage/>
                     </Route>
+                    <Route path='/admin' exact={true}>
+                        <AdminPage/>
+                    </Route>
                     <Route path='/admin/messages'>
                         <PhotatoMessagesPage/>
                     </Route>
                     <Route path='/admin/message/:slug'>
                         <PhotatoMessagePage/>
+                    </Route>
+                    <Route path='/admin/sitemap-generator'>
+                        <SitemapGeneratorPage/>
                     </Route>
                     <Route path='/'>
                         <Error404Page/>

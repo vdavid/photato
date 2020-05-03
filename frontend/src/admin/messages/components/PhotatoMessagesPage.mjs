@@ -14,12 +14,11 @@ export default function PhotatoMessagesPage() {
     const {getTokenSilently} = useAuth0();
     const {__} = useI18n();
     const [/** @type {PhotatoMessage[]} */messages, setMessages] = useState(null);
-    console.log(config.course.startDateTime);
 
     /* Load messages on component start */
     useEffect(() => {
         loadMessages().then(() => {});
-        document.title = __('Messages') + ' - Photato';
+        document.title = __('Messages') + ' - Photato admin';
     }, []);
 
     /* Render */

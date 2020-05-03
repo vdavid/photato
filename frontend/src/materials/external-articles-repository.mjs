@@ -1,7 +1,7 @@
-/**
- * @type {Object<int, string[]>} The index is one-based! (First week is 1 etc.)
- */
 // noinspection SpellCheckingInspection (Hungarian text)
+/**
+ * @type {object<string, (object<int, string[]>)>} The index is one-based! (First week is 1 etc.)
+ */
 export const articleSlugsByLanguageAndByWeek = {
     'hu': {
         1: [ /* Foodie shot */

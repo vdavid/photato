@@ -1,16 +1,231 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://photato.eu/</loc>
-        <lastmod>2020-04-25T12:38:56+00:00</lastmod>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
     </url>
 
     <url>
         <loc>https://photato.eu/about</loc>
-        <lastmod>2020-04-25T12:38:56+00:00</lastmod>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/faq</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/contact</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/upload</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
     </url>
 
     <url>
         <loc>https://photato.eu/materials</loc>
-        <lastmod>2020-04-25T12:38:56+00:00</lastmod>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/1</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/2</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/3</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/4</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/5</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/6</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/challenges/7</loc>
+        <lastmod>2020-05-03T20:21:46.215Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/sg-makrofotozas-1</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/sg-makrofotozas-2</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/canon-tippek-makrofotozashoz</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/tisztaegtisztafold-makrofotozas-forditott-objektiv</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/webdesignsuli-tilt-shift-azaz-makett-effekt-keszitese-photoshopban</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/sg-varosok-megorokitese</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/canon-varosi-fotok-keszitese</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/pixinfo-nehany-tanacs-kezdo-utcai-fotosoknak</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/pixinfo-fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-2</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-3</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/canon-az-expozicio-beallitasa</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/photonet-sportfotozas</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotozz-gyorsan-mozgo-temak-elesen-kompakttal-is</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/haziallat-allatok-fotozasa-trukkok</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/origo-fotozas-az-allatkertben</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotosuli-unja-a-telet-keszuljon-fel-a-tavaszra-1</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/indafoto-fenycsikok-hosszu-zaridovel</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotopiac-bemozdulni-vagy-bemozditani</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/pixinfo-objektiv-szurokrol-egyszeruen</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/vaku-a-hosszu-expozicios-ideju-fotozas-alapjai</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/tripont-capture-one-pro-10-a-fenyelhajlas-tobbe-nem-okoz-gondot</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/tutsplus-10-tipp-a-csendelet-fotozas-elkezdesehez</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/tisztaegtisztafold-komponalas-geometria</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotosuli-hogyan-keszitsunk-szep-portrefotot</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotobetyar-objektivek-jellemzoi-gyujtotavolsag</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/onlinefototanfolyam-mi-a-gyujtotavolsag-szorzo</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/sg-emberek-portrek</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/elkapottpillanatok-fotozas-szuletesnapi-zsuron</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/hvg-tippek-a-karacsonyi-fotozashoz</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
+    </url>
+
+    <url>
+        <loc>https://photato.eu/external-article/fotosarok-hogyan-fotozzunk-buliban</loc>
+        <lastmod>2020-04-28T00:00:00.000Z</lastmod>
     </url>
 </urlset>

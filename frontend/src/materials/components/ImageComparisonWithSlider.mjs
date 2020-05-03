@@ -54,7 +54,6 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, caption
     const sliderX = sliderXPercent * imageWidth;
     const overlayStyle = {left: sliderX + 'px', width: imageWidth - sliderX + 'px'};
 
-    console.log(sliderX);
     return <div className='imageComparison' style={{width}}>
         <figure>
             <div className='primary'>
