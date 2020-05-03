@@ -1,4 +1,4 @@
-import React from '../../web_modules/react.js';
+import React, {useEffect} from '../../web_modules/react.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ChallengeList from '../../challenges/components/ChallengeList.mjs';
@@ -9,9 +9,7 @@ export default function FrontPage() {
     const {isAuthenticated, loginWithRedirect} = useAuth0();
     const {__} = useI18n();
 
-    function handleSignIn() {
-        loginWithRedirect({});
-    }
+    useEffect(() => {document.title = __('12 weeks, 12 pics') + ' - Photato'}, []);
 
     return <>
         <h1>{__('Photato') + ' – ' + __('12 weeks, 12 pics')} 📷🥔</h1>
@@ -30,4 +28,8 @@ export default function FrontPage() {
         <div>{!isAuthenticated ?
             <button onClick={handleSignIn}>{__('Sign in')}</button> : null}</div>
     </>;
+
+    function handleSignIn() {
+        loginWithRedirect({});
+    }
 }

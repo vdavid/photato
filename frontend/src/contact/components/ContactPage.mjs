@@ -1,19 +1,14 @@
-import React from '../../web_modules/react.js';
+import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 
 export default function ContactPage() {
-    const {getActiveLocaleCode} = useI18n();
+    const {__, getActiveLocaleCode} = useI18n();
+
+    useEffect(() => {document.title = __('Contact') + ' - Photato'}, []);
+
     return (getActiveLocaleCode() === 'hu-HU') ? getHungarianPage() : getEnglishPage();
-
-    /*
-    No phone or physical address, no company
-    Email address
-    Link to the team info and FAQ
-    Becoming a mentor
-
-     */
 }
 
 function getHungarianPage() {

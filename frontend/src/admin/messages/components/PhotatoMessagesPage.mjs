@@ -19,6 +19,7 @@ export default function PhotatoMessagesPage() {
     /* Load messages on component start */
     useEffect(() => {
         loadMessages().then(() => {});
+        document.title = __('Messages') + ' - Photato';
     }, []);
 
     /* Render */

@@ -47,6 +47,7 @@ export default function MaterialsPage() {
         }
 
         loadArticlesForAllWeeks().then(() => {});
+        document.title = __('Articles about photography') + ' - Photato';
     }, []);
 
     return <>
@@ -54,8 +55,9 @@ export default function MaterialsPage() {
         <p>{__('On this page we list articles that we found useful. [...]')}</p>
         {Object.keys(articlesByWeek).length
             ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
-            : <p>{__('Loading articles...')}</p>}
-        </>;
+            :
+            <p>{__('Loading articles...')}</p>}
+    </>;
 
     /**
      * @param {int} weekIndex

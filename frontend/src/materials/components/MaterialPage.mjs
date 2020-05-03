@@ -12,28 +12,23 @@ export default function MaterialPage() {
     const {getActiveLocaleCode, __} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
 
-    /* Load article */
     const [article, setArticle] = useState({isLoaded: false, metadata: {}, component: null});
 
+    /* Load article */
     useEffect(() => {
         setArticle({isLoaded: false, metadata: {}, component: null});
 
         async function loadArticle() {
             const content = await import('../content/' + languageCode + '/' + slug + '.mjs');
-            setArticle({isLoaded: true, metadata: content.getMetadata(), component: content.default});
+            const importedArticle = {isLoaded: true, metadata: content.getMetadata(), component: content.default};
+            setArticle(importedArticle);
+            document.title = importedArticle.metadata.title + ' - Photato';
         }
 
         loadArticle().then(() => {});
     }, [slug]);
 
-    useEffect(() => {
-        if (article.isLoaded) {
-
-        }
-    }, [article]);
-
-    return article.isLoaded
-        ?
+    return article.isLoaded ?
         <MaterialContextProvider metadata={article.metadata}>
             <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
             <article>

@@ -41,6 +41,7 @@ export default function ChallengePage() {
             }
 
             loadChallenge().then(() => {});
+            document.title = __('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1]) + ' - Photato';
         }
     }, [weekIndex]);
 

@@ -42,6 +42,7 @@ export default function UploadPage({photoUploader}) {
 
         // noinspection JSIgnoredPromiseFromCall
         setupAccessToken();
+        document.title = __('Photo upload') + ' - Photato';
     }, []);
 
     /**

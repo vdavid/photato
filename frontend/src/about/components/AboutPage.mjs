@@ -1,9 +1,12 @@
-import React from '../../web_modules/react.js';
+import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
 
 export default function AboutPage() {
     const {getActiveLocaleCode, __} = useI18n();
+
+    useEffect(() => {document.title = __('About') + ' - Photato'}, []);
+
     return (getActiveLocaleCode() === 'hu-HU') ? getHungarianPage() : getEnglishPage();
 
     function getHungarianPage() {

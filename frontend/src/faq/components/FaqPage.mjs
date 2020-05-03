@@ -1,4 +1,4 @@
-import React from '../../web_modules/react.js';
+import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList.mjs';
 import {getSingleLanguageContent} from '../faqContent.mjs';
@@ -9,6 +9,8 @@ export default function FaqPage() {
     const languageCode = getActiveLocaleCode().substring(0, 2);
 
     const questionsAndAnswers = getSingleLanguageContent(languageCode);
+
+    useEffect(() => {document.title = __('Frequently asked questions') + ' - Photato'}, []);
 
     return <>
         <h1>{__('Frequently asked questions')}</h1>
