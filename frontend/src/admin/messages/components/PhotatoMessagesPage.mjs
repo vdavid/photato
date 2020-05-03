@@ -77,10 +77,18 @@ export default function PhotatoMessagesPage() {
         </table>;
     }
 
+    /**
+     * @param {int} dayIndex
+     * @returns {int}
+     */
     function getWeekIndexByDayIndex(dayIndex) {
         return Math.floor((dayIndex - 1) / 7) + 1;
     }
 
+    /**
+     * @param {int} dayIndex
+     * @returns {string}
+     */
     function getSendingTimeByDayIndex(dayIndex) {
         const date = addDaysToDate(config.course.startDateTime, dayIndex);
         date.setHours(8);

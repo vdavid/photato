@@ -80,14 +80,14 @@ body { margin: 0; padding: 0; display: flex; flex-direction: column; background:
 
 * {box-sizing: border-box;}
 h1, h2, h3, h4, h5, h6, p { margin-block-start: 1em; margin-block-end: 0.5em; }
-ul, ol {margin-block-start: 0.5em; margin-block-end: 0.5em; }
+ul, ol { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 li { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 figure { margin: 0; }
 figcaption { text-align: center; }
 table { width:100%; }
 th { text-align: center; color: var(--accent-color-main); border-bottom:2px solid var(--accent-color-main); }
 img { display: inline-block; }
-pre {white-space: pre-line; }
+pre { margin-block-start: 1em; margin-block-end: 1em; white-space: pre-line; }
 
 input[type="text"] { border: none; outline: none; border-bottom: 1px solid var(--primary-color-light); border-radius: 2px; padding-bottom: 0.1em; color: var(--dark-primary-text-color); }
 
@@ -299,4 +299,4 @@ dl.faqList dd { margin-left:0; }
 
 table.photatoMessages { border:1px solid white; font-size:80%; }
 table.photatoMessages td { text-align:center; }
-table.photatoMessages td:nth-child(5) { text-align:left; }
+table.photatoMessages td:nth-child(6) { text-align:left; }
