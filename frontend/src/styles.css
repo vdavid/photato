@@ -322,3 +322,5 @@ table.photatoMessages td { text-align: center; }
 table.photatoMessages td:nth-child(6) { text-align: left; }
 
 pre.sitemap { white-space: pre-wrap; }
+
+img.emoji { box-sizing: content-box; width:0.8em; padding:0 0.1em; }

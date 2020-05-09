@@ -23,6 +23,7 @@ import PhotatoMessagesPage from '../../admin/messages/components/PhotatoMessages
 import PhotatoMessagePage from '../../admin/messages/components/PhotatoMessagePage.mjs';
 import SitemapGeneratorPage from '../../admin/sitemap-generator/components/SitemapGeneratorPage.mjs';
 import AdminPage from '../../admin/components/AdminPage.mjs';
+import Twemoji from './Twemoji.mjs';
 
 const photoUploader = new PhotoUploader();
 
@@ -46,7 +47,7 @@ export default function App() {
         ?
         <BrowserRouter basename='/'>
             <NavigationBar/>
-            <main>
+            <Twemoji tag="main" options={{folder: 'noto-emojis', ext: '.svg', className: 'emoji', base: '/website/'}}>
                 <Switch>
                     <Route path='/' exact={true}>
                         <FrontPage/>
@@ -91,7 +92,7 @@ export default function App() {
                         <Error404Page/>
                     </Route>
                 </Switch>
-            </main>
+            </Twemoji>
             <Footer/>
         </BrowserRouter>
         :
