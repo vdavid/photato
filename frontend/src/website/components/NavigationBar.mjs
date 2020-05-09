@@ -78,7 +78,7 @@ export default function NavigationBar() {
 
     // noinspection HtmlUnknownTarget
     return <header role='navigation'>
-        <NavLink to='/' className='logo' title='Photato'><img src='/website/potato-with-camera-logo.svg' alt="logo"/>
+        <NavLink to='/' exact={true} className='logo' title='Photato'><img src='/website/potato-with-camera-logo.svg' alt="logo"/>
             <div className='siteTitle'>Photato</div>
         </NavLink>{createMainMenu()}
         <div className='spacer'/>
