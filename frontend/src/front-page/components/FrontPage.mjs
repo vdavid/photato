@@ -23,7 +23,7 @@ export default function FrontPage() {
                         A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz.<br/>
                         Ha fotózni tanulnál:
                     </p>
-                    <a href="https://bit.ly/2tB1hpR" className="callToActionButton">Iratkozz fel itt!</a>
+                    <ExternalLink href="https://bit.ly/2tB1hpR" className="callToActionButton">Iratkozz fel itt!</ExternalLink>
                 </div>
             </div>
         </div>

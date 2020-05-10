@@ -44,7 +44,7 @@ export default function AboutPage() {
                 <p>Egy tanfolyam költsége átlagosan kb. 8 000 Ft összesen, amiből Facebook hirdetéseket, a legjobb képek kinyomtatását, és egy kis pogácsát és díjakat veszünk a záróeseményre.</p>
 
                 <p>
-                    <a className="callToActionButton" href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</a>
+                    <ExternalLink className="callToActionButton" href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink>
                 </p>
 
                 <h2>Weboldal történet</h2>
