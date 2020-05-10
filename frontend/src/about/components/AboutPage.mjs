@@ -42,7 +42,10 @@ export default function AboutPage() {
                     <li>A weboldal elkészítésével eddig 126 órát töltöttem.</li>
                 </ul>
                 <p>Egy tanfolyam költsége átlagosan kb. 8 000 Ft összesen, amiből Facebook hirdetéseket, a legjobb képek kinyomtatását, és egy kis pogácsát és díjakat veszünk a záróeseményre.</p>
-                <ExternalLink href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink>
+
+                <p>
+                    <a className="callToActionButton" href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</a>
+                </p>
 
                 <h2>Weboldal történet</h2>
                 <ul>

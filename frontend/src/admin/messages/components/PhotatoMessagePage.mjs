@@ -43,25 +43,38 @@ export default function PhotatoMessagePage() {
 
     return message
         ? <>
-            <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            </p>
             <article>
                 <header>
                     <h1>{message.title}</h1>
                     <div className="metadata">
-                        <p>Send via <strong>{message.channel}</strong>, to {message.locale} <strong>{message.audience}</strong>. Content type is {message.contentType}.</p>
-                        <p><strong>Date/time: </strong>{getSendingTimeByDayIndex(message.courseDayIndex)} (Day {message.courseDayIndex} of the course)</p>
-                        {message.channel ==='email' ? <p><strong>Subject: </strong>{message.subject}</p> : null}
+                        <p>Send via <strong>{message.channel}</strong>, to {message.locale}&nbsp;
+                            <strong>{message.audience}</strong>. Content type is {message.contentType}.
+                        </p>
+                        <p>
+                            <strong>Date/time: </strong>{getSendingTimeByDayIndex(message.courseDayIndex)} (Day {message.courseDayIndex} of the course)
+                        </p>
+                        {message.channel === 'email' ?
+                            <p>
+                                <strong>Subject: </strong>{message.subject}
+                            </p> : null}
                     </div>
                 </header>
                 <pre className="photatoMessageContent">
                     {message.content}
                 </pre>
             </article>
-            <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            </p>
         </>
         : <>
             <p>{__('Loading message...')}</p>
-            <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/admin/messages'>{'←' + __('Back to the list of messages')}</NavLinkButton>
+            </p>
         </>;
 
     async function loadMessageFromLocalOrRemote(slug) {

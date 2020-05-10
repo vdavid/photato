@@ -24,8 +24,11 @@ export default function PhotatoMessagesPage() {
     /* Render */
     return <>
         <h1>{__('Messages')}</h1>
-        <button onClick={() => loadMessages(true)}>{__('Re-download all messages')}</button>
-        {messages ? buildMessagesTable() : <p>Loading items...</p>}
+        <p>
+            <button onClick={() => loadMessages(true)}>{__('Re-download all messages')}</button>
+        </p>
+        {messages ? buildMessagesTable() :
+            <p>Loading items...</p>}
     </>;
 
     /**
@@ -65,14 +68,17 @@ export default function PhotatoMessagesPage() {
             <th>Title</th>
             </thead>
             <tbody>
-            {messages.map(message => <tr>
-                <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
-                <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
-                <td>{message.courseDayIndex}</td>
-                <td>{message.channel}</td>
-                <td>{message.audience}</td>
-                <td><NavLink to={'/admin/message/' + message.slug}>{message.title}</NavLink></td>
-            </tr>)}
+            {messages.map(message =>
+                <tr>
+                    <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
+                    <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
+                    <td>{message.courseDayIndex}</td>
+                    <td>{message.channel}</td>
+                    <td>{message.audience}</td>
+                    <td>
+                        <NavLink to={'/admin/message/' + message.slug}>{message.title}</NavLink>
+                    </td>
+                </tr>)}
             </tbody>
         </table>;
     }

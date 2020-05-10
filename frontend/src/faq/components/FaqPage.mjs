@@ -2,7 +2,6 @@ import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList.mjs';
 import {getSingleLanguageContent} from '../faqContent.mjs';
-import ExternalLink from '../../materials/components/ExternalLink.mjs';
 
 export default function FaqPage() {
     const {getActiveLocaleCode, __} = useI18n();
@@ -21,7 +20,7 @@ export default function FaqPage() {
         </div>
         <QuestionsAndAnswersList questionsAndAnswers={questionsAndAnswers}/>
         <p>
-            <ExternalLink href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink>
+            <a href="https://bit.ly/2tB1hpR" className="callToActionButton">{__('Sign up for the next course')} →</a>
         </p>
     </>;
 
