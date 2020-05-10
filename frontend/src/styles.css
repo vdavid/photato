@@ -103,8 +103,9 @@ button { margin-block-start: 1em; margin-block-end: 1em; border: none; padding: 
 button:hover { background: var(--primary-color-dark); }
 button[disabled] { background: var(--disabled-color); color: var(--light-text-color-disabled); cursor: default;}
 a, a:visited { color: var(--primary-color-light); text-decoration: none; }
-a:hover, a:active { text-decoration: underline; }
-
+a:hover, a:active { text-decoration: underline var(--accent-color-main); }
+a.external { background: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg enable-background='new 0 0 512 512' version='1.1' viewBox='0 0 512 512' xml:space='preserve' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m312.7 0v56.7h102.6l-280.5 280.4 40.1 40.1 280.4-280.5v102.6h56.7v-199.3z' fill='%23b28900'/%3E%3Cpath d='m455.3 455.3h-398.6v-398.6h199.3v-56.7h-199.3c-31.3 0-56.7 25.4-56.7 56.7v398.7c0 31.2 25.4 56.6 56.7 56.6h398.7c31.3 0 56.7-25.4 56.7-56.7v-199.3h-56.7c-0.1 0-0.1 199.3-0.1 199.3z' fill='%231769aa'/%3E%3C/svg%3E%0A") top right no-repeat; background-size:0.5em; padding-right:0.7em; }
+a.external:hover { background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg enable-background='new 0 0 512 512' version='1.1' viewBox='0 0 512 512' xml:space='preserve' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m312.7 0v56.7h102.6l-280.5 280.4 40.1 40.1 280.4-280.5v102.6h56.7v-199.3z' fill='%23ffc400'/%3E%3Cpath d='m455.3 455.3h-398.6v-398.6h199.3v-56.7h-199.3c-31.3 0-56.7 25.4-56.7 56.7v398.7c0 31.2 25.4 56.6 56.7 56.6h398.7c31.3 0 56.7-25.4 56.7-56.7v-199.3h-56.7c-0.1 0-0.1 199.3-0.1 199.3z' fill='%231769aa'/%3E%3C/svg%3E%0A"); }
 a.brokenLink { text-decoration: line-through; }
 
 /* Non-semantic class, so it's a bit of cheating, but makes life easier. */

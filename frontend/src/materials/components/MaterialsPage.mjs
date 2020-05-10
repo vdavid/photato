@@ -3,6 +3,7 @@ import React, {useState, useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 import {weeklyChallengeTitles} from '../../challenges/challengeRepository.mjs';
+import ExternalLink from './ExternalLink.mjs';
 
 /**
  * @typedef {Object} ArticleMetadata
@@ -78,9 +79,8 @@ export default function MaterialsPage() {
         const metadata = article.getMetadata();
         return <li className={metadata.isOriginalUrlBroken ? 'broken' : ''}>
             [<NavLink to={'/external-article/' + metadata.slug}>{__('Photato cached version')}</NavLink>]&nbsp;
-            <a href={metadata.originalUrl}
-               target='_blank'
-               className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</a>
+            <ExternalLink href={metadata.originalUrl}
+               className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</ExternalLink>
             {metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'}
         </li>;
     }
