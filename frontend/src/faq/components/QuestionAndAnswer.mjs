@@ -1,4 +1,5 @@
 import React from '../../web_modules/react.js';
+import Twemoji from '../../website/components/Twemoji.mjs';
 
 /**
  * @param {string} id
@@ -9,7 +10,9 @@ import React from '../../web_modules/react.js';
  */
 export default function QuestionAndAnswer({id, question, answer}) {
     return <div id={id}>
-        <dt>🅠: {question}</dt>
-        <dd>🅐: {answer}</dd>
+        <Twemoji>
+            <dt>🅠: {question}</dt>
+            <dd>🅐: {answer}</dd>
+        </Twemoji>
     </div>;
 }

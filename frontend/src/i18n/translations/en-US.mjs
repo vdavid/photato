@@ -1,5 +1,5 @@
 import React from '../../web_modules/react.js';
-import PhotatoEmoji from '../../website/components/emojis/PhotatoEmoji.mjs';
+import PhotatoEmoji from '../../website/components/PhotatoEmoji.mjs';
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 export const translations = {
