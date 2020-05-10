@@ -72,6 +72,11 @@
 body {font-family: var(--content-font); font-size: var(--base-font-size); line-height: var(--base-line-height); }
 figcaption { font-size: 50%; line-height: 1.3; }
 h1, h2, h3, h4, h5, h6 { font-family: var(--header-font); line-height: 1.2; }
+:root { --hashtagJumpSize: 0.5em; }
+@media screen and (min-height: 500px) {
+    :root { --hashtagJumpSize: calc(var(--site-header-height) + 0.5em) }
+}
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] { margin-top: calc(-1 * var(--hashtagJumpSize)); padding-top: var(--hashtagJumpSize); }
 main { }
 input, button { font-family: var(--ui-font); font-size: var(--base-font-size); }
 pre { font-size: 60%; line-height: 1.6; }

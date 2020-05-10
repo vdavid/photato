@@ -25,7 +25,7 @@ export function getMetadata() {
  * @returns {React.ReactElement}
  */
 export default function Article() {
-    // noinspection SpellCheckingInspection (It's in Hungarian.)
+    // noinspection SpellCheckingInspection,HtmlUnknownAnchorTarget (It's in Hungarian.)
     return <>
         <p>Szög, geometria, jó szög, rossz szög, nincsen szögben. Folyton ezt hallottam Szipál Martintól, amikor a fotótanfolyamára jártam… Eleinte nem igazán tudtam, hogy miről is beszél, aztán lassan kezdtem megérteni.</p>
         <p>Egy fénykép attól is szép, ha valamilyen szép geometriai forma kirajzolódik rajta. És mitől szép egy geometriai forma?</p>
@@ -37,31 +37,31 @@ export default function Article() {
         <h2>Tartalom</h2>
         <ul>
             <li>
-                <ExternalLink href="#1_Aranymetszes">1. Aranymetszés</ExternalLink>
+                <a href="#1_Aranymetszes">1. Aranymetszés</a>
             </li>
             <li>
-                <ExternalLink href="#2_Harmadolas">2. Harmadolás</ExternalLink>
+                <a href="#2_Harmadolas">2. Harmadolás</a>
             </li>
             <li>
-                <ExternalLink href="#3_Sokszogek_es_atlok_hasznalata">3. Sokszögek és átlók használata</ExternalLink>
+                <a href="#3_Sokszogek_es_atlok_hasznalata">3. Sokszögek és átlók használata</a>
             </li>
             <li>
-                <ExternalLink href="#4_Keretbe_foglalas">4. Keretbe foglalás</ExternalLink>
+                <a href="#4_Keretbe_foglalas">4. Keretbe foglalás</a>
             </li>
             <li>
-                <ExternalLink href="#5_Egyensuly_legyen">5. Egyensúly legyen</ExternalLink>
+                <a href="#5_Egyensuly_legyen">5. Egyensúly legyen</a>
             </li>
             <li>
-                <ExternalLink href="#Komponalasi_erzek_fejlesztese">Komponálási érzék fejlesztése</ExternalLink>
+                <a href="#Komponalasi_erzek_fejlesztese">Komponálási érzék fejlesztése</a>
                 <ul>
                     <li>
-                        <ExternalLink href="#Fenykepek_es_festmenyek_tanulmanyozasa">Fényképek és festmények tanulmányozása</ExternalLink>
+                        <a href="#Fenykepek_es_festmenyek_tanulmanyozasa">Fényképek és festmények tanulmányozása</a>
                     </li>
                     <li>
-                        <ExternalLink href="#Fotozas_fix_objektivvel">Fotózás fix objektívvel</ExternalLink>
+                        <a href="#Fotozas_fix_objektivvel">Fotózás fix objektívvel</a>
                     </li>
                     <li>
-                        <ExternalLink href="#Rajzolas">Rajzolás</ExternalLink>
+                        <a href="#Rajzolas">Rajzolás</a>
                     </li>
                 </ul>
             </li>
