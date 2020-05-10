@@ -3,10 +3,11 @@
     <msapplication>
         <tile>
             <square70x70logo src="/website/favicon/ms-icon-70x70.png"/>
+            <square144x144logo src="/website/favicon/ms-icon-144x144.png"/>
             <square150x150logo src="/website/favicon/ms-icon-150x150.png"/>
             <square310x310logo src="/website/favicon/ms-icon-310x310.png"/>
             <wide310x150logo src="/website/favicon/ms-icon-310x150.png"/>
-            <TileColor>#000000</TileColor>
+            <TileColor>#101016</TileColor>
         </tile>
     </msapplication>
 </browserconfig>
