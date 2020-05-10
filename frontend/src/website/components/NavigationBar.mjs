@@ -51,7 +51,7 @@ export default function NavigationBar() {
             <NavLinkMenuItemWithIcon to='/materials' activeClassName='active' iconName='book'>{__('Materials')}</NavLinkMenuItemWithIcon>
             {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/admin' activeClassName='active' iconName='book'>{__('Admin')}</NavLinkMenuItemWithIcon> : null}
             {isAuthenticated ?
-            <div className='menuItem'>
+            <div className='menuItem separator'>
                 <span className='material-icons'/>
                 <hr/>
             </div> : null}

@@ -47,15 +47,10 @@
 :root {
     --minimum-site-width: 320px;
     --maximum-content-width: 900px;
-    --site-header-height: 54px;
-    --site-header-profile-pic-size: 46px;
+    --site-header-height: 47px;
+    --site-header-profile-pic-size: 40px;
     --page-vertical-padding-size: 20px;
-    --site-header-vertical-padding: calc((var(--site-header-height) - var(--base-font-size) * 1.3) / 2);
-}
-@media screen and (max-width: 730px) {
-    :root {
-        --site-header-height: 47px;
-    }
+    --site-header-vertical-padding: calc((var(--site-header-height) - var(--base-font-size) * 0.9 * 1.3) / 2);
 }
 
 /* ======================= Typography ======================= */
@@ -80,7 +75,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--header-font); line-height: 1.2; }
 main { }
 input, button { font-family: var(--ui-font); font-size: var(--base-font-size); }
 pre { font-size: 60%; line-height: 1.6; }
-header { font-family: var(--ui-font); line-height: 1.3; }
+header { font-family: var(--ui-font); font-size:90%; line-height: 1.3; }
 article .articleMetadata { font-size: 70%; }
 article .enlargeable.fullscreen figcaption { font-size: 100%; }
 footer { font-family: var(--ui-font); font-size:90%; }
@@ -138,13 +133,13 @@ article .metadata { padding-left: 5%; }
 }
 #app > header a { display: block; box-sizing: border-box; height: var(--site-header-height); padding: var(--site-header-vertical-padding) 16px; text-align: center; color: var(--light-text-color-high-emphasis); text-decoration: none; transition: color 0.3s ease, background-color 0.3s ease; }
 #app > header a:hover { }
-#app > header a.active { font-weight: bold; }
+#app > header a.active { text-shadow: 0 0 1px; }
 #app > header a.active .title {  border-bottom: 2px solid var(--accent-color-main); text-underline-position: under; }
 
 /* Logo and site title */
 #app > header .logo { flex-basis: 50px; padding: 0; display: flex; }
 #app > header .logo img { width: auto; height: 100%; margin: 2px 0 0 2px;}
-#app > header a.logo.active { font-weight:normal; text-decoration: none; color: var(--light-text-color-high-emphasis); }
+#app > header a.logo.active { text-shadow: none; text-decoration: none; color: var(--light-text-color-high-emphasis); }
 #app > header a.logo.active:hover { color: var(--light-text-color-high-emphasis); }
 #app > header .siteTitle { padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; user-select: none; }
 
@@ -155,24 +150,26 @@ article .metadata { padding-left: 5%; }
 #app > header nav a.active .title:before { display:none; }
 /* Source: https://tobiasahlin.com/blog/css-trick-animating-link-underlines/ */
 #app > header nav a .title:before { content: ""; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background-color: var(--accent-color-main); visibility: hidden; transform: scaleX(0); transition: all 0.1s ease-in-out 0s;}
-#app > header nav a .title:hover:before { visibility: visible; transform: scaleX(1);}
+#app > header nav a:hover .title:before { visibility: visible; transform: scaleX(1);}
 #app > header nav hr { border: none; flex-grow: 1; }
 #app > header nav a span.icon { display: none; }
 #app > header nav a span.profile img { width: 25px; height: 25px; margin: 0; }
 #app > header nav a span.title { flex-grow: 1; text-align: left; padding-left: 0; }
+#app > header nav .menuItem.separator { display: none; }
 #app > header nav hr { display: block; height: 2px; margin: -10px 3em 10px 16px; background-color: var(--dark-primary-text-color); }
 #app > header nav .menuItem.signOut { display: none;}
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 950px) {
     /* If narrow screen, make menu a popup */
     #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: var(--site-header-height); right: 0; }
     #app > header nav.visible { visibility: visible; }
     #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
-    #app > header nav a.active { display: flex; padding: 0; font-weight:normal; background-color: var(--primary-color-main); }
+    #app > header nav a.active { display: flex; padding: 0; text-shadow: none; background-color: var(--primary-color-main); }
     #app > header nav a:hover { background-color: var(--primary-color-lighter); color: var(--dark-primary-text-color); }
     #app > header nav a .title { display: flex; padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; }
     #app > header nav a .title:before { display: none;}
     #app > header nav a.active .title { border-bottom:none; }
     #app > header nav a span.icon { display: inline-block; box-sizing: content-box; width: 30px; padding: calc((var(--site-header-height) - 24px) / 2) 8px; text-align: center; color: var(--dark-primary-text-color); }
+    #app > header nav .menuItem.separator { display: block; }
     #app > header nav .menuItem.signOut { display: flex;}
 }
 
@@ -182,7 +179,7 @@ article .metadata { padding-left: 5%; }
 /* Hamburger menu icon – displayed only if narrow screen */
 #app > header .hamburgerMenu { display: none; cursor: pointer; font-size: var(--site-header-height); }
 #app > header .hamburgerMenu:hover { background-color: var(--primary-color-lighter); color: var(--primary-color-dark); transition: color 0.3s ease, background-color 0.3s ease; }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 950px) {
     #app > header .hamburgerMenu { display: block; color: var(--light-text-color-high-emphasis); }
 }
 
@@ -196,7 +193,7 @@ article .metadata { padding-left: 5%; }
 #app > header nav.authenticationMenu a .title { display: flex; padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; }
 #app > header nav.authenticationMenu a span.icon { display: inline-block; box-sizing: content-box; width: 30px; padding: calc((var(--site-header-height) - 24px) / 2) 8px;  text-align: center; color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu .menuItem.signOut { display: flex;}
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 950px) {
     #app > header > img.profilePicture { display: none;}
     #app > header nav.authenticationMenu.visible { visibility: hidden; }
 }
