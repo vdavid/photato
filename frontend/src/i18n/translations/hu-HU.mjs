@@ -4,9 +4,6 @@ import PhotatoEmoji from '../../website/components/PhotatoEmoji.mjs';
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const siteHeaderAndFooterTranslations = {
     'Photato': {translation: 'Photato'},
-    '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
-    'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
-    'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
     'Made with ❤️ by the Photato team': {translation: 'Készítette szeretettel ❤️ a Photato csapat'},
     'Home': {translation: 'Főoldal'},
     'About': {translation: 'Rólunk'},
@@ -94,6 +91,7 @@ const uploadPageTranslations = {
     'Loading...': {translation: 'Betöltés folyamatban...'},
 };
 
+// noinspection SpellCheckingInspection
 const adminTranslations = {
     'Messages': {translation: 'Üzenetek'},
     'Re-download all messages': {translation: 'Újratöltés a szerverről'},
@@ -101,6 +99,7 @@ const adminTranslations = {
     'Back to the list of messages': {translation: 'Vissza az üzenetek listájához'},
 };
 
+// noinspection SpellCheckingInspection
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
@@ -110,6 +109,10 @@ const otherTranslations = {
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
+    /* Front page */
+    'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
+    'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
+    '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
