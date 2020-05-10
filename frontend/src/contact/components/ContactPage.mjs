@@ -2,6 +2,8 @@ import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
+import PotatoEmoji from '../../website/components/emojis/PotatoEmoji.mjs';
+import CallMeHandEmoji from '../../website/components/emojis/CallMeHandEmoji.mjs';
 
 export default function ContactPage() {
     const {__, getActiveLocaleCode} = useI18n();
@@ -13,7 +15,7 @@ export default function ContactPage() {
 
 function getHungarianPage() {
     return <>
-        <h1>Kapcsolat 🥔🤙</h1>
+        <h1>Kapcsolat <PotatoEmoji /><CallMeHandEmoji /></h1>
         <p>Elérsz minket:</p>
         <ul>
             <li>E-mailben: <a href="mailto:photatophotato@gmail.com">photatophotato@gmail.com</a></li>
@@ -37,7 +39,7 @@ function getHungarianPage() {
 
 function getEnglishPage() {
     return <>
-        <h1>Contact 🥔🤙</h1>
+        <h1>Contact <PotatoEmoji /><CallMeHandEmoji /></h1>
         <p>You can reach us:</p>
         <ul>
             <li>In email: <a href="mailto:photatophotato@gmail.com">photatophotato@gmail.com</a></li>

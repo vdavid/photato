@@ -267,7 +267,7 @@ export default class EmojiReplacer {
         // nodes with type 1 which should **not** be parsed
         const shouldNotBeParsed = /^(?:iframe|noframes|noscript|script|select|style|textarea)$/;
 
-        const childNodes = node.childNodes;
+        const childNodes = node ? node.childNodes : null;
         let length = childNodes ? childNodes.length : 0;
         let subNode;
         let nodeType;
@@ -408,7 +408,7 @@ export default class EmojiReplacer {
      * @return {string} The string with <img tags> replacing all found and parsed emoji
      */
     _parseString(string, options) {
-        return this.replace(string, function (rawText) {
+        return this.replace(string, rawText => {
             let returnValue = rawText;
             const iconId = this._grabTheRightIcon(rawText);
             const src = options.callback(iconId, options);

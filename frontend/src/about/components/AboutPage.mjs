@@ -1,6 +1,8 @@
 import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
+import CameraEmoji from '../../website/components/emojis/CameraEmoji.mjs';
+import PotatoEmoji from '../../website/components/emojis/PotatoEmoji.mjs';
 
 export default function AboutPage() {
     const {getActiveLocaleCode, __} = useI18n();
@@ -11,7 +13,7 @@ export default function AboutPage() {
 
     function getHungarianPage() {
         return <>
-            <h1>A Photatoról 🥔📷</h1>
+            <h1>A Photatoról <PotatoEmoji /><CameraEmoji /></h1>
             <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani. Ha fotózni tanulnál, <ExternalLink href="https://bit.ly/2tB1hpR">iratkozz fel itt</ExternalLink>.
             </p>
 
@@ -19,7 +21,7 @@ export default function AboutPage() {
             <p>
                 <strong>Dávid:</strong> A Photatot <ExternalLink href="http://www.jurikov.com/">Gyuri</ExternalLink> barátom és <ExternalLink href="https://david.veszelovszki.hu/">én</ExternalLink> alapítottuk. Eredetileg én készítettem a húgomnak karácsonyi ajándéknak, de aztán arra gondoltam, másoknak is hasznos lehet. 😊 Eddig 3 db 3 hónapos tanfolyamot tartottunk, összesen 549 embernek. Az elsőt 2018-ban indítottuk, úgy, hogy még a tananyag sem volt kész, hétről hétre írtuk Gyurival. A második kurzus már nyugisabb volt, mert a tanayag már kész volt. Itt már Luca húgom segített levezetni a tanfolyamot. Ezután szűk 2 év szünet következett. 2020-ban, Dóri segítségével indítottuk a harmadik kurzust. Közben több lelkes ismerős és ismeretlen segített nekünk a mentorálásban, visszajelzésekkel, a közösség aktívan tartásával.
             </p>
-            <p>Az eddigi 3 tanfolyam 116, 86, és 347 diákkal indult. Összesen 1 081 érvényes beadást kaptunk a hetek során, a tanfolyamok végén pedig összesen 50 értékes díjat osztottunk ki. 🥔</p>
+            <p>Az eddigi 3 tanfolyam 116, 86, és 347 diákkal indult. Összesen 1 081 érvényes beadást kaptunk a hetek során, a tanfolyamok végén pedig összesen 50 értékes díjat osztottunk ki. <PotatoEmoji /></p>
 
             <h2>Miért? És miért ingyen?</h2>
             <p>
@@ -53,7 +55,7 @@ export default function AboutPage() {
 
     function getEnglishPage() {
         return <>
-            <h1>About Photato 🥔📷</h1>
+            <h1>About Photato <PotatoEmoji /><CameraEmoji /></h1>
             <p>This is a free photography course for beginners and intermediates. You only need a camera or a mobile phone. The course takes 12 weeks: we teach you something and give you a challenge each week. Around the 5th week there’s a live event where we shoot together. The course ends with an exhibition (also free), at <ExternalLink href="https://szimpla.hu/">Szimpla</ExternalLink>, Budapest. If you want to study photography, <ExternalLink href="https://bit.ly/2tB1hpR">sign up here</ExternalLink>.
             </p>
             <p><strong>Important:</strong> this course is currently in Hungarian only. If you speak Hungarian and English, <a href="mailto:photatophotato@gmail.com?I want to help translate!">help us translate</a>.
