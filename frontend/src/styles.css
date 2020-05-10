@@ -4,6 +4,7 @@
 
 /*
  * Primary and accent colors are from here: https://material-ui.com/customization/color/#color-tool
+ * Created the lighter versions here: https://coolors.co/101016-2196f3-ffc400-4dabf5-b4654a
  * Background and text colors are from here: https://uxplanet.org/8-tips-for-dark-theme-design-8dfc2f8f7ab6
  */
 :root {
@@ -48,10 +49,13 @@
 :root {
     --minimum-site-width: 320px;
     --maximum-content-width: 900px;
-    --site-header-height: 47px;
-    --site-header-profile-pic-size: 40px;
+    --site-header-height: 54px;
+    --site-header-profile-pic-size: 38px;
     --page-vertical-padding-size: 20px;
     --site-header-vertical-padding: calc((var(--site-header-height) - var(--base-font-size) * 0.9 * 1.3) / 2);
+}
+@media screen and (max-width: 950px) {
+    :root {--site-header-height: 47px; }
 }
 
 /* ======================= Typography ======================= */
@@ -161,8 +165,8 @@ article .metadata { padding-left: 5%; }
 
 /* Logo and site title */
 #app > header .logoContainer { flex-basis: 50px; padding: 0; display: flex; align-items: center; }
-#app > header .logo { width: var(--site-header-height); height: var(--site-header-height); padding: 0.3em; }
-#app > header .siteTitle { height: 50%; }
+#app > header .logo { width: var(--site-header-height); height: var(--site-header-height); padding: 8px; }
+#app > header .siteTitle { height: 40%; }
 #app > header a.logoContainer.active { text-shadow: none; text-decoration: none; color: var(--light-text-color-high-emphasis); }
 #app > header a.logoContainer.active:hover { color: var(--light-text-color-high-emphasis); }
 
@@ -185,7 +189,7 @@ article .metadata { padding-left: 5%; }
     /* If narrow screen, make menu a popup */
     #app > header nav { flex-direction: column; visibility: hidden; position: absolute; z-index: 50; background: white; top: var(--site-header-height); right: 0; }
     #app > header nav.visible { visibility: visible; }
-    #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
+    #app > header nav a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color);  }
     #app > header nav a.active { display: flex; padding: 0; text-shadow: none; background-color: var(--primary-color-main); }
     #app > header nav a:hover { background-color: var(--primary-color-lightest); color: var(--dark-primary-text-color); }
     #app > header nav a .title { display: flex; padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; }
@@ -214,6 +218,7 @@ article .metadata { padding-left: 5%; }
 #app > header nav.authenticationMenu a { display: flex; padding: 0; background-color: var(--light-text-color-high-emphasis); color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu a:hover { background-color: var(--primary-color-lightest); color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu a .title { display: flex; padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; }
+#app > header nav.authenticationMenu a .title:before { display: none;}
 #app > header nav.authenticationMenu a span.icon { display: inline-block; box-sizing: content-box; width: 30px; padding: calc((var(--site-header-height) - 24px) / 2) 8px; text-align: center; color: var(--dark-primary-text-color); }
 #app > header nav.authenticationMenu .menuItem.signOut { display: flex;}
 @media screen and (max-width: 950px) {
