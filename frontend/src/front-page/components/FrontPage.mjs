@@ -9,24 +9,39 @@ export default function FrontPage() {
     const {isAuthenticated, loginWithRedirect} = useAuth0();
     const {__} = useI18n();
 
-    useEffect(() => {document.title = __('12 weeks, 12 pics') + ' - Photato'}, []);
+    useEffect(() => {document.title = __('12 weeks, 12 pics') + ' - Photato';}, []);
 
     return <>
-        <h1>{__('Photato') + ' – ' + __('12 weeks, 12 pics')}</h1>
-        <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak.<br/>
-            Csak egy fényképezőgépre vagy mobilra van szükséged.<br/>
-            A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz.<br/>
-            Ha fotózni tanulnál, <ExternalLink href="https://bit.ly/2tB1hpR">iratkozz fel itt</ExternalLink>.
-        </p>
+        <div className="lead">
+            <div className="leadImage" style={{backgroundImage: 'url("/front-page/1600x400px-24x8-photo-mosaic-turned-blurred.jpg")'}} />
+            <div className="leadImageGradient" />
+            <div className="leadText">
+                <div>
+                    <h1>{__('Photato') + ' – ' + __('12 weeks, 12 pics')}</h1>
+                    <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak.<br/>
+                        Csak egy fényképezőgépre vagy mobilra van szükséged.<br/>
+                        A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz.<br/>
+                        Ha fotózni tanulnál:
+                    </p>
+                    <a href="https://bit.ly/2tB1hpR" className="callToActionButton">Iratkozz fel itt!</a>
+                </div>
+            </div>
+        </div>
         <h2>{__('Challenges')}</h2>
         <ChallengeList/>
-        <NavLinkButton to='/upload'
-                       disabled={!isAuthenticated}
-                       title={!isAuthenticated ? __('You’ll need to sign in to upload a photo.') : ''}>
-            {__('Upload your weekly photo')}
-        </NavLinkButton>
-        <div>{!isAuthenticated ?
-            <button onClick={handleSignIn}>{__('Sign in')}</button> : null}</div>
+        <div>
+            <p>
+                <NavLinkButton to='/upload'
+                               disabled={!isAuthenticated}
+                               title={!isAuthenticated ? __('You’ll need to sign in to upload a photo.') : ''}>
+                    {__('Upload your weekly photo')}
+                </NavLinkButton>
+            </p>
+            {!isAuthenticated ?
+                <p>
+                    <button onClick={handleSignIn}>{__('Sign in')}</button>
+                </p> : null}
+        </div>
     </>;
 
     function handleSignIn() {
