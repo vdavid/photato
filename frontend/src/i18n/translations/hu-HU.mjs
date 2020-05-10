@@ -1,5 +1,5 @@
 import React from '../../web_modules/react.js';
-import PotatoEmoji from '../../website/components/emojis/PotatoEmoji.mjs';
+import PhotatoEmoji from '../../website/components/emojis/PhotatoEmoji.mjs';
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const siteHeaderAndFooterTranslations = {
@@ -65,7 +65,7 @@ const articlePageTranslations = {
             Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.</>, format: 'jsx'
     },
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
-    'Photato cached version': {translation: <><PotatoEmoji /> mentett verzió</>, format: 'jsx'},
+    'Photato cached version': {translation: <><PhotatoEmoji /> mentett verzió</>, format: 'jsx'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection

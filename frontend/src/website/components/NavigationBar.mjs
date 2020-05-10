@@ -78,8 +78,9 @@ export default function NavigationBar() {
 
     // noinspection HtmlUnknownTarget
     return <header role='navigation'>
-        <NavLink to='/' exact={true} className='logo' title='Photato'><img src='/website/potato-with-camera-logo.svg' alt="logo"/>
-            <div className='siteTitle'>Photato</div>
+        <NavLink to='/' exact={true} className='logoContainer' title='Photato'>
+            <img src='/website/aperture-logo.svg' alt="logo" className="logo" />
+            <img src="/website/photato-logo-text.svg" alt="Photato" className="siteTitle" />
         </NavLink>{createMainMenu()}
         <div className='spacer'/>
         {!isAuthenticated && <a href='#' className='signInLink' onClick={handleSignIn}>{__('Sign in')}</a>}

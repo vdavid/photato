@@ -18,7 +18,10 @@ export default function FullPageLoadingIndicator() {
     return <div id='fullPageLoadingIndicator'>
         <div>
             <div className='spinner'/>
-            <div className='logo'/>
+            <div className='logo'>
+                <img src='/website/aperture-logo.svg' alt="logo" className="logo" />
+                <img src="/website/photato-logo-text.svg" alt="Photato" className="siteTitle" />
+            </div>
         </div>
         {isTakingLong && areTranslationsLoaded ? <div className="loadingTakingLong">{__('Loading seems to take longer than usual. If you think this is a problem, please report it here.')}</div> : null}
     </div>;

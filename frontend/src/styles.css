@@ -137,11 +137,11 @@ article .metadata { padding-left: 5%; }
 #app > header a.active .title {  border-bottom: 2px solid var(--accent-color-main); text-underline-position: under; }
 
 /* Logo and site title */
-#app > header .logo { flex-basis: 50px; padding: 0; display: flex; }
-#app > header .logo img { width: auto; height: 100%; margin: 2px 0 0 2px;}
-#app > header a.logo.active { text-shadow: none; text-decoration: none; color: var(--light-text-color-high-emphasis); }
-#app > header a.logo.active:hover { color: var(--light-text-color-high-emphasis); }
-#app > header .siteTitle { padding: var(--site-header-vertical-padding) 16px var(--site-header-vertical-padding) 0; user-select: none; }
+#app > header .logoContainer { flex-basis: 50px; padding: 0; display: flex; align-items: center; }
+#app > header .logo { width:var(--site-header-height); height:var(--site-header-height); padding:0.3em; }
+#app > header .siteTitle { height: 50%; }
+#app > header a.logoContainer.active { text-shadow: none; text-decoration: none; color: var(--light-text-color-high-emphasis); }
+#app > header a.logoContainer.active:hover { color: var(--light-text-color-high-emphasis); }
 
 /* Menu (a fixed menu for desktops, a popup for narrow screens) */
 #app > header nav { display: flex; flex-direction: row; visibility: visible; position: unset; background-color: var(--navbar-color); }
@@ -248,10 +248,11 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
     width: var(--indicatorSize); height: var(--indicatorSize); }
 #fullPageLoadingIndicator .spinner { position: absolute; display: block; width: var(--spinnerSize); height: var(--spinnerSize);
     top: calc((var(--indicatorSize) - var(--spinnerSize)) / 2); left: calc((var(--indicatorSize) - var(--spinnerSize)) / 2);
-    border-radius: calc(var(--spinnerSize) / 2); box-shadow: 0 6px 0 0 var(--primary-color-main); animation: spinnerAnimation 1s linear infinite; }
-#fullPageLoadingIndicator .logo { position: absolute; display: block; width: var(--logoSize); height: var(--logoSize);
+    border-radius: calc(var(--spinnerSize) / 2); box-shadow: 0 6px 0 0 var(--primary-color-dark); animation: spinnerAnimation 1s linear infinite; }
+#fullPageLoadingIndicator > div > .logo { position: absolute; display: flex; flex-direction: column; align-items: center; width: var(--logoSize); height: var(--logoSize);
     top: calc((var(--indicatorSize) - var(--logoSize)) / 2); left: calc((var(--indicatorSize) - var(--logoSize)) / 2);
-    background: url('website/potato-with-camera-logo.svg') no-repeat center; background-size: cover; animation: logoAnimation 1s ease-in-out infinite; }
+    animation: logoAnimation 1s ease-in-out infinite; }
+#fullPageLoadingIndicator > div > .logo > .logo { height:60%; margin-bottom:10%; }
 
 #fullPageLoadingIndicator .loadingTakingLong { top: 400px; width: 400px; max-width: 100%; text-align: center; animation: appearAnimation 0.2s ease-in-out; }
 

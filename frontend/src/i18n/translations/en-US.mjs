@@ -1,5 +1,5 @@
 import React from '../../web_modules/react.js';
-import PotatoEmoji from '../../website/components/emojis/PotatoEmoji.mjs';
+import PhotatoEmoji from '../../website/components/emojis/PhotatoEmoji.mjs';
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 export const translations = {
@@ -9,7 +9,7 @@ export const translations = {
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Loading seems to take longer than usual. If you think this is a problem, please report it at <a href="mailto:photatophotato@gmail.com?subject=Problem with website, loading for too long!">photatophotato@gmail.com</a>.</>, format: 'jsx'},
 
     /* Article pages */
-    'Photato cached version': {translation: <><PotatoEmoji /> cached version</>, format: 'jsx'},
+    'Photato cached version': {translation: <><PhotatoEmoji /> cached version</>, format: 'jsx'},
 
     /* Materials page */
     'On this page we list articles that we found useful. [...]': {
