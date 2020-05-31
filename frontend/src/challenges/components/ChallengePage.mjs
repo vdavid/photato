@@ -5,6 +5,7 @@ import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 
 import {useCourseData} from './CourseDataProvider.mjs';
 import {weeklyChallengeTitles} from '../challengeRepository.mjs';
+import {formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
 
 import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import Error404Page from '../../website/components/Error404Page.mjs';
@@ -23,9 +24,9 @@ export default function ChallengePage() {
     /* Create references to helpers */
     const {isAuthenticated} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
-    const {currentWeekIndex, getFormattedDeadline} = useCourseData();
+    const {currentWeekIndex, getDeadline} = useCourseData();
 
-    const formattedDeadline = getFormattedDeadline(weekIndex, getActiveLocaleCode());
+    const formattedDeadline = formatDateWithWeekDayAndTime(getDeadline(weekIndex), getActiveLocaleCode());
     const languageCode = getActiveLocaleCode().substring(0, 2);
 
     useEffect(() => {

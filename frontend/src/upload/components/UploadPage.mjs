@@ -7,6 +7,7 @@ import FileSelectorWithPreview from './FileSelectorWithPreview.mjs';
 import PhotoTitleInput from './PhotoTitleInput.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useCourseData} from '../../challenges/components/CourseDataProvider.mjs';
+import {formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
 
 // noinspection JSValidateJSDoc
 /**
@@ -24,7 +25,7 @@ function _validateSelectedFile(file) {
 export default function UploadPage({photoUploader}) {
     const {isAuthenticated, user, getTokenSilently} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
-    const {currentWeekIndex, isCourseOver, isCourseRunning, getFormattedDeadline} = useCourseData();
+    const {currentWeekIndex, isCourseOver, isCourseRunning, getDeadline} = useCourseData();
 
     const [accessToken, setAccessToken] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -135,7 +136,7 @@ export default function UploadPage({photoUploader}) {
         }
     }
 
-    const formattedDeadline = getFormattedDeadline(currentWeekIndex, getActiveLocaleCode());
+    const formattedDeadline = formatDateWithWeekDayAndTime(getDeadline(currentWeekIndex), getActiveLocaleCode());
     const courseStatusHelpText = isCourseRunning
         ? __('Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
         : (isCourseOver

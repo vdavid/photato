@@ -23,7 +23,7 @@ export default function PhotatoMessagePage() {
     const photatoMessageLiveContentReplacerRef = useRef(new PhotatoMessageLiveContentReplacer({
         courseStartDate: config.course.startDateTime,
         signedUpCount: config.course.subscribedStudentCount, // TODO: Make this dynamic someday
-        signUpUrl: config.course.signupFormUrl,
+        signUpUrl: config.course.signUpFormUrl,
         facebookGroupUrl: config.course.facebookGroupUrl,
         courseTitle: config.course.titleWithPhotato,
     }));

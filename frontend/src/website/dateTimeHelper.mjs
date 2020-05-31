@@ -1,9 +1,23 @@
+/**
+ * E.g. "2020. május 31., vasárnap 23:59"
+ *
+ * @param {Date} date
+ * @param {string} localeCode E.g. "en-US"
+ * @returns {string}
+ */
 export function formatDateWithWeekDayAndTime(date, localeCode) {
     return new Intl.DateTimeFormat(localeCode, {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric'
     }).format(date);
 }
 
+/**
+ * E.g. "2020. május 31., vasárnap"
+ *
+ * @param {Date} date
+ * @param {string} localeCode E.g. "en-US"
+ * @returns {string}
+ */
 export function formatDateWithWeekDay(date, localeCode) {
     return new Intl.DateTimeFormat(localeCode, {year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'})
         .format(date);

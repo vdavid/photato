@@ -1,4 +1,5 @@
 import React, {useEffect} from '../../web_modules/react.js';
+import {config} from '../../config.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList.mjs';
 import {getSingleLanguageContent} from '../faqContent.mjs';
@@ -21,7 +22,7 @@ export default function FaqPage() {
         </div>
         <QuestionsAndAnswersList questionsAndAnswers={questionsAndAnswers}/>
         <p>
-            <ExternalLink href="https://bit.ly/2tB1hpR" className="callToActionButton">{__('Sign up for the next course')} →</ExternalLink>
+            <ExternalLink href={config.course.signUpFormUrl} className="callToActionButton">{__('Sign up for the next course')} →</ExternalLink>
         </p>
     </>;
 
