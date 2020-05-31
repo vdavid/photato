@@ -44,59 +44,63 @@ export default function App() {
         checkFontsLoaded();
     }, []);
 
+    const publicRoutes = [
+        <Route path='/' exact={true}>
+            <FrontPage/>
+        </Route>,
+        <Route path='/about'>
+            <AboutPage/>
+        </Route>,
+        <Route path='/faq'>
+            <FaqPage/>
+        </Route>,
+        <Route path='/contact'>
+            <ContactPage/>
+        </Route>,
+        <Route path='/materials'>
+            <MaterialsPage/>
+        </Route>,
+        <Route path='/external-article/:slug'>
+            <MaterialPage/>
+        </Route>,
+    ];
+
+    const memberRoutes = [
+        <Route path='/upload'>
+            <UploadPage photoUploader={photoUploader}/>
+        </Route>,
+        <Route path='/course' exact={true}>
+            <CoursePage/>
+        </Route>,
+        <Route path='/challenges/:weekIndex'>
+            <ChallengePage/>
+        </Route>,
+    ];
+
+    const adminRoutes = [
+        <Route path='/admin' exact={true}>
+            <AdminPage/>
+        </Route>,
+        <Route path='/admin/messages'>
+            <PhotatoMessagesPage/>
+        </Route>,
+        <Route path='/admin/message/:slug'>
+            <PhotatoMessagePage/>
+        </Route>,
+        <Route path='/admin/sitemap-generator'>
+            <SitemapGeneratorPage/>
+        </Route>,
+    ];
+
     return areTranslationsLoaded && areFontsReady && !isAuthLoading
         ?
         <BrowserRouter basename='/'>
             <NavigationBar/>
             <main>
                 <Switch>
-                    <Route path='/' exact={true}>
-                        <FrontPage/>
-                    </Route>
-                    <Route path='/about'>
-                        <AboutPage/>
-                    </Route>
-                    <Route path='/faq'>
-                        <FaqPage/>
-                    </Route>
-                    <Route path='/contact'>
-                        <ContactPage/>
-                    </Route>
-                    {isAuthenticated ?
-                        <>
-                            <Route path='/upload'>
-                                <UploadPage photoUploader={photoUploader}/>
-                            </Route>
-                            <Route path='/course' exact={true}>
-                                <CoursePage/>
-                            </Route>
-                            <Route path='/challenges/:weekIndex'>
-                                <ChallengePage/>
-                            </Route>
-                        </> :
-                        <Redirect to="/"/>}
-                    <Route path='/materials'>
-                        <MaterialsPage/>
-                    </Route>
-                    <Route path='/external-article/:slug'>
-                        <MaterialPage/>
-                    </Route>
-                    {isAuthenticated && permissionHelper.isAdmin(user.email) ?
-                        <>
-                            <Route path='/admin' exact={true}>
-                                <AdminPage/>
-                            </Route>
-                            <Route path='/admin/messages'>
-                                <PhotatoMessagesPage/>
-                            </Route>
-                            <Route path='/admin/message/:slug'>
-                                <PhotatoMessagePage/>
-                            </Route>
-                            <Route path='/admin/sitemap-generator'>
-                                <SitemapGeneratorPage/>
-                            </Route>
-                        </> :
-                        <Redirect to="/"/>}
+                    {publicRoutes}
+                    {isAuthenticated ? memberRoutes : <Redirect to="/"/>}
+                    {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes: <Redirect to="/"/>}
                     <Route path='/'>
                         <Error404Page/>
                     </Route>
