@@ -40,7 +40,7 @@ const challengeTranslations = {
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const challengePageTranslations = {
-    'Back to the challenge list': {translation: 'Vissza a feladatok listájához'},
+    'Back to the course page': {translation: 'Vissza a tanfolyam oldalára'},
     'Current challenge': {translation: 'E heti feladat'},
     'Loading challenge...': {translation: 'Töltjük a feladatot...'},
     'Sorry, this challenge hasn’t been translated to your language yet.': {translation: 'Ezt a feladatot sajnos még nem fordítottuk le a te nyelvedre.'},

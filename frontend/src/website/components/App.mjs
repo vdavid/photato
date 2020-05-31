@@ -14,7 +14,7 @@ import AboutPage from '../../about/components/AboutPage.mjs';
 import FaqPage from '../../faq/components/FaqPage.mjs';
 import ContactPage from '../../contact/components/ContactPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
-import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
+import CoursePage from '../../challenges/components/CoursePage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
@@ -63,8 +63,8 @@ export default function App() {
                     <Route path='/upload'>
                         <UploadPage photoUploader={photoUploader}/>
                     </Route>
-                    <Route path='/challenges' exact={true}>
-                        <ChallengesPage/>
+                    <Route path='/course' exact={true}>
+                        <CoursePage/>
                     </Route>
                     <Route path='/challenges/:weekIndex'>
                         <ChallengePage/>

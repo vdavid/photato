@@ -25,7 +25,7 @@ export default function PhotatoMessagePage() {
         signedUpCount: config.course.subscribedStudentCount, // TODO: Make this dynamic someday
         signUpUrl: config.course.signupFormUrl,
         facebookGroupUrl: config.course.facebookGroupUrl,
-        courseTitle: config.course.title,
+        courseTitle: config.course.titleWithPhotato,
     }));
 
     useEffect(() => {

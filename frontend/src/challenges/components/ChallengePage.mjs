@@ -63,7 +63,7 @@ export default function ChallengePage() {
                            title={!isAuthenticated ? __('You’ll need to sign in to upload a photo.') : ''}>
                 {__('Upload your weekly photo')}
             </NavLinkButton>}
-            <NavLinkButton to='/challenges'>{'← ' + __('Back to the challenge list')}</NavLinkButton>
+            <NavLinkButton to='/course'>{'← ' + __('Back to the course page')}</NavLinkButton>
         </article>
         :
         <Error404Page/>;

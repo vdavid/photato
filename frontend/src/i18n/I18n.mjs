@@ -43,6 +43,7 @@ export default class I18n {
     }
 
     /**
+     * This function replaces placeholders like {this-one} with the values provided.
      * @param {string} localizedString
      * @param {Object<string, string>} values
      * @returns {string}

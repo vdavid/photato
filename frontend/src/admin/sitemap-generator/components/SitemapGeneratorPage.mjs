@@ -28,7 +28,7 @@ export default function SitemapGeneratorPage() {
             {relativeUrl: '/faq'},
             {relativeUrl: '/contact'},
             {relativeUrl: '/upload'},
-            {relativeUrl: '/challenges'},
+            {relativeUrl: '/course'},
             {relativeUrl: '/materials'},
         ];
     }
