@@ -62,22 +62,22 @@
 /* ======================= Typography ======================= */
 
 :root {
-    --base-font-size: 1.3rem;
+    --base-font-size: 1.2rem;
     --base-line-height: 1.6;
 }
 @media screen and (max-width: 730px) {
     :root {
-        --base-font-size: 3vw;
+        --base-font-size: 2.7vw;
     }
 }
 @media screen and (max-width: 520px) {
     :root {
-        --base-font-size: 3.5vw;
+        --base-font-size: 3.3vw;
     }
 }
 @media screen and (max-width: 450px) {
     :root {
-        --base-font-size: 4vw;
+        --base-font-size: 3.6vw;
     }
 }
 @media screen and (max-width: 320px) {
@@ -88,11 +88,12 @@
 body {font-family: var(--content-font); font-size: var(--base-font-size); line-height: var(--base-line-height); }
 figcaption { font-size: 50%; line-height: 1.3; }
 h1, h2, h3, h4, h5, h6 { font-family: var(--header-font); line-height: 1.2; }
+h1 { font-size:1.7em; }
+h2 { font-size:1.2em; }
 :root { --hashtagJumpSize: 0.5em; }
 @media screen and (min-height: 500px) {
     :root { --hashtagJumpSize: calc(var(--site-header-height) + 0.5em) }
 }
-h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] { margin-top: calc(-1 * var(--hashtagJumpSize)); padding-top: var(--hashtagJumpSize); }
 #app > header { font-family: var(--ui-font); font-size: 90%; line-height: 1.3; }
 main { }
 #app > footer { font-family: var(--ui-font); font-size: 90%; }
@@ -109,6 +110,7 @@ body { margin: 0; padding: 0; display: flex; flex-direction: column; background:
 
 * {box-sizing: border-box;}
 h1, h2, h3, h4, h5, h6, p { margin-block-start: 1em; margin-block-end: 0.5em; }
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] { margin-top: calc(-1 * var(--hashtagJumpSize)); padding-top: var(--hashtagJumpSize); }
 ul, ol { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 li { margin-block-start: 0.5em; margin-block-end: 0.5em; }
 figure { margin: 0; }
@@ -167,7 +169,7 @@ article .metadata { padding-left: 5%; }
 #app > header a.active .title { border-bottom: 2px solid var(--accent-color-main); text-underline-position: under; }
 
 /* Logo and site title */
-#app > header .logoContainer { flex-basis: 50px; padding: 0; display: flex; align-items: center; }
+#app > header .logoContainer { flex-basis: 50px; margin-right:1em; padding: 0; display: flex; align-items: center; }
 #app > header .logo { width: var(--site-header-height); height: var(--site-header-height); padding: 8px; }
 #app > header .siteTitle { height: 40%; }
 #app > header a.logoContainer.active { text-shadow: none; text-decoration: none; color: var(--light-text-color-high-emphasis); }
@@ -207,7 +209,7 @@ article .metadata { padding-left: 5%; }
 #app > header .spacer { flex-grow: 1; }
 
 /* Hamburger menu icon – displayed only if narrow screen */
-#app > header .hamburgerMenu { display: none; cursor: pointer; font-size: var(--site-header-height); }
+#app > header .hamburgerMenu { display: none; cursor: pointer; padding: calc(var(--site-header-height) * 0.05); font-size: calc(var(--site-header-height) * 0.9);}
 #app > header .hamburgerMenu:hover { background-color: var(--primary-color-lightest); color: var(--primary-color-dark); transition: color 0.3s ease, background-color 0.3s ease; }
 @media screen and (max-width: 950px) {
     #app > header .hamburgerMenu { display: block; color: var(--light-text-color-high-emphasis); }
@@ -241,8 +243,8 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
 
 /* ======================= Front page ======================= */
 
-.frontPageHeader { position: relative; padding: 0.1em 0 5em; background: linear-gradient(135deg, var(--primary-color-darker) 0%, var(--primary-color-main) 100%); }
-.frontPageHeader:after { content: ''; position: absolute; bottom: -2px; width: 100%; height: 7em; background: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg enable-background='new 0 0 1920 304' version='1.1' viewBox='0 0 1920 304' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns%23' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23'%3E%3Cmetadata%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage'/%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cpath d='m0 274s199.42-199.25 579.28-124c603.7 119.59 767.59-47.24 988.45-121.65 174.18-58.679 353.63-2.4264 353.63-2.4264l-1.3646 278.07h-1920z' fill='%23101016'/%3E%3C/svg%3E%0A") no-repeat center bottom; }
+.frontPageHeader { position: relative; padding: 0.1em 0 5.5em; background: linear-gradient(135deg, var(--primary-color-darker) 0%, var(--primary-color-main) 100%); }
+.frontPageHeader:after { content: ''; position: absolute; bottom: -2px; width: 100%; height: 7.5em; background: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg enable-background='new 0 0 1920 304' version='1.1' viewBox='0 0 1920 304' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns%23' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23'%3E%3Cmetadata%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage'/%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cpath d='m0 274s199.42-199.25 579.28-124c603.7 119.59 767.59-47.24 988.45-121.65 174.18-58.679 353.63-2.4264 353.63-2.4264l-1.3646 278.07h-1920z' fill='%23101016'/%3E%3C/svg%3E%0A") no-repeat center bottom; background-size:cover; }
 .frontPageHeader div { padding: 0 var(--page-vertical-padding-size); height: 100%; }
 .frontPageHeader h2 { font-size:250%; }
 .frontPageHeader p { font-size:100%; margin:2em 0; }
