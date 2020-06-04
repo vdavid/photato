@@ -22,7 +22,7 @@ export default function FrontPage() {
         return <>
             <header className="frontPageHeader">
                 <div className="">
-                    <h2>Tanulj meg fotózni! 📷</h2>
+                    <h2>Tanulj meg fotózni!</h2>
                     <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak.<br/>
                         Csak egy fényképezőgépre vagy mobilra van szükséged.
                     </p>
