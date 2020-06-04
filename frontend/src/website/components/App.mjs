@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
-import {BrowserRouter, Switch, Route} from '../../web_modules/react-router-dom.js';
+import {BrowserRouter, Switch, Route, Redirect} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 
@@ -14,7 +14,7 @@ import AboutPage from '../../about/components/AboutPage.mjs';
 import FaqPage from '../../faq/components/FaqPage.mjs';
 import ContactPage from '../../contact/components/ContactPage.mjs';
 import UploadPage from '../../upload/components/UploadPage.mjs';
-import ChallengesPage from '../../challenges/components/ChallengesPage.mjs';
+import CoursePage from '../../challenges/components/CoursePage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
@@ -23,13 +23,15 @@ import PhotatoMessagesPage from '../../admin/messages/components/PhotatoMessages
 import PhotatoMessagePage from '../../admin/messages/components/PhotatoMessagePage.mjs';
 import SitemapGeneratorPage from '../../admin/sitemap-generator/components/SitemapGeneratorPage.mjs';
 import AdminPage from '../../admin/components/AdminPage.mjs';
+import PermissionHelper from '../../auth/PermissionHelper.mjs';
 
 const photoUploader = new PhotoUploader();
+const permissionHelper = new PermissionHelper();
 
 export default function App() {
     const {areTranslationsLoaded} = useI18n();
     const [areFontsReady, setFontsReady] = useState(false);
-    const {loading: isAuthLoading} = useAuth0();
+    const {loading: isAuthLoading, isAuthenticated, user} = useAuth0();
 
     useEffect(() => {
         async function checkFontsLoaded() {
@@ -42,51 +44,63 @@ export default function App() {
         checkFontsLoaded();
     }, []);
 
+    const publicRoutes = [
+        <Route path='/' exact={true}>
+            <FrontPage/>
+        </Route>,
+        <Route path='/about'>
+            <AboutPage/>
+        </Route>,
+        <Route path='/faq'>
+            <FaqPage/>
+        </Route>,
+        <Route path='/contact'>
+            <ContactPage/>
+        </Route>,
+        <Route path='/materials'>
+            <MaterialsPage/>
+        </Route>,
+        <Route path='/external-article/:slug'>
+            <MaterialPage/>
+        </Route>,
+    ];
+
+    const memberRoutes = [
+        <Route path='/upload'>
+            <UploadPage photoUploader={photoUploader}/>
+        </Route>,
+        <Route path='/course' exact={true}>
+            <CoursePage/>
+        </Route>,
+        <Route path='/challenges/:weekIndex'>
+            <ChallengePage/>
+        </Route>,
+    ];
+
+    const adminRoutes = [
+        <Route path='/admin' exact={true}>
+            <AdminPage/>
+        </Route>,
+        <Route path='/admin/messages'>
+            <PhotatoMessagesPage/>
+        </Route>,
+        <Route path='/admin/message/:slug'>
+            <PhotatoMessagePage/>
+        </Route>,
+        <Route path='/admin/sitemap-generator'>
+            <SitemapGeneratorPage/>
+        </Route>,
+    ];
+
     return areTranslationsLoaded && areFontsReady && !isAuthLoading
         ?
         <BrowserRouter basename='/'>
             <NavigationBar/>
             <main>
                 <Switch>
-                    <Route path='/' exact={true}>
-                        <FrontPage/>
-                    </Route>
-                    <Route path='/about'>
-                        <AboutPage/>
-                    </Route>
-                    <Route path='/faq'>
-                        <FaqPage/>
-                    </Route>
-                    <Route path='/contact'>
-                        <ContactPage/>
-                    </Route>
-                    <Route path='/upload'>
-                        <UploadPage photoUploader={photoUploader}/>
-                    </Route>
-                    <Route path='/challenges' exact={true}>
-                        <ChallengesPage/>
-                    </Route>
-                    <Route path='/challenges/:weekIndex'>
-                        <ChallengePage/>
-                    </Route>
-                    <Route path='/materials'>
-                        <MaterialsPage/>
-                    </Route>
-                    <Route path='/external-article/:slug'>
-                        <MaterialPage/>
-                    </Route>
-                    <Route path='/admin' exact={true}>
-                        <AdminPage/>
-                    </Route>
-                    <Route path='/admin/messages'>
-                        <PhotatoMessagesPage/>
-                    </Route>
-                    <Route path='/admin/message/:slug'>
-                        <PhotatoMessagePage/>
-                    </Route>
-                    <Route path='/admin/sitemap-generator'>
-                        <SitemapGeneratorPage/>
-                    </Route>
+                    {publicRoutes}
+                    {isAuthenticated ? memberRoutes : <Redirect to="/"/>}
+                    {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes: <Redirect to="/"/>}
                     <Route path='/'>
                         <Error404Page/>
                     </Route>

@@ -18,6 +18,8 @@ export default function CourseDataProvider({children, courseDateConverter}) {
         hasCourseStarted: courseDateConverter.hasCourseStarted(),
         isCourseOver: courseDateConverter.isCourseOver(),
         isCourseRunning: courseDateConverter.isCourseRunning(),
-        getFormattedDeadline: courseDateConverter.getFormattedDeadline.bind(courseDateConverter)
+        courseStartDate: courseDateConverter.getCourseStartDate(),
+        weekCount: courseDateConverter.getWeekCount(),
+        getDeadline: courseDateConverter.getDeadline.bind(courseDateConverter),
     }}>{children}</CourseDataContext.Provider>;
 }

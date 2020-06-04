@@ -1,12 +1,13 @@
 import React from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
+import Twemoji from './Twemoji.mjs';
 
 export default function Footer() {
     const {__} = useI18n();
 
     return <footer>
-        <div className='copyright'>{__('Made with ❤️ by the Photato team')}</div>
+        <Twemoji><div className='copyright'>{__('Made with ❤️ by the Photato team')}</div></Twemoji>
         <div className='social'>{[
             <ExternalLink href='https://www.facebook.com/photato12/'
                           className='facebook icon'

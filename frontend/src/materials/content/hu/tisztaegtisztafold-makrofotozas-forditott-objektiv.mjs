@@ -24,7 +24,7 @@ export function getMetadata() {
  * @returns {React.ReactElement}
  */
 export default function Article() {
-    // noinspection SpellCheckingInspection (It's in Hungarian.)
+    // noinspection SpellCheckingInspection,HtmlUnknownAnchorTarget (It's in Hungarian.)
     return <>
         <p className="note">
             <strong>Csíkos István</strong> fotóival először a facebookon találkoztam. Hihetetlen világot tárt a szemem elé, és a képekhez fűzött szövegeiből sugárzott a természet, az Élet szeretete. Úgy éreztem, Ő az az ember, akinek munkássága és szellemisége megérdemli a nagyobb figyelmet. Így megkértem, hogy írjon az általa használt technikáról és szemléletéről a blogon. Fogadd szeretettel. – Mayer Miklós
@@ -53,50 +53,50 @@ export default function Article() {
         <h2>Tartalom</h2>
         <ul>
             <li>
-                <ExternalLink href="#Epitkezes">Építkezés</ExternalLink>
+                <a href="#Epitkezes">Építkezés</a>
             </li>
             <li>
-                <ExternalLink href="#Felepites">Felépítés</ExternalLink>
+                <a href="#Felepites">Felépítés</a>
             </li>
             <li>
-                <ExternalLink href="#Mukodes">Működés</ExternalLink>
+                <a href="#Mukodes">Működés</a>
             </li>
             <li>
-                <ExternalLink href="#Objektivek">Objektívek</ExternalLink>
+                <a href="#Objektivek">Objektívek</a>
             </li>
             <li>
-                <ExternalLink href="#Expozicio_es_vaku_beallitasa">Expozíció és vaku beállítása</ExternalLink>
+                <a href="#Expozicio_es_vaku_beallitasa">Expozíció és vaku beállítása</a>
             </li>
             <li>
-                <ExternalLink href="#Hatranyok">Hátrányok</ExternalLink>
+                <a href="#Hatranyok">Hátrányok</a>
             </li>
             <li>
-                <ExternalLink href="#Fokuszeltolas">Fókuszeltolás</ExternalLink>
+                <a href="#Fokuszeltolas">Fókuszeltolás</a>
                 <ul>
                     <li>
-                        <ExternalLink href="#Pelda_fokusz_eltolasra">Példa fókusz eltolásra</ExternalLink>
+                        <a href="#Pelda_fokusz_eltolasra">Példa fókusz eltolásra</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <ExternalLink href="#A_gyakorlatban">A gyakorlatban</ExternalLink>
+                <a href="#A_gyakorlatban">A gyakorlatban</a>
             </li>
             <li>
-                <ExternalLink href="#Ennyit_a_geprol_beszeljunk_a_lenyegrol8230">Ennyit a gépről, beszéljünk a lényegről…</ExternalLink>
+                <a href="#Ennyit_a_geprol_beszeljunk_a_lenyegrol8230">Ennyit a gépről, beszéljünk a lényegről…</a>
                 <ul>
                     <li>
-                        <ExternalLink href="#Aprocska_vilag">Aprócska világ</ExternalLink>
+                        <a href="#Aprocska_vilag">Aprócska világ</a>
                     </li>
                     <li>
-                        <ExternalLink href="#Az_elet">Az élet</ExternalLink>
+                        <a href="#Az_elet">Az élet</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <ExternalLink href="#Jo_tanacs">Jó tanács</ExternalLink>
+                <a href="#Jo_tanacs">Jó tanács</a>
             </li>
             <li>
-                <ExternalLink href="#Egyeb_forrasok_forditott_objektives_makrofotozas_temaban">Egyéb források fordított objektíves makrófotózás témában</ExternalLink>
+                <a href="#Egyeb_forrasok_forditott_objektives_makrofotozas_temaban">Egyéb források fordított objektíves makrófotózás témában</a>
             </li>
         </ul>
 

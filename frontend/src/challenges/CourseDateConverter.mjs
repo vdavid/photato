@@ -1,5 +1,3 @@
-import {formatDateWithWeekDayAndTime} from '../website/dateTimeHelper.mjs';
-
 export default class CourseDateConverter {
     /**
      * @param {Date} courseStartDate 00:00 of the zeroth day of the course, a Sunday.
@@ -12,13 +10,11 @@ export default class CourseDateConverter {
 
     /**
      * @param {int|string} weekIndex A one-based index of the week. Also handles numbers given as strings, just in case.
-     * @param {string} [localeCode] Default is "en-US".
-     * @returns {string} A fully qualified, printable date.
+     * @returns {Date} The start of the next week, minus one minute.
      */
-    getFormattedDeadline(weekIndex, localeCode = 'en-US') {
+    getDeadline(weekIndex) {
         const ONE_MINUTE = 60 * 1000;
-        const deadline = new Date(this.getStartDateOfWeek(parseInt(weekIndex) + 1) - ONE_MINUTE);
-        return formatDateWithWeekDayAndTime(deadline, localeCode);
+        return new Date(this.getStartDateOfWeek(parseInt(weekIndex) + 1) - ONE_MINUTE);
     }
 
     /**
@@ -37,6 +33,7 @@ export default class CourseDateConverter {
     /**
      * @param {Date} date Usually the current date/time.
      * @returns {number} A one-based index of the course week. The week of the first Monday is the 1st week of the course.
+     *          May return numbers that are larger than the course length. That means the course is over.
      */
     getWeekIndex(date = new Date()) {
         const dayIndex = this.getDayIndexSinceCourseStart(date);
@@ -71,5 +68,13 @@ export default class CourseDateConverter {
 
     isCourseRunning(date = new Date()) {
         return this.hasCourseStarted(date) && !this.isCourseOver(date);
+    }
+
+    getCourseStartDate() {
+        return this._courseStartDate;
+    }
+
+    getWeekCount() {
+        return this._weekCount;
     }
 };

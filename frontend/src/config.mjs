@@ -9,12 +9,13 @@ export const config = {
     },
     course: {
         name: 'hu-3', // TODO: Fake date for testing ↓↓↓
-        title: '2020. őszi Photato tanfolyam',
+        titleWithPhotato: '2020. őszi Photato tanfolyam',
+        titleWithoutPhotato: '2020. őszi tanfolyam',
         startDateTime: new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
             -1 /* -2 if it was daylight saving time, -1 otherwise */)),
         weekCount: 12,
         subscribedStudentCount: 27,
-        signupFormUrl: 'https://bit.ly/2tB1hpR',
+        signUpFormUrl: 'https://bit.ly/2tB1hpR',
         facebookGroupUrl: 'https://bit.ly/2T2E76b',
         timeZone: 'Europe/Budapest',
     },

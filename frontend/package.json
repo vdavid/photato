@@ -36,7 +36,6 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/helper-builder-react-jsx": "^7.9.0",
-    "babel-plugin-transform-react-createelement-to-jsx": "^1.1.0",
     "jest": "^25.4.0",
     "snowpack": "^1.7.1"
   },
@@ -47,8 +46,7 @@
     "webDependencies": [
       "react",
       "react-dom",
-      "react-router-dom",
-      "htm"
+      "react-router-dom"
     ]
   }
 }

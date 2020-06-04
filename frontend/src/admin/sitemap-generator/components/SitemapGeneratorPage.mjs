@@ -1,15 +1,14 @@
-import {config} from '../../../config.mjs';
 import React, {useEffect} from '../../../web_modules/react.js';
 import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
-import {useCourseData} from '../../../challenges/components/CourseDataProvider.mjs';
 import {articleSlugsByLanguageAndByWeek} from '../../../materials/external-articles-repository.mjs';
 
 export default function SitemapGeneratorPage() {
     const {__} = useI18n();
     useEffect(() => {document.title = __('Sitemap generator') + ' - Photato Admin';}, []);
 
-    const pageInfosWithRelativeUrls = [...getPublicStaticPageInfos(), ...getChallengePageInfos(), ...getExternalMaterialPageInfos()];
-    const pageInfosWithAbsoluteUrls = pageInfosWithRelativeUrls.map(pageInfo => ({...pageInfo, url: config.baseUrl + pageInfo.relativeUrl}));
+    const pageInfosWithRelativeUrls = [...getPublicStaticPageInfos(), ...getExternalMaterialPageInfos()];
+    const pageInfosWithAbsoluteUrls
+        = pageInfosWithRelativeUrls.map(pageInfo => ({...pageInfo, url: 'https://photato.eu' + pageInfo.relativeUrl}));
 
     const sitemapItemStrings = pageInfosWithAbsoluteUrls.map(getSitemapItemString);
     const sitemap=sitemapItemStrings.join('\n\n');
@@ -27,17 +26,8 @@ export default function SitemapGeneratorPage() {
             {relativeUrl: '/about'},
             {relativeUrl: '/faq'},
             {relativeUrl: '/contact'},
-            {relativeUrl: '/upload'},
-            {relativeUrl: '/challenges'},
             {relativeUrl: '/materials'},
         ];
-    }
-
-    function getChallengePageInfos() {
-        const weekCount = config.course.weekCount;
-        const {currentWeekIndex} = useCourseData();
-        const weekIndexes = Array.from(Array(Math.min(currentWeekIndex, weekCount)), (value, key) => key + 1);
-        return weekIndexes.map(weekIndex => ({relativeUrl:'/challenges/' + weekIndex}));
     }
 
     function getExternalMaterialPageInfos() {

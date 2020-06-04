@@ -30,7 +30,9 @@ export default function MaterialPage() {
 
     return article.isLoaded ?
         <MaterialContextProvider metadata={article.metadata}>
-            <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            </p>
             <article>
                 <header>
                     <h1>{article.metadata.title}</h1>
@@ -39,10 +41,14 @@ export default function MaterialPage() {
                 </header>
                 <article.component/>
             </article>
-            <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            </p>
         </MaterialContextProvider>
         : <>
             {__('Loading article...')}
-            <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            <p>
+                <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
+            </p>
         </>;
 }

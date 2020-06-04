@@ -1,11 +1,9 @@
 import React from '../../web_modules/react.js';
+import PhotatoEmoji from '../../website/components/PhotatoEmoji.mjs';
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const siteHeaderAndFooterTranslations = {
     'Photato': {translation: 'Photato'},
-    '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
-    'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
-    'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
     'Made with ❤️ by the Photato team': {translation: 'Készítette szeretettel ❤️ a Photato csapat'},
     'Home': {translation: 'Főoldal'},
     'About': {translation: 'Rólunk'},
@@ -42,10 +40,17 @@ const challengeTranslations = {
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const challengePageTranslations = {
-    'Back to the challenge list': {translation: 'Vissza a feladatok listájához'},
+    'Back to the course page': {translation: 'Vissza a tanfolyam oldalára'},
     'Current challenge': {translation: 'E heti feladat'},
     'Loading challenge...': {translation: 'Töltjük a feladatot...'},
     'Sorry, this challenge hasn’t been translated to your language yet.': {translation: 'Ezt a feladatot sajnos még nem fordítottuk le a te nyelvedre.'},
+    'This week’s challenge': {translation: 'E heti feladat'},
+    'Deadline to submit your shot': {translation: 'Beküldési határidő'},
+    'Previous challenges': {translation: 'Korábbi feladatok'},
+    'The course started {approximateWeeksAgo} ({exactDate}).': {translation: 'A tanfolyam {approximateWeeksAgo} ({exactDate}) kezdődött.'},
+    'about {weekIndex} weeks ago': {translation: 'kb. {weekIndex} hete'},
+    'recently': {translation: 'nemrég'},
+    'Unfortunately, it’s already over. But you can sign up to the next course if you still want to study photography.': {translation: 'Sajnos azóta vége lett. Viszont feliratkozhatsz a következő tanfolyamra, ha még mindig szívesen tanulnál fotózni.'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
@@ -64,12 +69,13 @@ const articlePageTranslations = {
             Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.</>, format: 'jsx'
     },
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
-    '🥔 cached version': {translation: '🥔 mentett verzió'},
+    'Photato cached version': {translation: <><PhotatoEmoji /> mentett verzió</>, format: 'jsx'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
 const uploadPageTranslations = {
     'Upload your weekly photo': {translation: 'Töltsd fel a heti fotód'},
+    'Upload your best photo': {translation: 'Töltsd fel a legjobb fotód'},
     'Week #{weekIndex}': {translation: '{weekIndex}. hét'},
     'Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt.\nNe feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
     'Upload': {translation: 'Feltöltés'},
@@ -93,6 +99,7 @@ const uploadPageTranslations = {
     'Loading...': {translation: 'Betöltés folyamatban...'},
 };
 
+// noinspection SpellCheckingInspection
 const adminTranslations = {
     'Messages': {translation: 'Üzenetek'},
     'Re-download all messages': {translation: 'Újratöltés a szerverről'},
@@ -100,15 +107,21 @@ const adminTranslations = {
     'Back to the list of messages': {translation: 'Vissza az üzenetek listájához'},
 };
 
+// noinspection SpellCheckingInspection
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
-    'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
+    'Sign up for the next course': {translation: 'Feliratkozom a következő tanfolyamra'},
+    'Sign up for the next free course': {translation: 'Feliratkozom a következő ingyenes tanfolyamra'},
     /* Loading page */
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
     /* 404 page */
     '404 error': {translation: '404-es hiba'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
+    /* Front page */
+    'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
+    'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
+    '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from '../../web_modules/react.js';
 import {NavLink} from '../../web_modules/react-router-dom.js';
+import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import NavLinkMenuItemWithIcon from './NavLinkMenuItemWithIcon.mjs';
@@ -41,17 +42,15 @@ export default function NavigationBar() {
             setIsMenuVisible(false);
         }}>
             <NavLinkMenuItemWithIcon to='/' exact={true} activeClassName='active' iconName='home'>{__('Home')}</NavLinkMenuItemWithIcon>
-            <NavLinkMenuItemWithIcon to='/about' activeClassName='active' iconName='help'>{__('About')}</NavLinkMenuItemWithIcon>
+            <NavLinkMenuItemWithIcon to='/about' activeClassName='active' iconName='face'>{__('About')}</NavLinkMenuItemWithIcon>
             <NavLinkMenuItemWithIcon to='/faq' activeClassName='active' iconName='help'>{__('FAQ')}</NavLinkMenuItemWithIcon>
-            <NavLinkMenuItemWithIcon to='/contact' activeClassName='active' iconName='help'>{__('Contact')}</NavLinkMenuItemWithIcon>
+            <NavLinkMenuItemWithIcon to='/contact' activeClassName='active' iconName='alternate_email'>{__('Contact')}</NavLinkMenuItemWithIcon>
             {isAuthenticated ?
-            <NavLinkMenuItemWithIcon to='/upload' activeClassName='active' iconName='cloud_upload'>{__('Photo upload')}</NavLinkMenuItemWithIcon> : null}
-            {isAuthenticated ?
-            <NavLinkMenuItemWithIcon to='/challenges' activeClassName='active' iconName='casino'>{__('Challenges')}</NavLinkMenuItemWithIcon> : null}
+            <NavLinkMenuItemWithIcon to='/course' activeClassName='active' iconName='casino'>{config.course.titleWithoutPhotato}</NavLinkMenuItemWithIcon> : null}
             <NavLinkMenuItemWithIcon to='/materials' activeClassName='active' iconName='book'>{__('Materials')}</NavLinkMenuItemWithIcon>
-            {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/admin' activeClassName='active' iconName='book'>{__('Admin')}</NavLinkMenuItemWithIcon> : null}
+            {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/admin' activeClassName='active' iconName='lock'>{__('Admin')}</NavLinkMenuItemWithIcon> : null}
             {isAuthenticated ?
-            <div className='menuItem'>
+            <div className='menuItem separator'>
                 <span className='material-icons'/>
                 <hr/>
             </div> : null}
@@ -78,8 +77,9 @@ export default function NavigationBar() {
 
     // noinspection HtmlUnknownTarget
     return <header role='navigation'>
-        <NavLink to='/' className='logo' title='Photato'><img src='/website/potato-with-camera-logo.svg' alt="logo"/>
-            <div className='siteTitle'>Photato</div>
+        <NavLink to='/' exact={true} className='logoContainer' title='Photato'>
+            <img src='/website/aperture-logo.svg' alt="logo" className="logo" />
+            <img src="/website/photato-logo-text.svg" alt="Photato" className="siteTitle" />
         </NavLink>{createMainMenu()}
         <div className='spacer'/>
         {!isAuthenticated && <a href='#' className='signInLink' onClick={handleSignIn}>{__('Sign in')}</a>}
