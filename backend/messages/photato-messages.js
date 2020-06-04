@@ -1,3 +1,6 @@
+// TODO: Replace *|FNAME|* with {firstName} in emails!
+// TODO: Add [Photato] to email subjects
+
 /**
  * @typedef {Object} PhotatoMessage
  * @property {string} slug Unique identifier of the message
@@ -17,7 +20,6 @@
 // {signUpUrl} → https://bit.ly/2tB1hpR (plain text)
 // {facebookGroupUrl} → bit.ly link (plain text)
 // {courseTitle} → e.g. "2020. őszi Photato tanfolyam"
-// https://... → keep as plain text in Facebook posts; replace with <a> tag in emails
 // {firstName} → Student's first name
 
 const emailAudiences = {
