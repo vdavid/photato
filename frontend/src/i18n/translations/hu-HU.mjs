@@ -110,7 +110,8 @@ const adminTranslations = {
 // noinspection SpellCheckingInspection
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
-    'Sign up for the next course': {translation: 'Feliratkozás a következő tanfolyamra'},
+    'Sign up for the next course': {translation: 'Feliratkozom a következő tanfolyamra'},
+    'Sign up for the next free course': {translation: 'Feliratkozom a következő ingyenes tanfolyamra'},
     /* Loading page */
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
     /* 404 page */
