@@ -16,6 +16,8 @@ export const config = {
         weekCount: 12,
         subscribedStudentCount: 27,
         signUpFormUrl: 'https://bit.ly/2tB1hpR',
+        midTimeSurveyUrl: '', // TODO: Add URL
+        finalSurveyUrl: '', // TODO: Add URL
         facebookGroupUrl: 'https://bit.ly/2T2E76b',
         timeZone: 'Europe/Budapest',
     },
