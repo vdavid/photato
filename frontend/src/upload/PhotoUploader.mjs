@@ -27,7 +27,7 @@ export default class PhotoUploader {
      * @param {string} url
      * @param {File} file
      * @param {function(number): void} setUploadProgressCallback
-     * @returns {Promise<unknown>} TODO: Figure out the type
+     * @returns {Promise<ProgressEvent>}
      */
     uploadFile(url, file, setUploadProgressCallback) {
         return new Promise((resolve, reject) => {
