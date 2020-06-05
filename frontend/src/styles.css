@@ -31,6 +31,7 @@
     --navbar-color: black;
     --dark-primary-text-color: #000; /* BLACK */
     --error-color: #ff5722; /* DEEP ORANGE 500 */
+    --success-color: #2e7d32; /* GREEN 800 */
     --accent-color: #ff5722; /* DEEP ORANGE 500 */
     --light-disabled-text-color: #fafafa; /* GREY 50 */
     --divider-color: #bdbdbd; /* GREY 400 */
@@ -282,8 +283,9 @@ p.frontPageMainCallToAction { text-align:center; }
 #fileUpload .uploadButton { margin-top: 1em; }
 
 #fileUpload .uploadStatus { margin-top: 1em; }
-#fileUpload .uploadStatus.error { color: var(--error-color); }
 #fileUpload .uploadStatus div { margin-top: 1em; }
+#fileUpload .uploadStatus.error div { color: var(--error-color); }
+#fileUpload .uploadStatus.success div { border-radius: 3px; padding: 20px; background: var(--success-color); }
 @media screen and (max-width: 920px) {
     .imageFileSelector .helpText > * { padding: 5%; }
 }

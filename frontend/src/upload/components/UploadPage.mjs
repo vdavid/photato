@@ -142,6 +142,9 @@ export default function UploadPage({photoUploader}) {
         : (isCourseOver
             ? __('The course has already ended. You can’t upload pics anymore. ☹')
             : __('The course has not started. You can upload your photos soon! 😊'));
+    const canStartUpload = isAuthenticated
+        && (selectionStatus === selectionStatuses.readyToUpload)
+        && (uploadStatus !== uploadStatuses.uploading);
 
     return <div id='fileUpload'>
         <h1>{__('Photo upload')}</h1>
@@ -149,30 +152,33 @@ export default function UploadPage({photoUploader}) {
         {isCourseRunning &&
         <h2>{__(weeklyChallengeTitles[currentWeekIndex - 1])}</h2>}
         <p className='preWrap'>{courseStatusHelpText}</p>
-        {isCourseRunning && [
+        {isCourseRunning &&
+        <>
             <FileSelectorWithPreview onFileSelected={handleFileSelected}
                                      onFileRemoved={handleFileSelectionRemoved}
                                      isDisabled={!isAuthenticated || uploadStatus === uploadStatuses.uploading}
                                      selectedFile={selectedFile}
-                                     selectedFilePreviewUrl={selectedFilePreviewUrl}/>,
+                                     selectedFilePreviewUrl={selectedFilePreviewUrl}/>
             <PhotoTitleInput title={title}
                              isDisabled={uploadStatus === uploadStatuses.uploading}
-                             onChange={newTitle => setTitle(newTitle)}/>, uploadStatus === uploadStatuses.notStarted &&
+                             onChange={newTitle => setTitle(newTitle)}/>
+            {uploadStatus === uploadStatuses.notStarted &&
             <div className={'selectionStatus' + (selectionStatus.isError ? ' error' : '')}>
                 {getSelectionStatusText(selectionStatus)}
-            </div>,
-            <div className='uploadButton'>
-                <button onClick={uploadSelectedFile}
-                        disabled={!isAuthenticated || selectionStatus !== selectionStatuses.readyToUpload}>
-                    {__('Upload')}
-                </button>
-            </div>,
-            <div className={'uploadStatus' + (selectionStatus.isError ? ' error' : '')}>
+            </div>}
+            <div className={'uploadStatus' + (selectionStatus.isError ? ' error' : (uploadStatus === uploadStatuses.uploadDone ? ' success' : ''))}>
                 {[uploadStatuses.uploading, uploadStatuses.uploadDone, uploadStatuses.uploadFailed].includes(uploadStatus) &&
                 <progress value={uploadProgress * 100} max={100}/>}
                 <div>
                     {getUploadStatusText(uploadStatus)}
                 </div>
-            </div>]}
+            </div>
+            <div className='uploadButton'>
+                <button onClick={uploadSelectedFile}
+                        disabled={!canStartUpload}>
+                    {__('Upload')}
+                </button>
+            </div>
+        </>}
     </div>;
 }
