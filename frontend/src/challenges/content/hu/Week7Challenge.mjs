@@ -82,8 +82,6 @@ export default function Week7Challenge({formattedDeadline}) {
 
 <p>A hosszú záridős képeket pedig <PhotoUploadLink label="itt" /> várjuk!</p>
 
-        <p>TODO</p>
-
 <p>Jó fotózást,</p>
 
 <p>--<br />
