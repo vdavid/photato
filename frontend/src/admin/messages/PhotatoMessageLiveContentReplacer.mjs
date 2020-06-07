@@ -31,6 +31,8 @@ export default class PhotatoMessageLiveContentReplacer {
             .replace(/{courseTitle}/g, this._courseTitle)
             .replace(/{firstName}/g, '*|FNAME|*')
             .replace(/{uploadUrl}/g, config.baseUrl)
-            .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl);
+            .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl)
+            .replace(/{finalSurveyUrl}/g, config.course.finalSurveyUrl)
+            .replace(/{ownArticleBaseUrl}/g, config.baseUrl + '/article');
     }
 }
