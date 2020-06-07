@@ -1,4 +1,5 @@
 import React from '../../../web_modules/react.js';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -30,6 +31,7 @@ export default function Article() {
             <li><strong>Manuális fókusz:</strong> A legtöbb fényképezőgépen ki lehet kapcsolni az automata fókuszt és kézzel beállítani, hogy mi legyen éles. Néhány helyzetben ez a nyerő: a fókuszálás időbe telik, tipikusan 0.3-0.8 másodpercbe. Ez gyorsan mozgó fotótéma esetében (pl. majmok) túl sok lehet. Ezért, ha tudod előre, hogy milyen távolságban lesz a fotótémád, beállíthatod a manuális fókuszt előre, és innentől csak kattogtathatsz. A képek így is sokkal gyorsabban fognak elkészülni, mint autofókusz esetén.</li>
             <li><strong>Mobillal:</strong> Ha mobillal fotózol, a legtöbb kamera appban ha rápöttyintesz a képernyőre a kis virsli ujjaddal, a kamera ráélesít a képnek arra a részére, amit megérintettél.</li>
         </ol>
-        <!-- TODO: Add link here! (animals) -->
+
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/article/allat-noveny-fotozas-tippek'}>Állat- és növényfotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }

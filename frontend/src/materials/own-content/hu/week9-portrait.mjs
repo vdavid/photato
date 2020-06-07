@@ -1,6 +1,7 @@
 import React from '../../../web_modules/react.js';
 import ExternalLink from '../../components/ExternalLink.mjs';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -14,6 +15,7 @@ export function getMetadata() {
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
+        unlockWeekIndex: 9,
     };
 }
 
@@ -24,7 +26,8 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <!-- TODO: Add link here! (fov) -->
+        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a portréidon, ajánljuk elolvasásra a <a href={config.baseUrl + '/article/latoszog-gyujtotavolsag'}>Látószög, gyújtótávolság</a> cikkünket, hogy biztosan jó objektívet használ, és ne legyen senkinek a valóságosnál nagyobb orra vagy laposabb arca a képeiden. 😊</p>
+
         <p><strong>Néhány praktikus tanács portréfotózáshoz:</strong></p>
         <ol>
             <li><strong>Válassz helyszínt.</strong> Zárt térben, mesterséges fénynél van a legtöbb lehetőséged beállítani a képet, de végső soron a kreativitásodra (és gyakran a véletlenre) van bízva, hogy hol fotózol.</li>

@@ -1,5 +1,6 @@
 import React from '../../../web_modules/react.js';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -13,6 +14,7 @@ export function getMetadata() {
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
+        unlockWeekIndex: 8,
     };
 }
 
@@ -23,9 +25,9 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <!-- TODO: Add link here! (white balance) -->
+        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a csendélet fotódon, ajánljuk elolvasásra a <a href={config.baseUrl + '/article/feheregyensuly'}>fehéregyensúlyról</a> szóló cikkünket, hogy biztosan ne legyenek túl sárgák vagy hidegek a képeid.</p>
 
-        <p><strong>Néhány tipp a csendélethez</strong></p>
+        <h2>Néhány tipp a csendélethez</h2>
         <p>A csendélet igen komplex feladat tud lenni, de egyben kellemesen ráérős is, mert a fotómodellek garantáltan nem tűnnek/másznak/fáradnak el. A tippek:</p>
         <ol>
             <li><strong>Válaszd ki a témát.</strong> Mi az, ami érdekes neked, és miért? Mit akarsz mondani a képpel? Lehet, hogy rögtön rátalálsz a témádra a lakásodban vagy az utcán. De lehet, hogy keresgélned kell, vagy akár szobrászkodnod, barkácsolnod, festened érdemes hozzá.</li>
@@ -42,16 +44,27 @@ export default function Article() {
                 </ul>
             </li>
         </ol>
-        <p><strong>Linkek további infókra, tippekre</strong></p>
+
+        <h2>Linkek további infókra, tippekre</h2>
         <ul>
             <li>10 remek tipp <ExternalLink href="https://photography.tutsplus.com/hu/tutorials/10-tips-to-get-started-with-still-life-photography--photo-8278">a csendélet-fotózás elkezdéséhez</ExternalLink></li>
             <li>A komponálási technikákról: <ExternalLink href="https://tisztaegtisztafold.hu/komponalas-geometria/">6 komponálási és geometriai tipp</ExternalLink></li>
         </ul>
-        <p><strong>Ötletek, variációk</strong></p>
+
+        <h2>Ötletek, variációk</h2>
         <ul>
             <li>Gyűjtemények: <ExternalLink href="https://hu.pinterest.com/pin/424464333613794639/">egyszínű dolgok</ExternalLink>, egy témához kapcsolódó tárgyak összerendezve</li>
             <li><ExternalLink href="https://hu.pinterest.com/pin/439171401157788730/">Lebegő tárgyak</ExternalLink></li>
         </ul>
-        <p><strong>Inspiráció:</strong> <ExternalLink href="https://hu.pinterest.com/search/pins/?q=still%20life%20photography">Pinterest csendéletek</ExternalLink> | <ExternalLink href="https://www.pexels.com/search/still%20life/">Pexels</ExternalLink> | Mobile Photo Awards épületfotó győztesek: <ExternalLink href="https://mobilephotoawards.com/3rd-annual-mobile-photography-awards-winners-honorable-mentions/">2013</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/still-life-2014-mpa-results/">2014</ExternalLink> <ExternalLink href="https://mobilephotoawards.com/still-life/">2015</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-6th-annual-mpa/">2016</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-7th-annual-mpa/">2017</ExternalLink></p>
+
+        <h2>Inspiráció</h2>
+        <ul>
+            <li><ExternalLink href="https://hu.pinterest.com/search/pins/?q=still%20life%20photography">Pinterest csendéletek</ExternalLink></li>
+            <li><ExternalLink href="https://www.pexels.com/search/still%20life/">Pexels</ExternalLink></li>
+            <li>Mobile Photo Awards épületfotó győztesek: <ExternalLink href="https://mobilephotoawards.com/3rd-annual-mobile-photography-awards-winners-honorable-mentions/">2013</ExternalLink></li>
+            <li><ExternalLink href="https://mobilephotoawards.com/still-life-2014-mpa-results/">2014</ExternalLink> <ExternalLink href="https://mobilephotoawards.com/still-life/">2015</ExternalLink></li>
+            <li><ExternalLink href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-6th-annual-mpa/">2016</ExternalLink></li>
+            <li><ExternalLink href="https://mobilephotoawards.com/still-life-winner-honorable-mentions-7th-annual-mpa/">2017</ExternalLink></li>
+        </ul>
     </>;
 }

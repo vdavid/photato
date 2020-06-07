@@ -1,6 +1,7 @@
 import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -64,6 +65,6 @@ export default function Article() {
 
         <FullWidthLocalImage fileName="horse.jpg" altText="Ló." />
 
-        <!-- TODO: Add link here! (sports) -->
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/article/sportfoto-tippek'}>Sportfotó tippek</a>et a gyakorláshoz.</p>
     </>;
 }

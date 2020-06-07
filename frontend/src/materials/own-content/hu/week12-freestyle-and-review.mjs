@@ -8,11 +8,12 @@ import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalIm
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'freestyle-tippek',
-        title: 'Szabad fotózás tippek',
+        slug: 'freestyle-tippek-es-visszatekintes',
+        title: 'Szabad fotózás tippek, és egy kis visszatekintés',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
+        unlockWeekIndex: 12,
     };
 }
 
@@ -24,7 +25,8 @@ export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
         <FullWidthLocalImage fileName="cranes.jpg" altText="Darvak" />
-        <p>Tekintsünk vissza, mit csináltunk az elmúlt 12 héten:</p>
+        <h2>Visszatekintés</h2>
+        <p>Nézzük meg röviden, mit csináltunk az elmúlt 12 héten:</p>
         <ol>
             <li><strong>Gasztrofotók</strong>kal kezdtünk, átnéztük, hogyan készül egy beállított kép és ejtettünk pár szót a mesterséges megvilágításról.</li>
             <li><strong>Épületfotók</strong>kal folytattuk, gyakoroltuk a kinti fotózást és a kompozíciót. Az érdeklődőbbek megismerkedtek a blende és a záridő fogalmával.</li>
@@ -40,8 +42,8 @@ export default function Article() {
             <li>A héten pedig <strong>szabadon fotózunk</strong>.</li>
         </ol>
         <p>...mert bizony elérkezett a tanfolyam utolsó hete! Reméljük, sokat tanultál, kipróbáltál új dolgokat, közben sikerült néha elhagyni a komfortzónád, és még élvezted is. Most adunk egy utolsó feladatot, és néhány továbblépési lehetőséget, hogy ha szeretnéd, folytathasd a tanulást.</p>
-        <p><strong>A heti feladatról:</strong>
-        </p>
+
+        <h2>A heti feladathoz</h2>
         <p>Most, hogy megtanultál mindent, amit csak a fényképezésről tudni lehet 😉, szabadjára engedünk, fotózz, amit csak szeretnél. A cél, hogy bemutathasd, mit tanultál, és mi jelenleg a kedvenc stílusod. Ha ez segít, gondolj rá úgy, mint egy diplomamunkára. Ha ez inkább frusztrál, akkor ne gondolj rá úgy. 😀 Talán mostanra kialakult benned egy érzés, hogy melyik téma állt legközelebb hozzád az elmúlt hetekben. Vagy valami, amit nem érintettünk, de jó lett volna?</p>
         <p>Pár tipp, hogyan találd meg a témád:</p>
         <ul>

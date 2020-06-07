@@ -1,5 +1,6 @@
 import React from '../../../web_modules/react.js';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -13,6 +14,7 @@ export function getMetadata() {
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
+        unlockWeekIndex: 6,
     };
 }
 
@@ -25,7 +27,7 @@ export default function Article() {
     return <>
         <p>Tehát állatok és növények. A feladatot értelmezd, ahogyan szeretnéd: fotózhatsz csemegeuborkától hangyákon át elefántfókákig bármit. 😊</p>
 
-        <p>Tippek, cikkek:</p>
+        <h2>Tippek, cikkek</h2>
         <ul>
             <li>Ha szép, tiszta az idő, valószínűleg kültéri fotókkal jársz a legjobban. Ha borús az idő, próbálkozz állatok helyett növényekkel.</li>
             <li>Ha a kiskutyád/kiscicád/kismalacod fotóznád: <ExternalLink href="https://www.haziallat.hu/allati-trendi/technika/allatok-fotozasa-trukkok/1897/">haziallat.hu</ExternalLink>
@@ -38,13 +40,15 @@ export default function Article() {
             </li>
         </ul>
 
-        <p>Inspiráció: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=animal%20photography">Pinterest: állatok</ExternalLink>
-            | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=pet%20photography">Pinterest: háziállatok</ExternalLink>
-            | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=plant%20photography">Pinterest: növények</ExternalLink>
-            | <ExternalLink href="https://mobilephotoawards.com/nature-wildlife-winner-honorable-mentions-7th-annual-mpa/">Mobile Photo Awards 2017</ExternalLink>
-            | <ExternalLink href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</ExternalLink>
-        </p>
+        <h2>Inspiráció</h2>
+        <ul>
+            <li><ExternalLink href="https://hu.pinterest.com/search/pins/?q=animal%20photography">Pinterest: állatok</ExternalLink></li>
+            <li><ExternalLink href="https://hu.pinterest.com/search/pins/?q=pet%20photography">Pinterest: háziállatok</ExternalLink></li>
+            <li><ExternalLink href="https://hu.pinterest.com/search/pins/?q=plant%20photography">Pinterest: növények</ExternalLink></li>
+            <li><ExternalLink href="https://mobilephotoawards.com/nature-wildlife-winner-honorable-mentions-7th-annual-mpa/">Mobile Photo Awards 2017</ExternalLink></li>
+            <li><ExternalLink href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</ExternalLink></li>
+        </ul>
 
-        <!-- TODO: Add link here! (focus) -->
+        <p>A szép állatfotók elkészítéséhez nagyon ajánljuk még a <a href={config.baseUrl + '/article/fokuszalas'}>Fókuszálás</a> cikkünket, sok hasznos dolgot tanulhatsz belőle, hogy szebb képeket csinálj.</p>
     </>;
 }

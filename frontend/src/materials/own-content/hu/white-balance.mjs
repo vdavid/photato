@@ -1,6 +1,7 @@
 import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -56,6 +57,6 @@ export default function Article() {
             <li>A fotozasblog.hu cikke szintén <ExternalLink href="https://fotozasblog.hu/feher-egyensuly-beallitas-viszlat-sarga-fotok/">a fehéregyensúlyról</ExternalLink></li>
         </ul>
 
-            <!-- TODO: Add link here! (still life) -->
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/article/csendelet-tippek'}>Csendélet-fotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }

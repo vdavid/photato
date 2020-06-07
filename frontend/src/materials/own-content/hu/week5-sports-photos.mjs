@@ -1,6 +1,7 @@
 import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -14,6 +15,7 @@ export function getMetadata() {
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
+        unlockWeekIndex: 5,
     };
 }
 
@@ -24,11 +26,9 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
+        <h2>Gyorsan mozgó dolgok fotózása fényképezőgéppel</h2>
 
-        <!-- TODO: Add link here! (aperture-shutter-iso) -->
-
-        <p>Ha elolvastad a cikket és kipróbálgattad a beállításokat, állítsd a géped <strong>“záridő-előválasztás” üzemmódba</strong>. Ezt a fényképezőgép típusától függően az “S” (shutter speed) vagy “Tv” (time value) betűk jelölik. Ez a manuális (“M”) módhoz képest azzal könnyíti meg az életed, hogy csak a záridőt és az ISO értéket kell beállítanod, a blendét beállítja magától. Általában ebben a módban érdemes gyorsan mozgó dolgokat fotózni, mert elég pontos beállítást tesz lehetővé viszonylag gyorsan.</p>
+        <p>Ha elolvastad a <a href={config.baseUrl + '/article/blende-zarido-iso'}>Blende, záridő, és ISO érték</a> cikket és kipróbálgattad a beállításokat, állítsd a géped <strong>“záridő-előválasztás” üzemmódba</strong>. Ezt a fényképezőgép típusától függően az “S” (shutter speed) vagy “Tv” (time value) betűk jelölik. Ez a manuális (“M”) módhoz képest azzal könnyíti meg az életed, hogy csak a záridőt és az ISO értéket kell beállítanod, a blendét beállítja magától. Általában ebben a módban érdemes gyorsan mozgó dolgokat fotózni, mert elég pontos beállítást tesz lehetővé viszonylag gyorsan.</p>
 
         <p>Most pedig gondoljuk végül együtt, hogyan érdemes beállítani ezeket az értékeket gyorsan mozgó dolgok fényképezéséhez.</p>
 

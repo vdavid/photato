@@ -1,5 +1,6 @@
 import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
+import {config} from '../../../config.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -50,6 +51,6 @@ export default function Article() {
         <p>Ha tudni akarod, hogy a te gépednél mi az emberi szemnek leginkább megfelelő zoom-beállítás, keresd ki a géped érzékelőjének méretét a gép használati utasításában vagy az interneten, aztán keresd ki az érzékelő-méretednek megfelelő oszlopot az alábbi táblázatban, és nézd meg a “Normal” sorban lévő értéket. Ezzel a gyújtótávolság-beállítással lesz a legtermészetesebb a portréd.</p>
         <FullWidthLocalImage fileName="sensor-size-table.jpg" altText="Szenzorméret táblázat" />
 
-            <!-- TODO: Add link here! (portrait) -->
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/article/portrefotozas-tippek'}>Portréfotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }
