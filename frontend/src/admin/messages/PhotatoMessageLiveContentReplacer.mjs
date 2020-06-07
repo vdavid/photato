@@ -1,3 +1,4 @@
+import {config} from '../../config.mjs';
 import {formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
 
 export default class PhotatoMessageLiveContentReplacer {
@@ -27,6 +28,9 @@ export default class PhotatoMessageLiveContentReplacer {
             .replace(/{signedUpCount}/g, this._signedUpCount.toString())
             .replace(/{signUpUrl}/g, this._signUpUrl)
             .replace(/{facebookGroupUrl}/g, this._facebookGroupUrl)
-            .replace(/{courseTitle}/g, this._courseTitle);
+            .replace(/{courseTitle}/g, this._courseTitle)
+            .replace(/{firstName}/g, '*|FNAME|*')
+            .replace(/{uploadUrl}/g, config.baseUrl)
+            .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl);
     }
 }
