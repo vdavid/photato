@@ -1,8 +1,5 @@
-// TODO: Replace *|FNAME|* with {firstName} in emails!
-// TODO: Add [Photato] to email subjects
 // TODO: Set courseDayIndex everywhere, it's not set yet!
-// TODO: Replace URLs in weekly email texts
-// TODO: Add dynamic links to weekly email texts
+// TODO: Make dates dynamic
 
 /**
  * @typedef {Object} PhotatoMessage
@@ -26,6 +23,8 @@
 // {firstName} → Student's first name
 // {uploadUrl} → https://photato.eu/upload
 // {midTimeSurveyUrl} → The URL
+// {finalSurveyUrl} → The URL
+// {ownArticleBaseUrl} → An URL to the place where all articles are, without locale. Without a trailing slash.
 
 const emailAudiences = {
     graduatedStudents: 'graduatedStudents',
@@ -133,7 +132,7 @@ Szeretnénk kérni, hogy jelentkezzetek be oda is, mivel ott történik majd az 
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
-        subject: '3 nap és jön az első feladat!',
+        subject: '[Photato] 3 nap és jön az első feladat!',
         contentType: 'text/html',
         content: `<p>Kedves {firstName}!</p>
 
@@ -180,7 +179,7 @@ Itt van pl. egy rövid üzenet, amit küldhetsz nekik:
         channel: channels.email,
         audience: emailAudiences.mentors,
         locale: 'hu-HU',
-        subject: 'Mentorkodás',
+        subject: '[Photato] Mentorkodás',
         contentType: 'text/html',
         content: `<p>Sziasztok!</p>
 <p>Ti jelentkeztetek mentornak a következő Photato kurzusra.</p>
@@ -205,9 +204,9 @@ Itt van pl. egy rövid üzenet, amit küldhetsz nekik:
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
-        subject: 'Nulladik nap: felkészülés',
+        subject: '[Photato] Nulladik nap: felkészülés',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
+        content: `<p>Kedves {firstName}!</p>
 <p>Köszönjük, hogy feliratkoztál ingyenes krumplifotós tanfolyamunkra.</p>
 <p>Valójában nem csak krumplikat fogunk fotózni – remélem, megérted, hogy ez csak Neked lenne izgalmas, sok más ember unalmasnak találná. 😀</p>
 <p>Eddig {signedUpCount} feliratkozót számláltunk, ennek kb. ⅔-a fényképezőgéppel jön, ⅓-a mobillal. Ez alapján picit jobban a kamerásokra fogunk koncentrálni, de figyelünk rá, hogy mobillal is érdekes legyen a kurzus.</p>
@@ -254,20 +253,19 @@ Fotózásra fel! 📸
         locale: 'hu-HU',
         subject: '[Photato] Első heti feladat: gasztrofotó',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
-<p>Az első hét témája: <strong>gasztrofotó</strong>!</p>
-<p>A legjobb képedet <a href="https://bit.ly/phhu3w1">itt tudod feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p><img src="https://photato.eu/challenges/illustrations/pizza.jpg" alt="pizza" style="width:100%; max-width:800px;" /></p>
-<p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben azért még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
+<p><img src="https://photato.eu/challenges/illustrations/pizza.jpg" alt="Pizza" style="width:100%; max-width:800px;" /></p>
 
-<p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és március 11. 23:59-ig feltölteni <a href="https://bit.ly/phhu3w1">ezen a linken</a>. A beazonosításhoz fontos, hogy a kép neve az email címed legyen: pl. “krumplipuree12@gmail.com.jpg”.</p>
+<p>Az első héten <strong>ételeket</strong> fogunk fotózni!</p>
 
-<!-- TODO: Add link here! -->
+<p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
 
-<p>Várjuk a képeket <a href="https://bit.ly/phhu3w1">itt</a>! A legjobb beküldött képek díjazásban részesülnek.</p>
+<p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és március 11. 23:59-ig feltölteni <a href="{uploadUrl}">ezen a linken</a>.</p>
+
+<p>Készültünk neked <a href="{ownArticleBaseUrl}/hu/gasztrofoto-tippek">jópár tippel, ötlettel</a> ehhez a témához, ezeket mindenképp <strong><a href="{ownArticleBaseUrl}/hu/gasztrofoto-tippek">olvasd el</a></strong>!</p>
+
+<p><a href="{uploadUrl}">Várjuk a képeket itt</a>! A legjobb beküldött képek díjazásban részesülnek.</p>
 
 <p>Üdv,</p>
 
@@ -311,26 +309,18 @@ A beküldött képek közül közönségszavazással és a mentorok szavazatai a
         locale: 'hu-HU',
         subject: '[Photato] Második hét: épületek',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p><strong>Röviden:</strong></p>
-<p>A második hét témája: <strong>épületfotók</strong>!</p>
+<p><img src="https://photato.eu/challenges/illustrations/taj-mahal.jpg" alt="Taj Mahal" style="width:100%; max-width:800px;" /></p>
+
+<p>A második hét témája az <strong>épületfotózás</strong>!</p>
 <p>Közben gyorsan megtanuljuk, mi a zoom, a blende és a záridő.</p>
-<p>A legjobb képedet <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
+<p>A legjobb képedet holnaptól, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
 
-<p><strong>Hosszabban:</strong></p>
+<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet június 17. 23:59-ig, <a href="{uploadUrl}">itt tudod feltölteni</a>.</p>
+<p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket, ötleteinket az épületfotózáshoz, ezeket <strong><a href="{ownArticleBaseUrl}/hu/epuletfotozas-tippek">itt olvashatod</a></strong>.</p>
 
-    <p><img src="https://photato.eu/challenges/illustrations/taj-mahal.jpg" alt="Taj Mahal" style="width:100%; max-width:800px;" /></p>
-
-<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet június 17. 23:59-ig, <a href="https://bit.ly/phhu3w2">itt tudod feltölteni</a>.</p>
-
-<p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket:</p>
-
-<!-- TODO: Add link here! -->
-
-<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w1">megteheted</a>. 🕚</p>
-
-<p>Az épületes képeket pedig <a href="https://bit.ly/phhu3w2">ide</a> várjuk!</p>
+<p>Ha esetleg még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
@@ -360,7 +350,7 @@ Ha valamiért nem kaptad volna meg az első heti feladatot, pl. mert később je
         channel: channels.email,
         audience: emailAudiences.mentors,
         locale: 'hu-HU',
-        subject: 'Photato galéria kommentelés infók',
+        subject: '[Photato] Galéria kommentelés infók',
         contentType: 'text/html',
         content: `<p>Szia!</p>
 <p>Az imént elkészült és feltöltődött az első hét galériája. A visszajelzések alapján rengeteget dobna a tanulók élményén, ha kapnának véleményeket a képeikre. Mentorként úgy tudsz segíteni, ha végigmész a beérkezett képeken, és lájkolod, amik tetszenek, plusz mindegyik képhez írsz néhány érzést/gondolatot.</p>
@@ -396,7 +386,7 @@ Megérkeztek az első heti beadások!
 - Lájkold a kedvenceidet,
 - Írj bátran konstruktív véleményt a többiek fotóira. Úgy írj, ahogy te is örülnél, hogy írjanak a saját képeidről! 
 - A lájkok sokat segítenek majd eldönteni, hogy melyik fotó nyeri a hetet,
-- Ha gondolod, iratkozz fel a saját képedre, hogy megkapd a kommentekről az értesítést, ezt így teheted meg: http://bit.ly/38r3Jy9  - jobb felül a három pöttyre kattintva, értesítések bekapcsolása.
+- Ha gondolod, iratkozz fel a saját képedre, hogy megkapd a kommentekről az értesítést, ezt így teheted meg: https://bit.ly/38r3Jy9  - jobb felül a három pöttyre kattintva, értesítések bekapcsolása.
 
 Hajrá! 😊`, // TODO: We'll need a link in this message once we have the galleries in the website.
     },
@@ -409,7 +399,7 @@ Hajrá! 😊`, // TODO: We'll need a link in this message once we have the galle
         locale: 'hu-HU',
         subject: '[Photato] Megérkeztek az első fotók a Facebook csoportba!',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
+        content: `<p>Kedves {firstName}!</p>
 <p>Ez egy emlékeztető, hogy ne felejts el csatlakozni a "{courseTitle}" Facebook csoporthoz.</p>
 <p>Ez három dolog miatt hasznos neked:</p>
 <ol>
@@ -443,24 +433,13 @@ Ide jöhet: {uploadUrl}`, // TODO: "The "more than 40" part would love some dyna
         locale: 'hu-HU',
         subject: '[Photato] Harmadik hét: makró',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-
-<p><strong>Röviden:</strong></p>
-
-<p>A harmadik héten egy <strong>makró fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w3">itt tudsz feltölteni</a>.</p>
-
-<p><strong>Hosszabban:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
 
 <p><img src="https://photato.eu/challenges/illustrations/mosquitoes.jpg" alt="Légyott" style="width:100%; max-width:800px;" /></p>
 
-<p>Ezen a héten megtanuljuk, mi az a makró, és hogyan érdemes 5 centiről krumplit fotózni.</p>
-<p>A legjobb képedet június 24. 23:59-ig, <a href="https://bit.ly/phhu3w3">itt tudod feltölteni</a>.</p>
-
-<!-- TODO: Add link here! -->
-
-<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w2">megteheted</a>. 🕚</p>
-
-<p>A makrós képeket pedig <a href="https://bit.ly/phhu3w3">itt</a> várjuk!</p>
+<p>Ezen a héten <strong><a href="{ownArticleBaseUrl}/hu/makrofotozas-tippek">megtanuljuk, mi az a makrózás</a></strong>, és hogyan érdemes 5 centiről krumplit fotózni.</p>
+<p>Hétfőtől egy <strong>makró fotót</strong> várunk tőled, amit <a href="{uploadUrl}">itt tudsz majd feltölteni</a>, június 24. 23:59-ig.</p>
+<p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 <p>--<br />
@@ -513,23 +492,15 @@ a Photato csapata</p>`,
         locale: 'hu-HU',
         subject: '[Photato] Negyedik hét: utcai fotózás',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p>A negyedik héten egy <strong>utcai fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w4">itt tudsz feltölteni</a>.</p>
+<p><img src="https://photato.eu/challenges/illustrations/lomo.jpg" alt="Lomo" style="width:100%; max-width:800px;" /></p>
 
-<p><strong>Hosszabban:</strong></p>
-
-<p><img src="https://photato.eu/challenges/illustrations/logo.jpg" alt="Lomo" style="width:100%; max-width:800px;" /></p>
-
-<p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző két hét képeit, és már a makrók is szépen érkezgetnek. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymás képeire a galériákban.</p>
-
-<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét. A legjobb képedet július 1. 23:59-ig, <a href="https://bit.ly/phhu3w4">itt tudod feltölteni</a>.</p>
-
-
-<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w3">megteheted</a>. 🕚</p>
-
-<p>Az utcai fotókat pedig <a href="https://bit.ly/phhu3w4">itt</a> várjuk!</p>
+<p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző három hét képeit. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymásnak a galériákban.</p>
+<p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét.<br />
+Ehhez <strong><a href="{ownArticleBaseUrl}/hu/utcai-fotozas-tippek">itt van egy csomó tipp, ötlet</a></strong>.</p>
+<p>A legjobb utcai fotódat július 1. 23:59-ig, <a href="{uploadUrl}">itt tudod feltölteni</a>, holnaptól.</p>
+<p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
@@ -573,7 +544,7 @@ Nagyon sok király makrót küldtetek be a múlt héten, köszönjük szépen!
         audience: facebookAudiences.group,
         locale: 'hu-HU',
         contentType: 'text/plain',
-        content: `Még 3 napod van feltölteni az utcai fotóidat itt: {uploadUrl} – ne felejtsd el! 😊`, // TODO
+        content: `Még 3 napod van feltölteni az utcai fotóidat itt: {uploadUrl} – ne felejtsd el! 😊`,
     },
     {
         slug: 'live-event-summer-facebook-group-message',
@@ -602,29 +573,21 @@ Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esem
         locale: 'hu-HU',
         subject: '[Photato] Ötödik hét: mozgó dolgok, sportfotózás',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p><strong>Röviden:</strong></p>
+<p>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból, és <strong>sportfotókat</strong> készítünk.</p>
 
-<ul>
-<li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</li>
-<li>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból.</li>
-<li>Július 4-én (szerdán) 18:00-kor <strong>közös fotózás</strong> lesz a Margitszigeten. <a href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt!</a></li>
-</ul>
+<p>Az elméletet egy külön cikkben foglaltuk neked össze, amit <strong><a href="{ownArticleBaseUrl}/hu/blende-zarido-iso">itt találsz</a></strong> (ezt mindenképp érdemes elolvasnod!), a sportfotózásról, gyorsan mozgó dolgok lefényképezéséről pedig <strong><a href="{ownArticleBaseUrl}/hu/sportfoto-tippek">itt adunk tippeket, ötleteket</a></strong>.</p>
 
-<p><strong>Hosszabban:</strong></p>
+<p><strong>Tipp:</strong> Az elmélet miatt ezen a héten egy picit több időre lesz szükséged, mint az előző hetekben. Azt ajánljuk, még most döntsd el, melyik nap fogsz foglalkozni ezzel kb. 1 órát, és írd be a naptáradba. Ha ezzel megvagy, olvass tovább!</p>
 
-<!-- TODO: Add link here! (aperture-shutter-iso) -->
-<!-- TODO: Add link here! (week5) -->
-
-<p>A legjobb gyorsan mozgó képedet július 8. 23:59-ig, <a href="https://bit.ly/phhu3w5">itt tudod feltölteni</a>.</p>
-
-<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w4">megteheted</a>. 🕚</p>
+<li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled jövő vasárnapig (július 8. 23:59-ig), <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</li>
+<p>Ha még nem küldted be a múlt heti (utcai fotós) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
 <p>--<br />
-a Photato csapata</p>`, // TODO: Make Margitsziget stuff optional, or remove from here
+a Photato csapata</p>`,
     },
     {
         slug: '5th-challenge-facebook-group-message',
@@ -680,20 +643,17 @@ Még 2 napod van feltölteni itt: {uploadUrl}`,
         locale: 'hu-HU',
         subject: '[Photato] Hatodik hét: állatok és növények',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*,</p>
-<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="https://bit.ly/phhu3w6">Itt tudod feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
-<p><img src="https://photato.eu/challenges/illustrations/jellyfish.jpg" alt="Medúza." style="width:100%; max-width:800px;" /></p>
-<p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, csak a fókuszáláshoz adunk pár egyszerű tippet. 😊</p>
+        content: `<p>Kedves {firstName},</p>
 
-<p>A legjobb képedet július 15. 23:59-ig, <a href="https://bit.ly/phhu3w6">itt tudod feltölteni</a>.</p>
+<p><img src="https://photato.eu/challenges/illustrations/jellyfish.jpg" alt="Medúza" style="width:100%; max-width:800px;" /></p>
 
-        <!-- TODO: Add link here! (focus) -->
-        <!-- TODO: Add link here! (animals) -->
+<p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, de a helyes fókuszáláshoz adunk azért pár extra tippet.</p>
 
-<p>Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w5">megteheted</a>. 🕚</p>
-<p>Az élőlényeket pedig még egyszer, <a href="https://bit.ly/phhu3w6">itt</a> várjuk!</p>
+<p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="{uploadUrl}">Itt tudod feltölteni</a>, hétfőtől.</p>
+<p><strong><a href="{ownArticleBaseUrl}/hu/fokuszalas">A fókuszálásról itt</a></strong> tanulhatsz, <strong><a href="{ownArticleBaseUrl}/hu/allat-noveny-fotozas-tippek">az állatok, növények fotózásához pedig itt</a></strong> adunk tippeket. Jó tanulást, gyakorlást! 😊</p>
+
+<p>A legjobb képedet hétfőtől, július 15. 23:59-ig várjuk. Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
+
 <p>Jó fotózást,</p>
 <p>--<br />
 a Photato csapata</p>`,
@@ -763,23 +723,13 @@ A múlt héten jópár, izgalmasabbnál izgalmasabb mozgásfotót kaptunk. Ha ne
         locale: 'hu-HU',
         subject: '[Photato] Hetedik hét: hosszú záridő, fényfestés',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*,</p>
+        content: `<p>Kedves {firstName},</p>
 
-<p><strong>Röviden:</strong></p>
+<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép, vagy annak bizonyos részei.</p>
 
-<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w7">itt tudsz feltölteni</a>. Kedden közös fotózós esemény lesz, <a href="https://www.facebook.com/events/2265483047079220/">jelentkezz itt!</a> </p>
-
-<p><strong>Hosszabban:</strong></p>
-
-<p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép, vagy annak bizonyos részei. A legjobb képedet július 22. 23:59-ig, <a href="https://bit.ly/phhu3w7">itt tudod feltölteni</a>.</p>
-
-        <!-- TODO: Add link here! -->
-
-<p>Ha még nem küldted be a múlt heti (állatos/növényes) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w6">megteheted</a>. 🕚</p>
-
-<p>A hosszú záridős képeket pedig <a href="https://bit.ly/phhu3w7">itt</a> várjuk!</p>
-
-<p>TODO
+<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amihez <strong><a href="{ownArticleBaseUrl}/hu/hosszu-zarido-tippek">ide gyűjtöttük össze neked</a></strong> a legkirályabb tippeinket.</p>
+<p>A legjobb képedet <a href="{uploadUrl}">itt tudod feltölteni</a>, július 22. 23:59-ig.</p>
+<p>Ha még nem küldted be a múlt heti (állatos/növényes) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
@@ -807,7 +757,7 @@ Ha még nem küldted be az állatos/növényes képedet, ma éjfélig még azt i
         locale: 'hu-HU',
         subject: '[Photato] 3 perces kérdőív',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
+        content: `<p>Kedves {firstName}!</p>
 
 <p>Nagyon örülünk, hogy velünk tartottál az első 6 héten!<br />
 Most szeretnénk egy pillanatra megállni és visszajelzést kapni tőled,<br />
@@ -867,23 +817,22 @@ Ha még nem töltötted ki a kérdőívet, megköszönjük, ha megteszed itt: {m
         locale: 'hu-HU',
         subject: '[Photato] Nyolcadik hét: csendélet',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>csendélet-jellegű fotót</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w8">itt tudsz feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;"><img style="width:100%;" src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/6d431dc0-f4c0-4e8d-a7d3-61c302e71e98.jpg" alt="Jama" /><br />
-© <a href="https://hu.wikipedia.org/wiki/Farkas_Antal_(fot%C3%B3m%C5%B1v%C3%A9sz)">Farkas Antal Jama</a></p>
+<p style="width:100%; max-width:800px; text-align:center; font-size:smaller;">
+    <img style="width:100%;" src="https://photato.eu/challenges/illustrations/jama.jpg" alt="Jama" /><br />
+©   <a href="https://hu.wikipedia.org/wiki/Farkas_Antal_(fot%C3%B3m%C5%B1v%C3%A9sz)">Farkas Antal Jama</a>
+</p>
 
 <p>Az elmúlt 3 hétben sokan kültéren, komfortzónán kívüli helyzetekben fotóztatok dinamikus, nehéz témákat. Tudjuk, hogy ez gyakran trükkös volt, és ezúton gratulálunk a bátor próbálkozásokhoz és a jól sikerült fotókhoz!</p>
 <p>Sunyi módon, miközben a fotózást gyakoroltad ezekben az éles helyzetekben, a fényképezőgép legbonyolultabb beállításai is bejöttek a képbe (záridő, blende és ISO érték), és gyakoroltad őket egy kicsit. A tanulás nehezén ezzel túl vagy, gratulálunk! 😊</p>
 <p>Ezen a héten eggyel békésebb vizekre evezünk és biztosítjuk, hogy a fotótémád ne szaladjon el. Ami pedig az elméletet illeti, egyetlen igazán fontos beállítás van hátra: a <em>fehéregyensúly</em>.</p>
 
-        <!-- TODO: Add link here! (white balance) -->
-        <!-- TODO: Add link here! (still life) -->
+<p>Ezen a héten egy szépen beállított, <strong>csendélet-jellegű fotót</strong> várunk tőled, amit <a href="{uploadUrl}">itt tudsz feltölteni</a>, hétfőtől egészen április 22. 23:59-ig.</p>
 
-<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w7">megteheted</a>. 🕚</p>
-<p>A csendéleteket pedig április 22. 23:59-ig, <a href="https://bit.ly/phhu3w8">itt tudod feltölteni</a>.</p>
+<p>A fehéregyensúlyról <strong><a href="{ownArticleBaseUrl}/hu/feheregyensuly">itt mesélünk neked</a></strong>, a csendélet-fotózás csínjáról-bínjáról pedig <strong><a href="{ownArticleBaseUrl}/hu/csendelet-tippek">itt olvashatsz</a></strong>.</p>
+<p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
+
 <p>Jó fotózást,</p>
 <p>--<br />
 a Photato csapata</p>`,
@@ -936,20 +885,17 @@ Emellett még 2 napod van feltölteni a Csendélet fotódat itt: {uploadUrl} �
         locale: 'hu-HU',
         subject: '[Photato] Kilencedik hét: portréfotózás',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
-<p>A 9. héten egy <strong>portrét</strong> várunk tőled, amit <a href="https://bit.ly/phhu3w9">itt tudsz feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
 
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/d259a400-6e49-485b-8297-a652cd3e05a3.jpg" alt="Bajszos csávó" style="width:100%; max-width:800px;" /></p>
+<p><img src="https://photato.eu/challenges/illustrations/mustache-guy.jpg" alt="Bajszos csávó" style="width:100%; max-width:800px;" /></p>
 
-<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. A legjobb képedet május 6. 23:59-ig, <a href="https://bit.ly/phhu3w9">itt tudod majd feltölteni</a>.</p>
+<p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. .</p>
 
-<!-- TODO: Add link here! (fov) -->
-<!-- TODO: Add link here! (portrait) -->
+<p>A 9. héten tehát <strong>portrét</strong> tanulunk meg fotózni, amihez <strong><a href="{ownArticleBaseUrl}/hu/portrefotozas-tippek">itt vannak a heti tippjeink</a></strong>. Emellett van még egy fontos elméleti anyag, ami szeintünk rendkívül jól fog jönni a portrékhoz, ez pedig a <strong><a href="{ownArticleBaseUrl}/hu/latoszog-gyujtotavolsag">látószög és gyújtótávolság</a></strong> témaköre.</p>
 
-<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w8">megteheted</a>. 🕚</p>
-<p>A portrékat pedig <a href="https://bit.ly/phhu3w9">itt</a> várjuk!</p>
+<p>A legjobb portréfotódat május 6. 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>
+<p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
+
 <p>Jó fotózást,</p>
 <p>--<br />
 a Photato csapata</p>`,
@@ -996,17 +942,15 @@ Megjöttek a csendélet-fotók!`, // TODO: We'll need a link in this message onc
         locale: 'hu-HU',
         subject: '[Photato] 10. hét: eseményfotózás',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
-<p>A 10. héten egy <strong>eseményfotót</strong> várunk tőled, <a href="https://bit.ly/phhu3w10">itt tudod feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
-<p><img src="https://gallery.mailchimp.com/0305d4c45bf55547841755d47/images/2493480e-d958-4ffd-91c3-8e9f1e26d163.jpg" alt="Koncert Buffalo WY" style="width:100%; max-width:800px;" /></p>
-<p>Megint egy könnyedebb, de sokakat érintő témával jövünk: csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben. A legjobb képed május 13. 23:59-ig, <a href="https://bit.ly/phhu3w10">itt tudod majd feltölteni</a>.</p>
+        content: `<p>Kedves {firstName}!</p>
 
-        <!-- TODO: Add link here! -->
+<p><img src="https://photato.eu/challenges/illustrations/concert.jpg" alt="Koncert Buffalo WY" style="width:100%; max-width:800px;" /></p>
 
-<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w9">megteheted</a>. 🕚</p>
-<p>Az eseményfotókat pedig <a href="https://bit.ly/phhu3w10">itt várjuk</a>!</p>
+<p>Ismét egy sokakat érintő témával jövünk: a csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben, akár fényképezőgéppel, akár mobillal.</p>
+
+<p>A témához kapcsolódó tippjeinket <strong><a href="{ownArticleBaseUrl}/hu/esemenyfotozas-tippek">itt találod</a></strong>, a legjobb eseményfotód pedig hétfőtől május 13. 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.
+<p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
+
 <p>Jó fotózást,</p>
 <p>--<br />
 a Photato csapata</p>`,
@@ -1054,19 +998,13 @@ Máris itt a következő galéria: a gyönyörű portrék. Lájkolj, kommentelj 
         locale: 'hu-HU',
         subject: '[Photato] 11. hét: túl a selfie-n',
         contentType: 'text/html',
-        content: `<p>Kedves *|FNAME|*!</p>
-<p><strong>Röviden:</strong></p>
-<p>Ezen a héten egy <strong>önarcképet</strong> várunk tőled. <a href="https://bit.ly/phhu3w11">Itt tudod feltölteni</a>.</p>
-<p><strong>Hosszabban:</strong></p>
+        content: `<p>Kedves {firstName}!</p>
+<p><img src="https://photato.eu/challenges/illustrations/gyuri.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;" /></p>
 
-<p><img src="mailchimp gyuri.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;" /></p>
-
-<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva. A legjobb képedet május 20. 23:59-ig, <a href="https://bit.ly/phhu3w11">itt tudod majd feltölteni</a>.</p>
-
-        <!-- TODO: Add link here! -->
-
-<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w10">megteheted</a>. 🕚</p>
-<p>Az önarcképeket pedig <a href="https://bit.ly/phhu3w11">itt</a> várjuk!</p>
+<p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva.</p>
+<p>Mindenesetre <strong><a href="{ownArticleBaseUrl}/hu/onarckep-tippek">hoztunk hozzá néhány tippet</a></strong>, hogy ebből a témából is ki tudd hozni a legtöbbet.</p>
+<p>A legjobb önarcképed május 20. 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
+<p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
 
@@ -1116,57 +1054,33 @@ Itt vannak a kiváló eseményfotók! 😊 A legtöbb lájkot kapott kép nyeri 
         subject: '[Photato] 12., utolsó hét: freestyle – fotózz szabadon!',
         contentType: 'text/html',
         content: `<body>
-<p>Kedves *|FNAME|*,</p>
-<p><strong>Röviden:</strong>
-</p>
-<ul>
-    <li>Ezen a héten a legjobb <strong><em>bármilyen</em></strong> képedet várjuk tőled. <a href="https://bit.ly/phhu3w12">Itt tudod majd feltölteni</a>, április 5. 23:59-ig.</li>
-    <li>Mindjárt vége a tanfolyamnak, de adunk pár ötletet a folytatáshoz.</li>
-    <li>Hamarosan indul a következő kurzus, ajánld azoknak, akik örülnének neki.</li>
-</ul>
-<p><strong>Hosszabban:</strong></p>
+<p>Kedves {firstName}!</p>
 
-        <!-- TODO: Add link here! -->
+<p>Ezen a héten lazára eresztjük az elvárásokat, és bármilyen képet elfogadunk. Emellett kicsit visszatekintünk az elmúlt 11 hétre, és megnézzük, hogyan érdemes továbbmenned a fotózás-tanulás útján.</p>
 
-<p>A legjobb képedet augusztus 26. vasárnap 23:59-ig, <a href="https://bit.ly/phhu3w12">itt tudod majd feltölteni</a>.</p>
-<p><strong>Arról, hogy hogyan folytasd a tanulást:</strong>
-</p>
-<p>Úgy gondoljuk, ha tetszett ez a 12 hetes tanfolyam, talán szívesen folytatnád a tanulást (most vagy később) hasonló napi/heti kihívásokkal és kurzusokkal. Összeszedtünk neked néhányat a legjobbak közül, viszont sajnos nem találtunk másik magyar nyelvű ingyenes tanfolyamot, így ezek mind vagy fizetősek, vagy angol nyelvűek – de mind színvonalasak. Reméljük, ha folytatnád a tanulást, találsz közülük szimpatikusat.</p>
-<p>Napi/heti kihívások:</p>
-<ul>
-    <li><a href="https://www.flickr.com/groups/365days/">365 önarckép</a> (angol) – egy kis közösség, akik minden nap beküldenek egy önarcképet.</li>
-    <li><a href="https://www.techradar.com/how-to/52-photography-projects-a-great-technique-to-try-every-week-of-the-year">52 heti fotóötlet</a> (angol, de képekkel) – ha a Photato koncepcióját folytatnád.</li>
-    <li><a href="https://digital-photography-school.com/7-photography-projects-to-jumpstart-your-creativity/">7 projekt-ötlet</a> (angol) – 7 további ötlet: napi önarckép; heti fotós séta; 100 fotó ismeretlen emberekről; egy fotó az abc minden betűjére (a „Q” egész trükkös lehet); sok fotó egy témáról; napi fekete-fehér fotó egy hónapig; listaírás és végigfotózás.</li>
-</ul>
-<p>Tanfolyamok:</p>
-<ul>
-    <li><a href="https://www.onlinefototanfolyam.hu/">Online fotótanfolyam</a> (magyar, 19.900 ft) – A 67 leckéből az első 5 ingyen van, így ingyen megnézheted, tetszik-e.</li>
-    <li><a href="https://fotozasblog.hu/">Fotózás lépésről lépésre</a> (magyar, 4.500 ft) – Egy blog, leírásokkal és magyarázatokkal, melyeknek egy része ingyenes, más része egy online megvásárolható digitális könyvben elérhető.</li>
-    <li><a href="https://digital-photography-school.com/">Digital Photography School</a> (angol) – Fotós suli heti tippekkel és hasznos cikkekkel kezdőtől profi szintig.</li>
-    <li><a href="https://gurushots.com/">Gurushots</a> (angol) – Szépen felépített, játékos oldal folyamatos kihívásokkal és akár pénzdíjas versenyekkel.</li>
-</ul>
-<p><strong>A Photatoról:</strong>
-</p>
-<p>Köszi, hogy részt vettél a kurzuson! Mi nagyon élveztük, örültünk a rengeteg pozitív visszajelzésnek és konstruktív kritikának. 😊 Még nem búcsúzkodunk, hiszen még van egy hét, és egy fotókiállítás, amiről hamarosan írunk! Viszont akartunk szólni, hogy hamarosan újabb tanfolyamot indítunk. Sokan írtátok, hogy szívesen ajánlanátok a Photatot a barátaitoknak/kollégáitoknak. Gondoltuk, ez egy remek alkalom, hogy lehetőséget adjunk erre.</p>
+<p>A <strong><a href="{ownArticleBaseUrl}/hu/freestyle-tippek-es-visszatekintes">visszatekintést és tippeket itt találod</a></strong>, a (többnyire ingyenes) továbbtanulási ötleteinkről pedig <strong><a href="{ownArticleBaseUrl}/hu/">ezt a cikket hoztuk neked</a></strong>.</p>
+
+<p>A legjobb <em>bármilyen</em> képedet augusztus 26. vasárnap 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
+
+<p>Köszi, hogy részt vettél a kurzuson! Mi nagyon élveztük, örültünk a rengeteg pozitív visszajelzésnek és konstruktív kritikának. 😊 Még nem búcsúzkodunk, hiszen még van egy hét, és egy fotókiállítás, amiről hamarosan írunk! Viszont akartunk szólni, hogy hamarosan újabb tanfolyamot indítunk. Sokan írtátok, hogy szívesen ajánlanátok a Photatot a barátaitoknak/kollégáitoknak. Gondoltuk, ez egy remek alkalom, hogy segítséget adjunk ehhez.</p>
 <p>Itt van pl. egy rövid üzenet, amit átküldhetsz azoknak, akiket szerinted érdekelhet:</p>
 <hr>
 <p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb kurzusuk!<br />
     Arra gondoltam, téged is érdekelhet a fotózás.<br />
-    Ha így van, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <a href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
+    Ha így van, iratkozz fel itt: <a href="{signUpUrl}">{signUpUrl}</a></em>
 </p>
 <hr>
 <p>Vagy kiírhatsz valami ilyesmit a faladra:</p>
 <hr>
-<p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő kurzusuk, ajánlom mindenkinek! Ha érdekel, lájkold az oldalt és nyomj rá a Feliratkozás gombra itt: <a href="https://bit.ly/12712fbpage">https://bit.ly/12712fbpage</a></em>
+<p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő kurzusuk, ajánlom mindenkinek! Ha érdekel, iratkozz fel itt: <a href="{signUpUrl}">{signUpUrl}</a></em>
 </p>
 <hr>
-<p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <a href="http://bit.ly/12712signupc1">http://bit.ly/12712signupc1</a>
-</p>
 <p>És még egy dolog:</p>
-<p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <a href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</a> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>
+<p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <a href="mailto:photatophotato@gmail.com?subject=Mentor">photatophotato@gmail.com</a> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem jár hatalmas felelősséggel, de nekünk nagy segítség. 😊</p>
 <p>Hát, így. 😊</p>
-<p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is <a href="https://bit.ly/phhu3w11">megteheted</a>. 🕚</p>
-<p>Az e heti képeket pedig <a href="https://bit.ly/phhu3w12">itt</a> várjuk!</p>
+<p>Ha még nem küldted be a múlt heti (önarckép) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
+<p>Az e heti képeket pedig hétfőtől, <a href="{uploadUrl}">ugyanitt</a> várjuk!</p>
+
 <p>Jó fotózást,</p>
 <p>--<br />
 a Photato csapata</p>
@@ -1304,7 +1218,7 @@ A Photato csapata
 <p>A következő kurzusra saját honlappal készülünk, hogy egy kicsit eltávolodjunk a Facebooktól, és hogy kényelmesebb legyen a képfeltöltés meg pár egyéb dolog. Emellett nagyobb hangsúlyt igyekszünk fektetni a visszajelzésekre, mentori kommentekre.</p>
 <p><strong>2 kérés</strong> tőlünk a tanfolyam lezárása kapcsán:</p>
 <ol>
-<li>❓ <strong>Válaszolj pár kérdésünkre:</strong> Készítettünk egy 3 perces <a href="http://bit.ly/2D0ltFJ">kurzus végi kérdőívet</a>. Csak 9 kérdésből áll, és mind opcionális. Légyszi töltsd ki, rengeteget segítesz a visszajelzéseddel, még akkor is, ha egyébként kevésbé voltál aktív a tanfolyamon.</li>
+<li>❓ <strong>Válaszolj pár kérdésünkre:</strong> Készítettünk egy 3 perces <a href="{finalSurveyUrl}">kurzus végi kérdőívet</a>. Csak 9 kérdésből áll, és mind opcionális. Légyszi töltsd ki, rengeteget segítesz a visszajelzéseddel, még akkor is, ha egyébként kevésbé voltál aktív a tanfolyamon.</li>
 <li>🌟 <strong>Értékelj a Facebook oldalon:</strong> Még csak néhány visszajelzésünk van a Facebook oldalon. Ha van 2 perced segíteni nekünk, <a href="https://www.facebook.com/photato12/reviews/">írj egyet te is</a>.</li>
 </ol>
 <p>A továbbiakban legfeljebb évi 4 emailt szeretnénk neked küldeni, az új kurzusokkal kapcsolatban. De ha ez is túl sok, bátran leiratkozhatsz itt lejjebb, örülünk, hogy eddig velünk tartottál. 😊</p>
