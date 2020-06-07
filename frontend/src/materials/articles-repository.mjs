@@ -5,28 +5,45 @@
 export const ownArticleSlugsByLanguageAndByWeek = {
     'hu': {
         1: [ /* Foodie shot */
+            'week1-foodie-shots',
         ],
         2: [ /* Buildings */
+            'week2-building-photography',
         ],
         3: [ /* Close-up photography */
+            'week3-close-up-photography',
         ],
         4: [ /* Street photography */
+            'week4-street-photography',
         ],
         5: [ /* Sports photos / Dynamic shots / Fast objects */
+            'week5-sports-photos',
+            'aperture-shutter-iso',
         ],
         6: [ /* Animals, plants */
+            'week6-animals-plants',
+            'focus',
         ],
         7: [ /* Long exposure, light painting */
+            'week7-long-exposure',
         ],
         8: [ /* Still life */
+            'week8-still-life',
+            'white-balance',
         ],
         9: [ /* Portrait */
+            'week9-portrait',
+            'fov-and-focal-distance',
         ],
         10: [ /* Event: party, concert, group */
+            'week10-event-photography',
         ],
         11: [ /* Self portrait */
+            'week11-self-portrait',
         ],
         12: [ /* Freestyle—take your best shot! */
+            'week12-freestyle-and-review',
+            'after-photato',
         ],
     },
 };
