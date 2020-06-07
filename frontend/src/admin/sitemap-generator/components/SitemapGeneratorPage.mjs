@@ -1,6 +1,6 @@
 import React, {useEffect} from '../../../web_modules/react.js';
 import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
-import {articleSlugsByLanguageAndByWeek} from '../../../materials/external-articles-repository.mjs';
+import {externalArticleSlugsByLanguageAndByWeek} from '../../../materials/external-articles-repository.mjs';
 
 export default function SitemapGeneratorPage() {
     const {__} = useI18n();
@@ -11,7 +11,7 @@ export default function SitemapGeneratorPage() {
         = pageInfosWithRelativeUrls.map(pageInfo => ({...pageInfo, url: 'https://photato.eu' + pageInfo.relativeUrl}));
 
     const sitemapItemStrings = pageInfosWithAbsoluteUrls.map(getSitemapItemString);
-    const sitemap=sitemapItemStrings.join('\n\n');
+    const sitemap = sitemapItemStrings.join('\n\n');
 
     return <>
         <h1>{__('Sitemap generator')}</h1>
@@ -30,13 +30,25 @@ export default function SitemapGeneratorPage() {
         ];
     }
 
+    /**
+     * @returns {{relativeUrl: string, lastModificationDate: Date}[]}
+     */
     function getExternalMaterialPageInfos() {
-        /** @type {Object<int, string[]>[]} */
-        const slugsByWeekForAllLanguages = Object.values(articleSlugsByLanguageAndByWeek);
-        /** @type {string[][][]} */
-        const slugsForAllWeeksForAllLanguages = slugsByWeekForAllLanguages.map(slugsByWeekForOneLanguage => Object.values(slugsByWeekForOneLanguage));
-        const slugs = slugsForAllWeeksForAllLanguages.flat(2);
-        return slugs.map(slug => ({relativeUrl: '/external-article/' + slug, lastModificationDate: new Date('2020-04-28')}));
+        let result = [];
+        for (const [languageCode, slugsByWeek] of Object.entries(externalArticleSlugsByLanguageAndByWeek)) {
+            result = [...result, ...getExternalMaterialPageInfosForOneLocale(languageCode, slugsByWeek)];
+        }
+        return result;
+    }
+
+    /**
+     * @param {string} languageCode E.g. "hu"
+     * @param {{int: string[]}} slugsByWeek
+     * @returns {{relativeUrl: string, lastModificationDate: Date}[]}
+     */
+    function getExternalMaterialPageInfosForOneLocale(languageCode, slugsByWeek) {
+        const allSlugs = Object.values(slugsByWeek).flat();
+        return allSlugs.map(slug => ({relativeUrl: '/' + languageCode + '/external-article/' + slug, lastModificationDate: new Date('2020-05-28')}));
     }
 
     /**
@@ -45,7 +57,7 @@ export default function SitemapGeneratorPage() {
      * @return {string}
      */
     function getSitemapItemString({url, lastModificationDate = new Date()}) {
-return `<url>
+        return `<url>
     <loc>${url}</loc>
     <lastmod>${lastModificationDate.toISOString()}</lastmod>
 </url>`;

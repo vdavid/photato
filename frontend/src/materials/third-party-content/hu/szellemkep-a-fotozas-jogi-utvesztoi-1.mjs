@@ -55,7 +55,7 @@ export default function Article() {
         </p>
         <p>Nagyon kell figyelnünk arra is, hogy a fotózásra adott engedély önmagában még nem jelenti azt, hogy a fénykép felhasználható, nyilvánosságra hozható. Az engedély nem értelmezhető kiterjesztő módon. A pózolás vagy ha az illető hagyja magát fényképezni, ugyanis önmagában csak arra jelent felhatalmazást, hogy elkészítsük a képet, de arra nem, hogy fel is használjuk, nyilvánosságra hozzuk. Ehhez külön engedély szükséges, kivéve abban az esetben, ha a felvételkészítés céljáról, és a későbbi felhasználásról már előzetesen tudott az érintett személy. És amire talán nem is gondolnánk: a nyilvánosságra hozatalhoz szükséges engedélyt célszerű nemcsak egy adott projektre vonatkozóan, hanem minden lehetséges későbbi publikáláshoz is kérni, ugyanis a bírói gyakorlat szerint a korábban adott hozzájárulás alapján felhasznált fénykép későbbi, más célból történő, ám engedély nélküli felhasználása is jogsértés.</p>
         <p>
-            <em>(<NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-2">Következő írásunkban</NavLink> az engedély nélküli fotózás szankcióit mutatjuk be, és megpróbálunk tanácsot adni a helyes eljárásra is.)</em>
+            <em>(<NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-2">Következő írásunkban</NavLink> az engedély nélküli fotózás szankcióit mutatjuk be, és megpróbálunk tanácsot adni a helyes eljárásra is.)</em>
         </p>
     </>;
 }

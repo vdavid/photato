@@ -26,7 +26,7 @@ export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
         <p>
-            <NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">Cikksorozatunk első részében</NavLink> a fotózás jogi szabályozásának alapjait, az engedélyköteles fotók jellemzőit, illetve az engedély megadásának módját jártuk körül. Mostani írásunkban az engedély nélküli fotózás jogkövetkezményeit mutatjuk be, és megpróbálunk útmutatást adni a megfelelő eljárásra is.
+            <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">Cikksorozatunk első részében</NavLink> a fotózás jogi szabályozásának alapjait, az engedélyköteles fotók jellemzőit, illetve az engedély megadásának módját jártuk körül. Mostani írásunkban az engedély nélküli fotózás jogkövetkezményeit mutatjuk be, és megpróbálunk útmutatást adni a megfelelő eljárásra is.
         </p>
 
         <h2>Mi a helyzet, ha nem kérek engedélyt a fotóhoz?</h2>
@@ -53,7 +53,7 @@ export default function Article() {
         <h2>Konklúzió?</h2>
         <p>Végső soron mindenkinek magának kell eldöntenie, hogy fotósként milyen magatartást tanúsít. Ez vérmérséklettől, hozzáállástól, a törvény és azon keresztül mások jogainak tiszteletétől függ, de azt nem szabad elfelejtenünk, hogy a jog nem fog az engedély nélkül alkotó-publikáló fotós pártjára állni, még akkor sem, ha a művészi önkifejezés fontosságára és nemes céljára hivatkoznánk.</p>
         <p>
-            <em>(A tömegrendezvényen részt vevőkről, illetve a nyilvános közszereplés során készített, engedély nélküli fotózásról <NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-3">következő írásunkban</NavLink> olvashatnak.)</em>
+            <em>(A tömegrendezvényen részt vevőkről, illetve a nyilvános közszereplés során készített, engedély nélküli fotózásról <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-3">következő írásunkban</NavLink> olvashatnak.)</em>
         </p>
     </>;
 }

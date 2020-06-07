@@ -1,4 +1,4 @@
-import {articleSlugsByLanguageAndByWeek} from '../external-articles-repository.mjs';
+import {externalArticleSlugsByLanguageAndByWeek} from '../external-articles-repository.mjs';
 import React, {useState, useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
@@ -27,7 +27,7 @@ export default function MaterialsPage() {
     const {getActiveLocaleCode, __} = useI18n();
 
     const languageCode = getActiveLocaleCode().substring(0, 2);
-    const slugsByLanguageAndByWeek = articleSlugsByLanguageAndByWeek[languageCode];
+    const slugsByLanguageAndByWeek = externalArticleSlugsByLanguageAndByWeek[languageCode];
 
     /* Load articles */
 
@@ -80,7 +80,7 @@ export default function MaterialsPage() {
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
         return <li className={metadata.isOriginalUrlBroken ? 'broken' : ''}>
-            [<NavLink to={'/external-article/' + metadata.slug}>{__('Photato cached version')}</NavLink>]&nbsp;
+            [<NavLink to={'/' + languageCode + '/external-article/' + metadata.slug}>{__('Photato cached version')}</NavLink>]&nbsp;
             <ExternalLink href={metadata.originalUrl}
                className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</ExternalLink>
             {metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'}

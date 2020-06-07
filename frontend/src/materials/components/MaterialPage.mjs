@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-import {useParams} from '../../web_modules/react-router-dom.js';
+import {useParams, useRouteMatch} from '../../web_modules/react-router-dom.js';
 
 import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import MaterialContextProvider from './MaterialContextProvider.mjs';
 
 export default function MaterialPage() {
     /* Get page parameters */
-    const {slug} = useParams();
+    const {slug, languageCode} = useParams();
+    const isExternalArticle = useRouteMatch(`/${languageCode}/:folder/${slug}`).params['folder'] === 'external-article';
 
     const {getActiveLocaleCode, __} = useI18n();
-    const languageCode = getActiveLocaleCode().substring(0, 2);
 
     const [article, setArticle] = useState({isLoaded: false, metadata: {}, component: null});
 
@@ -19,7 +19,7 @@ export default function MaterialPage() {
         setArticle({isLoaded: false, metadata: {}, component: null});
 
         async function loadArticle() {
-            const content = await import('../third-party-content/' + languageCode + '/' + slug + '.mjs');
+            const content = await import((`../${isExternalArticle ? 'third-party' : 'own'}-content/${languageCode}/${slug}.mjs`));
             const importedArticle = {isLoaded: true, metadata: content.getMetadata(), component: content.default};
             setArticle(importedArticle);
             document.title = importedArticle.metadata.title + ' - Photato';

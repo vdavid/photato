@@ -25,7 +25,7 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <p>Korábbi cikkeinkben felvázoltuk a fotózás jogi szabályozásának alapjait, a fotóalany hozzájárulásának <NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">követelményrendszerét</NavLink>, illetve bemutattuk az engedély nélküli, <NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-2">jogellenes fotózás jogkövetkezményeit</NavLink> is. Jelen írásunkban azokat az eseteket járjuk körül, amikor a törvény nem követeli meg az érintett személy hozzájárulását sem a fénykép elkészítéséhez, sem annak felhasználásához. Az új Polgári törvénykönyv rendszerében ugyanis a tömegrendezvényen és a nyilvános közszereplés során készített felvételek nem engedélykötelesek.
+        <p>Korábbi cikkeinkben felvázoltuk a fotózás jogi szabályozásának alapjait, a fotóalany hozzájárulásának <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">követelményrendszerét</NavLink>, illetve bemutattuk az engedély nélküli, <NavLink to="/external-article/szellemkep-a-fotozas-jogi-utvesztoi-2">jogellenes fotózás jogkövetkezményeit</NavLink> is. Jelen írásunkban azokat az eseteket járjuk körül, amikor a törvény nem követeli meg az érintett személy hozzájárulását sem a fénykép elkészítéséhez, sem annak felhasználásához. Az új Polgári törvénykönyv rendszerében ugyanis a tömegrendezvényen és a nyilvános közszereplés során készített felvételek nem engedélykötelesek.
         </p>
         <blockquote>
             <p>
