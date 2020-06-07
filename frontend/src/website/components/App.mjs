@@ -60,7 +60,10 @@ export default function App() {
         <Route path='/materials'>
             <MaterialsPage/>
         </Route>,
-        <Route path='/external-article/:slug'>
+        <Route path='/:languageCode/article/:slug'>
+            <MaterialPage/>
+        </Route>,
+        <Route path='/:languageCode/external-article/:slug'>
             <MaterialPage/>
         </Route>,
     ];
