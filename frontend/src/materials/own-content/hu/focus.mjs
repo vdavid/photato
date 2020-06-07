@@ -8,7 +8,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'fokuszalas',
+        slug: 'focus',
         title: 'Fókuszálás',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -32,6 +32,6 @@ export default function Article() {
             <li><strong>Mobillal:</strong> Ha mobillal fotózol, a legtöbb kamera appban ha rápöttyintesz a képernyőre a kis virsli ujjaddal, a kamera ráélesít a képnek arra a részére, amit megérintettél.</li>
         </ol>
 
-        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/article/allat-noveny-fotozas-tippek'}>Állat- és növényfotózás tippek</a>et a gyakorláshoz.</p>
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/hu/article/week6-animals-plants'}>Állat- és növényfotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }

@@ -1,4 +1,4 @@
-import {externalArticleSlugsByLanguageAndByWeek} from '../external-articles-repository.mjs';
+import {externalArticleSlugsByLanguageAndByWeek} from '../articles-repository.mjs';
 import React, {useState, useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';

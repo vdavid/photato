@@ -9,7 +9,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'latoszog-gyujtotavolsag',
+        slug: 'fov-and-focal-distance',
         title: 'Látószög, gyújtótávolság',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -51,6 +51,6 @@ export default function Article() {
         <p>Ha tudni akarod, hogy a te gépednél mi az emberi szemnek leginkább megfelelő zoom-beállítás, keresd ki a géped érzékelőjének méretét a gép használati utasításában vagy az interneten, aztán keresd ki az érzékelő-méretednek megfelelő oszlopot az alábbi táblázatban, és nézd meg a “Normal” sorban lévő értéket. Ezzel a gyújtótávolság-beállítással lesz a legtermészetesebb a portréd.</p>
         <FullWidthLocalImage fileName="sensor-size-table.jpg" altText="Szenzorméret táblázat" />
 
-        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/article/portrefotozas-tippek'}>Portréfotózás tippek</a>et a gyakorláshoz.</p>
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk az <a href={config.baseUrl + '/hu/article/week9-portrait'}>Portréfotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }

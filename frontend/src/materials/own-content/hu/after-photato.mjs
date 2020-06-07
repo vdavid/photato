@@ -9,7 +9,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'hogyan-tovabb-a-photato-utan',
+        slug: 'after-photato',
         title: 'Hogyan tovább a Photato után?',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),

@@ -9,7 +9,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'allat-noveny-fotozas-tippek',
+        slug: 'week6-animals-plants',
         title: 'Állat- és növényfotózás tippek',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -49,6 +49,6 @@ export default function Article() {
             <li><ExternalLink href="https://www.nationalgeographic.com/photography/best-of-2017/best-pictures-animals-wildlife-underwater/#/17-best-galapagos-nature-animals-marine-iguanas.jpg">National Geographic 2017</ExternalLink></li>
         </ul>
 
-        <p>A szép állatfotók elkészítéséhez nagyon ajánljuk még a <a href={config.baseUrl + '/article/fokuszalas'}>Fókuszálás</a> cikkünket, sok hasznos dolgot tanulhatsz belőle, hogy szebb képeket csinálj.</p>
+        <p>A szép állatfotók elkészítéséhez nagyon ajánljuk még a <a href={config.baseUrl + '/hu/article/focus'}>Fókuszálás</a> cikkünket, sok hasznos dolgot tanulhatsz belőle, hogy szebb képeket csinálj.</p>
     </>;
 }

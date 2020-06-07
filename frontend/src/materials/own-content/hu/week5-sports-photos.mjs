@@ -10,7 +10,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'sportfoto-tippek',
+        slug: 'week5-sports-photos',
         title: 'Tippek sportfotókhoz',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -28,7 +28,7 @@ export default function Article() {
     return <>
         <h2>Gyorsan mozgó dolgok fotózása fényképezőgéppel</h2>
 
-        <p>Ha elolvastad a <a href={config.baseUrl + '/article/blende-zarido-iso'}>Blende, záridő, és ISO érték</a> cikket és kipróbálgattad a beállításokat, állítsd a géped <strong>“záridő-előválasztás” üzemmódba</strong>. Ezt a fényképezőgép típusától függően az “S” (shutter speed) vagy “Tv” (time value) betűk jelölik. Ez a manuális (“M”) módhoz képest azzal könnyíti meg az életed, hogy csak a záridőt és az ISO értéket kell beállítanod, a blendét beállítja magától. Általában ebben a módban érdemes gyorsan mozgó dolgokat fotózni, mert elég pontos beállítást tesz lehetővé viszonylag gyorsan.</p>
+        <p>Ha elolvastad a <a href={config.baseUrl + '/hu/article/aperture-shutter-iso'}>Blende, záridő, és ISO érték</a> cikket és kipróbálgattad a beállításokat, állítsd a géped <strong>“záridő-előválasztás” üzemmódba</strong>. Ezt a fényképezőgép típusától függően az “S” (shutter speed) vagy “Tv” (time value) betűk jelölik. Ez a manuális (“M”) módhoz képest azzal könnyíti meg az életed, hogy csak a záridőt és az ISO értéket kell beállítanod, a blendét beállítja magától. Általában ebben a módban érdemes gyorsan mozgó dolgokat fotózni, mert elég pontos beállítást tesz lehetővé viszonylag gyorsan.</p>
 
         <p>Most pedig gondoljuk végül együtt, hogyan érdemes beállítani ezeket az értékeket gyorsan mozgó dolgok fényképezéséhez.</p>
 

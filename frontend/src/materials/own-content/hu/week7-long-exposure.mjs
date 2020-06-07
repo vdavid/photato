@@ -9,7 +9,7 @@ import ExternalLink from '../../components/ExternalLink.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'hosszu-zarido-tippek',
+        slug: 'week7-long-exposure',
         title: 'Tippek hosszú záridős fotózáshoz',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),

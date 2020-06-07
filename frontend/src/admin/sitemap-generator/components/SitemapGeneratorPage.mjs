@@ -1,6 +1,6 @@
 import React, {useEffect} from '../../../web_modules/react.js';
 import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
-import {externalArticleSlugsByLanguageAndByWeek} from '../../../materials/external-articles-repository.mjs';
+import {externalArticleSlugsByLanguageAndByWeek} from '../../../materials/articles-repository.mjs';
 
 export default function SitemapGeneratorPage() {
     const {__} = useI18n();

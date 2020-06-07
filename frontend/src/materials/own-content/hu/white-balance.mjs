@@ -10,7 +10,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'feheregyensuly',
+        slug: 'white-balance',
         title: 'Fehéegyensúly',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -57,6 +57,6 @@ export default function Article() {
             <li>A fotozasblog.hu cikke szintén <ExternalLink href="https://fotozasblog.hu/feher-egyensuly-beallitas-viszlat-sarga-fotok/">a fehéregyensúlyról</ExternalLink></li>
         </ul>
 
-        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/article/csendelet-tippek'}>Csendélet-fotózás tippek</a>et a gyakorláshoz.</p>
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/hu/article/week8-still-life'}>Csendélet-fotózás tippek</a>et a gyakorláshoz.</p>
     </>;
 }

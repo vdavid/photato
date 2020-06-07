@@ -23,6 +23,7 @@ export default class PhotatoMessageLiveContentReplacer {
      * @returns {string}
      */
     replace(message, localeCode) {
+        const languageCode = localeCode.substring(0, 2);
         const formattedDate = formatDateWithWeekDayAndTime(this._courseStartDate, localeCode);
         return message.replace(/{courseStartDate}/g, formattedDate)
             .replace(/{signedUpCount}/g, this._signedUpCount.toString())
@@ -33,6 +34,6 @@ export default class PhotatoMessageLiveContentReplacer {
             .replace(/{uploadUrl}/g, config.baseUrl)
             .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl)
             .replace(/{finalSurveyUrl}/g, config.course.finalSurveyUrl)
-            .replace(/{ownArticleBaseUrl}/g, config.baseUrl + '/article');
+            .replace(/{ownArticleBaseUrl}/g, config.baseUrl + '/' + languageCode + '/article');
     }
 }

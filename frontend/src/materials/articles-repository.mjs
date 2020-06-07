@@ -2,6 +2,39 @@
 /**
  * @type {{string: {int: string[]}}} The index is one-based! (First week is 1 etc.)
  */
+export const ownArticleSlugsByLanguageAndByWeek = {
+    'hu': {
+        1: [ /* Foodie shot */
+        ],
+        2: [ /* Buildings */
+        ],
+        3: [ /* Close-up photography */
+        ],
+        4: [ /* Street photography */
+        ],
+        5: [ /* Sports photos / Dynamic shots / Fast objects */
+        ],
+        6: [ /* Animals, plants */
+        ],
+        7: [ /* Long exposure, light painting */
+        ],
+        8: [ /* Still life */
+        ],
+        9: [ /* Portrait */
+        ],
+        10: [ /* Event: party, concert, group */
+        ],
+        11: [ /* Self portrait */
+        ],
+        12: [ /* Freestyle—take your best shot! */
+        ],
+    },
+};
+
+// noinspection SpellCheckingInspection (Hungarian text)
+/**
+ * @type {{string: {int: string[]}}} The index is one-based! (First week is 1 etc.)
+ */
 export const externalArticleSlugsByLanguageAndByWeek = {
     'hu': {
         1: [ /* Foodie shot */

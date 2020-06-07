@@ -8,7 +8,7 @@ import ExternalLink from '../../components/ExternalLink.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'gasztrofoto-tippek',
+        slug: 'week1-foodie-shots',
         title: 'Gasztrofotó tippek',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),

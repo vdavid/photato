@@ -9,7 +9,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'csendelet-tippek',
+        slug: 'week8-still-life',
         title: 'Csendélet-fotózás tippek',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -25,7 +25,7 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a csendélet fotódon, ajánljuk elolvasásra a <a href={config.baseUrl + '/article/feheregyensuly'}>fehéregyensúlyról</a> szóló cikkünket, hogy biztosan ne legyenek túl sárgák vagy hidegek a képeid.</p>
+        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a csendélet fotódon, ajánljuk elolvasásra a <a href={config.baseUrl + '/hu/article/white-balance'}>fehéregyensúlyról</a> szóló cikkünket, hogy biztosan ne legyenek túl sárgák vagy hidegek a képeid.</p>
 
         <h2>Néhány tipp a csendélethez</h2>
         <p>A csendélet igen komplex feladat tud lenni, de egyben kellemesen ráérős is, mert a fotómodellek garantáltan nem tűnnek/másznak/fáradnak el. A tippek:</p>

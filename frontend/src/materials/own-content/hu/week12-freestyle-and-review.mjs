@@ -8,7 +8,7 @@ import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalIm
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'freestyle-tippek-es-visszatekintes',
+        slug: 'week12-freestyle-and-review',
         title: 'Szabad fotózás tippek, és egy kis visszatekintés',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),

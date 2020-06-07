@@ -10,7 +10,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'blende-zarido-iso',
+        slug: 'aperture-shutter-iso',
         title: 'Blende, záridő, és ISO érték',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -65,6 +65,6 @@ export default function Article() {
 
         <FullWidthLocalImage fileName="horse.jpg" altText="Ló." />
 
-        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/article/sportfoto-tippek'}>Sportfotó tippek</a>et a gyakorláshoz.</p>
+        <p>Most, hogy ezt a cikket elolvastad, ajánljuk a <a href={config.baseUrl + '/hu/article/week5-sports-photos'}>Sportfotó tippek</a>et a gyakorláshoz.</p>
     </>;
 }

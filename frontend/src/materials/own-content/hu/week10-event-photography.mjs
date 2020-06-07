@@ -9,7 +9,7 @@ import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalIm
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'esemenyfotozas-tippek',
+        slug: 'week10-event-photography',
         title: 'Eseményfotózás tippek',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),

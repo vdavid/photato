@@ -10,7 +10,7 @@ import {config} from '../../../config.mjs';
 export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
-        slug: 'portrefotozas-tippek',
+        slug: 'week9-portrait',
         title: 'Portréfotózás tippek',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
@@ -26,7 +26,7 @@ export function getMetadata() {
 export default function Article() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return <>
-        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a portréidon, ajánljuk elolvasásra a <a href={config.baseUrl + '/article/latoszog-gyujtotavolsag'}>Látószög, gyújtótávolság</a> cikkünket, hogy biztosan jó objektívet használ, és ne legyen senkinek a valóságosnál nagyobb orra vagy laposabb arca a képeiden. 😊</p>
+        <p><strong>Tipp:</strong> Mielőtt elkezdesz dolgozni a portréidon, ajánljuk elolvasásra a <a href={config.baseUrl + '/hu/article/fov-and-focal-distance'}>Látószög, gyújtótávolság</a> cikkünket, hogy biztosan jó objektívet használ, és ne legyen senkinek a valóságosnál nagyobb orra vagy laposabb arca a képeiden. 😊</p>
 
         <p><strong>Néhány praktikus tanács portréfotózáshoz:</strong></p>
         <ol>
