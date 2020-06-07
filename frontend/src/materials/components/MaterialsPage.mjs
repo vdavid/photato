@@ -12,8 +12,10 @@ import ExternalLink from './ExternalLink.mjs';
  * @property {string|null} author
  * @property {Date} publishDate
  * @property {string} publisherName
- * @property {string} originalUrl
- * @property {boolean} isOriginalUrlBroken
+ * @property {string} [originalUrl] Only applicable for external articles.
+ * @property {boolean} [isOriginalUrlBroken] Only applicable for external articles.
+ * @property {int} [unlockWeekIndex] A one-based index which determines the week when the article is
+ *           first displayed for students. If not defined then it's always displayed.
  */
 /**
  * @typedef {Object} ThirdPartyArticle
@@ -55,7 +57,7 @@ export default function MaterialsPage() {
         <h1>{__('Articles about photography')}</h1>
         <p>{__('On this page we list articles that we found useful. [...]')}</p>
         {Object.keys(articlesByWeek).length
-            ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(weekIndex, articles))
+            ? Object.entries(articlesByWeek).map(([weekIndex, articles]) => renderOneWeek(Number.parseInt(weekIndex), articles))
             :
             <p>{__('Loading articles...')}</p>}
     </>;
