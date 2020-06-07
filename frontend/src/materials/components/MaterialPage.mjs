@@ -19,7 +19,7 @@ export default function MaterialPage() {
         setArticle({isLoaded: false, metadata: {}, component: null});
 
         async function loadArticle() {
-            const content = await import('../content/' + languageCode + '/' + slug + '.mjs');
+            const content = await import('../third-party-content/' + languageCode + '/' + slug + '.mjs');
             const importedArticle = {isLoaded: true, metadata: content.getMetadata(), component: content.default};
             setArticle(importedArticle);
             document.title = importedArticle.metadata.title + ' - Photato';

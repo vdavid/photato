@@ -36,7 +36,7 @@ export default function MaterialsPage() {
          * @returns {Promise<ThirdPartyArticle[]>}
          */
         function loadArticlesForOneWeek(slugs) {
-            return Promise.all(slugs.map(slug => import('../content/' + languageCode + '/' + slug + '.mjs')));
+            return Promise.all(slugs.map(slug => import('../third-party-content/' + languageCode + '/' + slug + '.mjs')));
         }
 
         async function loadArticlesForAllWeeks() {
