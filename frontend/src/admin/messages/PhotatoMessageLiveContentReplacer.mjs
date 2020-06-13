@@ -1,5 +1,5 @@
 import {config} from '../../config.mjs';
-import {formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
+import {formatDateWithWeekDay, formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
 
 export default class PhotatoMessageLiveContentReplacer {
     /**
@@ -25,15 +25,18 @@ export default class PhotatoMessageLiveContentReplacer {
     replace(message, localeCode) {
         const languageCode = localeCode.substring(0, 2);
         const formattedDate = formatDateWithWeekDayAndTime(this._courseStartDate, localeCode);
-        return message.replace(/{courseStartDate}/g, formattedDate)
-            .replace(/{signedUpCount}/g, this._signedUpCount.toString())
-            .replace(/{signUpUrl}/g, this._signUpUrl)
-            .replace(/{facebookGroupUrl}/g, this._facebookGroupUrl)
-            .replace(/{courseTitle}/g, this._courseTitle)
+        return message
             .replace(/{firstName}/g, '*|FNAME|*')
+            .replace(/{courseTitle}/g, this._courseTitle)
+            .replace(/{courseStartDate}/g, formattedDate)
+            .replace(/{facebookGroupUrl}/g, this._facebookGroupUrl)
+            .replace(/{signedUpCount}/g, this._signedUpCount.toString())
             .replace(/{uploadUrl}/g, config.baseUrl)
+            .replace(/{signUpUrl}/g, this._signUpUrl)
             .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl)
             .replace(/{finalSurveyUrl}/g, config.course.finalSurveyUrl)
+            .replace(/{liveEventDate}/g, formatDateWithWeekDay(config.course.liveEventDate, localeCode))
+            .replace(/{exhibitionDate}/g, formatDateWithWeekDay(config.course.exhibitionDate, localeCode))
             .replace(/{ownArticleBaseUrl}/g, config.baseUrl + '/' + languageCode + '/article');
     }
 }

@@ -1,5 +1,16 @@
 const cloudFrontBackUrl = 'https://d2rw8z9jy7vx22.cloudfront.net';
 
+const isWinterOrSummerCourse = 'summer';
+// TODO: Fake date for testing ↓↓↓
+const startDateTime = new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
+    -1 /* -2 if it was daylight saving time, -1 otherwise */));
+const liveEventDate = new Date(startDateTime);
+liveEventDate.setDate(liveEventDate.getDate() + isWinterOrSummerCourse
+    ? ((5 - 1) * 7) + 3 /* 5th week, 3rd day: Wednesday */
+    : ((6 - 1) * 7) + 2 /* 6th week, 2nd day: Tuesday */);
+const exhibitionDate = new Date(startDateTime);
+exhibitionDate.setDate(exhibitionDate.getDate() + ((13 - 1) * 7) + 4); /* 13th week, 4th day: Thursday */
+
 export const config = {
     environment: '', // Will be set to 'development', 'staging', or 'production' by main.mjs
     baseUrl: '', // Will be set by main.mjs. E.g. "https://photato.eu". Will not contain a slash at the end.
@@ -8,16 +19,18 @@ export const config = {
         clientId: '', // Will be set by main.mjs
     },
     course: {
-        name: 'hu-3', // TODO: Fake date for testing ↓↓↓
+        name: 'hu-3',
+        weekCount: 12,
+        isWinterOrSummerCourse,
         titleWithPhotato: '2020. őszi Photato tanfolyam',
         titleWithoutPhotato: '2020. őszi tanfolyam',
-        startDateTime: new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
-            -1 /* -2 if it was daylight saving time, -1 otherwise */)),
-        weekCount: 12,
+        startDateTime,
         subscribedStudentCount: 27,
         signUpFormUrl: 'https://bit.ly/2tB1hpR',
         midTimeSurveyUrl: '', // TODO: Add URL
         finalSurveyUrl: '', // TODO: Add URL
+        liveEventDate,
+        exhibitionDate,
         facebookGroupUrl: 'https://bit.ly/2T2E76b',
         timeZone: 'Europe/Budapest',
     },
