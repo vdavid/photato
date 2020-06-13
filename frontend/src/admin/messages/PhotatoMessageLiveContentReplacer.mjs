@@ -1,5 +1,5 @@
 import {config} from '../../config.mjs';
-import {formatDateWithWeekDay, formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
+import {addDaysToDate, formatDateWithWeekDay, formatDateWithWeekDayAndTime} from '../../website/dateTimeHelper.mjs';
 
 export default class PhotatoMessageLiveContentReplacer {
     /**
@@ -35,6 +35,8 @@ export default class PhotatoMessageLiveContentReplacer {
             .replace(/{signUpUrl}/g, this._signUpUrl)
             .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl)
             .replace(/{finalSurveyUrl}/g, config.course.finalSurveyUrl)
+            .replace(/{week(\d+)DeadlineDate}/g, (match, weekIndex) =>
+                formatDateWithWeekDay(addDaysToDate(config.course.startDateTime, (weekIndex - 1) * 7 + 7), localeCode))
             .replace(/{liveEventDate}/g, formatDateWithWeekDay(config.course.liveEventDate, localeCode))
             .replace(/{exhibitionDate}/g, formatDateWithWeekDay(config.course.exhibitionDate, localeCode))
             .replace(/{ownArticleBaseUrl}/g, config.baseUrl + '/' + languageCode + '/article');
