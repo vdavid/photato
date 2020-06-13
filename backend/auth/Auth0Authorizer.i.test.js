@@ -3,7 +3,7 @@ const auth0Authorizer = new Auth0Authorizer('https://photato.eu.auth0.com/userin
 
 test('Can validate good token', async () => {
     /* Arrange */
-    const validAccessToken = 'HqjagZDI00DeOspGcJdJ29TQNomuvj_G'; /* Sorry, it's inconenient, but you'll need a valid access token for this test */
+    const validAccessToken = 'HqjagZDI00DeOspGcJdJ29TQNomuvj_G'; /* Sorry, it's inconvenient, but you'll need a valid access token for this test */
 
     /* Act */
     const validPromise = auth0Authorizer.getAuth0UserData(validAccessToken);
