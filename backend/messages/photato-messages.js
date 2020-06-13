@@ -1,4 +1,3 @@
-// TODO: Set courseDayIndex everywhere, it's not set yet!
 // TODO: Make dates dynamic
 
 /**
@@ -42,7 +41,7 @@ const channels = {
     facebook: 'facebook',
 };
 
-// noinspection HtmlUnknownTarget
+// noinspection HtmlUnknownTarget,PointlessArithmeticExpressionJS
 const photatoMessages = [
     {
         slug: 'coming-soon-facebook-page-message',
@@ -247,7 +246,7 @@ Fotózásra fel! 📸
     {
         slug: '1st-challenge-email-current-students-message',
         title: '1st challenge: Food photos',
-        courseDayIndex: 0,
+        courseDayIndex: ((1 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -275,7 +274,7 @@ a Photato csapata</p>`,
     {
         slug: '1st-challenge-facebook-group-message',
         title: '1st challenge: Food photos',
-        courseDayIndex: 0,
+        courseDayIndex: ((1 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -288,7 +287,7 @@ Ha nem látod benne a képet, engedélyezd a képek megjelenítését a photatop
     {
         slug: '1st-challenge-reminder-facebook-group-message',
         title: '1st challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((1 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -303,7 +302,7 @@ A beküldött képek közül közönségszavazással és a mentorok szavazatai a
     {
         slug: '2nd-challenge-email-current-students-message',
         title: '2nd challenge: Buildings',
-        courseDayIndex: 0,
+        courseDayIndex: ((2 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -330,7 +329,7 @@ a Photato csapata</p>`,
     {
         slug: '2nd-challenge-facebook-group-message',
         title: '2nd challenge: Buildings',
-        courseDayIndex: 0,
+        courseDayIndex: ((2 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -346,7 +345,7 @@ Ha valamiért nem kaptad volna meg az első heti feladatot, pl. mert később je
     {
         slug: 'instructions-email-mentors-message',
         title: 'Instructions for mentors',
-        courseDayIndex: -2,
+        courseDayIndex: ((1 - 1) * 7) + 8,
         channel: channels.email,
         audience: emailAudiences.mentors,
         locale: 'hu-HU',
@@ -375,7 +374,7 @@ Ha valamiért nem kaptad volna meg az első heti feladatot, pl. mert később je
     {
         slug: '1st-challenge-voting-facebook-group-message',
         title: '1st challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((1 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -393,7 +392,7 @@ Hajrá! 😊`, // TODO: We'll need a link in this message once we have the galle
     {
         slug: 'facebook-group-reminder-email-mentors-message',
         title: 'Facebook group reminder',
-        courseDayIndex: -2,
+        courseDayIndex: ((2 - 1) * 7) + 5,
         channel: channels.email,
         audience: emailAudiences.mentors,
         locale: 'hu-HU',
@@ -413,7 +412,7 @@ Hajrá! 😊`, // TODO: We'll need a link in this message once we have the galle
     {
         slug: '2nd-challenge-reminder-facebook-group-message',
         title: '2nd challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((2 - 1) * 7) + 5,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -427,7 +426,7 @@ Ide jöhet: {uploadUrl}`, // TODO: "The "more than 40" part would love some dyna
     {
         slug: '3rd-challenge-email-current-students-message',
         title: '3rd challenge: Macro',
-        courseDayIndex: 0,
+        courseDayIndex: ((3 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -448,7 +447,7 @@ a Photato csapata</p>`,
     {
         slug: '3rd-challenge-facebook-group-message',
         title: '3rd challenge: Macro',
-        courseDayIndex: 0,
+        courseDayIndex: ((3 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -462,7 +461,7 @@ a Photato csapata</p>`,
     {
         slug: '2nd-challenge-voting-facebook-group-message',
         title: '2nd challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((2 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -476,7 +475,7 @@ a Photato csapata</p>`,
     {
         slug: '3rd-challenge-reminder-facebook-group-message',
         title: '3rd challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((3 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -486,7 +485,7 @@ a Photato csapata</p>`,
     {
         slug: '4th-challenge-email-current-students-message',
         title: '4th challenge: Street photography',
-        courseDayIndex: 0,
+        courseDayIndex: ((4 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -510,7 +509,7 @@ a Photato csapata</p>`,
     {
         slug: '4th-challenge-facebook-group-message',
         title: '4th challenge: Street photography',
-        courseDayIndex: 0,
+        courseDayIndex: ((4 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -524,7 +523,7 @@ a Photato csapata</p>`,
     {
         slug: '3rd-challenge-voting-facebook-group-message',
         title: '3rd challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((3 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -539,7 +538,7 @@ Nagyon sok király makrót küldtetek be a múlt héten, köszönjük szépen!
     {
         slug: '4th-challenge-reminder-facebook-group-message',
         title: '4th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((4 - 1) * 7) + 5,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -549,7 +548,7 @@ Nagyon sok király makrót küldtetek be a múlt héten, köszönjük szépen!
     {
         slug: 'live-event-summer-facebook-group-message',
         title: 'Live photo event (summer)',
-        courseDayIndex: 0,
+        courseDayIndex: ((4 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -567,7 +566,7 @@ Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esem
     {
         slug: '5th-challenge-email-current-students-message',
         title: '5th challenge: Sports photos / Fast objects',
-        courseDayIndex: 0,
+        courseDayIndex: ((5 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -592,7 +591,7 @@ a Photato csapata</p>`,
     {
         slug: '5th-challenge-facebook-group-message',
         title: '5th challenge: Sports photos / Fast objects',
-        courseDayIndex: 0,
+        courseDayIndex: ((5 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -606,7 +605,7 @@ a Photato csapata</p>`,
     {
         slug: '4th-challenge-voting-facebook-group-message',
         title: '4th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((4 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -622,14 +621,12 @@ Megérkeztek a bátor utcai fotósok alkotásai 😊
     {
         slug: '5th-challenge-reminder-facebook-group-message',
         title: '5th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((5 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
         contentType: 'text/plain',
-        content: `Ezen a héten szokatlanul kevés kép érkezett be eddig, ami két dolgot jelent:
-1. Hogy még nagyon kevesen küldtetek be képet 😉
-2. Hogy potenciálisan kisebb lesz a verseny, mint az előző hetekben, így ha beküldöd, nagyobb eséllyel lesz a tiéd a legjobbnak ítélt kép. 😊
+        content: `Már érkezgetnek a mozgós képek. Itt a hétvége, menj ki fotózni, és tedd hozzájuk a tiédet, ha még nem tetted.
 
 A legjobb képeket pedig értékes krumplikkal fogunk díjazni a tanfolyam végén. 🥔🥔🥔
 Még 2 napod van feltölteni itt: {uploadUrl}`,
@@ -637,7 +634,7 @@ Még 2 napod van feltölteni itt: {uploadUrl}`,
     {
         slug: '6th-challenge-email-current-students-message',
         title: '6th challenge: Animals, plants',
-        courseDayIndex: 0,
+        courseDayIndex: ((6 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -661,7 +658,7 @@ a Photato csapata</p>`,
     {
         slug: '6th-challenge-facebook-group-message',
         title: '6th challenge: Animals, plants',
-        courseDayIndex: 0,
+        courseDayIndex: ((6 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -673,7 +670,7 @@ Ha még nem küldted be a sportos fotódat, éjfélig még azt is tedd meg, ugya
     {
         slug: 'live-event-winter-facebook-group-message',
         title: 'Live photo event (winter)',
-        courseDayIndex: 0,
+        courseDayIndex: ((6 - 1) * 7) + 4,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -696,7 +693,7 @@ Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esem
     {
         slug: '5th-challenge-voting-facebook-group-message',
         title: '5th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((5 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -707,7 +704,7 @@ A múlt héten jópár, izgalmasabbnál izgalmasabb mozgásfotót kaptunk. Ha ne
     {
         slug: '6th-challenge-reminder-facebook-group-message',
         title: '6th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((6 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -717,7 +714,7 @@ A múlt héten jópár, izgalmasabbnál izgalmasabb mozgásfotót kaptunk. Ha ne
     {
         slug: '7th-challenge-email-current-students-message',
         title: '7th challenge: Long exposure',
-        courseDayIndex: 0,
+        courseDayIndex: ((7 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -739,7 +736,7 @@ a Photato csapata</p>`,
     {
         slug: '7th-challenge-facebook-group-message',
         title: '7th challenge: Long exposure',
-        courseDayIndex: 0,
+        courseDayIndex: ((7 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -751,7 +748,7 @@ Ha még nem küldted be az állatos/növényes képedet, ma éjfélig még azt i
     {
         slug: 'mid-time-survey-email-current-students-message',
         title: 'Mid-time survey',
-        courseDayIndex: 0,
+        courseDayIndex: ((7 - 1) * 7) + 2,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -779,7 +776,7 @@ a Photato csapata</p>`,
     {
         slug: '6th-challenge-voting-facebook-group-message',
         title: '6th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((6 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -790,7 +787,7 @@ A múlt héten számos állati jó 😉 képet kaptunk tőletek. Ha nem küldté
     {
         slug: 'midtime-survey-partial-results-facebook-group-message',
         title: 'midtime-survey-results',
-        courseDayIndex: 0,
+        courseDayIndex: ((7 - 1) * 7) + 5,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -801,17 +798,17 @@ Ha még nem töltötted ki a kérdőívet, megköszönjük, ha megteszed itt: {m
     {
         slug: '7th-challenge-reminder-facebook-group-message',
         title: '7th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
         contentType: 'text/plain',
-        content: `Közben még 3 napod van feltölteni a hosszú záridős fotódat itt: {uploadUrl} – ne felejtsd el! 🕐`,
+        content: `Közben még 2 napod van feltölteni a hosszú záridős fotódat itt: {uploadUrl} – ne felejtsd el! 🕐`,
     },
     {
         slug: '8th-challenge-email-current-students-message',
         title: '8th challenge: Still life',
-        courseDayIndex: 0,
+        courseDayIndex: ((8 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -840,7 +837,7 @@ a Photato csapata</p>`,
     {
         slug: '8th-challenge-facebook-group-message',
         title: '8th challenge: Still life',
-        courseDayIndex: 0,
+        courseDayIndex: ((8 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -854,7 +851,7 @@ Ha még nem töltötted ki a kérdőívet, megköszönjük, ha megteszed itt: {m
     {
         slug: '7th-challenge-voting-facebook-group-message',
         title: '7th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((7 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -868,7 +865,7 @@ Ha esetleg a múlt héten nem is küldtél be képet, segíts a beküldőknek l�
     {
         slug: '8th-challenge-reminder-facebook-group-message',
         title: '8th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((8 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -879,7 +876,7 @@ Emellett még 2 napod van feltölteni a Csendélet fotódat itt: {uploadUrl} �
     {
         slug: '9th-challenge-email-current-students-message',
         title: '9th challenge: Portrait',
-        courseDayIndex: 0,
+        courseDayIndex: ((9 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -903,7 +900,7 @@ a Photato csapata</p>`,
     {
         slug: '9th-challenge-facebook-group-message',
         title: '9th challenge: Portrait',
-        courseDayIndex: 0,
+        courseDayIndex: ((9 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -915,7 +912,7 @@ Ha még nem küldted be a csendélet fotódat, ezt ma éjfélig teheted meg: {up
     {
         slug: '8th-challenge-voting-facebook-group-message',
         title: '8th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((8 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -926,7 +923,7 @@ Megjöttek a csendélet-fotók!`, // TODO: We'll need a link in this message onc
     {
         slug: '9th-challenge-reminder-facebook-group-message',
         title: '9th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((9 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -936,7 +933,7 @@ Megjöttek a csendélet-fotók!`, // TODO: We'll need a link in this message onc
     {
         slug: '10th-challenge-email-current-students-message',
         title: '10th challenge: Events',
-        courseDayIndex: 0,
+        courseDayIndex: ((10 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -958,7 +955,7 @@ a Photato csapata</p>`,
     {
         slug: '10th-challenge-facebook-group-message',
         title: '10th challenge: Events',
-        courseDayIndex: 0,
+        courseDayIndex: ((10 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -971,7 +968,7 @@ Ha még nem küldted be a portréfotódat, ma éjfélig még azt is megteheted: 
     {
         slug: '9th-challenge-voting-facebook-group-message',
         title: '9th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((9 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -982,7 +979,7 @@ Máris itt a következő galéria: a gyönyörű portrék. Lájkolj, kommentelj 
     {
         slug: '10th-challenge-reminder-facebook-group-message',
         title: '10th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((10 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -992,7 +989,7 @@ Máris itt a következő galéria: a gyönyörű portrék. Lájkolj, kommentelj 
     {
         slug: '11th-challenge-email-current-students-message',
         title: '11th challenge: Self portrait',
-        courseDayIndex: 0,
+        courseDayIndex: ((11 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -1014,7 +1011,7 @@ a Photato csapata</p>`,
     {
         slug: '11th-challenge-facebook-group-message',
         title: '11th challenge: Self portrait',
-        courseDayIndex: 0,
+        courseDayIndex: ((11 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1026,7 +1023,7 @@ Ha még nem küldted be az eseményfotódat, ma éjfélig az is jöhet: {uploadU
     {
         slug: '10th-challenge-voting-facebook-group-message',
         title: '10th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((10 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1037,7 +1034,7 @@ Itt vannak a kiváló eseményfotók! 😊 A legtöbb lájkot kapott kép nyeri 
     {
         slug: '11th-challenge-reminder-facebook-group-message',
         title: '11th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((11 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1047,7 +1044,7 @@ Itt vannak a kiváló eseményfotók! 😊 A legtöbb lájkot kapott kép nyeri 
     {
         slug: '12th-challenge-email-current-students-message',
         title: '12th challenge: Freestyle',
-        courseDayIndex: 0,
+        courseDayIndex: ((12 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.currentStudents,
         locale: 'hu-HU',
@@ -1089,7 +1086,7 @@ a Photato csapata</p>
     {
         slug: '12th-challenge-facebook-group-message',
         title: '12th challenge: Freestyle',
-        courseDayIndex: 0,
+        courseDayIndex: ((12 - 1) * 7) + 0,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1103,7 +1100,7 @@ A kurzus végével és a következő tanfolyammal kapcsolatos információkat ha
     {
         slug: '11th-challenge-voting-facebook-group-message',
         title: '11th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((11 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1114,7 +1111,7 @@ Megérkeztek az önarcképek – gratulálunk minden bátor beküldőnek! 😊 L
     {
         slug: '12th-challenge-reminder-facebook-group-message',
         title: '12th challenge reminder',
-        courseDayIndex: 0,
+        courseDayIndex: ((12 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1124,7 +1121,7 @@ Megérkeztek az önarcképek – gratulálunk minden bátor beküldőnek! 😊 L
     {
         slug: 'exhibition-facebook-group-message',
         title: 'Exhibition (Facebook event)',
-        courseDayIndex: 0,
+        courseDayIndex: ((12 - 1) * 7) + 7,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1142,7 +1139,7 @@ We've just finished the latest course of “Photato: 12 weeks, 12 shots”. The 
     {
         slug: '12th-challenge-voting-facebook-group-message',
         title: '12th challenge voting',
-        courseDayIndex: 0,
+        courseDayIndex: ((12 - 1) * 7) + 8,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
@@ -1151,24 +1148,9 @@ We've just finished the latest course of “Photato: 12 weeks, 12 shots”. The 
 Megérkeztek az utolsó heti képek! Gyorsan szavazzatok rájuk, mert holnap délután 2-kor lezárjuk a szavazást, az akkori sorrend alapján nyer a legtöbb lájkot kapott kép. Csütörtökön pedig találkozunk a Szimplában (ld. a Facebook eseményt)! 😊`, // TODO: We'll need a link in this message once we have the galleries in the website.
     },
     {
-        slug: 'exhibition-reminder-facebook-group-message',
-        title: 'Event reminder',
-        courseDayIndex: 0,
-        channel: channels.facebook,
-        audience: facebookAudiences.group,
-        locale: 'hu-HU',
-        contentType: 'text/plain',
-        content: `Hamarosan találkozunk, és kihirdetjük a nyerteseket, már nagyon izgatottak vagyunk! 🥔
-18:00-kor várunk Titeket ezen a Zoom linken:
-https://zoom.us/j/9995559876?pwd=ZW5tSzBjUERzNktyalhSRk1COWFFQT09 
-
-A Zoom használható laptopról, tabletről és mobilról is. Tudjátok telepíteni az alkalmazást, ezt automatikusan felajánlja, amikor rákattintotok a fenti linkre, válasszátok a ’dowload and run Zoom’ lehetőséget. Választhatjátok azt is, hogy a böngészőből csatlakoztok, ehhez kattintsatok arra, hogy ’join from your browser’. Ha nehézségetek lenne a belépéssel, írjatok és segítünk! :)
-`,
-    },
-    {
         slug: 'exhibition-invitation-email-winners-message',
         title: 'Exhibition for winners',
-        courseDayIndex: 0,
+        courseDayIndex: ((13 - 1) * 7) + 2,
         channel: channels.email,
         audience: emailAudiences.winners,
         locale: 'hu-HU',
@@ -1191,9 +1173,24 @@ A Photato csapata
 `,
     },
     {
+        slug: 'exhibition-reminder-facebook-group-message',
+        title: 'Event reminder',
+        courseDayIndex: ((13 - 1) * 7) + 4,
+        channel: channels.facebook,
+        audience: facebookAudiences.group,
+        locale: 'hu-HU',
+        contentType: 'text/plain',
+        content: `Hamarosan találkozunk, és kihirdetjük a nyerteseket, már nagyon izgatottak vagyunk! 🥔
+18:00-kor várunk Titeket ezen a Zoom linken:
+https://zoom.us/j/9995559876?pwd=ZW5tSzBjUERzNktyalhSRk1COWFFQT09 
+
+A Zoom használható laptopról, tabletről és mobilról is. Tudjátok telepíteni az alkalmazást, ezt automatikusan felajánlja, amikor rákattintotok a fenti linkre, válasszátok a ’dowload and run Zoom’ lehetőséget. Választhatjátok azt is, hogy a böngészőből csatlakoztok, ehhez kattintsatok arra, hogy ’join from your browser’. Ha nehézségetek lenne a belépéssel, írjatok és segítünk! :)
+`,
+    },
+    {
         slug: 'farewell-email-winners-message',
         title: 'Farewell',
-        courseDayIndex: 0,
+        courseDayIndex: ((14 - 1) * 7) + 0,
         channel: channels.email,
         audience: emailAudiences.winners,
         locale: 'hu-HU',
