@@ -14,15 +14,17 @@
  */
 
 // \n → keep in Facebook messages
-// {courseStartDate} (a nicely formatted date)
-// {signedUpCount} → 27 (just a number)
-// {signUpUrl} → https://bit.ly/2tB1hpR (plain text)
-// {facebookGroupUrl} → bit.ly link (plain text)
-// {courseTitle} → e.g. "2020. őszi Photato tanfolyam"
 // {firstName} → Student's first name
+// {courseTitle} → e.g. "2020. őszi Photato tanfolyam"
+// {courseStartDate} (a nicely formatted date)
+// {facebookGroupUrl} → bit.ly link (plain text)
+// {signedUpCount} → 27 (just a number)
 // {uploadUrl} → https://photato.eu/upload
+// {signUpUrl} → https://bit.ly/2tB1hpR (plain text)
 // {midTimeSurveyUrl} → The URL
 // {finalSurveyUrl} → The URL
+// {liveEventDate} → The formatted date when the mid-course live event happens
+// {exhibitionDate} → The formatted date when the final exhibition event happens
 // {ownArticleBaseUrl} → An URL to the place where all articles are, without locale. Without a trailing slash.
 
 const emailAudiences = {
@@ -41,7 +43,7 @@ const channels = {
     facebook: 'facebook',
 };
 
-// noinspection HtmlUnknownTarget,PointlessArithmeticExpressionJS
+// noinspection HtmlUnknownTarget,PointlessArithmeticExpressionJS,SpellCheckingInspection
 const photatoMessages = [
     {
         slug: 'coming-soon-facebook-page-message',
@@ -554,14 +556,14 @@ Nagyon sok király makrót küldtetek be a múlt héten, köszönjük szépen!
         locale: 'hu-HU',
         contentType: 'text/plain',
         content: `
-Title: Margitszigeti futófotók
-Times: 18:00-20:00
+[Title: Margitszigeti futófotók]
+[Date/time: {liveEventDate} 18:00–20:00]
 Content (watch out for TODO-s!):
-Közös fotózás a Margitszigeten {TODO: 2018. július 4. szerda} este 6-kor. Találkozó a képen látható lépcső aljánál (a lány valószínűleg nem lesz ott). Kb. itt: https://bit.ly/photatohu3-maps
+Közös fotózás a Margitszigeten {liveEventDate} este 6-kor. Találkozó a képen látható lépcső aljánál (a lány valószínűleg nem lesz ott). Kb. itt: https://bit.ly/photatohu3-maps
 
 A fényképezőgépekről jó eséllyel megismersz minket. 18:13-ig várunk a későn érkezőkre, utána elindulunk. Egészen kötetlen, beszélgetős-ismerkedős-fotózós eseményre számíts. :) Bárkit ér hozni. Ha jössz, jelezz az eseményre, hogy tudjuk, hány embert várjunk.
 
-Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esemény. Ha van kedved, bátran írj ki eseményt a csoportban {TODO: július 4.} 18:00-ra a saját városodban, főleg ha többen is vagytok onnan! :)`,
+Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esemény. Ha van kedved, bátran írj ki eseményt a csoportban {liveEventDate} 18:00-ra a saját városodban, főleg ha többen is vagytok onnan! :)`,
     },
     {
         slug: '5th-challenge-email-current-students-message',
@@ -676,10 +678,10 @@ Ha még nem küldted be a sportos fotódat, éjfélig még azt is tedd meg, ugya
         locale: 'hu-HU',
         contentType: 'text/plain',
         content: `
-Title: Közös fotózás az Erzsébet téren!
-Times: 18:00-20:00
+[Title: Közös fotózás az Erzsébet téren!]
+[Date/time: {liveEventDate} 18:00–20:00]
 Content (watch out for TODO-s!):
-Hosszú záridős közös fotózás lesz Budapest belvárosában {TODO: 2020. február 25. kedd} délután 6-tól 8-ig! Találkozó a medence sarkánál, ennél a kukánál: https://bit.ly/photatohu3-maps
+Hosszú záridős közös fotózás lesz Budapest belvárosában {liveEventDate} délután 6-tól 8-ig! Találkozó a medence sarkánál, ennél a kukánál: https://bit.ly/photatohu3-maps
 
 A fényképezőgépekről jó eséllyel megismersz minket. 18:08-ig várunk a későn érkezőkre, utána elindulunk tovább a környéken. Egészen kötetlen, beszélgetős-ismerkedős-fotózós eseményre számíts. :) Bárkit ér hozni. Ha jössz, jelezz az eseményre, hogy tudjuk, hány embert várjunk!
 
@@ -688,7 +690,7 @@ Azért választottuk ezt a hetet, mert csomó tudásotok van már, és az esti i
 
 Hozzatok állványt, ha tudtok szerezni, jól fog jönni! Ha kérdés adódna, írjatok a Photato messengerén, vagy emailben.
 
-Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esemény. Ha van kedved, bátran írj ki egy hasonló közös fotózást a csoportban {TODO: február 25.} du. 6-ra a saját városodban, főleg ha többen is vagytok onnan! 😊`,
+Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esemény. Ha van kedved, bátran írj ki egy hasonló közös fotózást a csoportban {liveEventDate} du. 6-ra a saját városodban, főleg ha többen is vagytok onnan! 😊`,
     },
     {
         slug: '5th-challenge-voting-facebook-group-message',
@@ -1128,6 +1130,7 @@ Megérkeztek az önarcképek – gratulálunk minden bátor beküldőnek! 😊 L
         contentType: 'text/plain',
         content: `
 [Title: Photato fotókiállítás / photo exhibition]
+[Date/time: {exhibitionDate} 19:00–21:00]
 [Keywords: Keywords: fotó tanfolyam kiállítás fotókiállítás krumpli photo exhibition course potato]
 [Watch out for TODOs!]
 A Photato első kurzusának záróakkordjaként csütörtökön este kiállítjuk a legjobb képeket a Szimplában. A nyertes képek fotósai értékes nyereményekben részesülnek! Díjátadó 20:00-kor! Jelezzetek vissza, hogy tudjuk, mennyien leszünk! :) Csütörtökön találkozunk! 🥔
@@ -1145,7 +1148,7 @@ We've just finished the latest course of “Photato: 12 weeks, 12 shots”. The 
         locale: 'hu-HU',
         contentType: 'text/plain',
         content: `[Galéria címe: "12. hét: freestyle"]
-Megérkeztek az utolsó heti képek! Gyorsan szavazzatok rájuk, mert holnap délután 2-kor lezárjuk a szavazást, az akkori sorrend alapján nyer a legtöbb lájkot kapott kép. Csütörtökön pedig találkozunk a Szimplában (ld. a Facebook eseményt)! 😊`, // TODO: We'll need a link in this message once we have the galleries in the website.
+Megérkeztek az utolsó heti képek! Gyorsan szavazzatok rájuk, mert holnap délután 2-kor lezárjuk a szavazást, az akkori sorrend alapján nyer a legtöbb lájkot kapott kép. Csütörtökön ({exhibitionDate}) pedig találkozunk a Szimplában (ld. a Facebook eseményt)! 😊`, // TODO: We'll need a link in this message once we have the galleries in the website.
     },
     {
         slug: 'exhibition-invitation-email-winners-message',
@@ -1158,13 +1161,13 @@ Megérkeztek az utolsó heti képek! Gyorsan szavazzatok rájuk, mert holnap dé
         contentType: 'text/html',
         content: `Szia!
 
-Baráti tipp: Ha Te lennék, én benéznék a csütörtök esti eredményhirdetésre, hátha nyertél valamit! 😉
+Baráti tipp: Ha Te lennék, én benéznék a csütörtök ({exhibitionDate}) esti eredményhirdetésre, hátha nyertél valamit! 😉
 
 Az infók:
 
 A Photato harmadik kurzusának záróakkordjaként csütörtökön este kiállítjuk a legjobb képeket a virtuális térben, amit összekötünk egy pogácsázással-borozással ZOOM-on! Természetesen tea, süti is választható, sőt, mivel mindenki otthonról fog csatlakozni, azzal készülsz, amivel szeretnél! :)
 
-A nyertes képek fotósai értékes nyereményekben részesülnek! Díjátadó 18:00-kor! A ZOOM linket röviddel az esemény előtt küldjünk, ahol tudsz majd kapcsolódni.
+A nyertes képek fotósai értékes nyereményekben részesülnek! Díjátadó 20:00-kor! A ZOOM linket röviddel az esemény előtt küldjünk, ahol tudsz majd kapcsolódni.
 
 Csütörtökön találkozunk! 🥔
 
@@ -1181,7 +1184,7 @@ A Photato csapata
         locale: 'hu-HU',
         contentType: 'text/plain',
         content: `Hamarosan találkozunk, és kihirdetjük a nyerteseket, már nagyon izgatottak vagyunk! 🥔
-18:00-kor várunk Titeket ezen a Zoom linken:
+20:00-kor várunk Titeket ezen a Zoom linken:
 https://zoom.us/j/9995559876?pwd=ZW5tSzBjUERzNktyalhSRk1COWFFQT09 
 
 A Zoom használható laptopról, tabletről és mobilról is. Tudjátok telepíteni az alkalmazást, ezt automatikusan felajánlja, amikor rákattintotok a fenti linkre, válasszátok a ’dowload and run Zoom’ lehetőséget. Választhatjátok azt is, hogy a böngészőből csatlakoztok, ehhez kattintsatok arra, hogy ’join from your browser’. Ha nehézségetek lenne a belépéssel, írjatok és segítünk! :)
