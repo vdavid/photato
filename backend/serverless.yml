@@ -56,7 +56,7 @@ functions:
     timeout: 5
     lambdaAtEdge:
       distribution: CloudFront
-      eventType: viewer-request
+      eventType: origin-request
       pathPattern: '/get-all-messages'
 
 # Plugins for extended functions, such as Lambda@Edge use
@@ -167,7 +167,7 @@ resources:
               MaxTTL: 0
               MinTTL: 0
               ForwardedValues:
-                QueryString: 'false'
+                QueryString: 'true'
                 Cookies:
                   Forward: none
               PathPattern: '/get-all-messages'
