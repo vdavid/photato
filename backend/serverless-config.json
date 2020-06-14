@@ -1,0 +1,8 @@
+{
+  "photoBucket": {
+    "name": "photato-photos-bucket"
+  },
+  "cloudFrontLogBucket": {
+    "name": "photato-cloudfront-logs-bucket"
+  }
+}

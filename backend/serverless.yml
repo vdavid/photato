@@ -8,20 +8,22 @@ service: photato-website-backend
 app: photato-website
 org: veszelovszki
 
-# This is the basic setup I think
+# Basic setup
 provider:
   name: aws
   runtime: nodejs12.x
   stage: production
   region: us-east-1
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: Allow # Allow replicated lambdas to create logs – note that these rights are given in the default policy and are required if you want logs out of your lambda(s)
       Action:
         - logs:CreateLogGroup
         - logs:CreateLogStream
         - logs:PutLogEvents
       Resource:
-        - arn:aws:logs:us-east-1:*:* # Allow replicated lambdas to create logs
+        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-adminGetAllMessages:*'
+        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-getSignedUrl:*'
+        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-validateSignedUrl:*'
     - Effect: Allow
       Action:
         - s3:PutObject
@@ -29,9 +31,9 @@ provider:
         - s3:ListBucket
         - s3:ListBucketVersions
       Resource:
-        - 'arn:aws:s3:::${self:custom.config.bucket.name}'
-        - 'arn:aws:s3:::${self:custom.config.bucket.name}/*'
-  cfnRole: arn:aws:iam::633371514237:role/cloudformation-role
+        - 'arn:aws:s3:::${self:custom.config.photoBucket.name}'
+        - 'arn:aws:s3:::${self:custom.config.photoBucket.name}/*'
+  cfnRole: arn:aws:iam::633371514237:role/cloudformation-role # Role to assume to build the tech stack
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
@@ -40,7 +42,7 @@ functions:
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
-      distribution: CloudFront
+      distribution: PhotatoCloudFront
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
       pathPattern: '/get-signed-url'
   validateSignedUrl:
@@ -48,34 +50,34 @@ functions:
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
-      distribution: CloudFront
+      distribution: PhotatoCloudFront
       eventType: viewer-request
   adminGetAllMessages:
     handler: messages/getAllMessages/getAllMessages.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
-      distribution: CloudFront
+      distribution: PhotatoCloudFront
       eventType: origin-request
       pathPattern: '/get-all-messages'
 
 # Plugins for extended functions, such as Lambda@Edge use
 plugins:
   - '@silvermine/serverless-plugin-cloudfront-lambda-edge' # This allows using Lamda@Edge features of CloudFront.
-    # More info: https://github.com/silvermine/serverless-plugin-cloudfront-lambda-edge
+  # More info: https://github.com/silvermine/serverless-plugin-cloudfront-lambda-edge
 
 # Any custom settings may come here. They can be referenced as ${self:custom.XXX}
 custom:
   stage: ${opt:stage, self:provider.stage}
-  config: ${file(./config.json)} # Lambda@Edge doesn't support environmental variables, so we put them in this JSON
+  config: ${file(./serverless-config.json)} # Lambda@Edge doesn't support environment variables, so we put them in this JSON
 
-# you can add CloudFormation resource templates here
+# The Resources the functions use. Raw AWS CloudFormation resource templates go in here.
 resources:
   Resources:
     PhotoBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.config.bucket.name}
+        BucketName: ${self:custom.config.photoBucket.name}
         BucketEncryption:
           ServerSideEncryptionConfiguration:
             - ServerSideEncryptionByDefault:
@@ -89,13 +91,29 @@ resources:
               AllowedOrigins: ['*']
               Id: CORSRuleId1
               MaxAge: '3600'
-    CloudFront:
+    CloudFrontLogBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.config.cloudFrontLogBucket.name}
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        VersioningConfiguration:
+          Status: Enabled
+    PhotatoCloudFront:
       Type: AWS::CloudFront::Distribution
-      DependsOn: PhotoBucket
+      DependsOn:
+        - PhotoBucket
+        - CloudFrontLogBucket
       Properties:
         DistributionConfig:
           Enabled: true
           Comment: '${self:custom.stage}-${self:service}'
+          Logging:
+            IncludeCookies: 'false'
+            Bucket: ${self:custom.config.cloudFrontLogBucket.name}.s3.amazonaws.com
+            Prefix: photato-cloudfront
           PriceClass: PriceClass_All # TODO: Maybe PriceClass_100 would be better? No idea, but I'm on the free tier ATM
           HttpVersion: http2
           IPV6Enabled: true
@@ -125,7 +143,7 @@ resources:
             - ErrorCachingMinTTL: 0
               ErrorCode: 504
           Origins:
-            - DomainName: ${self:custom.config.bucket.name}.s3.amazonaws.com
+            - DomainName: ${self:custom.config.photoBucket.name}.s3.amazonaws.com
               Id: S3Origin
               S3OriginConfig: {}
           DefaultCacheBehavior:
