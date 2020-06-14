@@ -27,17 +27,23 @@ module.exports = class GetSignedUrlHandler {
      */
     async handleRequest(event, context) {
         try {
-            /* Parse input */
-            const requestData = getRequestDataFromLambdaEdgeEvent(event);
+            console.debug(`getAllMessages | Got ${event.Records[0].cf.request.method} request.`);
+            try {
+                /* Parse input */
+                const requestData = getRequestDataFromLambdaEdgeEvent(event);
 
-            /* Authorize user */
-            if (requestData.method === 'OPTIONS') {
-                return buildOptionsResponse(['GET']);
-            } else if (requestData.method === 'GET') {
-                return this._handleGetRequest(requestData);
+                /* Authorize user */
+                if (requestData.method === 'OPTIONS') {
+                    return buildOptionsResponse(['GET']);
+                } else if (requestData.method === 'GET') {
+                    return this._handleGetRequest(requestData);
+                }
+            } catch (error) {
+                console.info(`getAllMessages | 400 error: "${error.message}"`);
+                return buildResponse(400, error.message);
             }
-        } catch (error) {
-            return buildResponse(400, error.message);
+        } catch (error) { // Only temporary, to see if the logging works at all.
+            console.error(error);
         }
     }
 
@@ -55,12 +61,15 @@ module.exports = class GetSignedUrlHandler {
                     const allMessages = this._photatoMessageRepository.getAllMessages();
                     return buildResponse(200, JSON.stringify(allMessages), {contentType: 'application/json'});
                 } else {
+                    console.info(`getAllMessages | 403 error: Not an admin. Email: "${userData.email}".`);
                     return buildResponse(403, 'Not an admin.');
                 }
             } else {
+                console.info(`getAllMessages | 403 error: Invalid user with token "${requestData.accessToken}".`);
                 return buildResponse(403, 'Invalid auth0 token.');
             }
         } else {
+            console.info(`getAllMessages | 400 error. Invalid environment "${requestData.arguments.environment}".`);
             return buildResponse(400, 'Wrong environment.');
         }
     }

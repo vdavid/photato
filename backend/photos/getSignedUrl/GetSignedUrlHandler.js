@@ -33,6 +33,7 @@ module.exports = class GetSignedUrlHandler {
      * @returns {Promise<Object>}
      */
     async handleRequest(event, context) {
+        console.debug(`getSignedUrl | Got ${event.Records[0].cf.request.method} request.`)
         try {
             /* Parse input */
             const requestData = getRequestDataFromLambdaEdgeEvent(event);
@@ -44,6 +45,7 @@ module.exports = class GetSignedUrlHandler {
                 return this._handleGetRequest(requestData);
             }
         } catch (error) {
+            console.info(`getSignedUrl | 400 error: "${error.message}"`)
             return buildResponse(400, error.message);
         }
     }
@@ -67,14 +69,18 @@ module.exports = class GetSignedUrlHandler {
                     await this._signatureRepository.createValidSignatureForPath(path);
 
                     /* Return signed upload URL */
+                    console.debug(`getSignedUrl | Responded with URL.`)
                     return buildResponse(200, 'https://' + requestData.host + path);
                 } else {
+                    console.info(`getSignedUrl | 403 error: Invalid user. Email: "${userData.email}", but on photo: "${photoMetadata.emailAddress}".`)
                     return buildResponse(403, 'Invalid user.');
                 }
             } else {
+                console.info(`getSignedUrl | 403 error: Invalid user with token "${requestData.accessToken}".`)
                 return buildResponse(403, 'Invalid auth0 token.');
             }
         } else {
+            console.info(`getSignedUrl | 400 error. Invalid environment "${requestData.arguments.environment}".`)
             return buildResponse(400, 'Wrong environment.');
         }
     }
