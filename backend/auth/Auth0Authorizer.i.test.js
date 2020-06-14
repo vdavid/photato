@@ -18,9 +18,8 @@ test('Can invalidate bad token', async () => {
     const invalidAccessToken = 'invalidtoken';
 
     /* Act */
-    const invalidPromise = auth0Authorizer.getAuth0UserData(invalidAccessToken);
+    const result = await auth0Authorizer.getAuth0UserData(invalidAccessToken);
 
     /* Assert */
-    expect.assertions(1);
-    await expect(invalidPromise).rejects.toThrow('Bad token.');
+    expect(result).toBeFalsy();
 });

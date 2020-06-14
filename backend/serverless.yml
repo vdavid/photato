@@ -34,6 +34,8 @@ provider:
         - 'arn:aws:s3:::${self:custom.config.photoBucket.name}'
         - 'arn:aws:s3:::${self:custom.config.photoBucket.name}/*'
   cfnRole: arn:aws:iam::633371514237:role/cloudformation-role # Role to assume to build the tech stack
+  logs:
+    restApi: true
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
@@ -56,10 +58,20 @@ functions:
     handler: messages/getAllMessages/getAllMessages.handler
     memorySize: 128
     timeout: 5
-    lambdaAtEdge:
-      distribution: PhotatoCloudFront
-      eventType: origin-request
-      pathPattern: '/get-all-messages'
+    events:
+      - http:
+          path: 'messages/get-all-messages'
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
 
 # Plugins for extended functions, such as Lambda@Edge use
 plugins:

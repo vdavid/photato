@@ -1,6 +1,22 @@
+
+/**
+ * @param {{path: string, httpMethod: string, headers: Object<string, string>, queryStringParameters: Object<string, string>}} event
+ *        Format: https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html
+ * @returns {{url: string, method: string, host: string, queryString: string|null, accessToken: string|null, arguments: Object<string, string>}}
+ */
+function getRequestDataFromApiGatewayEvent(event) {
+    return {
+        url: event.path,
+        method: event.httpMethod,
+        host: event.headers.Host,
+        queryString: _convertToQueryString(event.queryStringParameters),
+        accessToken: _extractBearerToken((event.headers || {}).Authorization),
+        arguments: event.queryStringParameters
+    };
+}
+
 /**
  * @param {Object} event Format: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
- * @returns {{method: (string), host: (string|string), arguments: any, queryString: string | string}}
  * @returns {{url: string, method: string, host: string, queryString: string|null, accessToken: string|null, arguments: Object<string, string>}}
  */
 function getRequestDataFromLambdaEdgeEvent(event) {
@@ -10,7 +26,7 @@ function getRequestDataFromLambdaEdgeEvent(event) {
         method: request.method,
         host: request.headers.host[0].value,
         queryString: request.querystring,
-        accessToken: _extractBearerToken(request),
+        accessToken: _extractBearerToken(((request.headers || {}).authorization || [{value: undefined}])[0].value),
         arguments: _parseQueryString(request.querystring)
     };
 }
@@ -27,22 +43,30 @@ function _parseQueryString(queryString) {
         (key, value) => (key === '') ? value : decodeURIComponent(value)) : {};
 }
 
+/**
+ * @param {Object?} object
+ * @returns {string}
+ */
+function _convertToQueryString(object) {
+    return object ? Object.keys(object).map(key => key + '=' + object[key]).join('&') : '';
+}
+
 function isEnvironmentValid(environmentInput) {
     const knownEnvironments = ['development', 'staging', 'production'];
     return knownEnvironments.includes(environmentInput);
 }
 
 /**
- * @param {Object} request Must have a header called "Authorization" with a value like "Bearer {token}"
+ * @param {string} authorizationHeader
  * @returns {string|null} Null if not found
  */
-function _extractBearerToken(request) {
-    const authorizationHeader = ((request.headers || {}).authorization || [{value: undefined}])[0].value;
+function _extractBearerToken(authorizationHeader) {
     return (authorizationHeader && authorizationHeader.length > 7) ? authorizationHeader.substring(7) : null;
 }
 
 
 module.exports = {
+    getRequestDataFromApiGatewayEvent,
     getRequestDataFromLambdaEdgeEvent,
     isEnvironmentValid,
 };

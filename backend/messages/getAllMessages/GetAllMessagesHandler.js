@@ -3,7 +3,7 @@ const Auth0Authorizer = require('../../auth/Auth0Authorizer.js');
 const PermissionHelper = require('../../auth/PermissionHelper.js');
 const PhotatoMessageRepository = require('../PhotatoMessageRepository.js');
 
-const {getRequestDataFromLambdaEdgeEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
+const {getRequestDataFromApiGatewayEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
 const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
 
 module.exports = class GetSignedUrlHandler {
@@ -27,16 +27,16 @@ module.exports = class GetSignedUrlHandler {
      */
     async handleRequest(event, context) {
         try {
-            console.debug(`getAllMessages | Got ${event.Records[0].cf.request.method} request.`);
+            console.debug(`getAllMessages | Got ${event.httpMethod} request.`);
             try {
                 /* Parse input */
-                const requestData = getRequestDataFromLambdaEdgeEvent(event);
+                const requestData = getRequestDataFromApiGatewayEvent(event);
 
                 /* Authorize user */
                 if (requestData.method === 'OPTIONS') {
                     return buildOptionsResponse(['GET']);
                 } else if (requestData.method === 'GET') {
-                    return this._handleGetRequest(requestData);
+                    return await this._handleGetRequest(requestData);
                 }
             } catch (error) {
                 console.info(`getAllMessages | 400 error: "${error.message}"`);

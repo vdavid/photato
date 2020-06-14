@@ -16,32 +16,20 @@ const auth0Authorizer = {
         : (token === ordinaryBearerToken ? {email: ordinaryEmailAddress} : undefined)
 };
 const permissionHelper = new PermissionHelper();
+// noinspection JSUnusedGlobalSymbols
 const photatoMessageRepository = {getAllMessages: () => mockMessages};
+// noinspection JSCheckFunctionSignatures
 const getAllMessagesHandler = new GetAllMessagesHandler({auth0Authorizer, permissionHelper, photatoMessageRepository});
-
-function _convertToQueryString(object) {
-    return Object.keys(object).map(key => key + '=' + object[key]).join('&');
-}
 
 test('Handles valid OPTIONS requests well', async () => {
     /* Arrange */
     const host = 'temp.cloudfront.net';
     const event = {
-        Records: [
-            {
-                cf: {
-                    request: {
-                        headers: {
-                            host: [
-                                {key: 'Host', value: host},
-                            ],
-                        },
-                        method: 'OPTIONS',
-                        uri: '/get-all-messages',
-                    },
-                },
-            },
-        ],
+        path: '/get-all-messages',
+        httpMethod: 'OPTIONS',
+        headers: {
+            Host: host,
+        },
     };
 
     /* Act */
@@ -79,6 +67,19 @@ test('Rejects GET requests for non-admins', async () => {
     expect(response.statusDescription).toEqual('Forbidden');
 });
 
+test('Rejects GET requests for invalid tokens', async () => {
+    /* Arrange */
+    const event = createGetEvent('unknown@email.address');
+
+    /* Act */
+    const response = await getAllMessagesHandler.handleRequest(event, {});
+
+    /* Assert */
+    expect(response.body).toEqual('Invalid auth0 token.');
+    expect(response.status).toEqual(403);
+    expect(response.statusDescription).toEqual('Forbidden');
+});
+
 function createGetEvent(emailAddress) {
     const host = 'temp.cloudfront.net';
     const parameters = {
@@ -86,29 +87,18 @@ function createGetEvent(emailAddress) {
         emailAddress: emailAddress,
         courseName: 'hu-3',
         weekIndex: '2',
-        originalFileName: 'kukutyin.jpg',
+        originalFileName: 'kuk.jpg',
         title: 'Test title',
         mimeType: 'image/jpeg',
     };
     return {
-        Records: [
-            {
-                cf: {
-                    request: {
-                        headers: {
-                            host: [
-                                {key: 'Host', value: host},
-                            ],
-                            authorization: [
-                                {key: 'Authorization', value: 'Bearer ' + ((emailAddress === adminEmailAddress) ? adminBearerToken : ordinaryBearerToken)},
-                            ],
-                        },
-                        method: 'GET',
-                        querystring: _convertToQueryString(parameters),
-                        uri: '/get-all-messages',
-                    },
-                },
-            },
-        ],
+        path: '/get-all-messages',
+        httpMethod: 'GET',
+        headers: {
+            Host: host,
+            Authorization: 'Bearer ' + ((emailAddress === adminEmailAddress) ? adminBearerToken
+                : ((emailAddress === ordinaryEmailAddress) ? ordinaryBearerToken : '')),
+        },
+        queryStringParameters: parameters,
     };
 }

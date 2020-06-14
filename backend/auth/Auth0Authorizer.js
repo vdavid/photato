@@ -8,7 +8,7 @@ module.exports = class Auth0Authorizer {
 
     /**
      * @param {string} accessToken
-     * @returns {Promise<object>}
+     * @returns {Promise<Object|null>} Null in case of a bad token.
      */
     async getAuth0UserData(accessToken) {
         const {statusCode, body} = await httpsConnector.requestPromisified(this._auth0UserInfoEndpoint, {
@@ -19,7 +19,7 @@ module.exports = class Auth0Authorizer {
         if (statusCode === 200) {
             return JSON.parse(body);
         } else {
-            throw new Error('Bad token.');
+            return null;
         }
     }
 };
