@@ -29,11 +29,10 @@ class ResponseHelper {
     _buildApiGatewayResponse(statusCode, body, {contentType = 'text/plain'} = {}) {
         return {
             statusCode,
-            statusDescription: getStatusDescription(statusCode),
             headers: {
-                'content-type': [{key: 'Content-Type', value: contentType}],
-                'content-encoding': [{key: 'Content-Encoding', value: 'UTF-8'}],
-                'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
+                'Content-Type': contentType,
+                'Content-Encoding': 'UTF-8',
+                'Access-Control-Allow-Origin': '*',
             },
             body,
         };
@@ -55,7 +54,7 @@ class ResponseHelper {
     convertResponseToEdge(apiGatewayResponse) {
         return {
             status: apiGatewayResponse.statusCode,
-            statusDescription: apiGatewayResponse.statusDescription,
+            statusDescription: getStatusDescription(apiGatewayResponse.statusCode),
             headers: Object.entries(apiGatewayResponse.headers).reduce((result, [key, value]) => ({...result, [key.toLowerCase()]: [{key, value}]}), {}),
             ...((apiGatewayResponse.body) && {body: apiGatewayResponse.body})
         };
@@ -68,11 +67,10 @@ class ResponseHelper {
     _buildApiGatewayOptionsResponse(allowedMethods) {
         return {
             statusCode: 200,
-            statusDescription: 'OK',
             headers: {
-                'access-control-allow-origin': [{key: 'Access-Control-Allow-Origin', value: '*'}],
-                'access-control-allow-methods': [{key: 'Access-Control-Allow-Methods', value: allowedMethods.join(', ')}],
-                'access-control-allow-headers': [{key: 'Access-Control-Allow-Headers', value: '*'}],
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': allowedMethods.join(', '),
+                'Access-Control-Allow-Headers': '*',
             },
         };
     }
