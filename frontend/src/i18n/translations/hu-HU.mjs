@@ -68,6 +68,7 @@ const articlePageTranslations = {
             Sajnos azt tapasztaltuk, ezek a remek cikkek az évek alatt gyakran eltűnnek az internetről. Hogy később is meglegyenek, elmentettük a másolataikat ide az oldalra.<br/>
             Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.</>, format: 'jsx'
     },
+    'The course hasn’t started. Helpful articles will be added here as the course progresses. Check back later!': {translation: 'A tanfolyam még nem kezdődött el. A kurzus előrehaladtával hasznos cikkek fognak kerülni ahogy a kurzus. Nézz vissza később!'},
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
     'Photato cached version': {translation: <><PhotatoEmoji /> mentett verzió</>, format: 'jsx'},
 };

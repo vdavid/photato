@@ -1,8 +1,9 @@
-const cloudFrontBackUrl = 'https://d2rw8z9jy7vx22.cloudfront.net';
+const apiGatewayBackEndUrl = 'https://971tlzc7le.execute-api.us-east-1.amazonaws.com/production';
+const cloudFrontBackEndUrl = 'https://dglg96wn4of1.cloudfront.net';
 
 const isWinterOrSummerCourse = 'summer';
 // TODO: Fake date for testing ↓↓↓
-const startDateTime = new Date(Date.UTC(2020, 3 - 1, 15, /* Must be the Sunday morning 0:00 CET when the course started */
+const startDateTime = new Date(Date.UTC(2020, 6 - 1, 7, /* Must be the Sunday morning 0:00 CET when the course started */
     -1 /* -2 if it was daylight saving time, -1 otherwise */));
 const liveEventDate = new Date(startDateTime);
 liveEventDate.setDate(liveEventDate.getDate() + isWinterOrSummerCourse
@@ -40,14 +41,14 @@ export const config = {
     },
     backendApi: {
         photoUpload: {
-            url: cloudFrontBackUrl + '/get-signed-url', /* Must have no trailing slash */
+            url: cloudFrontBackEndUrl + '/get-signed-url', /* Must have no trailing slash */
         },
         adminGetAllMessages: {
-            url: cloudFrontBackUrl + '/get-all-messages', /* Must have no trailing slash */
+            url: apiGatewayBackEndUrl + '/messages/get-all-messages', /* Must have no trailing slash */
         },
     },
     contentImages: {
-        externalArticlesBaseUrl: 'https://photato-photos-bucket.s3.us-east-1.amazonaws.com/external-articles/', /* Must have a trailing slash */
+        thirdPartyArticlesBaseUrl: 'https://photato-photos-bucket.s3.us-east-1.amazonaws.com/external-articles/', /* Must have a trailing slash */
     },
     customerServiceEmailAddress: 'photatophotato@gmail.com',
     adminEmailAddresses: [

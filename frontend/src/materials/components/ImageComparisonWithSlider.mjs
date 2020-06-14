@@ -16,7 +16,7 @@ export default function ImageComparisonWithSlider({fileName1, fileName2, caption
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
     const {metadata} = useMaterialContext();
-    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
+    const imageBaseUrl = config.contentImages.thirdPartyArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
 
     /* Element refs */
     const primaryImageRef = useRef({});

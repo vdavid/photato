@@ -1,6 +1,6 @@
 import React, {useEffect} from '../../../web_modules/react.js';
 import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
-import {externalArticleSlugsByLanguageAndByWeek} from '../../../materials/articles-repository.mjs';
+import {thirdPartyArticleSlugsByLanguageAndByWeek} from '../../../materials/articles-repository.mjs';
 
 export default function SitemapGeneratorPage() {
     const {__} = useI18n();
@@ -35,7 +35,7 @@ export default function SitemapGeneratorPage() {
      */
     function getExternalMaterialPageInfos() {
         let result = [];
-        for (const [languageCode, slugsByWeek] of Object.entries(externalArticleSlugsByLanguageAndByWeek)) {
+        for (const [languageCode, slugsByWeek] of Object.entries(thirdPartyArticleSlugsByLanguageAndByWeek)) {
             result = [...result, ...getExternalMaterialPageInfosForOneLocale(languageCode, slugsByWeek)];
         }
         return result;

@@ -52,11 +52,13 @@ export const ownArticleSlugsByLanguageAndByWeek = {
 /**
  * @type {{string: {int: string[]}}} The index is one-based! (First week is 1 etc.)
  */
-export const externalArticleSlugsByLanguageAndByWeek = {
+export const thirdPartyArticleSlugsByLanguageAndByWeek = {
     'hu': {
         1: [ /* Foodie shot */
         ],
         2: [ /* Buildings */
+            'sg-varosok-megorokitese',
+            'canon-varosi-fotok-keszitese',
         ],
         3: [ /* Close-up photography */
             'sg-makrofotozas-1',
@@ -67,8 +69,6 @@ export const externalArticleSlugsByLanguageAndByWeek = {
             'webdesignsuli-tilt-shift-azaz-makett-effekt-keszitese-photoshopban',
         ],
         4: [ /* Street photography */
-            'sg-varosok-megorokitese',
-            'canon-varosi-fotok-keszitese',
             'pixinfo-nehany-tanacs-kezdo-utcai-fotosoknak',
             'pixinfo-fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek',
             'szellemkep-a-fotozas-jogi-utvesztoi-1',

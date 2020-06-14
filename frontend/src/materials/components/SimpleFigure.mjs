@@ -16,7 +16,7 @@ export default function SimpleFigure({fileName, altText, titleText, caption, wid
     const {getActiveLocaleCode} = useI18n();
     const languageCode = getActiveLocaleCode().substring(0, 2);
     const {metadata} = useMaterialContext();
-    const imageBaseUrl = config.contentImages.externalArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
+    const imageBaseUrl = config.contentImages.thirdPartyArticlesBaseUrl + languageCode + '/' + metadata.slug + '/';
     const imageUrl = imageBaseUrl + fileName;
 
     return <div className='simpleFigure'>

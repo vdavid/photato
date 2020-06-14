@@ -1,6 +1,8 @@
 import React from '../../../web_modules/react.js';
 import ExternalLink from '../../components/ExternalLink.mjs';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
+import PhotatoEmoji from '../../../website/components/PhotatoEmoji.mjs';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -49,10 +51,17 @@ export default function Article() {
         <p>Linkek:</p>
         <ul>
             <li>A legjobban a fentebb is linkelt <ExternalLink href="https://fotozasblog.hu/digitalis-fotozas/">fotózás alapok: zoom, blende, záridő</ExternalLink> cikket ajánljuk.</li>
-            <li>További <ExternalLink href="https://sg.hu/cikkek/it-tech/43737/hogyan-fotozzunk-varosok-megorokitese">tippek városi fotózáshoz</ExternalLink> az sg.hu-n.</li>
+            <li>További <ExternalLink href="https://sg.hu/cikkek/it-tech/43737/hogyan-fotozzunk-varosok-megorokitese">tippek városi fotózáshoz</ExternalLink> az sg.hu-n. [<NavLink to={'/hu/external-article/sg-varosok-megorokitese'}><PhotatoEmoji /> mentett verzió</NavLink>]</li>
             <li>Még <ExternalLink href="https://www.canon.hu/get-inspired/tips-and-techniques/city-photography/">tippek városi fotózáshoz</ExternalLink> a Canontól.</li>
         </ul>
 
-        <p>Inspiráció: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=building%20photography">Pinterest</ExternalLink> | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=budapest%20buildings">Pinterest / Budapest</ExternalLink> | Mobile Photo Awards épületfotó győztesek: <ExternalLink href="https://mobilephotoawards.com/architecture-design-winners-8th-annual-mpa/">2018</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-7th-annual-mpa/">2017</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-6th-mpa/">2016</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/architecture-design/">2015</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/architecture-design-2014-mpa-results/">2014</ExternalLink> | <ExternalLink href="https://mobilephotoawards.com/2013-mobile-photography-awards-architecturedesign-category-winners/">2013</ExternalLink></p>
+        <p>Inspiráció: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=building%20photography">Pinterest</ExternalLink>
+            | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=budapest%20buildings">Pinterest / Budapest</ExternalLink>
+            | Mobile Photo Awards épületfotó győztesek: <ExternalLink href="https://mobilephotoawards.com/architecture-design-winners-8th-annual-mpa/">2018</ExternalLink>
+            | <ExternalLink href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-7th-annual-mpa/">2017</ExternalLink>
+            | <ExternalLink href="https://mobilephotoawards.com/architecture-design-winner-honorable-mentions-6th-mpa/">2016</ExternalLink>
+            | <ExternalLink href="https://mobilephotoawards.com/architecture-design/">2015</ExternalLink>
+            | <ExternalLink href="https://mobilephotoawards.com/architecture-design-2014-mpa-results/">2014</ExternalLink>
+            | <ExternalLink href="https://mobilephotoawards.com/2013-mobile-photography-awards-architecturedesign-category-winners/">2013</ExternalLink></p>
     </>;
 }
