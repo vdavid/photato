@@ -6,8 +6,8 @@ const PhotoRepository = require('../PhotoRepository.js');
 const SignatureRepository = require('../SignatureRepository.js');
 
 const url = require('url');
-const {getRequestDataFromLambdaEdgeEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
-const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
+const RequestHelper = require('../../http/RequestHelper.js');
+const ResponseHelper = require('../../http/ResponseHelper.js');
 
 module.exports = class GetSignedUrlHandler {
     /**
@@ -34,29 +34,33 @@ module.exports = class GetSignedUrlHandler {
      */
     async handleRequest(event, context) {
         console.debug(`getSignedUrl | Got ${event.Records[0].cf.request.method} request.`)
+        const requestHelper = new RequestHelper(event);
+        const responseHelper = new ResponseHelper(requestHelper.eventSource);
         try {
             /* Parse input */
-            const requestData = getRequestDataFromLambdaEdgeEvent(event);
+            const requestData = requestHelper.getRequestData();
 
             /* Authorize user */
             if (requestData.method === 'OPTIONS') {
-                return buildOptionsResponse(['GET']);
+                return responseHelper.buildOptionsResponse(['GET']);
             } else if (requestData.method === 'GET') {
-                return this._handleGetRequest(requestData);
+                return this._handleGetRequest(requestData, requestHelper, responseHelper);
             }
         } catch (error) {
             console.info(`getSignedUrl | 400 error: "${error.message}"`)
-            return buildResponse(400, error.message);
+            return responseHelper.buildResponse(400, error.message);
         }
     }
 
     /**
      * @param {Object} requestData
+     * @param {RequestHelper} requestHelper
+     * @param {ResponseHelper} responseHelper
      * @returns {Promise<Object>}
      * @private
      */
-    async _handleGetRequest(requestData) {
-        if (isEnvironmentValid(requestData.arguments.environment)) {
+    async _handleGetRequest(requestData, requestHelper, responseHelper) {
+        if (requestHelper.isEnvironmentValid(requestData.arguments.environment)) {
             const userData = await this._auth0Authorizer.getAuth0UserData(requestData.accessToken);
             if (userData) {
                 const photoMetadata = this._photoMetadataBuilder.createFromRawFields(requestData.arguments);
@@ -70,18 +74,18 @@ module.exports = class GetSignedUrlHandler {
 
                     /* Return signed upload URL */
                     console.debug(`getSignedUrl | Responded with URL.`)
-                    return buildResponse(200, 'https://' + requestData.host + path);
+                    return responseHelper.buildResponse(200, 'https://' + requestData.host + path);
                 } else {
                     console.info(`getSignedUrl | 403 error: Invalid user. Email: "${userData.email}", but on photo: "${photoMetadata.emailAddress}".`)
-                    return buildResponse(403, 'Invalid user.');
+                    return responseHelper.buildResponse(403, 'Invalid user.');
                 }
             } else {
                 console.info(`getSignedUrl | 403 error: Invalid user with token "${requestData.accessToken}".`)
-                return buildResponse(403, 'Invalid auth0 token.');
+                return responseHelper.buildResponse(403, 'Invalid auth0 token.');
             }
         } else {
             console.info(`getSignedUrl | 400 error. Invalid environment "${requestData.arguments.environment}".`)
-            return buildResponse(400, 'Wrong environment.');
+            return responseHelper.buildResponse(400, 'Wrong environment.');
         }
     }
 };

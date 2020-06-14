@@ -36,7 +36,7 @@ test('Handles valid OPTIONS requests well', async () => {
     const response = await getAllMessagesHandler.handleRequest(event, {});
 
     /* Assert */
-    expect(response.status).toEqual(200);
+    expect(response.statusCode).toEqual(200);
     expect(response.statusDescription).toEqual('OK');
     expect(response.body).toEqual(undefined);
 });
@@ -50,7 +50,7 @@ test('Accepts valid GET requests for admins', async () => {
 
     /* Assert */
     expect(response.body).toEqual(JSON.stringify(mockMessages));
-    expect(response.status).toEqual(200);
+    expect(response.statusCode).toEqual(200);
     expect(response.statusDescription).toEqual('OK');
 });
 
@@ -63,7 +63,7 @@ test('Rejects GET requests for non-admins', async () => {
 
     /* Assert */
     expect(response.body).toEqual('Not an admin.');
-    expect(response.status).toEqual(403);
+    expect(response.statusCode).toEqual(403);
     expect(response.statusDescription).toEqual('Forbidden');
 });
 
@@ -76,8 +76,8 @@ test('Rejects GET requests for invalid tokens', async () => {
 
     /* Assert */
     expect(response.body).toEqual('Invalid auth0 token.');
-    expect(response.status).toEqual(403);
-    expect(response.statusDescription).toEqual('Forbidden');
+    expect(response.statusCode).toEqual(401);
+    expect(response.statusDescription).toEqual('Unauthorized');
 });
 
 function createGetEvent(emailAddress) {

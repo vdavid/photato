@@ -2,9 +2,8 @@ const config = require('../../config.js');
 const Auth0Authorizer = require('../../auth/Auth0Authorizer.js');
 const PermissionHelper = require('../../auth/PermissionHelper.js');
 const PhotatoMessageRepository = require('../PhotatoMessageRepository.js');
-
-const {getRequestDataFromApiGatewayEvent, isEnvironmentValid} = require('../../http/requestHelper.js');
-const {buildResponse, buildOptionsResponse} = require('../../http/responseHelper.js');
+const RequestHelper = require('../../http/RequestHelper.js');
+const ResponseHelper = require('../../http/ResponseHelper.js');
 
 module.exports = class GetSignedUrlHandler {
     /**
@@ -27,20 +26,30 @@ module.exports = class GetSignedUrlHandler {
      */
     async handleRequest(event, context) {
         try {
-            console.debug(`getAllMessages | Got ${event.httpMethod} request.`);
+            console.debug('getAllMessages | Started responding to request.');
+
+            const requestHelper = new RequestHelper(event);
+            const responseHelper = new ResponseHelper(requestHelper.eventSource);
+
             try {
                 /* Parse input */
-                const requestData = getRequestDataFromApiGatewayEvent(event);
+                const requestData = requestHelper.getRequestData();
+                console.debug(`getAllMessages | Parsed request data.`, requestData);
 
                 /* Authorize user */
-                if (requestData.method === 'OPTIONS') {
-                    return buildOptionsResponse(['GET']);
-                } else if (requestData.method === 'GET') {
-                    return await this._handleGetRequest(requestData);
+                try {
+                    if (requestData.method === 'OPTIONS') {
+                        return responseHelper.buildOptionsResponse(['GET']);
+                    } else if (requestData.method === 'GET') {
+                        return await this._handleGetRequest(requestData, requestHelper, responseHelper);
+                    }
+                } catch (error) {
+                    console.info('getAllMessages | 401 could not authenticate.', {error});
+                    return responseHelper.buildResponse(401, error.message);
                 }
             } catch (error) {
-                console.info(`getAllMessages | 400 error: "${error.message}"`);
-                return buildResponse(400, error.message);
+                console.info(`getAllMessages | 400 bad request error: "${error.message}"`, {event});
+                return responseHelper.buildResponse(400, error.message);
             }
         } catch (error) { // Only temporary, to see if the logging works at all.
             console.error(error);
@@ -49,28 +58,30 @@ module.exports = class GetSignedUrlHandler {
 
     /**
      * @param {Object} requestData
+     * @param {RequestHelper} requestHelper
+     * @param {ResponseHelper} responseHelper
      * @returns {Promise<Object>}
      * @private
      */
-    async _handleGetRequest(requestData) {
-        if (isEnvironmentValid(requestData.arguments.environment)) {
+    async _handleGetRequest(requestData, requestHelper, responseHelper) {
+        if (requestHelper.isEnvironmentValid(requestData.arguments.environment)) {
             const userData = await this._auth0Authorizer.getAuth0UserData(requestData.accessToken);
             if (userData) {
                 const isAdmin = this._permissionHelper.isAdmin(userData.email);
                 if (isAdmin) {
                     const allMessages = this._photatoMessageRepository.getAllMessages();
-                    return buildResponse(200, JSON.stringify(allMessages), {contentType: 'application/json'});
+                    return responseHelper.buildResponse(200, JSON.stringify(allMessages), {contentType: 'application/json'});
                 } else {
                     console.info(`getAllMessages | 403 error: Not an admin. Email: "${userData.email}".`);
-                    return buildResponse(403, 'Not an admin.');
+                    return responseHelper.buildResponse(403, 'Not an admin.');
                 }
             } else {
-                console.info(`getAllMessages | 403 error: Invalid user with token "${requestData.accessToken}".`);
-                return buildResponse(403, 'Invalid auth0 token.');
+                console.info(`getAllMessages | 401 error: Invalid user with token "${requestData.accessToken}".`);
+                return responseHelper.buildResponse(401, 'Invalid auth0 token.');
             }
         } else {
             console.info(`getAllMessages | 400 error. Invalid environment "${requestData.arguments.environment}".`);
-            return buildResponse(400, 'Wrong environment.');
+            return responseHelper.buildResponse(400, 'Wrong environment.');
         }
     }
 };
