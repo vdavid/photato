@@ -16,8 +16,6 @@ import ExternalLink from './ExternalLink.mjs';
  * @property {string} publisherName
  * @property {string} [originalUrl] Only applicable for external articles.
  * @property {boolean} [isOriginalUrlBroken] Only applicable for external articles.
- * @property {int} [unlockWeekIndex] A one-based index which determines the week when the article is
- *           first displayed for students. If not defined then it's always displayed.
  */
 /**
  * @typedef {Object} LoadedArticle

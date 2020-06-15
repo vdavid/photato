@@ -15,7 +15,6 @@ export function getMetadata() {
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
-        unlockWeekIndex: 9,
     };
 }
 
