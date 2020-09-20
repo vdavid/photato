@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const {getConfig} = require('./config.js');
+const {getDefaultConfig} = require('./config.js');
 
 const AuthMiddleware = require('./auth/AuthMiddleware.js');
 const LambdaAuthorizer = require('./auth/LambdaAuthorizer.js');
@@ -14,22 +14,21 @@ const SignatureRepository = require('./photos/SignatureRepository.js');
 const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlController.js');
 const ValidateSignedUrlController = require('./photos/validateSignedUrl/ValidateSignedUrlController.js');
 
-const router = new Router();
+const defaultConfig = getDefaultConfig();
+const router = new Router(defaultConfig.appName);
 const s3 = new AWS.S3({region: 'us-east-1', signatureVersion: 'v4'});
 
 const photoMetadataBuilder = new PhotoMetadataBuilder();
+const photoRepository = new PhotoRepository(s3, defaultConfig.photos.bucket.name);
+const signatureRepository = new SignatureRepository(s3, defaultConfig.photos.bucket.name);
+const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
+
+const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
+const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
 
 async function main(event, context) {
     const requestHelper = new RequestHelper(event, context);
     const responseHelper = new ResponseHelper(requestHelper.eventSource);
-
-    const config = getConfig(requestHelper.getEnvironment());
-
-    const photoRepository = new PhotoRepository(s3, config.photos.bucket.name);
-    const signatureRepository = new SignatureRepository(s3, config.photos.bucket.name);
-    const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
-    const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
-    const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
 
     try {
         return await router.resolveRoutes(event, context, [

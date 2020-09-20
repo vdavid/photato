@@ -1,3 +1,5 @@
+const {getDefaultConfig} = require('./config.js');
+
 const RequestHelper = require('./http/RequestHelper.js');
 const ResponseHelper = require('./http/ResponseHelper.js');
 const Router = require('./http/Router.js');
@@ -8,8 +10,6 @@ const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js
 
 const VersionController = require('./meta/VersionController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
-
-const router = new Router();
 
 /**
  * @typedef {Object} ApiGatewayEvent
@@ -57,6 +57,17 @@ const router = new Router();
  * @property {string} callbackWaitsForEmptyEventLoop Set to false to send the response right away when the callback executes, instead of waiting for the Node.js event loop to be empty. If this is false, any outstanding events continue to run during the next invocation.
  */
 
+const defaultConfig = getDefaultConfig();
+const router = new Router(defaultConfig.appName);
+
+/* Create middleware */
+const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
+
+/* Create controllers */
+const versionController = new VersionController();
+const photatoMessageRepository = new PhotatoMessageRepository();
+const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
+
 /**
  * @param {ApiGatewayEvent|LambdaEdgeEvent} event For formats:
  *        API Gateway: See https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html
@@ -71,14 +82,6 @@ async function main(event, context) {
 
     /* Log */
     console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()}.`);
-
-    /* Create middleware */
-    const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
-
-    /* Create controllers */
-    const versionController = new VersionController();
-    const photatoMessageRepository = new PhotatoMessageRepository();
-    const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
 
     /* Resolve routes */
     try {

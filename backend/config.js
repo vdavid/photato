@@ -1,7 +1,7 @@
 /**
- * @param {string} environment
+ * @param {string?} environment
  */
-function getConfig(environment) {
+function getConfig(environment= '') {
     const environmentSpecificConfig =
         (environment === 'production') ? productionConfig
             : ((environment === 'staging') ? stagingConfig
@@ -13,7 +13,15 @@ function getConfig(environment) {
     });
 }
 
+/**
+ * Be careful, any environment-specific stuff will not be set!
+ */
+function getDefaultConfig() {
+    return defaultConfig;
+}
+
 const defaultConfig = Object.freeze({
+    appName: 'photato-website-backend',
     environment: '', // Will be set to 'development', 'staging', or 'production' by environment-specific config
     baseUrl: '', // Will be set by environment-specific config. E.g. "https://photato.eu". Will not contain a slash at the end.
     database: {
@@ -52,5 +60,6 @@ const developmentConfig = Object.freeze({
 });
 
 module.exports = {
-    getConfig
+    getConfig,
+    getDefaultConfig,
 };

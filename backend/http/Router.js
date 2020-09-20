@@ -14,6 +14,13 @@ const ResponseHelper = require('./ResponseHelper.js');
 
 class Router {
     /**
+     * @param {string} appName
+     */
+    constructor({appName}) {
+        this._appName = appName;
+    }
+
+    /**
      * Finds the first matching route in the given array, and calls the specified sequence of middleware.
      * If the called sequence does not yield a result, an error will be returned.
      *
@@ -28,9 +35,13 @@ class Router {
     async resolveRoutes(event, context, routes) {
         const requestHelper = new RequestHelper(event, context);
         const responseHelper = new ResponseHelper(requestHelper.eventSource);
+
+        const environment = requestHelper.getEnvironment();
         if (requestHelper.isEnvironmentValid()) {
-            console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()}.`);
-            const firstMatchedRoute = routes.find(route => route.functionName === context.functionName && route.method === requestHelper.getRequestData().method);
+            console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${environment}.`);
+            const firstMatchedRoute = routes.find(route =>
+                this._getFullFunctionName(this._appName, environment, route.functionName) === context.functionName
+                && route.method === requestHelper.getRequestData().method);
             if (firstMatchedRoute) {
                 for (const middleware of firstMatchedRoute.middlewareSequence) {
                     const result = await middleware(requestHelper, responseHelper);
@@ -46,9 +57,13 @@ class Router {
 
             }
         } else {
-            console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 400 error. Invalid environment "${requestHelper.getEnvironment()}".`);
+            console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 400 error. Invalid environment "${environment}".`);
             return responseHelper.buildResponse(400, 'Wrong environment.');
         }
+    }
+
+    _getFullFunctionName(appName, environment, functionName) {
+        return `${appName}-${environment}-${functionName}`;
     }
 }
 
