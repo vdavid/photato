@@ -7,7 +7,7 @@ Technology used:
 
 For the single-use upload URLs, got a lot of inspiration from this [article](https://serverless.com/blog/s3-one-time-signed-url/) and the related [repository](https://github.com/laardee/one-time-presigned-url).
 
-See also the frontend's README.md
+See also the frontend’s README.md
 
 ## Installation
 
@@ -42,6 +42,9 @@ I suppose it needs "AdministratorAccess" privileges, that's what I gave it:
    ```bash
    serverless login
    ```
+
+### Mongo
+A “users” collection will be auto-created, but an index on it is needed for "sessions.auth0AccessToken".
 
 ## Development
 
