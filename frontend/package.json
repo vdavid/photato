@@ -1,6 +1,6 @@
 {
   "name": "photato-website-frontend",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "This is the JS front end of the Photato website.",
   "main": "src/main.mjs",
   "scripts": {
@@ -28,25 +28,28 @@
   "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
   "dependencies": {
     "htm": "^3.0.4",
-    "react": "npm:@pika/react@^16.13.1",
-    "react-dom": "npm:@pika/react-dom@^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/helper-builder-react-jsx": "^7.9.0",
-    "jest": "^25.4.0",
-    "snowpack": "^1.7.1"
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "jest": "^26.4.2",
+    "snowpack": "^2.11.1"
   },
   "jest": {
     "testEnvironment": "jsdom"
   },
   "snowpack": {
-    "webDependencies": [
+    "install": [
       "react",
       "react-dom",
       "react-router-dom"
-    ]
+    ],
+    "installOptions": {
+      "dest": "src/web_modules"
+    }
   }
 }

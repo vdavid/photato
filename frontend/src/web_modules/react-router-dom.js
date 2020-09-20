@@ -1,15 +1,9 @@
-import React, { Component } from './react.js';
+import { c as createCommonjsModule, a as checkPropTypes_1, R as ReactPropTypesSecret_1, o as objectAssign, r as react } from './common/index-5c888680.js';
 
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
   subClass.__proto__ = superClass;
-}
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
 var reactIs_development = createCommonjsModule(function (module, exports) {
@@ -184,34 +178,6 @@ exports.typeOf = typeOf;
   })();
 }
 });
-var reactIs_development_1 = reactIs_development.AsyncMode;
-var reactIs_development_2 = reactIs_development.ConcurrentMode;
-var reactIs_development_3 = reactIs_development.ContextConsumer;
-var reactIs_development_4 = reactIs_development.ContextProvider;
-var reactIs_development_5 = reactIs_development.Element;
-var reactIs_development_6 = reactIs_development.ForwardRef;
-var reactIs_development_7 = reactIs_development.Fragment;
-var reactIs_development_8 = reactIs_development.Lazy;
-var reactIs_development_9 = reactIs_development.Memo;
-var reactIs_development_10 = reactIs_development.Portal;
-var reactIs_development_11 = reactIs_development.Profiler;
-var reactIs_development_12 = reactIs_development.StrictMode;
-var reactIs_development_13 = reactIs_development.Suspense;
-var reactIs_development_14 = reactIs_development.isAsyncMode;
-var reactIs_development_15 = reactIs_development.isConcurrentMode;
-var reactIs_development_16 = reactIs_development.isContextConsumer;
-var reactIs_development_17 = reactIs_development.isContextProvider;
-var reactIs_development_18 = reactIs_development.isElement;
-var reactIs_development_19 = reactIs_development.isForwardRef;
-var reactIs_development_20 = reactIs_development.isFragment;
-var reactIs_development_21 = reactIs_development.isLazy;
-var reactIs_development_22 = reactIs_development.isMemo;
-var reactIs_development_23 = reactIs_development.isPortal;
-var reactIs_development_24 = reactIs_development.isProfiler;
-var reactIs_development_25 = reactIs_development.isStrictMode;
-var reactIs_development_26 = reactIs_development.isSuspense;
-var reactIs_development_27 = reactIs_development.isValidElementType;
-var reactIs_development_28 = reactIs_development.typeOf;
 
 var reactIs = createCommonjsModule(function (module) {
 
@@ -219,234 +185,12 @@ var reactIs = createCommonjsModule(function (module) {
   module.exports = reactIs_development;
 }
 });
-var reactIs_1 = reactIs.AsyncMode;
-var reactIs_2 = reactIs.ConcurrentMode;
-var reactIs_3 = reactIs.ContextConsumer;
-var reactIs_4 = reactIs.ContextProvider;
-var reactIs_5 = reactIs.Element;
-var reactIs_6 = reactIs.ForwardRef;
-var reactIs_7 = reactIs.Fragment;
-var reactIs_8 = reactIs.Lazy;
-var reactIs_9 = reactIs.Memo;
-var reactIs_10 = reactIs.Portal;
-var reactIs_11 = reactIs.Profiler;
-var reactIs_12 = reactIs.StrictMode;
-var reactIs_13 = reactIs.Suspense;
-var reactIs_14 = reactIs.isAsyncMode;
-var reactIs_15 = reactIs.isConcurrentMode;
-var reactIs_16 = reactIs.isContextConsumer;
-var reactIs_17 = reactIs.isContextProvider;
-var reactIs_18 = reactIs.isElement;
-var reactIs_19 = reactIs.isForwardRef;
-var reactIs_20 = reactIs.isFragment;
-var reactIs_21 = reactIs.isLazy;
-var reactIs_22 = reactIs.isMemo;
-var reactIs_23 = reactIs.isPortal;
-var reactIs_24 = reactIs.isProfiler;
-var reactIs_25 = reactIs.isStrictMode;
-var reactIs_26 = reactIs.isSuspense;
-var reactIs_27 = reactIs.isValidElementType;
-var reactIs_28 = reactIs.typeOf;
 
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-var ReactPropTypesSecret_1 = ReactPropTypesSecret;
-
+var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
 
 {
-  var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
-  var loggedTypeFailures = {};
-  var has = Function.call.bind(Object.prototype.hasOwnProperty);
-
   printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  {
-    for (var typeSpecName in typeSpecs) {
-      if (has(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error(
-              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
-            );
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$1);
-        } catch (ex) {
-          error = ex;
-        }
-        if (error && !(error instanceof Error)) {
-          printWarning(
-            (componentName || 'React class') + ': type specification of ' +
-            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
-            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
-            'You may have forgotten to pass an argument to the type checker ' +
-            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
-            'shape all require an argument).'
-          );
-        }
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          printWarning(
-            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
- * Resets warning cache when testing.
- *
- * @private
- */
-checkPropTypes.resetWarningCache = function() {
-  {
-    loggedTypeFailures = {};
-  }
-};
-
-var checkPropTypes_1 = checkPropTypes;
-
-var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
-var printWarning$1 = function() {};
-
-{
-  printWarning$1 = function(text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') {
       console.error(message);
@@ -622,7 +366,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
             // Avoid spamming the console because they are often not actionable except for lib authors
             manualPropTypeWarningCount < 3
           ) {
-            printWarning$1(
+            printWarning(
               'You are manually calling a React.PropTypes validation ' +
               'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
               'and will throw in the standalone `prop-types` package. ' +
@@ -735,12 +479,12 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
     if (!Array.isArray(expectedValues)) {
       {
         if (arguments.length > 1) {
-          printWarning$1(
+          printWarning(
             'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
             'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
           );
         } else {
-          printWarning$1('Invalid argument supplied to oneOf, expected an array.');
+          printWarning('Invalid argument supplied to oneOf, expected an array.');
         }
       }
       return emptyFunctionThatReturnsNull;
@@ -777,7 +521,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
       }
       for (var key in propValue) {
-        if (has$1(propValue, key)) {
+        if (has(propValue, key)) {
           var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
           if (error instanceof Error) {
             return error;
@@ -791,14 +535,14 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
 
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-       printWarning$1('Invalid argument supplied to oneOfType, expected an instance of array.') ;
+       printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') ;
       return emptyFunctionThatReturnsNull;
     }
 
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        printWarning$1(
+        printWarning(
           'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
           'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
         );
@@ -1036,27 +780,6 @@ var propTypes = createCommonjsModule(function (module) {
   module.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
 }
 });
-var propTypes_1 = propTypes.array;
-var propTypes_2 = propTypes.bool;
-var propTypes_3 = propTypes.func;
-var propTypes_4 = propTypes.number;
-var propTypes_5 = propTypes.object;
-var propTypes_6 = propTypes.string;
-var propTypes_7 = propTypes.symbol;
-var propTypes_8 = propTypes.any;
-var propTypes_9 = propTypes.arrayOf;
-var propTypes_10 = propTypes.element;
-var propTypes_11 = propTypes.elementType;
-var propTypes_12 = propTypes.instanceOf;
-var propTypes_13 = propTypes.node;
-var propTypes_14 = propTypes.objectOf;
-var propTypes_15 = propTypes.oneOf;
-var propTypes_16 = propTypes.oneOfType;
-var propTypes_17 = propTypes.shape;
-var propTypes_18 = propTypes.exact;
-var propTypes_19 = propTypes.checkPropTypes;
-var propTypes_20 = propTypes.resetWarningCache;
-var propTypes_21 = propTypes.PropTypes;
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -2123,21 +1846,13 @@ function createMemoryHistory(props) {
   return history;
 }
 
-function _inheritsLoose$1(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-var inheritsLoose = _inheritsLoose$1;
-
-var key = '__global_unique_id__';
-
-var gud = function() {
-  return commonjsGlobal[key] = (commonjsGlobal[key] || 0) + 1;
-};
-
 var MAX_SIGNED_31_BIT_INT = 1073741823;
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {};
+
+function getUniqueId() {
+  var key = '__global_unique_id__';
+  return commonjsGlobal[key] = (commonjsGlobal[key] || 0) + 1;
+}
 
 function objectIs(x, y) {
   if (x === y) {
@@ -2177,12 +1892,10 @@ function onlyChild(children) {
 function createReactContext(defaultValue, calculateChangedBits) {
   var _Provider$childContex, _Consumer$contextType;
 
-  var contextProp = '__create-react-context-' + gud() + '__';
+  var contextProp = '__create-react-context-' + getUniqueId() + '__';
 
-  var Provider =
-  /*#__PURE__*/
-  function (_Component) {
-    inheritsLoose(Provider, _Component);
+  var Provider = /*#__PURE__*/function (_Component) {
+    _inheritsLoose(Provider, _Component);
 
     function Provider() {
       var _this;
@@ -2229,14 +1942,12 @@ function createReactContext(defaultValue, calculateChangedBits) {
     };
 
     return Provider;
-  }(Component);
+  }(react.Component);
 
   Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[contextProp] = propTypes.object.isRequired, _Provider$childContex);
 
-  var Consumer =
-  /*#__PURE__*/
-  function (_Component2) {
-    inheritsLoose(Consumer, _Component2);
+  var Consumer = /*#__PURE__*/function (_Component2) {
+    _inheritsLoose(Consumer, _Component2);
 
     function Consumer() {
       var _this2;
@@ -2294,7 +2005,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
     };
 
     return Consumer;
-  }(Component);
+  }(react.Component);
 
   Consumer.contextTypes = (_Consumer$contextType = {}, _Consumer$contextType[contextProp] = propTypes.object, _Consumer$contextType);
   return {
@@ -2303,7 +2014,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
   };
 }
 
-var index = React.createContext || createReactContext;
+var index = react.createContext || createReactContext;
 
 var isarray = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
@@ -2810,7 +2521,7 @@ function getStatics(component) {
 
 var defineProperty = Object.defineProperty;
 var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols$1 = Object.getOwnPropertySymbols;
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 var getPrototypeOf = Object.getPrototypeOf;
 var objectPrototype = Object.prototype;
@@ -2827,8 +2538,8 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 
     var keys = getOwnPropertyNames(sourceComponent);
 
-    if (getOwnPropertySymbols$1) {
-      keys = keys.concat(getOwnPropertySymbols$1(sourceComponent));
+    if (getOwnPropertySymbols) {
+      keys = keys.concat(getOwnPropertySymbols(sourceComponent));
     }
 
     var targetStatics = getStatics(targetComponent);
@@ -2861,9 +2572,21 @@ var createNamedContext = function createNamedContext(name) {
   return context;
 };
 
+var historyContext =
+/*#__PURE__*/
+createNamedContext("Router-History");
+
+// TODO: Replace with React.createContext once we can assume React 16+
+
+var createNamedContext$1 = function createNamedContext(name) {
+  var context = index();
+  context.displayName = name;
+  return context;
+};
+
 var context =
 /*#__PURE__*/
-createNamedContext("Router");
+createNamedContext$1("Router");
 
 /**
  * The public API for putting history on context.
@@ -2930,19 +2653,21 @@ function (_React$Component) {
   };
 
   _proto.render = function render() {
-    return React.createElement(context.Provider, {
-      children: this.props.children || null,
+    return react.createElement(context.Provider, {
       value: {
         history: this.props.history,
         location: this.state.location,
         match: Router.computeRootMatch(this.state.location.pathname),
         staticContext: this.props.staticContext
       }
-    });
+    }, react.createElement(historyContext.Provider, {
+      children: this.props.children || null,
+      value: this.props.history
+    }));
   };
 
   return Router;
-}(React.Component);
+}(react.Component);
 
 {
   Router.propTypes = {
@@ -2980,14 +2705,14 @@ function (_React$Component) {
   var _proto = MemoryRouter.prototype;
 
   _proto.render = function render() {
-    return React.createElement(Router, {
+    return react.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
 
   return MemoryRouter;
-}(React.Component);
+}(react.Component);
 
 {
   MemoryRouter.propTypes = {
@@ -3031,7 +2756,7 @@ function (_React$Component) {
   };
 
   return Lifecycle;
-}(React.Component);
+}(react.Component);
 
 /**
  * The public API for prompting the user before navigating away from a screen.
@@ -3041,11 +2766,11 @@ function Prompt(_ref) {
   var message = _ref.message,
       _ref$when = _ref.when,
       when = _ref$when === void 0 ? true : _ref$when;
-  return React.createElement(context.Consumer, null, function (context) {
+  return react.createElement(context.Consumer, null, function (context) {
     !context ?  invariant(false, "You should not use <Prompt> outside a <Router>")  : void 0;
     if (!when || context.staticContext) return null;
     var method = context.history.block;
-    return React.createElement(Lifecycle, {
+    return react.createElement(Lifecycle, {
       onMount: function onMount(self) {
         self.release = method(message);
       },
@@ -3114,7 +2839,7 @@ function Redirect(_ref) {
       to = _ref.to,
       _ref$push = _ref.push,
       push = _ref$push === void 0 ? false : _ref$push;
-  return React.createElement(context.Consumer, null, function (context) {
+  return react.createElement(context.Consumer, null, function (context) {
     !context ?  invariant(false, "You should not use <Redirect> outside a <Router>")  : void 0;
     var history = context.history,
         staticContext = context.staticContext;
@@ -3129,7 +2854,7 @@ function Redirect(_ref) {
       return null;
     }
 
-    return React.createElement(Lifecycle, {
+    return react.createElement(Lifecycle, {
       onMount: function onMount() {
         method(location);
       },
@@ -3236,7 +2961,7 @@ function matchPath(pathname, options) {
 }
 
 function isEmptyChildren(children) {
-  return React.Children.count(children) === 0;
+  return react.Children.count(children) === 0;
 }
 
 function evalChildrenDev(children, props, path) {
@@ -3263,7 +2988,7 @@ function (_React$Component) {
   _proto.render = function render() {
     var _this = this;
 
-    return React.createElement(context.Consumer, null, function (context$1) {
+    return react.createElement(context.Consumer, null, function (context$1) {
       !context$1 ?  invariant(false, "You should not use <Route> outside a <Router>")  : void 0;
       var location = _this.props.location || context$1.location;
       var match = _this.props.computedMatch ? _this.props.computedMatch // <Switch> already computed the match for us
@@ -3284,20 +3009,20 @@ function (_React$Component) {
         children = null;
       }
 
-      return React.createElement(context.Provider, {
+      return react.createElement(context.Provider, {
         value: props
-      }, props.match ? children ? typeof children === "function" ?  evalChildrenDev(children, props, _this.props.path)  : children : component ? React.createElement(component, props) : render ? render(props) : null : typeof children === "function" ?  evalChildrenDev(children, props, _this.props.path)  : null);
+      }, props.match ? children ? typeof children === "function" ?  evalChildrenDev(children, props, _this.props.path)  : children : component ? react.createElement(component, props) : render ? render(props) : null : typeof children === "function" ?  evalChildrenDev(children, props, _this.props.path)  : null);
     });
   };
 
   return Route;
-}(React.Component);
+}(react.Component);
 
 {
   Route.propTypes = {
     children: propTypes.oneOfType([propTypes.func, propTypes.node]),
     component: function component(props, propName) {
-      if (props[propName] && !reactIs_27(props[propName])) {
+      if (props[propName] && !reactIs.isValidElementType(props[propName])) {
         return new Error("Invalid prop 'component' supplied to 'Route': the prop is not a valid React component");
       }
     },
@@ -3430,14 +3155,14 @@ function (_React$Component) {
       listen: this.handleListen,
       block: this.handleBlock
     };
-    return React.createElement(Router, _extends({}, rest, {
+    return react.createElement(Router, _extends({}, rest, {
       history: history,
       staticContext: context
     }));
   };
 
   return StaticRouter;
-}(React.Component);
+}(react.Component);
 
 {
   StaticRouter.propTypes = {
@@ -3469,7 +3194,7 @@ function (_React$Component) {
   _proto.render = function render() {
     var _this = this;
 
-    return React.createElement(context.Consumer, null, function (context) {
+    return react.createElement(context.Consumer, null, function (context) {
       !context ?  invariant(false, "You should not use <Switch> outside a <Router>")  : void 0;
       var location = _this.props.location || context.location;
       var element, match; // We use React.Children.forEach instead of React.Children.toArray().find()
@@ -3477,8 +3202,8 @@ function (_React$Component) {
       // to trigger an unmount/remount for two <Route>s that render the same
       // component at different URLs.
 
-      React.Children.forEach(_this.props.children, function (child) {
-        if (match == null && React.isValidElement(child)) {
+      react.Children.forEach(_this.props.children, function (child) {
+        if (match == null && react.isValidElement(child)) {
           element = child;
           var path = child.props.path || child.props.from;
           match = path ? matchPath(location.pathname, _extends({}, child.props, {
@@ -3486,7 +3211,7 @@ function (_React$Component) {
           })) : context.match;
         }
       });
-      return match ? React.cloneElement(element, {
+      return match ? react.cloneElement(element, {
         location: location,
         computedMatch: match
       }) : null;
@@ -3494,7 +3219,7 @@ function (_React$Component) {
   };
 
   return Switch;
-}(React.Component);
+}(react.Component);
 
 {
   Switch.propTypes = {
@@ -3519,9 +3244,9 @@ function withRouter(Component) {
     var wrappedComponentRef = props.wrappedComponentRef,
         remainingProps = _objectWithoutPropertiesLoose(props, ["wrappedComponentRef"]);
 
-    return React.createElement(context.Consumer, null, function (context) {
+    return react.createElement(context.Consumer, null, function (context) {
       !context ?  invariant(false, "You should not use <" + displayName + " /> outside a <Router>")  : void 0;
-      return React.createElement(Component, _extends({}, remainingProps, context, {
+      return react.createElement(Component, _extends({}, remainingProps, context, {
         ref: wrappedComponentRef
       }));
     });
@@ -3539,13 +3264,13 @@ function withRouter(Component) {
   return hoistNonReactStatics_cjs(C, Component);
 }
 
-var useContext = React.useContext;
+var useContext = react.useContext;
 function useHistory() {
   {
     !(typeof useContext === "function") ?  invariant(false, "You must use React >= 16.8 in order to use useHistory()")  : void 0;
   }
 
-  return useContext(context).history;
+  return useContext(historyContext);
 }
 function useLocation() {
   {
@@ -3567,28 +3292,30 @@ function useRouteMatch(path) {
     !(typeof useContext === "function") ?  invariant(false, "You must use React >= 16.8 in order to use useRouteMatch()")  : void 0;
   }
 
-  return path ? matchPath(useLocation().pathname, path) : useContext(context).match;
+  var location = useLocation();
+  var match = useContext(context).match;
+  return path ? matchPath(location.pathname, path) : match;
 }
 
 {
   if (typeof window !== "undefined") {
     var global$1 = window;
-    var key$1 = "__react_router_build__";
+    var key = "__react_router_build__";
     var buildNames = {
       cjs: "CommonJS",
       esm: "ES modules",
       umd: "UMD"
     };
 
-    if (global$1[key$1] && global$1[key$1] !== "esm") {
-      var initialBuildName = buildNames[global$1[key$1]];
+    if (global$1[key] && global$1[key] !== "esm") {
+      var initialBuildName = buildNames[global$1[key]];
       var secondaryBuildName = buildNames["esm"]; // TODO: Add link to article that explains in detail how to avoid
       // loading 2 different builds.
 
       throw new Error("You are loading the " + secondaryBuildName + " build of React Router " + ("on a page that is already running the " + initialBuildName + " ") + "build, so things won't work right.");
     }
 
-    global$1[key$1] = "esm";
+    global$1[key] = "esm";
   }
 }
 
@@ -3616,14 +3343,14 @@ function (_React$Component) {
   var _proto = BrowserRouter.prototype;
 
   _proto.render = function render() {
-    return React.createElement(Router, {
+    return react.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
 
   return BrowserRouter;
-}(React.Component);
+}(react.Component);
 
 {
   BrowserRouter.propTypes = {
@@ -3663,14 +3390,14 @@ function (_React$Component) {
   var _proto = HashRouter.prototype;
 
   _proto.render = function render() {
-    return React.createElement(Router, {
+    return react.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
 
   return HashRouter;
-}(React.Component);
+}(react.Component);
 
 {
   HashRouter.propTypes = {
@@ -3696,7 +3423,7 @@ var forwardRefShim = function forwardRefShim(C) {
   return C;
 };
 
-var forwardRef = React.forwardRef;
+var forwardRef = react.forwardRef;
 
 if (typeof forwardRef === "undefined") {
   forwardRef = forwardRefShim;
@@ -3740,8 +3467,10 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
   } else {
     props.ref = innerRef;
   }
+  /* eslint-disable-next-line jsx-a11y/anchor-has-content */
 
-  return React.createElement("a", props);
+
+  return react.createElement("a", props);
 });
 
 {
@@ -3760,7 +3489,7 @@ var Link = forwardRef(function (_ref2, forwardedRef) {
       innerRef = _ref2.innerRef,
       rest = _objectWithoutPropertiesLoose(_ref2, ["component", "replace", "to", "innerRef"]);
 
-  return React.createElement(context.Consumer, null, function (context) {
+  return react.createElement(context.Consumer, null, function (context) {
     !context ?  invariant(false, "You should not use <Link> outside a <Router>")  : void 0;
     var history = context.history;
     var location = normalizeToLocation(resolveToLocation(to, context.location), context.location);
@@ -3782,7 +3511,7 @@ var Link = forwardRef(function (_ref2, forwardedRef) {
       props.innerRef = innerRef;
     }
 
-    return React.createElement(component, props);
+    return react.createElement(component, props);
   });
 });
 
@@ -3805,7 +3534,7 @@ var forwardRefShim$1 = function forwardRefShim(C) {
   return C;
 };
 
-var forwardRef$1 = React.forwardRef;
+var forwardRef$1 = react.forwardRef;
 
 if (typeof forwardRef$1 === "undefined") {
   forwardRef$1 = forwardRefShim$1;
@@ -3835,13 +3564,14 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
       exact = _ref.exact,
       isActiveProp = _ref.isActive,
       locationProp = _ref.location,
+      sensitive = _ref.sensitive,
       strict = _ref.strict,
       styleProp = _ref.style,
       to = _ref.to,
       innerRef = _ref.innerRef,
-      rest = _objectWithoutPropertiesLoose(_ref, ["aria-current", "activeClassName", "activeStyle", "className", "exact", "isActive", "location", "strict", "style", "to", "innerRef"]);
+      rest = _objectWithoutPropertiesLoose(_ref, ["aria-current", "activeClassName", "activeStyle", "className", "exact", "isActive", "location", "sensitive", "strict", "style", "to", "innerRef"]);
 
-  return React.createElement(context.Consumer, null, function (context) {
+  return react.createElement(context.Consumer, null, function (context) {
     !context ?  invariant(false, "You should not use <NavLink> outside a <Router>")  : void 0;
     var currentLocation = locationProp || context.location;
     var toLocation = normalizeToLocation(resolveToLocation(to, currentLocation), currentLocation);
@@ -3851,6 +3581,7 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
     var match = escapedPath ? matchPath(currentLocation.pathname, {
       path: escapedPath,
       exact: exact,
+      sensitive: sensitive,
       strict: strict
     }) : null;
     var isActive = !!(isActiveProp ? isActiveProp(match, currentLocation) : match);
@@ -3871,7 +3602,7 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
       props.innerRef = innerRef;
     }
 
-    return React.createElement(Link, props);
+    return react.createElement(Link, props);
   });
 });
 
@@ -3886,9 +3617,10 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
     exact: propTypes.bool,
     isActive: propTypes.func,
     location: propTypes.object,
+    sensitive: propTypes.bool,
     strict: propTypes.bool,
     style: propTypes.object
   });
 }
 
-export { BrowserRouter, HashRouter, Link, MemoryRouter, NavLink, Prompt, Redirect, Route, Router, StaticRouter, Switch, context as __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter };
+export { BrowserRouter, HashRouter, Link, MemoryRouter, NavLink, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter };

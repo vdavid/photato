@@ -11,6 +11,7 @@ export default function QuestionsAndAnswersList({questionsAndAnswers}) {
         {questionsAndAnswers.map(questionAndAnswer =>
             <QuestionAndAnswer id={questionAndAnswer.id}
                                question={questionAndAnswer.question}
-                               answer={questionAndAnswer.answer}/>)}
+                               answer={questionAndAnswer.answer}
+                               key={questionAndAnswer.id}/>)}
     </dl>;
 }

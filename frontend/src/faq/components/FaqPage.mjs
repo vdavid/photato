@@ -28,7 +28,7 @@ export default function FaqPage() {
 
     function getTocItems(questionsAndAnswers) {
         return questionsAndAnswers.map(questionAndAnswer =>
-            <li>
+            <li key={questionAndAnswer.id}>
                 <a href={'#' + questionAndAnswer.id}>{questionAndAnswer.question}</a>
             </li>);
     }

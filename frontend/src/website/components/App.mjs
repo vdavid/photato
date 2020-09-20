@@ -45,52 +45,52 @@ export default function App() {
     }, []);
 
     const publicRoutes = [
-        <Route path='/' exact={true}>
+        <Route path='/' exact={true} key='FrontPage'>
             <FrontPage/>
         </Route>,
-        <Route path='/about'>
+        <Route path='/about' key='AboutPage'>
             <AboutPage/>
         </Route>,
-        <Route path='/faq'>
+        <Route path='/faq' key='FaqPage'>
             <FaqPage/>
         </Route>,
-        <Route path='/contact'>
+        <Route path='/contact' key='ContactPage'>
             <ContactPage/>
         </Route>,
-        <Route path='/materials'>
+        <Route path='/materials' key='MaterialsPage'>
             <MaterialsPage/>
         </Route>,
-        <Route path='/:languageCode/article/:slug'>
+        <Route path='/:languageCode/article/:slug' key='MaterialPage'>
             <MaterialPage/>
         </Route>,
-        <Route path='/:languageCode/external-article/:slug'>
+        <Route path='/:languageCode/external-article/:slug' key='MaterialPage'>
             <MaterialPage/>
         </Route>,
     ];
 
     const memberRoutes = [
-        <Route path='/upload'>
+        <Route path='/upload' key='UploadPage'>
             <UploadPage photoUploader={photoUploader}/>
         </Route>,
-        <Route path='/course' exact={true}>
+        <Route path='/course' exact={true} key='CoursePage'>
             <CoursePage/>
         </Route>,
-        <Route path='/challenges/:weekIndex'>
+        <Route path='/challenges/:weekIndex' key='ChallengePage'>
             <ChallengePage/>
         </Route>,
     ];
 
     const adminRoutes = [
-        <Route path='/admin' exact={true}>
+        <Route path='/admin' exact={true} key='AdminPage'>
             <AdminPage/>
         </Route>,
-        <Route path='/admin/messages'>
+        <Route path='/admin/messages' key='PhotatoMessagesPage'>
             <PhotatoMessagesPage/>
         </Route>,
-        <Route path='/admin/message/:slug'>
+        <Route path='/admin/message/:slug' key='PhotatoMessagePage'>
             <PhotatoMessagePage/>
         </Route>,
-        <Route path='/admin/sitemap-generator'>
+        <Route path='/admin/sitemap-generator' key='SitemapGeneratorPage'>
             <SitemapGeneratorPage/>
         </Route>,
     ];
@@ -104,7 +104,7 @@ export default function App() {
                     {publicRoutes}
                     {isAuthenticated ? memberRoutes : <Redirect to="/"/>}
                     {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes: <Redirect to="/"/>}
-                    <Route path='/'>
+                    <Route path='/' key='Error404Page'>
                         <Error404Page/>
                     </Route>
                 </Switch>

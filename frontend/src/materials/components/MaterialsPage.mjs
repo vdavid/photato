@@ -94,10 +94,10 @@ export default function MaterialsPage() {
      * @returns {React.ReactElement[]|null}
      */
     function renderOneWeek(weekIndex, articles) {
-        return articles.length ? <>
+        return articles.length ? <div key={weekIndex}>
             <h2>{__('Week #{weekIndex}', {weekIndex})} – {__(weeklyChallengeTitles[weekIndex - 1])}</h2>
             <ul>{articles.map(renderArticleToListElement)}</ul>
-        </> : null;
+        </div> : null;
     }
 
     /**
@@ -106,11 +106,11 @@ export default function MaterialsPage() {
     function renderArticleToListElement(article) {
         const metadata = article.getMetadata();
         if (article.getMetadata().publisherName === 'Photato') {
-            return <li className="own">
+            return <li className="own" key={metadata.slug}>
                 <NavLink to={'/' + languageCode + '/article/' + metadata.slug}>{metadata.title}</NavLink>
             </li>;
         } else {
-            return <li className={metadata.isOriginalUrlBroken ? 'thirdParty broken' : 'thirdParty'}>
+            return <li className={metadata.isOriginalUrlBroken ? 'thirdParty broken' : 'thirdParty'} key={metadata.slug}>
                 [<NavLink to={'/' + languageCode + '/external-article/' + metadata.slug}>{__('Photato cached version')}</NavLink>]&nbsp;
                 <ExternalLink href={metadata.originalUrl}
                               className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</ExternalLink>
