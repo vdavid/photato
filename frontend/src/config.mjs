@@ -40,6 +40,7 @@ export const config = {
         maximumSizeInBytes: 25 * 1024 * 1024,
     },
     backendApi: {
+        environment: '', // Will be set to 'development', 'staging', or 'production' by main.mjs
         version: {
             url: cloudFrontBackEndUrl + '/version',
         },
@@ -68,6 +69,9 @@ export const productionConfig = {
         domain: 'photato.eu.auth0.com',
         clientId: 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey'
     },
+    backendApi: {
+        environment: 'production',
+    },
     featureSwitches: {},
 };
 
@@ -78,6 +82,9 @@ export const stagingConfig = {
         domain: 'photato.eu.auth0.com',
         clientId: 'iK62e1zUO6CMbmg6Y8qpfFiDu2qyhHTD'
     },
+    backendApi: {
+        environment: 'production', /* We have no staging environment for the backend yet, so we'll use production */
+    },
     featureSwitches: {},
 };
 
@@ -87,6 +94,9 @@ export const developmentConfig = {
     auth0: {
         domain: 'photato.eu.auth0.com',
         clientId: 'JLFeh90tCqr0KebY2hUWYBlhHOuHXl5f'
+    },
+    backendApi: {
+        environment: 'production', /* We have no development environment for the backend yet, so we'll use production */
     },
     featureSwitches: {},
 };

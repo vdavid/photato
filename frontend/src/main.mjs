@@ -27,6 +27,7 @@ function initializeConfig() {
     config.baseUrl = environmentSpecificConfig.baseUrl;
     config.auth0 = environmentSpecificConfig.auth0;
     config.featureSwitches = environmentSpecificConfig.featureSwitches;
+    config.backendApi.environment = environmentSpecificConfig.backendApi.environment;
 }
 
 initializeConfig();

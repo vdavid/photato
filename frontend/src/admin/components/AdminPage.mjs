@@ -29,9 +29,9 @@ export default function AdminPage() {
 
     async function _getVersionFromServer() {
         const url = config.backendApi.version.url
-        const accessToken = getTokenSilently();
+        const accessToken = await getTokenSilently();
         try {
-            return await fetch(url, {
+            const response = await fetch(url, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -42,6 +42,7 @@ export default function AdminPage() {
                     Authorization: 'Bearer ' + accessToken
                 },
             });
+            return response.body || 'Bad response from server.';
         } catch(error) {
             return `Unknown, could not reach back end. (URL: ${url})`;
         }
