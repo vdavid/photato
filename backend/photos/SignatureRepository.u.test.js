@@ -10,6 +10,19 @@ class S3Mock {
             promise: async () => {this._db[Key] = Body;}
         };
     }
+
+    // noinspection JSUnusedGlobalSymbols
+    headObject({Key}) {
+        return {
+            promise: async () => {
+                if (this._db[Key] !== undefined) {
+                    return true;
+                } else {
+                    throw new Error('Not found');
+                }
+            }
+        };
+    }
 }
 
 test('Can create and validate signatures', async () => {
