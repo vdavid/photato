@@ -8,10 +8,6 @@ service: photato-website-backend
 app: photato-website
 org: veszelovszki
 
-# Packaging settings
-package:
-  individually: true
-
 # Basic setup
 provider:
   name: aws
@@ -67,7 +63,8 @@ functions:
     handler: index-cloudfront.handler
     memorySize: 128
     timeout: 5
-    package:
+    package: # Help: https://www.serverless.com/framework/docs/providers/aws/guide/packaging/
+      individually: true
       exclude:
         - node_modules/**
     lambdaAtEdge:
@@ -78,7 +75,8 @@ functions:
     handler: index-cloudfront.handler
     memorySize: 128
     timeout: 5
-    package:
+    package: # Help: https://www.serverless.com/framework/docs/providers/aws/guide/packaging/
+      individually: true
       exclude:
         - node_modules/**
     lambdaAtEdge:
