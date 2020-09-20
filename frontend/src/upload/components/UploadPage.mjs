@@ -107,7 +107,7 @@ export default function UploadPage({photoUploader}) {
             setUploadStatus(uploadStatuses.uploading);
 
             const parameters = {
-                environment: config.environment,
+                environment: config.backendApi.environment,
                 emailAddress: user.email,
                 courseName: config.course.name,
                 weekIndex: currentWeekIndex,

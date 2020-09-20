@@ -48,7 +48,7 @@ export default function PhotatoMessagesPage() {
     async function _loadAndStoreMessagesFromRemote() {
         try {
             const accessToken = await getTokenSilently();
-            const messagesFromRemote = await photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.environment});
+            const messagesFromRemote = await photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.backendApi.environment});
             await photatoMessageLocalRepository.saveMessages(messagesFromRemote);
             setMessages(messagesFromRemote);
         } catch (error) {

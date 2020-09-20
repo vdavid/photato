@@ -3,6 +3,7 @@ import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../web_modules/react-router-dom.js';
 import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
+import {convertObjectToQueryString} from '../../website/httpHelper.mjs';
 
 export default function AdminPage() {
     const {getTokenSilently} = useAuth0();
@@ -31,7 +32,7 @@ export default function AdminPage() {
         const url = config.backendApi.version.url
         const accessToken = await getTokenSilently();
         try {
-            const response = await fetch(url, {
+            const response = await fetch(url + '?' + convertObjectToQueryString({environment: config.backendApi.environment}), {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

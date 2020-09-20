@@ -81,7 +81,7 @@ export default function PhotatoMessagePage() {
         if (!await photatoMessageLocalRepository.getAllMessages()) {
             try {
                 const accessToken = await getTokenSilently();
-                const messagesFromRemote = await photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.environment});
+                const messagesFromRemote = await photatoMessageRemoteRepository.getAllPhotatoMessagesFromServer(config.backendApi.adminGetAllMessages.url, accessToken, {environment: config.backendApi.environment});
                 await photatoMessageLocalRepository.saveMessages(messagesFromRemote);
             } catch (error) {
                 console.error('Could not load messages from remote:');
