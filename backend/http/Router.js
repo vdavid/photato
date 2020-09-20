@@ -1,6 +1,17 @@
 const RequestHelper = require('./RequestHelper.js');
 const ResponseHelper = require('./ResponseHelper.js');
 
+/**
+ * @typedef {function(request: RequestHelper, response: ResponseHelper):Promise<ApiGatewayResponse|LambdaEdgeResponse|undefined>} Middleware
+ */
+
+/**
+ * @typedef {Object} Route
+ * @property {string} functionName E.g. "getSignedUrl"
+ * @property {string} method E.g. "GET"
+ * @property {Middleware[]} middlewareSequence
+ */
+
 class Router {
     /**
      * Finds the first matching route in the given array, and calls the specified sequence of middleware.

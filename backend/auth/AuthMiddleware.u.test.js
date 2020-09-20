@@ -11,14 +11,14 @@ const ordinaryBearerToken = 'ordinaryToken';
 const adminBearerToken = 'adminToken';
 
 /* External objects */
-const fakeAuth0AndMongoAuthorizer = {
+const fakeAuthorizer = {
     authenticateByAccessToken: async (accessToken) => accessToken === adminBearerToken
         ? {emailAddress: adminEmailAddress, isAdmin: true}
         : (accessToken === ordinaryBearerToken ? {emailAddress: ordinaryEmailAddress, isAdmin: false} : undefined)
 };
 const responseHelper = new ResponseHelper(eventSources.APIGateway);
 // noinspection JSCheckFunctionSignatures
-const authMiddleware = new AuthMiddleware(fakeAuth0AndMongoAuthorizer);
+const authMiddleware = new AuthMiddleware(fakeAuthorizer);
 
 test('isUser accepts valid users', async () => {
     /* Arrange */

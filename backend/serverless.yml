@@ -8,6 +8,10 @@ service: photato-website-backend
 app: photato-website
 org: veszelovszki
 
+# Packaging settings
+package:
+  individually: true
+
 # Basic setup
 provider:
   name: aws
@@ -39,8 +43,12 @@ provider:
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
+  getUser:
+    handler: getUser.handler
+    memorySize: 128
+    timeout: 5
   getVersion:
-    handler: index.handler
+    handler: index-gateway.handler
     memorySize: 128
     timeout: 5
     events:
@@ -58,9 +66,12 @@ functions:
               - X-Amz-User-Agent
             allowCredentials: false
   getSignedUrl:
-    handler: index.handler
+    handler: index-cloudfront.handler
     memorySize: 128
     timeout: 5
+    package:
+      exclude:
+        - node_modules/**
     lambdaAtEdge:
       distribution: PhotatoCloudFront
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
@@ -69,11 +80,14 @@ functions:
     handler: index-cloudfront.handler
     memorySize: 128
     timeout: 5
+    package:
+      exclude:
+        - node_modules/**
     lambdaAtEdge:
       distribution: PhotatoCloudFront
       eventType: viewer-request
   adminGetAllMessages:
-    handler: index.handler
+    handler: index-gateway.handler
     memorySize: 128
     timeout: 5
     events:
@@ -117,7 +131,7 @@ resources:
         CorsConfiguration:
           CorsRules:
             - AllowedHeaders: ['*']
-              AllowedMethods: [GET, PUT]
+              AllowedMethods: [HEAD, GET, PUT]
               AllowedOrigins: ['*']
               Id: CORSRuleId1
               MaxAge: '3600'
@@ -186,14 +200,7 @@ resources:
               QueryString: 'true'
               Cookies:
                 Forward: none
-            AllowedMethods:
-              - DELETE
-              - GET
-              - HEAD
-              - OPTIONS
-              - PATCH
-              - POST
-              - PUT
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
           CacheBehaviors:
             - TargetOriginId: S3Origin
               ViewerProtocolPolicy: redirect-to-https
@@ -205,8 +212,7 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/version'
-              AllowedMethods:
-                - GET
+              AllowedMethods: [HEAD, GET]
             - TargetOriginId: S3Origin
               ViewerProtocolPolicy: redirect-to-https
               DefaultTTL: 0
@@ -217,10 +223,7 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/get-signed-url'
-              AllowedMethods:
-                - GET
-                - OPTIONS
-                - HEAD
+              AllowedMethods: [HEAD, GET, OPTIONS]
             - TargetOriginId: S3Origin
               ViewerProtocolPolicy: redirect-to-https
               DefaultTTL: 0
@@ -231,7 +234,4 @@ resources:
                 Cookies:
                   Forward: none
               PathPattern: '/get-all-messages'
-              AllowedMethods:
-                - GET
-                - OPTIONS
-                - HEAD
+              AllowedMethods: [HEAD, GET, OPTIONS]

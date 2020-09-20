@@ -2,7 +2,7 @@
   "name": "photato-website-backend",
   "version": "7.1.0",
   "description": "This is the AWS Lambda backend for the Photato website, deployed by Serverless",
-  "main": "index.js",
+  "main": "index-gateway.js",
   "scripts": {
     "test": "npx jest",
     "deploy": "npx serverless deploy"

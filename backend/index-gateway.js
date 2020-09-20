@@ -1,26 +1,12 @@
-const AWS = require('aws-sdk');
-const mongoose = require('mongoose');
-const MongoConnector = require('./database/MongoConnector.js');
-const {getConfig} = require('./config.js');
-
 const RequestHelper = require('./http/RequestHelper.js');
 const ResponseHelper = require('./http/ResponseHelper.js');
 const Router = require('./http/Router.js');
 const AuthMiddleware = require('./auth/AuthMiddleware.js');
-
-const {getUserClass} = require('./auth/User.js');
-const UserRepository = require('./auth/UserRepository.js');
-const Auth0Authorizer = require('./auth/Auth0Authorizer.js');
-const Auth0AndMongoAuthorizer = require('./auth/Auth0AndMongoAuthorizer.js');
-
-const PhotoMetadataBuilder = require('./photos/PhotoMetadataBuilder.js');
-const PhotoRepository = require('./photos/PhotoRepository.js');
-const SignatureRepository = require('./photos/SignatureRepository.js');
+const LambdaAuthorizer = require('./auth/LambdaAuthorizer.js');
 
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
 
 const VersionController = require('./meta/VersionController.js');
-const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
 
 const router = new Router();
@@ -79,30 +65,25 @@ const router = new Router();
  * @returns {Promise<ApiGatewayResponse|LambdaEdgeResponse>}
  */
 async function main(event, context) {
-
-    const functionName = context.functionName;
+    /* Parse request and set up response */
     const requestHelper = new RequestHelper(event, context);
     const responseHelper = new ResponseHelper(requestHelper.eventSource);
-    const config = getConfig(requestHelper.getEnvironment());
-    console.debug(`${functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()}.`);
 
-    const photoMetadataBuilder = new PhotoMetadataBuilder();
-    const s3 = new AWS.S3({region: 'us-east-1', signatureVersion: 'v4'});
-    const photoRepository = new PhotoRepository(s3, config.photos.bucket.name);
-    const signatureRepository = new SignatureRepository(s3, config.photos.bucket.name);
-    const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
+    /* Log */
+    console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()}.`);
 
+    /* Create middleware */
+    const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
+
+    /* Create controllers */
     const versionController = new VersionController();
     const photatoMessageRepository = new PhotatoMessageRepository();
     const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
 
-    const authMiddleware = new AuthMiddleware(await _createAuth0AuthorizerForEnvironment(requestHelper.getEnvironment()));
-
+    /* Resolve routes */
     try {
         return await router.resolveRoutes(event, context, [
             {functionName: 'version', method: 'GET', middlewareSequence: [authMiddleware.isAdmin, versionController.handleGetRequest]},
-            {functionName: 'getSignedUrl', method: 'OPTIONS', middlewareSequence: [getSignedUrlController.handleOptionsRequest]},
-            {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser, getSignedUrlController.handleGetRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
             {functionName: 'adminGetAllMessages', method: 'PUT', middlewareSequence: [authMiddleware.isAdmin, getAllMessagesController.handleGetRequest]},
         ]);
@@ -111,31 +92,5 @@ async function main(event, context) {
         return responseHelper.buildResponse(500, error.message);
     }
 }
-
-/**
- * @param {string} environment
- * @returns {Promise<Auth0AndMongoAuthorizer>}
- * @private
- */
-async function _createAuth0AuthorizerForEnvironment(environment) {
-    const config = getConfig(environment);
-    const mongoConnector = new MongoConnector(mongoose);
-    const mongoConnection = await mongoConnector.connect(config.database.connectionString, config.database.name);
-    const auth0Authorizer = new Auth0Authorizer(config.auth.auth0.userInfoEndpoint);
-    const userRepository = new UserRepository({userClass: getUserClass(mongoConnection), sessionValidityLengthInDays: 3});
-    return new Auth0AndMongoAuthorizer({auth0Authorizer, userRepository});
-}
-
-/**
- * @typedef {function(request: RequestHelper, response: ResponseHelper):Promise<ApiGatewayResponse|LambdaEdgeResponse|undefined>} Middleware
- */
-
-/**
- * @typedef {Object} Route
- * @property {string} functionName E.g. "getSignedUrl"
- * @property {string} method E.g. "GET"
- * @property {Middleware[]} middlewareSequence
- */
-
 
 module.exports.handler = main;

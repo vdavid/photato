@@ -1,26 +1,40 @@
 const AWS = require('aws-sdk');
 const {getConfig} = require('./config.js');
 
+const AuthMiddleware = require('./auth/AuthMiddleware.js');
+const LambdaAuthorizer = require('./auth/LambdaAuthorizer.js');
+
 const RequestHelper = require('./http/RequestHelper.js');
 const ResponseHelper = require('./http/ResponseHelper.js');
 const Router = require('./http/Router.js');
 
+const PhotoMetadataBuilder = require('./photos/PhotoMetadataBuilder.js');
+const PhotoRepository = require('./photos/PhotoRepository.js');
 const SignatureRepository = require('./photos/SignatureRepository.js');
+const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlController.js');
 const ValidateSignedUrlController = require('./photos/validateSignedUrl/ValidateSignedUrlController.js');
 
 const router = new Router();
 const s3 = new AWS.S3({region: 'us-east-1', signatureVersion: 'v4'});
+
+const photoMetadataBuilder = new PhotoMetadataBuilder();
 
 async function main(event, context) {
     const requestHelper = new RequestHelper(event, context);
     const responseHelper = new ResponseHelper(requestHelper.eventSource);
 
     const config = getConfig(requestHelper.getEnvironment());
+
+    const photoRepository = new PhotoRepository(s3, config.photos.bucket.name);
     const signatureRepository = new SignatureRepository(s3, config.photos.bucket.name);
+    const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
     const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
+    const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
 
     try {
         return await router.resolveRoutes(event, context, [
+            {functionName: 'getSignedUrl', method: 'OPTIONS', middlewareSequence: [getSignedUrlController.handleOptionsRequest]},
+            {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser, getSignedUrlController.handleGetRequest]},
             {functionName: 'validateSignedUrl', method: 'OPTIONS', middlewareSequence: [validateSignedUrlController.handleOptionsRequest]},
             {functionName: 'validateSignedUrl', method: 'PUT', middlewareSequence: [validateSignedUrlController.handlePutRequest]},
         ]);
