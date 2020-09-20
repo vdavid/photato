@@ -25,9 +25,7 @@ provider:
         - logs:CreateLogStream
         - logs:PutLogEvents
       Resource:
-        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-adminGetAllMessages:*'
-        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-getSignedUrl:*'
-        - 'arn:aws:logs:us-east-1:633371514237:log-group:/aws/lambda/photato-website-backend-production-validateSignedUrl:*'
+        - 'arn:aws:logs:us-east-1:633371514237:log-group:*:*'
     - Effect: Allow
       Action:
         - s3:PutObject
