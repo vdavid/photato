@@ -39,6 +39,24 @@ provider:
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
+  getVersion:
+    handler: index.handler
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: 'version'
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
   getSignedUrl:
     handler: index.handler
     memorySize: 128
@@ -177,6 +195,18 @@ resources:
               - POST
               - PUT
           CacheBehaviors:
+            - TargetOriginId: S3Origin
+              ViewerProtocolPolicy: redirect-to-https
+              DefaultTTL: 0
+              MaxTTL: 0
+              MinTTL: 0
+              ForwardedValues:
+                QueryString: 'false'
+                Cookies:
+                  Forward: none
+              PathPattern: '/version'
+              AllowedMethods:
+                - GET
             - TargetOriginId: S3Origin
               ViewerProtocolPolicy: redirect-to-https
               DefaultTTL: 0

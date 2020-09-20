@@ -1,6 +1,6 @@
 {
   "name": "photato-website-backend",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "This is the AWS Lambda backend for the Photato website, deployed by Serverless",
   "main": "index.js",
   "scripts": {

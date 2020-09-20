@@ -19,6 +19,7 @@ const SignatureRepository = require('./photos/SignatureRepository.js');
 
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
 
+const VersionController = require('./meta/VersionController.js');
 const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
 
@@ -91,6 +92,7 @@ async function main(event, context) {
     const signatureRepository = new SignatureRepository(s3, config.photos.bucket.name);
     const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
 
+    const versionController = new VersionController();
     const photatoMessageRepository = new PhotatoMessageRepository();
     const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
 
@@ -98,6 +100,7 @@ async function main(event, context) {
 
     try {
         return await router.resolveRoutes(event, context, [
+            {functionName: 'version', method: 'GET', middlewareSequence: [authMiddleware.isAdmin, versionController.handleGetRequest]},
             {functionName: 'getSignedUrl', method: 'OPTIONS', middlewareSequence: [getSignedUrlController.handleOptionsRequest]},
             {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser, getSignedUrlController.handleGetRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
