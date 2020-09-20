@@ -40,7 +40,7 @@ class Router {
         if (requestHelper.isEnvironmentValid()) {
             console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${environment}.`);
             const firstMatchedRoute = routes.find(route =>
-                this._getFullFunctionName(this._appName, environment, route.functionName) === context.functionName
+                this._getFullFunctionName(environment, route.functionName) === context.functionName
                 && route.method === requestHelper.getRequestData().method);
             if (firstMatchedRoute) {
                 for (const middleware of firstMatchedRoute.middlewareSequence) {
@@ -49,10 +49,10 @@ class Router {
                         return result;
                     }
                 }
-                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 420 error. Method Failure after running ${firstMatchedRoute.middlewareSequence} layer(s) of middleware.`);
+                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 420 error. No output after running ${firstMatchedRoute.middlewareSequence} layer(s) of middleware.`);
                 return responseHelper.buildResponse(420, 'Method Failure.');
             } else {
-                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 405 error. Method Not Allowed.`);
+                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 405 error. No route matched.`, {appName: this._appName, routes});
                 return responseHelper.buildResponse(405, 'Method Not Allowed.');
 
             }
@@ -62,8 +62,14 @@ class Router {
         }
     }
 
-    _getFullFunctionName(appName, environment, functionName) {
-        return `${appName}-${environment}-${functionName}`;
+    /**
+     * @param {string} environment E.g. "production"
+     * @param {string} bareFunctionName E.g. "getUser"
+     * @returns {string} E.g. "photato-website-backend-production-getUser"
+     * @private
+     */
+    _getFullFunctionName(environment, bareFunctionName) {
+        return `${this._appName}-${environment}-${bareFunctionName}`;
     }
 }
 
