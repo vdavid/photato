@@ -40,6 +40,9 @@ export const config = {
         maximumSizeInBytes: 25 * 1024 * 1024,
     },
     backendApi: {
+        version: {
+            url: cloudFrontBackEndUrl + '/version',
+        },
         photoUpload: {
             url: cloudFrontBackEndUrl + '/get-signed-url', /* Must have no trailing slash */
         },
