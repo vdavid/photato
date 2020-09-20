@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({region: 'us-east-1'});
+const {getDefaultConfig} = require('../config.js');
 
 class LambdaAuthorizer {
     /**
@@ -11,7 +12,7 @@ class LambdaAuthorizer {
         /* Docs are here: https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html */
         try {
             const result = await lambda.invoke({
-                FunctionName: 'getUser',
+                FunctionName: `${getDefaultConfig().appName}-${environment}-getUser`,
                 InvocationType: 'Event',
                 LogType: 'Tail',
                 Payload: JSON.stringify({accessToken, environment}),

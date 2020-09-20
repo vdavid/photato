@@ -33,9 +33,9 @@ async function main(event, context) {
     try {
         return await router.resolveRoutes(event, context, [
             {functionName: 'getSignedUrl', method: 'OPTIONS', middlewareSequence: [getSignedUrlController.handleOptionsRequest]},
-            {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser, getSignedUrlController.handleGetRequest]},
-            {functionName: 'validateSignedUrl', method: 'OPTIONS', middlewareSequence: [validateSignedUrlController.handleOptionsRequest]},
-            {functionName: 'validateSignedUrl', method: 'PUT', middlewareSequence: [validateSignedUrlController.handlePutRequest]},
+            {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser.bind(authMiddleware), getSignedUrlController.handleGetRequest.bind(getSignedUrlController)]},
+            {functionName: 'validateSignedUrl', method: 'OPTIONS', middlewareSequence: [validateSignedUrlController.handleOptionsRequest.bind(validateSignedUrlController)]},
+            {functionName: 'validateSignedUrl', method: 'PUT', middlewareSequence: [validateSignedUrlController.handlePutRequest.bind(validateSignedUrlController)]},
         ]);
     } catch (error) {
         console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 500 Server Error: Totally an uncaught error. "${error.message}"`);
