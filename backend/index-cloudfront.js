@@ -15,7 +15,7 @@ const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlContro
 const ValidateSignedUrlController = require('./photos/validateSignedUrl/ValidateSignedUrlController.js');
 
 const defaultConfig = getDefaultConfig();
-const router = new Router(defaultConfig.appName);
+const router = new Router({appName: defaultConfig.appName});
 const s3 = new AWS.S3({region: 'us-east-1', signatureVersion: 'v4'});
 
 const photoMetadataBuilder = new PhotoMetadataBuilder();

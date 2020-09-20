@@ -58,7 +58,7 @@ const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessag
  */
 
 const defaultConfig = getDefaultConfig();
-const router = new Router(defaultConfig.appName);
+const router = new Router({appName: defaultConfig.appName});
 
 /* Create middleware */
 const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
