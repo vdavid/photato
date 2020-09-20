@@ -20,7 +20,6 @@ const SignatureRepository = require('./photos/SignatureRepository.js');
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
 
 const GetSignedUrlController = require('./photos/getSignedUrl/GetSignedUrlController.js');
-const ValidateSignedUrlController = require('./photos/validateSignedUrl/ValidateSignedUrlController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
 
 const router = new Router();
@@ -92,8 +91,6 @@ async function main(event, context) {
     const signatureRepository = new SignatureRepository(s3, config.photos.bucket.name);
     const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
 
-    const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
-
     const photatoMessageRepository = new PhotatoMessageRepository();
     const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
 
@@ -103,8 +100,6 @@ async function main(event, context) {
         return await router.resolveRoutes(event, context, [
             {functionName: 'getSignedUrl', method: 'OPTIONS', middlewareSequence: [getSignedUrlController.handleOptionsRequest]},
             {functionName: 'getSignedUrl', method: 'GET', middlewareSequence: [authMiddleware.isUser, getSignedUrlController.handleGetRequest]},
-            {functionName: 'validateSignedUrl', method: 'OPTIONS', middlewareSequence: [validateSignedUrlController.handleOptionsRequest]},
-            {functionName: 'validateSignedUrl', method: 'PUT', middlewareSequence: [validateSignedUrlController.handlePutRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
             {functionName: 'adminGetAllMessages', method: 'PUT', middlewareSequence: [authMiddleware.isAdmin, getAllMessagesController.handleGetRequest]},
         ]);

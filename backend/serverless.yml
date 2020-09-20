@@ -48,7 +48,7 @@ functions:
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
       pathPattern: '/get-signed-url'
   validateSignedUrl:
-    handler: index.handler
+    handler: index-cloudfront.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
