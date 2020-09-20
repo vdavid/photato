@@ -1,5 +1,6 @@
 const HashProvider = require('./HashProvider.js');
-module.exports = class SignatureRepository {
+
+class SignatureRepository {
     /**
      * @param {S3} s3
      * @param {HashProvider} [hashProvider]
@@ -27,7 +28,7 @@ module.exports = class SignatureRepository {
     async isSignatureValidForPath(path) {
         const hash = this._hashProvider.getSHA256Hash(path);
         return await this._doesSignatureExist('valid', hash)
-         && !(await this._doesSignatureExist('expired', hash))
+            && !(await this._doesSignatureExist('expired', hash));
     }
 
     /**
@@ -37,7 +38,6 @@ module.exports = class SignatureRepository {
     markSignatureExpiredForPath(path) {
         return this._createSignature('expired', this._hashProvider.getSHA256Hash(path));
     }
-
 
     /**
      * @param {'valid'|'expired'} status
@@ -79,4 +79,6 @@ module.exports = class SignatureRepository {
     _buildKey(status, hash) {
         return 'signatures/' + status + '/' + hash;
     }
-};
+}
+
+module.exports = SignatureRepository;

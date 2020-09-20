@@ -1,6 +1,6 @@
 const https = require("https"); /* Documentation: https://nodejs.org/api/https.html */
 
-module.exports = class HttpsConnector {
+class HttpsConnector {
     /**
      * @param {string} url
      * @param {Object<string, string>} options Any valid HTTPS request options: https://nodejs.org/api/http.html#http_http_request_options_callback
@@ -25,3 +25,5 @@ module.exports = class HttpsConnector {
         });
     }
 }
+
+module.exports = HttpsConnector;

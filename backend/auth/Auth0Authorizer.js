@@ -1,7 +1,7 @@
 const HttpsConnector = require('../http/HttpsConnector.js');
 const httpsConnector = new HttpsConnector();
 
-module.exports = class Auth0Authorizer {
+class Auth0Authorizer {
     constructor(auth0UserInfoEndpoint) {
         this._auth0UserInfoEndpoint = auth0UserInfoEndpoint;
     }
@@ -27,4 +27,6 @@ module.exports = class Auth0Authorizer {
             return null;
         }
     }
-};
+}
+
+module.exports = Auth0Authorizer;

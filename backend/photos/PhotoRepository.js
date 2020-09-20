@@ -1,6 +1,6 @@
 const uuid = require('uuid-random');
 
-module.exports = class PhotoRepository {
+class PhotoRepository {
     /**
      * @param {S3} s3
      * @param {string} bucketName The name of the S3 bucket to use
@@ -46,4 +46,6 @@ module.exports = class PhotoRepository {
             + '/' + photoMetadata.emailAddress
             + '.jpg';
     }
-};
+}
+
+module.exports = PhotoRepository;

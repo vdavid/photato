@@ -1,10 +1,12 @@
 const {photatoMessages} = require('./photato-messages.js');
 
-module.exports = class MessageRepository {
+class PhotatoMessageRepository {
     /**
      * @returns {PhotatoMessage[]}
      */
     getAllMessages() {
         return photatoMessages;
     }
-};
+}
+
+module.exports = PhotatoMessageRepository;
