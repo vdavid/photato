@@ -13,7 +13,7 @@
 
 // \n → keep in Facebook messages
 // {firstName} → Student's first name
-// {courseTitle} → e.g. "2020. őszi Photato tanfolyam"
+// {courseTitle} → e.g. "2020 summer Photato course"
 // {courseStartDate} (a nicely formatted date)
 // {facebookGroupUrl} → bit.ly link (plain text)
 // {signedUpCount} → 27 (just a number)
@@ -1201,7 +1201,7 @@ A Zoom használható laptopról, tabletről és mobilról is. Tudjátok telepít
         content: `<p>Kedves {firstName},</p>
 <p>Ez az utolsó levél, amit a mostani Photato kurzussal kapcsolatban küldünk neked.</p>
 <p>Köszönjük, hogy velünk tartottál. 😊</p>
-<p>Gratulálunk a nyerteseknek! 🏆 <a href="{TODO}">A legjobbnak ítélt 12 fotót itt<a/> tudod megnézni.</p>
+<p>Gratulálunk a nyerteseknek! 🏆 <a href="{TODO}">A legjobbnak ítélt 12 fotót itt</a> tudod megnézni.</p>
 <p>Néhány érdekes adat:</p>
 <ul>
 <li>👪 {signedUpCount} lelkes fotóstársaddal vettetek részt a tanfolyamon,</li>

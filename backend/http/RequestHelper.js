@@ -1,15 +1,52 @@
 const {eventSources} = require('./eventSources.js');
 
+/**
+ * @typedef {Object} RequestData
+ * @property {string} url
+ * @property {string} method
+ * @property {string} host
+ * @property {string|null} queryString
+ * @property {string|null} accessToken
+ * @property {Object<string, string>} arguments
+ */
+
 class RequestHelper {
     /**
-     * @param {{path: string, httpMethod: string, headers: Object<string, string>, queryStringParameters: Object<string, string>}|{Records: {cf: {request: Object}}[]}} event
+     * @type {ApiGatewayEvent|LambdaEdgeEvent}
+     */
+    event;
+    /**
+     * @type {LambdaContext}
+     */
+    context;
+    /**
+     * @type {string}
+     */
+    eventSource;
+    /**
+     * @type {RequestData}
+     * @private
+     */
+    _requestData;
+    /**
+     * @type {User|undefined}
+     * @private
+     */
+    _user;
+
+    /**
+     * @param {ApiGatewayEvent|LambdaEdgeEvent} event
      *        API Gateway format: https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html
      *        Lambda@Edge format: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
+     * @param {LambdaContext} context See https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html
      * @param {Object} event
      */
-    constructor(event) {
+    constructor(event, context) {
         this.event = event;
+        this.context = context;
         this.eventSource = this.determineEventSource(event);
+        this._requestData = undefined;
+        this._user = undefined;
     }
 
     /**
@@ -26,18 +63,21 @@ class RequestHelper {
 
     /**
      * Determines event source and parses the event data accordingly
-     * @returns {{url: string, method: string, host: string, queryString: (string|null), accessToken: (string|null), arguments: Object<string, string>}}
+     * @returns {RequestData}
      */
     getRequestData() {
-        if (this.eventSource === eventSources.LambdaEdge) {
-            return this._getRequestDataFromLambdaEdgeEvent();
-        } else {
-            return this._getRequestDataFromApiGatewayEvent();
+        if (!this._requestData) {
+            if (this.eventSource === eventSources.LambdaEdge) {
+                this._requestData = this._getRequestDataFromLambdaEdgeEvent();
+            } else {
+                this._requestData = this._getRequestDataFromApiGatewayEvent();
+            }
         }
+        return this._requestData;
     }
 
     /**
-     * @returns {{url: string, method: string, host: string, queryString: string|null, accessToken: string|null, arguments: Object<string, string>}}
+     * @returns {RequestData}
      */
     _getRequestDataFromApiGatewayEvent() {
         return {
@@ -51,7 +91,7 @@ class RequestHelper {
     }
 
     /**
-     * @returns {{url: string, method: string, host: string, queryString: string|null, accessToken: string|null, arguments: Object<string, string>}}
+     * @returns {RequestData}
      */
     _getRequestDataFromLambdaEdgeEvent() {
         const request = this.event.Records[0].cf.request;
@@ -85,9 +125,31 @@ class RequestHelper {
         return object ? Object.keys(object).map(key => key + '=' + object[key]).join('&') : '';
     }
 
-    isEnvironmentValid(environmentInput) {
+    getAccessToken() {
+        return this.getRequestData().accessToken;
+    }
+
+    getEnvironment() {
+        return this.getRequestData().arguments.environment;
+    }
+
+    isEnvironmentValid() {
         const knownEnvironments = ['development', 'staging', 'production'];
-        return knownEnvironments.includes(environmentInput);
+        return knownEnvironments.includes(this.getEnvironment());
+    }
+
+    /**
+     * @param {User} user
+     */
+    setUser(user) {
+        this._user = user;
+    }
+
+    /**
+     * @returns {User|undefined}
+     */
+    getUser() {
+        return this._user;
     }
 
     /**

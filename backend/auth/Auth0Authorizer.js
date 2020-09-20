@@ -10,7 +10,7 @@ class Auth0Authorizer {
      * @param {string} accessToken
      * @returns {Promise<Object|null>} Null in case of a bad token or request error.
      */
-    async getAuth0UserData(accessToken) {
+    async getAuth0UserInfo(accessToken) {
         try {
             const {statusCode, body} = await httpsConnector.requestPromisified(this._auth0UserInfoEndpoint, {
                 method: 'get',

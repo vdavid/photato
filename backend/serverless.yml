@@ -40,7 +40,7 @@ provider:
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
   getSignedUrl:
-    handler: photos/getSignedUrl/getSignedUrl.handler
+    handler: index.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
@@ -48,14 +48,14 @@ functions:
       eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
       pathPattern: '/get-signed-url'
   validateSignedUrl:
-    handler: photos/validateSignedUrl/validateSignedUrl.handler
+    handler: index.handler
     memorySize: 128
     timeout: 5
     lambdaAtEdge:
       distribution: PhotatoCloudFront
       eventType: viewer-request
   adminGetAllMessages:
-    handler: messages/getAllMessages/getAllMessages.handler
+    handler: index.handler
     memorySize: 128
     timeout: 5
     events:

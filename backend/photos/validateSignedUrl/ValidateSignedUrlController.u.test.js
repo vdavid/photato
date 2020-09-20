@@ -1,6 +1,10 @@
 /* Requires */
-const ValidateSignedUrlHandler = require('./ValidateSignedUrlHandler.js');
+const RequestHelper = require('../../http/RequestHelper.js');
+const ResponseHelper = require('../../http/ResponseHelper.js');
+const {eventSources} = require('../../http/eventSources.js');
+
 const SignatureRepository = require('../SignatureRepository.js');
+const ValidateSignedUrlController = require('./ValidateSignedUrlController.js');
 
 /* Constants */
 const bucketName = 'testBucket';
@@ -41,8 +45,9 @@ test('Allows OPTIONS for non-expired, valid signatures', async () => {
         promise: () => new Promise((resolve, reject) => Key.startsWith('signatures/valid') ? resolve() : reject())
     }));
     const s3 = {...defaultS3, headObject: localHeadObjectMock};
+    // noinspection JSCheckFunctionSignatures
     const signatureRepository = new SignatureRepository(s3, bucketName);
-    const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
+    const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
     const event = {
         Records: [
             {
@@ -56,9 +61,12 @@ test('Allows OPTIONS for non-expired, valid signatures', async () => {
             },
         ],
     };
+    // noinspection JSCheckFunctionSignatures
+    const requestHelper = new RequestHelper(event, {});
+    const responseHelper = new ResponseHelper(eventSources.LambdaEdge);
 
     /* Act */
-    const response = await validateSignedUrlHandler.handleRequest(event);
+    const response = await validateSignedUrlController.handleOptionsRequest(requestHelper, responseHelper);
 
     /* Assert */
     expect(response.status).toEqual(200);
@@ -74,14 +82,20 @@ test('Allows non-expired, valid signatures', async () => {
         promise: () => new Promise((resolve, reject) => Key.startsWith('signatures/valid') ? resolve() : reject())
     }));
     const s3 = {...defaultS3, headObject: localHeadObjectMock};
+    // noinspection JSCheckFunctionSignatures
     const signatureRepository = new SignatureRepository(s3, bucketName);
-    const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
+    const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
+
+    // noinspection JSCheckFunctionSignatures
+    const requestHelper = new RequestHelper(defaultEvent, {});
+    const responseHelper = new ResponseHelper(eventSources.APIGateway);
 
     /* Act */
-    const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
+    const response = await validateSignedUrlController.handlePutRequest(requestHelper, responseHelper);
 
     /* Assert */
     expect(putObjectMock.mock.calls[0][0].Bucket).toBe(bucketName);
+    // noinspection SpellCheckingInspection
     expect(putObjectMock.mock.calls[0][0].Key).toBe('signatures/expired/760f639343dd04b36ee536867ad9663bfde630553f79653e9f6d463195e895c1');
     expect(response.method).toEqual('PUT');
     expect(response.querystring).toEqual(queryString);
@@ -92,11 +106,16 @@ test('Allows non-expired, valid signatures', async () => {
 
 test('Disallows expired, valid signatures', async () => {
     /* Arrange */
+    // noinspection JSCheckFunctionSignatures
     const signatureRepository = new SignatureRepository(defaultS3, bucketName);
-    const validateSignedUrlHandler = new ValidateSignedUrlHandler({signatureRepository});
+    const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
+
+    // noinspection JSCheckFunctionSignatures
+    const requestHelper = new RequestHelper(defaultEvent, {});
+    const responseHelper = new ResponseHelper(eventSources.LambdaEdge);
 
     /* Act */
-    const response = await validateSignedUrlHandler.handleRequest(defaultEvent);
+    const response = await validateSignedUrlController.handlePutRequest(requestHelper, responseHelper);
 
     /* Assert */
     expect(response.status).toEqual(403);

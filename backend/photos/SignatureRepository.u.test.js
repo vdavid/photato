@@ -10,23 +10,12 @@ class S3Mock {
             promise: async () => {this._db[Key] = Body;}
         };
     }
-
-    headObject({Key}) {
-        return {
-            promise: async () => {
-                if (this._db[Key] !== undefined) {
-                    return true;
-                } else {
-                    throw new Error('Not found');
-                }
-            }
-        };
-    }
 }
 
 test('Can create and validate signatures', async () => {
     /* Assemble */
     const s3Mock = new S3Mock();
+    // noinspection JSCheckFunctionSignatures
     const signatureRepository = new SignatureRepository(s3Mock, 'test-bucket');
     const testPath = 'test-path';
 
@@ -41,6 +30,7 @@ test('Can create and validate signatures', async () => {
 test('Can expire signatures', async () => {
     /* Assemble */
     const s3Mock = new S3Mock();
+    // noinspection JSCheckFunctionSignatures
     const signatureRepository = new SignatureRepository(s3Mock, 'test-bucket');
     const testPath1 = 'test-path1';
     const testPath2 = 'test-path2';

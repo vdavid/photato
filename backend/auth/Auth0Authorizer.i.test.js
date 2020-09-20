@@ -3,23 +3,24 @@ const auth0Authorizer = new Auth0Authorizer('https://photato.eu.auth0.com/userin
 
 test('Can validate good token', async () => {
     /* Arrange */
-    const validAccessToken = 'HqjagZDI00DeOspGcJdJ29TQNomuvj_G'; /* Sorry, it's inconvenient, but you'll need a valid access token for this test */
+    // noinspection SpellCheckingInspection
+    const validAccessToken = 'o-lFFr8Erisc2C-Hf-BD8xKLMh9zO7zL'; /* Sorry, it's inconvenient, but you'll need a valid access token for this test */
 
     /* Act */
-    const validPromise = auth0Authorizer.getAuth0UserData(validAccessToken);
+    const userInfo = await auth0Authorizer.getAuth0UserInfo(validAccessToken);
 
     /* Assert */
-    expect.assertions(1);
-    await expect(validPromise).resolves.toHaveProperty('email');
+    await expect(userInfo).toHaveProperty('email');
 });
 
 test('Can invalidate bad token', async () => {
     /* Arrange */
+    // noinspection SpellCheckingInspection
     const invalidAccessToken = 'invalidtoken';
 
     /* Act */
-    const result = await auth0Authorizer.getAuth0UserData(invalidAccessToken);
+    const userInfo = await auth0Authorizer.getAuth0UserInfo(invalidAccessToken);
 
     /* Assert */
-    expect(result).toBeFalsy();
+    expect(userInfo).toBeFalsy();
 });

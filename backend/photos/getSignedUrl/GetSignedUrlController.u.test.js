@@ -1,8 +1,12 @@
 /* Requires */
-const GetSignedUrlHandler = require('./GetSignedUrlHandler.js');
+const RequestHelper = require('../../http/RequestHelper.js');
+const ResponseHelper = require('../../http/ResponseHelper.js');
+const {eventSources} = require('../../http/eventSources.js');
+
 const PhotoMetadataBuilder = require('../PhotoMetadataBuilder.js');
 const PhotoRepository = require('../PhotoRepository.js');
 const SignatureRepository = require('../SignatureRepository.js');
+const GetSignedUrlController = require('./GetSignedUrlController.js');
 
 /* Constants */
 const bucketName = 'testBucket';
@@ -20,11 +24,12 @@ const s3Mock = {
 };
 
 /* External objects */
-const auth0Authorizer = {getAuth0UserData: async token => token === testBearerToken ? {email: testEmailAddress} : undefined};
 const photoMetadataBuilder = new PhotoMetadataBuilder();
+// noinspection JSCheckFunctionSignatures
 const photoRepository = new PhotoRepository(s3Mock, bucketName);
+// noinspection JSCheckFunctionSignatures
 const signatureRepository = new SignatureRepository(s3Mock, bucketName);
-const getSignedUrlHandler = new GetSignedUrlHandler({auth0Authorizer, photoMetadataBuilder, photoRepository, signatureRepository});
+const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder, photoRepository, signatureRepository});
 
 function _convertToQueryString(object) {
     return Object.keys(object).map(key => key + '=' + object[key]).join('&');
@@ -50,9 +55,12 @@ test('Handles valid OPTIONS requests well', async () => {
             },
         ],
     };
+    // noinspection JSCheckFunctionSignatures
+    const requestHelper = new RequestHelper(event, {});
+    const responseHelper = new ResponseHelper(eventSources.LambdaEdge)
 
     /* Act */
-    const response = await getSignedUrlHandler.handleRequest(event, {});
+    const response = await getSignedUrlController.handleOptionsRequest(requestHelper, responseHelper);
 
     /* Assert */
     expect(response.status).toEqual(200);
@@ -69,7 +77,7 @@ test('Handles valid GET requests well', async () => {
         emailAddress: testEmailAddress,
         courseName: 'hu-3',
         weekIndex: '2',
-        originalFileName: 'kukutyin.jpg',
+        originalFileName: 'test-pic.jpg',
         title: 'Test title',
         mimeType: 'image/jpeg',
     };
@@ -96,7 +104,12 @@ test('Handles valid GET requests well', async () => {
     };
 
     /* Act */
-    const response = await getSignedUrlHandler.handleRequest(event, {});
+    // noinspection JSCheckFunctionSignatures
+    const requestHelper = new RequestHelper(event, {});
+    // noinspection JSCheckFunctionSignatures
+    requestHelper.setUser({emailAddress: testEmailAddress});
+    const responseHelper = new ResponseHelper(eventSources.LambdaEdge)
+    const response = await getSignedUrlController.handleGetRequest(requestHelper, responseHelper);
 
     /* Assert */
     expect(response.body).toEqual('https://' + host + '/development/photos/' + parameters.courseName + '/'

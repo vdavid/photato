@@ -14,6 +14,7 @@ test('Uploads image', async () => {
     };
 
     const s3Mock = {getSignedUrl: (operation, parameters) => ({operation, bucket: parameters.Bucket, key: parameters.Key, metadata: parameters.Metadata, contentType: parameters.ContentType})};
+    // noinspection JSCheckFunctionSignatures
     const photoRepository = new PhotoRepository(s3Mock, bucketName);
 
     /* Act */
@@ -42,6 +43,7 @@ test('Throws on bad mime type', async () => {
         mimeType: 'text/plain',
     };
     const s3Mock = {getSignedUrl: (operation, parameters) => ({operation, bucket: parameters.Bucket, key: parameters.Key, metadata: parameters.Metadata, contentType: parameters.ContentType})};
+    // noinspection JSCheckFunctionSignatures
     const photoRepository = new PhotoRepository(s3Mock, bucketName);
 
     /* Act & assert */

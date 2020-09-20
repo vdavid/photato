@@ -8,7 +8,7 @@
  * @property {string} mimeType Must be "image/jpeg"
  */
 
-module.exports = class PhotoMetadataBuilder {
+class PhotoMetadataBuilder {
 
     /**
      * @param {Object<string, string>} fields The raw fields got from the user
@@ -51,4 +51,6 @@ module.exports = class PhotoMetadataBuilder {
         const emailAddressRegularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return emailAddressRegularExpression.test(string);
     }
-};
+}
+
+module.exports = PhotoMetadataBuilder;
