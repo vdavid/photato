@@ -24,14 +24,14 @@
   "author": "David Veszelovszki",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.9.18",
-    "uuid-random": "^1.3.0"
+    "mongoose": "^5.10.6",
+    "uuid-random": "^1.3.2"
   },
   "devDependencies": {
     "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
-    "aws-sdk": "^2.696.0",
-    "jest": "^26.0.1",
-    "serverless": "^1.72.0"
+    "aws-sdk": "^2.756.0",
+    "jest": "^26.4.2",
+    "serverless": "^2.1.1"
   },
   "jest": {
     "testEnvironment": "node"
