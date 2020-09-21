@@ -43,7 +43,7 @@ export default function AdminPage() {
                     Authorization: 'Bearer ' + accessToken
                 },
             });
-            return response.body || 'Bad response from server.';
+            return response.body.toString() || 'Bad response from server.';
         } catch(error) {
             return `Unknown, could not reach back end. (URL: ${url})`;
         }
