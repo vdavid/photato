@@ -81,15 +81,17 @@ async function main(event, context) {
     const responseHelper = new ResponseHelper(requestHelper.eventSource);
 
     /* Log */
-    console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()}.`, {event, context});
+    console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${requestHelper.getEnvironment()} via ${requestHelper.eventSource}.`, {event, context});
 
     /* Resolve routes */
     try {
-        return await router.resolveRoutes(event, context, [
+        const result = await router.resolveRoutes(event, context, [
             {functionName: 'version', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
             {functionName: 'adminGetAllMessages', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), getAllMessagesController.handleGetRequest.bind(getAllMessagesController)]},
         ]);
+        console.debug(`${context.functionName} | Rendered ${requestHelper.getRequestData().method} in ${requestHelper.getEnvironment()}. Status code: ${result.statusCode}, body length: ${result.body ? result.body.length : 'null'}`);
+        return result;
     } catch (error) {
         console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 500 Server Error: Totally an uncaught error. "${error.message}"`);
         return responseHelper.buildResponse(500, error.message);

@@ -13,14 +13,19 @@ class LambdaAuthorizer {
         try {
             const result = await lambda.invoke({
                 FunctionName: `${getDefaultConfig().appName}-${environment}-getUser`,
-                InvocationType: 'Event',
-                LogType: 'Tail',
+                InvocationType: 'RequestResponse',
+                LogType: 'None',
                 Payload: JSON.stringify({accessToken, environment}),
             }).promise();
-            console.log('Got result.', {result});
             const payloadAsString = result.Payload.toString();
-            console.log('Payload as string: ' + payloadAsString);
-            return payloadAsString ? JSON.parse(payloadAsString) : undefined;
+            if (payloadAsString) {
+                const user = JSON.parse(payloadAsString);
+                console.debug('LambdaAuthorizer | Got user', user);
+                return user;
+            } else {
+                console.debug('LambdaAuthorizer | Got no user.', {result});
+                return undefined;
+            }
         } catch (error) {
             console.error('LambdaAuthorizer | Request came back with an error.', error);
         }

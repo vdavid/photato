@@ -54,7 +54,7 @@ functions:
     events:
       - http:
           path: 'version'
-          method: get
+          method: any
           cors:
             origin: '*'
             headers:
@@ -95,7 +95,7 @@ functions:
     events:
       - http:
           path: 'messages/get-all-messages'
-          method: get
+          method: any
           cors:
             origin: '*'
             headers:
@@ -213,27 +213,5 @@ resources:
                 QueryString: 'false'
                 Cookies:
                   Forward: none
-              PathPattern: '/version'
-              AllowedMethods: [HEAD, GET]
-            - TargetOriginId: S3Origin
-              ViewerProtocolPolicy: redirect-to-https
-              DefaultTTL: 0
-              MaxTTL: 0
-              MinTTL: 0
-              ForwardedValues:
-                QueryString: 'false'
-                Cookies:
-                  Forward: none
               PathPattern: '/get-signed-url'
-              AllowedMethods: [HEAD, GET, OPTIONS]
-            - TargetOriginId: S3Origin
-              ViewerProtocolPolicy: redirect-to-https
-              DefaultTTL: 0
-              MaxTTL: 0
-              MinTTL: 0
-              ForwardedValues:
-                QueryString: 'true'
-                Cookies:
-                  Forward: none
-              PathPattern: '/get-all-messages'
               AllowedMethods: [HEAD, GET, OPTIONS]

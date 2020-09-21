@@ -25,6 +25,7 @@ class GetAllMessagesController {
      */
     async handleGetRequest(requestHelper, responseHelper) {
         const allMessages = this._photatoMessageRepository.getAllMessages();
+        console.debug(`GetAllMessagesController | handleGetRequest | Got ${allMessages.length} messages.`);
         return responseHelper.buildResponse(200, JSON.stringify(allMessages), {contentType: 'application/json'});
     }
 }

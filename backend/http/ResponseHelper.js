@@ -44,13 +44,13 @@ class ResponseHelper {
     _buildApiGatewayResponse(statusCode, body, {contentType = 'text/plain'} = {}) {
         return {
             statusCode,
-            statusDescription: getStatusDescription(statusCode),
             headers: {
                 'Content-Type': contentType,
                 'Content-Encoding': 'UTF-8',
                 'Access-Control-Allow-Origin': '*',
             },
             body,
+            isBase64Encoded: false,
         };
     }
 
@@ -83,12 +83,12 @@ class ResponseHelper {
     _buildApiGatewayOptionsResponse(allowedMethods) {
         return {
             statusCode: 200,
-            statusDescription: getStatusDescription(200),
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': allowedMethods.join(', '),
                 'Access-Control-Allow-Headers': '*',
             },
+            isBase64Encoded: false,
         };
     }
 }
