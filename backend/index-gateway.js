@@ -4,7 +4,7 @@ const RequestHelper = require('./http/RequestHelper.js');
 const ResponseHelper = require('./http/ResponseHelper.js');
 const Router = require('./http/Router.js');
 const AuthMiddleware = require('./auth/AuthMiddleware.js');
-const LambdaAuthorizer = require('./auth/LambdaAuthorizer.js');
+const Auth0AndMongoAuthorizer = require('./auth/Auth0AndMongoAuthorizer.js');
 
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
 
@@ -61,7 +61,7 @@ const defaultConfig = getDefaultConfig();
 const router = new Router({appName: defaultConfig.appName});
 
 /* Create middleware */
-const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
+const authMiddleware = new AuthMiddleware(new Auth0AndMongoAuthorizer());
 
 /* Create controllers */
 const versionController = new VersionController();

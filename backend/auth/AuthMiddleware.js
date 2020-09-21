@@ -3,10 +3,10 @@ const ResponseHelper = require('../http/ResponseHelper.js');
 
 class AuthMiddleware {
     /**
-     * @param {LambdaAuthorizer} lambdaAuthorizer
+     * @param {LambdaAuthorizer|Auth0AndMongoAuthorizer} authorizer
      */
-    constructor(lambdaAuthorizer) {
-        this._lambdaAuthorizer = lambdaAuthorizer;
+    constructor(authorizer) {
+        this._authorizer = authorizer;
     }
 
     /**
@@ -37,7 +37,7 @@ class AuthMiddleware {
      * @returns {Promise<ApiGatewayResponse|LambdaEdgeResponse|undefined>} Undefined if it checks out
      */
     async isUser(requestHelper, responseHelper) {
-        const user = await this._lambdaAuthorizer.authenticateByAccessToken(requestHelper.getAccessToken(), requestHelper.getEnvironment());
+        const user = await this._authorizer.authenticateByAccessToken(requestHelper.getAccessToken(), requestHelper.getEnvironment());
 
         if (user) {
             requestHelper.setUser(user);

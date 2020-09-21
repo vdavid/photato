@@ -15,7 +15,7 @@ const Auth0AndMongoAuthorizer = require('./Auth0AndMongoAuthorizer.js');
 async function handler(event, context) {
     console.info(`getUser | Got request.`, {event, context});
     const auth0AndMongoAuthorizer = await _createAuth0AndMongoAuthorizerForEnvironment(event.environment)
-    const user = await auth0AndMongoAuthorizer.authenticateByAccessToken(event.accessToken);
+    const user = await auth0AndMongoAuthorizer.authenticateByAccessToken(event.accessToken, event.environment);
     console.debug('getUser | Returning result.', user);
     return user || '';
 }

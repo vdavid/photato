@@ -21,9 +21,10 @@ class Auth0AndMongoAuthorizer {
 
     /**
      * @param {string} accessToken
+     * @param {string} environment E.g. "production"
      * @returns {Promise<User|undefined>}
      */
-    async authenticateByAccessToken(accessToken) {
+    async authenticateByAccessToken(accessToken, environment) {
         const user = await this._userRepository.getUserByAccessToken(accessToken);
         if (user) { /* We have a valid session with this access token locally */
             return user;
