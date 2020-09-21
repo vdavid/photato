@@ -42,7 +42,7 @@ export const config = {
     backendApi: {
         environment: '', // Will be set to 'development', 'staging', or 'production' by main.mjs
         version: {
-            url: cloudFrontBackEndUrl + '/version',
+            url: apiGatewayBackEndUrl + '/version', /* Must have no trailing slash */
         },
         photoUpload: {
             url: cloudFrontBackEndUrl + '/get-signed-url', /* Must have no trailing slash */
