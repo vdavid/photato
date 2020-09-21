@@ -2,10 +2,12 @@ class UserRepository {
     /**
      * @param {Number?} sessionValidityLengthInDays Optional, default is 3.
      * @param {function(new: User, properties: Object)|{findOne: function(Object): Object, deleteOne: function(Object): void}} userClass
+     * @param {string[]?} adminEmailAddresses Optional, default is [].
      */
-    constructor({userClass, sessionValidityLengthInDays = 3}) {
+    constructor({userClass, sessionValidityLengthInDays = 3, adminEmailAddresses = []}) {
         this.User = userClass;
         this._sessionValidityLengthInDays = sessionValidityLengthInDays;
+        this._adminEmailAddresses = adminEmailAddresses;
     }
 
     /**
@@ -41,7 +43,7 @@ class UserRepository {
     createUserFromAuth0User(auth0UserInfo) {
         return new this.User({
             emailAddress: auth0UserInfo.email,
-            isAdmin: false,
+            isAdmin: this._adminEmailAddresses.includes(auth0UserInfo.email),
             auth0UserInfo: auth0UserInfo,
         });
     }
@@ -94,14 +96,14 @@ class UserRepository {
             console.error('User | updateUserAuth0Data | Can’t update, email address is different.', {old: user.emailAddress, new: auth0UserInfo.email});
         }
     }
-    // TODO: Create a user integration test, this will be needed for that.
-    // /**
-    //  * @param {string} emailAddress
-    //  * @returns {*} TODO: What in case of deletion? In case not found?
-    //  */
-    // deleteUser(emailAddress) {
-    //     return this.User.deleteOne({emailAddress});
-    // }
+
+    /**
+     * @param {string} emailAddress
+     * @returns {*} TODO: What in case of deletion? In case not found?
+     */
+    deleteUser(emailAddress) {
+        return this.User.deleteOne({emailAddress});
+    }
 }
 
 module.exports = UserRepository;

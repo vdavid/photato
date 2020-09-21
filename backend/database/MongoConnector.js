@@ -17,6 +17,7 @@ class MongoConnector {
                 connectTimeoutMS: 10 * 1000,
                 useNewUrlParser: true,
                 useFindAndModify: false, /* Avoids deprecation warning when using findOneAndUpdate() */
+                useUnifiedTopology: true, /* Avoids deprecation warning */
                 dbName: databaseName
             });
         } catch (error) {

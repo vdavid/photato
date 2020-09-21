@@ -67,6 +67,16 @@ test('Can getUserByEmailAddress', async () => {
     expect(result).toBe(fakeUser);
 });
 
+test('Recognizes admin users', () => {
+    /* Arrange */
+    // noinspection JSCheckFunctionSignatures
+    // TODO Write this test. Started below
+    //const adminEmailAddress = 'admin@email.com';
+    //const userRepository = new UserRepository({userClass: fakeUserClass, adminEmailAddresses: [adminEmailAddress]});
+    /* Act */
+    /* Assert */
+});
+
 test('Can updateUserAuth0Data', () => {
     /* Arrange */
     // TODO Write this test

@@ -17,10 +17,10 @@ class LambdaAuthorizer {
                 LogType: 'Tail',
                 Payload: JSON.stringify({accessToken, environment}),
             }).promise();
-            console.log('Got payload: ' + result.Payload);
+            console.log('Got result.', {result});
             const payloadAsString = result.Payload.toString();
             console.log('Payload as string: ' + payloadAsString);
-            return payloadAsString !== 'undefined' ? JSON.parse(payloadAsString) : undefined;
+            return payloadAsString ? JSON.parse(payloadAsString) : undefined;
         } catch (error) {
             console.error('LambdaAuthorizer | Request came back with an error.', error);
         }

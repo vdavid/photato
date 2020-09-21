@@ -24,7 +24,7 @@ const mongoose = require('mongoose');
  * @property {string} updated_at Unix timestamp. E.g. "1556845729"
  */
 const auth0UserInfoSchema = new mongoose.Schema({
-    sub: Number,
+    sub: String,
     name: String,
     given_name: String,
     family_name: String,

@@ -80,6 +80,3 @@ function _createObjects() {
 
     return {auth0Authorizer, userRepository, auth0AndMongoAuthorizer};
 }
-
-
-module.exports = Auth0AndMongoAuthorizer;

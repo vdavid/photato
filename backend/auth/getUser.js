@@ -10,12 +10,15 @@ const Auth0AndMongoAuthorizer = require('./Auth0AndMongoAuthorizer.js');
 /**
  * @param {{environment: string, accessToken: string}} event
  * @param {LambdaContext} context See https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html
- * @returns {Promise<User|undefined>}
+ * @returns {Promise<string>} The user stringified, or an an empty string in case of error
  */
 async function handler(event, context) {
     console.info(`Got request.`, {event, context});
     const auth0AndMongoAuthorizer = await _createAuth0AndMongoAuthorizerForEnvironment(event.environment)
-    return auth0AndMongoAuthorizer.authenticateByAccessToken(event.accessToken);
+    const user = auth0AndMongoAuthorizer.authenticateByAccessToken(event.accessToken);
+    const returnValue = user ? JSON.stringify(user) : '';
+    console.debug('Returning result.', {returnValue});
+    return returnValue;
 }
 
 /**
@@ -28,7 +31,7 @@ async function _createAuth0AndMongoAuthorizerForEnvironment(environment) {
     const mongoConnector = new MongoConnector(mongoose);
     const mongoConnection = await mongoConnector.connect(config.database.connectionString, config.database.name);
     const auth0Authorizer = new Auth0Authorizer(config.auth.auth0.userInfoEndpoint);
-    const userRepository = new UserRepository({userClass: getUserClass(mongoConnection), sessionValidityLengthInDays: 3});
+    const userRepository = new UserRepository({userClass: getUserClass(mongoConnection), sessionValidityLengthInDays: 3, adminEmailAddresses: config.adminEmailAddresses});
     return new Auth0AndMongoAuthorizer({auth0Authorizer, userRepository});
 }
 
