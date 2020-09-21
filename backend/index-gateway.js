@@ -85,6 +85,7 @@ async function main(event, context) {
 
     /* Resolve routes */
     try {
+        /** @type {ApiGatewayResponse|LambdaEdgeResponse} */
         const result = await router.resolveRoutes(event, context, [
             {functionName: 'getVersion', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},

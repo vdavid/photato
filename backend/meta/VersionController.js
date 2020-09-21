@@ -4,9 +4,10 @@ class VersionController {
     /**
      * @param {RequestHelper} requestHelper
      * @param {ResponseHelper} responseHelper
+     * @returns {ApiGatewayResponse|LambdaEdgeResponse}
      */
     handleGetRequest(requestHelper, responseHelper) {
-        responseHelper.buildResponse(200, `Version ${packageJson.version}`);
+        return responseHelper.buildResponse(200, `Version ${packageJson.version}`);
     }
 }
 
