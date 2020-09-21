@@ -86,7 +86,7 @@ async function main(event, context) {
     /* Resolve routes */
     try {
         const result = await router.resolveRoutes(event, context, [
-            {functionName: 'version', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},
+            {functionName: 'getVersion', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},
             {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
             {functionName: 'adminGetAllMessages', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), getAllMessagesController.handleGetRequest.bind(getAllMessagesController)]},
         ]);
