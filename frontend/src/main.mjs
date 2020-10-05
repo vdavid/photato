@@ -1,6 +1,7 @@
 import {config, developmentConfig, stagingConfig, productionConfig} from './config.mjs';
 import React, {StrictMode} from './web_modules/react.js';
 import {render} from './web_modules/react-dom.js';
+import ReactGA from './web_modules/react-ga.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
 import I18nProvider from "./i18n/components/I18nProvider.mjs";
@@ -15,26 +16,8 @@ import CourseDateConverter from './challenges/CourseDateConverter.mjs';
 
 const courseDateConverter = new CourseDateConverter(config.course.startDateTime, config.course.weekCount);
 
-/**
- * Moves keys from environment-specific configs to common config.
- * This should be done at the very beginning of the app code (which is here).
- */
-function initializeConfig() {
-    const environmentSpecificConfig = window.location.host.startsWith('photato.eu')
-        ? productionConfig
-        : (window.location.host.startsWith('staging.photato.eu') ? stagingConfig : developmentConfig);
-    config.environment = environmentSpecificConfig.environment;
-    config.baseUrl = environmentSpecificConfig.baseUrl;
-    config.auth0 = environmentSpecificConfig.auth0;
-    config.featureSwitches = environmentSpecificConfig.featureSwitches;
-    config.backendApi.environment = environmentSpecificConfig.backendApi.environment;
-}
-
 initializeConfig();
-
-function onRedirectCallback() {
-    window.history.replaceState({}, document.title, window.location.pathname);
-}
+initializeTracking();
 
 render(
     <Auth0Provider domain={config.auth0.domain}
@@ -52,3 +35,30 @@ render(
             </CourseDataProvider>
         </I18nProvider>
     </Auth0Provider>, document.getElementById('app'));
+
+/**
+ * Moves keys from environment-specific configs to common config.
+ * This should be done at the very beginning of the app code (which is here).
+ */
+function initializeConfig() {
+    const environmentSpecificConfig = window.location.host.startsWith('photato.eu')
+        ? productionConfig
+        : (window.location.host.startsWith('staging.photato.eu') ? stagingConfig : developmentConfig);
+    config.environment = environmentSpecificConfig.environment;
+    config.baseUrl = environmentSpecificConfig.baseUrl;
+    config.auth0 = environmentSpecificConfig.auth0;
+    config.featureSwitches = environmentSpecificConfig.featureSwitches;
+    config.backendApi.environment = environmentSpecificConfig.backendApi.environment;
+}
+
+function initializeTracking() {
+    ReactGA.initialize(config.tracking.googleTrackingCode, {
+        debug: config.environment === 'development',
+        titleCase: false,
+    });
+    ReactGA.pageview(window.location.pathname + window.location.search);
+}
+
+function onRedirectCallback() {
+    window.history.replaceState({}, document.title, window.location.pathname);
+}

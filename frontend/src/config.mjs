@@ -59,6 +59,9 @@ export const config = {
         'veszelovszki@gmail.com',
         'dorah.nemeth@gmail.com',
     ],
+    tracking: {
+        googleTrackingCode: 'UA-178413371-1',
+    },
     featureSwitches: {},
 };
 

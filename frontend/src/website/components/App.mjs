@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
-import {BrowserRouter, Switch, Route, Redirect} from '../../web_modules/react-router-dom.js';
+import {BrowserRouter, Switch, Route, Redirect, useHistory} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
+import ReactGA from '../../web_modules/react-ga.js';
 
 import PhotoUploader from '../../upload/PhotoUploader.mjs';
 
@@ -30,8 +31,9 @@ const permissionHelper = new PermissionHelper();
 
 export default function App() {
     const {areTranslationsLoaded} = useI18n();
-    const [areFontsReady, setFontsReady] = useState(false);
+    const history = useHistory();
     const {loading: isAuthLoading, isAuthenticated, user} = useAuth0();
+    const [areFontsReady, setFontsReady] = useState(false);
 
     useEffect(() => {
         async function checkFontsLoaded() {
@@ -44,7 +46,52 @@ export default function App() {
         checkFontsLoaded();
     }, []);
 
-    const publicRoutes = [
+    /* Initialize Google Analytics page view tracking */
+    useEffect(() => {
+        history.listen(location => {
+            ReactGA.set({page: location.pathname}); /* Update the user’s current page */
+            ReactGA.pageview(location.pathname); /* Record a page view for the given page */
+        });
+    });
+
+    /* Set Google Analytics user sub if we have any */
+    useEffect(() => {
+        if (isAuthenticated) {
+            ReactGA.set({
+                userSub: isAuthenticated ? user.sub : undefined,
+                /* Can add any data that is relevant to the session and would like to track with Google Analytics */
+            });
+        }
+    }, [isAuthenticated]);
+
+    const publicRoutes = _getPublicRoutes();
+    const memberRoutes = _getMemberRoutes();
+    const adminRoutes = _getAdminRoutes();
+
+    return areTranslationsLoaded && areFontsReady && !isAuthLoading
+        ?
+        <BrowserRouter basename='/'>
+            <NavigationBar/>
+            <main>
+                <Switch>
+                    {publicRoutes}
+                    {isAuthenticated ? memberRoutes :
+                        <Redirect to="/"/>}
+                    {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes :
+                        <Redirect to="/"/>}
+                    <Route path='/' key='Error404Page'>
+                        <Error404Page/>
+                    </Route>
+                </Switch>
+            </main>
+            <Footer/>
+        </BrowserRouter>
+        :
+        <FullPageLoadingIndicator/>;
+}
+
+function _getPublicRoutes() {
+    return [
         <Route path='/' exact={true} key='FrontPage'>
             <FrontPage/>
         </Route>,
@@ -67,8 +114,10 @@ export default function App() {
             <MaterialPage/>
         </Route>,
     ];
+}
 
-    const memberRoutes = [
+function _getMemberRoutes() {
+    return [
         <Route path='/upload' key='UploadPage'>
             <UploadPage photoUploader={photoUploader}/>
         </Route>,
@@ -79,8 +128,10 @@ export default function App() {
             <ChallengePage/>
         </Route>,
     ];
+}
 
-    const adminRoutes = [
+function _getAdminRoutes() {
+    return [
         <Route path='/admin' exact={true} key='AdminPage'>
             <AdminPage/>
         </Route>,
@@ -94,23 +145,4 @@ export default function App() {
             <SitemapGeneratorPage/>
         </Route>,
     ];
-
-    return areTranslationsLoaded && areFontsReady && !isAuthLoading
-        ?
-        <BrowserRouter basename='/'>
-            <NavigationBar/>
-            <main>
-                <Switch>
-                    {publicRoutes}
-                    {isAuthenticated ? memberRoutes : <Redirect to="/"/>}
-                    {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes: <Redirect to="/"/>}
-                    <Route path='/' key='Error404Page'>
-                        <Error404Page/>
-                    </Route>
-                </Switch>
-            </main>
-            <Footer/>
-        </BrowserRouter>
-        :
-        <FullPageLoadingIndicator/>;
 }
