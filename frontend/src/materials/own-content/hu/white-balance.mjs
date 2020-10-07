@@ -11,7 +11,7 @@ export function getMetadata() {
     // noinspection SpellCheckingInspection (It's in Hungarian.)
     return {
         slug: 'white-balance',
-        title: 'Fehéegyensúly',
+        title: 'Fehéregyensúly',
         author: 'Photato',
         publishDate: new Date('2020-06-07'),
         publisherName: 'Photato',
