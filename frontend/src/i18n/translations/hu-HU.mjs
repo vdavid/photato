@@ -50,6 +50,7 @@ const challengePageTranslations = {
     'The course started {approximateWeeksAgo} ({exactDate}).': {translation: 'A tanfolyam {approximateWeeksAgo} ({exactDate}) kezdődött.'},
     'about {weekIndex} weeks ago': {translation: 'kb. {weekIndex} hete'},
     'recently': {translation: 'nemrég'},
+    'Hold on for a bit more. 🕑 The course will start on {exactDate}.': {translation: 'Várj még egy kicsit. 🕑 A tanfolyam hamarosan indul, ezen a szép napon: {exactDate}.'},
     'Unfortunately, it’s already over. But you can sign up to the next course if you still want to study photography.': {translation: 'Sajnos azóta vége lett. Viszont feliratkozhatsz a következő tanfolyamra, ha még mindig szívesen tanulnál fotózni.'},
 };
 

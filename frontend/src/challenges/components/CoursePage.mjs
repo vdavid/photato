@@ -11,34 +11,57 @@ import ExternalLink from '../../materials/components/ExternalLink.mjs';
 export default function CoursePage() {
     const {__, getActiveLocaleCode} = useI18n();
     const {currentWeekIndex, weekCount, courseStartDate, getDeadline} = useCourseData();
-    const weekIndexes = Array.from(Array(Math.min(currentWeekIndex, weekCount)), (value, key) => key + 1);
+    const currentWeekIndexButAtLeastOne = Math.max(currentWeekIndex, 1);
+    const weekIndexes = Array.from(Array(Math.min(currentWeekIndexButAtLeastOne, weekCount)), (value, key) => key + 1);
+
+
+    const currentWeekIndexAdjustedForFirstDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime() !== courseStartDate.getTime() ? currentWeekIndex : 1;
 
     useEffect(() => {document.title = config.course.titleWithoutPhotato + ' - Photato';}, []);
 
     return <>
         <h1>{config.course.titleWithPhotato}</h1>
-        <p>{__('The course started {approximateWeeksAgo} ({exactDate}).', {
-            approximateWeeksAgo: (currentWeekIndex > 1) ? __('about {weekIndex} weeks ago', {weekIndex: currentWeekIndex}) : __('recently'),
-            exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())
-        })}</p>
-        {currentWeekIndex <= weekCount ?
-            <>
-        <h2>{__('This week’s challenge')}</h2>
-        <p>
-            <NavLink to={'/challenges/' + currentWeekIndex}>
-                {__('Week {weekIndex}:', {weekIndex: currentWeekIndex}) + ' ' + __(weeklyChallengeTitles[currentWeekIndex - 1])}
-            </NavLink> – {__('Deadline to submit your shot')}: {formatDateWithWeekDayAndTime(getDeadline(currentWeekIndex), getActiveLocaleCode())}
-        </p>
-        <p>
-            <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
-        </p>
-                </> :
-        <>
+        {currentWeekIndexAdjustedForFirstDay >= 1
+            ? <>
+                <p>{__('The course started {approximateWeeksAgo} ({exactDate}).', {
+                    approximateWeeksAgo: (currentWeekIndex > 1) ? __('about {weekIndex} weeks ago', {weekIndex: currentWeekIndex}) : __('recently'),
+                    exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())
+                })}</p>
+                {currentWeekIndex <= weekCount ? _getThisWeeksChallenge() : _getAlreadyOverMessage()}
+                {currentWeekIndex > 1 ? _getPreviousChallengesList() : null}
+            </>
+            : <p>
+                {__('Hold on for a bit more. 🕑 The course will start on {exactDate}.', {
+                    exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())
+                })}
+            </p>}
+    </>;
+
+    function _getThisWeeksChallenge() {
+        return <>
+            <h2>{__('This week’s challenge')}</h2>
+            <p>
+                <NavLink to={'/challenges/' + currentWeekIndexAdjustedForFirstDay}>
+                    {__('Week {weekIndex}:', {weekIndex: currentWeekIndexAdjustedForFirstDay}) + ' ' + __(weeklyChallengeTitles[currentWeekIndexAdjustedForFirstDay - 1])}
+                </NavLink> – {__('Deadline to submit your shot')}: {formatDateWithWeekDayAndTime(getDeadline(currentWeekIndexAdjustedForFirstDay), getActiveLocaleCode())}
+            </p>
+            <p>
+                <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
+            </p>
+        </>;
+    }
+
+    function _getAlreadyOverMessage() {
+        return <>
             <p>{__('Unfortunately, it’s already over. But you can sign up to the next course if you still want to study photography.')}</p>
-            <p><ExternalLink href={config.course.signUpFormUrl} className="callToActionButton">{__('Sign up for the next course')}</ExternalLink></p>
-            </>}
-        {currentWeekIndex > 1 ?
-        <>
+            <p>
+                <ExternalLink href={config.course.signUpFormUrl} className="callToActionButton">{__('Sign up for the next course')}</ExternalLink>
+            </p>
+        </>;
+    }
+
+    function _getPreviousChallengesList() {
+        return <>
             <h2>{__('Previous challenges')}</h2>
             {weekIndexes.map(weekIndex =>
                 <p>
@@ -46,7 +69,6 @@ export default function CoursePage() {
                         {__('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])}
                     </NavLink>
                 </p>)}
-        </>
-        : null}
-    </>;
+        </>;
+    }
 }

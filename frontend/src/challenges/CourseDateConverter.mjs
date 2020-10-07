@@ -1,6 +1,6 @@
 export default class CourseDateConverter {
     /**
-     * @param {Date} courseStartDate 00:00 of the zeroth day of the course, a Sunday.
+     * @param {Date} courseStartDate 00:00 of the 1st day of the course, a Monday.
      * @param {int} weekCount Total number of weeks in the course
      */
     constructor(courseStartDate, weekCount) {
