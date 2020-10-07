@@ -4,7 +4,7 @@ const RequestHelper = require('./http/RequestHelper.js');
 const ResponseHelper = require('./http/ResponseHelper.js');
 const Router = require('./http/Router.js');
 const AuthMiddleware = require('./auth/AuthMiddleware.js');
-const Auth0AndMongoAuthorizer = require('./auth/Auth0AndMongoAuthorizer.js');
+const Auth0AndMongoAuthorizerFactory = require('./auth/Auth0AndMongoAuthorizerFactory.js');
 
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
 
@@ -61,7 +61,7 @@ const defaultConfig = getDefaultConfig();
 const router = new Router({appName: defaultConfig.appName});
 
 /* Create middleware */
-const authMiddleware = new AuthMiddleware(new Auth0AndMongoAuthorizer());
+const auth0AndMongoAuthorizerFactory = new Auth0AndMongoAuthorizerFactory();
 
 /* Create controllers */
 const versionController = new VersionController();
@@ -85,6 +85,8 @@ async function main(event, context) {
 
     /* Resolve routes */
     try {
+        const auth0AndMongoAuthorizer = await auth0AndMongoAuthorizerFactory.createForEnvironment(requestHelper.getEnvironment());
+        const authMiddleware = new AuthMiddleware(auth0AndMongoAuthorizer);
         /** @type {ApiGatewayResponse|LambdaEdgeResponse} */
         const result = await router.resolveRoutes(event, context, [
             {functionName: 'getVersion', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},

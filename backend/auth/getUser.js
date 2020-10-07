@@ -1,11 +1,4 @@
-const mongoose = require('mongoose');
-const MongoConnector = require('../database/MongoConnector.js');
-const {getConfig} = require('../config.js');
-
-const {getUserClass} = require('./User.js');
-const UserRepository = require('./UserRepository.js');
-const Auth0Authorizer = require('./Auth0Authorizer.js');
-const Auth0AndMongoAuthorizer = require('./Auth0AndMongoAuthorizer.js');
+const Auth0AndMongoAuthorizerFactory = require('./Auth0AndMongoAuthorizerFactory.js');
 
 /**
  * @param {{environment: string, accessToken: string}} event
@@ -14,24 +7,11 @@ const Auth0AndMongoAuthorizer = require('./Auth0AndMongoAuthorizer.js');
  */
 async function handler(event, context) {
     console.info(`getUser | Got request.`, {event, context});
-    const auth0AndMongoAuthorizer = await _createAuth0AndMongoAuthorizerForEnvironment(event.environment)
+    const auth0AndMongoAuthorizerFactory = new Auth0AndMongoAuthorizerFactory();
+    const auth0AndMongoAuthorizer = await auth0AndMongoAuthorizerFactory.createForEnvironment(event.environment)
     const user = await auth0AndMongoAuthorizer.authenticateByAccessToken(event.accessToken, event.environment);
     console.debug('getUser | Returning result.', user);
     return user || '';
-}
-
-/**
- * @param {string} environment
- * @returns {Promise<Auth0AndMongoAuthorizer>}
- * @private
- */
-async function _createAuth0AndMongoAuthorizerForEnvironment(environment) {
-    const config = getConfig(environment);
-    const mongoConnector = new MongoConnector(mongoose);
-    const mongoConnection = await mongoConnector.connect(config.database.connectionString, config.database.name);
-    const auth0Authorizer = new Auth0Authorizer(config.auth.auth0.userInfoEndpoint);
-    const userRepository = new UserRepository({userClass: getUserClass(mongoConnection), sessionValidityLengthInDays: 3, adminEmailAddresses: config.adminEmailAddresses});
-    return new Auth0AndMongoAuthorizer({auth0Authorizer, userRepository});
 }
 
 module.exports.handler = handler;
