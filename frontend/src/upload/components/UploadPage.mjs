@@ -138,7 +138,7 @@ export default function UploadPage({photoUploader}) {
 
     const formattedDeadline = formatDateWithWeekDayAndTime(getDeadline(currentWeekIndex), getActiveLocaleCode());
     const courseStatusHelpText = isCourseRunning
-        ? __('Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
+        ? __('Submit your pic before {deadline}.\nNote: Please upload a photo you made this week. If you want to share your older pics, you’re welcome to send them in to the Facebook group.\nReminder: if you already submitted a photo this week, the new picture will replace it.', {deadline: formattedDeadline})
         : (isCourseOver
             ? __('The course has already ended. You can’t upload pics anymore. ☹')
             : __('The course has not started. You can upload your photos soon! 😊'));
