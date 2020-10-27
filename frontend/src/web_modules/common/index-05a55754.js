@@ -1,16 +1,4 @@
-function createCommonjsModule(fn, basedir, module) {
-	return module = {
-	  path: basedir,
-	  exports: {},
-	  require: function (path, base) {
-      return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-    }
-	}, fn(module, module.exports), module.exports;
-}
-
-function commonjsRequire () {
-	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-}
+import { c as createCommonjsModule } from './_commonjsHelpers-be8ed69f.js';
 
 /*
 object-assign
@@ -2117,4 +2105,4 @@ var react = createCommonjsModule(function (module) {
 }
 });
 
-export { ReactPropTypesSecret_1 as R, checkPropTypes_1 as a, createCommonjsModule as c, objectAssign as o, react as r };
+export { ReactPropTypesSecret_1 as R, checkPropTypes_1 as c, objectAssign as o, react as r };

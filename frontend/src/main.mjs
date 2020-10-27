@@ -2,6 +2,7 @@ import {config, developmentConfig, stagingConfig, productionConfig} from './conf
 import React, {StrictMode} from './web_modules/react.js';
 import {render} from './web_modules/react-dom.js';
 import ReactGA from './web_modules/react-ga.js';
+import ReactPixel from './web_modules/react-facebook-pixel.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
 import I18nProvider from "./i18n/components/I18nProvider.mjs";
@@ -57,6 +58,14 @@ function initializeTracking() {
         titleCase: false,
     });
     ReactGA.pageview(window.location.pathname + window.location.search);
+
+    const options = {
+        autoConfig: true, /* Sets pixel to autoConfig. */
+        debug: config.environment === 'development', /* Enables logs */
+    };
+    /* Info: https://github.com/zsajjad/react-facebook-pixel */
+    ReactPixel.init(config.tracking.facebookPixelId, {}, options);
+    ReactPixel.pageView();
 }
 
 function onRedirectCallback() {
