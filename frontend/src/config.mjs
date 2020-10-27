@@ -19,7 +19,7 @@ export const config = {
         clientId: '', // Will be set by main.mjs
     },
     course: {
-        name: 'hu-staging-4',
+        name: 'hu-4',
         weekCount: 12,
         isWinterOrSummerCourse,
         titleWithPhotato: '2020. téli Photato tanfolyam',

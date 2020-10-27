@@ -31,7 +31,7 @@ function getHungarianPage() {
                 <li>
                     <a href="mailto:photatophotato@gmail.com?subject=Mentornak jelentkezem">Jelentkezz mentornak</a>
                 </li>
-                <li>Vidd hírünket, pl. postolj a Facebook faladra valami ilyet: “Találtam egy ingyenes online fotóssulit, krumplikat lehet fotózni. 😄 Hamarosan indul a következő tanfolyamuk, itt lehet jelentkezni: <ExternalLink href="https://bit.ly/2tB1hpR">https://bit.ly/2tB1hpR</ExternalLink> 🍠”
+                <li>Vidd hírünket, pl. postolj a Facebook faladra valami ilyet: “Találtam egy ingyenes online fotóssulit, krumplikat lehet fotózni. 😄 Hamarosan indul a következő tanfolyamuk, itt lehet jelentkezni: <ExternalLink href="https://bit.ly/3iDJ3HV">https://bit.ly/3iDJ3HV</ExternalLink> 🍠”
                 </li>
             </ul>
 
@@ -67,7 +67,7 @@ function getEnglishPage() {
                 <li>
                     <a href="mailto:photatophotato@gmail.com?subject=Mentor application">Jelentkezz mentornak</a>
                 </li>
-                <li>Spread the word. Post on your wall something like: ‘I’ve found a free photo school where you can shoot potatoes. 😄 Their next course is starting soon, apply here: <ExternalLink href="https://bit.ly/2tB1hpR">https://bit.ly/2tB1hpR</ExternalLink> 🍠’
+                <li>Spread the word. Post on your wall something like: ‘I’ve found a free photo school where you can shoot potatoes. 😄 Their next course is starting soon, apply here: <ExternalLink href="https://bit.ly/3iDJ3HV">https://bit.ly/3iDJ3HV</ExternalLink> 🍠’
                 </li>
             </ul>
 
