@@ -18,7 +18,7 @@
 // {facebookGroupUrl} → bit.ly link (plain text)
 // {signedUpCount} → 27 (just a number)
 // {uploadUrl} → https://photato.eu/upload
-// {signUpUrl} → https://bit.ly/2tB1hpR (plain text)
+// {signUpUrl} → https://bit.ly/3iDJ3HV (plain text)
 // {midTimeSurveyUrl} → The URL
 // {finalSurveyUrl} → The URL
 // {weekXXDeadlineDate} → The formatted date (including day of week) when the XXth challenge is due.
