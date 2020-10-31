@@ -1,4 +1,5 @@
 import React from '../../../web_modules/react.js';
+import {config} from '../../../config.mjs';
 import PhotoUploadLink from '../../components/PhotoUploadLink.mjs';
 import ExternalLink from '../../../materials/components/ExternalLink.mjs';
 
@@ -43,15 +44,15 @@ export default function Week12Challenge({formattedDeadline}) {
         <hr />
         <p><em>Képzeld, az elmúlt hetekben fotózni tanultam egy online suliban, és pár hét múlva indul egy újabb tanfolyamuk!<br />
             Arra gondoltam, téged is érdekelhet a fotózás.<br />
-            Ha így van, jelentkezz itt: <ExternalLink href="https://bit.ly/3iDJ3HV">https://bit.ly/3iDJ3HV</ExternalLink></em>
+            Ha így van, jelentkezz itt: <ExternalLink href={config.course.signUpFormUrl}>{config.course.signUpFormUrl}</ExternalLink></em>
         </p>
         <hr />
         <p>Vagy kiírhatsz valami ilyesmit a faladra:</p>
         <hr />
-        <p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő tanfolyamuk, ajánlom mindenkinek! Ha érdekel, jelentkezz itt: <ExternalLink href="https://bit.ly/3iDJ3HV">https://bit.ly/3iDJ3HV</ExternalLink></em>
+        <p><em>Az elmúlt hetekben fotózni tanultam egy ingyenes, online suliban, és nagyon király volt. Hamarosan indul a következő tanfolyamuk, ajánlom mindenkinek! Ha érdekel, jelentkezz itt: <ExternalLink href={config.course.signUpFormUrl}>{config.course.signUpFormUrl}</ExternalLink></em>
         </p>
         <hr />
-        <p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <ExternalLink href="https://bit.ly/3iDJ3HV">https://bit.ly/3iDJ3HV</ExternalLink>
+        <p>A feladatok a tervek szerint a következő tanfolyamon is nagyon hasonlóak lesznek a mostanihoz, szóval ha már egyszer végigcsináltad, nem feltétlenül ajánljuk újra, de ha nem adtál be annyi képet, mint tervezted, és megpróbálnád ismét, bátran iratkozz fel a következő körre itt: <ExternalLink href={config.course.signUpFormUrl}>{config.course.signUpFormUrl}</ExternalLink>
         </p>
         <p>És még egy dolog:</p>
         <p><strong>Mentorokat keresünk!</strong> Sokan jeleztétek, hogy jó lett volna több visszajelzés a képeitekre, viszont nekünk sajnos nem volt erre annyi időnk, mint szerettük volna. Ha érzed magadban az erőt, hogy besegíts nekünk kommentálni a beérkező képeket, küldj egy levelet a <ExternalLink href="mailto:photatophotato+mentor@gmail.com">photatophotato+mentor@gmail.com</ExternalLink> címre. Egy egy soros email teljesen elég, hogy „Mentornak jelentkezem”, a többiről emailben egyeztetünk. Nem hatalmas felelősség, de nekünk nagy segítség. 😊</p>

@@ -1,4 +1,5 @@
 import React from '../web_modules/react.js';
+import {config} from '../config.mjs';
 import {NavLink} from '../web_modules/react-router-dom.js';
 import ExternalLink from '../materials/components/ExternalLink.mjs';
 
@@ -157,8 +158,8 @@ function getMultiLanguageContent() {
                 hu: <>Csatlakozni szeretnék. Mit tegyek?</>,
             },
             answer: {
-                en: <><ExternalLink href="https://bit.ly/3iDJ3HV">Sign up here</ExternalLink>. Signing up (and the whole course) is free.</>,
-                hu: <><ExternalLink href="https://bit.ly/3iDJ3HV">Iratkozz fel itt</ExternalLink>. A regisztráció (és a teljes tanfolyam) ingyenes.</>,
+                en: <><ExternalLink href={config.course.signUpFormUrl}>Sign up here</ExternalLink>. Signing up (and the whole course) is free.</>,
+                hu: <><ExternalLink href={config.course.signUpFormUrl}>Iratkozz fel itt</ExternalLink>. A regisztráció (és a teljes tanfolyam) ingyenes.</>,
             },
         },
         {
