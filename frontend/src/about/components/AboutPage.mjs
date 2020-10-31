@@ -14,26 +14,22 @@ export default function AboutPage() {
         return <>
             <Twemoji>
                 <h1>A Photatoról 🥔📷</h1>
+                <p>(Írta: Veszelovszki Dávid)</p>
                 <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani. Ha fotózni tanulnál, <ExternalLink href="https://bit.ly/2tB1hpR">iratkozz fel itt</ExternalLink>.
                 </p>
 
                 <h2>Pár szó a történetünkről</h2>
-                <p>
-                    <strong>Dávid:</strong> A Photatot <ExternalLink href="http://www.jurikov.com/">Gyuri</ExternalLink> barátom és <ExternalLink href="https://david.veszelovszki.hu/">én</ExternalLink> alapítottuk. Eredetileg én készítettem a húgomnak karácsonyi ajándéknak, de aztán arra gondoltam, másoknak is hasznos lehet. 😊 Eddig 3 db 3 hónapos tanfolyamot tartottunk, összesen 549 embernek. Az elsőt 2018-ban indítottuk, úgy, hogy még a tananyag sem volt kész, hétről hétre írtuk Gyurival. A második kurzus már nyugisabb volt, mert a tanayag már kész volt. Itt már Luca húgom segített levezetni a tanfolyamot. Ezután szűk 2 év szünet következett. 2020-ban, Dóri segítségével indítottuk a harmadik kurzust. Közben több lelkes ismerős és ismeretlen segített nekünk a mentorálásban, visszajelzésekkel, a közösség aktívan tartásával.
+                <p>A Photatot <ExternalLink href="http://www.jurikov.com/">Gyuri</ExternalLink> barátom és <ExternalLink href="https://david.veszelovszki.hu/">én</ExternalLink> alapítottuk. Eredetileg én készítettem a húgomnak karácsonyi ajándéknak, de aztán arra gondoltam, másoknak is hasznos lehet. 😊 Eddig 3 db 3 hónapos tanfolyamot tartottunk, összesen 549 embernek. Az elsőt 2018-ban indítottuk, úgy, hogy még a tananyag sem volt kész, hétről hétre írtuk Gyurival. A második kurzus már nyugisabb volt, mert a tanayag már kész volt. Itt már Luca húgom segített levezetni a tanfolyamot. Ezután szűk 2 év szünet következett. 2020-ban, Dóri segítségével indítottuk a harmadik kurzust. Közben több lelkes ismerős és ismeretlen segített nekünk a mentorálásban, visszajelzésekkel, a közösség aktívan tartásával.
                 </p>
                 <p>Az eddigi 3 tanfolyam 116, 86, és 347 diákkal indult. Összesen 1 081 érvényes beadást kaptunk a hetek során, a tanfolyamok végén pedig összesen 50 értékes díjat osztottunk ki. 🥔</p>
 
                 <h2>Miért? És miért ingyen?</h2>
-                <p>
-                    <strong>Dávid:</strong> Mert hiszünk abban, hogy ha az emberek a szabadidejüket azzal töltik, hogy adnak egymásnak dolgokat, akkor jobb lesz a világ. Mi fotózni és tanítani szeretünk, ezért mi ezt adjuk.
-                </p>
+                <p>Mert hiszünk abban, hogy ha az emberek a szabadidejüket azzal töltik, hogy adnak egymásnak dolgokat, akkor jobb lesz a világ. Mi fotózni és tanítani szeretünk, ezért mi ezt adjuk.</p>
                 <p>Számomra pl. a fotózás csak hobbi, de tanítani nagyon szeretek. A napi munkámban (<ExternalLink href="https://codeberryschool.com">CodeBerry</ExternalLink>, szintén saját vállalkozás) is tanítunk, programozást. A csapatban mind úgy vagyunk, hogy a munkánk biztosítja a megélhetésünket, emellett a Photato egy jó kikapcsolódás, amiből mások is kapnak értéket.
                 </p>
 
-                <h2>Mennyibe kerül ez nektek?</h2>
-                <p>
-                    <strong>Dávid</strong>: Nem sokba. Két része van: az idő és a pénz.
-                </p>
+                <h2>Mennyibe kerül ez nektek, mint készítőknek?</h2>
+                <p>Nem sokba. Két része van: az idő és a pénz.</p>
                 <p>Időben eddig – 3 év alatt – kb. 360 órát tettünk a tanfolyamba. Ez kb. így oszlik el:</p>
                 <ul>
                     <li>Az első tanfolyam elején kb. 60 óra volt Gyurinak és nekem megírni a 12 heti feladatot.</li>
