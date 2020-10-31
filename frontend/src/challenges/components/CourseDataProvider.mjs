@@ -13,7 +13,7 @@ export const useCourseData = () => useContext(CourseDataContext);
 export default function CourseDataProvider({children, courseDateConverter}) {
     return <CourseDataContext.Provider value={{
         currentDayIndex: courseDateConverter.getDayIndexSinceCourseStart(),
-        currentWeekIndex: courseDateConverter.getWeekIndex(),
+        currentWeekIndex: courseDateConverter.getWeekIndex(), /* One-based! */
         currentWeekDeadline: courseDateConverter.getWeekDeadline(),
         hasCourseStarted: courseDateConverter.hasCourseStarted(),
         isCourseOver: courseDateConverter.isCourseOver(),
