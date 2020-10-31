@@ -8,6 +8,7 @@ import PhotoUploader from '../../upload/PhotoUploader.mjs';
 
 import FullPageLoadingIndicator from './FullPageLoadingIndicator.mjs';
 import NavigationBar from './NavigationBar.mjs';
+import BugReportButton from '../../bug-report/components/BugReportButton.mjs';
 
 import Error404Page from './Error404Page.mjs';
 import FrontPage from '../../front-page/components/FrontPage.mjs';
@@ -18,6 +19,7 @@ import UploadPage from '../../upload/components/UploadPage.mjs';
 import CoursePage from '../../challenges/components/CoursePage.mjs';
 import ChallengePage from '../../challenges/components/ChallengePage.mjs';
 import MaterialsPage from '../../materials/components/MaterialsPage.mjs';
+import BugReportPage from '../../bug-report/components/BugReportPage.mjs';
 import MaterialPage from '../../materials/components/MaterialPage.mjs';
 import Footer from './Footer.mjs';
 import PhotatoMessagesPage from '../../admin/messages/components/PhotatoMessagesPage.mjs';
@@ -78,6 +80,7 @@ export default function App() {
         ?
         <BrowserRouter basename='/'>
             <NavigationBar/>
+            <BugReportButton/>
             <main>
                 <Switch>
                     {publicRoutes}
@@ -112,6 +115,9 @@ function _getPublicRoutes() {
         </Route>,
         <Route path='/materials' key='MaterialsPage'>
             <MaterialsPage/>
+        </Route>,
+        <Route path='/bug-report' key='BugReportPage'>
+            <BugReportPage/>
         </Route>,
         <Route path='/:languageCode/article/:slug' key='MaterialPage'>
             <MaterialPage/>

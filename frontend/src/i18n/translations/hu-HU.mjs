@@ -108,7 +108,7 @@ const adminTranslations = {
     'Back to the list of messages': {translation: 'Vissza az üzenetek listájához'},
 };
 
-// noinspection SpellCheckingInspection
+// noinspection SpellCheckingInspection,JSNonASCIINames,NonAsciiCharacters
 const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozom a következő tanfolyamra'},
@@ -117,12 +117,16 @@ const otherTranslations = {
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
     /* 404 page */
     '404 error': {translation: '404-es hiba'},
+    'Dead potato': {translation: 'Halott krumpli'},
     'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
     /* Front page */
     'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
     'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
     '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
+    /* Bug report */
+    'Found a bug?': {translation: 'Hibát találtál?'},
+    'Bug report': {translation: 'Hibajelentés'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
