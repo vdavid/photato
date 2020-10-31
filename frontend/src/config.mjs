@@ -4,8 +4,8 @@ const cloudFrontBackEndUrl = 'https://dglg96wn4of1.cloudfront.net';
 /* Course settings */
 const startYear = 2020;
 const startMonth = 11;
-const startDay = 9; /* Must be the Monday when the course starts */
-const isDaylightSavingTimeOn = true; /* Usually from the end of March till the end of October, but different every year */
+const startDay = 8; /* Must be the Sunday when the course starts */
+const isDaylightSavingTimeOn = false; /* Usually from the end of March till the end of October, but different every year */
 const isWinterOrSummerCourse = 'winter';
 
 const {startDateTime, liveEventDate, exhibitionDate}

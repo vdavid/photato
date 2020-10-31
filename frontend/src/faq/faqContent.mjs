@@ -157,8 +157,8 @@ function getMultiLanguageContent() {
                 hu: <>Csatlakozni szeretnék. Mit tegyek?</>,
             },
             answer: {
-                en: <><ExternalLink href="https://bit.ly/2tB1hpR">Sign up here</ExternalLink>. Signing up (and the whole course) is free.</>,
-                hu: <><ExternalLink href="https://bit.ly/2tB1hpR">Iratkozz fel itt</ExternalLink>. A regisztráció (és a teljes tanfolyam) ingyenes.</>,
+                en: <><ExternalLink href="https://bit.ly/3iDJ3HV">Sign up here</ExternalLink>. Signing up (and the whole course) is free.</>,
+                hu: <><ExternalLink href="https://bit.ly/3iDJ3HV">Iratkozz fel itt</ExternalLink>. A regisztráció (és a teljes tanfolyam) ingyenes.</>,
             },
         },
         {

@@ -81,7 +81,7 @@ const uploadPageTranslations = {
     'Upload your weekly photo': {translation: 'Töltsd fel a heti fotód'},
     'Upload your best photo': {translation: 'Töltsd fel a legjobb fotód'},
     'Week #{weekIndex}': {translation: '{weekIndex}. hét'},
-    'Send in your pic before {deadline}.\nReminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt.\nNe feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
+    'Submit your pic before {deadline}.\nNote: Please upload a photo you made this week. If you want to share your older pics, you’re welcome to send them in to the Facebook group.\nReminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt.\nFontos: Kérünk, hogy a héten készült, friss képet küldj be. Ha szeretnéd néhány régebbi fotódat is megosztani a közösséggel, bátran küldd be őket a Facebook csoportba.\nNe feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
     'Upload': {translation: 'Feltöltés'},
     'Please select your photo to upload.': {translation: 'Válaszd ki a feltöltendő fotót.'},
     'The image you’ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.':

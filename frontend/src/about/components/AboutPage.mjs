@@ -15,7 +15,7 @@ export default function AboutPage() {
             <Twemoji>
                 <h1>A Photatoról 🥔📷</h1>
                 <p>(Írta: Veszelovszki Dávid)</p>
-                <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani. Ha fotózni tanulnál, <ExternalLink href="https://bit.ly/2tB1hpR">iratkozz fel itt</ExternalLink>.
+                <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani. Ha fotózni tanulnál, <ExternalLink href="https://bit.ly/3iDJ3HV">iratkozz fel itt</ExternalLink>.
                 </p>
 
                 <h2>Pár szó a történetünkről</h2>
@@ -40,7 +40,7 @@ export default function AboutPage() {
                 <p>Egy tanfolyam költsége átlagosan kb. 8 000 Ft összesen, amiből Facebook hirdetéseket, a legjobb képek kinyomtatását, és egy kis pogácsát és díjakat veszünk a záróeseményre.</p>
 
                 <p>
-                    <ExternalLink className="callToActionButton" href="https://bit.ly/2tB1hpR">{__('Sign up for the next course')} →</ExternalLink>
+                    <ExternalLink className="callToActionButton" href="https://bit.ly/3iDJ3HV">{__('Sign up for the next course')} →</ExternalLink>
                 </p>
 
                 <h2>Weboldal történet</h2>
@@ -63,7 +63,7 @@ export default function AboutPage() {
         return <>
             <Twemoji>
                 <h1>About Photato 🥔📷</h1>
-                <p>This is a free photography course for beginners and intermediates. You only need a camera or a mobile phone. The course takes 12 weeks: we teach you something and give you a challenge each week. Around the 5th week there’s a live event where we shoot together. The course ends with an exhibition (also free), at <ExternalLink href="https://szimpla.hu/">Szimpla</ExternalLink>, Budapest. If you want to study photography, <ExternalLink href="https://bit.ly/2tB1hpR">sign up here</ExternalLink>.
+                <p>This is a free photography course for beginners and intermediates. You only need a camera or a mobile phone. The course takes 12 weeks: we teach you something and give you a challenge each week. Around the 5th week there’s a live event where we shoot together. The course ends with an exhibition (also free), at <ExternalLink href="https://szimpla.hu/">Szimpla</ExternalLink>, Budapest. If you want to study photography, <ExternalLink href="https://bit.ly/3iDJ3HV">sign up here</ExternalLink>.
                 </p>
                 <p>
                     <strong>Important:</strong> this course is currently in Hungarian only. If you speak Hungarian and English, <a href="mailto:photatophotato@gmail.com?I want to help translate!">help us translate</a>.
