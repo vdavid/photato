@@ -25,6 +25,7 @@ import PhotatoMessagePage from '../../admin/messages/components/PhotatoMessagePa
 import SitemapGeneratorPage from '../../admin/sitemap-generator/components/SitemapGeneratorPage.mjs';
 import AdminPage from '../../admin/components/AdminPage.mjs';
 import PermissionHelper from '../../auth/PermissionHelper.mjs';
+import ReactPixel from '../../web_modules/react-facebook-pixel.js';
 
 const photoUploader = new PhotoUploader();
 const permissionHelper = new PermissionHelper();
@@ -33,6 +34,7 @@ export default function App() {
     const {areTranslationsLoaded} = useI18n();
     const history = useHistory();
     const {loading: isAuthLoading, isAuthenticated, user} = useAuth0();
+    const [isTrackingInitialized, setIsTrackingInitialized] = useState(false);
     const [areFontsReady, setFontsReady] = useState(false);
 
     useEffect(() => {
@@ -48,11 +50,15 @@ export default function App() {
 
     /* Initialize Google Analytics page view tracking */
     useEffect(() => {
-        history.listen(location => {
-            ReactGA.set({page: location.pathname}); /* Update the user’s current page */
-            ReactGA.pageview(location.pathname); /* Record a page view for the given page */
-        });
-    });
+        if (history && !isTrackingInitialized) {
+            history.listen(location => {
+                ReactGA.set({page: location.pathname}); /* Update the user’s current page */
+                ReactGA.pageview(location.pathname); /* Record a page view for the given page */
+                ReactPixel.pageView();
+            });
+            setIsTrackingInitialized(true);
+        }
+    }, [history]);
 
     /* Set Google Analytics user sub if we have any */
     useEffect(() => {
