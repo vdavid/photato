@@ -48,6 +48,12 @@ export default function AboutPage() {
                     <li>[2020-04-11] v1.0: Kép feltöltés</li>
                     <li>[2020-04-27] v2.0: Külsős cikkek</li>
                     <li>[2020-05-02] v3.0: Weboldal tartalom, “Rólunk” oldal, FAQ, stb.</li>
+                    <li>[2020-05-08] v4.0: Kurzus emailek</li>
+                    <li>[2020-05-10] v5.0: Design csere, új logo</li>
+                    <li>[2020-06-15] v6.0: Tananyagok az oldalon</li>
+                    <li>[2020-09-20] v7.0: Ügyesebb regisztráció</li>
+                    <li>[2020-09-21] v7.1: Sok hibajavítás</li>
+                    <li>[2020-10-30] v7.2: “Hibajelentés” funkció és hibajavítások</li>
                 </ul>
             </Twemoji>
         </>;

@@ -1,6 +1,6 @@
-import './common/_commonjsHelpers-be8ed69f.js';
-import { r as react } from './common/index-05a55754.js';
-import { p as propTypes } from './common/index-b6a62e27.js';
+import './common/_commonjsHelpers-913f9c4a.js';
+import { r as react } from './common/index-f786a66f.js';
+import { p as propTypes } from './common/index-347cef88.js';
 
 function warn(s) {
   console.warn('[react-ga]', s);
@@ -101,7 +101,7 @@ var OutboundLink = /*#__PURE__*/function (_Component) {
       });
 
       if (target === NEWTAB) {
-        props.rel = 'noopener noreferrer';
+        props.rel = "".concat(props.rel ? props.rel : '', " noopener noreferrer").trim();
       }
 
       delete props.eventLabel;

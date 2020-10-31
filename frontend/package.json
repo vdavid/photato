@@ -1,6 +1,6 @@
 {
   "name": "photato-website-frontend",
-  "version": "7.0.0",
+  "version": "7.2.0",
   "description": "This is the JS front end of the Photato website.",
   "main": "src/main.mjs",
   "scripts": {
@@ -28,18 +28,18 @@
   "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
   "dependencies": {
     "htm": "^3.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-facebook-pixel": "^1.0.3",
-    "react-ga": "^3.1.2",
+    "react-ga": "^3.2.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "jest": "^26.4.2",
-    "snowpack": "^2.11.1"
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-react-jsx": "^7.12.1",
+    "jest": "^26.6.1",
+    "snowpack": "^2.16.1"
   },
   "jest": {
     "testEnvironment": "jsdom"
