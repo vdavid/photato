@@ -64,13 +64,13 @@ export default function App() {
 
     /* Set Google Analytics user sub if we have any */
     useEffect(() => {
-        if (isAuthenticated) {
+        if (isAuthenticated && user) {
             ReactGA.set({
                 userSub: isAuthenticated ? user.sub : undefined,
                 /* Can add any data that is relevant to the session and would like to track with Google Analytics */
             });
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, user]);
 
     const publicRoutes = _getPublicRoutes();
     const memberRoutes = _getMemberRoutes();
