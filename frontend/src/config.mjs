@@ -31,7 +31,7 @@ export const config = {
         finalSurveyUrl: 'https://bit.ly/3jEbCq9',
         liveEventDate,
         exhibitionDate,
-        facebookGroupUrl: '', // TODO: Add this
+        facebookGroupUrl: 'https://www.facebook.com/groups/photato2020tel',
         timeZone: 'Europe/Budapest',
     },
     imageUpload: {
