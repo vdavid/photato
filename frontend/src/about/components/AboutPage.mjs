@@ -16,7 +16,7 @@ export default function AboutPage() {
             <Twemoji>
                 <h1>A Photatoról 🥔📷</h1>
                 <p>(Írta: Veszelovszki Dávid)</p>
-                <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani. Ha fotózni tanulnál, <ExternalLink href={config.course.signUpFormUrl}>iratkozz fel itt</ExternalLink>.
+                <p>Ez egy ingyenes fotós tanfolyam kezdőknek és középhaladóknak. Csak egy fényképezőgépre vagy mobilra van szükséged. A tanfolyam 12 hétig tart, minden héten új elméleti tudást és feladatot kapsz. Az 5. hét környékén szokott lenni egy közösen fotózós esemény. A tanfolyam fotókiállítással zárul (szintén ingyenes), Budapesten, a <ExternalLink href="https://szimpla.hu/">Szimplában</ExternalLink> szoktunk tartani (járványhelyzetben pedig online). Ha fotózni tanulnál, <ExternalLink href={config.course.signUpFormUrl}>iratkozz fel itt</ExternalLink>.
                 </p>
 
                 <h2>Pár szó a történetünkről</h2>
