@@ -6,6 +6,7 @@ import ReactGA from '../../web_modules/react-ga.js';
 
 import PhotoUploader from '../../upload/PhotoUploader.mjs';
 
+import ScrollToTop from './ScrollToTop.mjs';
 import FullPageLoadingIndicator from './FullPageLoadingIndicator.mjs';
 import NavigationBar from './NavigationBar.mjs';
 import BugReportButton from '../../bug-report/components/BugReportButton.mjs';
@@ -79,6 +80,7 @@ export default function App() {
     return areTranslationsLoaded && areFontsReady && !isAuthLoading
         ?
         <BrowserRouter basename='/'>
+            <ScrollToTop />
             <NavigationBar/>
             <BugReportButton/>
             <main>
