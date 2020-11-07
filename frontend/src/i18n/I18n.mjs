@@ -50,7 +50,7 @@ export default class I18n {
      * @private
      */
     _replacePlaceholdersInLocalizedString(localizedString, values) {
-        return localizedString.replace(/{([\w-]+?)}/g, (match, key) => values[key] || key);
+        return localizedString.replace(/{([\w-]+?)}/g, (match, key) => (values[key] !== undefined) ? values[key] : key);
     }
 
     /**
@@ -71,10 +71,10 @@ export default class I18n {
      */
     translate(phrase, values = {}, localeCode = this._activeLocaleCode) {
         if (this._translations[localeCode]) {
-            if(typeof phrase === 'string') {
+            if (typeof phrase === 'string') {
                 const localizedString = (this._translations[localeCode][phrase] || {}).translation;
                 if (localizedString !== undefined) {
-                    if(typeof localizedString === 'string') {
+                    if (typeof localizedString === 'string') {
                         return this._replacePlaceholdersInLocalizedString(localizedString, values);
                     } else { /* JSX, placeholder replace is not supported. */
                         return localizedString;
@@ -86,7 +86,7 @@ export default class I18n {
                     return this._replacePlaceholdersInLocalizedString(phrase, values);
                 }
             } else {
-                throw new Error ('The phrase must be a string! ' + phrase + ' is not a string.');
+                throw new Error('The phrase must be a string! ' + phrase + ' is not a string.');
             }
         } else {
             if (Object.keys(this._translations).length !== 0) {
