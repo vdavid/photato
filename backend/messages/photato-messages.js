@@ -263,7 +263,7 @@ Fotózásra fel! 📸
 
 <p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és {week1DeadlineDate} 23:59-ig feltölteni <a href="{uploadUrl}">ezen a linken</a>.</p>
 
-<p>Készültünk neked <a href="{ownArticleBaseUrl}/hu/week1-foodie-shots">jópár tippel, ötlettel</a> ehhez a témához, ezeket mindenképp <strong><a href="{ownArticleBaseUrl}/hu/week1-foodie-shots">olvasd el</a></strong>!</p>
+<p>Készültünk neked <a href="{ownArticleBaseUrl}/week1-foodie-shots">jópár tippel, ötlettel</a> ehhez a témához, ezeket mindenképp <strong><a href="{ownArticleBaseUrl}/week1-foodie-shots">olvasd el</a></strong>!</p>
 
 <p><a href="{uploadUrl}">Várjuk a képeket itt</a>! A legjobb beküldött képek díjazásban részesülnek.</p>
 
@@ -318,7 +318,7 @@ A beküldött képek közül közönségszavazással és a mentorok szavazatai a
 <p>A legjobb képedet holnaptól, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
 
 <p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet {week2DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod feltölteni</a>.</p>
-<p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket, ötleteinket az épületfotózáshoz, ezeket <strong><a href="{ownArticleBaseUrl}/hu/week2-building-photography">itt olvashatod</a></strong>.</p>
+<p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket, ötleteinket az épületfotózáshoz, ezeket <strong><a href="{ownArticleBaseUrl}/week2-building-photography">itt olvashatod</a></strong>.</p>
 
 <p>Ha esetleg még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -437,7 +437,7 @@ Ide jöhet: {uploadUrl}`, // TODO: "The "more than 40" part would love some dyna
 
 <p><img src="https://photato.eu/challenges/illustrations/mosquitoes.jpg" alt="Légyott" style="width:100%; max-width:800px;" /></p>
 
-<p>Ezen a héten <strong><a href="{ownArticleBaseUrl}/hu/week3-close-up-photography">megtanuljuk, mi az a makrózás</a></strong>, és hogyan érdemes 5 centiről krumplit fotózni.</p>
+<p>Ezen a héten <strong><a href="{ownArticleBaseUrl}/week3-close-up-photography">megtanuljuk, mi az a makrózás</a></strong>, és hogyan érdemes 5 centiről krumplit fotózni.</p>
 <p>Hétfőtől egy <strong>makró fotót</strong> várunk tőled, amit <a href="{uploadUrl}">itt tudsz majd feltölteni</a>, {week3DeadlineDate} 23:59-ig.</p>
 <p>Ha még nem küldted be a múlt heti (épületfotós) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -498,7 +498,7 @@ a Photato csapata</p>`,
 
 <p>Nagyon örülünk, hogy ilyen sokan beküldtétek az előző három hét képeit. 😊 Nagyon jó képeket küldtök, csak így tovább, és bátran adjatok tippeket/visszajelzéseket egymásnak a galériákban.</p>
 <p>A negyedik hét feladata, hogy légy néhány percre turista a saját városodban, és fotózd le az utca emberét.<br />
-Ehhez <strong><a href="{ownArticleBaseUrl}/hu/week4-street-photography">itt van egy csomó tipp, ötlet</a></strong>.</p>
+Ehhez <strong><a href="{ownArticleBaseUrl}/week4-street-photography">itt van egy csomó tipp, ötlet</a></strong>.</p>
 <p>A legjobb utcai fotódat {week4DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod feltölteni</a>, holnaptól.</p>
 <p>Ha még nem küldted be a múlt heti (makró) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -577,7 +577,7 @@ Ha vidéki vagy, akkor elnézést kérünk, hogy csak Budapesten lesz ilyen esem
 
 <p>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból, és <strong>sportfotókat</strong> készítünk.</p>
 
-<p>Az elméletet egy külön cikkben foglaltuk neked össze, amit <strong><a href="{ownArticleBaseUrl}/hu/aperture-shutter-iso">itt találsz</a></strong> (ezt mindenképp érdemes elolvasnod!), a sportfotózásról, gyorsan mozgó dolgok lefényképezéséről pedig <strong><a href="{ownArticleBaseUrl}/hu/week5-sports-photos">itt adunk tippeket, ötleteket</a></strong>.</p>
+<p>Az elméletet egy külön cikkben foglaltuk neked össze, amit <strong><a href="{ownArticleBaseUrl}/aperture-shutter-iso">itt találsz</a></strong> (ezt mindenképp érdemes elolvasnod!), a sportfotózásról, gyorsan mozgó dolgok lefényképezéséről pedig <strong><a href="{ownArticleBaseUrl}/week5-sports-photos">itt adunk tippeket, ötleteket</a></strong>.</p>
 
 <p><strong>Tipp:</strong> Az elmélet miatt ezen a héten egy picit több időre lesz szükséged, mint az előző hetekben. Azt ajánljuk, még most döntsd el, melyik nap fogsz foglalkozni ezzel kb. 1 órát, és írd be a naptáradba. Ha ezzel megvagy, olvass tovább!</p>
 
@@ -648,7 +648,7 @@ Még 2 napod van feltölteni itt: {uploadUrl}`,
 <p>A múlt héten egészen sok elméletet vettünk. Most lazítunk egy kicsit, de a helyes fókuszáláshoz adunk azért pár extra tippet.</p>
 
 <p>Ezen a héten egy <strong>élőlényekről készült fotót</strong> várunk tőled. <a href="{uploadUrl}">Itt tudod feltölteni</a>, hétfőtől.</p>
-<p><strong><a href="{ownArticleBaseUrl}/hu/focus">A fókuszálásról itt</a></strong> tanulhatsz, <strong><a href="{ownArticleBaseUrl}/hu/week6-animals-plants">az állatok, növények fotózásához pedig itt</a></strong> adunk tippeket. Jó tanulást, gyakorlást! 😊</p>
+<p><strong><a href="{ownArticleBaseUrl}/focus">A fókuszálásról itt</a></strong> tanulhatsz, <strong><a href="{ownArticleBaseUrl}/week6-animals-plants">az állatok, növények fotózásához pedig itt</a></strong> adunk tippeket. Jó tanulást, gyakorlást! 😊</p>
 
 <p>A legjobb képedet hétfőtől, {week6DeadlineDate} 23:59-ig várjuk. Ha még nem küldted be a múlt heti (mozgásos) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -725,7 +725,7 @@ A múlt héten jópár, izgalmasabbnál izgalmasabb mozgásfotót kaptunk. Ha ne
 
 <p>Ezen a héten a két héttel ezelőtti mozgás technikának az ellenkezőjét fogjuk megtanulni és gyakorolni. A múltkor az volt a cél, hogy nagyon élesen fotózzunk le gyorsan mozgó dolgokat. Most nem feltétlenül gyorsan mozgó dolgokat fogunk lefotózni úgy, hogy bemozduljon a kép, vagy annak bizonyos részei.</p>
 
-<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amihez <strong><a href="{ownArticleBaseUrl}/hu/week7-long-exposure">ide gyűjtöttük össze neked</a></strong> a legkirályabb tippeinket.</p>
+<p>Egy <strong>hosszú záridős fotót</strong> várunk tőled, amihez <strong><a href="{ownArticleBaseUrl}/week7-long-exposure">ide gyűjtöttük össze neked</a></strong> a legkirályabb tippeinket.</p>
 <p>A legjobb képedet <a href="{uploadUrl}">itt tudod feltölteni</a>, {week7DeadlineDate} 23:59-ig.</p>
 <p>Ha még nem küldted be a múlt heti (állatos/növényes) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -828,7 +828,7 @@ Ha még nem töltötted ki a kérdőívet, megköszönjük, ha megteszed itt: {m
 
 <p>Ezen a héten egy szépen beállított, <strong>csendélet-jellegű fotót</strong> várunk tőled, amit <a href="{uploadUrl}">itt tudsz feltölteni</a>, hétfőtől egészen {week8DeadlineDate} 23:59-ig.</p>
 
-<p>A fehéregyensúlyról <strong><a href="{ownArticleBaseUrl}/hu/white-balance">itt mesélünk neked</a></strong>, a csendélet-fotózás csínjáról-bínjáról pedig <strong><a href="{ownArticleBaseUrl}/hu/week8-still-life">itt olvashatsz</a></strong>.</p>
+<p>A fehéregyensúlyról <strong><a href="{ownArticleBaseUrl}/white-balance">itt mesélünk neked</a></strong>, a csendélet-fotózás csínjáról-bínjáról pedig <strong><a href="{ownArticleBaseUrl}/week8-still-life">itt olvashatsz</a></strong>.</p>
 <p>Ha még nem küldted be a múlt heti (hosszú exponálási idejű) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
@@ -889,7 +889,7 @@ Emellett még 2 napod van feltölteni a Csendélet fotódat itt: {uploadUrl} �
 
 <p>A legtöbbünk életében egészen gyakran előfordul, hogy a barátainkat, családtagjainkat fotózzuk, ezért azt gondoltuk, mindannyiunknak hasznos lehet, ha megpróbálunk szintet lépni az ilyen típusú fotók készítésében. A stúdióban, tökéletesre csiszolt megvilágítással és milliós géppel készült portréfotózást meghagyjuk egy szűk elitnek, a cél inkább az, hogy megkapargassuk a portréfotózás tudományának felszínét. .</p>
 
-<p>A 9. héten tehát <strong>portrét</strong> tanulunk meg fotózni, amihez <strong><a href="{ownArticleBaseUrl}/hu/week9-portrait">itt vannak a heti tippjeink</a></strong>. Emellett van még egy fontos elméleti anyag, ami szeintünk rendkívül jól fog jönni a portrékhoz, ez pedig a <strong><a href="{ownArticleBaseUrl}/hu/fov-and-focal-distance">látószög és gyújtótávolság</a></strong> témaköre.</p>
+<p>A 9. héten tehát <strong>portrét</strong> tanulunk meg fotózni, amihez <strong><a href="{ownArticleBaseUrl}/week9-portrait">itt vannak a heti tippjeink</a></strong>. Emellett van még egy fontos elméleti anyag, ami szeintünk rendkívül jól fog jönni a portrékhoz, ez pedig a <strong><a href="{ownArticleBaseUrl}/fov-and-focal-distance">látószög és gyújtótávolság</a></strong> témaköre.</p>
 
 <p>A legjobb portréfotódat {week9DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>
 <p>Ha még nem küldted be a múlt heti (csendéletes) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
@@ -946,7 +946,7 @@ Megjöttek a csendélet-fotók!`, // TODO: We'll need a link in this message onc
 
 <p>Ismét egy sokakat érintő témával jövünk: a csoportos események fényképezésével. Legyen az buli, családi összejövetel, esküvő vagy koncert, valószínűleg sokan fognak kattogtatni közben a telefonjukkal, köztük talán te is. Megpróbálunk segíteni, hogy minél jobb fotókat lőj az ilyen helyzetekben, akár fényképezőgéppel, akár mobillal.</p>
 
-<p>A témához kapcsolódó tippjeinket <strong><a href="{ownArticleBaseUrl}/hu/week10-event-photography">itt találod</a></strong>, a legjobb eseményfotód pedig hétfőtől {week10DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.
+<p>A témához kapcsolódó tippjeinket <strong><a href="{ownArticleBaseUrl}/week10-event-photography">itt találod</a></strong>, a legjobb eseményfotód pedig hétfőtől {week10DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.
 <p>Ha még nem küldted be a múlt heti (portré) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
 <p>Jó fotózást,</p>
@@ -1000,7 +1000,7 @@ Máris itt a következő galéria: a gyönyörű portrék. Lájkolj, kommentelj 
 <p><img src="https://photato.eu/challenges/illustrations/gyuri.jpg" alt="Gyuri összeverve" style="width:100%; max-width:800px;" /></p>
 
 <p>Az utolsó előtti hét feladata egy olyan kép elkészítése, ahol te vagy a tárgy és az alkotó is egyben. Ez lehet egy gyors selfie, vagy egy jobban megtervezett, profibb kompozíció is, az elmúlt hetekben tanult technikákat felhasználva.</p>
-<p>Mindenesetre <strong><a href="{ownArticleBaseUrl}/hu/week11-self-portrait">hoztunk hozzá néhány tippet</a></strong>, hogy ebből a témából is ki tudd hozni a legtöbbet.</p>
+<p>Mindenesetre <strong><a href="{ownArticleBaseUrl}/week11-self-portrait">hoztunk hozzá néhány tippet</a></strong>, hogy ebből a témából is ki tudd hozni a legtöbbet.</p>
 <p>A legjobb önarcképed {week11DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
 <p>Gyors emlékeztető: Ha még nem küldted be a múlt heti (esemény) képedet, ma éjfélig még azt is <a href="{uploadUrl}">megteheted</a>. 🕚</p>
 
@@ -1056,7 +1056,7 @@ Itt vannak a kiváló eseményfotók! 😊 A legtöbb lájkot kapott kép nyeri 
 
 <p>Ezen a héten lazára eresztjük az elvárásokat, és bármilyen képet elfogadunk. Emellett kicsit visszatekintünk az elmúlt 11 hétre, és megnézzük, hogyan érdemes továbbmenned a fotózás-tanulás útján.</p>
 
-<p>A <strong><a href="{ownArticleBaseUrl}/hu/week12-freestyle-and-review">visszatekintést és tippeket itt találod</a></strong>, a (többnyire ingyenes) továbbtanulási ötleteinkről pedig <strong><a href="{ownArticleBaseUrl}/hu/after-photato">ezt a cikket hoztuk neked</a></strong>.</p>
+<p>A <strong><a href="{ownArticleBaseUrl}/week12-freestyle-and-review">visszatekintést és tippeket itt találod</a></strong>, a (többnyire ingyenes) továbbtanulási ötleteinkről pedig <strong><a href="{ownArticleBaseUrl}/after-photato">ezt a cikket hoztuk neked</a></strong>.</p>
 
 <p>A legjobb <em>bármilyen</em> képedet {week12DeadlineDate} 23:59-ig, <a href="{uploadUrl}">itt tudod majd feltölteni</a>.</p>
 
