@@ -30,8 +30,8 @@ export default class PhotatoMessageLiveContentReplacer {
             .replace(/{courseTitle}/g, this._courseTitle)
             .replace(/{courseStartDate}/g, formattedDate)
             .replace(/{facebookGroupUrl}/g, this._facebookGroupUrl)
-            .replace(/{signedUpCount}/g, this._signedUpCount.toString())
-            .replace(/{uploadUrl}/g, config.baseUrl)
+            .replace(/{signedUpCount}/g, this._signedUpCount.toString()) // TODO: Make this dynamic once we have the signups on the website because this being hard-coded in the config led to mistakes
+            .replace(/{uploadUrl}/g, config.baseUrl + '/upload')
             .replace(/{signUpUrl}/g, this._signUpUrl)
             .replace(/{midTimeSurveyUrl}/g, config.course.midTimeSurveyUrl)
             .replace(/{finalSurveyUrl}/g, config.course.finalSurveyUrl)
