@@ -6,7 +6,7 @@ test('Initializes', async () => {
         -1 /* -2 if it was daylight saving time, -1 otherwise */));
 
     /* Act */
-    const courseDateConverter = new CourseDateConverter(testCourseStartDate);
+    const courseDateConverter = new CourseDateConverter(testCourseStartDate, 12);
 
     /* Assert */
     expect(courseDateConverter.getWeekIndex()).not.toBe(undefined);
@@ -16,7 +16,7 @@ test('Calculates day indexes correctly', async () => {
     /* Arrange */
     const testCourseStartDate = new Date(Date.UTC(2020, 1 - 1, 12, /* Must be the Sunday morning 0:00 CET when the course started */
         -1 /* -2 if it was daylight saving time, -1 otherwise */));
-    const courseDateConverter = new CourseDateConverter(testCourseStartDate);
+    const courseDateConverter = new CourseDateConverter(testCourseStartDate, 12);
 
     /* Act */
     const firstDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 1 - 1, 13, 12, 0)));
@@ -34,7 +34,7 @@ test('Calculates day indexes correctly', async () => {
 test('Calculates day indexes correctly', async () => {
     /* Arrange */
     const testCourseStartDate = new Date(Date.UTC(2020, 1 - 1, 12, -1)); /* Sunday morning 0:00 CET when the course started, not daylight saving time */
-    const courseDateConverter = new CourseDateConverter(testCourseStartDate);
+    const courseDateConverter = new CourseDateConverter(testCourseStartDate, 12);
 
     /* Act */
     const firstDayNoonWeekIndex = courseDateConverter.getWeekIndex(new Date(Date.UTC(2020, 1 - 1, 13, 12, 0)));
@@ -61,7 +61,7 @@ test('Calculates day indexes correctly', async () => {
 test('Handles daylight saving correctly', async () => {
     /* Arrange */
     const testCourseStartDate = new Date(Date.UTC(2020, 1 - 1, 12, -1)); /* Sunday morning 0:00 CET when the course started, not daylight saving time */
-    const courseDateConverter = new CourseDateConverter(testCourseStartDate);
+    const courseDateConverter = new CourseDateConverter(testCourseStartDate, 12);
 
     /* Act */
     const march30thNoonDayIndex = courseDateConverter.getDayIndexSinceCourseStart(new Date(Date.UTC(2020, 3 - 1, 30, 12, 0)));
@@ -81,7 +81,7 @@ test('Handles daylight saving correctly', async () => {
 test('Calculates weekly deadlines correctly', async () => {
     /* Arrange */
     const testCourseStartDate = new Date(Date.UTC(2020, 1 - 1, 12, -1)); /* Sunday morning 0:00 CET when the course started, not daylight saving time */
-    const courseDateConverter = new CourseDateConverter(testCourseStartDate);
+    const courseDateConverter = new CourseDateConverter(testCourseStartDate, 12);
 
     /* Act */
     const firstDayWeekDeadline = courseDateConverter.getWeekDeadline(new Date(Date.UTC(2020, 1 - 1, 13, 12, 0)));
