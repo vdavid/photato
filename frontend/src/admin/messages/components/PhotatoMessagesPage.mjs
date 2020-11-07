@@ -60,12 +60,14 @@ export default function PhotatoMessagesPage() {
     function buildMessagesTable() {
         return <table className="photatoMessages">
             <thead>
-            <th>Week #</th>
-            <th>Date</th>
-            <th>Day #</th>
-            <th>Channel</th>
-            <th>Audience</th>
-            <th>Title</th>
+            <tr>
+                <th>Week #</th>
+                <th>Date</th>
+                <th>Day #</th>
+                <th>Channel</th>
+                <th>Audience</th>
+                <th>Title</th>
+            </tr>
             </thead>
             <tbody>
             {messages.map(buildMessagesTableRow)}
@@ -73,11 +75,16 @@ export default function PhotatoMessagesPage() {
         </table>;
     }
 
-    function buildMessagesTableRow(message) {
+    /**
+     * @param {PhotatoMessage} message
+     * @param {number} index
+     * @returns {JSX.Element}
+     */
+    function buildMessagesTableRow(message, index) {
         const date = addDaysToDate(config.course.startDateTime, message.courseDayIndex);
         const differenceInDays = getDifferenceInDays(new Date(), date);
         const className = (differenceInDays === 0) ? 'today' : ((differenceInDays >= 1) && ((differenceInDays <= 2)) ? 'soon' : '');
-        return <tr className={className}>
+        return <tr className={className} key={index}>
             <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
             <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
             <td>{message.courseDayIndex}</td>
