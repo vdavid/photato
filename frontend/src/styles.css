@@ -31,6 +31,7 @@
     --navbar-color: black;
     --dark-primary-text-color: #000; /* BLACK */
     --error-color: #ff5722; /* DEEP ORANGE 500 */
+    --warning-color: #fdd835; /* YELLOW 600 */
     --success-color: #2e7d32; /* GREEN 800 */
     --accent-color: #ff5722; /* DEEP ORANGE 500 */
     --light-disabled-text-color: #fafafa; /* GREY 50 */
