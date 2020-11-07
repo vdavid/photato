@@ -5,7 +5,7 @@ import {useI18n} from '../../../i18n/components/I18nProvider.mjs';
 import {NavLink} from '../../../web_modules/react-router-dom.js';
 import PhotatoMessageRemoteRepository from '../PhotatoMessageRemoteRepository.mjs';
 import PhotatoMessageLocalRepository from '../PhotatoMessageLocalRepository.mjs';
-import {addDaysToDate, toISODateStringWithHHMM} from '../../../website/dateTimeHelper.mjs';
+import {addDaysToDate, toISODateStringWithHHMM, getDifferenceInDays} from '../../../website/dateTimeHelper.mjs';
 
 const photatoMessageLocalRepository = new PhotatoMessageLocalRepository();
 const photatoMessageRemoteRepository = new PhotatoMessageRemoteRepository();
@@ -68,19 +68,25 @@ export default function PhotatoMessagesPage() {
             <th>Title</th>
             </thead>
             <tbody>
-            {messages.map(message =>
-                <tr>
-                    <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
-                    <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
-                    <td>{message.courseDayIndex}</td>
-                    <td>{message.channel}</td>
-                    <td>{message.audience}</td>
-                    <td>
-                        <NavLink to={'/admin/message/' + message.slug}>{message.title}</NavLink>
-                    </td>
-                </tr>)}
+            {messages.map(buildMessagesTableRow)}
             </tbody>
         </table>;
+    }
+
+    function buildMessagesTableRow(message) {
+        const date = addDaysToDate(config.course.startDateTime, message.courseDayIndex);
+        const differenceInDays = getDifferenceInDays(new Date(), date);
+        const className = (differenceInDays === 0) ? 'today' : ((differenceInDays >= 1) && ((differenceInDays <= 2)) ? 'soon' : '');
+        return <tr className={className}>
+            <td>{getWeekIndexByDayIndex(message.courseDayIndex)}</td>
+            <td>{getSendingTimeByDayIndex(message.courseDayIndex)}</td>
+            <td>{message.courseDayIndex}</td>
+            <td>{message.channel}</td>
+            <td>{message.audience}</td>
+            <td>
+                <NavLink to={'/admin/message/' + message.slug}>{message.title}</NavLink>
+            </td>
+        </tr>;
     }
 
     /**

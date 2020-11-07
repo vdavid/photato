@@ -31,7 +31,9 @@
     --navbar-color: black;
     --dark-primary-text-color: #000; /* BLACK */
     --error-color: #ff5722; /* DEEP ORANGE 500 */
+    --error-color-30-percent: rgba(255, 87, 34, 0.3);
     --warning-color: #fdd835; /* YELLOW 600 */
+    --warning-color-30-percent: rgba(253, 216, 53, 0.3);
     --success-color: #2e7d32; /* GREEN 800 */
     --accent-color: #ff5722; /* DEEP ORANGE 500 */
     --light-disabled-text-color: #fafafa; /* GREY 50 */
@@ -105,6 +107,8 @@ article .articleMetadata { font-size: 70%; }
 article .enlargeable.fullscreen figcaption { font-size: 100%; }
 
 table.photatoMessages { font-size: 80%; }
+table.photatoMessages tr.today { background-color:var(--error-color-30-percent); }
+table.photatoMessages tr.soon { background-color:var(--warning-color-30-percent); }
 
 /* ======================= Generic styles ======================= */
 

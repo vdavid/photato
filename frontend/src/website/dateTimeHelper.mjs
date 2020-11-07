@@ -54,3 +54,17 @@ export function addDaysToDate(date, days) {
     date2.setDate(date2.getDate() + days);
     return date2;
 }
+
+/**
+ * @param {Date} date1 Only the date part will be used (not the time)
+ * @param {Date} date2 Only the date part will be used (not the time)
+ * @returns {number} The difference in days (e.g. 2). Will be positive if date2 > date1
+ */
+export function getDifferenceInDays(date1, date2) {
+    const date1WithoutTime = new Date(date1.valueOf());
+    date1WithoutTime.setHours(0,0,0,0);
+    const date2WithoutTime = new Date(date2.valueOf());
+    date2WithoutTime.setHours(0,0,0,0);
+    const diffTime = date2WithoutTime - date1WithoutTime;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
