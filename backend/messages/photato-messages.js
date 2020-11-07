@@ -259,7 +259,7 @@ Fotózásra fel! 📸
 
 <p>Az első héten <strong>ételeket</strong> fogunk fotózni!</p>
 
-<p>A gasztrofotózást tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
+<p>Az ételek fotózását – más néven “gasztrofotózást” – tökéletes első témának tartjuk, mert kevés lelkesítőbb fotós kihívást ismerünk, mint finom, színes kajákat fényképezni 😋, és mert a legtöbben még bőven tanulhatunk arról, hogy hogyan lehet ezt igazán profin csinálni.</p>
 
 <p><strong>Az első heti feladatod</strong> tehát ételeket/italokat fotózni, kiválasztani közülük a legjobbat, és {week1DeadlineDate} 23:59-ig feltölteni <a href="{uploadUrl}">ezen a linken</a>.</p>
 
