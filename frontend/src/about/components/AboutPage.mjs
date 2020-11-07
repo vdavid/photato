@@ -46,6 +46,7 @@ export default function AboutPage() {
 
                 <h2>Weboldal történet</h2>
                 <table className="website-history">
+                    <tbody>
                     <tr><td>2020-04-11</td><td>v1.0</td><td>🖼 Elkészült a <strong>képfeltöltés</strong>! – Korábban a Dropboxot használtuk erre, de ezzel sokaknak gondja volt.</td></tr>
                     <tr><td>2020-04-27</td><td>v2.0</td><td>📰 Bekerültek a <strong>külső cikkek</strong> mentett változatai – ezek korábban gyakran eltűntek, ami zavaró volt.</td></tr>
                     <tr><td>2020-05-02</td><td>v3.0</td><td>ℹ Felkerült a <strong>“Rólunk” oldal, GYIK</strong>, stb. – ezek korábban Facebookon voltak, de szeretnénk magunkat függetleníteni a Facebooktól.</td></tr>
@@ -54,6 +55,7 @@ export default function AboutPage() {
                     <tr><td>2020-06-15</td><td>v6.0</td><td>👩‍🏫 <strong>Tananyagok</strong> az oldalon – Korábban minden tananyag az e-mailekben volt, de sokaknak nehézkes volt később visszanézni ezeket. Felraktuk őket inkább a honlapra.</td></tr>
                     <tr><td>2020-09-20</td><td>v7.0</td><td>👤 <strong>Ügyesebb regisztráció</strong> – Korábban gond lehetett vele, ha egyszerre sokan regisztrálnak vagy akár lépnek be. Most már kb. bármennyi tanulót tudunk kezelni. 😊</td></tr>
                     <tr><td>2020-10-30</td><td>v7.2</td><td>❗ <strong>“Hibajelentés”</strong> funkció és még pár hibajavítás</td></tr>
+                    </tbody>
                 </table>
             </Twemoji>
         </>;
