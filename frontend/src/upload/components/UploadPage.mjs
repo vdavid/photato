@@ -29,7 +29,7 @@ export default function UploadPage({photoUploader}) {
 
     const [accessToken, setAccessToken] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [selectedFilePreviewUrl, setSelectedFilePreviewUrl] = useState(null);
+    const [selectedFilePreviewUrl, setSelectedFilePreviewUrl] = useState('');
     const [selectionStatus, setSelectionStatus] = useState(selectionStatuses.readyToSelectFile);
     const [uploadStatus, setUploadStatus] = useState(uploadStatuses.notStarted);
     const [uploadProgress, setUploadProgress] = useState(0.0);
@@ -58,7 +58,7 @@ export default function UploadPage({photoUploader}) {
                 setSelectedFilePreviewUrl(URL.createObjectURL(file));
             } else {
                 setSelectedFile(null);
-                setSelectedFilePreviewUrl(null);
+                setSelectedFilePreviewUrl('');
             }
             setUploadProgress(0.0);
         }
@@ -67,7 +67,7 @@ export default function UploadPage({photoUploader}) {
     function handleFileSelectionRemoved() {
         setSelectedFile(null);
         setSelectionStatus(selectionStatuses.readyToSelectFile);
-        setSelectedFilePreviewUrl(null);
+        setSelectedFilePreviewUrl('');
         setUploadProgress(0.0);
     }
 
