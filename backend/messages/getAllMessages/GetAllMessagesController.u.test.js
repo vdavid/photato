@@ -31,7 +31,6 @@ test('Handles valid OPTIONS requests well', async () => {
 
     /* Assert */
     expect(response.statusCode).toEqual(200);
-    expect(response.statusDescription).toEqual('OK');
     expect(response.body).toEqual(undefined);
 });
 
@@ -65,5 +64,4 @@ test('Accepts valid GET requests', async () => {
     /* Assert */
     expect(response.body).toEqual(JSON.stringify(mockMessages));
     expect(response.statusCode).toEqual(200);
-    expect(response.statusDescription).toEqual('OK');
 });
