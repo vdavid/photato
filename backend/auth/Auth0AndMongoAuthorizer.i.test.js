@@ -22,7 +22,7 @@ test('Accepts a valid access token and gets user from local repo', async () => {
 
     /* Act */
     await userRepository.deleteUser(emailAddress);
-    const user = await auth0AndMongoAuthorizer.authenticateByAccessToken(accessToken);
+    const user = await auth0AndMongoAuthorizer.authenticateByAccessToken(accessToken, environment);
     const userFromDatabase = await userRepository.getUserByEmailAddress(emailAddress)
 
     /* Assert */
