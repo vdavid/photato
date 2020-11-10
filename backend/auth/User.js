@@ -60,8 +60,7 @@ const sessionSchema = new mongoose.Schema({
 
 /**
  * @typedef {Object} User
- * @property {Date} creationDateTime Timestamp in seconds (seconds since Unix epoch 1970-01-01 00:00 UTC).
- *           Use moment(createdAt * 1000).format('YYYY-MM-DD HH:mm:ss') to convert it to ISO date.
+ * @property {Date} creationDateTime
  * @property {string} emailAddress
  * @property {boolean} isAdmin
  * @property {auth0UserInfoSchema} auth0UserInfo
