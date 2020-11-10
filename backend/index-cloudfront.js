@@ -1,3 +1,4 @@
+console.debug('Started loading file.');
 const AWS = require('aws-sdk');
 const {getDefaultConfig} = require('./config.js');
 
@@ -25,10 +26,12 @@ const getSignedUrlController = new GetSignedUrlController({photoMetadataBuilder,
 
 const validateSignedUrlController = new ValidateSignedUrlController({signatureRepository});
 const authMiddleware = new AuthMiddleware(new LambdaAuthorizer());
+console.debug('Finished loading file.');
 
 async function main(event, context) {
     const requestHelper = new RequestHelper(event, context);
     const responseHelper = new ResponseHelper(requestHelper.eventSource);
+    console.debug('Got request.');
 
     try {
         return await router.resolveRoutes(event, context, [
