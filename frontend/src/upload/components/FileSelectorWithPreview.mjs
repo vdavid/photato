@@ -34,7 +34,7 @@ export default function FileSelectorWithPreview({selectedFile, selectedFilePrevi
         setIsImageLoading(true);
         // noinspection JSIgnoredPromiseFromCall
         updateOrientation();
-    }, selectedFilePreviewUrl);
+    }, [selectedFilePreviewUrl]);
 
     const handleRemove = event => {
         event.preventDefault();
