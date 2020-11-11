@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
-import {useParams} from '../../web_modules/react-router-dom.js';
+import {NavLink, useParams} from '../../web_modules/react-router-dom.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 
@@ -58,6 +58,7 @@ export default function ChallengePage() {
                 </div>
                 : <p>{__('Loading challenge...')}</p>
             }
+            <p>{__('We’ve collected many useful resources for you to make the most out of this challenge. You can find them here:')} <NavLink to='/materials'>{__('Materials')}</NavLink></p>
             {(parseInt(weekIndex) === currentWeekIndex) &&
             <NavLinkButton to='/upload'
                            disabled={!isAuthenticated}

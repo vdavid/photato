@@ -46,6 +46,7 @@ const challengePageTranslations = {
     'Sorry, this challenge hasn’t been translated to your language yet.': {translation: 'Ezt a feladatot sajnos még nem fordítottuk le a te nyelvedre.'},
     'This week’s challenge': {translation: 'E heti feladat'},
     'Deadline to submit your shot': {translation: 'Beküldési határidő'},
+    'We’ve collected many useful resources for you to make the most out of this challenge. You can find them here:': {translation: 'Összegyűjtöttünk neked egy csomó hasznos anyagot, hogy a legtöbbet hozhasd ki a feladatból. Itt találod őket:'},
     'Previous challenges': {translation: 'Korábbi feladatok'},
     'The course started {approximateWeeksAgo} ({exactDate}).': {translation: 'A tanfolyam {approximateWeeksAgo} ({exactDate}) kezdődött.'},
     'about {weekIndex} weeks ago': {translation: 'kb. {weekIndex} hete'},
