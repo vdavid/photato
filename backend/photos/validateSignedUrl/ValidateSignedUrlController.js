@@ -18,7 +18,8 @@ class ValidateSignedUrlController {
      * @returns {Promise<LambdaEdgeResponse>}
      */
     async handleOptionsRequest(requestHelper, responseHelper) {
-        const path = requestHelper.getRequestData().url + '?' + requestHelper.getRequestData().queryString;
+        const path = (requestHelper.getRequestData().url + '?' + requestHelper.getRequestData().queryString)
+            .replace(/&environment=[a-z]+/, '');
 
         if (await this._signatureRepository.isSignatureValidForPath(path)) {
             return responseHelper.buildOptionsResponse(['PUT']);
@@ -36,7 +37,8 @@ class ValidateSignedUrlController {
      * @returns {Promise<LambdaEdgeResponse|Object>}
      */
     async handlePutRequest(requestHelper, responseHelper) {
-        const path = requestHelper.getRequestData().url + '?' + requestHelper.getRequestData().queryString;
+        const path = requestHelper.getRequestData().url + '?' + requestHelper.getRequestData().queryString
+            .replace(/&environment=[a-z]+/, '');
 
         if (await this._signatureRepository.isSignatureValidForPath(path)) {
             await this._signatureRepository.markSignatureExpiredForPath(path);

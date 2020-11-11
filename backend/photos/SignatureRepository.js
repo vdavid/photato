@@ -18,7 +18,9 @@ class SignatureRepository {
      * @returns {Promise}
      */
     createValidSignatureForPath(path) {
-        return this._createSignature('valid', this._hashProvider.getSHA256Hash(path));
+        const hash = this._hashProvider.getSHA256Hash(path);
+        console.debug(`SignatureRepository | Creating signature (${hash}) for path: ${path}`);
+        return this._createSignature('valid', hash);
     }
 
     /**
@@ -27,6 +29,7 @@ class SignatureRepository {
      */
     async isSignatureValidForPath(path) {
         const hash = this._hashProvider.getSHA256Hash(path);
+        console.debug(`SignatureRepository | Checking signature (${hash}) for path: ${path}`);
         return await this._doesSignatureExist('valid', hash)
             && !(await this._doesSignatureExist('expired', hash));
     }
@@ -36,7 +39,9 @@ class SignatureRepository {
      * @returns {Promise}
      */
     markSignatureExpiredForPath(path) {
-        return this._createSignature('expired', this._hashProvider.getSHA256Hash(path));
+        const hash = this._hashProvider.getSHA256Hash(path);
+        console.debug(`SignatureRepository | Marking signature (${hash}) for path: ${path}`);
+        return this._createSignature('expired', hash);
     }
 
     /**
