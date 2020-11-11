@@ -117,7 +117,7 @@ export default function UploadPage({photoUploader}) {
             };
             const signedUrl = await photoUploader.getSignedUrlFromServer(config.backendApi.photoUpload.url, accessToken, parameters);
             if (signedUrl) {
-                const response = await photoUploader.uploadFile(signedUrl + '&environment=' + config.environment, selectedFile, setUploadProgress);
+                const response = await photoUploader.uploadFile(signedUrl, selectedFile, setUploadProgress);
 
                 if (response.target.status === 200) {
                     setUploadStatus(uploadStatuses.uploadDone);
