@@ -149,9 +149,6 @@ export default function UploadPage({photoUploader}) {
     return <div id='fileUpload'>
         <h1>{__('Photo upload')}</h1>
         <p className='currentWeek'>{__('Week #{weekIndex}', {weekIndex: currentWeekIndex})}</p>
-        <div className="warning">
-            <strong>Jelenleg hibás a képfeltöltés.</strong> Még csak most indult a kurzus és egészen új a honlap. A képfeltöltés nem működik, de dolgozunk rajta, hogy mihamarabb (remélhetőleg még ma, 2020 november 11-én) javítsuk. Írunk a Facebook csoportba, amint javul, vagy csak nézz vissza holnap, és valószínűleg már működni is fog. Köszi a türelmet! 🥔
-        </div>
         {isCourseRunning &&
         <h2>{__(weeklyChallengeTitles[currentWeekIndex - 1])}</h2>}
         <p className='preWrap'>{courseStatusHelpText}</p>
