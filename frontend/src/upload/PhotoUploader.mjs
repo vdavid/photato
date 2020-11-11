@@ -9,7 +9,26 @@ export default class PhotoUploader {
      * @returns {Promise<string>} The URL.
      */
     async getSignedUrlFromServer(url, accessToken, parameters) {
-        const response = await fetch(url + '?' + convertObjectToQueryString(parameters), {
+        const response = await this._getSignedUrlFromServerOnce(url, accessToken, parameters);
+        if (response.status !== 503) {
+            return response.text();
+        } else { /* Try again once if 503 – this is because the lambda function tends to be slow the first time and
+                    time out after 5 seconds (Lambda@Edge limit), but fast from then on. */
+            await this._sleep(2000);
+            return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
+        }
+    }
+
+    /**
+     * @param {string} url
+     * @param {string} accessToken The JWT to pass as the authorization Bearer
+     * @param {{environment: string, emailAddress: string, courseName: string, weekIndex: int, originalFileName: string,
+     *        title: string, mimeType: string}} parameters
+     * @returns {Promise<Response>}
+     * @private
+     */
+    _getSignedUrlFromServerOnce(url, accessToken, parameters) {
+        return fetch(url + '?' + convertObjectToQueryString(parameters), {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -20,7 +39,15 @@ export default class PhotoUploader {
                 Authorization: 'Bearer ' + accessToken
             },
         });
-        return response.text();
+    }
+
+    /**
+     * @param {int} milliseconds
+     * @returns {Promise<void>}
+     * @private
+     */
+    _sleep(milliseconds) {
+        return new Promise((resolve) => {setTimeout(resolve, milliseconds);});
     }
 
     /**
