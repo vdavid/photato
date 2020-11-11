@@ -9,11 +9,10 @@ export default class PhotoUploader {
      * @returns {Promise<string>} The URL.
      */
     async getSignedUrlFromServer(url, accessToken, parameters) {
-        const response = await this._getSignedUrlFromServerOnce(url, accessToken, parameters);
-        if (response.status !== 503) {
-            return response.text();
-        } else { /* Try again once if 503 – this is because the lambda function tends to be slow the first time and
-                    time out after 5 seconds (Lambda@Edge limit), but fast from then on. */
+        try {
+            return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
+        } catch(error) { /* Try again once if 503 – this is because the lambda function tends to be slow the first time
+                            and time out after 5 seconds (Lambda@Edge limit), but fast from then on. */
             await this._sleep(2000);
             return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
         }
