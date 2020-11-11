@@ -28,9 +28,10 @@
     "uuid-random": "^1.3.2"
   },
   "devDependencies": {
+    "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
     "aws-sdk": "^2.789.0",
     "jest": "^26.6.3",
-    "serverless": "^2.11.1"
+    "serverless": "~2.1.1"
   },
   "jest": {
     "testEnvironment": "node"

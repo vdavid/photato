@@ -37,11 +37,10 @@ class Router {
         const responseHelper = new ResponseHelper(requestHelper.eventSource);
 
         const environment = requestHelper.getEnvironment();
+        const method = requestHelper.getRequestData().method;
         if (requestHelper.isEnvironmentValid()) {
-            console.debug(`${context.functionName} | Got ${requestHelper.getRequestData().method} request in ${environment}.`);
-            const firstMatchedRoute = routes.find(route =>
-                this._getFullFunctionName(environment, route.functionName) === context.functionName
-                && route.method === requestHelper.getRequestData().method);
+            console.debug(`${context.functionName} | Got ${method} request in ${environment}.`);
+            const firstMatchedRoute = routes.find(route => this._doesCalledFunctionNameMatchRoute(context.functionName, method, route, environment));
             if (firstMatchedRoute) {
                 for (const middleware of firstMatchedRoute.middlewareSequence) {
                     const result = await middleware(requestHelper, responseHelper);
@@ -49,17 +48,29 @@ class Router {
                         return result;
                     }
                 }
-                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 420 error. No output after running ${firstMatchedRoute.middlewareSequence} layer(s) of middleware.`);
+                console.info(`${method} ${context.functionName} | 420 error. No output after running ${firstMatchedRoute.middlewareSequence} layer(s) of middleware.`);
                 return responseHelper.buildResponse(420, 'Method Failure.');
             } else {
-                console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 405 error. No route matched.`, {appName: this._appName, routes});
-                return responseHelper.buildResponse(405, 'Method Not Allowed.');
+                console.info(`${method} ${context.functionName} | 405 error. No route matched.`, {appName: this._appName, routes});
+                return responseHelper.buildResponse(405, `Method Not Allowed. ${context.functionName} ${environment} ${method}`);
 
             }
         } else {
-            console.info(`${requestHelper.getRequestData().method} ${context.functionName} | 400 error. Invalid environment "${environment}".`);
+            console.info(`${method} ${context.functionName} | 400 error. Invalid environment "${environment}".`);
             return responseHelper.buildResponse(400, 'Wrong environment.');
         }
+    }
+
+    /**
+     * @param {string} functionName E.g. "us-east-1.photato-website-backend-production-getSignedUrl" or "photato-website-backend-production-getSignedUrl
+     * @param {string} method E.g. "GET"
+     * @param {Route} route
+     * @param {string} environment E.g. "development"
+     * @private
+     */
+    _doesCalledFunctionNameMatchRoute(functionName, method, route, environment) {
+        return functionName.includes(this._getFullFunctionName(environment, route.functionName)) && route.method === method;
+
     }
 
     /**
