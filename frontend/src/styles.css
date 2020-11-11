@@ -140,6 +140,7 @@ a.callToActionButton { margin-block-start: 1em; margin-block-end: 1em; margin-ri
 a.callToActionButton:hover { background: var(--primary-color-main); text-decoration: none; }
 a.callToActionButton.main { background: var(--accent-color-main); color: var(--dark-primary-text-color); }
 a.callToActionButton.main:hover { background: var(--accent-color-light); }
+div.warning { padding:2em; background: var(--warning-color); color: var(--dark-primary-text-color); }
 
 /* Non-semantic class, so it's a bit of cheating, but makes life easier. */
 .preWrap { white-space: pre-wrap; }
