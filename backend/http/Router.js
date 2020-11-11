@@ -36,16 +36,17 @@ class Router {
         const requestHelper = new RequestHelper(event, context);
         const responseHelper = new ResponseHelper(requestHelper.eventSource);
 
-        const environment = requestHelper.getEnvironment();
+        // TODO: This is a hack but not sure how to solve this that validateSignedUrl can have no environment.
+        const environment = context.functionName.includes('validateSignedUrl') ? 'production' : requestHelper.getEnvironment();
         const method = requestHelper.getRequestData().method;
-        if (requestHelper.isEnvironmentValid()) {
+        if (requestHelper.isEnvironmentValid() || context.functionName.includes('validateSignedUrl')) {
             console.debug(`ROUTER | ${context.functionName} | Got ${method} request in ${environment}.`);
             const firstMatchedRoute = routes.find(route => this._doesCalledFunctionNameMatchRoute(context.functionName, method, route, environment));
             if (firstMatchedRoute) {
                 for (const middleware of firstMatchedRoute.middlewareSequence) {
                     const result = await middleware(requestHelper, responseHelper);
                     if (result) {
-                        console.debug(`ROUTER | ${context.functionName} | Finished ${method} request in ${environment} successfully.`);
+                        console.debug(`ROUTER | ${context.functionName} | Finished ${method} request in ${environment}. Status: ${result.status || result.statusCode}.`);
                         return result;
                     }
                 }
