@@ -23,6 +23,7 @@ class ValidateSignedUrlController {
         if (await this._signatureRepository.isSignatureValidForPath(path)) {
             return responseHelper.buildOptionsResponse(['PUT']);
         } else {
+            console.info(`ValidateSignedUrlController | handleOptionsRequest | Invalid signature. Path: “${path}”`);
             return responseHelper.buildResponse(403, 'Invalid signature for OPTIONS.');
         }
     }
@@ -41,6 +42,7 @@ class ValidateSignedUrlController {
             await this._signatureRepository.markSignatureExpiredForPath(path);
             return requestHelper.event.Records[0].cf.request;
         } else {
+            console.info(`ValidateSignedUrlController | handlePutRequest | Invalid signature. Path: “${path}”`);
             return responseHelper.buildResponse(403, 'Invalid signature for PUT.');
         }
     }

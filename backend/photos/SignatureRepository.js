@@ -50,6 +50,7 @@ class SignatureRepository {
             await this._s3.headObject({Bucket: this._bucketName, Key: this._buildKey(status, hash)}).promise();
             return true;
         } catch (error) {
+            console.debug(`SignatureRepository | Signature doesn’t exist with ${status}/${hash}`);
             return false;
         }
     }

@@ -39,25 +39,26 @@ class Router {
         const environment = requestHelper.getEnvironment();
         const method = requestHelper.getRequestData().method;
         if (requestHelper.isEnvironmentValid()) {
-            console.debug(`${context.functionName} | Got ${method} request in ${environment}.`);
+            console.debug(`ROUTER | ${context.functionName} | Got ${method} request in ${environment}.`);
             const firstMatchedRoute = routes.find(route => this._doesCalledFunctionNameMatchRoute(context.functionName, method, route, environment));
             if (firstMatchedRoute) {
                 for (const middleware of firstMatchedRoute.middlewareSequence) {
                     const result = await middleware(requestHelper, responseHelper);
                     if (result) {
+                        console.debug(`ROUTER | ${context.functionName} | Finished ${method} request in ${environment} successfully.`);
                         return result;
                     }
                 }
-                console.info(`${method} ${context.functionName} | 420 error. No output after running ${firstMatchedRoute.middlewareSequence} layer(s) of middleware.`);
-                return responseHelper.buildResponse(420, 'Method Failure.');
+                console.info(`ROUTER | ${method} ${context.functionName} | 420 error. No output after running ${firstMatchedRoute.middlewareSequence.length} layer(s) of middleware.`);
+                return responseHelper.buildResponse(420, `Method Failure. ${context.functionName} ${environment} ${method} ${firstMatchedRoute.middlewareSequence.length}`);
             } else {
-                console.info(`${method} ${context.functionName} | 405 error. No route matched.`, {appName: this._appName, routes});
+                console.info(`ROUTER | ${method} ${context.functionName} | 405 error. No route matched.`, {appName: this._appName, routes});
                 return responseHelper.buildResponse(405, `Method Not Allowed. ${context.functionName} ${environment} ${method}`);
 
             }
         } else {
-            console.info(`${method} ${context.functionName} | 400 error. Invalid environment "${environment}".`);
-            return responseHelper.buildResponse(400, 'Wrong environment.');
+            console.info(`ROUTER | ${method} ${context.functionName} | 400 error. Invalid environment "${environment}".`);
+            return responseHelper.buildResponse(400, `Wrong environment. ${context.functionName} ${environment} ${method}`);
         }
     }
 
