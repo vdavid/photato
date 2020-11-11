@@ -40,6 +40,8 @@ provider:
   cfnRole: arn:aws:iam::633371514237:role/cloudformation-role # Role to assume to build the tech stack
   logs:
     restApi: true
+  apiGateway:
+    shouldStartNameWithService: true
 
 # These are the lambda functions and their location in this repo, plus also how to call them from Lambda@Edge
 functions:
@@ -73,12 +75,22 @@ functions:
       individually: true
       exclude:
         - node_modules/**
-      include:
-        - node_modules/uuid-random/**
-    lambdaAtEdge:
-      distribution: PhotatoCloudFront
-      eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
-      pathPattern: '/get-signed-url'
+        - '!node_modules/uuid-random/**'
+    events:
+      - cloudFront: # Help: https://www.serverless.com/framework/docs/providers/aws/events/cloudfront/#cloudfront/
+          eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
+          pathPattern: '/get-signed-url'
+          origin: 's3://${self:custom.config.photoBucket.name}.s3.amazonaws.com'
+          behavior:
+            ViewerProtocolPolicy: https-only
+            AllowedMethods:
+              - 'GET'
+              - 'HEAD'
+              - 'OPTIONS'
+            CachedMethods:
+              - 'GET'
+              - 'HEAD'
+              - 'OPTIONS'
   validateSignedUrl:
     handler: index-cloudfront.handler
     memorySize: 128
@@ -87,11 +99,26 @@ functions:
       individually: true
       exclude:
         - node_modules/**
-      include:
-        - node_modules/uuid-random/**
-    lambdaAtEdge:
-      distribution: PhotatoCloudFront
-      eventType: viewer-request
+        - '!node_modules/uuid-random/**'
+    events:
+      - cloudFront: # Help: https://www.serverless.com/framework/docs/providers/aws/events/cloudfront/#cloudfront/
+          eventType: viewer-request # Help: https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html
+          isDefaultOrigin: true
+          origin: 's3://${self:custom.config.photoBucket.name}.s3.amazonaws.com'
+          behavior:
+            ViewerProtocolPolicy: https-only
+            AllowedMethods:
+              - 'GET'
+              - 'HEAD'
+              - 'OPTIONS'
+              - 'PUT'
+              - 'PATCH'
+              - 'POST'
+              - 'DELETE'
+            CachedMethods:
+              - 'GET'
+              - 'HEAD'
+              - 'OPTIONS'
   adminGetAllMessages:
     handler: index-gateway.handler
     memorySize: 128
@@ -113,8 +140,6 @@ functions:
 
 # Plugins for extended functions, such as Lambda@Edge use
 plugins:
-  - '@silvermine/serverless-plugin-cloudfront-lambda-edge' # This allows using Lamda@Edge features of CloudFront.
-  # More info: https://github.com/silvermine/serverless-plugin-cloudfront-lambda-edge
 
 # Any custom settings may come here. They can be referenced as ${self:custom.XXX}
 custom:
@@ -194,10 +219,10 @@ resources:
               ErrorCode: 504
           Origins:
             - DomainName: ${self:custom.config.photoBucket.name}.s3.amazonaws.com
-              Id: S3Origin
+              Id: 's3/${self:custom.config.photoBucket.name}.s3.amazonaws.com'
               S3OriginConfig: {}
           DefaultCacheBehavior:
-            TargetOriginId: S3Origin
+            TargetOriginId: 's3/${self:custom.config.photoBucket.name}.s3.amazonaws.com'
             ViewerProtocolPolicy: redirect-to-https
             DefaultTTL: 0
             MaxTTL: 0
@@ -208,7 +233,7 @@ resources:
                 Forward: none
             AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
           CacheBehaviors:
-            - TargetOriginId: S3Origin
+            - TargetOriginId: 's3/${self:custom.config.photoBucket.name}.s3.amazonaws.com'
               ViewerProtocolPolicy: redirect-to-https
               DefaultTTL: 0
               MaxTTL: 0
