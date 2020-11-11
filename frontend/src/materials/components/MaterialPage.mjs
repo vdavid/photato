@@ -42,6 +42,7 @@ export default function MaterialPage() {
                 <article.component/>
             </article>
             <p>
+                {!isExternalArticle && <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>}
                 <NavLinkButton to='/materials'>{'←' + __('Back to the list of materials')}</NavLinkButton>
             </p>
         </MaterialContextProvider>
