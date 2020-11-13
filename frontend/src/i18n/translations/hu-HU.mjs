@@ -119,10 +119,13 @@ const otherTranslations = {
     'Sign up for the next free course': {translation: 'Feliratkozom a következő ingyenes tanfolyamra'},
     /* Loading page */
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
-    /* 404 page */
+    /* Error pages */
     '404 error': {translation: '404-es hiba'},
+    '403 error': {translation: '403-as hiba'},
     'Dead potato': {translation: 'Halott krumpli'},
-    'This page does not exist': {translation: 'Ez az oldal nem létezik.'},
+    'This page does not exist.': {translation: 'Ez az oldal nem létezik.'},
+    'Unfortunately, you can’t see this page.': {translation: 'Ezt az oldalt sajnos nem láthatod.'},
+    'This page is only for members. Log in or sign up here:': {translation: 'Ezt az oldal csak regisztrált felhasználóknak szól. Jelentkezz be vagy regisztrálj itt:'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
     /* Front page */
     'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},

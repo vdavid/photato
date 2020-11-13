@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
-import {BrowserRouter, Switch, Route, Redirect, useHistory} from '../../web_modules/react-router-dom.js';
+import {BrowserRouter, Switch, Route, useHistory} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ReactGA from '../../web_modules/react-ga.js';
@@ -29,6 +29,7 @@ import SitemapGeneratorPage from '../../admin/sitemap-generator/components/Sitem
 import AdminPage from '../../admin/components/AdminPage.mjs';
 import PermissionHelper from '../../auth/PermissionHelper.mjs';
 import ReactPixel from '../../web_modules/react-facebook-pixel.js';
+import Error403Page from './Error403Page.mjs';
 
 const photoUploader = new PhotoUploader();
 const permissionHelper = new PermissionHelper();
@@ -74,8 +75,8 @@ export default function App() {
     }, [isAuthenticated, user]);
 
     const publicRoutes = _getPublicRoutes();
-    const memberRoutes = _getMemberRoutes();
-    const adminRoutes = _getAdminRoutes();
+    const memberRoutes = _getMemberRoutes(isAuthenticated);
+    const adminRoutes = _getAdminRoutes(isAuthenticated && user && permissionHelper.isAdmin(user.email));
 
     return areTranslationsLoaded && areFontsReady && !isAuthLoading
         ?
@@ -86,10 +87,8 @@ export default function App() {
             <main>
                 <Switch>
                     {publicRoutes}
-                    {isAuthenticated ? memberRoutes :
-                        <Redirect to="/"/>}
-                    {isAuthenticated && permissionHelper.isAdmin(user.email) ? adminRoutes :
-                        <Redirect to="/"/>}
+                    {memberRoutes}
+                    {adminRoutes}
                     <Route path='/' key='Error404Page'>
                         <Error404Page/>
                     </Route>
@@ -130,33 +129,33 @@ function _getPublicRoutes() {
     ];
 }
 
-function _getMemberRoutes() {
+function _getMemberRoutes(isAuthenticated) {
     return [
         <Route path='/upload' key='UploadPage'>
-            <UploadPage photoUploader={photoUploader}/>
+            {isAuthenticated ? <UploadPage photoUploader={photoUploader}/> : <Error403Page/>}
         </Route>,
         <Route path='/course' exact={true} key='CoursePage'>
-            <CoursePage/>
+            {isAuthenticated ? <CoursePage/> : <Error403Page/>}
         </Route>,
         <Route path='/challenges/:weekIndex' key='ChallengePage'>
-            <ChallengePage/>
+            {isAuthenticated ? <ChallengePage/> : <Error403Page/>}
         </Route>,
     ];
 }
 
-function _getAdminRoutes() {
+function _getAdminRoutes(isAdmin) {
     return [
         <Route path='/admin' exact={true} key='AdminPage'>
-            <AdminPage/>
+            {isAdmin ? <AdminPage/> : <Error403Page/>}
         </Route>,
         <Route path='/admin/messages' key='PhotatoMessagesPage'>
-            <PhotatoMessagesPage/>
+            {isAdmin ? <PhotatoMessagesPage/> : <Error403Page/>}
         </Route>,
         <Route path='/admin/message/:slug' key='PhotatoMessagePage'>
-            <PhotatoMessagePage/>
+            {isAdmin ? <PhotatoMessagePage/> : <Error403Page/>}
         </Route>,
         <Route path='/admin/sitemap-generator' key='SitemapGeneratorPage'>
-            <SitemapGeneratorPage/>
+            {isAdmin ? <SitemapGeneratorPage/> : <Error403Page/>}
         </Route>,
     ];
 }

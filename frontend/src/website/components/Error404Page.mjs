@@ -1,6 +1,6 @@
 import React, {useEffect} from '../../web_modules/react.js';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
-import {NavLink} from '../../web_modules/react-router-dom.js';
+import NavLinkButton from './NavLinkButton.mjs';
 
 export default function Error404Page() {
     const {__} = useI18n();
@@ -9,7 +9,7 @@ export default function Error404Page() {
 
     return <>
         <h1>{__('404 error')}</h1>
-        <p>{__('This page does not exist')}</p>
-        <NavLink to='/'>{__('Return to the Photato main page.')}</NavLink>
+        <p>{__('This page does not exist.')}</p>
+        <p><NavLinkButton to='/'>{__('Return to the Photato main page.')}</NavLinkButton></p>
     </>;
 }
