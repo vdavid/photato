@@ -799,7 +799,7 @@ Ha még nem töltötted ki a kérdőívet, megköszönjük, ha megteszed itt: {m
     {
         slug: '7th-challenge-reminder-facebook-group-message',
         title: '7th challenge reminder',
-        courseDayIndex: 6,
+        courseDayIndex: ((7 - 1) * 7) + 6,
         channel: channels.facebook,
         audience: facebookAudiences.group,
         locale: 'hu-HU',
