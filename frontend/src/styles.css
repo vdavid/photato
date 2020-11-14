@@ -385,9 +385,9 @@ article .tip { padding: 15px; border: 1px solid var(--accent-color-main); border
 
 /* ======================= Other stuff ======================= */
 
-dl.faqList > div { padding-top: 2em; }
 dl.faqList dt { margin-block-end: 0.5em; }
 dl.faqList dd { margin-left: 0; }
+.faqItem { padding-top: calc(var(--site-header-height) + 2em); margin-top: calc(-1 * var(--site-header-height)); }
 
 table.photatoMessages { border: 1px solid white; }
 table.photatoMessages td { text-align: center; }

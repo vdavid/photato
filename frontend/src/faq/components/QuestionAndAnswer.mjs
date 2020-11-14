@@ -9,9 +9,9 @@ import Twemoji from '../../website/components/Twemoji.mjs';
  * @constructor
  */
 export default function QuestionAndAnswer({id, question, answer}) {
-    return <div id={id}>
+    return <div className="faqItem" id={id}>
         <Twemoji>
-            <dt>🅠: {question}</dt>
+            <dt><strong>🅠: {question}</strong></dt>
             <dd>🅐: {answer}</dd>
         </Twemoji>
     </div>;
