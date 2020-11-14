@@ -107,8 +107,6 @@ article .articleMetadata { font-size: 70%; }
 article .enlargeable.fullscreen figcaption { font-size: 100%; }
 
 table.photatoMessages { font-size: 80%; }
-table.photatoMessages tr.today { background-color:var(--error-color-30-percent); }
-table.photatoMessages tr.soon { background-color:var(--warning-color-30-percent); }
 
 /* ======================= Generic styles ======================= */
 
@@ -392,6 +390,12 @@ dl.faqList dd { margin-left: 0; }
 table.photatoMessages { border: 1px solid white; }
 table.photatoMessages td { text-align: center; }
 table.photatoMessages td:nth-child(6) { text-align: left; }
+table.photatoMessages tr.today { background-color:var(--error-color-30-percent); }
+table.photatoMessages tr.soon { background-color:var(--warning-color-30-percent); }
+
+table.adminPhotoListForWeek { font-size: 8pt; }
+.weekIndexSelector { display: flex; }
+.weekIndexSelector a { display:inline-block; flex-grow: 1; }
 
 pre.sitemap { white-space: pre-wrap; }
 

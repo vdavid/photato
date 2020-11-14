@@ -33,6 +33,7 @@ import PermissionHelper from '../../auth/PermissionHelper.mjs';
 import ReactPixel from '../../web_modules/react-facebook-pixel.js';
 import Error403Page from './Error403Page.mjs';
 import {getAndRemoveRedirectPath} from '../../auth/auth0LoginHandler.mjs';
+import AdminPhotosPage from '../../admin/photos/components/AdminPhotosPage.mjs';
 
 const photoUploader = new PhotoUploader();
 const permissionHelper = new PermissionHelper();
@@ -170,14 +171,19 @@ function _getAdminRoutes(isAdmin) {
                 <AdminPage/> :
                 <Error403Page/>}
         </Route>,
-        <Route path='/admin/messages' key='PhotatoMessagesPage'>
+        <Route path='/admin/messages' key='AdminPhotatoMessagesPage'>
             {isAdmin ?
                 <PhotatoMessagesPage/> :
                 <Error403Page/>}
         </Route>,
-        <Route path='/admin/message/:slug' key='PhotatoMessagePage'>
+        <Route path='/admin/message/:slug' key='AdminPhotatoMessagePage'>
             {isAdmin ?
                 <PhotatoMessagePage/> :
+                <Error403Page/>}
+        </Route>,
+        <Route path='/admin/photos' key='AdminPhotosPage'>
+            {isAdmin ?
+                <AdminPhotosPage/> :
                 <Error403Page/>}
         </Route>,
         <Route path='/admin/sitemap-generator' key='SitemapGeneratorPage'>

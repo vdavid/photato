@@ -49,6 +49,9 @@ export const config = {
         adminGetAllMessages: {
             url: apiGatewayBackEndUrl + '/messages/get-all-messages', /* Must have no trailing slash */
         },
+        adminListPhotosForWeek: {
+            url: apiGatewayBackEndUrl + '/photos/list-for-week', /* Must have no trailing slash */
+        },
     },
     contentImages: {
         thirdPartyArticlesBaseUrl: 'https://photato-photos-bucket.s3.us-east-1.amazonaws.com/external-articles/', /* Must have a trailing slash */

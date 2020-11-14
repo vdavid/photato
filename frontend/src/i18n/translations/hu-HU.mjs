@@ -106,6 +106,7 @@ const uploadPageTranslations = {
 
 // noinspection SpellCheckingInspection
 const adminTranslations = {
+    'Photos': {translation: 'Fotók'},
     'Messages': {translation: 'Üzenetek'},
     'Re-download all messages': {translation: 'Újratöltés a szerverről'},
     'Loading message...': {translation: 'Az üzenet betöltése folyamatban...'},
