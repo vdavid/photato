@@ -59,7 +59,7 @@ export const config = {
         'dorah.nemeth@gmail.com',
     ],
     tracking: {
-        facebookPixelId: '363212094918835',
+        facebookPixelId: '831452107631081',
         googleTrackingCode: 'UA-178413371-1',
     },
     featureSwitches: {},
