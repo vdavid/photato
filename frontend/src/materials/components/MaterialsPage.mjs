@@ -67,7 +67,7 @@ export default function MaterialsPage() {
 
     return <>
         <h1>{__('Articles about photography')}</h1>
-        <p>{__('On this page we list articles that we found useful. [...]')}</p>
+        <p>{__('Some of these articles are not our own. [...]')}</p>
         {renderList()}
     </>;
 

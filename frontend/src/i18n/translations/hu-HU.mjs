@@ -66,10 +66,9 @@ const articlePageTranslations = {
     'Author': {translation: 'Szerző'},
     'Publication date': {translation: 'Dátum'},
     'Original article': {translation: 'Eredeti cikk'},
-    'On this page we list articles that we found useful. [...]': {
+    'Some of these articles are not our own. [...]': {
         translation: <>
-            Olyan cikkeket szedtünk össze ide, amiket mi hasznosnak találtunk.<br/>
-            <em>Ezeket a cikkeket nem mi írtuk.</em> Csak szerintünk nagyon jók.<br/>
+            <em>A cikk egy részét nem mi írtuk.</em> Csak szerintünk nagyon jók. Ezeket onnan ismered meg, hogy oda van írva az eredeti szerző, pl. “Sg.hu”, és másképp néz ki a link.<br/>
             Sajnos azt tapasztaltuk, ezek a remek cikkek az évek alatt gyakran eltűnnek az internetről. Hogy később is meglegyenek, elmentettük a másolataikat ide az oldalra.<br/>
             Ha működik az eredeti link, arra kérünk, <em>olvasd az eredetit</em>, a látogatásoddal támogatva a szerzőket.</>, format: 'jsx'
     },

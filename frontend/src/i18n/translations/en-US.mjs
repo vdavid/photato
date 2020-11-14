@@ -12,10 +12,9 @@ export const translations = {
     'Photato cached version': {translation: <><PhotatoEmoji /> cached version</>, format: 'jsx'},
 
     /* Materials page */
-    'On this page we list articles that we found useful. [...]': {
+    'Some of these articles are not our own. [...]': {
         translation: <>
-            On this page we list articles that we found useful.<br/>
-            <em>We didn't write these articles.</em> We just like them very much.<br/>
+            <em>Some of these articles are not our own.</em> We just like them very much. You’ll recognize them easily because the original author is specified, and the link looks different.<br/>
             Sadly, these great articles tend to disappear from the internet over the years. To protect them, we created cached copies for some.<br/>
             Unless the link is broken, we advise you to <em>read the original version</em> to support its authors with your visit and ad views.</>, format: 'jsx'
     },
