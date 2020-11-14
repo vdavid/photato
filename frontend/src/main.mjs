@@ -3,6 +3,7 @@ import React, {StrictMode} from './web_modules/react.js';
 import {render} from './web_modules/react-dom.js';
 import ReactGA from './web_modules/react-ga.js';
 import ReactPixel from './web_modules/react-facebook-pixel.js';
+import LogRocket from './web_modules/logrocket.js';
 
 import {Auth0Provider} from "./auth/components/Auth0Provider.mjs";
 import I18nProvider from "./i18n/components/I18nProvider.mjs";
@@ -19,6 +20,7 @@ const courseDateConverter = new CourseDateConverter(config.course.startDateTime,
 
 initializeConfig();
 initializeTracking();
+(config.environment === 'production') && initializeLogRocket();
 
 render(
     <Auth0Provider domain={config.auth0.domain}
@@ -68,6 +70,9 @@ function initializeTracking() {
     ReactPixel.pageView();
 }
 
+function initializeLogRocket() {
+    LogRocket.init('veujlu/photato-website');
+}
 function onRedirectCallback() {
     window.history.replaceState({}, document.title, window.location.pathname);
 }

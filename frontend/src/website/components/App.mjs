@@ -3,6 +3,8 @@ import {BrowserRouter, Switch, Route, useHistory} from '../../web_modules/react-
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ReactGA from '../../web_modules/react-ga.js';
+import LogRocket from '../../web_modules/logrocket.js';
+import {config} from '../../config.mjs';
 
 import PhotoUploader from '../../upload/PhotoUploader.mjs';
 
@@ -37,6 +39,7 @@ const permissionHelper = new PermissionHelper();
 export default function App() {
     const {areTranslationsLoaded} = useI18n();
     const history = useHistory();
+    /* User type: https://auth0.com/docs/api/authentication#user-profile or check “auth0UserInfoSchema” in back end */
     const {loading: isAuthLoading, isAuthenticated, user} = useAuth0();
     const [isTrackingInitialized, setIsTrackingInitialized] = useState(false);
     const [areFontsReady, setFontsReady] = useState(false);
@@ -71,6 +74,13 @@ export default function App() {
                 userSub: isAuthenticated ? user.sub : undefined,
                 /* Can add any data that is relevant to the session and would like to track with Google Analytics */
             });
+
+            if (config.environment === 'production') {
+                LogRocket.identify(user.sub, { /* More info and options: https://app.logrocket.com/veujlu/photato-website/settings/setup */
+                    name: user.name,
+                    email: user.email,
+                });
+            }
         }
     }, [isAuthenticated, user]);
 
@@ -81,7 +91,7 @@ export default function App() {
     return areTranslationsLoaded && areFontsReady && !isAuthLoading
         ?
         <BrowserRouter basename='/'>
-            <ScrollToTop />
+            <ScrollToTop/>
             <NavigationBar/>
             <BugReportButton/>
             <main>
@@ -132,13 +142,19 @@ function _getPublicRoutes() {
 function _getMemberRoutes(isAuthenticated) {
     return [
         <Route path='/upload' key='UploadPage'>
-            {isAuthenticated ? <UploadPage photoUploader={photoUploader}/> : <Error403Page/>}
+            {isAuthenticated ?
+                <UploadPage photoUploader={photoUploader}/> :
+                <Error403Page/>}
         </Route>,
         <Route path='/course' exact={true} key='CoursePage'>
-            {isAuthenticated ? <CoursePage/> : <Error403Page/>}
+            {isAuthenticated ?
+                <CoursePage/> :
+                <Error403Page/>}
         </Route>,
         <Route path='/challenges/:weekIndex' key='ChallengePage'>
-            {isAuthenticated ? <ChallengePage/> : <Error403Page/>}
+            {isAuthenticated ?
+                <ChallengePage/> :
+                <Error403Page/>}
         </Route>,
     ];
 }
@@ -146,16 +162,24 @@ function _getMemberRoutes(isAuthenticated) {
 function _getAdminRoutes(isAdmin) {
     return [
         <Route path='/admin' exact={true} key='AdminPage'>
-            {isAdmin ? <AdminPage/> : <Error403Page/>}
+            {isAdmin ?
+                <AdminPage/> :
+                <Error403Page/>}
         </Route>,
         <Route path='/admin/messages' key='PhotatoMessagesPage'>
-            {isAdmin ? <PhotatoMessagesPage/> : <Error403Page/>}
+            {isAdmin ?
+                <PhotatoMessagesPage/> :
+                <Error403Page/>}
         </Route>,
         <Route path='/admin/message/:slug' key='PhotatoMessagePage'>
-            {isAdmin ? <PhotatoMessagePage/> : <Error403Page/>}
+            {isAdmin ?
+                <PhotatoMessagePage/> :
+                <Error403Page/>}
         </Route>,
         <Route path='/admin/sitemap-generator' key='SitemapGeneratorPage'>
-            {isAdmin ? <SitemapGeneratorPage/> : <Error403Page/>}
+            {isAdmin ?
+                <SitemapGeneratorPage/> :
+                <Error403Page/>}
         </Route>,
     ];
 }

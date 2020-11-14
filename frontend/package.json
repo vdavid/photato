@@ -28,6 +28,7 @@
   "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
   "dependencies": {
     "htm": "^3.0.4",
+    "logrocket": "^1.0.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-facebook-pixel": "^1.0.3",
@@ -50,7 +51,8 @@
       "react-dom",
       "react-router-dom",
       "react-facebook-pixel",
-      "react-ga"
+      "react-ga",
+      "logrocket"
     ],
     "installOptions": {
       "dest": "src/web_modules"
