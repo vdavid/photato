@@ -14,7 +14,15 @@ export default class PhotoUploader {
         } catch(error) { /* Try again once if 503 – this is because the lambda function tends to be slow the first time
                             and time out after 5 seconds (Lambda@Edge limit), but fast from then on. */
             await this._sleep(2000);
-            return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
+            console.log(error);
+            console.log('Retrying...');
+            try {
+                return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
+            } catch(error) {
+                console.log(error);
+                console.log('Retrying again...');
+                return (await this._getSignedUrlFromServerOnce(url, accessToken, parameters)).text();
+            }
         }
     }
 
