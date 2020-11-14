@@ -17,7 +17,7 @@ class AuthMiddleware {
     async isAdmin(requestHelper, responseHelper) {
         const authResult = this.isUser(requestHelper, responseHelper);
 
-        if (!authResult) { /* Means we have a user */
+        if (!authResult) { /* "undefined" response means we have a user */
             if (requestHelper.getUser().isAdmin) {
                 return undefined; /* We're good to go with the next action */
             } else {

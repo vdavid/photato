@@ -2,7 +2,7 @@
  * @typedef {Object} PhotoMetadata
  * @property {string} emailAddress E-mail address of the uploader
  * @property {string} courseName E.g. "hu-3". Maximum 4 characters.
- * @property {int} weekIndex Zero-based
+ * @property {int} weekIndex One-based
  * @property {string} originalFileName The original file name at the upload
  * @property {string|undefined} title Maximum 150 characters
  * @property {string} mimeType Must be "image/jpeg"
