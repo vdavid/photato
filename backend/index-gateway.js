@@ -10,6 +10,7 @@ const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js
 
 const VersionController = require('./meta/VersionController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
+const ListPhotosForWeekController = require('./photos/listPhotosForWeek/ListPhotosForWeekController.js');
 
 /**
  * @typedef {Object} ApiGatewayEvent
@@ -67,6 +68,7 @@ const auth0AndMongoAuthorizerFactory = new Auth0AndMongoAuthorizerFactory();
 const versionController = new VersionController();
 const photatoMessageRepository = new PhotatoMessageRepository();
 const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
+const listPhotosForWeekController = new ListPhotosForWeekController({photoRepository});
 
 /**
  * @param {ApiGatewayEvent|LambdaEdgeEvent} event For formats:
@@ -89,9 +91,11 @@ async function main(event, context) {
         const authMiddleware = new AuthMiddleware(auth0AndMongoAuthorizer);
         /** @type {ApiGatewayResponse|LambdaEdgeResponse} */
         const result = await router.resolveRoutes(event, context, [
-            {functionName: 'getVersion', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest]},
-            {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest]},
+            {functionName: 'getVersion', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), versionController.handleGetRequest.bind(versionController)]},
+            {functionName: 'adminGetAllMessages', method: 'OPTIONS', middlewareSequence: [getAllMessagesController.handleOptionsRequest.bind(getAllMessagesController)]},
             {functionName: 'adminGetAllMessages', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), getAllMessagesController.handleGetRequest.bind(getAllMessagesController)]},
+            {functionName: 'listPhotosForWeek', method: 'OPTIONS', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), listPhotosForWeekController.handleOptionsRequest.bind(listPhotosForWeekController)]},
+            {functionName: 'listPhotosForWeek', method: 'GET', middlewareSequence: [authMiddleware.isAdmin.bind(authMiddleware), listPhotosForWeekController.handleGetRequest.bind(listPhotosForWeekController)]},
         ]);
         console.debug(`${context.functionName} | Rendered ${requestHelper.getRequestData().method} in ${requestHelper.getEnvironment()}. Status code: ${result.statusCode}, body length: ${result.body ? result.body.length : 'null'}`);
         return result;

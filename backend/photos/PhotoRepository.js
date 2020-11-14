@@ -1,4 +1,5 @@
 const uuid = require('uuid-random');
+const utils = require('../common/utils.js');
 
 class PhotoRepository {
     /**
@@ -45,6 +46,53 @@ class PhotoRepository {
             + '/week-' + photoMetadata.weekIndex
             + '/' + photoMetadata.emailAddress
             + '.jpg';
+    }
+
+    /**
+     * @param {string} environment
+     * @param {string} courseName
+     * @param {int} weekIndex One-based
+     * @returns {Promise<{url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}[]>}
+     */
+    async listPhotosForWeek(environment, courseName, weekIndex) {
+        const keys = await this._getAllFileKeysInFolder(`${environment}/photos/${courseName}/week-${weekIndex}`);
+        return utils.promiseAllInBatches(this._getMetadataForObject.bind(this), keys, 25);
+    }
+
+    /**
+     * @param {string} folderPath Must have NO beginning NOR closing slash
+     * @returns {Promise<string[]>}
+     * @private
+     */
+    async _getAllFileKeysInFolder(folderPath) {
+        /* ListObjects documentation: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property */
+        const response = await this._s3.listObjectsV2({
+            Bucket: this._bucketName,
+            MaxKeys: 1000, /* This is the default and the maximum. Once there are more than 1,000 uploaded pics for a week, this method needs fixing. An example on how to fix this: https://stackoverflow.com/questions/9437581/node-js-amazon-s3-how-to-iterate-through-all-files-in-a-bucket#34912646 */
+            Delimiter: '/',
+            Prefix: folderPath + '/',
+        }).promise();
+        return response.Contents.map(object => object.Key);
+    }
+
+    /**
+     * @param {string} key
+     * @returns {Promise<{url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}>}
+     * @private
+     */
+    async _getMetadataForObject(key) {
+        const response = await this._s3.headObject({
+            Bucket: this._bucketName,
+            Key: key
+        }).promise();
+        return {
+            url: `https://${this._bucketName}.s3.amazonaws.com/${key}`,
+            emailAddress: decodeURIComponent(response.Metadata['email-address']),
+            title: decodeURIComponent(response.Metadata['title']),
+            contentType: response.ContentType,
+            sizeInBytes: response.ContentLength,
+            lastModifiedDate: response.LastModified,
+        };
     }
 }
 
