@@ -4,12 +4,11 @@ const {eventSources} = require('../../http/eventSources.js');
 const ListPhotosForWeekController = require('./ListPhotosForWeekController.js');
 
 /* Constants */
-/** @type {{url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}[]} */
 const fakePhotos = [
     {url: 'https://test-url.s3.amazonaws.com/something/test1@test.com/jpg', emailAddress: 'test1@test.com', title: 'Test photo 1', contentType: 'image/jpeg', sizeInBytes: 1024, lastModifiedDate: new Date()},
     {url: 'https://test-url.s3.amazonaws.com/something/test2@test.com/jpg', emailAddress: 'test2@test.com', title: 'Test photo 2', contentType: 'image/jpeg', sizeInBytes: 1024, lastModifiedDate: new Date()},
     {url: 'https://test-url.s3.amazonaws.com/something/test3@test.com/jpg', emailAddress: 'test3@test.com', title: 'Test photo 3', contentType: 'image/jpeg', sizeInBytes: 1024, lastModifiedDate: new Date()},
-    ];
+];
 
 // noinspection JSUnusedGlobalSymbols
 const photoRepository = {listPhotosForWeek: () => fakePhotos};

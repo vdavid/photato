@@ -46,11 +46,11 @@ functions:
   getUser:
     handler: auth/getUser.handler
     memorySize: 128
-    timeout: 5
+    timeout: 10 # Default is 6s, maximum is 29s with API Gateway
   getVersion:
     handler: index-gateway.handler
     memorySize: 128
-    timeout: 5
+    timeout: 5 # Default is 6s, maximum is 29s with API Gateway, 5s with Lambda@Edge
     events:
       - http:
           path: 'version'
@@ -68,7 +68,7 @@ functions:
   getSignedUrl:
     handler: index-cloudfront.handler
     memorySize: 128
-    timeout: 5
+    timeout: 5 # Default is 6s, maximum is 5s with Lambda@Edge
     package: # Help: https://www.serverless.com/framework/docs/providers/aws/guide/packaging/
       individually: true
       exclude:
@@ -81,7 +81,7 @@ functions:
   validateSignedUrl:
     handler: index-cloudfront.handler
     memorySize: 128
-    timeout: 5
+    timeout: 5 # Default is 6s, maximum is 5s with Lambda@Edge
     package: # Help: https://www.serverless.com/framework/docs/providers/aws/guide/packaging/
       individually: true
       exclude:
@@ -93,7 +93,7 @@ functions:
   listPhotosForWeek:
     handler: index-gateway.handler
     memorySize: 128
-    timeout: 5
+    timeout: 29 # Default is 6s, maximum is 29s with API Gateway
     events:
       - http:
           path: 'photos/list-for-week'
@@ -111,7 +111,7 @@ functions:
   adminGetAllMessages:
     handler: index-gateway.handler
     memorySize: 128
-    timeout: 5
+    timeout: 10 # Default is 6s, maximum is 29s with API Gateway
     events:
       - http:
           path: 'messages/get-all-messages'

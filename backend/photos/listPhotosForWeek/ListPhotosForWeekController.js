@@ -21,15 +21,15 @@ class ListPhotosForWeekController {
     /**
      * @param {RequestHelper} requestHelper
      * @param {ResponseHelper} responseHelper
-     * @returns {Promise<ApiGatewayResponse|LambdaEdgeResponse>}
-     *     The returned data is this, stringified:
-     *     {url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}[]
+     * @returns {Promise<ApiGatewayResponse|LambdaEdgeResponse>} The returned type (stringified) is: S3PhotoMetadata[]
      */
     async handleGetRequest(requestHelper, responseHelper) {
-        const photosForWeek = await this._photoRepository.listPhotosForWeek(
-            requestHelper.getRequestData().arguments['environment'],
-            requestHelper.getRequestData().arguments['courseName'],
-            parseInt(requestHelper.getRequestData().arguments['weekIndex']));
+        const photosForWeek = await this._photoRepository.listPhotosForWeek({
+            environment: requestHelper.getRequestData().arguments['environment'],
+            courseName: requestHelper.getRequestData().arguments['courseName'],
+            weekIndex: parseInt(requestHelper.getRequestData().arguments['weekIndex']),
+            getDetails: requestHelper.getRequestData().arguments['getDetails']
+        });
         console.debug(`ListPhotosForWeekController | handleGetRequest | Got ${photosForWeek.length} messages.`);
         return responseHelper.buildResponse(200, JSON.stringify(photosForWeek), {contentType: 'application/json'});
     }

@@ -1,5 +1,18 @@
+const path = require('path');
 const uuid = require('uuid-random');
 const utils = require('../common/utils.js');
+
+/**
+ * @typedef {Object} S3PhotoMetadata
+ * @property {string} key
+ * @property {string} fileName
+ * @property {string} url
+ * @property {string} emailAddress
+ * @property {string} title
+ * @property {string} contentType
+ * @property {int} sizeInBytes
+ * @property {Date} lastModifiedDate
+ */
 
 class PhotoRepository {
     /**
@@ -52,19 +65,24 @@ class PhotoRepository {
      * @param {string} environment
      * @param {string} courseName
      * @param {int} weekIndex One-based
-     * @returns {Promise<{url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}[]>}
+     * @param {boolean} [getDetails] Default is false.
+     * @returns {Promise<S3PhotoMetadata[]>}
      */
-    async listPhotosForWeek(environment, courseName, weekIndex) {
-        const keys = await this._getAllFileKeysInFolder(`${environment}/photos/${courseName}/week-${weekIndex}`);
-        return utils.promiseAllInBatches(this._getMetadataForObject.bind(this), keys, 25);
+    async listPhotosForWeek({environment, courseName, weekIndex, getDetails = false}) {
+        const items = await this._listFilesInFolder(`${environment}/photos/${courseName}/week-${weekIndex}`);
+        if (!getDetails) {
+            return items;
+        } else {
+            return utils.promiseAllInBatches(this._getMetadataForObject.bind(this), items.map(item => item.key), 25);
+        }
     }
 
     /**
      * @param {string} folderPath Must have NO beginning NOR closing slash
-     * @returns {Promise<string[]>}
+     * @returns {Promise<S3PhotoMetadata[]>} With the title and content type missing!
      * @private
      */
-    async _getAllFileKeysInFolder(folderPath) {
+    async _listFilesInFolder(folderPath) {
         /* ListObjects documentation: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property */
         const response = await this._s3.listObjectsV2({
             Bucket: this._bucketName,
@@ -72,20 +90,35 @@ class PhotoRepository {
             Delimiter: '/',
             Prefix: folderPath + '/',
         }).promise();
-        return response.Contents.map(object => object.Key);
+        return response.Contents.map(object => {
+            const parsedPath = path.parse(object.Key);
+            return {
+                key: object.Key,
+                fileName: parsedPath.base,
+                url: `https://${this._bucketName}.s3.amazonaws.com/${object.Key}`,
+                emailAddress: parsedPath.name,
+                title: undefined,
+                contentType: undefined,
+                sizeInBytes: object.Size,
+                lastModifiedDate: object.LastModified
+            };
+        });
     }
 
     /**
      * @param {string} key
-     * @returns {Promise<{url: string, emailAddress: string, title: string, contentType: string, sizeInBytes: int, lastModifiedDate: Date}>}
+     * @returns {Promise<S3PhotoMetadata>}
      * @private
      */
     async _getMetadataForObject(key) {
+        const parsedPath = path.parse(key);
         const response = await this._s3.headObject({
             Bucket: this._bucketName,
             Key: key
         }).promise();
         return {
+            key,
+            fileName: parsedPath.base,
             url: `https://${this._bucketName}.s3.amazonaws.com/${key}`,
             emailAddress: decodeURIComponent(response.Metadata['email-address']),
             title: decodeURIComponent(response.Metadata['title']),
