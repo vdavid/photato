@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from '../../web_modules/react.js';
-import {NavLink} from '../../web_modules/react-router-dom.js';
+import {NavLink, useLocation} from '../../web_modules/react-router-dom.js';
 import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import NavLinkMenuItemWithIcon from './NavLinkMenuItemWithIcon.mjs';
 import PermissionHelper from '../../auth/PermissionHelper.mjs';
+import {saveUrlAndLoginWithRedirect} from '../../auth/auth0LoginHandler.mjs';
 
 const permissionHelper = new PermissionHelper();
 
@@ -14,6 +15,7 @@ export default function NavigationBar() {
     const menuRef = useRef(null);
     const authenticationMenuRef = useRef(null);
     const {__} = useI18n();
+    const location = useLocation();
 
     useEffect(() => {
         function hideMenusIfClickedOutside(event) {
@@ -28,9 +30,20 @@ export default function NavigationBar() {
 
     }, [menuRef, authenticationMenuRef]);
 
-    function handleSignIn() {
-        loginWithRedirect({});
-    }
+    // noinspection HtmlUnknownTarget
+    return <header role='navigation'>
+        <NavLink to='/' exact={true} className='logoContainer' title='Photato'>
+            <img src='/website/aperture-logo.svg' alt="logo" className="logo" />
+            <img src="/website/photato-logo-text.svg" alt="Photato" className="siteTitle" />
+        </NavLink>{createMainMenu()}
+        <div className='spacer'/>
+        {!isAuthenticated && <a href='#' className='signInLink' onClick={() => saveUrlAndLoginWithRedirect(loginWithRedirect, location.pathname)}>{__('Sign in')}</a>}
+        <div className='material-icons hamburgerMenu' onClick={toggleMenuVisibility}>menu
+        </div>
+        {isAuthenticated &&
+        <img src={user.picture} alt={__('Profile picture')} onClick={toggleMenuVisibility} className='profilePicture'/>}{isAuthenticated && createAuthenticationMenu()}
+    </header>;
+
 
     function handleSignOut() {
         logout({returnTo: window.location.origin});
@@ -46,16 +59,16 @@ export default function NavigationBar() {
             <NavLinkMenuItemWithIcon to='/faq' activeClassName='active' iconName='help'>{__('FAQ')}</NavLinkMenuItemWithIcon>
             <NavLinkMenuItemWithIcon to='/contact' activeClassName='active' iconName='alternate_email'>{__('Contact')}</NavLinkMenuItemWithIcon>
             {isAuthenticated ?
-            <NavLinkMenuItemWithIcon to='/course' activeClassName='active' iconName='casino'>{config.course.titleWithoutPhotato}</NavLinkMenuItemWithIcon> : null}
+                <NavLinkMenuItemWithIcon to='/course' activeClassName='active' iconName='casino'>{config.course.titleWithoutPhotato}</NavLinkMenuItemWithIcon> : null}
             <NavLinkMenuItemWithIcon to='/materials' activeClassName='active' iconName='book'>{__('Materials')}</NavLinkMenuItemWithIcon>
             {isAuthenticated && permissionHelper.isAdmin(user.email) ? <NavLinkMenuItemWithIcon to='/admin' activeClassName='active' iconName='lock'>{__('Admin')}</NavLinkMenuItemWithIcon> : null}
             {isAuthenticated ?
-            <div className='menuItem separator'>
-                <span className='material-icons'/>
-                <hr/>
-            </div> : null}
+                <div className='menuItem separator'>
+                    <span className='material-icons'/>
+                    <hr/>
+                </div> : null}
             {isAuthenticated ?
-            <a href='#' className='menuItem signOut' onClick={handleSignOut}><span className='profile icon'><img src={user.picture} alt={__('Profile picture')} className='profilePicture'/></span><span className='title'>{__('Sign out')}</span></a> : null}
+                <a href='#' className='menuItem signOut' onClick={handleSignOut}><span className='profile icon'><img src={user.picture} alt={__('Profile picture')} className='profilePicture'/></span><span className='title'>{__('Sign out')}</span></a> : null}
         </nav>;
     }
 
@@ -74,18 +87,4 @@ export default function NavigationBar() {
     function toggleMenuVisibility() {
         setIsMenuVisible(!isMenuVisible);
     }
-
-    // noinspection HtmlUnknownTarget
-    return <header role='navigation'>
-        <NavLink to='/' exact={true} className='logoContainer' title='Photato'>
-            <img src='/website/aperture-logo.svg' alt="logo" className="logo" />
-            <img src="/website/photato-logo-text.svg" alt="Photato" className="siteTitle" />
-        </NavLink>{createMainMenu()}
-        <div className='spacer'/>
-        {!isAuthenticated && <a href='#' className='signInLink' onClick={handleSignIn}>{__('Sign in')}</a>}
-        <div className='material-icons hamburgerMenu' onClick={toggleMenuVisibility}>menu
-        </div>
-        {isAuthenticated &&
-        <img src={user.picture} alt={__('Profile picture')} onClick={toggleMenuVisibility} className='profilePicture'/>}{isAuthenticated && createAuthenticationMenu()}
-    </header>;
 }

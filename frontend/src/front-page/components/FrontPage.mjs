@@ -1,14 +1,16 @@
 import React, {useEffect} from '../../web_modules/react.js';
+import {NavLink, useLocation} from '../../web_modules/react-router-dom.js';
+import {config} from '../../config.mjs';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import NavLinkButton from '../../website/components/NavLinkButton.mjs';
 import ExternalLink from '../../materials/components/ExternalLink.mjs';
-import {config} from '../../config.mjs';
-import {NavLink} from '../../web_modules/react-router-dom.js';
+import {saveUrlAndLoginWithRedirect} from '../../auth/auth0LoginHandler.mjs';
 
 export default function FrontPage() {
     const {isAuthenticated, loginWithRedirect} = useAuth0();
     const {__, getActiveLocaleCode} = useI18n();
+    const location = useLocation();
 
     useEffect(() => {document.title = __('12 weeks, 12 pics') + ' - Photato';}, []);
 
@@ -20,13 +22,9 @@ export default function FrontPage() {
         {getVanityNumbersSection()}
         {getSignUpForFreeButtonSection()}
         {getFreeCommentSection()}
-        <hr />
+        <hr/>
         {getMembersOnlySection(isAuthenticated)}
     </>;
-
-    function handleSignIn() {
-        loginWithRedirect({});
-    }
 
     function getAlreadySignedInSection() {
         return <section className="frontPageSection">
@@ -51,7 +49,9 @@ export default function FrontPage() {
                             You only need a camera or a mobile phone.
                         </p>
                     </>}
-                <p><ExternalLink href={config.course.signUpFormUrl} className="main callToActionButton">{__('Sign up for the next course')}</ExternalLink></p>
+                <p>
+                    <ExternalLink href={config.course.signUpFormUrl} className="main callToActionButton">{__('Sign up for the next course')}</ExternalLink>
+                </p>
             </div>
         </header>;
     }
@@ -59,17 +59,23 @@ export default function FrontPage() {
     function getThreeKeyPointsSection() {
         return <section className="frontPageSection threePoints">
             <div>
-                <p><span className='icon material-icons'>photo_camera</span><span className='icon material-icons'>smartphone</span></p>
+                <p>
+                    <span className='icon material-icons'>photo_camera</span><span className='icon material-icons'>smartphone</span>
+                </p>
                 <h3>{__('With a camera or a mobile')}</h3>
                 <p>{__('You can get the most out of this course with a camera, but if you don’t have one, a mobile will do.')}</p>
             </div>
             <div>
-                <p><span className='icon material-icons'>today</span></p>
+                <p>
+                    <span className='icon material-icons'>today</span>
+                </p>
                 <h3>{__('In 12 weeks')}</h3>
                 <p>{__('15–45 minutes of theory and a new challenge each week.')}</p>
             </div>
             <div>
-                <p><span className='icon material-icons'>face</span><span className='icon material-icons'>face</span></p>
+                <p>
+                    <span className='icon material-icons'>face</span><span className='icon material-icons'>face</span>
+                </p>
                 <h3>{__('In community')}</h3>
                 <p>{__('You can learn alone, with your friends, or with new friends.')}</p>
             </div>
@@ -77,23 +83,31 @@ export default function FrontPage() {
     }
 
     function getSignUpForFreeButtonSection() {
-        return <section className="frontPageSection frontPageMainCallToAction"><ExternalLink href={config.course.signUpFormUrl} className="callToActionButton">{__('Sign up for the next free course')}</ExternalLink></section>;
+        return <section className="frontPageSection frontPageMainCallToAction">
+            <ExternalLink href={config.course.signUpFormUrl} className="callToActionButton">{__('Sign up for the next free course')}</ExternalLink>
+        </section>;
     }
 
     function getVanityNumbersSection() {
         return <section className="frontPageSection threePoints">
             <div>
-                <p><span className='icon material-icons'>looks_4</span></p>
+                <p>
+                    <span className='icon material-icons'>looks_4</span>
+                </p>
                 <h3>{__('4 courses')}</h3>
                 <p>{__('This is the fourth free course we start since 2018.')}</p>
             </div>
             <div>
-                <p><span className='icon material-icons'>face</span><span className='icon material-icons'>face</span></p>
+                <p>
+                    <span className='icon material-icons'>face</span><span className='icon material-icons'>face</span>
+                </p>
                 <h3>{__('500+ students')}</h3>
                 <p>{__('In the last 3 courses, we’ve taught more than 500 people to take better shots.')}</p>
             </div>
             <div>
-                <p><span className='icon material-icons'>photo</span><span className='icon material-icons'>photo</span><span className='icon material-icons'>photo</span></p>
+                <p>
+                    <span className='icon material-icons'>photo</span><span className='icon material-icons'>photo</span><span className='icon material-icons'>photo</span>
+                </p>
                 <h3>{__('1,000+ photos')}</h3>
                 <p>{__('We got more than 1,000 valid “best shot of the week” submissions.')}</p>
             </div>
@@ -116,10 +130,11 @@ export default function FrontPage() {
     }
 
     function getMembersOnlySection(isAuthenticated) {
-        return isAuthenticated ? getAlreadySignedInSection() : <section className="frontPageSection">
-            <h3>{__('Already enrolled?')}</h3>
-            <NavLinkButton to='/upload' disabled={true} title={__('You’ll need to sign in to upload a photo.')}>{__('Upload your weekly photo')}</NavLinkButton>
-            <button onClick={handleSignIn}>{__('Sign in')}</button>
-        </section>
+        return isAuthenticated ? getAlreadySignedInSection() :
+            <section className="frontPageSection">
+                <h3>{__('Already enrolled?')}</h3>
+                <NavLinkButton to='/upload' disabled={true} title={__('You’ll need to sign in to upload a photo.')}>{__('Upload your weekly photo')}</NavLinkButton>
+                <button onClick={() => saveUrlAndLoginWithRedirect(loginWithRedirect, location.pathname)}>{__('Sign in')}</button>
+            </section>;
     }
 }

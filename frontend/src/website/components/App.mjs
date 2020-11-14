@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from '../../web_modules/react.js';
-import {BrowserRouter, Switch, Route, useHistory} from '../../web_modules/react-router-dom.js';
+import {BrowserRouter, Switch, Route, useHistory, Redirect} from '../../web_modules/react-router-dom.js';
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ReactGA from '../../web_modules/react-ga.js';
@@ -32,6 +32,7 @@ import AdminPage from '../../admin/components/AdminPage.mjs';
 import PermissionHelper from '../../auth/PermissionHelper.mjs';
 import ReactPixel from '../../web_modules/react-facebook-pixel.js';
 import Error403Page from './Error403Page.mjs';
+import {getAndRemoveRedirectPath} from '../../auth/auth0LoginHandler.mjs';
 
 const photoUploader = new PhotoUploader();
 const permissionHelper = new PermissionHelper();
@@ -135,6 +136,9 @@ function _getPublicRoutes() {
         </Route>,
         <Route path='/:languageCode/external-article/:slug' key='MaterialPage'>
             <MaterialPage/>
+        </Route>,
+        <Route path='/login-callback' key='LoginCallbackRedirect'>
+            <Redirect to={getAndRemoveRedirectPath() || '/'}/>
         </Route>,
     ];
 }
