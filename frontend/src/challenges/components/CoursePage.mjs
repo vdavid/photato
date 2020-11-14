@@ -14,33 +14,46 @@ export default function CoursePage() {
     const currentWeekIndexButAtLeastOne = Math.max(currentWeekIndex, 1);
     const weekIndexes = Array.from(Array(Math.max(Math.min(currentWeekIndexButAtLeastOne, weekCount), 0)), (value, key) => key + 1);
 
-
     const currentWeekIndexAdjustedForFirstDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime() !== courseStartDate.getTime() ? currentWeekIndex : 1;
 
     useEffect(() => {document.title = config.course.titleWithoutPhotato + ' - Photato';}, []);
 
     return <>
         <h1>{config.course.titleWithPhotato}</h1>
-    {currentWeekIndexAdjustedForFirstDay >= 1
-        ? <>
-        <p>{__('The course started {approximateWeeksAgo} ({exactDate}).', {
+        {currentWeekIndexAdjustedForFirstDay >= 1
+            ? <>
+                {_getCourseStartDateSection()}
+                {currentWeekIndex <= weekCount ? _getPageContentForRunningCourse() : _getAlreadyOverMessage()}
+                {currentWeekIndex > 1 ? _getPreviousChallengesList() : null}
+            </>
+            : _getNotStartedMessage()}
+    </>;
+
+    function _getCourseStartDateSection() {
+        return <p>{__('The course started {approximateWeeksAgo} ({exactDate}).', {
             approximateWeeksAgo: (currentWeekIndex > 1) ? __('about {weekIndex} weeks ago', {weekIndex: currentWeekIndex}) : __('recently'),
             exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())
-        })}</p>
-            {currentWeekIndex <= weekCount
-                ? <>
-                    {_getThisWeeksChallenge()}
-                    <h2>{__('Materials')}</h2>
-                    <p>{__('Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:')} <NavLink to={'/materials'}>{__('Materials')}</NavLink></p>
-                    <p>
-                        <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
-                    </p>
-                </>
-                : _getAlreadyOverMessage()}
-            {currentWeekIndex > 1 ? _getPreviousChallengesList() : null}
-        </>
-        : _getNotStartedMessage()}
-    </>;
+        })}</p>;
+    }
+
+    function _getPageContentForRunningCourse() {
+        return <>
+            {_getThisWeeksChallenge()}
+            <h2>{__('Materials')}</h2>
+            <p>{__('Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:')}
+                <NavLink to={'/materials'}>{__('Materials')}</NavLink>
+            </p>
+            <p>
+                <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
+            </p>
+            <h2>{__('Community')}</h2>
+            {getActiveLocaleCode() === 'hu-HU' ?
+                <p>Együtt tanulni általában könnyebb és viccesebb, mint külön. Ha használsz Facebookot, nézz be a <ExternalLink href={config.course.facebookGroupUrl}>csoportba</ExternalLink>, ahol beszélgethetsz a többiekkel, hasznos tippeket és extra infókat kaphatsz. Emellett segíthetsz is másoknak: nem kell profi fotósnak lenned, gyakran a laikus vélemény is sokat ad. Ráädásul amikor tippekkel segítesz másoknak, abból is csomót tanulsz. Várunk a csoportban! 😊
+                </p>
+                :
+                <p>TODO</p>}
+        </>;
+    }
 
     function _getThisWeeksChallenge() {
         return <>
@@ -52,6 +65,7 @@ export default function CoursePage() {
             </p>
         </>;
     }
+
     function _getPreviousChallengesList() {
         return <>
             <h2>{__('Previous challenges')}</h2>
@@ -63,13 +77,16 @@ export default function CoursePage() {
                 </p>)}
         </>;
     }
+
     function _getNotStartedMessage() {
         return <>
             <p>{__('The course hasn’t started. It’ll start in only {dayCount} days, on {exactDate}!', {dayCount: Math.abs(currentDayIndex), exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())})}</p>
             <p>{__('If you’ve signed up, you’ll get an email on the next steps in {dayCount} days.', {dayCount: Math.abs(currentDayIndex)})}</p>
             <p>{__('In case you haven’t')}:</p>
-            <p><ExternalLink href={config.course.signUpFormUrl} className="main callToActionButton">{__('Sign up for the next course')}</ExternalLink></p>
-        </>
+            <p>
+                <ExternalLink href={config.course.signUpFormUrl} className="main callToActionButton">{__('Sign up for the next course')}</ExternalLink>
+            </p>
+        </>;
     }
 
     function _getAlreadyOverMessage() {

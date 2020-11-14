@@ -39,7 +39,7 @@ const challengeTranslations = {
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection
-const challengePageTranslations = {
+const challengeAndCoursePageTranslations = {
     'Back to the course page': {translation: 'Vissza a tanfolyam oldalára'},
     'Current challenge': {translation: 'E heti feladat'},
     'Loading challenge...': {translation: 'Töltjük a feladatot...'},
@@ -50,6 +50,7 @@ const challengePageTranslations = {
     'Previous challenges': {translation: 'Korábbi feladatok'},
     'The course started {approximateWeeksAgo} ({exactDate}).': {translation: 'A tanfolyam {approximateWeeksAgo} ({exactDate}) kezdődött.'},
     'Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:': {translation: 'Ha még nem tetted, mindenképp olvasd el heti tippjeinket. A mostani és előző hetek anyagait is itt találod:'},
+    'Community': {translation: 'Közösség'},
     'about {weekIndex} weeks ago': {translation: 'kb. {weekIndex} hete'},
     'recently': {translation: 'nemrég'},
     'The course hasn’t started. It’ll start in only {dayCount} days, on {exactDate}!': {translation: 'A tanfolyam még nem indult el, de már csak {dayCount} nap és kezdünk! (A pontos dátum: {exactDate})'},
@@ -163,7 +164,7 @@ const otherTranslations = {
 export const translations = {
     ...siteHeaderAndFooterTranslations,
     ...challengeTranslations,
-    ...challengePageTranslations,
+    ...challengeAndCoursePageTranslations,
     ...articlePageTranslations,
     ...uploadPageTranslations,
     ...adminTranslations,
