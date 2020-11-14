@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx jest",
     "postinstall": "npx snowpack --clean",
-    "build": "babel src --out-dir public --delete-dir-on-start --keep-file-extension --copy-files",
+    "build": "(export NODE_ENV=production || set NODE_ENV=production) && babel src --out-dir public --delete-dir-on-start --keep-file-extension --copy-files",
     "watch": "babel src --out-dir public --delete-dir-on-start --keep-file-extension --copy-files --watch"
   },
   "repository": {
