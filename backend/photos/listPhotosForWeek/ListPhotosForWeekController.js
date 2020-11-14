@@ -1,6 +1,3 @@
-const RequestHelper = require('../../http/RequestHelper.js');
-const ResponseHelper = require('../../http/ResponseHelper.js');
-
 class ListPhotosForWeekController {
     /**
      * @param {PhotoRepository} photoRepository For mocking
@@ -28,7 +25,7 @@ class ListPhotosForWeekController {
             environment: requestHelper.getRequestData().arguments['environment'],
             courseName: requestHelper.getRequestData().arguments['courseName'],
             weekIndex: parseInt(requestHelper.getRequestData().arguments['weekIndex']),
-            getDetails: requestHelper.getRequestData().arguments['getDetails']
+            getDetails: requestHelper.getRequestData().arguments['getDetails'] === 'true'
         });
         console.debug(`ListPhotosForWeekController | handleGetRequest | Got ${photosForWeek.length} messages.`);
         return responseHelper.buildResponse(200, JSON.stringify(photosForWeek), {contentType: 'application/json'});
