@@ -27,7 +27,16 @@ export default function CoursePage() {
             approximateWeeksAgo: (currentWeekIndex > 1) ? __('about {weekIndex} weeks ago', {weekIndex: currentWeekIndex}) : __('recently'),
             exactDate: formatDateWithWeekDay(courseStartDate, getActiveLocaleCode())
         })}</p>
-            {currentWeekIndex <= weekCount ? _getThisWeeksChallenge() : _getAlreadyOverMessage()}
+            {currentWeekIndex <= weekCount
+                ? <>
+                    {_getThisWeeksChallenge()}
+                    <h2>{__('Materials')}</h2>
+                    <p>{__('Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:')} <NavLink to={'/materials'}>{__('Materials')}</NavLink></p>
+                    <p>
+                        <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
+                    </p>
+                </>
+                : _getAlreadyOverMessage()}
             {currentWeekIndex > 1 ? _getPreviousChallengesList() : null}
         </>
         : _getNotStartedMessage()}
@@ -39,10 +48,7 @@ export default function CoursePage() {
             <p>
                 <NavLink to={'/challenges/' + currentWeekIndexAdjustedForFirstDay}>
                     {__('Week {weekIndex}:', {weekIndex: currentWeekIndexAdjustedForFirstDay}) + ' ' + __(weeklyChallengeTitles[currentWeekIndexAdjustedForFirstDay - 1])}
-                </NavLink> – {__('Deadline to submit your shot')}: {formatDateWithWeekDayAndTime(getDeadline(currentWeekIndexAdjustedForFirstDay), getActiveLocaleCode())}
-            </p>
-            <p>
-                <NavLinkButton to='/upload'>{__('Upload your best photo')}</NavLinkButton>
+                </NavLink> – {__('Deadline to submit your shot')}: <strong>{formatDateWithWeekDayAndTime(getDeadline(currentWeekIndexAdjustedForFirstDay), getActiveLocaleCode())}</strong>
             </p>
         </>;
     }
