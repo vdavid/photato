@@ -1,3 +1,4 @@
+const AWS = require('aws-sdk');
 const {getDefaultConfig} = require('./config.js');
 
 const RequestHelper = require('./http/RequestHelper.js');
@@ -7,6 +8,7 @@ const AuthMiddleware = require('./auth/AuthMiddleware.js');
 const Auth0AndMongoAuthorizerFactory = require('./auth/Auth0AndMongoAuthorizerFactory.js');
 
 const PhotatoMessageRepository = require('./messages/PhotatoMessageRepository.js');
+const PhotoRepository = require('./photos/PhotoRepository.js');
 
 const VersionController = require('./meta/VersionController.js');
 const GetAllMessagesController = require('./messages/getAllMessages/GetAllMessagesController.js');
@@ -60,6 +62,7 @@ const ListPhotosForWeekController = require('./photos/listPhotosForWeek/ListPhot
 
 const defaultConfig = getDefaultConfig();
 const router = new Router({appName: defaultConfig.appName});
+const s3 = new AWS.S3({region: 'us-east-1', signatureVersion: 'v4'});
 
 /* Create middleware */
 const auth0AndMongoAuthorizerFactory = new Auth0AndMongoAuthorizerFactory();
@@ -67,6 +70,7 @@ const auth0AndMongoAuthorizerFactory = new Auth0AndMongoAuthorizerFactory();
 /* Create controllers */
 const versionController = new VersionController();
 const photatoMessageRepository = new PhotatoMessageRepository();
+const photoRepository = new PhotoRepository(s3, defaultConfig.photos.bucket.name);
 const getAllMessagesController = new GetAllMessagesController({photatoMessageRepository});
 const listPhotosForWeekController = new ListPhotosForWeekController({photoRepository});
 
