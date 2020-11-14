@@ -89,7 +89,7 @@ export default function MaterialsPage() {
     }
 
     /**
-     * @param {int} weekIndex
+     * @param {int} weekIndex One-based
      * @param {LoadedArticle[]} articles
      * @returns {React.ReactElement[]|null}
      */
