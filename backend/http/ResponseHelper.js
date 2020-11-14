@@ -48,6 +48,7 @@ class ResponseHelper {
                 'Content-Type': contentType,
                 'Content-Encoding': 'UTF-8',
                 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
             },
             body,
             isBase64Encoded: false,
