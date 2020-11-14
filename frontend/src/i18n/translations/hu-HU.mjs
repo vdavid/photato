@@ -49,6 +49,7 @@ const challengePageTranslations = {
     'We’ve collected many useful resources for you to make the most out of this challenge. You can find them here:': {translation: 'Összegyűjtöttünk neked egy csomó hasznos anyagot, hogy a legtöbbet hozhasd ki a feladatból. Itt találod őket:'},
     'Previous challenges': {translation: 'Korábbi feladatok'},
     'The course started {approximateWeeksAgo} ({exactDate}).': {translation: 'A tanfolyam {approximateWeeksAgo} ({exactDate}) kezdődött.'},
+    'Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:': {translation: 'Ha még nem tetted, mindenképp olvasd el heti tippjeinket. A mostani és előző hetek anyagait is itt találod:'},
     'about {weekIndex} weeks ago': {translation: 'kb. {weekIndex} hete'},
     'recently': {translation: 'nemrég'},
     'The course hasn’t started. It’ll start in only {dayCount} days, on {exactDate}!': {translation: 'A tanfolyam még nem indult el, de már csak {dayCount} nap és kezdünk! (A pontos dátum: {exactDate})'},
@@ -117,8 +118,10 @@ const otherTranslations = {
     'Frequently asked questions': {translation: 'Gyakran ismételt kérdések'},
     'Sign up for the next course': {translation: 'Feliratkozom a következő tanfolyamra'},
     'Sign up for the next free course': {translation: 'Feliratkozom a következő ingyenes tanfolyamra'},
+
     /* Loading page */
     'Loading seems to take longer than usual. If you think this is a problem, please report it here.': {translation: <>Úgy tűnik, a betöltés tovább tart, mint szokott. Ha szerinted nálunk van a gond, légyszi jelezd ezt a <a href="mailto:photatophotato@gmail.com?subject=Weboldal probléma, sokáig tart a betöltés!">photatophotato@gmail.com</a> címen.</>, format: 'jsx'},
+
     /* Error pages */
     '404 error': {translation: '404-es hiba'},
     '403 error': {translation: '403-as hiba'},
@@ -127,10 +130,30 @@ const otherTranslations = {
     'Unfortunately, you can’t see this page.': {translation: 'Ezt az oldalt sajnos nem láthatod.'},
     'This page is only for members. Log in or sign up here:': {translation: 'Ezt az oldal csak regisztrált felhasználóknak szól. Jelentkezz be vagy regisztrálj itt:'},
     'Return to the Photato main page.': {translation: 'Vissza a Photato főoldalára'},
+
     /* Front page */
     'Welcome to Photato, {firstName}!': {translation: 'Üdv a Photaton, {firstName}!'},
     'Welcome to Photato!': {translation: 'Üdv a Photaton!'},
     '12 weeks, 12 pics': {translation: '12 hét, 12 kép'},
+
+    'With a camera or a mobile': {translation: 'Fényképezőgéppel vagy mobillal'},
+    'You can get the most out of this course with a camera, but if you don’t have one, a mobile will do.': {translation: 'Fényképezőgéppel tudsz a legtöbbet tanulni, de ha nincs, egy mobil is elég.'},
+    'In 12 weeks': {translation: '12 hét alatt'},
+    '15–45 minutes of theory and a new challenge each week.': {translation: 'Heti 15–45 perc elmélet, és annyi gyakorlat, amit beleteszel. Minden héten új feladatot kapsz.'},
+    'In community': {translation: 'Társaságban'},
+    'You can learn alone, with your friends, or with new friends.': {translation: 'Tanulhatsz egyedül, a barátaiddal, vagy új ismerősökkel is.'},
+
+    '4 courses': {translation: '4 tanfolyam'},
+    'This is the fourth free course we start since 2018.': {translation: '2018 óta ez már a 4. ingyenes tanfolyam, amit indítunk.'},
+    '500+ students': {translation: '500+ résztvevő'},
+    'In the last 3 courses, we’ve taught more than 500 people to take better shots.': {translation: 'Az eddigi 3 tanfolyamon több, mint 500 embert tanítottunk fotózni.'},
+    '1,000+ photos': {translation: '1 000+ fotó'},
+    'We got more than 1,000 valid “best shot of the week” submissions.': {translation: 'Több, mint 1 000 érvényes “heti legjobb fotó” beadást kaptunk.'},
+
+    'It seems like you’re already enrolled in a course, and signed in.': {translation: 'Úgy tűnik, te már nálunk tanulsz, és be is vagy jelentkezve.'},
+    'Already enrolled?': {translation: 'Már nálunk tanulsz?'},
+    'Come to the {courseTitle} page': {translation: 'Gyere tovább a {courseTitle} oldalára'},
+
     /* Bug report */
     'Found a bug?': {translation: 'Hibát találtál?'},
     'Bug report': {translation: 'Hibajelentés'},

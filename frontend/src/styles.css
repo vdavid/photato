@@ -251,6 +251,7 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
 
 /* ======================= Front page ======================= */
 
+.frontPageSection { margin-top:2em; margin-bottom:2em; padding: 0; }
 .frontPageHeader { position: relative; padding: 0.1em 0 5.5em; background: linear-gradient(135deg, var(--primary-color-darker) 0%, var(--primary-color-main) 100%); }
 .frontPageHeader:after { content: ''; position: absolute; bottom: -2px; width: 100%; height: 7.5em; background: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg enable-background='new 0 0 1920 304' version='1.1' viewBox='0 0 1920 304' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns%23' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23'%3E%3Cmetadata%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage'/%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cpath d='m0 274s199.42-199.25 579.28-124c603.7 119.59 767.59-47.24 988.45-121.65 174.18-58.679 353.63-2.4264 353.63-2.4264l-1.3646 278.07h-1920z' fill='%23101016'/%3E%3C/svg%3E%0A") no-repeat center bottom; background-size: cover; }
 .frontPageHeader div { padding: 0 var(--page-vertical-padding-size); height: 100%; }
@@ -258,14 +259,14 @@ footer .instagram.icon { background-image: url("data:image/svg+xml,%3C%3Fxml ver
 .frontPageHeader p { font-size: 100%; margin: 2em 0; }
 .frontPageHeader p:last-child { margin-top: 2.5em; }
 
-.threePoints { display: grid; grid-template-columns: repeat(3, calc((100% - 2em) / 3)); gap: 1em; margin-top: 3em; margin-bottom: 3em; padding: 0; }
+.threePoints { display: grid; grid-template-columns: repeat(3, calc((100% - 2em) / 3)); gap: 1em; margin-top: 3em; margin-bottom: 3em; }
 .threePoints div { padding: 1em; text-align: center; background: var(--navbar-color); }
 .threePoints .icon { font-size: 300%; color: var(--accent-color-main); }
 @media screen and (max-width: 950px) {
     .threePoints { grid-template-columns: 100%; grid-column-gap: 1em; }
 }
 
-p.frontPageMainCallToAction { text-align: center; }
+.frontPageMainCallToAction { text-align: center; }
 
 /* ======================= Upload page ======================= */
 
