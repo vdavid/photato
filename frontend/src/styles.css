@@ -240,6 +240,9 @@ article .metadata { padding-left: 5%; }
 /* ======================= Site footer ======================= */
 
 footer { display: flex; min-width: var(--minimum-site-width); max-width: var(--maximum-content-width); margin: 2em auto 1em; padding: 0 var(--page-vertical-padding-size); }
+@media screen and (max-width: 1250px) {
+    footer { margin-bottom:5em; }
+}
 footer .copyright { text-align: left; flex-grow: 1;}
 footer .social { text-align: right; }
 footer .icon { display: inline-block; padding: 0.3em 0.5em; width: 2em; height: 1em; background-size: 1em; background-repeat: no-repeat; background-position: center; opacity: 0.6; transition: opacity 0.3s ease; }
