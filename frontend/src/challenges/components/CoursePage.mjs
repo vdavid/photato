@@ -70,7 +70,7 @@ export default function CoursePage() {
         return <>
             <h2>{__('Previous challenges')}</h2>
             {weekIndexes.map(weekIndex =>
-                <p>
+                <p key={weekIndex}>
                     <NavLink to={'/challenges/' + weekIndex}>
                         {__('Week {weekIndex}:', {weekIndex}) + ' ' + __(weeklyChallengeTitles[weekIndex - 1])}
                     </NavLink>
