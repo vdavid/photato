@@ -2,6 +2,7 @@ import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
 import {config} from '../../../config.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -50,7 +51,7 @@ export default function Article() {
         <ol>
             <li>Tölts el egy percet a fenti képpel. Nézd meg, mit írtunk róla fentebb (blende, záridő, ISO érték). Keresd meg a kép 3 részét, és gondolkozz egy picit, mit ábrázolhatnak.</li>
             <li>Olvasd el a <ExternalLink href="https://fotozasblog.hu/digitalis-fotozas/">Fotózás alapjai</ExternalLink> cikk “Rekesz, blende, rekeszérték” és “Záridő” részeit. Ha van rá időd, fusd át a "Mélységélesség" részt is. Ez után nézd meg a fenti képet újra. Az első két sor a mélységélességet és a blendét illusztrálja, a harmadik sor pedig a záridőt.</li>
-            <li>Olvasd el a cikk <ExternalLink href="https://fotozasblog.hu/fotozas-alapjai-iso-fenymeres/">második részének</ExternalLink> “ISO érzékenység” részét. Aztán nézd meg újra a fenti kép utolsó sorát, ami az ISO érzékenységet illusztrálja.</li>
+            <li>Olvasd el a cikk <NavLink to="/hu/external-article/fotozasblog-iso-erzekenyseg-fenymeres-beepitett-vaku">második részének</NavLink> “ISO érzékenység” részét. Aztán nézd meg újra a fenti kép utolsó sorát, ami az ISO érzékenységet illusztrálja.</li>
             <li>(Opcionális) Ha beszélsz valamennyire angolul és szívesen tanulsz videóból, jó szívvel ajánljuk <ExternalLink href="https://www.youtube.com/watch?v=F8T94sdiNjc">Tony Northrup 15 perces videóját</ExternalLink>, amiben még egyszer elmagyarázza ezeket. A cikkekből és a videóból nagyon stabilan meg fogod érteni, hogy mik ezek a beállítások. Nézd meg még egyszer a fenti képet. Így már nem ijesztő, ugye? 😊</li>
         </ol>
 

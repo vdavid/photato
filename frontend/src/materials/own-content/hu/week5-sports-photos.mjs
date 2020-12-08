@@ -2,6 +2,7 @@ import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
 import {config} from '../../../config.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -60,7 +61,7 @@ export default function Article() {
 
         <p><strong>Linkek:</strong></p>
         <ul>
-            <li>Fotózás alapok: <ExternalLink href="https://fotozasblog.hu/digitalis-fotozas/">rekesz, záridő, zoom</ExternalLink> | <ExternalLink href="https://fotozasblog.hu/fotozas-alapjai-iso-fenymeres/">fénymérés, ISO, vaku</ExternalLink>.</li>
+            <li>Fotózás alapok: <ExternalLink href="https://fotozasblog.hu/digitalis-fotozas/">rekesz, záridő, zoom</ExternalLink> | <NavLink to="/hu/external-article/fotozasblog-iso-erzekenyseg-fenymeres-beepitett-vaku">fénymérés, ISO, vaku</NavLink>.</li>
             <li><ExternalLink href="http://fotozz.hu/cikket_megmutat?cikk_ID=83">Tippek gyorsan mozgó témákhoz</ExternalLink> a fotozz.hu-tól</li>
             <li><ExternalLink href="https://www.canon.hu/get-inspired/tips-and-techniques/capturing-motion/">Tippek gyorsan mozgó témákhoz</ExternalLink> a Canon oldaláról</li>
             <li><ExternalLink href="http://www.photonet.hu/arhiv/sportfotozas.html">Sportfotózásról</ExternalLink> a Photonet.hu-tól</li>
