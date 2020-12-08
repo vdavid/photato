@@ -79,7 +79,7 @@ export default function UploadPage({photoUploader}) {
         const minimumSize = Math.round(config.imageUpload.minimumSizeInBytes / 1024);
         const maximumSize = Math.round(config.imageUpload.maximumSizeInBytes / 1024 / 1024);
         const selectionStatusTexts = {
-            [selectionStatuses.readyToSelectFile.name]: __('Please select your photo to upload.'),
+            [selectionStatuses.readyToSelectFile.name]: __('Please select your photo to upload. (a JPEG file of maximum 25 megabytes)'),
             [selectionStatuses.selectedFileIsTooSmall.name]: __('The image you’ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.', {minimumSize}),
             [selectionStatuses.selectedFileIsTooLarge.name]: __('The image you’ve selected is larger than {maximumSize} megabytes. We can’t handle a photo this big. Please select a smaller photo.', {maximumSize}),
             [selectionStatuses.wrongFileType.name]: __('The image you’ve selected is not a JPEG. Please select a JPEG file.', {maximumSize}),

@@ -87,7 +87,7 @@ const uploadPageTranslations = {
     'Week #{weekIndex}': {translation: '{weekIndex}. hét'},
     'Submit your pic before {deadline}.\nNote: Please upload a photo you made this week. If you want to share your older pics, you’re welcome to send them in to the Facebook group.\nReminder: if you already submitted a photo this week, the new picture will replace it.': {translation: 'Küldd be a fotód {deadline} előtt.\nFontos: Kérünk, hogy a héten készült, friss képet küldj be. Ha szeretnéd néhány régebbi fotódat is megosztani a közösséggel, bátran küldd be őket a Facebook csoportba.\nNe feledd: ha már töltöttél fel fotót a héten, az új kép lesz az érvényes.'},
     'Upload': {translation: 'Feltöltés'},
-    'Please select your photo to upload.': {translation: 'Válaszd ki a feltöltendő fotót.'},
+    'Please select your photo to upload. (a JPEG file of maximum 25 megabytes)': {translation: 'Válaszd ki a feltöltendő fotót (egy maximum 25 megabájtos JPEG fájlt).'},
     'The image you’ve selected is smaller than {minimumSize} kilobytes. This is just too small. Please select a bit higher resolution photo.':
         {translation: 'A kiválasztott képed kisebb, mint {minimumSize} kilobájt. Ez sajnos túl kicsi. Kérlek, válassz egy kicsit jobb felbontású fotót.'},
     'The image you’ve selected is larger than {maximumSize} megabytes. We can’t handle a photo this big. Please select a smaller photo.':
