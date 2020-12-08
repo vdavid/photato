@@ -36,7 +36,7 @@ export default function MaterialPage() {
             <article>
                 <header>
                     <h1>{article.metadata.title}</h1>
-                    <p className='metadata articleMetadata'>{__('Author') + ': ' + article.metadata.author} — {__('Publication date') + ': ' + article.metadata.publishDate.toLocaleDateString(getActiveLocaleCode())} — <a href={article.metadata.originalUrl} target='_blank'>{__('Original article')}</a>
+                    <p className='metadata articleMetadata'>{__('Author') + ': ' + article.metadata.author} — {__('Publication date') + ': ' + article.metadata.publishDate.toLocaleDateString(getActiveLocaleCode())}{article.metadata.originalUrl ? <> — <a href={article.metadata.originalUrl} target='_blank'>{__('Original article')}</a></> : ''}
                     </p>
                 </header>
                 <article.component/>
