@@ -59,6 +59,7 @@ export const thirdPartyArticleSlugsByLanguageAndByWeek = {
         2: [ /* Buildings */
             'sg-varosok-megorokitese',
             'canon-varosi-fotok-keszitese',
+            'fotozasblog-feheregyensuly-es-szinhomerseklet',
         ],
         3: [ /* Close-up photography */
             'sg-makrofotozas-1',
@@ -76,6 +77,8 @@ export const thirdPartyArticleSlugsByLanguageAndByWeek = {
             'szellemkep-a-fotozas-jogi-utvesztoi-3',
         ],
         5: [ /* Sports photos / Dynamic shots / Fast objects */
+            'fotozasblog-digitalis-fotozas-alapok-tippek-trukkok',
+            'fotozasblog-iso-erzekenyseg-fenymeres-beepitett-vaku',
             'canon-az-expozicio-beallitasa',
             'photonet-sportfotozas',
             'fotozz-gyorsan-mozgo-temak-elesen-kompakttal-is',
@@ -95,6 +98,7 @@ export const thirdPartyArticleSlugsByLanguageAndByWeek = {
         8: [ /* Still life */
             'tutsplus-10-tipp-a-csendelet-fotozas-elkezdesehez',
             'tisztaegtisztafold-komponalas-geometria',
+            'studioeszkozok-feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal',
         ],
         9: [ /* Portrait */
 //        'fotosarok-101-portrefoto-tipp',
