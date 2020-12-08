@@ -56,7 +56,6 @@ export default function Article() {
                 Ez a módszer csak akkor működik, ha tudod előre, hogy milyen pályán fog mozogni a témád. Emellett érdemes tudni, hogy ez a nehezebb technikák egyike: keveseknek sikerül elsőre jó képekeket készíteni vele. De ha tetszik, érdemes gyakorolnod, és előbb-utóbb ráérezel.</li>
             <li><strong>Chronophotography.</strong> Itt a mozgás több fázisát kombinálod utómunka során egy képpé, <ExternalLink href="https://hu.pinterest.com/search/pins/?q=chronophotograpy%20sport">valahogy így</ExternalLink>. Ehhez állványról kell fotóznod és a sima sportfotózáshoz hasonlóan rövid záridővel sorozatfelvételt készítened az akcióról. A több elkészült képet utána egy képszerkesztő programmal (pl. <ExternalLink href="https://www.gimp.org/downloads/">GIMP</ExternalLink>, Photoshop) összekombinálhatod egy képpé. Ennek a pontos mikéntjére itt sajnos terjedelmi okokból nem tudunk kitérni, de ha tudsz angolul, az internetek segítenek neked. 😀</li>
             <li><strong>Válassz témát szabadon.</strong> Lehet, hogy a héten nem mész sporteseményre, vagy rossz idő lesz, vagy csak nem ihlet meg téged a sport. Nyugodtan engedd el. Valószínűleg rengeteg más mozgó dolog van a környékeden. Néhány ötlet, amit fotózhatsz: autók, mozóglépcső, hintázó gyerekek, repülő labdák. További ötletekért nézd meg az "Inspiráció" részt lejjebb.</li>
-            <li><strong>Gyere velünk fotózni a Margitszigetre!</strong> Az előző tanfolyamon a sportfotók bizonyultak a legtöbb embernek a legnehezebbnek, ezért ezen a héten szeretnénk segíteni nektek a közösség erejével. <ExternalLink href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt</ExternalLink> a szerdai eseményre!</li>
         </ol>
 
         <p><strong>Linkek:</strong></p>
@@ -66,7 +65,6 @@ export default function Article() {
             <li><ExternalLink href="https://www.canon.hu/get-inspired/tips-and-techniques/capturing-motion/">Tippek gyorsan mozgó témákhoz</ExternalLink> a Canon oldaláról</li>
             <li><ExternalLink href="http://www.photonet.hu/arhiv/sportfotozas.html">Sportfotózásról</ExternalLink> a Photonet.hu-tól</li>
             <li>Inspiráció: <ExternalLink href="https://hu.pinterest.com/search/pins/?q=sport%20photography">Pinterest sportfotók</ExternalLink> | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=panning%20photography">Pinterest úsztatásos fotók</ExternalLink> | <ExternalLink href="https://hu.pinterest.com/search/pins/?q=chronophotograpy%20sport">Pinterest chronophotography</ExternalLink> | <ExternalLink href="https://mashable.com/2016/09/29/red-bull-photography-contest/?europe=true">Red Bull sportfotók</ExternalLink></li>
-            <li><ExternalLink href="https://www.facebook.com/events/688185368187546/">Margitszigeti fotózás</ExternalLink></li>
         </ul>
     </>;
 }

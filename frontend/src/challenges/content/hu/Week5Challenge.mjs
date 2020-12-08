@@ -1,6 +1,5 @@
 import React from '../../../web_modules/react.js';
 import PhotoUploadLink from '../../components/PhotoUploadLink.mjs';
-import ExternalLink from '../../../materials/components/ExternalLink.mjs';
 
 // noinspection JSUnusedGlobalSymbols (It's imported dynamically.)
 /**
@@ -14,14 +13,11 @@ export default function Week5Challenge({formattedDeadline}) {
 <ul>
     <li>Egy <strong>gyorsan mozgó dologról készült fotót</strong> várunk tőled, és <PhotoUploadLink label="itt tudod feltölteni" />.</li>
     <li>Ezen a héten elmagyarázunk némi elméletet, ami eddig hiányozhatott a tarsolyodból.</li>
-    <li>Július 4-én (szerdán) 18:00-kor <strong>közös fotózás</strong> lesz a Margitszigeten. <ExternalLink href="https://www.facebook.com/events/688185368187546/">Jelentkezz itt!</ExternalLink></li>
 </ul>
 
 <p><strong>Hosszabban:</strong></p>
 
-
 <p><strong>Gyorsan mozgó dolgok fotózása fényképezőgéppel:</strong></p>
-
 
 <p>A legjobb gyorsan mozgó képedet ${formattedDeadline}-ig, <PhotoUploadLink label="itt tudod feltölteni" />.</p>
 

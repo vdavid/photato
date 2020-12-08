@@ -61,7 +61,6 @@ export default function Article() {
             <li><strong>Fókuszálj manuálisan.</strong> Kevés fénynél gyakran nem működik jól az autofókusz. Ilyenkor jobb, ha kézzel állítod be.</li>
             <li><strong>Engedd el a gépet.</strong> A gép óhatatlanul megmozdul egy picit, amikor megnyomod az exponáló gombot. Használj önkioldót ⏲️: minden gépen be lehet állítani 2 másodperces várakozást, pont emiatt. Ha esetleg van távkioldó a gépedhez, az még jobb, mert akkor még várnod sem kell.</li>
             <li><strong>Ha kell, használj ND szűrőt.</strong> Ha sok a fény és elkötelezett fotós vagy, csökkentsd a gépbe jutó fény mennyiségét egy megfelelő <ExternalLink href="https://pixinfo.com/cikkek/objektiv-szurokrol-egyszeruen/">természetes szürke szűrővel</ExternalLink>.</li>
-            <li><strong>+1: Gyere velünk fotózni a Margitszigetre!</strong> Az előző tanfolyamokon a hosszú záridős képek bizonyultak a legtöbb embernek az egyik legnehezebbnek, ezért ezen a héten szeretnénk segíteni nektek a közösség erejével. <ExternalLink href="https://www.facebook.com/events/2265483047079220/">Jelentkezz itt</ExternalLink> a keddi eseményre!</li>
         </ol>
 
         <p>6 link további infókkal és ötletekkel – érdemes őket megnézni:</p>
