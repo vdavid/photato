@@ -76,6 +76,8 @@ const articlePageTranslations = {
     'The course hasn’t started. Helpful articles will be added here as the course progresses. Check back later!': {translation: 'A tanfolyam még nem kezdődött el. A kurzus előrehaladtával hasznos cikkek fognak idekerülni. Nézz vissza később!'},
     'Articles about photography': {translation: 'Cikkek fotózás témában'},
     'Photato cached version': {translation: <><PhotatoEmoji /> mentett verzió</>, format: 'jsx'},
+    'Photato article': {translation: 'Photato saját cikk'},
+    'the original article is not available anymore 😞': {translation: 'az eredeti cikk már nem elérhető 😞'},
 };
 
 // noinspection JSUnusedGlobalSymbols, JSNonASCIINames, NonAsciiCharacters, SpellCheckingInspection

@@ -107,14 +107,15 @@ export default function MaterialsPage() {
         const metadata = article.getMetadata();
         if (article.getMetadata().publisherName === 'Photato') {
             return <li className="own" key={metadata.slug}>
-                <NavLink to={'/' + languageCode + '/article/' + metadata.slug}>{metadata.title}</NavLink>
+                <NavLink to={'/' + languageCode + '/article/' + metadata.slug}>{metadata.title}</NavLink> ({__('Photato article')})
             </li>;
         } else {
             return <li className={metadata.isOriginalUrlBroken ? 'thirdParty broken' : 'thirdParty'} key={metadata.slug}>
                 [<NavLink to={'/' + languageCode + '/external-article/' + metadata.slug}>{__('Photato cached version')}</NavLink>]&nbsp;
-                <ExternalLink href={metadata.originalUrl}
-                              className={metadata.isOriginalUrlBroken ? 'brokenLink' : ''}>{metadata.publisherName + ': ' + metadata.title}</ExternalLink>
-                {metadata.isOriginalUrlBroken && ' – az eredeti cikk már nem elérhető'}
+                {!metadata.isOriginalUrlBroken
+                    ? <ExternalLink href={metadata.originalUrl}>{metadata.publisherName + ': ' + metadata.title}</ExternalLink>
+                    : metadata.publisherName + ': ' + metadata.title}
+                {metadata.isOriginalUrlBroken && ' – ' + __('the original article is not available anymore 😞')}
             </li>;
         }
     }
