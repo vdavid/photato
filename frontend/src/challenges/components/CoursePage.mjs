@@ -40,7 +40,7 @@ export default function CoursePage() {
         return <>
             {_getThisWeeksChallenge()}
             <h2>{__('Materials')}</h2>
-            <p>{__('Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:')}
+            <p>{__('Make sure you read this week’s tips. Check out the materials for the current and previous weeks right here:')}&nbsp;
                 <NavLink to={'/materials'}>{__('Materials')}</NavLink>
             </p>
             <p>
