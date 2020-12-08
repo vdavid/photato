@@ -1,5 +1,6 @@
 import React from '../../../web_modules/react.js';
 import ExternalLink from '../../components/ExternalLink.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -29,13 +30,13 @@ export default function Article() {
 
         <p><strong>A leggyakoribb kérdés: kell engedélyt kérnem azoktól, akiket lefotózok?</strong></p>
 
-        <p>Röviden: jogilag nem, de figyelj arra, hogy tisztelettel bánj embertársaiddal, és ne bánts meg és ne hozz zavarba senkit. Ha mégis így történik, oldd fel a helyzetet, pl. kérj elnézést, töröld ki a képet, vegyél nekik virágot stb.</p>
+        <p>Röviden: jogilag igen, de ez úgynevezett ráutaló magatartással is történhet, azaz ha a fotózásod alanya látja, hogy kattintasz és rád mosolyog, biccent, pózol neked vagy kíváncsi az elkészült képre, úgy tekintheted úgy, hogy a hozzájárulását megadta. Mindig figyelj arra, hogy tisztelettel bánj embertársaiddal, és ne bánts meg és ne hozz zavarba senkit. Ha mégis így történik, oldd fel a helyzetet, pl. kérj elnézést, töröld ki a képet, vegyél nekik virágot stb.</p>
 
         <p>Bővebben (<ExternalLink href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben//">forrás</ExternalLink>):</p>
         <ul>
-            <li>Közterületen szabad embereket fotózni, kivéve közfeladatot ellátó személy arcát vagy azonosító számát.</li>
-            <li>Ha egyszerre sok ember van a képen, gond nélkül publikálhatod is a képeket.</li>
-            <li>Ha a képen kiemelten szerepel 1-1 ember, és felismerhetőek, engedélyt kell adniuk a fényképezésre ahhoz, hogy publikáld a képet. (Tehát fényképezni enélkül is szabad, publikálni nem.) Ráutaló magatartás is számít: pl. ha mosolyog a kamerába és integet.</li>
+            <li>Közfeladatot ellátó személy arcát vagy azonosító számát nem szabad fotózni.</li>
+            <li>Ha egyszerre sok ember van a képen (tömegrendezvény, tüntetés, stb.), gond nélkül publikálhatod is a képeket.</li>
+            <li>Ha a képen kiemelten szerepel 1-1 ember, és felismerhetőek, engedélyt kell adniuk a fényképezésre ahhoz, hogy publikáld a képet. Ráutaló magatartás is számít: pl. ha mosolyog a kamerába és integet.</li>
         </ul>
 
         <p><strong>Néhány további tipp:</strong></p>
@@ -64,7 +65,8 @@ export default function Article() {
         <p>Linkek:</p>
         <ul>
             <li>Három angol nyelvű cikk rövid kivonata a pixinfo-n: <ExternalLink href="https://pixinfo.com/hirek/2012/01/19/nehany-tanacs-kezdo-utcai-fotosoknak/">John Batdorff tippjei</ExternalLink> | <ExternalLink href="https://pixinfo.com/hirek/2012/01/03/fekete-hattyu-az-utcan-avagy-mi-a-titka-a-street-photography-nek/">Eric Kim tippjei</ExternalLink> | <ExternalLink href="https://www.canon.hu/get-inspired/stories/street-photography/">A Canon inspirációs oldala</ExternalLink></li>
-            <li><ExternalLink href="http://www.szellemkeponline.hu/foto/a-fotozas-jogi-utvesztoi-i-resz-jogvedelem-a-fotozas-koreben/">Az utcai fotózás jogi háttere Magyarországon</ExternalLink> (3 részes cikk)</li>
+            <li>Az utcai fotózás jogi háttere Magyarországon (3 részes cikk a Photato oldalán): <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">[1]</NavLink> <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">[2]</NavLink> <NavLink to="/hu/external-article/szellemkep-a-fotozas-jogi-utvesztoi-1">[3]</NavLink></li>
+            <li><ExternalLink href="https://piacesprofit.hu/tarsadalom/mikor-kell-engedely-hogy-fenykep-keszulhessen/">Mikor kell engedély, hogy fénykép készülhessen?</ExternalLink></li>
             <li><ExternalLink href="https://petapixel.com/2016/08/06/15-street-photography-techniques-tips/">Eric Kim 15 tippje</ExternalLink> [angol]</li>
             <li><ExternalLink href="http://www.erickimphotography.com/Downloads/Books/100LessonsFromtheMastersofStreetPhotography/100%20Lessons%20From%20the%20Masters%20of%20Street%20Photography.pdf">Eric Kim 100 tippje utcai fotózáshoz</ExternalLink> [angol pdf]</li>
             <li>Filmajánló: Everybody Street [<ExternalLink href="https://www.imdb.com/title/tt2784462/">imdb</ExternalLink>] [<ExternalLink href="https://vimeo.com/ondemand/everybodystreet/70639661">trailer</ExternalLink>] – egy dokumentumfilm new yorki utcai fotósokról.</li>

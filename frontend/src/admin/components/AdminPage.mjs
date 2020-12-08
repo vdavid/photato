@@ -23,9 +23,9 @@ export default function AdminPage() {
     }, []);
 
     return <>
-        <p><NavLink to={'/admin/photos'}>{__('Photos')}</NavLink></p>
-        <p><NavLink to={'/admin/messages'}>{__('Messages')}</NavLink></p>
-        <p><NavLink to={'/admin/sitemap-generator'}>{__('Sitemap generator')}</NavLink></p>
+        <p><NavLink to="/admin/photos">{__('Photos')}</NavLink></p>
+        <p><NavLink to="/admin/messages">{__('Messages')}</NavLink></p>
+        <p><NavLink to="/admin/sitemap-generator">{__('Sitemap generator')}</NavLink></p>
         <p>Back end version: {version}</p>
     </>;
 
