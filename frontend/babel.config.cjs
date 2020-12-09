@@ -1,10 +1,10 @@
-module.exports = function (api) {
+module.exports = function(api) {
     api.cache(false);
 
     return {
-        "plugins": [
+        plugins: [
 //            "transform-react-createelement-to-jsx"
-            ["@babel/plugin-transform-react-jsx", {}] /* Docs: https://babeljs.io/docs/en/babel-plugin-transform-react-jsx */
+            ['@babel/plugin-transform-react-jsx', {}] /* Docs: https://babeljs.io/docs/en/babel-plugin-transform-react-jsx */
         ]
     };
 };
