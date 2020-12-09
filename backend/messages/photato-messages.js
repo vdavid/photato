@@ -101,17 +101,23 @@ Ha szeretnéd a barátaidat is meghívni, kattints a Megosztás gombra az oldal 
         audience: facebookAudiences.group,
         locale: 'hu-HU',
         contentType: 'text/plain',
-        content: `Sziasztok, üdv a {courseTitle} csapatában!
+        content: `Sziasztok, üdv a {courseTitle} csapatában, ami hamarosan ({courseStartDate}) indul!
 
 Ez a csoport azért jött létre, hogy
-hetente tudjátok követni egymás fotóit,
-kérdezzetek, beszélgessetek, szakmázzatok, mókázzatok,
-szervezzünk közös fotózásokat,
-illetve mi is elérjünk Titeket az emaieken túl :)
+- hetente tudjátok követni egymás fotóit,
+- kérdezzetek, beszélgessetek, szakmázzatok, mókázzatok,
+- szervezzünk közös fotózásokat,
+- illetve mi is elérjünk Titeket az emaieken túl 📷
 
-Izgalmas 12 hét elé nézünk, reméljük Ti is nagyon várjátok! Ha még nem töltöttétek ki a jelentkezési formot, tegyétek meg itt: {signUpUrl}
+Izgalmas 12 hét elé nézünk, reméljük ti is nagyon várjátok!
+Jelentkezni a friss és ropogós honlapunkon keresztül tudtok, amit csekkoljatok itt:
+https://photato.eu/
 
-Visszaszámlálás indul!`,
+A kurzussal kapcsolatos általános infókért böngésszétek át a GYIK oldalunkat: https://photato.eu/faq, és ha ezután is van kérdésetek, írjatok nekünk üzenetet itt FB-on, vagy a photatophotato@gmail.com-on.
+
+Egyetlen kérésünk lenne: legyetek kedvesek egymással! 🥰
+
+Visszaszámlálás indul! 🤩`,
     },
     {
         slug: 'old-group-closing-facebook-previous-group-message',
@@ -122,8 +128,10 @@ Visszaszámlálás indul!`,
         locale: 'hu-HU',
         contentType: 'text/plain',
         content: `Sziasztok!
-Sokan jelentkeztetek ebbe a csoportba, ám szeretnénk erre az évre egy újat indítani, ami már el is készült itt találjátok: {facebookGroupUrl}
-Szeretnénk kérni, hogy jelentkezzetek be oda is, mivel ott történik majd az izgalom! 😎 Várunk szeretettel!`,
+Hamarosan elindítjuk a következő Photato kurzust! Az új csoport már el is készült. Ha lenne kedved ismételni, itt találod: {facebookGroupUrl}
+Ezt a csoportot lezárjuk és privátra állítjuk. A régebbi tartalmakat továbbra is eléred, de az izgalom az új csopotban történik majd. 😎
+Ha esetleg olyan jó arc vagy, hogy jönnél mentornak visszajelzésekkel segítseni az újakat, dobj egy e-mailt a photatophotato@gmail.com címre “Mentornak jelentkezem” tárggyal.
+Várunk szeretettel!`,
     },
     {
         slug: 'minus-3-days-email-current-students-message',
