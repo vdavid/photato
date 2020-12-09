@@ -3,8 +3,8 @@ import {BrowserRouter, Switch, Route, useHistory, Redirect} from '../../web_modu
 import {useAuth0} from '../../auth/components/Auth0Provider.mjs';
 import {useI18n} from '../../i18n/components/I18nProvider.mjs';
 import ReactGA from '../../web_modules/react-ga.js';
-import LogRocket from '../../web_modules/logrocket.js';
-import {config} from '../../config.mjs';
+// import LogRocket from '../../web_modules/logrocket.js';
+//import {config} from '../../config.mjs';
 
 import PhotoUploader from '../../upload/PhotoUploader.mjs';
 
@@ -77,12 +77,12 @@ export default function App() {
                 /* Can add any data that is relevant to the session and would like to track with Google Analytics */
             });
 
-            if (config.environment === 'production') {
-                LogRocket.identify(user.sub, { /* More info and options: https://app.logrocket.com/veujlu/photato-website/settings/setup */
-                    name: user.name,
-                    email: user.email,
-                });
-            }
+            // if (config.environment === 'production') {
+            //     LogRocket.identify(user.sub, { /* More info and options: https://app.logrocket.com/veujlu/photato-website/settings/setup */
+            //         name: user.name,
+            //         email: user.email,
+            //     });
+            // }
         }
     }, [isAuthenticated, user]);
 
