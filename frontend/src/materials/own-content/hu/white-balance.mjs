@@ -2,6 +2,7 @@ import React from '../../../web_modules/react.js';
 import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.mjs';
 import ExternalLink from '../../components/ExternalLink.mjs';
 import {config} from '../../../config.mjs';
+import {NavLink} from '../../../web_modules/react-router-dom.js';
 
 // noinspection JSUnusedGlobalSymbols (This file is loaded dynamically.)
 /**
@@ -33,7 +34,7 @@ export default function Article() {
 
         <p>Az “A” és “B” négyszög színe pontosan ugyanaz, valószínűleg mégis jóval sötétebbnek látod az “A”-t, mert az agyad értelmezi a képet és korrigál. Ez az optikai illúzió ennek a képességnek a határait mutatja be, de ez a képesség a hétköznapokban nagyon hasznos: például a napszaktól függetlenül meg tudod állapítani, hogy a fentebb elképzelt házad fehér. 😀</p>
         <p>Amit a szemed/agyad ilyen remekül megold, azt a fényképezőgépedben egy közepesen okos automatika próbálja lekövetni. Ez időnként hibázik, és ilyenkor a géped segítségre szorul: kézzel kell megtalálnod a tiszta fehér színt, hogy az elkészült kép színei hűek legyenek a fotótémád valódi színeihez. Ezt hívják fehéregyensúly-beállításnak.</p>
-        <p>A cél, hogy a fehér szín tényleg fehér legyen, ne pedig sárga, kékes stb. Bővebb infókért jó szívvel ajánljuk a témában <ExternalLink href="https://studioeszkozok.hu/blog/feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal">a studioeszkozok.hu cikkét</ExternalLink>.</p>
+        <p>A cél, hogy a fehér szín tényleg fehér legyen, ne pedig sárga, kékes stb. Bővebb infókért jó szívvel ajánljuk a témában <ExternalLink href="https://studioeszkozok.hu/feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal">a studioeszkozok.hu cikkét</ExternalLink>. (<NavLink to="/hu/external-article/studioeszkozok-feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal">🥔📷 mentett verzió</NavLink>) </p>
         <p>A fehéregyensúlyhoz kapcsolódó fogalom a <em>színhőmérséklet</em>, melyet <em>Kelvin</em>ben mérnek, jele “K”. Az egyes fehéregyensúly-beállításokhoz bizonyos színhőmérsékletek tartoznak. Itt van néhány példa, amikor valószínűleg a fényképezőgéped is támogat, mint alapbeállításokat:</p>
         <ul>
             <li>Hagyományos izzó (3200 K)</li>
