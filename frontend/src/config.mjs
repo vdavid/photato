@@ -26,7 +26,7 @@ export const config = {
         titleWithoutPhotato: '2020. téli tanfolyam',
         startDateTime,
         subscribedStudentCount: 336,
-        signUpFormUrl: 'https://bit.ly/3iDJ3HV',
+        signUpFormUrl: 'https://bit.ly/3ccXkMp',
         midTimeSurveyUrl: 'https://bit.ly/3iK31RC',
         finalSurveyUrl: 'https://bit.ly/3jEbCq9',
         liveEventDate,
