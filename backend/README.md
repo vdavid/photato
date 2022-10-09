@@ -26,7 +26,7 @@ See also the frontend’s README.md
    npm install -g serverless
    ```
 
-2. Allow it to access AWS.b
+2. Allow it to access AWS.
    You'll need to add your AWS access key and secret to the command.
    
    If you have no user yet, set it up here:
@@ -34,7 +34,7 @@ https://console.aws.amazon.com/iam/home?region=us-east-1
 I suppose it needs "AdministratorAccess" privileges, that's what I gave it:
 
    ```bash
-   serverless config credentials --provider aws --key {ACCESS_KEY} ?secret {SECRET_KEY}
+   serverless config credentials --provider aws --key {ACCESS_KEY} --secret {SECRET_KEY}
    ```
 
 3. Log in to Serverless Dashboard.
