@@ -16,7 +16,6 @@ class MongoConnector {
             return await this.mongoose.connect(connectionString, {
                 connectTimeoutMS: 10 * 1000,
                 useNewUrlParser: true,
-                useFindAndModify: false, /* Avoids deprecation warning when using findOneAndUpdate() */
                 useUnifiedTopology: true, /* Avoids deprecation warning */
                 dbName: databaseName
             });
