@@ -4,6 +4,7 @@
   "description": "This is the AWS Lambda backend for the Photato website, deployed by Serverless",
   "main": "index-gateway.js",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "test": "npx jest",
     "deploy": "npx serverless deploy"
   },

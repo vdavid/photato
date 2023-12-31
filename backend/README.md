@@ -23,7 +23,7 @@ See also the frontend’s README.md
 1. Install Serverless globally:
 
    ```bash
-   npm install -g serverless
+   pnpm install -g serverless
    ```
 
 2. Allow it to access AWS.
@@ -64,7 +64,7 @@ sls create --template aws-nodejs --path {myService}
 It uses Jest. To run them, just run:
 
 ```bash
-npm test
+pnpm test
 ```
 
 ## Deployment
