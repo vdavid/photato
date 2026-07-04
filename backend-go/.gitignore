@@ -1,0 +1,8 @@
+# Local SQLite databases (created by a dev run)
+*.db
+*.db-shm
+*.db-wal
+
+# Compiled binaries
+/server
+/cmd/server/server

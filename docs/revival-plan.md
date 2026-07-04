@@ -7,7 +7,7 @@ Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary 
 - Phase 0 — salvage (DONE): pulled all S3 objects + metadata down to the Hetzner volume, MD5-verified.
 - Phase 1 — monorepo (DONE): merged the two legacy repos into this one with full history, pushed to GitHub.
 - Phase 2 — Playwright baseline (DONE): E2E flows + Linux pixel screenshots against live photato.eu, so the rewrite has a behavioral reference. Suite in `e2e/` (Docker-run, target-switchable via `BASE_URL` / `LEGACY_BACKEND_DEAD`). See `e2e/README.md`.
-- Phase 3a — Go tests (TDD red): port the old Jest suite to Go tests + golden vectors; see them fail first.
+- Phase 3a — Go tests (TDD red) (DONE): ported the old Jest suite to Go tests + golden vectors in `backend-go/`; they fail with `not implemented` (red). Intentional divergences captured in `docs/backend-go-divergences.md`.
 - Phase 3b — Go backend impl: implement the backend (SQLite, all endpoints) until 3a goes green.
 - Phase 3c — data-migration tool: transform the salvaged S3 layout into the app's photo layout + SQLite rows.
 - Phase 4 — deploy: Docker + Caddy + GitHub Actions webhook autodeploy, backend on port 9003 (per hetzner-server conventions).

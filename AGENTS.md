@@ -6,7 +6,8 @@ This is a monorepo merging two formerly separate repos, with full git history an
 
 ## Repo layout
 
-- `backend/`: legacy Node.js backend, ran on AWS Lambda + Lambda@Edge + API Gateway, S3 for photos, MongoDB for users. Being replaced by a Go backend (a `backend-go/` dir arrives in a later phase). Kept for reference: it's the source of truth for the old API contract and signing scheme.
+- `backend/`: legacy Node.js backend, ran on AWS Lambda + Lambda@Edge + API Gateway, S3 for photos, MongoDB for users. Being replaced by `backend-go/`. Kept for reference: it's the source of truth for the old API contract and signing scheme.
+- `backend-go/`: the replacement Go backend (single binary, pure-Go SQLite). See the "backend-go" section below.
 - `frontend/`: React SPA, no build step originally (native ES modules, `.mjs` + `htm` instead of JSX). Being migrated Vite → TypeScript → eventually Svelte.
 - `e2e/`: Playwright E2E + pixel-screenshot baseline suite (Phase 2). Lives at the repo root so it outlives the frontend implementation swaps. See the "e2e" section below.
 - `docs/revival-plan.md`: the migration plan, phases, and load-bearing salvage facts. Read it before working on any backend/data/deploy phase.
@@ -26,7 +27,14 @@ This is a monorepo merging two formerly separate repos, with full git history an
 - Non-standard high ports for dev services (10000–29999), never 3000/5173/8080.
 - Commit style: lead with impact, verbose body ok, no AI attribution.
 
-## e2e
+## backend-go
+
+The replacement backend, a single Go binary using pure-Go SQLite (`modernc.org/sqlite`, no cgo). Go is managed by mise (`backend-go/.mise.toml` pins the toolchain); run Go via `mise exec -- go ...` inside `backend-go/`.
+
+- Layout: `cmd/server/` (entrypoint + wiring) and `internal/{signing,photos,auth,messages,store,httpapi}`. Each `internal` package owns one slice of the old backend's behavior; the domain packages define the interfaces, `store` (SQLite) implements them, `httpapi` is the HTTP surface, `cmd/server` wires it all.
+- Run tests: `cd backend-go && mise exec -- go test ./...`. Vet/build: `mise exec -- go vet ./...` and `mise exec -- go build ./...`.
+- Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via `PHOTATO_*` env vars; listens on `:9003` by default, matching the deploy port).
+- Phase status: 3a (TDD red) is done — the tests port the legacy Jest suite + golden signing vectors and currently fail with `not implemented`. Phase 3b implements the packages until they go green. Intentional differences from the legacy backend are in `docs/backend-go-divergences.md` — read it before implementing.
 
 Playwright baseline suite in `e2e/` (a pnpm workspace package). It captures the live photato.eu so the migration can be checked for regressions; assumes the live site is correct as-is.
 
