@@ -32,9 +32,9 @@ This is a monorepo merging two formerly separate repos, with full git history an
 The replacement backend, a single Go binary using pure-Go SQLite (`modernc.org/sqlite`, no cgo). Go is managed by mise (`backend-go/.mise.toml` pins the toolchain); run Go via `mise exec -- go ...` inside `backend-go/`.
 
 - Layout: `cmd/server/` (entrypoint + wiring) and `internal/{signing,photos,auth,messages,store,httpapi}`. Each `internal` package owns one slice of the old backend's behavior; the domain packages define the interfaces, `store` (SQLite) implements them, `httpapi` is the HTTP surface, `cmd/server` wires it all.
-- Run tests: `cd backend-go && mise exec -- go test ./...`. Vet/build: `mise exec -- go vet ./...` and `mise exec -- go build ./...`.
-- Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via `PHOTATO_*` env vars; listens on `:9003` by default, matching the deploy port).
-- Phase status: 3a (TDD red) is done — the tests port the legacy Jest suite + golden signing vectors and currently fail with `not implemented`. Phase 3b implements the packages until they go green. Intentional differences from the legacy backend are in `docs/backend-go-divergences.md` — read it before implementing.
+- Run tests: `cd backend-go && mise exec -- go test ./...` (add `-race` for the race detector). Vet/build: `mise exec -- go vet ./...` and `mise exec -- go build ./...`.
+- Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via env vars — see `backend-go/README.md`: `PORT` default `19003`, `DATA_DIR` default `./data`, `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`). Phase 4 deploy sets `PORT=9003` behind Caddy.
+- Phase status: 3a (TDD red) and 3b (impl) are done — the tests pass (`go test ./...` and `-race` green). Intentional differences from the legacy backend are in `docs/backend-go-divergences.md`; phase-3b storage-layout / photo-serving / config decisions are in `docs/revival-plan.md`.
 
 Playwright baseline suite in `e2e/` (a pnpm workspace package). It captures the live photato.eu so the migration can be checked for regressions; assumes the live site is correct as-is.
 

@@ -8,7 +8,7 @@ Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary 
 - Phase 1 — monorepo (DONE): merged the two legacy repos into this one with full history, pushed to GitHub.
 - Phase 2 — Playwright baseline (DONE): E2E flows + Linux pixel screenshots against live photato.eu, so the rewrite has a behavioral reference. Suite in `e2e/` (Docker-run, target-switchable via `BASE_URL` / `LEGACY_BACKEND_DEAD`). See `e2e/README.md`.
 - Phase 3a — Go tests (TDD red) (DONE): ported the old Jest suite to Go tests + golden vectors in `backend-go/`; they fail with `not implemented` (red). Intentional divergences captured in `docs/backend-go-divergences.md`.
-- Phase 3b — Go backend impl: implement the backend (SQLite, all endpoints) until 3a goes green.
+- Phase 3b — Go backend impl (DONE): implemented the backend (SQLite store, auth, signing, photos, messages, HTTP API) — `go test ./...` and `go test -race ./...` are green. See `backend-go/README.md` for run/config and the "New backend decisions" section below for the storage-layout and photo-serving choices.
 - Phase 3c — data-migration tool: transform the salvaged S3 layout into the app's photo layout + SQLite rows.
 - Phase 4 — deploy: Docker + Caddy + GitHub Actions webhook autodeploy, backend on port 9003 (per hetzner-server conventions).
 - Phase 5 — frontend on Vite: build with Vite, repoint API to api.photato.eu, serve via Caddy, cut over DNS.
@@ -44,10 +44,18 @@ Signing scheme: a `SHA256(path)` marker, with a valid + not-expired check. See `
 
 ## New backend decisions
 
-- Go, stdlib or chi. Pure-Go SQLite via `modernc.org/sqlite`.
-- SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`.
+- Go, stdlib only (no chi — `net/http` 1.22 method+path routing suffices). Pure-Go SQLite via `modernc.org/sqlite`. `modernc.org/sqlite` is the only non-stdlib dep.
+- SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`. Schema created on startup (idempotent `CREATE TABLE IF NOT EXISTS`, versioned via `PRAGMA user_version`). Opened WAL + `busy_timeout=5000` + `foreign_keys=on`, with `SetMaxOpenConns(1)` (SQLite serializes writes; one connection avoids "database is locked" under `-race` and concurrent uploads).
 - Auth0 kept through the migration: tenant `photato.eu.auth0.com` is alive, test user `test@photato.eu` exists. Replaced by magic-links + passkeys at the later redesign.
 - Latest stable deps only (check registries, respect the 3-day age rule).
+
+### Phase 3b decisions (storage layout, photo serving, config)
+
+- **Photo storage layout (load-bearing for 3c and listing):** files live under `DATA_DIR/photos/` keyed by the preserved legacy S3 key shape `{environment}/photos/{courseName}/week-{weekIndex}/{email}.jpg`. Because the key itself starts with `{environment}/photos/…`, the on-disk path repeats `photos`, e.g. `DATA_DIR/photos/production/photos/hu-4/week-2/user@example.com.jpg`. `list-for-week` reads SQLite (not the directory) and selects rows by this path prefix.
+- **Photo serving:** added `GET /photos/{key...}`, admin-gated exactly like `list-for-week` (the whole listing surface is admin-only, so serving matches). The `url` field in the listing points at this route (`BASE_URL` + `/photos/` + key). Files stream from disk via `http.ServeFile`; `..` in the key is rejected.
+- **Single-use uploads:** the `signing.Store` interface stays check-marker + put-marker (no atomic delete), so single-use is enforced at the HTTP layer: the check-and-expire "claim" runs under an in-process mutex (fine for the single binary). A valid signature hashes the canonical storage path (not the query string), so it's stable regardless of URL encoding. Consequence, same as legacy S3 markers: once a path's signature is expired, re-uploading to that exact path is blocked (the expired marker persists).
+- **Admin source of truth:** admin status is derived from `ADMIN_EMAILS` at auth time (authoritative). The stored `users.is_admin` column is informational — editing it directly does not grant admin.
+- **Config is env-var only** (documented in `backend-go/README.md`): `PORT` (default `19003`), `DATA_DIR` (default `./data`), `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`. No `AUTH0_ISSUER`/`AUTH0_AUDIENCE` (tokens are validated via `/userinfo`, not local JWT verification) and no `ENVIRONMENT` (environment is a per-request parameter). Deploy note: phase 4 sets `PORT=9003` behind Caddy.
 
 ## Dead infrastructure (do not try to reach)
 

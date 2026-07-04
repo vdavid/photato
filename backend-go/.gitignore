@@ -1,3 +1,6 @@
+# Local dev data dir (default DATA_DIR): SQLite db + uploaded photos
+/data/
+
 # Local SQLite databases (created by a dev run)
 *.db
 *.db-shm
