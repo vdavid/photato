@@ -1,0 +1,14 @@
+/*
+ * Injected by Playwright at screenshot time (expect.toHaveScreenshot.stylePath).
+ * Kills anything that would make two identical renders differ pixel-wise.
+ */
+*,
+*::before,
+*::after {
+  transition: none !important;
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  caret-color: transparent !important;
+  scroll-behavior: auto !important;
+}

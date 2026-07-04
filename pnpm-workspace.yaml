@@ -1,5 +1,6 @@
 packages:
   - "frontend"
+  - "e2e"
 
 # Block npm packages younger than 3 days (4320 minutes) at install time.
 minimumReleaseAge: 4320

@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Secrets (real credentials live here; committed placeholder is .env.example)
+.env
+
+# Playwright run artifacts (NOT the committed baselines under *-snapshots/)
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Saved auth state from the real Auth0 login (contains live tokens)
+/.auth/

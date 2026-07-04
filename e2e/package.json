@@ -1,0 +1,20 @@
+{
+  "name": "e2e",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Playwright E2E + pixel-screenshot baseline for photato.eu. Outlives the frontend implementation swaps (Vite → TypeScript → Svelte).",
+  "type": "module",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:docker": "bash scripts/docker-test.sh",
+    "test:e2e:docker:update": "bash scripts/docker-test.sh --update-snapshots"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "^22.10.0",
+    "dotenv": "^17.4.0"
+  }
+}
