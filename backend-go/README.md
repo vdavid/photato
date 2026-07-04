@@ -96,6 +96,61 @@ DATA_DIR/photos/production/photos/hu-4/week-2/user@example.com.jpg
 
 The phase-3c migration tool and `list-for-week` both depend on this layout.
 
+## Data migration (phase 3c)
+
+`cmd/migrate` turns the Phase-0 S3 salvage into this live layout: it hardlinks
+each salvaged file into place and writes one `photos` row per photo object. It
+**hardlinks, never copies** (`os.Link` on the same ext4 volume), so it costs
+~zero bytes and leaves the salvage tree pristine — load-bearing, because the
+Hetzner volume has less free space than the 2.4 GB of photos occupy. It reuses
+the `store` package for the rows, so schema and upsert semantics stay identical
+to the running server.
+
+What it does with the 1392 salvaged objects:
+
+- **642 photos** (`<env>/photos/…`): hardlinked to `DATA_DIR/photos/<key>`, one
+  `photos` row each (path = the S3 key, which is unique, so the run upserts).
+  Custom metadata (`uuid`, `original-file-name`, `email-address`, `title`) is
+  percent-decoded before storing (e.g. `Ly%C3%A1ny` → `Lyány`); `title` may be
+  empty. `last_modified` (RFC1123) becomes the row's `last_modified`.
+- **750 external-articles**: hardlinked to `DATA_DIR/external-articles/<rest>`
+  (the leading `external-articles/` segment dropped), a plain static tree with
+  no `photos` rows. It lives **outside** `DATA_DIR/photos/` on purpose: that
+  tree is admin-gated, while Phase 4 serves the articles as public static files
+  via Caddy (`root * DATA_DIR/external-articles`), and the frontend's
+  `thirdPartyArticlesBaseUrl` repoints there.
+
+It is **idempotent** (re-running skips already-linked files and re-upserts rows,
+no duplication) and safe to interrupt.
+
+```sh
+mise exec -- go build -o migrate ./cmd/migrate
+migrate --source <salvage-root> --data-dir <DATA_DIR> [--dry-run] [--verify]
+```
+
+Flags: `--source` (salvage root holding `s3/` and `metadata.json`), `--data-dir`
+(the backend `DATA_DIR`), `--sqlite` (default `<data-dir>/photato.db`),
+`--external-articles-dir` (default `<data-dir>/external-articles`), `--dry-run`
+(print the plan and counts, write nothing), `--verify` (recount files/rows and
+MD5-check `--verify-samples` random photos against the manifest ETag), which
+exits non-zero on any mismatch.
+
+**Deploy constraint (phase 4):** `--data-dir` MUST sit on the same filesystem as
+the salvage `s3/` tree (both on the Hetzner volume), or the hardlinks fail with
+a cross-device error rather than silently copying. The command to run on the box
+(salvage at `/mnt/HC_Volume_105883537/photato`):
+
+```sh
+migrate \
+  --source  /mnt/HC_Volume_105883537/photato \
+  --data-dir /mnt/HC_Volume_105883537/photato-data \
+  --verify
+```
+
+That populates `/mnt/HC_Volume_105883537/photato-data/{photos,external-articles}`
+plus `photato.db`; point the server's `DATA_DIR` at the same path and Caddy's
+article root at `…/photato-data/external-articles`.
+
 ## Development
 
 ```sh
