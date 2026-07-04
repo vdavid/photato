@@ -12,6 +12,9 @@ package photos
 
 import (
 	"errors"
+	"fmt"
+	"regexp"
+	"strconv"
 	"time"
 )
 
@@ -26,8 +29,13 @@ var (
 	ErrUploadSize = errors.New("photos: upload size out of range")
 )
 
-// errNotImplemented backs skeleton functions during the TDD red phase.
-var errNotImplemented = errors.New("photos: not implemented")
+// courseNameRE and emailRE port the legacy PhotoMetadataBuilder validation.
+// emailRE is the exact regex from the legacy _isEmailAddress (RE2-compatible:
+// no backreferences or lookaround).
+var (
+	courseNameRE = regexp.MustCompile(`^[a-z][a-z]-[0-9]$`)
+	emailRE      = regexp.MustCompile(`^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$`)
+)
 
 // Upload size bounds, ported from the frontend config (imageUpload). The legacy
 // backend never enforced these server-side (S3 presigned PUTs can't), so the Go
@@ -88,22 +96,60 @@ type Record struct {
 }
 
 // ParseAndValidate builds validated Metadata from raw request fields, returning
-// ErrInvalidMetadata if any field is invalid. Ports PhotoMetadataBuilder.
+// ErrInvalidMetadata if any field is invalid. Ports PhotoMetadataBuilder's
+// _validateInput field constraints.
 func ParseAndValidate(fields map[string]string) (Metadata, error) {
-	// Skeleton: validation logic lands in phase 3b.
-	return Metadata{}, errNotImplemented
+	email := fields["emailAddress"]
+	if email == "" || !emailRE.MatchString(email) {
+		return Metadata{}, fmt.Errorf("%w: emailAddress", ErrInvalidMetadata)
+	}
+
+	courseName := fields["courseName"]
+	if len(courseName) > 4 || !courseNameRE.MatchString(courseName) {
+		return Metadata{}, fmt.Errorf("%w: courseName", ErrInvalidMetadata)
+	}
+
+	weekIndex, err := strconv.Atoi(fields["weekIndex"])
+	if err != nil || weekIndex < 0 || weekIndex > 12 {
+		return Metadata{}, fmt.Errorf("%w: weekIndex", ErrInvalidMetadata)
+	}
+
+	originalFileName := fields["originalFileName"]
+	if originalFileName == "" || len(originalFileName) > 255 {
+		return Metadata{}, fmt.Errorf("%w: originalFileName", ErrInvalidMetadata)
+	}
+
+	title := fields["title"]
+	if len(title) > 150 {
+		return Metadata{}, fmt.Errorf("%w: title", ErrInvalidMetadata)
+	}
+
+	mimeType := fields["mimeType"]
+	if mimeType != MimeTypeJPEG {
+		return Metadata{}, fmt.Errorf("%w: mimeType", ErrInvalidMetadata)
+	}
+
+	return Metadata{
+		EmailAddress:     email,
+		CourseName:       courseName,
+		WeekIndex:        weekIndex,
+		OriginalFileName: originalFileName,
+		Title:            title,
+		MimeType:         mimeType,
+	}, nil
 }
 
 // BuildUploadPath returns the relative storage path for a photo, matching the
 // legacy layout: "<environment>/photos/<courseName>/week-<weekIndex>/<email>.jpg".
 func BuildUploadPath(environment string, m Metadata) string {
-	// Skeleton: real path construction lands in phase 3b.
-	return ""
+	return fmt.Sprintf("%s/photos/%s/week-%d/%s.jpg", environment, m.CourseName, m.WeekIndex, m.EmailAddress)
 }
 
 // ValidateUploadSize checks that sizeInBytes is within [MinUploadBytes,
 // MaxUploadBytes], returning ErrUploadSize otherwise.
 func ValidateUploadSize(sizeInBytes int64) error {
-	// Skeleton: bounds check lands in phase 3b.
-	return errNotImplemented
+	if sizeInBytes < MinUploadBytes || sizeInBytes > MaxUploadBytes {
+		return fmt.Errorf("%w: %d bytes", ErrUploadSize, sizeInBytes)
+	}
+	return nil
 }

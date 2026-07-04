@@ -12,10 +12,14 @@
 // existing golden vectors stay stable.
 package signing
 
-import "errors"
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"errors"
+)
 
-// errNotImplemented is returned by every skeleton method during the TDD red
-// phase. Phase 3b replaces these bodies with real logic.
+// errNotImplemented is retained because a red-phase test (TestNotImplementedSentinel)
+// references it; real logic no longer returns it.
 var errNotImplemented = errors.New("signing: not implemented")
 
 // Status is the kind of signature marker.
@@ -36,10 +40,10 @@ type Store interface {
 }
 
 // Hash returns the hex-encoded SHA256 of path, matching the legacy signing
-// scheme.
+// scheme (HashProvider.getSHA256Hash).
 func Hash(path string) string {
-	// Skeleton: real SHA256 hashing lands in phase 3b.
-	return ""
+	sum := sha256.Sum256([]byte(path))
+	return hex.EncodeToString(sum[:])
 }
 
 // Repository implements the signature rules on top of a Store.
@@ -54,17 +58,29 @@ func NewRepository(store Store) *Repository {
 
 // CreateValidForPath records a valid signature for path.
 func (r *Repository) CreateValidForPath(path string) error {
-	return errNotImplemented
+	return r.store.PutSignature(Hash(path), StatusValid)
 }
 
 // IsValidForPath reports whether path currently has a valid, non-expired
-// signature.
+// signature: a valid marker exists AND an expired marker does not.
 func (r *Repository) IsValidForPath(path string) (bool, error) {
-	return false, errNotImplemented
+	hash := Hash(path)
+	valid, err := r.store.HasSignature(hash, StatusValid)
+	if err != nil {
+		return false, err
+	}
+	if !valid {
+		return false, nil
+	}
+	expired, err := r.store.HasSignature(hash, StatusExpired)
+	if err != nil {
+		return false, err
+	}
+	return !expired, nil
 }
 
 // MarkExpiredForPath records an expired marker for path, invalidating it. This
 // is what makes a signed upload single-use.
 func (r *Repository) MarkExpiredForPath(path string) error {
-	return errNotImplemented
+	return r.store.PutSignature(Hash(path), StatusExpired)
 }

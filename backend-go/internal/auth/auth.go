@@ -11,11 +11,10 @@ package auth
 
 import (
 	"context"
-	"errors"
+	"encoding/json"
 	"net/http"
+	"strings"
 )
-
-var errNotImplemented = errors.New("auth: not implemented")
 
 // UserInfo is the subset of the Auth0 /userinfo profile the backend uses. The
 // full schema (given_name, picture, locale, …) is ported in phase 3b; email is
@@ -72,13 +71,59 @@ func NewAuthenticator(auth0 Auth0Client, users UserStore, adminEmails []string) 
 // when the token is not recognized by either the local cache or Auth0 (the Go
 // equivalent of the legacy "undefined" return).
 func (a *Authenticator) AuthenticateByAccessToken(ctx context.Context, token string) (*User, error) {
-	// Skeleton: the cache-then-Auth0 upsert flow lands in phase 3b.
-	return nil, errNotImplemented
+	// 1. Local session cache: a hit skips Auth0 entirely.
+	if user, err := a.users.UserByAccessToken(ctx, token); err != nil {
+		return nil, err
+	} else if user != nil {
+		user.IsAdmin = IsAdmin(user.EmailAddress, a.adminEmails)
+		return user, nil
+	}
+
+	// 2. Validate the token against Auth0. A nil profile means Auth0 rejected
+	//    it (invalid token): no user, no writes.
+	info, err := a.auth0.GetUserInfo(ctx, token)
+	if err != nil {
+		return nil, err
+	}
+	if info == nil {
+		return nil, nil
+	}
+
+	// 3. Upsert the user by email (update if known, create if new).
+	user, err := a.users.UserByEmail(ctx, info.Email)
+	if err != nil {
+		return nil, err
+	}
+	if user != nil {
+		if err := a.users.UpdateAuth0UserInfo(ctx, user, *info); err != nil {
+			return nil, err
+		}
+	} else {
+		user, err = a.users.CreateUserFromAuth0(ctx, *info)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// 4. Cache a session so subsequent requests skip Auth0.
+	if err := a.users.AddSession(ctx, user, token); err != nil {
+		return nil, err
+	}
+
+	user.IsAdmin = IsAdmin(user.EmailAddress, a.adminEmails)
+	return user, nil
 }
 
-// IsAdmin reports whether email is in the admin allowlist.
+// IsAdmin reports whether email is in the admin allowlist (case-insensitive).
 func IsAdmin(email string, adminEmails []string) bool {
-	// Skeleton: allowlist check lands in phase 3b.
+	if email == "" {
+		return false
+	}
+	for _, admin := range adminEmails {
+		if strings.EqualFold(email, admin) {
+			return true
+		}
+	}
 	return false
 }
 
@@ -98,6 +143,31 @@ func NewAuth0HTTPClient(userInfoEndpoint string) *Auth0HTTPClient {
 // parsed profile; any other status yields (nil, nil) (invalid token, not an
 // error), matching the legacy Auth0Authorizer.
 func (c *Auth0HTTPClient) GetUserInfo(ctx context.Context, accessToken string) (*UserInfo, error) {
-	// Skeleton: real HTTP call + JSON parse lands in phase 3b.
-	return nil, errNotImplemented
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.UserInfoEndpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", "Bearer "+accessToken)
+
+	client := c.HTTPClient
+	if client == nil {
+		client = http.DefaultClient
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	// Any non-200 means Auth0 rejected the token: (nil, nil), not an error,
+	// matching the legacy Auth0Authorizer.
+	if resp.StatusCode != http.StatusOK {
+		return nil, nil
+	}
+
+	var info UserInfo
+	if err := json.NewDecoder(resp.Body).Decode(&info); err != nil {
+		return nil, err
+	}
+	return &info, nil
 }
