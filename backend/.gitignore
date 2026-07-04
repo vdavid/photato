@@ -1,0 +1,13 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+#Serverless temporary files
+/s_*.js
+/serverless_sdk
+
+# IDEA
+/.idea
