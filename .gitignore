@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+frontend/public/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Legacy Serverless (backend/, being replaced by Go)
+.serverless/
+serverless_sdk/
+s_*.js
+
+# Generated auth0 dev bundle (frontend/)
+frontend/src/auth/auth0-spa-js.development.js
+
+# Editors
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
