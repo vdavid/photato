@@ -2,12 +2,5 @@ packages:
   - "frontend"
   - "e2e"
 
-# No dependency needs to run install/build scripts: the frontend is a browser bundle, so
-# browser-tabs-lock (auth0-spa-js's cross-tab lock, pure JS at runtime) and core-js (a funding
-# postinstall) are both skipped.
-allowBuilds:
-  browser-tabs-lock: false
-  core-js: false
-
 # Block npm packages younger than 3 days (4320 minutes) at install time.
 minimumReleaseAge: 4320

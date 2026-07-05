@@ -1,13 +1,14 @@
 # Photato E2E + pixel-baseline suite
 
-Playwright end-to-end tests and pixel-screenshot baselines for **photato.eu**. This suite is the
-behavioral safety net for the migration (Phase 2 of `docs/revival-plan.md`): it captures the current
-live site so later phases — swapping the backend to Go on Hetzner, then moving the frontend to Vite,
-TypeScript, and eventually Svelte — can be checked for regressions. It assumes the current live site is
-correct as-is.
+Playwright end-to-end tests and pixel-screenshot baselines for **photato.eu**. It has two jobs:
 
-It lives at the repo root (not under `frontend/`) on purpose: it must outlive every frontend
-implementation swap.
+- **Parity guard.** The 20 public baselines were captured against the pre-rewrite live site and the
+  Svelte rewrite passes them byte-identical, so any anonymous-page regression shows up as a pixel diff.
+- **Authenticated coverage.** Six more baselines and a set of behavioral checks exercise the new
+  self-hosted magic-link auth and the logged-in member/admin pages.
+
+It lives at the repo root as its own pnpm workspace package (not under `frontend/`) on purpose: it must
+outlive any future frontend implementation swap.
 
 ## Requirements
 
@@ -20,44 +21,64 @@ implementation swap.
 ## Setup
 
 ```bash
-cp e2e/.env.example e2e/.env   # then fill in E2E_USER_PASSWORD (see the team password store)
+cp e2e/.env.example e2e/.env   # then fill in TEST_LOGIN_SECRET
 ```
 
-`.env` is gitignored and holds the real Auth0 test-user password. Never commit it. It is not used by
-the current suite (see "Auth" below) but is kept ready for Phase 5.
+`.env` is gitignored — never commit it. `TEST_LOGIN_SECRET` enables the magic-link e2e backdoor that
+the authenticated specs use (see "Auth" below). Get it from the box:
+
+```bash
+ssh hetzner "docker run --rm -v /etc/photato-deploy.env:/f:ro alpine grep TEST_LOGIN_SECRET /f"
+```
+
+When it's unset, the authenticated specs **skip** — the anonymous public suite still runs, so you can
+work on parity without the secret.
 
 ## Auth
 
-The live Auth0 client (classic Lock) exposes **only "Sign in with Google"** — there is no
-username/password form to drive, and automating Google's OAuth headlessly is infeasible and
-inappropriate. So the suite does **not** log in. Instead `tests/auth.spec.ts` asserts the deterministic,
-in-our-control part of the flow: clicking "Sign in" hands off to Auth0's `/authorize` with the correct
-`client_id` and the `/login-callback` redirect URI (the wiring every frontend rewrite must preserve),
-and that the Auth0 hosted page responds.
+Auth is self-hosted passwordless email magic links (no Auth0, no Google social login, no password).
+There's no third-party login redirect to assert anymore, so the suite covers auth two ways:
 
-Logged-in baselines (authenticated front page, upload, course, admin) are **deferred to Phase 5**, when
-the new backend is live and there is an automatable auth path (the planned magic-link/passkey system,
-an Auth0 test database connection, or direct token injection).
+- **`tests/auth.spec.ts`** drives the in-our-control login UI: the `/login` page renders its email form,
+  requesting a link flips to the "check your inbox" state (the request-link POST is stubbed 200 so tests
+  never send real email and stay offline-deterministic — the backend returns 200 regardless anyway, to
+  avoid account enumeration), and the members-only 403 page's "Bejelentkezés" button routes client-side
+  to `/login`.
+- **`tests/authenticated.spec.ts`** drives logged-in pages through the e2e backdoor: `POST
+  /auth/test-login {email, secret}` mints a real session token server-side, the test seeds it into
+  `localStorage`, and the app re-hydrates via `/auth/me` — exactly the runtime path, minus the email
+  round-trip. See `docs/auth-contract.md`.
 
 ## Running
 
-Always run through Docker for anything that compares or writes screenshots:
+Always run through Docker for anything that compares or writes screenshots.
+
+Against the **live target** (`docker-test.sh`):
 
 ```bash
 pnpm test:e2e:docker            # run the suite against the committed baselines
-pnpm test:e2e:docker:update     # (re)generate the baselines (do this on Linux/Docker only)
+pnpm test:e2e:docker:update     # (re)generate the baselines (Linux/Docker only)
 pnpm test:e2e:report            # open the last HTML report
 ```
 
-Pass extra `playwright test` args through the Docker runner:
+Against a **local build** before deploying (`docker-local-test.sh` — builds the frontend, serves it with
+`vite preview`, and runs Playwright, all on `localhost` inside one container):
+
+```bash
+bash e2e/scripts/docker-local-test.sh                  # run against the local build
+bash e2e/scripts/docker-local-test.sh --grep upload    # pass extra `playwright test` args through
+UPDATE=1 bash e2e/scripts/docker-local-test.sh         # (re)generate baselines against the local build
+```
+
+Pass extra `playwright test` args through the live runner too:
 
 ```bash
 bash e2e/scripts/docker-test.sh --grep "front page"
 bash e2e/scripts/docker-test.sh --project desktop
 ```
 
-The image tag in `scripts/docker-test.sh` is pinned to the `@playwright/test` version in
-`package.json`. Bump them together.
+The image tag in both scripts is pinned to the `@playwright/test` version in `package.json`. Bump them
+together.
 
 Non-Docker scripts (`pnpm --filter e2e test:e2e`) exist for writing/debugging test logic on the host,
 but they will **not** match the committed Linux baselines — use `--update-snapshots` locally only to
@@ -67,59 +88,64 @@ iterate on structure, and regenerate the real baselines in Docker before committ
 
 Everything that could make two renders differ is pinned:
 
-- **Clock** — anonymous pages freeze the clock to `2026-07-01T12:00:00+02:00`. The 2020 winter course
-  is long over, so any date past it puts the site in its stable "course complete" state (all 12 weeks
-  of materials, every countdown in the past) — the same thing a real visitor sees today. The
-  authenticated flow uses the **real** clock, because the live Auth0 token's validity is checked
-  against wall-clock time and a frozen past clock would reject a freshly issued token as skew.
+- **Clock** — frozen to `2026-07-01T12:00:00+02:00` for **all** specs, anonymous and authenticated. The
+  2020 winter course is long over, so any date past it puts the site in its stable "course complete"
+  state (all 12 weeks of materials, every countdown in the past) — the same thing a real visitor sees
+  today — and pinning it makes re-runs reproduce byte-for-byte. Freezing is safe on the authenticated
+  specs too: magic-link session tokens are opaque and validated server-side, with no
+  client-clock-sensitive claims, so a frozen page clock never rejects a freshly minted token.
 - **Locale / timezone** — `hu-HU`, `Europe/Budapest`. (The app hard-forces `hu-HU` anyway.)
 - **Viewports** — desktop `1280×720` and mobile `390×844`, both at `deviceScaleFactor: 1`.
-- **Trackers blocked** — Facebook pixel, Google Analytics, LogRocket, DoubleClick are aborted via route
-  interception. Auth0 and Google Fonts are allowed (the app blocks first render on both).
+- **Trackers blocked** — Facebook pixel, Google Analytics, LogRocket, DoubleClick, and the self-hosted
+  Umami script (`anal.veszelovszki.com`) are aborted via route interception. Google Fonts
+  (`fonts.gstatic.com` / `fonts.googleapis.com`) are allowed through: the app blocks first render on
+  `document.fonts.ready`.
 - **Dead legacy backend blocked** — the AWS API Gateway + CloudFront hosts (502) are aborted so pages
-  fail fast instead of hanging. Gated on `LEGACY_BACKEND_DEAD`.
-- **Third-party article images blocked** — the S3 content bucket loads slowly/inconsistently and shifts
-  full-page height; blocking it keeps article pages image-free and stable (structure + text is what the
-  baseline guards).
+  fail fast instead of hanging. Gated on `LEGACY_BACKEND_DEAD` (default on; harmless against the current
+  stack, which never calls those hosts).
+- **Third-party article images blocked** — the legacy S3 content bucket and `api.photato.eu/external-articles`
+  load slowly/inconsistently and shift full-page height; blocking both keeps article pages image-free and
+  stable (structure + text is what the baseline guards).
 - **Animations/transitions disabled**, carets hidden, remote/account-specific images masked.
 - **Screenshot threshold** — `maxDiffPixelRatio: 0.01` (1%): tight enough to catch layout/content/color
   regressions, loose enough to absorb sub-pixel font anti-aliasing jitter.
 
+## Baselines
+
+26 committed Linux baselines (`…-linux.png`), each captured on desktop and mobile:
+
+- **20 public** (10 pages × 2 viewports, anonymous) — the parity guard, byte-identical to the
+  pre-rewrite site: front, about, faq, contact, materials, bug-report, a cached external article, an own
+  article, the members-only 403, and the 404 page.
+- **6 authenticated** (3 × 2 viewports) — `login`, `upload-member`, and `admin-sitemap`. The admin
+  messages/photos pages pull live backend data, so those specs assert only that they render (past the
+  admin gate), without a screenshot.
+
 ## Layout
 
 - `playwright.config.ts` — projects, viewports, determinism defaults.
-- `support/config.ts` — route inventory, `BASE_URL`, `LEGACY_BACKEND_DEAD`, frozen clock, test user.
-- `support/determinism.ts` — clock freeze, tracker/backend blocking, app-ready wait.
+- `support/config.ts` — loads `.env`; route inventory, `BASE_URL`, `API_BASE_URL`, `LEGACY_BACKEND_DEAD`,
+  frozen clock, `TEST_LOGIN_SECRET`, admin/member test emails.
+- `support/determinism.ts` — clock freeze, tracker/backend/asset blocking, app-ready wait.
 - `support/screenshot.css` — injected at screenshot time to kill animations.
 - `tests/public.spec.ts` — anonymous public pages (front, about, faq, contact, materials, bug-report,
   cached external article, own article) with baselines.
 - `tests/protected.spec.ts` — member + admin routes logged out (all render the members-only 403).
 - `tests/navigation.spec.ts` — 404 page and client-side nav (opens the mobile hamburger when needed).
-- `tests/auth.spec.ts` — login handshake (redirect to Auth0 `/authorize` with the right client/callback).
-- `tests/__screenshots__/` — the committed Linux baselines (`…-linux.png`).
+- `tests/auth.spec.ts` — magic-link login UI (page renders, "check your inbox" state, 403 "Sign in"
+  button → `/login`).
+- `tests/authenticated.spec.ts` — logged-in member/admin pages via the `POST /auth/test-login` backdoor
+  (skips when `TEST_LOGIN_SECRET` is unset).
+- `tests/__screenshots__/` — the committed Linux baselines (`…-linux.png`), split by viewport.
 
-## Running against the new stack (Phase 5)
+## Running against a different target
 
 The suite is target-switchable by env:
 
-- `BASE_URL` — defaults to `https://photato.eu`; point it at the Vite deployment to run the same suite
-  there. The Phase-5 Vite build passes all 42 baselines against `BASE_URL=https://new.photato.eu` with
-  no baseline regeneration. Example: `BASE_URL=https://new.photato.eu pnpm test:e2e:docker`.
-- `LEGACY_BACKEND_DEAD` — defaults to `true` (blocks the dead AWS/CloudFront hosts). The Vite build
-  calls `api.photato.eu` instead, which the app never hits on the anonymous public pages this suite
-  baselines, so the flag makes no difference here; leave it at the default.
-- The two "Auth0 hosted login page loads" specs `test.skip` off production (`BASE_URL !==
-  https://photato.eu`): Auth0 only renders its hosted login for allow-listed origins, and
-  new.photato.eu isn't one yet (David-TODO in `docs/revival-plan.md`). The rest — including the
-  handshake-wiring spec — run everywhere.
-- Article images are blocked on both the legacy S3 host and `api.photato.eu/external-articles` so
-  article/materials pages keep the stable image-free layout the baselines were captured with (see
-  `support/determinism.ts`).
-
-### Local pre-deploy run (secure-origin gotcha)
-
-To run the Docker suite against a local build **before** deploying, serve `vite preview` and run
-Playwright **both on `localhost` inside one container** (BASE_URL=`http://localhost:<port>`). Don't use
-`http://host.docker.internal` — `@auth0/auth0-spa-js` throws "must run on a secure origin" on any
-plain-HTTP non-`localhost` host, so the app never finishes booting and every test times out. `localhost`
-and HTTPS both count as secure, so this only bites the containerized local run, never `https://new.photato.eu`.
+- `BASE_URL` — defaults to `https://photato.eu`; point it at another deployment to run the same suite
+  there, e.g. `BASE_URL=https://new.photato.eu pnpm test:e2e:docker`. `docker-local-test.sh` sets it to
+  the containerized `vite preview` URL automatically.
+- `API_BASE_URL` — defaults to `https://api.photato.eu`; the backend the test-login backdoor hits.
+- `LEGACY_BACKEND_DEAD` — defaults to `true` (blocks the dead AWS/CloudFront hosts). The current stack
+  never hits those hosts, so the flag makes no difference on the pages this suite baselines; leave it at
+  the default.
