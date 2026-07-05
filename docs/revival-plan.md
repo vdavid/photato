@@ -13,7 +13,7 @@ Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary 
 - Phase 4 — deploy (DONE): backend live at `https://api.photato.eu` on the Hetzner box — Docker (image built on the box) + Caddy + GitHub Actions webhook autodeploy. See the "Phase 4 deploy" section below for the layout, ports, and runbook. The live FE at photato.eu (Netlify) is untouched; cutover is Phase 5.
 - Phase 5 — frontend on Vite (DONE, minus the apex cutover): built with Vite, repointed the API to api.photato.eu, deployed at `https://new.photato.eu` on the box (Caddy static + webhook autodeploy). All 42 Playwright baselines pass against the new build. The apex `photato.eu` DNS flip is left for David — see the "Phase 5" section below. Auth0 origin allow-listing for new.photato.eu is a David-TODO.
 - Phase 5b — frontend TypeScript migration.
-- Phase 6 — backups: SQLite `VACUUM INTO` snapshot + photos dir into the NAS (naspolya) flow.
+- Phase 6 — backups (DONE): Photato's SQLite + photos + S3 salvage master are folded into the box's existing nightly NAS backup (`infra` repo, `hetzner/scripts/backup-to-nas/`). WAL DB dumped via `VACUUM INTO` to dated snapshots with grandfather-father-son retention; photos + salvage rsynced with hardlinks preserved. See the "Phase 6 (backups)" section below.
 
 ## Salvage facts (Phase 0 output)
 
@@ -90,6 +90,16 @@ The React frontend moved off its dead Snowpack/Babel toolchain onto Vite and now
   - *Keep Netlify DNS:* in the Netlify `photato.eu` zone, repoint the apex `photato.eu` (and `www`) records from Netlify's load balancer to the box — an A record → `37.27.245.171` (remove the Netlify `ALIAS`/`A` for apex; add `www` A or CNAME to `photato.eu`). Add a `photato.eu` (+ `www.photato.eu`) site block to the box Caddyfile (copy the `new.photato.eu` block), commit+push infra, pull on the box, **restart** Caddy for the new certs. The app auto-detects `photato.eu` → production config (production Auth0 client, already allow-listed).
   - *Move DNS to Cloudflare:* migrate the `photato.eu` zone to Cloudflare (see `~/projects-git/vdavid/infra` cloudflare/) and point apex + www at the box; same Caddy block. Retire the Netlify site afterward.
   - Either way: verify `photato.eu` serves the new build and that `new.photato.eu` can then be dropped, and remove the leftover `frontend/netlify.toml` history reference if any tooling still points at it.
+
+## Phase 6 (backups)
+
+Photato rides David's existing box→NAS→offsite 3-2-1 flow rather than a parallel system. All the machinery lives in the **`infra` repo** (`hetzner/scripts/backup-to-nas/`), not here, because that's where the box's backup runs from (`/home/david/infra`, `git pull`-deployed; the nightly cron at 03:08 runs `backup.sh`).
+
+- **What's backed up:** `/mnt/HC_Volume_105883537/photato-data/` (app layout: `photos/`, `external-articles/`, dated DB dumps under `backups/`) and `/mnt/HC_Volume_105883537/photato/` (the pristine S3 salvage master — critical, since AWS is being wiped). Both land on the NAS at `hetzner-server/photato/`, which the NAS's monthly `restic` job then copies offsite.
+- **DB (WAL-mode) — never plain-copied:** `photato-db-backup.sh` runs `sqlite3 ... 'VACUUM INTO'` on a read-only handle to write a fully-checkpointed, self-contained snapshot to `photato-data/backups/photato-YYYY-MM-DD.db`, then `PRAGMA integrity_check`s it. Retention: 14 daily + 6 monthly reps (tested in `test-photato-retention.sh`). The live `photato.db`/`-wal`/`-shm` are **excluded** from the rsync — the dated dumps carry the DB. Needs host `sqlite3` (the backend image is distroless; the Ansible `backup` role installs it).
+- **Photos + salvage — hardlinks preserved:** `photato-data/photos/` are hardlinks into `photato/s3/` (Phase 3c). backup.sh rsyncs both trees in ONE `rsync -aH` so the shared photo bytes are stored once on the NAS (~2.8 GB), not doubled.
+- **Restore runbook:** `infra` repo `hetzner/docs/disaster-recovery.md` → "Restore data" → Photato (DB dump + `rsync -aH` photos/salvage back).
+- **David-TODO:** none on the NAS side — the push destination `/share/naspi/saves/hetzner-server/` is already inside the NAS's restic source, so the monthly offsite picks up `photato/` automatically.
 
 ## Hetzner box facts
 

@@ -17,6 +17,7 @@ This is a monorepo merging two formerly separate repos, with full git history an
 - Single Go binary (stdlib or chi), pure-Go SQLite via `modernc.org/sqlite`. No AWS, no Mongo.
 - Photos live on a Hetzner volume: `/mnt/HC_Volume_105883537/photato/`.
 - Runs on David's Hetzner box behind Caddy (config in the `~/projects-git/vdavid/infra` repo under `hetzner/services/caddy/`), deployed via Docker + GitHub Actions webhook autodeploy. Backend live at `https://api.photato.eu` (container `photato:9003` on `proxy-net`; deploy webhook on box port 9004); the Vite frontend is served at `https://new.photato.eu` from `/mnt/HC_Volume_105883537/photato-frontend`. Deploy layout + runbook: `docs/revival-plan.md` "Phase 4 deploy" / "Phase 5" and `infra/deploy-webhook/README.md`. The apex `photato.eu` (Netlify) stays live until David flips DNS to the box.
+- Backups: the DB, photos, and S3 salvage master ride the box's nightly NAS→offsite 3-2-1 flow (machinery in the `infra` repo, `hetzner/scripts/backup-to-nas/`). WAL DB dumped via `VACUUM INTO` to dated snapshots; photos + salvage rsynced hardlink-preserving. Coverage + restore: `docs/revival-plan.md` "Phase 6 (backups)" and `infra/hetzner/docs/disaster-recovery.md`.
 - Auth0 stays for now (tenant `photato.eu.auth0.com` is alive). Replaced by magic-links + passkeys at a later redesign.
 - SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`.
 
