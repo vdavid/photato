@@ -1,0 +1,33 @@
+# systemd unit for the Photato deploy webhook listener.
+#
+# Runs adnanh's `webhook` binary listening on port 9004, verifying the
+# HMAC-SHA256 signature on the `deploy-photato` hook before running
+# infra/deploy-webhook/deploy-photato.sh. Webhook ports so far: cmdr 9000,
+# prvw 9001, agu 9002, lang 9003, photato 9004.
+#
+# The shared secret comes from /etc/photato-deploy.env (root-owned, NOT committed):
+#
+#     DEPLOY_WEBHOOK_SECRET=<the same long random string as the GitHub Actions secret>
+#
+# Install on the server (write a temp file, then move it into place — don't pipe a
+# pasted heredoc straight through sudo):
+#
+#     cp infra/deploy-photato-webhook.service /tmp/deploy-photato-webhook.service
+#     sudo mv /tmp/deploy-photato-webhook.service /etc/systemd/system/deploy-photato-webhook.service
+#     sudo systemctl daemon-reload
+#     sudo systemctl enable --now deploy-photato-webhook.service
+#
+# See infra/deploy-webhook/README.md for the full from-scratch runbook.
+
+[Unit]
+Description=Photato Deploy Webhook Listener
+After=network.target docker.service
+
+[Service]
+EnvironmentFile=/etc/photato-deploy.env
+ExecStart=/usr/local/bin/webhook -hooks /home/david/photato/infra/deploy-webhook/hooks.json -port 9004 -verbose -template
+Restart=always
+User=david
+
+[Install]
+WantedBy=multi-user.target

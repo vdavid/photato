@@ -1,0 +1,33 @@
+# Photato backend on the Hetzner box, behind Caddy on the shared proxy-net.
+#
+# The image is BUILT on the box (CI stays lean and pushes no registry image); the
+# deploy webhook runs `docker compose build && up -d` here. State (SQLite DB +
+# photos + external-articles) lives on the mounted volume and survives redeploys.
+#
+# Runs as uid 1000 (david) so it can write into the david-owned data volume.
+# Caddy reaches it as `photato:9003` over proxy-net; the port is not published to
+# the host.
+
+services:
+  photato:
+    build:
+      context: ../backend-go
+      dockerfile: Dockerfile
+    image: photato-backend:latest
+    container_name: photato
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      PORT: "9003"
+      DATA_DIR: /data
+      BASE_URL: https://api.photato.eu
+      AUTH0_USERINFO_URL: https://photato.eu.auth0.com/userinfo
+      ADMIN_EMAILS: veszelovszki@gmail.com,dorah.nemeth@gmail.com
+    volumes:
+      - /mnt/HC_Volume_105883537/photato-data:/data
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true

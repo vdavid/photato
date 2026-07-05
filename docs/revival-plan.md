@@ -10,7 +10,7 @@ Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary 
 - Phase 3a — Go tests (TDD red) (DONE): ported the old Jest suite to Go tests + golden vectors in `backend-go/`; they fail with `not implemented` (red). Intentional divergences captured in `docs/backend-go-divergences.md`.
 - Phase 3b — Go backend impl (DONE): implemented the backend (SQLite store, auth, signing, photos, messages, HTTP API) — `go test ./...` and `go test -race ./...` are green. See `backend-go/README.md` for run/config and the "New backend decisions" section below for the storage-layout and photo-serving choices.
 - Phase 3c — data-migration tool (DONE): `backend-go/cmd/migrate` transforms the salvaged S3 layout into the app's photo layout + SQLite rows. Hardlinks (never copies) each file so it costs ~zero bytes and keeps the salvage pristine; idempotent; `--dry-run` and `--verify` (recount + sample MD5) modes. See `backend-go/README.md` "Data migration (phase 3c)" for the exact box command. Photos → `DATA_DIR/photos/<key>` + one `photos` row each; external-articles → `DATA_DIR/external-articles/` (static, outside the admin-gated photos tree — Phase 4 serves it via Caddy, Phase 5 repoints `thirdPartyArticlesBaseUrl` there).
-- Phase 4 — deploy: Docker + Caddy + GitHub Actions webhook autodeploy, backend on port 9003 (per hetzner-server conventions).
+- Phase 4 — deploy (DONE): backend live at `https://api.photato.eu` on the Hetzner box — Docker (image built on the box) + Caddy + GitHub Actions webhook autodeploy. See the "Phase 4 deploy" section below for the layout, ports, and runbook. The live FE at photato.eu (Netlify) is untouched; cutover is Phase 5.
 - Phase 5 — frontend on Vite: build with Vite, repoint API to api.photato.eu, serve via Caddy, cut over DNS.
 - Phase 5b — frontend TypeScript migration.
 - Phase 6 — backups: SQLite `VACUUM INTO` snapshot + photos dir into the NAS (naspolya) flow.
@@ -62,6 +62,16 @@ Signing scheme: a `SHA256(path)` marker, with a valid + not-expired check. See `
 - The old MongoDB cluster is DELETED. The `users` table starts empty — nothing to migrate there.
 - The AWS account dies after migration.
 - Leaked AWS creds in `backend/config.js` history are dead. Do NOT scrub history to remove them; it would rewrite all commits and break blame for no security benefit.
+
+## Phase 4 deploy (live layout)
+
+The backend runs at `https://api.photato.eu`, alongside the still-live Netlify FE at `photato.eu`.
+
+- **Repo on the box:** `/home/david/photato` (public repo, https clone — no deploy key). The deploy webhook builds from here.
+- **Container:** service `photato` (`infra/docker-compose.yml`), image built ON the box (multi-stage `backend-go/Dockerfile`, static CGO-free binary on distroless), on `proxy-net`, `restart: unless-stopped`, runs as uid 1000. `PORT=9003` (container-internal; Caddy reaches `photato:9003`, not host-published). `DATA_DIR=/data` bind-mounts `/mnt/HC_Volume_105883537/photato-data`. Env also sets `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`. (No `ENVIRONMENT` var — the backend takes environment per-request, not server-wide.)
+- **Data:** the migration output at `/mnt/HC_Volume_105883537/photato-data` (`photato.db` + `photos/` + `external-articles/`), hardlinked from the salvage tree (same volume, ~zero extra bytes; salvage stays pristine).
+- **Caddy** (`hetzner-server` repo): `api.photato.eu` site block reverse-proxies to `photato:9003`, serves `/external-articles/*` as public static from the mounted `photato-data/external-articles`, and routes `/hooks/*` to the webhook listener. External-articles public base URL (for Phase 5's `thirdPartyArticlesBaseUrl`): `https://api.photato.eu/external-articles/`.
+- **Autodeploy:** `.github/workflows/deploy-backend.yml` (gofmt + vet + test, then a signed webhook POST) → adnanh/webhook systemd unit `deploy-photato-webhook.service` on **port 9004** (9003 was already taken by lang/pimsleur — the older "use 9003" note was stale) → `infra/deploy-webhook/deploy-photato.sh` builds + rolls the container. Runbook: `infra/deploy-webhook/README.md`.
 
 ## Hetzner box facts
 

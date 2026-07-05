@@ -1,0 +1,10 @@
+# Keep the build context lean and reproducible: only source + go.mod/go.sum are
+# needed to build. Exclude local build artifacts and runtime data.
+data/
+server
+migrate
+*.db
+*.db-wal
+*.db-shm
+Dockerfile
+.dockerignore

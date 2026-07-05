@@ -16,7 +16,7 @@ This is a monorepo merging two formerly separate repos, with full git history an
 
 - Single Go binary (stdlib or chi), pure-Go SQLite via `modernc.org/sqlite`. No AWS, no Mongo.
 - Photos live on a Hetzner volume: `/mnt/HC_Volume_105883537/photato/`.
-- Runs on David's Hetzner box behind Caddy (repo `~/hetzner-server`), deployed via Docker + GitHub Actions webhook autodeploy, backend on port 9003.
+- Runs on David's Hetzner box behind Caddy (repo `~/hetzner-server`), deployed via Docker + GitHub Actions webhook autodeploy. Live at `https://api.photato.eu` (backend container `photato:9003` on `proxy-net`; deploy webhook on box port 9004). Deploy layout + runbook: `docs/revival-plan.md` "Phase 4 deploy" and `infra/deploy-webhook/README.md`. The FE at photato.eu (Netlify) stays live until the Phase 5 cutover.
 - Auth0 stays for now (tenant `photato.eu.auth0.com` is alive). Replaced by magic-links + passkeys at a later redesign.
 - SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`.
 

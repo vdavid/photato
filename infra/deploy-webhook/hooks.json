@@ -1,0 +1,18 @@
+[
+  {
+    "id": "deploy-photato",
+    "execute-command": "/home/david/photato/infra/deploy-webhook/deploy-photato.sh",
+    "command-working-directory": "/home/david/photato",
+    "response-message": "Deployment triggered",
+    "trigger-rule": {
+      "match": {
+        "type": "payload-hmac-sha256",
+        "secret": "{{getenv `DEPLOY_WEBHOOK_SECRET`}}",
+        "parameter": {
+          "source": "header",
+          "name": "X-Hub-Signature-256"
+        }
+      }
+    }
+  }
+]
