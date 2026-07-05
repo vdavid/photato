@@ -5,7 +5,6 @@ jspm_packages/
 
 # Build outputs
 dist/
-frontend/public/
 
 # Env / secrets
 .env
@@ -16,9 +15,6 @@ frontend/public/
 .serverless/
 serverless_sdk/
 s_*.js
-
-# Generated auth0 dev bundle (frontend/)
-frontend/src/auth/auth0-spa-js.development.js
 
 # Editors
 .idea/

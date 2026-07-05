@@ -8,7 +8,7 @@ This is a monorepo merging two formerly separate repos, with full git history an
 
 - `backend/`: legacy Node.js backend, ran on AWS Lambda + Lambda@Edge + API Gateway, S3 for photos, MongoDB for users. Being replaced by `backend-go/`. Kept for reference: it's the source of truth for the old API contract and signing scheme.
 - `backend-go/`: the replacement Go backend (single binary, pure-Go SQLite). See the "backend-go" section below.
-- `frontend/`: React SPA, no build step originally (native ES modules, `.mjs` + `htm` instead of JSX). Being migrated Vite → TypeScript → eventually Svelte.
+- `frontend/`: React 17 SPA, built with Vite (Phase 5). Being migrated Vite → TypeScript → eventually Svelte. See the "frontend" section below.
 - `e2e/`: Playwright E2E + pixel-screenshot baseline suite (Phase 2). Lives at the repo root so it outlives the frontend implementation swaps. See the "e2e" section below.
 - `docs/revival-plan.md`: the migration plan, phases, and load-bearing salvage facts. Read it before working on any backend/data/deploy phase.
 
@@ -16,7 +16,7 @@ This is a monorepo merging two formerly separate repos, with full git history an
 
 - Single Go binary (stdlib or chi), pure-Go SQLite via `modernc.org/sqlite`. No AWS, no Mongo.
 - Photos live on a Hetzner volume: `/mnt/HC_Volume_105883537/photato/`.
-- Runs on David's Hetzner box behind Caddy (repo `~/hetzner-server`), deployed via Docker + GitHub Actions webhook autodeploy. Live at `https://api.photato.eu` (backend container `photato:9003` on `proxy-net`; deploy webhook on box port 9004). Deploy layout + runbook: `docs/revival-plan.md` "Phase 4 deploy" and `infra/deploy-webhook/README.md`. The FE at photato.eu (Netlify) stays live until the Phase 5 cutover.
+- Runs on David's Hetzner box behind Caddy (config in the `~/projects-git/vdavid/infra` repo under `hetzner/services/caddy/`), deployed via Docker + GitHub Actions webhook autodeploy. Backend live at `https://api.photato.eu` (container `photato:9003` on `proxy-net`; deploy webhook on box port 9004); the Vite frontend is served at `https://new.photato.eu` from `/mnt/HC_Volume_105883537/photato-frontend`. Deploy layout + runbook: `docs/revival-plan.md` "Phase 4 deploy" / "Phase 5" and `infra/deploy-webhook/README.md`. The apex `photato.eu` (Netlify) stays live until David flips DNS to the box.
 - Auth0 stays for now (tenant `photato.eu.auth0.com` is alive). Replaced by magic-links + passkeys at a later redesign.
 - SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`.
 
@@ -36,10 +36,22 @@ The replacement backend, a single Go binary using pure-Go SQLite (`modernc.org/s
 - Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via env vars — see `backend-go/README.md`: `PORT` default `19003`, `DATA_DIR` default `./data`, `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`). Phase 4 deploy sets `PORT=9003` behind Caddy.
 - Phase status: 3a (TDD red) and 3b (impl) are done — the tests pass (`go test ./...` and `-race` green). Intentional differences from the legacy backend are in `docs/backend-go-divergences.md`; phase-3b storage-layout / photo-serving / config decisions are in `docs/revival-plan.md`.
 
+## frontend
+
+React 17 SPA built with Vite (Phase 5, migrated off the dead Snowpack/Babel toolchain). App deps stay frozen (React 17, React Router 5) until the TypeScript (5b) and Svelte migrations; this phase only swapped the toolchain, repointed the API, and deployed a preview host.
+
+- Layout: `frontend/index.html` (Vite entry, loads `/src/main.jsx`), `frontend/src/` (app code), `frontend/public/` (static assets served at `/`: emoji SVGs under `website/noto-emojis/`, favicons, fonts, logos, `styles.css`, `robots.txt`, `sitemap.xml`). Build output goes to `frontend/dist/` (gitignored).
+- **JSX lives in `.jsx` files** (renamed from the old `.mjs`; Vite's Oxc transformer keys JSX parsing off the extension). `vite.config.js` pins the classic JSX runtime (`React.createElement`), matching the old Babel output — every component imports React. No `@vitejs/plugin-react` needed.
+- Run the dev server: `pnpm --filter ./frontend dev` (Vite on port **18730**, set in `vite.config.js` — non-standard high port, never 3000/5173). Build: `pnpm --filter ./frontend build`. Preview a build: `pnpm --filter ./frontend preview`.
+- Config lives in `src/config.jsx`: `apiGatewayBackEndUrl` and `cloudFrontBackEndUrl` both point at the single Go backend `https://api.photato.eu`; `thirdPartyArticlesBaseUrl` is `https://api.photato.eu/external-articles/`. Environment is chosen at runtime by hostname: `photato.eu*` → production, `staging.photato.eu*` → staging, anything else (incl. `new.photato.eu` and localhost) → development (dev Auth0 client, but `backendApi.environment` is still `production`).
+- Auth0 uses the npm `@auth0/auth0-spa-js` (v1, matching the old vendored 1.2.4), imported in `src/auth/components/Auth0Provider.jsx` — no more global `<script>` tag. Note: auth0-spa-js requires a **secure origin** (HTTPS or `localhost`); it throws on plain-HTTP non-localhost hosts, which only matters for local containerized testing (see `e2e/README.md`), never for the HTTPS deploy.
+- `react-facebook-pixel` interop: it ships only a webpack UMD (no ESM entry), and Rolldown's build interop nests the API oddly, so `src/website/reactPixel.js` normalizes it. Don't revert the pixel imports to `from 'react-facebook-pixel'` directly — it crashes the app on boot.
+- Deploy: `new.photato.eu` on the Hetzner box, static files served by Caddy from `/mnt/HC_Volume_105883537/photato-frontend`. A push to `main` touching `frontend/**` runs the CI build gate (`.github/workflows/deploy.yml`), then the same webhook that deploys the backend also builds the Vite bundle on the box (throwaway `node:24-alpine` container) and rsyncs `dist/` to the served dir (`infra/deploy-webhook/deploy-photato.sh`). The apex `photato.eu` stays on Netlify until David flips DNS — see `docs/revival-plan.md` "Phase 5" for the exact cutover steps and the David-TODOs (Auth0 origins).
+
 Playwright baseline suite in `e2e/` (a pnpm workspace package). It captures the live photato.eu so the migration can be checked for regressions; assumes the live site is correct as-is.
 
 - **Docker is required** for anything touching screenshots. Pixel baselines are Linux-only and must be generated inside the pinned Playwright image, never from macOS-native rendering. Playwright stamps the platform onto snapshot names, so a macOS run looks for `-darwin` baselines and fails loudly by design.
 - Run: `pnpm test:e2e:docker` (compare) / `pnpm test:e2e:docker:update` (regenerate). Both run `e2e/scripts/docker-test.sh`, which mounts the repo into `mcr.microsoft.com/playwright:v<version>-noble` (tag pinned to the `@playwright/test` version — bump together).
 - Setup: `cp e2e/.env.example e2e/.env` and fill `E2E_USER_PASSWORD` (gitignored). Unused today (the live Auth0 client is Google-social-only, so there's no password form to automate; the suite asserts the login redirect handshake instead of logging in). Kept for Phase 5.
-- Target-switchable via `BASE_URL` (default `https://photato.eu`) and `LEGACY_BACKEND_DEAD` (default `true`, which blocks the dead 502 backend). Phase 5 sets `LEGACY_BACKEND_DEAD=false` and adds logged-in baselines (upload/course/admin), which need both a live backend and an automatable auth path.
+- Target-switchable via `BASE_URL` (default `https://photato.eu`) and `LEGACY_BACKEND_DEAD` (default `true`, which blocks the dead 502 backend). The Phase-5 Vite build passes all 42 baselines against `BASE_URL=https://new.photato.eu` (and against a local `vite preview`); the two "Auth0 hosted login page loads" specs `test.skip` off production because `new.photato.eu` isn't yet in the Auth0 allowed origins (David-TODO). Logged-in baselines (upload/course/admin) still wait for an automatable auth path (the live Auth0 client is Google-social-only) and are deferred. Note: for a **local** Docker run, serve the build and run Playwright both on `localhost` inside one container — auth0-spa-js throws on a non-`localhost` plain-HTTP origin like `host.docker.internal`. See `e2e/README.md`.
 - Full details, determinism choices, and layout in `e2e/README.md`.

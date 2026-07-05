@@ -102,10 +102,24 @@ Everything that could make two renders differ is pinned:
 
 The suite is target-switchable by env:
 
-- `BASE_URL` — defaults to `https://photato.eu`; point it at the Hetzner deployment to run the same
-  suite there.
-- `LEGACY_BACKEND_DEAD` — defaults to `true`. While true, backend-dependent authenticated pages
-  (upload, course, admin photos) are asserted only at the handshake level and their baselines are
-  skipped, because the dead backend renders error garbage. **Phase 5 sets `LEGACY_BACKEND_DEAD=false`**
-  once the Go backend is live, which enables the wired-but-skipped upload/course baselines in
-  `authenticated.spec.ts`.
+- `BASE_URL` — defaults to `https://photato.eu`; point it at the Vite deployment to run the same suite
+  there. The Phase-5 Vite build passes all 42 baselines against `BASE_URL=https://new.photato.eu` with
+  no baseline regeneration. Example: `BASE_URL=https://new.photato.eu pnpm test:e2e:docker`.
+- `LEGACY_BACKEND_DEAD` — defaults to `true` (blocks the dead AWS/CloudFront hosts). The Vite build
+  calls `api.photato.eu` instead, which the app never hits on the anonymous public pages this suite
+  baselines, so the flag makes no difference here; leave it at the default.
+- The two "Auth0 hosted login page loads" specs `test.skip` off production (`BASE_URL !==
+  https://photato.eu`): Auth0 only renders its hosted login for allow-listed origins, and
+  new.photato.eu isn't one yet (David-TODO in `docs/revival-plan.md`). The rest — including the
+  handshake-wiring spec — run everywhere.
+- Article images are blocked on both the legacy S3 host and `api.photato.eu/external-articles` so
+  article/materials pages keep the stable image-free layout the baselines were captured with (see
+  `support/determinism.ts`).
+
+### Local pre-deploy run (secure-origin gotcha)
+
+To run the Docker suite against a local build **before** deploying, serve `vite preview` and run
+Playwright **both on `localhost` inside one container** (BASE_URL=`http://localhost:<port>`). Don't use
+`http://host.docker.internal` — `@auth0/auth0-spa-js` throws "must run on a secure origin" on any
+plain-HTTP non-`localhost` host, so the app never finishes booting and every test times out. `localhost`
+and HTTPS both count as secure, so this only bites the containerized local run, never `https://new.photato.eu`.

@@ -1,17 +1,16 @@
 {
-  "name": "photato-website-frontend",
+  "name": "@photato/frontend",
   "version": "7.2.0",
-  "description": "This is the JS front end of the Photato website.",
-  "main": "src/main.mjs",
+  "description": "The React front end of the Photato website. Built with Vite; app deps (React 17, React Router 5) stay frozen until the TypeScript and Svelte migrations.",
+  "type": "module",
   "scripts": {
-    "test": "npx jest",
-    "postinstall": "npx snowpack --clean",
-    "build": "(export NODE_ENV=production || set NODE_ENV=production) && babel src --out-dir public --delete-dir-on-start --keep-file-extension --copy-files",
-    "watch": "babel src --out-dir public --delete-dir-on-start --keep-file-extension --copy-files --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vdavid/photato-website-frontend.git"
+    "url": "git+https://github.com/vdavid/photato.git"
   },
   "keywords": [
     "photato",
@@ -22,13 +21,9 @@
   ],
   "author": "David Veszelovszki",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vdavid/photato-website-frontend/issues"
-  },
-  "homepage": "https://github.com/vdavid/photato-website-frontend#readme",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.2.4",
     "htm": "^3.0.4",
-    "logrocket": "^1.0.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-facebook-pixel": "^1.0.3",
@@ -36,26 +31,6 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
-    "@babel/plugin-transform-react-jsx": "^7.12.1",
-    "jest": "^26.6.1",
-    "snowpack": "^2.16.1"
-  },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
-  "snowpack": {
-    "install": [
-      "react",
-      "react-dom",
-      "react-router-dom",
-      "react-facebook-pixel",
-      "react-ga",
-      "logrocket"
-    ],
-    "installOptions": {
-      "dest": "src/web_modules"
-    }
+    "vite": "^8.1.1"
   }
 }

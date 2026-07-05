@@ -26,7 +26,7 @@ const TRACKER_HOST_FRAGMENTS = [
 
 /**
  * The dead legacy backend (AWS API Gateway + CloudFront). Blocked so pages fail fast and
- * deterministically instead of hanging on 502s. Sourced from frontend/src/config.mjs.
+ * deterministically instead of hanging on 502s. Sourced from frontend/src/config.jsx.
  */
 const DEAD_BACKEND_HOST_FRAGMENTS = [
   '971tlzc7le.execute-api.us-east-1.amazonaws.com',
@@ -34,12 +34,20 @@ const DEAD_BACKEND_HOST_FRAGMENTS = [
 ];
 
 /**
- * Third-party article images live in a public S3 bucket (config.mjs thirdPartyArticlesBaseUrl). They
- * load slowly and inconsistently, which shifts full-page layout height between runs. We always block
- * them so article pages render a stable, image-free layout — the baseline tests page structure and
- * text, not inherently non-deterministic external image content.
+ * Third-party article images (config.jsx thirdPartyArticlesBaseUrl). They load slowly and
+ * inconsistently, which shifts full-page layout height between runs, so we always block them and let
+ * article pages render a stable, image-free layout — the baseline tests page structure and text, not
+ * inherently non-deterministic external image content.
+ *
+ * Two hosts because the baselines were captured against the legacy site (images from the S3 bucket)
+ * and Phase 5 repoints the base URL to the Go backend's `/external-articles/` path. Blocking both keeps
+ * the image-free layout identical on either target. `/external-articles` is specific enough not to
+ * touch the backend's other `api.photato.eu` routes.
  */
-const NONDETERMINISTIC_ASSET_HOST_FRAGMENTS = ['photato-photos-bucket.s3'];
+const NONDETERMINISTIC_ASSET_HOST_FRAGMENTS = [
+  'photato-photos-bucket.s3',
+  'api.photato.eu/external-articles',
+];
 
 async function abortHosts(page: Page, fragments: string[]): Promise<void> {
   await page.route('**/*', (route) => {
