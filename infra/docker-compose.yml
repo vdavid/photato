@@ -17,11 +17,18 @@ services:
     container_name: photato
     restart: unless-stopped
     user: "1000:1000"
+    # Non-secret config is inline; secrets (AUTH_LINK_SECRET, TEST_LOGIN_SECRET,
+    # SMTP_*) come from photato-secrets.env, which deploy-photato.sh materializes
+    # from the root-owned /etc/photato-deploy.env at deploy time (see that script
+    # and infra/deploy-webhook/README.md). The file is git-ignored and never in
+    # the repo.
+    env_file:
+      - photato-secrets.env
     environment:
       PORT: "9003"
       DATA_DIR: /data
       BASE_URL: https://api.photato.eu
-      AUTH0_USERINFO_URL: https://photato.eu.auth0.com/userinfo
+      FRONTEND_BASE_URL: https://photato.eu
       ADMIN_EMAILS: veszelovszki@gmail.com,dorah.nemeth@gmail.com
     volumes:
       - /mnt/HC_Volume_105883537/photato-data:/data

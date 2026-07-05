@@ -36,28 +36,50 @@ All config is env-var only; there are no config files or secrets in the repo.
 - `BASE_URL`: public origin used to build the returned upload URLs and the photo
   `url` field. No trailing slash. Default `http://localhost:$PORT`. In
   production set it to the API's public origin (e.g. `https://api.photato.eu`).
-- `AUTH0_USERINFO_URL`: Auth0 `/userinfo` endpoint used to validate Bearer
-  access tokens on a session-cache miss. Default
-  `https://photato.eu.auth0.com/userinfo`.
 - `ADMIN_EMAILS`: comma-separated admin allowlist. Default
   `veszelovszki@gmail.com,dorah.nemeth@gmail.com`. This is the authoritative
   source of admin status at auth time (the stored `users.is_admin` column is
   informational).
 
-Notes on config the task brief mentioned but this backend does not need:
+Magic-link login (see `../docs/auth-contract.md` for the full wire contract):
 
-- No `AUTH0_ISSUER` / `AUTH0_AUDIENCE`: tokens are validated by calling Auth0
-  `/userinfo`, not by verifying a JWT signature locally, so issuer/audience
-  aren't consumed.
+- `AUTH_LINK_SECRET`: HMAC-SHA256 key that signs magic-link tokens. **Required**
+  for login — when empty, `/auth/request-link` and `/auth/verify` refuse to mint
+  or accept tokens (the server logs a warning at boot).
+- `FRONTEND_BASE_URL`: origin of the frontend verify page, no trailing slash.
+  Default `https://photato.eu`. The emailed link is
+  `FRONTEND_BASE_URL + "/login/verify?token=..."`.
+- `TEST_LOGIN_SECRET`: when non-empty, enables the `POST /auth/test-login` e2e
+  backdoor (constant-time secret compare). Unset in normal operation.
+- `SMTP_HOST`, `SMTP_PORT` (default `587`), `SMTP_USERNAME`, `SMTP_PASSWORD`,
+  `SMTP_FROM_ADDRESS`, `SMTP_FROM_NAME` (default `Photato`): SMTP submission
+  config for sending the link (generic `net/smtp` + STARTTLS; Photato uses
+  SMTP2GO). When `SMTP_HOST`/`SMTP_FROM_ADDRESS` are unset, links can't be mailed
+  (the server logs a warning); `/auth/request-link` still returns 200.
+
+Notes on config this backend does NOT use:
+
+- No `AUTH0_*`: Auth0 is gone. Sessions are our own opaque tokens, minted by the
+  magic-link flow and looked up locally.
 - No `ENVIRONMENT`: the photo `environment` (`development`/`staging`/
   `production`) is a per-request parameter on `get-signed-url` and
   `list-for-week`, not a server-wide setting.
 
 ## Endpoints
 
-All data endpoints are Bearer-authed via Auth0 (token → local session cache →
-Auth0 `/userinfo` on miss). Admin gating is enforced from `ADMIN_EMAILS`.
+Login is passwordless email magic links (`internal/{auth,magiclink,email}`); the
+full wire contract is in `../docs/auth-contract.md`. Data endpoints authorize
+with `Authorization: Bearer <sessionToken>` — an opaque 256-bit token minted by
+the login flow and looked up in the local `sessions` table. Admin gating is
+enforced from `ADMIN_EMAILS`.
 
+- `POST /auth/request-link`: `{email}` → always `200 {ok:true}` (no enumeration);
+  rate-limited; mails a single-use, 15-minute link.
+- `POST /auth/verify`: `{token}` → `{sessionToken, user}` (single-use), or 401.
+- `POST /auth/test-login`: `{email, secret}` e2e backdoor, only when
+  `TEST_LOGIN_SECRET` is set (else 404).
+- `GET /auth/me`: Bearer → `{emailAddress, isAdmin}` (401 without).
+- `POST /auth/logout`: Bearer → burns the session.
 - `GET /version`: valid user required (401 without a token); returns the version
   string. Not admin-gated.
 - `GET /messages/get-all-messages`: admin only (401/403). Returns the static

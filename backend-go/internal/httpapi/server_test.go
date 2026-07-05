@@ -8,10 +8,13 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strings"
+	"sync"
 	"testing"
 	"time"
 
 	"github.com/vdavid/photato/backend-go/internal/auth"
+	"github.com/vdavid/photato/backend-go/internal/magiclink"
 	"github.com/vdavid/photato/backend-go/internal/messages"
 	"github.com/vdavid/photato/backend-go/internal/photos"
 	"github.com/vdavid/photato/backend-go/internal/signing"
@@ -24,11 +27,13 @@ const (
 	userToken  = "user-token"
 )
 
+var linkSecret = []byte("test-link-secret")
+
 // --- fakes (hand-rolled, in the style of the legacy jest suite) ---
 
 type fakeAuth struct{}
 
-func (fakeAuth) AuthenticateByAccessToken(ctx context.Context, token string) (*auth.User, error) {
+func (fakeAuth) AuthenticateBySessionToken(ctx context.Context, token string) (*auth.User, error) {
 	switch token {
 	case adminToken:
 		return &auth.User{EmailAddress: adminEmail, IsAdmin: true}, nil
@@ -36,6 +41,88 @@ func (fakeAuth) AuthenticateByAccessToken(ctx context.Context, token string) (*a
 		return &auth.User{EmailAddress: userEmail, IsAdmin: false}, nil
 	default:
 		return nil, nil
+	}
+}
+
+// fakeLogin is an in-memory LoginStore: real single-use nonce burning and
+// session bookkeeping, a toggleable rate-limit verdict.
+type fakeLogin struct {
+	mu        sync.Mutex
+	burned    map[string]bool
+	sessions  map[string]string // token -> email
+	created   []string          // emails a session was opened for, in order
+	rateAllow bool
+	seq       int
+}
+
+func newFakeLogin() *fakeLogin {
+	return &fakeLogin{burned: map[string]bool{}, sessions: map[string]string{}, rateAllow: true}
+}
+
+func (f *fakeLogin) CreateSessionForEmail(ctx context.Context, email string) (string, *auth.User, error) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	f.seq++
+	token := "sess-" + email + "-" + string(rune('a'+f.seq))
+	f.sessions[token] = email
+	f.created = append(f.created, email)
+	return token, &auth.User{EmailAddress: email, IsAdmin: auth.IsAdmin(email, []string{adminEmail})}, nil
+}
+
+func (f *fakeLogin) BurnNonce(ctx context.Context, nonce string) (bool, error) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	if f.burned[nonce] {
+		return false, nil
+	}
+	f.burned[nonce] = true
+	return true, nil
+}
+
+func (f *fakeLogin) AllowLoginRequest(ctx context.Context, bucket string, limit int, window time.Duration) (bool, error) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	return f.rateAllow, nil
+}
+
+func (f *fakeLogin) DeleteSession(ctx context.Context, token string) error {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	delete(f.sessions, token)
+	return nil
+}
+
+// fakeEmail records sent mail on a channel so async sends can be awaited.
+type sentEmail struct{ to, subject, body string }
+
+type fakeEmail struct{ sent chan sentEmail }
+
+func newFakeEmail() *fakeEmail { return &fakeEmail{sent: make(chan sentEmail, 8)} }
+
+func (f *fakeEmail) Send(to, subject, body string) error {
+	f.sent <- sentEmail{to, subject, body}
+	return nil
+}
+
+// waitForEmail returns the next sent email, or fails if none arrives in time.
+func (f *fakeEmail) waitForEmail(t *testing.T) sentEmail {
+	t.Helper()
+	select {
+	case e := <-f.sent:
+		return e
+	case <-time.After(2 * time.Second):
+		t.Fatal("expected an email to be sent, none arrived")
+		return sentEmail{}
+	}
+}
+
+// expectNoEmail asserts nothing is sent within a short window.
+func (f *fakeEmail) expectNoEmail(t *testing.T) {
+	t.Helper()
+	select {
+	case e := <-f.sent:
+		t.Fatalf("expected no email, but one was sent to %s", e.to)
+	case <-time.After(300 * time.Millisecond):
 	}
 }
 
@@ -60,7 +147,7 @@ func (f *fakePhotos) InsertPhoto(ctx context.Context, record photos.Record) erro
 }
 
 // memSigStore is an in-memory signing.Store, so the tests drive the real
-// signing.Repository logic once phase 3b implements it.
+// signing.Repository logic.
 type memSigStore struct{ m map[string]bool }
 
 func newMemSigStore() *memSigStore { return &memSigStore{m: map[string]bool{}} }
@@ -74,9 +161,28 @@ func (s *memSigStore) HasSignature(hash string, status signing.Status) (bool, er
 	return s.m[string(status)+"/"+hash], nil
 }
 
-// testServer spins up the API over httptest and returns the server plus the
-// photo fake for assertions.
-func testServer(t *testing.T) (*httptest.Server, *fakePhotos) {
+// harness bundles a running server with its fakes for assertions.
+type harness struct {
+	ts     *httptest.Server
+	photos *fakePhotos
+	login  *fakeLogin
+	email  *fakeEmail
+}
+
+// startServer builds a server from deps, wires the httptest URL back into
+// BaseURL (handlers build upload URLs from it), and returns it.
+func startServer(t *testing.T, deps Deps) *httptest.Server {
+	t.Helper()
+	srv := NewServer(deps)
+	ts := httptest.NewServer(srv.Handler())
+	deps.BaseURL = ts.URL
+	ts.Config.Handler = NewServer(deps).Handler()
+	t.Cleanup(ts.Close)
+	return ts
+}
+
+// newHarness starts a server with default auth wiring; tweak mutates Deps first.
+func newHarness(t *testing.T, tweak func(*Deps)) *harness {
 	t.Helper()
 	photoFake := &fakePhotos{
 		seeded: []photos.PhotoInfo{
@@ -84,21 +190,31 @@ func testServer(t *testing.T) (*httptest.Server, *fakePhotos) {
 			{Key: "production/photos/hu-4/week-2/other@example.com.jpg", FileName: "other@example.com.jpg", URL: "https://api.photato.eu/y", EmailAddress: "other@example.com", Title: "Two", ContentType: "image/jpeg", SizeInBytes: 2048, LastModifiedDate: time.Now()},
 		},
 	}
+	login := newFakeLogin()
+	emailFake := newFakeEmail()
 	deps := Deps{
-		Authenticator: fakeAuth{},
-		AdminEmails:   []string{adminEmail, "dorah.nemeth@gmail.com"},
-		Signatures:    signing.NewRepository(newMemSigStore()),
-		Messages:      fakeMessages{},
-		Photos:        photoFake,
-		Version:       "7.1.0",
+		Authenticator:   fakeAuth{},
+		Login:           login,
+		Email:           emailFake,
+		AdminEmails:     []string{adminEmail, "dorah.nemeth@gmail.com"},
+		Signatures:      signing.NewRepository(newMemSigStore()),
+		Messages:        fakeMessages{},
+		Photos:          photoFake,
+		Version:         "7.1.0",
+		LinkSecret:      linkSecret,
+		FrontendBaseURL: "https://photato.eu",
 	}
-	srv := NewServer(deps)
-	ts := httptest.NewServer(srv.Handler())
-	deps.BaseURL = ts.URL // used by handlers to build upload URLs
-	// Rewire with the now-known base URL.
-	ts.Config.Handler = NewServer(deps).Handler()
-	t.Cleanup(ts.Close)
-	return ts, photoFake
+	if tweak != nil {
+		tweak(&deps)
+	}
+	ts := startServer(t, deps)
+	return &harness{ts: ts, photos: photoFake, login: login, email: emailFake}
+}
+
+// testServer keeps the original signature the photo/version/message tests use.
+func testServer(t *testing.T) (*httptest.Server, *fakePhotos) {
+	h := newHarness(t, nil)
+	return h.ts, h.photos
 }
 
 func do(t *testing.T, ts *httptest.Server, method, path, token string, body io.Reader) *http.Response {
@@ -115,6 +231,240 @@ func do(t *testing.T, ts *httptest.Server, method, path, token string, body io.R
 		t.Fatalf("do request: %v", err)
 	}
 	return resp
+}
+
+func postJSON(t *testing.T, ts *httptest.Server, path, token string, payload any) *http.Response {
+	t.Helper()
+	b, _ := json.Marshal(payload)
+	return do(t, ts, "POST", path, token, bytes.NewReader(b))
+}
+
+// --- /auth/request-link ---
+
+// TestRequestLinkAlwaysOKAndSends: a well-formed request returns 200 and mails a
+// link that points at the frontend verify page with the 15-minute note.
+func TestRequestLinkAlwaysOKAndSends(t *testing.T) {
+	h := newHarness(t, nil)
+	resp := postJSON(t, h.ts, "/auth/request-link", "", map[string]string{"email": "Student@Example.com"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	e := h.email.waitForEmail(t)
+	if e.to != "student@example.com" {
+		t.Errorf("email to = %q, want normalized lowercase student@example.com", e.to)
+	}
+	if !strings.Contains(e.body, "/login/verify?token=") {
+		t.Errorf("email body missing the verify link, got:\n%s", e.body)
+	}
+	if !strings.Contains(e.body, "15") {
+		t.Errorf("email body missing the 15-minute validity note")
+	}
+}
+
+// TestRequestLinkNoEnumeration: an unknown email gets the exact same 200 as a
+// known one (nothing distinguishes them to the caller).
+func TestRequestLinkNoEnumeration(t *testing.T) {
+	h := newHarness(t, nil)
+	resp := postJSON(t, h.ts, "/auth/request-link", "", map[string]string{"email": "who-knows@nowhere.test"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200 for an unknown email", resp.StatusCode)
+	}
+	// A link is still minted+sent — the account is created on verify, so request
+	// time can't reveal existence.
+	e := h.email.waitForEmail(t)
+	if e.to != "who-knows@nowhere.test" {
+		t.Errorf("email to = %q", e.to)
+	}
+}
+
+// TestRequestLinkMalformedEmailStillOK: a garbage email is a 200 with no send.
+func TestRequestLinkMalformedEmailStillOK(t *testing.T) {
+	h := newHarness(t, nil)
+	resp := postJSON(t, h.ts, "/auth/request-link", "", map[string]string{"email": "not-an-email"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	h.email.expectNoEmail(t)
+}
+
+// TestRequestLinkRateLimited: when the store denies the request, still 200 but
+// no email is sent.
+func TestRequestLinkRateLimited(t *testing.T) {
+	h := newHarness(t, func(d *Deps) {})
+	h.login.rateAllow = false
+	resp := postJSON(t, h.ts, "/auth/request-link", "", map[string]string{"email": "student@example.com"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200 even when rate-limited", resp.StatusCode)
+	}
+	h.email.expectNoEmail(t)
+}
+
+// --- /auth/verify ---
+
+func TestVerifyExchangesTokenForSession(t *testing.T) {
+	h := newHarness(t, nil)
+	token, _, _ := magiclink.Sign(linkSecret, "student@example.com", 15*time.Minute)
+	resp := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	var got struct {
+		SessionToken string `json:"sessionToken"`
+		User         struct {
+			EmailAddress string `json:"emailAddress"`
+			IsAdmin      bool   `json:"isAdmin"`
+		} `json:"user"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&got); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if got.SessionToken == "" {
+		t.Error("empty sessionToken")
+	}
+	if got.User.EmailAddress != "student@example.com" || got.User.IsAdmin {
+		t.Errorf("user = %+v, want student@example.com non-admin", got.User)
+	}
+}
+
+func TestVerifyAdminGetsAdminFlag(t *testing.T) {
+	h := newHarness(t, nil)
+	token, _, _ := magiclink.Sign(linkSecret, adminEmail, 15*time.Minute)
+	resp := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token})
+	defer resp.Body.Close()
+	var got struct {
+		User struct {
+			IsAdmin bool `json:"isAdmin"`
+		} `json:"user"`
+	}
+	_ = json.NewDecoder(resp.Body).Decode(&got)
+	if !got.User.IsAdmin {
+		t.Errorf("admin email did not get isAdmin=true")
+	}
+}
+
+func TestVerifyRejectsTamperedToken(t *testing.T) {
+	h := newHarness(t, nil)
+	token, _, _ := magiclink.Sign(linkSecret, "student@example.com", 15*time.Minute)
+	resp := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token + "x"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusUnauthorized {
+		t.Fatalf("tampered token status = %d, want 401", resp.StatusCode)
+	}
+}
+
+func TestVerifyRejectsExpiredToken(t *testing.T) {
+	h := newHarness(t, nil)
+	token, _, _ := magiclink.Sign(linkSecret, "student@example.com", -time.Minute)
+	resp := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusUnauthorized {
+		t.Fatalf("expired token status = %d, want 401", resp.StatusCode)
+	}
+}
+
+// TestVerifyIsSingleUse: a token works once, then is burned.
+func TestVerifyIsSingleUse(t *testing.T) {
+	h := newHarness(t, nil)
+	token, _, _ := magiclink.Sign(linkSecret, "student@example.com", 15*time.Minute)
+
+	first := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token})
+	first.Body.Close()
+	if first.StatusCode != http.StatusOK {
+		t.Fatalf("first verify status = %d, want 200", first.StatusCode)
+	}
+	second := postJSON(t, h.ts, "/auth/verify", "", map[string]string{"token": token})
+	second.Body.Close()
+	if second.StatusCode != http.StatusUnauthorized {
+		t.Fatalf("second verify status = %d, want 401 (single-use)", second.StatusCode)
+	}
+}
+
+// --- /auth/test-login ---
+
+func TestTestLoginDisabledByDefault(t *testing.T) {
+	h := newHarness(t, nil) // TestLoginSecret unset
+	resp := postJSON(t, h.ts, "/auth/test-login", "", map[string]string{"email": userEmail, "secret": "anything"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusNotFound {
+		t.Fatalf("status = %d, want 404 when the backdoor is off", resp.StatusCode)
+	}
+}
+
+func TestTestLoginRejectsWrongSecret(t *testing.T) {
+	h := newHarness(t, func(d *Deps) { d.TestLoginSecret = "s3cr3t" })
+	resp := postJSON(t, h.ts, "/auth/test-login", "", map[string]string{"email": userEmail, "secret": "wrong"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusForbidden {
+		t.Fatalf("status = %d, want 403 for a wrong secret", resp.StatusCode)
+	}
+}
+
+func TestTestLoginAcceptsRightSecret(t *testing.T) {
+	h := newHarness(t, func(d *Deps) { d.TestLoginSecret = "s3cr3t" })
+	resp := postJSON(t, h.ts, "/auth/test-login", "", map[string]string{"email": adminEmail, "secret": "s3cr3t"})
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	var got struct {
+		SessionToken string `json:"sessionToken"`
+		User         struct {
+			EmailAddress string `json:"emailAddress"`
+			IsAdmin      bool   `json:"isAdmin"`
+		} `json:"user"`
+	}
+	_ = json.NewDecoder(resp.Body).Decode(&got)
+	if got.SessionToken == "" || got.User.EmailAddress != adminEmail || !got.User.IsAdmin {
+		t.Errorf("unexpected response: %+v", got)
+	}
+}
+
+// --- /auth/me + /auth/logout ---
+
+func TestMeRequiresAuth(t *testing.T) {
+	ts, _ := testServer(t)
+	resp := do(t, ts, "GET", "/auth/me", "", nil)
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusUnauthorized {
+		t.Fatalf("status = %d, want 401", resp.StatusCode)
+	}
+}
+
+func TestMeReturnsUser(t *testing.T) {
+	ts, _ := testServer(t)
+	resp := do(t, ts, "GET", "/auth/me", userToken, nil)
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	var got struct {
+		EmailAddress string `json:"emailAddress"`
+		IsAdmin      bool   `json:"isAdmin"`
+	}
+	_ = json.NewDecoder(resp.Body).Decode(&got)
+	if got.EmailAddress != userEmail || got.IsAdmin {
+		t.Errorf("me = %+v, want %s non-admin", got, userEmail)
+	}
+}
+
+func TestLogoutBurnsSession(t *testing.T) {
+	h := newHarness(t, nil)
+	resp := do(t, h.ts, "POST", "/auth/logout", userToken, nil)
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+	// Logout with no token is still a 200 no-op.
+	resp2 := do(t, h.ts, "POST", "/auth/logout", "", nil)
+	defer resp2.Body.Close()
+	if resp2.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200 for tokenless logout", resp2.StatusCode)
+	}
 }
 
 // --- /version ---
@@ -276,7 +626,7 @@ func TestSignedUploadIsSingleUse(t *testing.T) {
 	resp := do(t, ts, "GET", "/get-signed-url"+signedURLQuery(userEmail, "image/jpeg"), userToken, nil)
 	if resp.StatusCode != http.StatusOK {
 		resp.Body.Close()
-		t.Fatalf("get-signed-url status = %d, want 200 (red until phase 3b)", resp.StatusCode)
+		t.Fatalf("get-signed-url status = %d, want 200", resp.StatusCode)
 	}
 	uploadURL, _ := io.ReadAll(resp.Body)
 	resp.Body.Close()
@@ -318,7 +668,7 @@ func TestSignedUploadRejectsTooSmall(t *testing.T) {
 	resp := do(t, ts, "GET", "/get-signed-url"+signedURLQuery(userEmail, "image/jpeg"), userToken, nil)
 	if resp.StatusCode != http.StatusOK {
 		resp.Body.Close()
-		t.Fatalf("get-signed-url status = %d, want 200 (red until phase 3b)", resp.StatusCode)
+		t.Fatalf("get-signed-url status = %d, want 200", resp.StatusCode)
 	}
 	uploadURL, _ := io.ReadAll(resp.Body)
 	resp.Body.Close()

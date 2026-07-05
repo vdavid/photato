@@ -19,9 +19,25 @@ The repo is cloned at `/home/david/photato` (public repo, https clone — no dep
 key needed). Then:
 
 ```sh
-# 1. Install the shared secret (root-owned, not committed). Use the SAME value as
-#    the GitHub Actions secret DEPLOY_WEBHOOK_SECRET.
-printf 'DEPLOY_WEBHOOK_SECRET=%s\n' 'THE-SECRET' | sudo tee /etc/photato-deploy.env >/dev/null
+# 1. Install the box secrets (root-owned 600, not committed) in /etc/photato-deploy.env.
+#    This one file holds BOTH the webhook HMAC secret AND the app's runtime secrets:
+#      DEPLOY_WEBHOOK_SECRET  — same value as the GitHub Actions repo secret (webhook only)
+#      AUTH_LINK_SECRET       — HMAC key for magic-link tokens
+#      TEST_LOGIN_SECRET      — enables the /auth/test-login e2e backdoor
+#      SMTP_HOST/PORT/USERNAME/PASSWORD/FROM_ADDRESS/FROM_NAME — SMTP2GO submission
+#    The webhook systemd unit loads the whole file (EnvironmentFile); deploy-photato.sh
+#    materializes the app subset into infra/photato-secrets.env for docker compose.
+sudo tee /etc/photato-deploy.env >/dev/null <<'EOF'
+DEPLOY_WEBHOOK_SECRET=THE-WEBHOOK-SECRET
+AUTH_LINK_SECRET=64-hex-chars
+TEST_LOGIN_SECRET=64-hex-chars
+SMTP_HOST=mail.smtp2go.com
+SMTP_PORT=2525
+SMTP_USERNAME=veszelovszki.com
+SMTP_PASSWORD=the-smtp2go-password
+SMTP_FROM_ADDRESS=photato@veszelovszki.com
+SMTP_FROM_NAME=Photato
+EOF
 sudo chmod 600 /etc/photato-deploy.env
 
 # 2. Install + start the webhook listener.

@@ -11,9 +11,18 @@ The Go backend (`backend-go/`) reproduces the legacy API's *observable* contract
 
 ## Auth
 
-- **Admin gating is actually enforced (legacy bug fixed).** The legacy `AuthMiddleware.isAdmin` had a missing `await`: it called `this.isUser(...)` without awaiting, so the returned Promise was always truthy and the admin check in the `if (!authResult)` branch was never reached. Effect: the admin-only routes (`get-all-messages`, `list-for-week`, and `/version`, all wired behind `isAdmin`) were effectively open to any authenticated user. The legacy unit test `isAdmin rejects non-admins` even asserts the broken result (`undefined`, not a 403). The Go backend enforces admin properly: **403 for a non-admin** on admin-only endpoints.
-- **`/version` requires a valid user but not admin.** The legacy `getVersion` route sat behind `isAdmin`; the `index-gateway` test confirms **401 without a token**. The Go backend keeps "valid user required" (401 without a Bearer token) but does not require admin — version info is not sensitive, and the legacy admin gate on it was the buggy no-op above. If phase 3b wants `/version` fully public, that is a further, deliberate loosening.
-- **Auth0 token rejection.** Legacy `Auth0Authorizer` returned `null` for any non-200 from `/userinfo`. The Go `Auth0HTTPClient.GetUserInfo` returns `(nil, nil)` for non-200 (invalid token, not a transport error); the authenticator maps an unrecognized token to a nil user → 401 upstream.
+- **Passwordless magic links replace Auth0 entirely.** The legacy stack (and the
+  first Go cut) authenticated via Auth0 `/userinfo`. That's gone: the Auth0 account
+  was lost, so there was nothing to preserve. Login is now self-hosted email magic
+  links — a signed, single-use, 15-minute token emailed to the user, exchanged for
+  an opaque 256-bit session token (3-day validity) that Bearer-authorizes every
+  endpoint. The `sessions` table holds our own tokens (not cached Auth0 tokens) and
+  `users` no longer carries an Auth0 profile blob. Full contract:
+  `docs/auth-contract.md`. Everything below still holds — only the token's origin
+  changed.
+- **Admin gating is actually enforced (legacy bug fixed).** The legacy `AuthMiddleware.isAdmin` had a missing `await`: it called `this.isUser(...)` without awaiting, so the returned Promise was always truthy and the admin check in the `if (!authResult)` branch was never reached. Effect: the admin-only routes (`get-all-messages`, `list-for-week`, and `/version`, all wired behind `isAdmin`) were effectively open to any authenticated user. The legacy unit test `isAdmin rejects non-admins` even asserts the broken result (`undefined`, not a 403). The Go backend enforces admin properly: **403 for a non-admin** on admin-only endpoints. Admin status is derived from `ADMIN_EMAILS` at auth time (authoritative).
+- **`/version` requires a valid user but not admin.** The legacy `getVersion` route sat behind `isAdmin`; the `index-gateway` test confirms **401 without a token**. The Go backend keeps "valid user required" (401 without a Bearer token) but does not require admin — version info is not sensitive, and the legacy admin gate on it was the buggy no-op above.
+- **Invalid session → 401, uniformly.** An unknown/expired session token, and any failed magic-link verify (tampered, expired, replayed), map to a flat 401 with no distinguishing detail.
 
 ## Uploads
 

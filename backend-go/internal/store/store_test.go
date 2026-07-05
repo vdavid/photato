@@ -3,10 +3,11 @@ package store
 import (
 	"context"
 	"path/filepath"
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
-	"github.com/vdavid/photato/backend-go/internal/auth"
 	"github.com/vdavid/photato/backend-go/internal/photos"
 	"github.com/vdavid/photato/backend-go/internal/signing"
 )
@@ -59,76 +60,189 @@ func TestSignatureRoundTrip(t *testing.T) {
 	}
 }
 
-// TestUserUpsertAndSessionCache exercises the store as an auth.UserStore.
-func TestUserUpsertAndSessionCache(t *testing.T) {
+// TestCreateSessionAndLookup: opening a session for an admin email upserts the
+// user and the returned token resolves back to that admin user.
+func TestCreateSessionAndLookup(t *testing.T) {
 	s := openTestStore(t)
 	ctx := context.Background()
-	info := auth.UserInfo{Sub: "auth0|1", Email: "veszelovszki@gmail.com", EmailVerified: true}
 
-	// Unknown email initially.
-	if u, err := s.UserByEmail(ctx, info.Email); err != nil {
-		t.Fatalf("UserByEmail: %v", err)
-	} else if u != nil {
-		t.Fatalf("UserByEmail on empty store = %+v, want nil", u)
-	}
-
-	user, err := s.CreateUserFromAuth0(ctx, info)
+	token, user, err := s.CreateSessionForEmail(ctx, "veszelovszki@gmail.com")
 	if err != nil {
-		t.Fatalf("CreateUserFromAuth0: %v", err)
+		t.Fatalf("CreateSessionForEmail: %v", err)
 	}
-	if user.EmailAddress != info.Email {
-		t.Errorf("created user email = %q, want %q", user.EmailAddress, info.Email)
+	if token == "" {
+		t.Fatal("CreateSessionForEmail returned an empty token")
 	}
 	if !user.IsAdmin {
 		t.Errorf("IsAdmin = false for an admin email, want true")
 	}
 
-	// Cache a session, then resolve the user by that token.
-	const token = "session-token-1"
-	if err := s.AddSession(ctx, user, token); err != nil {
-		t.Fatalf("AddSession: %v", err)
-	}
-	got, err := s.UserByAccessToken(ctx, token)
+	got, err := s.UserBySessionToken(ctx, token)
 	if err != nil {
-		t.Fatalf("UserByAccessToken: %v", err)
+		t.Fatalf("UserBySessionToken: %v", err)
 	}
-	if got == nil || got.EmailAddress != info.Email {
-		t.Fatalf("UserByAccessToken = %+v, want email %q", got, info.Email)
+	if got == nil || got.EmailAddress != "veszelovszki@gmail.com" {
+		t.Fatalf("UserBySessionToken = %+v, want the admin user", got)
+	}
+	if !got.IsAdmin {
+		t.Errorf("resolved IsAdmin = false, want true")
 	}
 }
 
-// TestNonAdminUserNotFlagged confirms a non-allowlisted email is not admin.
-func TestNonAdminUserNotFlagged(t *testing.T) {
+// TestCreateSessionIsIdempotentPerEmail: two logins for the same email don't
+// error on the unique-email constraint (upsert) and both tokens resolve.
+func TestCreateSessionIsIdempotentPerEmail(t *testing.T) {
 	s := openTestStore(t)
 	ctx := context.Background()
-	user, err := s.CreateUserFromAuth0(ctx, auth.UserInfo{Email: "someone@else.com"})
+	t1, _, err := s.CreateSessionForEmail(ctx, "student@example.com")
 	if err != nil {
-		t.Fatalf("CreateUserFromAuth0: %v", err)
+		t.Fatalf("first CreateSessionForEmail: %v", err)
+	}
+	t2, _, err := s.CreateSessionForEmail(ctx, "student@example.com")
+	if err != nil {
+		t.Fatalf("second CreateSessionForEmail: %v", err)
+	}
+	if t1 == t2 {
+		t.Fatal("two logins produced the same token, want distinct tokens")
+	}
+	for _, tok := range []string{t1, t2} {
+		if u, err := s.UserBySessionToken(ctx, tok); err != nil || u == nil {
+			t.Errorf("token %q did not resolve (err=%v)", tok, err)
+		}
+	}
+}
+
+// TestNonAdminSession confirms a non-allowlisted email is not admin.
+func TestNonAdminSession(t *testing.T) {
+	s := openTestStore(t)
+	_, user, err := s.CreateSessionForEmail(context.Background(), "someone@else.com")
+	if err != nil {
+		t.Fatalf("CreateSessionForEmail: %v", err)
 	}
 	if user.IsAdmin {
 		t.Errorf("IsAdmin = true for a non-allowlisted email, want false")
 	}
 }
 
-// TestExpiredSessionNotResolved: a session past its expiry must not resolve to a
-// user (the legacy addSessionToUser pruned expired sessions).
+// TestExpiredSessionNotResolved: a session past its expiry must not resolve.
 func TestExpiredSessionNotResolved(t *testing.T) {
 	s := openTestStore(t)
 	ctx := context.Background()
-	user, err := s.CreateUserFromAuth0(ctx, auth.UserInfo{Email: "veszelovszki@gmail.com"})
+	token, _, err := s.CreateSessionForEmail(ctx, "student@example.com")
 	if err != nil {
-		t.Fatalf("CreateUserFromAuth0: %v", err)
+		t.Fatalf("CreateSessionForEmail: %v", err)
 	}
-	const token = "expired-token"
-	if err := s.AddSession(ctx, user, token); err != nil {
-		t.Fatalf("AddSession: %v", err)
+	// Force the session into the past directly in the DB.
+	if _, err := s.db.ExecContext(ctx, `UPDATE sessions SET expires_at = ? WHERE token = ?`,
+		time.Now().Add(-time.Hour).Unix(), token); err != nil {
+		t.Fatalf("expire session: %v", err)
 	}
-	// A freshly added session is live; this documents that lookups are
-	// expiry-aware. Detailed expiry seeding is a phase 3b concern.
-	if got, err := s.UserByAccessToken(ctx, token); err != nil {
-		t.Fatalf("UserByAccessToken: %v", err)
-	} else if got == nil {
-		t.Fatalf("UserByAccessToken on a fresh session = nil, want the user")
+	got, err := s.UserBySessionToken(ctx, token)
+	if err != nil {
+		t.Fatalf("UserBySessionToken: %v", err)
+	}
+	if got != nil {
+		t.Errorf("UserBySessionToken on an expired session = %+v, want nil", got)
+	}
+}
+
+// TestDeleteSession: logout burns the token so it stops resolving.
+func TestDeleteSession(t *testing.T) {
+	s := openTestStore(t)
+	ctx := context.Background()
+	token, _, err := s.CreateSessionForEmail(ctx, "student@example.com")
+	if err != nil {
+		t.Fatalf("CreateSessionForEmail: %v", err)
+	}
+	if err := s.DeleteSession(ctx, token); err != nil {
+		t.Fatalf("DeleteSession: %v", err)
+	}
+	if got, err := s.UserBySessionToken(ctx, token); err != nil {
+		t.Fatalf("UserBySessionToken: %v", err)
+	} else if got != nil {
+		t.Errorf("token still resolves after logout: %+v", got)
+	}
+	// Deleting an unknown token is a no-op success.
+	if err := s.DeleteSession(ctx, "never-existed"); err != nil {
+		t.Errorf("DeleteSession(unknown) = %v, want nil", err)
+	}
+}
+
+// TestBurnNonceSingleUse: the first burn wins, the second reports already-used.
+func TestBurnNonceSingleUse(t *testing.T) {
+	s := openTestStore(t)
+	ctx := context.Background()
+	fresh, err := s.BurnNonce(ctx, "nonce-1")
+	if err != nil {
+		t.Fatalf("BurnNonce: %v", err)
+	}
+	if !fresh {
+		t.Fatal("first BurnNonce = false, want true (first use wins)")
+	}
+	fresh, err = s.BurnNonce(ctx, "nonce-1")
+	if err != nil {
+		t.Fatalf("BurnNonce (again): %v", err)
+	}
+	if fresh {
+		t.Fatal("second BurnNonce = true, want false (already used)")
+	}
+}
+
+// TestBurnNonceRace: many goroutines burn the same nonce concurrently; exactly
+// one must win. This is the load-bearing single-use guarantee for magic links.
+func TestBurnNonceRace(t *testing.T) {
+	s := openTestStore(t)
+	ctx := context.Background()
+	const n = 32
+	var wins int64
+	var wg sync.WaitGroup
+	start := make(chan struct{})
+	for i := 0; i < n; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			<-start
+			fresh, err := s.BurnNonce(ctx, "hot-nonce")
+			if err != nil {
+				t.Errorf("BurnNonce: %v", err)
+				return
+			}
+			if fresh {
+				atomic.AddInt64(&wins, 1)
+			}
+		}()
+	}
+	close(start)
+	wg.Wait()
+	if wins != 1 {
+		t.Fatalf("concurrent burns won %d times, want exactly 1", wins)
+	}
+}
+
+// TestRateLimit: allows up to the limit within the window, then rejects.
+func TestRateLimit(t *testing.T) {
+	s := openTestStore(t)
+	ctx := context.Background()
+	const bucket = "email:student@example.com"
+	for i := 0; i < 3; i++ {
+		ok, err := s.AllowLoginRequest(ctx, bucket, 3, 15*time.Minute)
+		if err != nil {
+			t.Fatalf("AllowLoginRequest: %v", err)
+		}
+		if !ok {
+			t.Fatalf("request %d rejected, want allowed (under the limit of 3)", i+1)
+		}
+	}
+	ok, err := s.AllowLoginRequest(ctx, bucket, 3, 15*time.Minute)
+	if err != nil {
+		t.Fatalf("AllowLoginRequest: %v", err)
+	}
+	if ok {
+		t.Fatal("4th request allowed, want rejected (over the limit)")
+	}
+	// A different bucket is independent.
+	if ok, err := s.AllowLoginRequest(ctx, "email:other@example.com", 3, 15*time.Minute); err != nil || !ok {
+		t.Errorf("independent bucket rejected (ok=%v err=%v)", ok, err)
 	}
 }
 

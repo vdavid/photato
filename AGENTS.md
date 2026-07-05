@@ -18,8 +18,8 @@ This is a monorepo merging two formerly separate repos, with full git history an
 - Photos live on a Hetzner volume: `/mnt/HC_Volume_105883537/photato/`.
 - Runs on David's Hetzner box behind Caddy (config in the `~/projects-git/vdavid/infra` repo under `hetzner/services/caddy/`), deployed via Docker + GitHub Actions webhook autodeploy. Backend live at `https://api.photato.eu` (container `photato:9003` on `proxy-net`; deploy webhook on box port 9004); the Vite frontend is served at the canonical apex `https://photato.eu` (and `https://new.photato.eu` as an alias) from `/mnt/HC_Volume_105883537/photato-frontend`; `www` 301s to the apex. Deploy layout + runbook: `docs/revival-plan.md` "Phase 4 deploy" / "Phase 5" and `infra/deploy-webhook/README.md`. The apex DNS is flipped to the box; the `photato.eu` zone still lives on Netlify DNS until David completes the Cloudflare move (see the Phase 5 "Apex cutover" David-TODO).
 - Backups: the DB, photos, and S3 salvage master ride the box's nightly NAS→offsite 3-2-1 flow (machinery in the `infra` repo, `hetzner/scripts/backup-to-nas/`). WAL DB dumped via `VACUUM INTO` to dated snapshots; photos + salvage rsynced hardlink-preserving. Coverage + restore: `docs/revival-plan.md` "Phase 6 (backups)" and `infra/hetzner/docs/disaster-recovery.md`.
-- Auth0 stays for now (tenant `photato.eu.auth0.com` is alive). Replaced by magic-links + passkeys at a later redesign.
-- SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`.
+- Auth is self-hosted passwordless email **magic links** (Auth0 is gone — the account was lost, nothing to preserve). A user requests a link, clicks it, and exchanges the signed token for an opaque session token that Bearer-authorizes every endpoint. Wire contract: `docs/auth-contract.md`. Backend: `backend-go/internal/{auth,magiclink,email}`. The React frontend's leftover Auth0 code/IDs are dead — the Svelte rewrite deletes them.
+- SQLite tables: `users`, `sessions`, `used_login_nonces`, `login_attempts`, `photos`, `upload_signatures`.
 
 ## Conventions
 
@@ -34,7 +34,7 @@ The replacement backend, a single Go binary using pure-Go SQLite (`modernc.org/s
 
 - Layout: `cmd/server/` (entrypoint + wiring) and `internal/{signing,photos,auth,messages,store,httpapi}`. Each `internal` package owns one slice of the old backend's behavior; the domain packages define the interfaces, `store` (SQLite) implements them, `httpapi` is the HTTP surface, `cmd/server` wires it all.
 - Run tests: `cd backend-go && mise exec -- go test ./...` (add `-race` for the race detector). Vet/build: `mise exec -- go vet ./...` and `mise exec -- go build ./...`.
-- Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via env vars — see `backend-go/README.md`: `PORT` default `19003`, `DATA_DIR` default `./data`, `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`). Phase 4 deploy sets `PORT=9003` behind Caddy.
+- Run the server: `cd backend-go && mise exec -- go run ./cmd/server` (config via env vars — see `backend-go/README.md`: `PORT` default `19003`, `DATA_DIR` default `./data`, `BASE_URL`, `ADMIN_EMAILS`, plus magic-link config `AUTH_LINK_SECRET`, `FRONTEND_BASE_URL`, `TEST_LOGIN_SECRET`, `SMTP_*`). Phase 4 deploy sets `PORT=9003` behind Caddy; secrets come from the box env file, never the repo.
 - Phase status: 3a (TDD red) and 3b (impl) are done — the tests pass (`go test ./...` and `-race` green). Intentional differences from the legacy backend are in `docs/backend-go-divergences.md`; phase-3b storage-layout / photo-serving / config decisions are in `docs/revival-plan.md`.
 
 ## frontend

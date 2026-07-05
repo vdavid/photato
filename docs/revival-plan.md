@@ -14,6 +14,7 @@ Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary 
 - Phase 5 — frontend on Vite (DONE): built with Vite, repointed the API to api.photato.eu, deployed on the box (Caddy static + webhook autodeploy). The apex `photato.eu` DNS is flipped — the live apex now serves the new build off the box (all 42 baselines pass against `https://photato.eu`, 0 skips); `new.photato.eu` stays as an alias. The `photato.eu` zone still lives on Netlify DNS; moving it to Cloudflare + the ICDSoft nameserver switch are the remaining David-TODOs (both David-gated). See the "Phase 5" section below.
 - Phase 5b — frontend TypeScript migration (DONE): the React frontend is now TypeScript strict — all `.jsx`→`.tsx` (pure-logic modules `.ts`), props/state/context/hooks typed, the Go-backend JSON contract typed as wire + revived-domain types, `@types/react@17`/`@types/react-router-dom@5` (runtime libs unchanged), `htm` dropped (was unused). `tsc --noEmit` is a CI gate (`.github/workflows/deploy.yml`). No behavior change: `tsc` clean, `vite build` green, all 42 Playwright baselines pass against a local `vite preview` (40 pass + 2 skip, no baseline regeneration). See the "Phase 5b" section below. The **Svelte rewrite is the next FE milestone and now starts from typed code.**
 - Phase 6 — backups (DONE): Photato's SQLite + photos + S3 salvage master are folded into the box's existing nightly NAS backup (`infra` repo, `hetzner/scripts/backup-to-nas/`). WAL DB dumped via `VACUUM INTO` to dated snapshots with grandfather-father-son retention; photos + salvage rsynced with hardlinks preserved. See the "Phase 6 (backups)" section below.
+- Phase 7 — magic-link auth (DONE): ripped Auth0 out of the backend (the account was lost) and replaced it with self-hosted passwordless email magic links. Signed single-use 15-min token → opaque 3-day session token that Bearer-authorizes every endpoint. Mail sent via SMTP2GO from `photato@veszelovszki.com`. Wire contract in `docs/auth-contract.md`; see the "Phase 7 (magic-link auth)" section below. The React frontend's leftover Auth0 code is dead — the Svelte rewrite deletes it.
 
 ## Salvage facts (Phase 0 output)
 
@@ -46,7 +47,7 @@ Signing scheme: a `SHA256(path)` marker, with a valid + not-expired check. See `
 
 - Go, stdlib only (no chi — `net/http` 1.22 method+path routing suffices). Pure-Go SQLite via `modernc.org/sqlite`. `modernc.org/sqlite` is the only non-stdlib dep.
 - SQLite tables: `users`, `sessions`, `photos`, `upload_signatures`. Schema created on startup (idempotent `CREATE TABLE IF NOT EXISTS`, versioned via `PRAGMA user_version`). Opened WAL + `busy_timeout=5000` + `foreign_keys=on`, with `SetMaxOpenConns(1)` (SQLite serializes writes; one connection avoids "database is locked" under `-race` and concurrent uploads).
-- Auth0 kept through the migration: tenant `photato.eu.auth0.com` is alive, test user `test@photato.eu` exists. Replaced by magic-links + passkeys at the later redesign.
+- Auth is self-hosted passwordless email magic links (Phase 7 below) — Auth0 is gone. No third-party identity provider; sessions are our own opaque tokens.
 - Latest stable deps only (check registries, respect the 3-day age rule).
 
 ### Phase 3b decisions (storage layout, photo serving, config)
@@ -55,7 +56,7 @@ Signing scheme: a `SHA256(path)` marker, with a valid + not-expired check. See `
 - **Photo serving:** added `GET /photos/{key...}`, admin-gated exactly like `list-for-week` (the whole listing surface is admin-only, so serving matches). The `url` field in the listing points at this route (`BASE_URL` + `/photos/` + key). Files stream from disk via `http.ServeFile`; `..` in the key is rejected.
 - **Single-use uploads:** the `signing.Store` interface stays check-marker + put-marker (no atomic delete), so single-use is enforced at the HTTP layer: the check-and-expire "claim" runs under an in-process mutex (fine for the single binary). A valid signature hashes the canonical storage path (not the query string), so it's stable regardless of URL encoding. Consequence, same as legacy S3 markers: once a path's signature is expired, re-uploading to that exact path is blocked (the expired marker persists).
 - **Admin source of truth:** admin status is derived from `ADMIN_EMAILS` at auth time (authoritative). The stored `users.is_admin` column is informational — editing it directly does not grant admin.
-- **Config is env-var only** (documented in `backend-go/README.md`): `PORT` (default `19003`), `DATA_DIR` (default `./data`), `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`. No `AUTH0_ISSUER`/`AUTH0_AUDIENCE` (tokens are validated via `/userinfo`, not local JWT verification) and no `ENVIRONMENT` (environment is a per-request parameter). Deploy note: phase 4 sets `PORT=9003` behind Caddy.
+- **Config is env-var only** (documented in `backend-go/README.md`): `PORT` (default `19003`), `DATA_DIR` (default `./data`), `BASE_URL`, `ADMIN_EMAILS`, plus the Phase-7 magic-link vars (`AUTH_LINK_SECRET`, `FRONTEND_BASE_URL`, `TEST_LOGIN_SECRET`, `SMTP_*`). No `ENVIRONMENT` (environment is a per-request parameter). Deploy note: phase 4 sets `PORT=9003` behind Caddy; secrets come from the box env file `/etc/photato-deploy.env`, never the repo.
 
 ## Dead infrastructure (do not try to reach)
 
@@ -114,6 +115,55 @@ Photato rides David's existing box→NAS→offsite 3-2-1 flow rather than a para
 - **Photos + salvage — hardlinks preserved:** `photato-data/photos/` are hardlinks into `photato/s3/` (Phase 3c). backup.sh rsyncs both trees in ONE `rsync -aH` so the shared photo bytes are stored once on the NAS (~2.8 GB), not doubled.
 - **Restore runbook:** `infra` repo `hetzner/docs/disaster-recovery.md` → "Restore data" → Photato (DB dump + `rsync -aH` photos/salvage back).
 - **David-TODO:** none on the NAS side — the push destination `/share/naspi/saves/hetzner-server/` is already inside the NAS's restic source, so the monthly offsite picks up `photato/` automatically.
+
+## Phase 7 (magic-link auth)
+
+Auth0 is gone (the tenant/account was lost — nothing to preserve). Login is now
+self-hosted passwordless email magic links. Wire contract for the frontend:
+`docs/auth-contract.md`. Backend: `backend-go/internal/{auth,magiclink,email}` +
+the `/auth/*` handlers in `internal/httpapi`.
+
+- **Flow:** `POST /auth/request-link {email}` (always 200, no enumeration,
+  rate-limited) mails a link `https://photato.eu/login/verify?token=…`. The token
+  is an HMAC-SHA256-signed payload (email + 15-min expiry + random nonce), keyed by
+  `AUTH_LINK_SECRET`. `POST /auth/verify {token}` checks the signature+expiry,
+  burns the nonce (single-use, race-safe), upserts the user, and returns
+  `{sessionToken, user}`. The session token is a 256-bit random opaque string,
+  3-day validity; it Bearer-authorizes every existing endpoint. `GET /auth/me`,
+  `POST /auth/logout` round out the surface.
+- **Single-use is DB-enforced, race-safe:** the nonce is burned by an
+  `INSERT OR IGNORE` into `used_login_nonces`; with the store's single write
+  connection + the primary key, exactly one of N concurrent verifies wins
+  (tested with 32 parallel burns). Rate limiting is SQLite-backed
+  (`login_attempts`): 3/email/15min + 20/IP/15min; over-limit still returns 200
+  but sends nothing (no enumeration).
+- **Schema (v2):** `users` dropped its Auth0 profile blob; `sessions` holds our
+  opaque tokens (column `token`, not `access_token`); added `used_login_nonces`
+  and `login_attempts`. The v1→v2 migration drops+recreates the empty
+  Auth0-era `users`/`sessions` (they only held Auth0 cache — production started
+  empty); `photos`/`upload_signatures` are untouched.
+- **Email delivery:** generic `net/smtp` + STARTTLS pointed at **SMTP2GO**
+  (`mail.smtp2go.com:2525`), from `Photato <photato@veszelovszki.com>`. SMTP2GO
+  is the box's existing outbound relay and `veszelovszki.com` is a DKIM +
+  return-path-verified sender there, so mail lands in the Gmail inbox (verified
+  end-to-end). Plain-text, bilingual (HU + EN). **mailcow's own submission cert
+  (`mail.veszelovszki.com:587`) is expired (Jan 2026) — a separate infra issue
+  for David; not on Photato's path since we relay via SMTP2GO directly.** A
+  `photato@veszelovszki.com` mailbox was created in mailcow (quota 0, uncounted)
+  for receiving/bounces.
+- **Secrets & deploy:** `AUTH_LINK_SECRET`, `TEST_LOGIN_SECRET`, and `SMTP_*`
+  live in `/etc/photato-deploy.env` (root-owned 600, loaded by the webhook
+  systemd unit). `deploy-photato.sh` materializes a david-readable 600 copy
+  (`infra/photato-secrets.env`, git-ignored) via a throwaway root container —
+  david is in the docker group but has no passwordless sudo, so that's how a
+  david-run `docker compose` reads a root:600 master. `DEPLOY_WEBHOOK_SECRET` is
+  filtered out of the container copy. Non-secret config (`BASE_URL`,
+  `FRONTEND_BASE_URL`, `ADMIN_EMAILS`, `PORT`) stays inline in the compose file.
+- **e2e backdoor:** `POST /auth/test-login {email, secret}` mints a session
+  without email, gated by a constant-time compare against `TEST_LOGIN_SECRET`
+  (404 when the env var is unset). The Svelte agent's e2e suite drives login
+  through it — put `TEST_LOGIN_SECRET` in `e2e/.env` (git-ignored), value from
+  the box env file.
 
 ## Hetzner box facts
 

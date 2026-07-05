@@ -28,6 +28,17 @@ git reset --hard origin/main
 
 cd infra
 
+# Materialize the container's runtime secrets for docker compose's `env_file`.
+# The master lives at /etc/photato-deploy.env (root-owned 600, loaded by the
+# webhook systemd unit). david can't read root:600 directly (no passwordless
+# sudo) but is in the docker group, so a throwaway root container reads it and
+# writes a david-owned 600 copy. DEPLOY_WEBHOOK_SECRET is dropped — only the
+# webhook listener needs it, the app container doesn't.
+echo "Materializing runtime secrets for the container..."
+docker run --rm -v /etc/photato-deploy.env:/src:ro alpine \
+  sh -c "grep -v '^DEPLOY_WEBHOOK_SECRET=' /src" > photato-secrets.env
+chmod 600 photato-secrets.env
+
 echo "Building the backend image (the old container keeps serving during the build)..."
 docker compose build
 
