@@ -1,6 +1,8 @@
-# Photato revival plan
+# Photato revival plan (HISTORICAL — migration log)
 
-Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary on David's Hetzner box, then modernizing the frontend. This doc holds the phase plan plus the hard-won facts later phases depend on. Read the relevant section before starting a phase.
+> **This is a completed migration log, kept for archaeology.** All phases below are done. Current-state facts live in the living docs — `AGENTS.md`, the colocated `CLAUDE.md` files (`backend-go/`, `frontend/`, `e2e/`, `infra/`), and `docs/{auth-contract,backend-go-divergences}.md`. When those disagree with this file, they win. Don't cite this file as current truth; read it only to understand *how* Photato got here.
+
+Migrating Photato off its dead AWS/Mongo stack onto a single Go + SQLite binary on David's Hetzner box, then modernizing the frontend. This doc holds the phase plan plus the hard-won facts each phase depended on.
 
 ## Phases
 
@@ -69,9 +71,9 @@ Signing scheme: a `SHA256(path)` marker, with a valid + not-expired check. See `
 The backend runs at `https://api.photato.eu`, alongside the still-live Netlify FE at `photato.eu`.
 
 - **Repo on the box:** `/home/david/photato` (public repo, https clone — no deploy key). The deploy webhook builds from here.
-- **Container:** service `photato` (`infra/docker-compose.yml`), image built ON the box (multi-stage `backend-go/Dockerfile`, static CGO-free binary on distroless), on `proxy-net`, `restart: unless-stopped`, runs as uid 1000. `PORT=9003` (container-internal; Caddy reaches `photato:9003`, not host-published). `DATA_DIR=/data` bind-mounts `/mnt/HC_Volume_105883537/photato-data`. Env also sets `BASE_URL`, `AUTH0_USERINFO_URL`, `ADMIN_EMAILS`. (No `ENVIRONMENT` var — the backend takes environment per-request, not server-wide.)
+- **Container:** service `photato` (`infra/docker-compose.yml`), image built ON the box (multi-stage `backend-go/Dockerfile`, static CGO-free binary on distroless), on `proxy-net`, `restart: unless-stopped`, runs as uid 1000. `PORT=9003` (container-internal; Caddy reaches `photato:9003`, not host-published). `DATA_DIR=/data` bind-mounts `/mnt/HC_Volume_105883537/photato-data`. Env also sets `BASE_URL`, `FRONTEND_BASE_URL`, `ADMIN_EMAILS`. (No `ENVIRONMENT` var — the backend takes environment per-request, not server-wide.)
 - **Data:** the migration output at `/mnt/HC_Volume_105883537/photato-data` (`photato.db` + `photos/` + `external-articles/`), hardlinked from the salvage tree (same volume, ~zero extra bytes; salvage stays pristine).
-- **Caddy** (`hetzner-server` repo): `api.photato.eu` site block reverse-proxies to `photato:9003`, serves `/external-articles/*` as public static from the mounted `photato-data/external-articles`, and routes `/hooks/*` to the webhook listener. External-articles public base URL (for Phase 5's `thirdPartyArticlesBaseUrl`): `https://api.photato.eu/external-articles/`.
+- **Caddy** (`infra` repo, `hetzner/services/caddy/`): `api.photato.eu` site block reverse-proxies to `photato:9003`, serves `/external-articles/*` as public static from the mounted `photato-data/external-articles`, and routes `/hooks/*` to the webhook listener. External-articles public base URL (for Phase 5's `thirdPartyArticlesBaseUrl`): `https://api.photato.eu/external-articles/`.
 - **Autodeploy:** `.github/workflows/deploy-backend.yml` (gofmt + vet + test, then a signed webhook POST) → adnanh/webhook systemd unit `deploy-photato-webhook.service` on **port 9004** (9003 was already taken by lang/pimsleur — the older "use 9003" note was stale) → `infra/deploy-webhook/deploy-photato.sh` builds + rolls the container. Runbook: `infra/deploy-webhook/README.md`.
 
 ## Phase 5 (frontend on Vite + new.photato.eu)
@@ -168,7 +170,7 @@ the `/auth/*` handlers in `internal/httpapi`.
 ## Hetzner box facts
 
 - ssh alias `hetzner`, user `david` (in the `docker` group — docker can do root-equivalent file ops when needed).
-- Caddy config in the `~/hetzner-server` repo: `Caddyfile`, `proxy-net` docker network. Restart (not reload) Caddy when new certs are needed.
+- Caddy config in the `~/projects-git/vdavid/infra` repo (`hetzner/services/caddy/`): `Caddyfile`, `proxy-net` docker network. Restart (not reload) Caddy when new certs are needed.
 - Deploy webhooks follow a pattern; ports 9000–9002 are already taken, so Photato backend uses 9003.
 - The volume is 9.8G, 78% used. Root disk is 83% full — don't stage large data on root.
 - ssh sessions can drop — use `nohup` for long-running jobs.

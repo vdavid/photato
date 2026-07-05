@@ -1,10 +1,10 @@
-// Command migrate turns the Phase-0 S3 salvage into the Go backend's live data
+// Command migrate turns the S3 salvage master into the Go backend's live data
 // layout: photo files hardlinked into DATA_DIR/photos, external-article files
 // hardlinked into a public static dir, and one SQLite photos row per photo.
 //
 // It hardlinks (never copies) so it costs ~zero bytes and leaves the salvage
 // tree pristine, and it is idempotent (safe to re-run). See the migration
-// section in backend-go/README.md for the exact deploy command.
+// section in backend-go/CLAUDE.md for the exact deploy command.
 package main
 
 import (

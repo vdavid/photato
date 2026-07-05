@@ -3,8 +3,8 @@
 // repositories into the HTTP API, then listens.
 //
 // Configuration comes entirely from environment variables (documented in
-// backend-go/README.md). The deployed backend sits behind Caddy on the Hetzner
-// box (see docs/revival-plan.md).
+// backend-go/CLAUDE.md). The deployed backend sits behind Caddy on the Hetzner
+// box (see infra/CLAUDE.md).
 package main
 
 import (

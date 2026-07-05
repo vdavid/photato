@@ -25,6 +25,15 @@ On startup the server creates `DATA_DIR` (and `DATA_DIR/photos`), opens/creates
 the SQLite database, and runs the schema migration (idempotent
 `CREATE TABLE IF NOT EXISTS`, versioned via `PRAGMA user_version`).
 
+## Store and schema (load-bearing decisions)
+
+- **Layout:** `cmd/server/` (entrypoint + wiring) and `internal/{signing,photos,auth,magiclink,email,messages,store,httpapi}`. Domain packages define interfaces; `store` (SQLite) implements them; `httpapi` is the HTTP surface; `cmd/server` wires it. `cmd/migrate` is the one-shot data-migration tool (see below).
+- **SQLite pragmas:** opened WAL + `busy_timeout=5000` + `foreign_keys=on`, with `SetMaxOpenConns(1)`. SQLite serializes writes; a single connection is what keeps "database is locked" from appearing under `-race` and concurrent uploads. Don't raise the connection cap.
+- **Tables:** `users`, `sessions`, `used_login_nonces`, `login_attempts`, `photos`, `upload_signatures`. The v1→v2 migration dropped the Auth0-era profile blob and recreated the empty `users`/`sessions` (production started empty — they only cached Auth0 data); `photos`/`upload_signatures` are untouched.
+- **Admin is derived from `ADMIN_EMAILS` at auth time** (authoritative). The stored `users.is_admin` column is informational — editing it grants nothing.
+- **Single-use uploads are enforced at the HTTP layer, not the store.** The `signing.Store` interface is check-marker + put-marker (no atomic delete), so the check-and-expire claim runs under an in-process mutex (fine for a single binary). A signature hashes the canonical storage path (not the query string), so it's stable regardless of URL encoding. Consequence (same as the legacy S3 markers): once a path's signature is expired, re-uploading to that exact path stays blocked.
+- **Single-use login is DB-enforced, race-safe:** the magic-link nonce is burned via `INSERT OR IGNORE` into `used_login_nonces` — with the primary key + single write connection, exactly one of N concurrent verifies wins. Rate limiting is SQLite-backed (`login_attempts`): 3/email/15min + 20/IP/15min; over-limit still returns 200 but sends nothing (no enumeration).
+
 ## Configuration (environment variables)
 
 All config is env-var only; there are no config files or secrets in the repo.
@@ -116,11 +125,11 @@ the key itself begins with `{environment}/photos/…`, the on-disk path has
 DATA_DIR/photos/production/photos/hu-4/week-2/user@example.com.jpg
 ```
 
-The phase-3c migration tool and `list-for-week` both depend on this layout.
+The `migrate` tool and `list-for-week` both depend on this layout.
 
-## Data migration (phase 3c)
+## Data migration (the `migrate` tool)
 
-`cmd/migrate` turns the Phase-0 S3 salvage into this live layout: it hardlinks
+`cmd/migrate` turns the S3 salvage master into this live layout: it hardlinks
 each salvaged file into place and writes one `photos` row per photo object. It
 **hardlinks, never copies** (`os.Link` on the same ext4 volume), so it costs
 ~zero bytes and leaves the salvage tree pristine — load-bearing, because the
@@ -138,8 +147,8 @@ What it does with the 1392 salvaged objects:
 - **750 external-articles**: hardlinked to `DATA_DIR/external-articles/<rest>`
   (the leading `external-articles/` segment dropped), a plain static tree with
   no `photos` rows. It lives **outside** `DATA_DIR/photos/` on purpose: that
-  tree is admin-gated, while Phase 4 serves the articles as public static files
-  via Caddy (`root * DATA_DIR/external-articles`), and the frontend's
+  tree is admin-gated, while Caddy serves the articles as public static files
+  (`root * DATA_DIR/external-articles`), and the frontend's
   `thirdPartyArticlesBaseUrl` repoints there.
 
 It is **idempotent** (re-running skips already-linked files and re-upserts rows,
@@ -157,7 +166,7 @@ Flags: `--source` (salvage root holding `s3/` and `metadata.json`), `--data-dir`
 MD5-check `--verify-samples` random photos against the manifest ETag), which
 exits non-zero on any mismatch.
 
-**Deploy constraint (phase 4):** `--data-dir` MUST sit on the same filesystem as
+**Deploy constraint:** `--data-dir` MUST sit on the same filesystem as
 the salvage `s3/` tree (both on the Hetzner volume), or the hardlinks fail with
 a cross-device error rather than silently copying. The command to run on the box
 (salvage at `/mnt/HC_Volume_105883537/photato`):
@@ -176,7 +185,7 @@ article root at `…/photato-data/external-articles`.
 ## Development
 
 ```sh
-mise exec -- go test ./...          # unit tests (the phase-3a spec)
+mise exec -- go test ./...          # unit tests
 mise exec -- go test -race ./...    # race detector
 mise exec -- go vet ./...
 mise exec -- gofmt -l .             # should print nothing
