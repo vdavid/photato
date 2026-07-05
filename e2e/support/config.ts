@@ -1,56 +1,58 @@
 /**
  * Shared configuration for the baseline suite.
  *
- * Everything target-specific funnels through here so the same suite can run against the current
- * live legacy site and, later, the new Hetzner deployment (Phase 5) by changing env vars only.
+ * Everything target-specific funnels through here so the same suite can run against the live site
+ * (`https://photato.eu`) or a local `vite preview` build by changing env vars only.
  */
+import dotenv from 'dotenv';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-/** Target under test. Default is the live legacy site. Phase 5 repoints this. */
+// Load e2e/.env here, at the top of the module every other file imports, so `.env`-only values (e.g.
+// TEST_LOGIN_SECRET) are populated before the `process.env` reads below run. (playwright.config.ts
+// imports this module before its own dotenv call, so relying on that alone would read too early.)
+dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '.env') });
+
+/** Target under test. Default is the live site. */
 export const BASE_URL = process.env.BASE_URL ?? 'https://photato.eu';
 
 /**
- * Is the legacy AWS/Mongo backend dead (502)?
- *
- * When true (current state), backend-dependent authenticated pages (upload, course, admin photos)
- * render error/garbage states, so we assert only the deterministic parts and skip baselining them.
- * Phase 5 sets LEGACY_BACKEND_DEAD=false once the Go backend is live, which is the flag Phase 5 flips
- * to turn on the upload/course functional baselines.
+ * Block the dead legacy AWS/Mongo backend hosts (they still resolve but 502). Defaults on and is
+ * harmless against the current stack — the Svelte app never calls those hosts — but it keeps pages
+ * from ever hanging on them if a stale reference resurfaces.
  */
 export const LEGACY_BACKEND_DEAD = (process.env.LEGACY_BACKEND_DEAD ?? 'true') !== 'false';
 
 /**
  * Frozen wall clock for anonymous/public pages.
  *
- * The site computes course dates and "current week" from the current date (config.mjs _calculateDates
+ * The site computes course dates and "current week" from the current date (config.ts _calculateDates
  * + CourseDateConverter). The 2020 winter course ended in early 2021, so any date well past it puts the
  * site in its stable "course complete" state — all 12 weeks of materials shown, every countdown in the
  * past. That is exactly what a real visitor sees today, and pinning it to a fixed instant makes re-runs
  * (and future baseline regens) reproduce byte-for-byte.
  *
- * NOTE: the clock is frozen only for anonymous pages. The authenticated flow uses the real clock so the
- * live Auth0 token's iat/exp validate (a frozen past clock would make a freshly issued token look
- * future-dated and get rejected as clock skew).
+ * Used for BOTH anonymous and authenticated specs: magic-link session tokens are validated server-side
+ * (opaque tokens, DB-checked expiry) and carry no client-clock-sensitive iat/exp, so freezing the page
+ * clock is safe and keeps course-derived text (e.g. the upload page's week number) deterministic.
  */
 export const FROZEN_TIME = new Date('2026-07-01T12:00:00+02:00');
 
 /**
- * Test user (real Auth0 account). Password lives only in the gitignored .env.
- *
- * NOTE: the live Auth0 client (classic Lock) exposes ONLY "Sign in with Google" — there is no
- * username/password form to drive, so an automated end-to-end login is not possible today. We assert
- * the login handshake instead (see tests/auth.spec.ts). These stay here for Phase 5, which revisits an
- * automatable auth path (the planned magic-link/passkey system, an Auth0 test DB connection, or token
- * injection) to enable logged-in baselines.
+ * Magic-link e2e backdoor. `POST /auth/test-login {email, secret}` mints a session token without the
+ * email round-trip (see docs/auth-contract.md). The authenticated specs use it to drive logged-in
+ * pages. The secret lives only in the gitignored `.env`; when unset, those specs skip.
  */
-export const USER_EMAIL = process.env.E2E_USER_EMAIL ?? 'test@photato.eu';
-export const USER_PASSWORD = process.env.E2E_USER_PASSWORD ?? '';
+export const API_BASE_URL = process.env.API_BASE_URL ?? 'https://api.photato.eu';
+export const TEST_LOGIN_SECRET = process.env.TEST_LOGIN_SECRET ?? '';
 
-/** Auth0 domain + production SPA client id (frontend/src/config.mjs). Used to verify the login wiring. */
-export const AUTH0_DOMAIN = 'photato.eu.auth0.com';
-export const AUTH0_PROD_CLIENT_ID = 'S31BLLD6U12BnIt92b5yq5xAQ1Dt37ey';
+/** An admin email — must be in the backend's `ADMIN_EMAILS`, so a backdoor session for it is admin. */
+export const ADMIN_EMAIL = 'veszelovszki@gmail.com';
+/** A non-admin member email (any address not in `ADMIN_EMAILS`). */
+export const MEMBER_EMAIL = 'e2e-member@photato.eu';
 
 /**
- * Public routes, enumerated from the React router in frontend/src/website/components/App.mjs.
+ * Public routes, enumerated from the route table in frontend/src/website/components/App.svelte.
  * The site forces locale hu-HU (i18nHelper.getDefaultLocaleCodeByNavigatorPreferences), so all copy
  * is Hungarian regardless of the browser Accept-Language.
  */
@@ -70,7 +72,7 @@ export const PUBLIC_ROUTES = {
 
 /**
  * Protected routes. Logged out, the app renders the "members only" Error403Page for every one of these
- * (it does NOT redirect). Enumerated from App.mjs _getMemberRoutes / _getAdminRoutes.
+ * (it does NOT redirect). Enumerated from the member/admin route entries in App.svelte.
  */
 export const MEMBER_ROUTES = ['/upload', '/course', '/challenges/1'] as const;
 export const ADMIN_ROUTES = [

@@ -1,67 +1,50 @@
 import { test, expect } from '@playwright/test';
-import { AUTH0_DOMAIN, AUTH0_PROD_CLIENT_ID, BASE_URL } from '../support/config';
 import { applyAnonymousDeterminism, waitForAppReady } from '../support/determinism';
 
 /**
- * Login handshake.
- *
- * The live Auth0 client (classic Lock) exposes only "Sign in with Google" — there is no
- * username/password form to automate, and driving Google's OAuth headlessly is infeasible and
- * inappropriate. So instead of a full logged-in session, we assert the deterministic, in-our-control
- * part of the flow: the frontend hands off to Auth0's /authorize with the right client_id and the
- * /login-callback redirect_uri. This is exactly the wiring the Vite / TypeScript / Svelte rewrites must
- * preserve. Logged-in baselines (upload, course, admin, authenticated front page) are deferred to
- * Phase 5, which introduces an automatable auth path.
+ * Magic-link login UI (replaces the old Auth0 handshake specs). Auth is now self-hosted passwordless
+ * email links — see docs/auth-contract.md. There's no third-party redirect to assert anymore; instead
+ * we cover the in-our-control login page: it renders, and requesting a link flips to the
+ * "check your inbox" state. The request-link POST is stubbed 200 so the test never sends a real email
+ * and stays offline-deterministic (the backend always returns 200 anyway, to avoid account
+ * enumeration).
  */
 
 test.beforeEach(async ({ page }) => {
   await applyAnonymousDeterminism(page);
 });
 
-test('sign-in hands off to Auth0 with the right client and callback', async ({ page }) => {
-  // The members-only 403 page has a "Sign in" button that is always visible (not tucked in the mobile
-  // hamburger menu), so this works on both viewports.
-  await page.goto('/upload', { waitUntil: 'networkidle' });
+test('login page renders the email form', async ({ page }) => {
+  await page.goto('/login', { waitUntil: 'networkidle' });
   await waitForAppReady(page);
-
-  const [authorizeRequest] = await Promise.all([
-    page.waitForRequest((r) => r.url().includes(`${AUTH0_DOMAIN}/authorize`), { timeout: 30_000 }),
-    page.getByRole('button', { name: 'Bejelentkezés' }).click(),
-  ]);
-
-  const url = authorizeRequest.url();
-  expect(url).toContain('client_id=');
-  expect(decodeURIComponent(url)).toContain('/login-callback');
-  // The saved-redirect handler stashes where to return; app wiring, not Auth0's.
-  expect(url).toContain('response_type=');
-
-  // Against the default production target, pin the exact client id from config.mjs.
-  if (BASE_URL === 'https://photato.eu') {
-    expect(url).toContain(`client_id=${AUTH0_PROD_CLIENT_ID}`);
-  }
+  await expect(page.getByRole('heading', { name: 'Bejelentkezés a Photatóra' })).toBeVisible();
+  await expect(page.locator('input[type="email"]')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Küldjétek a bejelentkező linket' })).toBeVisible();
+  await expect(page).toHaveScreenshot('login.png', { fullPage: true });
 });
 
-test('Auth0 hosted login page loads', async ({ page }) => {
-  // Auth0 only renders its hosted login widget for whitelisted origins (Allowed Callback URLs / Web
-  // Origins on the SPA client). Production photato.eu is whitelisted; the Phase-5 preview host
-  // new.photato.eu (and any localhost preview) is not, so Auth0 returns a "callback mismatch" error
-  // page instead of the Lock card. That is an Auth0-dashboard config gap, not an app regression, so we
-  // skip the render assertion off production.
-  // TODO(David): add https://new.photato.eu to the Auth0 SPA client's Allowed Callback URLs, Web
-  // Origins, and Logout URLs (keep photato.eu), then this passes on the preview host too.
-  test.skip(
-    BASE_URL !== 'https://photato.eu',
-    `Auth0 origin not whitelisted for ${BASE_URL}; see TODO to add it in the Auth0 dashboard.`,
-  );
+test('requesting a link shows the check-your-inbox state', async ({ page }) => {
+  await page.route('**/auth/request-link', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }));
+
+  await page.goto('/login', { waitUntil: 'networkidle' });
+  await waitForAppReady(page);
+
+  await page.locator('input[type="email"]').fill('someone@example.com');
+  await page.getByRole('button', { name: 'Küldjétek a bejelentkező linket' }).click();
+
+  await expect(page.getByText('Elküldtük a bejelentkező linket! Nézd meg a postaládád, és kattints a linkre a belépéshez.')).toBeVisible();
+  // The form is gone once submitted.
+  await expect(page.locator('input[type="email"]')).toHaveCount(0);
+});
+
+test('the members-only 403 "Sign in" button leads to the login page', async ({ page }) => {
+  // The 403 page has an always-visible "Bejelentkezés" button (not tucked in the mobile hamburger),
+  // so this holds on both viewports. It routes client-side to /login (no external redirect).
   await page.goto('/upload', { waitUntil: 'networkidle' });
   await waitForAppReady(page);
 
-  await Promise.all([
-    page.waitForURL(new RegExp(AUTH0_DOMAIN.replace('.', '\\.')), { timeout: 30_000 }),
-    page.getByRole('button', { name: 'Bejelentkezés' }).click(),
-  ]);
-
-  // We landed on the Auth0 tenant. Confirm the hosted widget rendered (the app title on the Lock card).
-  // Not baselined: it is an external page Auth0 can restyle at will.
-  await expect(page.getByRole('heading', { name: 'Photato' })).toBeVisible({ timeout: 20_000 });
+  await page.getByRole('button', { name: 'Bejelentkezés' }).click();
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByRole('heading', { name: 'Bejelentkezés a Photatóra' })).toBeVisible();
 });

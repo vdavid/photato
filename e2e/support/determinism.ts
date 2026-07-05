@@ -22,6 +22,10 @@ const TRACKER_HOST_FRAGMENTS = [
   'lr-ingest',
   'lr-in-prod',
   'cdn.lr-',
+  // Umami (self-hosted analytics) replaced the old GA/Facebook trackers in the Svelte rewrite. Its
+  // `data-domains="photato.eu"` already stops it sending events off production, but block the script
+  // host too so tests never wait on it and screenshots stay deterministic.
+  'anal.veszelovszki.com',
 ];
 
 /**
