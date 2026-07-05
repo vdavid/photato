@@ -1,13 +1,13 @@
 {
   "name": "@photato/frontend",
-  "version": "7.2.0",
-  "description": "The React front end of the Photato website. Built with Vite and TypeScript (strict); app deps (React 17, React Router 5) stay frozen until the Svelte migration.",
+  "version": "8.0.0",
+  "description": "The Photato website front end. Svelte 5 SPA, TypeScript (strict), vanilla CSS, built with Vite. Magic-link auth against the Go backend; Umami analytics.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -22,19 +22,12 @@
   ],
   "author": "David Veszelovszki",
   "license": "ISC",
-  "dependencies": {
-    "@auth0/auth0-spa-js": "^1.2.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-facebook-pixel": "^1.0.3",
-    "react-ga": "^3.2.0",
-    "react-router-dom": "^5.2.0"
-  },
   "devDependencies": {
-    "@types/react": "^17.0.93",
-    "@types/react-dom": "^17.0.26",
-    "@types/react-router-dom": "^5.3.3",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@tsconfig/svelte": "^5.0.8",
+    "svelte": "^5.56.4",
+    "svelte-check": "^4.7.1",
     "typescript": "^6.0.3",
-    "vite": "^8.1.1"
+    "vite": "^8.1.3"
   }
 }

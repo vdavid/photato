@@ -1,4 +1,4 @@
-import type React from 'react';
+import type {Component} from 'svelte';
 
 /** Metadata each article module returns from its `getMetadata()` export. */
 export interface ArticleMetadata {
@@ -13,8 +13,9 @@ export interface ArticleMetadata {
     isOriginalUrlBroken?: boolean;
 }
 
-/** The shape of a dynamically imported article module. */
+/** The shape of a dynamically imported article module: a `<script module>` `getMetadata` export plus
+ * the Svelte component as the default export. */
 export interface LoadedArticle {
     getMetadata: () => ArticleMetadata;
-    default: React.ComponentType;
+    default: Component;
 }
