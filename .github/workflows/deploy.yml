@@ -1,8 +1,8 @@
 name: Deploy
 
 # Runs on pushes to main that touch the backend, the frontend, or their deploy infra. CI stays lean
-# (Go: gofmt + vet + test, no -race, no docker build; frontend: a plain `vite build`, no browser
-# installs — Playwright pixel baselines run in Docker locally, not here). GitHub minutes are limited, so
+# (Go: gofmt + vet + test, no -race, no docker build; frontend: `tsc --noEmit` + `vite build`, no
+# browser installs — Playwright pixel baselines run in Docker locally, not here). GitHub minutes are limited, so
 # the Hetzner box builds both the backend image and the frontend bundle itself when it gets the signed
 # webhook. If any check fails the webhook is never sent, so a broken commit can't deploy.
 
@@ -69,6 +69,12 @@ jobs:
       - name: Install frontend deps
         working-directory: .
         run: pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+
+      # TypeScript is strict; `tsc --noEmit` is the type gate (the Oxc bundler strips types without
+      # checking them, so a type error would otherwise ship). Cheap, no browsers.
+      - name: Type-check frontend
+        working-directory: .
+        run: pnpm --filter ./frontend typecheck
 
       - name: Build frontend
         working-directory: .

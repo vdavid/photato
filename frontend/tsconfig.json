@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Language + environment: React 17 classic JSX runtime (React.createElement), matching the
+     * Oxc `jsx: 'classic'` pin in vite.config.ts. Every component imports React, as the runtime needs. */
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    /* Vite/Rolldown owns emit; tsc is a type-only gate. */
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Strict everywhere. */
+    "strict": true
+  },
+  "include": ["src", "vite.config.ts"]
+}

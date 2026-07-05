@@ -1,12 +1,13 @@
 {
   "name": "@photato/frontend",
   "version": "7.2.0",
-  "description": "The React front end of the Photato website. Built with Vite; app deps (React 17, React Router 5) stay frozen until the TypeScript and Svelte migrations.",
+  "description": "The React front end of the Photato website. Built with Vite and TypeScript (strict); app deps (React 17, React Router 5) stay frozen until the Svelte migration.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,6 @@
   "license": "ISC",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.2.4",
-    "htm": "^3.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-facebook-pixel": "^1.0.3",
@@ -31,6 +31,10 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.93",
+    "@types/react-dom": "^17.0.26",
+    "@types/react-router-dom": "^5.3.3",
+    "typescript": "^6.0.3",
     "vite": "^8.1.1"
   }
 }
