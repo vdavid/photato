@@ -32,7 +32,7 @@ The Photato web app: Svelte 5 (runes), TypeScript strict, vanilla CSS, built wit
 
 - **Config** (`src/config.ts`): picks the backend environment by hostname (`photato.eu*` → production, else development). The backend is always `api.photato.eu`. `thirdPartyArticlesBaseUrl` is `https://api.photato.eu/external-articles/`.
 - **Auth is magic-link** (`docs/auth-contract.md`), no Auth0. `auth/auth.svelte.ts` + `auth/components/{LoginPage,LoginVerifyPage}.svelte`: email → `POST /auth/request-link` → "check your inbox"; `/login/verify?token=` → `POST /auth/verify` → session token in localStorage → `Authorization: Bearer` on API calls; `GET /auth/me` re-hydrates on load. `isAdmin` is server truth.
-- **Analytics is Umami** (`index.html`, `anal.veszelovszki.com/script.js`, website id `75f81a27-3f5a-49f9-bf84-fcec90ee3f5a`, `data-domains="photato.eu"`). Cookieless, so no consent banner. Google Analytics, the Facebook Pixel, and its interop shim were all deleted with the React code — if you add analytics, preserve the cookieless property.
+- **Analytics is Umami, loaded first-party** (`index.html`: `src="/mami.js"`, website id `75f81a27-3f5a-49f9-bf84-fcec90ee3f5a`, `data-domains="photato.eu"`). Caddy proxies `/mami.js` → the umami container's `/script.js` and `/api/send` → umami on the photato.eu origin (see the photato.eu block in the infra repo's Caddyfile), so adblockers only see same-origin requests. Don't point the tag at the analytics host directly and don't add explanatory HTML comments to `index.html` — Vite ships them to production verbatim, and naming the analytics host in served HTML defeats the evasion. Cookieless, so no consent banner. If you add analytics, preserve the cookieless property.
 
 ## Deploy
 

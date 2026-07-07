@@ -31,12 +31,6 @@
     <meta name="msapplication-TileImage" content="/website/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#101016">
 
-    <!-- Umami analytics (self-hosted, cookieless). `data-domains` limits tracking to the production
-         apex, so localhost/preview/alias hosts never send events. The tracker patches history, so it
-         auto-records this SPA's client-side route changes. Website registered as "photato.eu".
-         First-party path: Caddy proxies /mami.js → umami /script.js and /api/send → umami on this
-         origin, so adblockers see same-origin requests (evades third-party blocklists and the
-         well-known /script.js name). Don't point this at anal.veszelovszki.com — that defeats it. -->
     <script defer src="/mami.js" data-website-id="75f81a27-3f5a-49f9-bf84-fcec90ee3f5a" data-domains="photato.eu"></script>
 </head>
 <body>
