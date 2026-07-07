@@ -8,7 +8,7 @@ const Auth0Authorizer = require('./Auth0Authorizer.js');
 const Auth0AndMongoAuthorizer = require('./Auth0AndMongoAuthorizer.js');
 
 const emailAddress = 'veszelovszki@gmail.com';
-const accessToken = 'hhBw8WwF1UqeuN_7PcuBRXPjoYJataIQ'; // Needs a real access token for this email address
+const accessToken = 'REDACTED'; // Dead: the Auth0 tenant is gone. This test can't run; needs a real access token for this email address.
 const environment = 'development';
 
 test('Accepts a valid access token and gets user from local repo', async () => {

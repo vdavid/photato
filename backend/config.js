@@ -25,7 +25,8 @@ const defaultConfig = Object.freeze({
     environment: '', // Will be set to 'development', 'staging', or 'production' by environment-specific config
     baseUrl: '', // Will be set by environment-specific config. E.g. "https://photato.eu". Will not contain a slash at the end.
     database: {
-        connectionString: 'mongodb+srv://lambda-user:z@mhjNp8unHhY^1YXe4k@photato-production-cluster-6zt0i.mongodb.net/test?retryWrites=true&w=majority',
+        // Credentials redacted: the Mongo Atlas cluster is deleted, this connection string is dead. Kept as a shape reference only.
+        connectionString: 'mongodb+srv://REDACTED:REDACTED@REDACTED.mongodb.net/test?retryWrites=true&w=majority',
         name: 'photato-website-production',
     },
     auth: {

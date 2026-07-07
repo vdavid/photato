@@ -4,7 +4,7 @@ const auth0Authorizer = new Auth0Authorizer('https://photato.eu.auth0.com/userin
 test('Can validate good token', async () => {
     /* Arrange */
     // noinspection SpellCheckingInspection
-    const validAccessToken = 'o-lFFr8Erisc2C-Hf-BD8xKLMh9zO7zL'; /* Sorry, it's inconvenient, but you'll need a valid access token for this test */
+    const validAccessToken = 'REDACTED'; /* Dead: the Auth0 tenant is gone. This test can't run; kept as a shape reference. You'd need a valid access token here. */
 
     /* Act */
     const userInfo = await auth0Authorizer.getAuth0UserInfo(validAccessToken);

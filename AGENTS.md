@@ -58,7 +58,6 @@ These need David (registrar/account access or a decision); agents can't do them.
 - **Close the Mongo Atlas subscription** (the cluster is already deleted; `users` started empty).
 - **Decide `photato.eu` email.** MX points at mailgun; account state unknown.
 - **Umami box oddity:** `TRACKER_SCRIPT_NAME=mami` env isn't taking effect on the box; the app loads `/script.js`. Cosmetic (adblock-evasion path only).
-- **Archive the old GitHub repos** `photato-website-backend` / `photato-website-frontend` (superseded by this monorepo).
 - **Obsolete local dir:** `~/projects-git/vdavid/photato-website` is the pre-monorepo checkout, now dead. Listed for awareness — David removes it himself; don't delete.
 
 ## Roadmap (next milestone ideas)
