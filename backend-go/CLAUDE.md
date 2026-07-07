@@ -62,8 +62,9 @@ Magic-link login (see `../docs/auth-contract.md` for the full wire contract):
   backdoor (constant-time secret compare). Unset in normal operation.
 - `SMTP_HOST`, `SMTP_PORT` (default `587`), `SMTP_USERNAME`, `SMTP_PASSWORD`,
   `SMTP_FROM_ADDRESS`, `SMTP_FROM_NAME` (default `Photato`): SMTP submission
-  config for sending the link (generic `net/smtp` + STARTTLS; Photato uses
-  SMTP2GO). When `SMTP_HOST`/`SMTP_FROM_ADDRESS` are unset, links can't be mailed
+  config for sending the link (generic `net/smtp` + STARTTLS; Photato points
+  these at mailcow submission, which relays outbound via the SMTP2GO smarthost).
+  When `SMTP_HOST`/`SMTP_FROM_ADDRESS` are unset, links can't be mailed
   (the server logs a warning); `/auth/request-link` still returns 200.
 
 Notes on config this backend does NOT use:

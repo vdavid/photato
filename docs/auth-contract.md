@@ -121,5 +121,6 @@ time (see `infra/deploy-webhook/deploy-photato.sh`):
   and drive login via `POST /auth/test-login {email, secret}`. Get the value from
   the box env file (`docker run --rm -v /etc/photato-deploy.env:/f:ro alpine grep
   TEST_LOGIN_SECRET /f`), never from source control.
-- `SMTP_*` — SMTP2GO submission creds; mail is sent from `Photato
-  <photato@veszelovszki.com>`.
+- `SMTP_*` — mailcow submission creds (`mail.veszelovszki.com:587`, user
+  `photato@photato.eu`); mail is sent from `Photato <photato@photato.eu>`. mailcow
+  relays outbound through the SMTP2GO smarthost (the box blocks port 25).

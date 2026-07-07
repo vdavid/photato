@@ -22,7 +22,7 @@ Each area has a colocated `CLAUDE.md` with its own detail. This file is the map.
 
 - **Backend:** one Go binary (stdlib `net/http`, no framework), pure-Go SQLite via `modernc.org/sqlite` (no cgo), WAL mode. Lives at `https://api.photato.eu` (container `photato:9003` on `proxy-net`, behind Caddy). See `backend-go/CLAUDE.md`.
 - **Frontend:** static Svelte SPA build served by Caddy at the apex `https://photato.eu` (`new.photato.eu` is an alias; `www` 301s to the apex). Client-side routing with a `try_files → /index.html` fallback.
-- **Auth:** self-hosted passwordless email **magic links** (no Auth0 — the account was lost, nothing to preserve). Signed single-use 15-min token → opaque 3-day session token that Bearer-authorizes every endpoint. Contract in `docs/auth-contract.md`. Mail via SMTP2GO from `photato@veszelovszki.com`.
+- **Auth:** self-hosted passwordless email **magic links** (no Auth0 — the account was lost, nothing to preserve). Signed single-use 15-min token → opaque 3-day session token that Bearer-authorizes every endpoint. Contract in `docs/auth-contract.md`. Mail sent via mailcow submission (`mail.veszelovszki.com`) as `photato@photato.eu`, which mailcow relays outbound through the SMTP2GO smarthost (the box blocks port 25); photato.eu also receives via mailcow (`hello@`/`info@` aliases).
 - **Analytics:** self-hosted Umami (`anal.veszelovszki.com`), cookieless. No Google Analytics / Facebook Pixel (deleted with the React code).
 - **Data on the box** (Hetzner volume, ext4):
   - `/mnt/HC_Volume_105883537/photato-data` → the backend's `DATA_DIR` (`/data` in the container): `photato.db` (+ `-wal`/`-shm`), `photos/`, `external-articles/`.
@@ -52,12 +52,9 @@ Push to `main` (touching `backend-go/**`, `frontend/**`, `infra/**`, or the work
 
 These need David (registrar/account access or a decision); agents can't do them.
 
-- **Finish the Cloudflare DNS move: switch nameservers at ICDSoft.** The CF zone exists (id `3fe0208531778949a4516fc118ee1cf4`, status pending) with all records replicated and verified answering on the assigned nameservers — everything DNS-only / grey-cloud so Caddy keeps doing its own TLS. The remaining step is David-only (no ICDSoft creds stored): at https://accounts.icdsoft.com/domains/details/photato.eu set the nameservers to `cass.ns.cloudflare.com` + `drew.ns.cloudflare.com`. The zone activates on its own (CF re-checks periodically); the site keeps working throughout since both DNS providers serve identical records. Afterwards the Netlify DNS zone can be retired together with the Netlify site.
-- **Retire the old hosting, keep DNS until the CF move.** Delete the Netlify **site** (hosting) but keep the Netlify **DNS zone** live until Cloudflare takes over.
+- **Retire the old Netlify hosting.** The Cloudflare DNS move is done: photato.eu's nameservers point at Cloudflare, the zone is active, and its records are the source of truth in the infra repo's Terraform (`cloudflare/photato.eu.tf`). Remaining David-only step: delete the Netlify **site** (hosting) and the now-redundant Netlify **DNS zone**.
 - **Wipe the AWS account.** Salvage lives on the box + NAS; ideally do it after the next restic offsite drive-connect confirms the offsite copy.
 - **Close the Mongo Atlas subscription** (the cluster is already deleted; `users` started empty).
-- **Decide `photato.eu` email.** MX points at mailgun; account state unknown.
-- **Umami box oddity:** `TRACKER_SCRIPT_NAME=mami` env isn't taking effect on the box; the app loads `/script.js`. Cosmetic (adblock-evasion path only).
 - **Obsolete local dir:** `~/projects-git/vdavid/photato-website` is the pre-monorepo checkout, now dead. Listed for awareness — David removes it himself; don't delete.
 
 ## Roadmap (next milestone ideas)
