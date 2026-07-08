@@ -14,6 +14,9 @@ on:
       - 'frontend/**'
       - 'infra/**'
       - '.github/workflows/deploy.yml'
+      # Docs-only pushes don't deploy (negated pattern — GitHub forbids mixing
+      # `paths` with `paths-ignore`). A push mixing .md and code still deploys.
+      - '!**/*.md'
   workflow_dispatch:
 
 permissions:
