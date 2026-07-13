@@ -9,12 +9,12 @@
             publisherName: 'fotozasblog.hu',
             originalUrl: 'http://fotozasblog.hu/digitalis-fotozas/',
             isOriginalUrlBroken: false,
-        };
+        }
     }
 </script>
 
 <script lang="ts">
-    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte';
+    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte'
 </script>
 
 <FullWidthLocalImage fileName="fotozasblog-digitalis-fotozas-alapok-tippek-trukkok.png" altText="" />

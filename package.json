@@ -1,0 +1,10 @@
+{
+  "name": "photato",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Photato monorepo root: pnpm workspace config and the check-runner entry point. The apps live in frontend/ and e2e/.",
+  "scripts": {
+    "check": "./scripts/check.sh",
+    "test:e2e:docker": "pnpm --filter e2e test:e2e:docker"
+  }
+}

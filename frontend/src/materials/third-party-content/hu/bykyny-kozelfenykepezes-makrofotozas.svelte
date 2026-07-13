@@ -9,6 +9,6 @@
             publisherName: 'bykyny.hu',
             originalUrl: 'http://www.bykyny.hu/fenykepezes-kozelfenykepezes.shtml',
             isOriginalUrlBroken: false,
-        };
+        }
     }
 </script>

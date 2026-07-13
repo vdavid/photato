@@ -1,32 +1,34 @@
 <script lang="ts">
-    import {onMount} from 'svelte';
-    import {__} from '../../i18n/i18n.svelte';
-    import {location, navigate} from '../../website/router.svelte';
-    import {verify} from '../auth.svelte';
-    import Link from '../../website/components/Link.svelte';
+    import { onMount } from 'svelte'
+    import { __ } from '../../i18n/i18n.svelte'
+    import { location, navigate } from '../../website/router.svelte'
+    import { verify } from '../auth.svelte'
+    import Link from '../../website/components/Link.svelte'
 
-    let status = $state<'verifying' | 'error'>('verifying');
+    let status = $state<'verifying' | 'error'>('verifying')
 
-    $effect(() => {document.title = __('Sign in to Photato') + ' - Photato';});
+    $effect(() => {
+        document.title = __('Sign in to Photato') + ' - Photato'
+    })
 
     onMount(async () => {
-        const token = new URLSearchParams(location.search).get('token');
+        const token = new URLSearchParams(location.search).get('token')
         if (!token) {
-            status = 'error';
-            return;
+            status = 'error'
+            return
         }
-        let ok = false;
+        let ok = false
         try {
-            ok = await verify(token);
+            ok = await verify(token)
         } catch (error) {
-            console.error('Verification request failed:', error);
+            console.error('Verification request failed:', error)
         }
         if (ok) {
-            navigate('/', {replace: true});
+            navigate('/', { replace: true })
         } else {
-            status = 'error';
+            status = 'error'
         }
-    });
+    })
 </script>
 
 {#if status === 'verifying'}

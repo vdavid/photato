@@ -1,15 +1,27 @@
 <script lang="ts">
-    import {config} from '../../config';
-    import {__, getActiveLocaleCode} from '../../i18n/i18n.svelte';
+    import { config } from '../../config'
+    import { __, getActiveLocaleCode } from '../../i18n/i18n.svelte'
 
-    $effect(() => {document.title = __('Bug report') + ' - Photato';});
+    $effect(() => {
+        document.title = __('Bug report') + ' - Photato'
+    })
 </script>
 
 {#if getActiveLocaleCode() === 'hu-HU'}
     <h2>Hibajelentés</h2>
-    <img src="/bug-report/images/dead-potato.jpg" alt={__('Dead potato')}/>
-    <p>A kurzusokat egy pár fős csapatként szervezzük. Időnként hibázunk, és ez néha neked is kellemetlenséget okozhat. Ezúton kérünk elnézést.</p>
-    <p>Sokat segíthetsz azzal, hogy szólsz nekünk, amikor hibát, vagy legalábbis valami furcsaságot tapasztalsz. A hibajelentéseket a <a href={`mailto:${config.customerServiceEmailAddress}?subject=${__('Bug report')}`} target="_blank" rel="noopener">photatophotato@gmail.com</a> címre várjuk.</p>
+    <img src="/bug-report/images/dead-potato.jpg" alt={__('Dead potato')} />
+    <p>
+        A kurzusokat egy pár fős csapatként szervezzük. Időnként hibázunk, és ez néha neked is kellemetlenséget okozhat.
+        Ezúton kérünk elnézést.
+    </p>
+    <p>
+        Sokat segíthetsz azzal, hogy szólsz nekünk, amikor hibát, vagy legalábbis valami furcsaságot tapasztalsz. A
+        hibajelentéseket a <a
+            href={`mailto:${config.customerServiceEmailAddress}?subject=${__('Bug report')}`}
+            target="_blank"
+            rel="noopener">photatophotato@gmail.com</a
+        > címre várjuk.
+    </p>
     <p>Szokott segíteni nekünk, ha mellékeled ezeket:</p>
     <ul>
         <li>Milyen böngészőt használsz? (pl. Chrome, Firefox, Edge)</li>
@@ -20,9 +32,18 @@
     </ul>
 {:else}
     <h2>Bug report</h2>
-    <img src="/bug-report/images/dead-potato.jpg" alt={__('Dead potato')}/>
-    <p>We’re a small group of people who organize these courses. We make mistakes, and some might negatively affect your experience. We apologize.</p>
-    <p>If you found a bug, you can help us by reporting it in email at <a href={`mailto:${config.customerServiceEmailAddress}?subject=${__('Bug report')}`} target="_blank" rel="noopener">photatophotato@gmail.com</a>.</p>
+    <img src="/bug-report/images/dead-potato.jpg" alt={__('Dead potato')} />
+    <p>
+        We’re a small group of people who organize these courses. We make mistakes, and some might negatively affect
+        your experience. We apologize.
+    </p>
+    <p>
+        If you found a bug, you can help us by reporting it in email at <a
+            href={`mailto:${config.customerServiceEmailAddress}?subject=${__('Bug report')}`}
+            target="_blank"
+            rel="noopener">photatophotato@gmail.com</a
+        >.
+    </p>
     <p>It usually helps when people tell us these:</p>
     <ul>
         <li>What internet browser do you use? (e.g. Chrome, Firefox, Edge)</li>

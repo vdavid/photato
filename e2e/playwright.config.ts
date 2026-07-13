@@ -1,11 +1,11 @@
-import { defineConfig, devices } from '@playwright/test';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import dotenv from 'dotenv';
-import { BASE_URL } from './support/config';
+import { defineConfig, devices } from '@playwright/test'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+import dotenv from 'dotenv'
+import { BASE_URL } from './support/config'
 
-const dir = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(dir, '.env') });
+const dir = path.dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: path.join(dir, '.env') })
 
 /**
  * Baseline suite for photato.eu. Pixel baselines are Linux-only: they must be generated inside the
@@ -33,7 +33,6 @@ export default defineConfig({
     timezoneId: 'Europe/Budapest',
     // Force the mobile-layout media queries via width alone and keep pixels 1:1 for stable diffs.
     deviceScaleFactor: 1,
-    reducedMotion: 'reduce',
     colorScheme: 'light',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
@@ -61,4 +60,4 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 },
     },
   ],
-});
+})

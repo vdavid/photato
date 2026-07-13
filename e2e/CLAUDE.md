@@ -18,6 +18,14 @@ outlive any future frontend implementation swap.
   finds none, and fails loudly. That is the intended guard.
 - **pnpm** (the repo is pnpm-only).
 
+## Lint, format, and typecheck
+
+Same strict tooling as `frontend/` (see `frontend/CLAUDE.md`), minus Svelte. Config: `eslint.config.js` here, root `.oxfmtrc.json`.
+
+- **Lint:** `pnpm --filter e2e lint` (`lint:fix`). ESLint flat config, `typescript-eslint` strictTypeChecked with Node + browser globals (browser for `page.evaluate` callbacks). `no-console` is warn-level.
+- **Format:** `pnpm --filter e2e format` (`format:check`). **oxfmt** owns everything (`.ts`); no prettier here (no Svelte).
+- **Typecheck:** `pnpm --filter e2e typecheck` (`tsc --noEmit`). Playwright strips types without checking, so this is the type gate for the specs.
+
 ## Setup
 
 ```bash

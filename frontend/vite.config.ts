@@ -1,5 +1,5 @@
-import {defineConfig} from 'vite';
-import {svelte} from '@sveltejs/vite-plugin-svelte';
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 /*
  * Photato front end: a plain Svelte 5 SPA (no SvelteKit). The app is inherently client-side — it picks
@@ -13,14 +13,14 @@ import {svelte} from '@sveltejs/vite-plugin-svelte';
  */
 
 // Non-standard high port so dev/preview never clash with other local services.
-const PORT = 18730;
+const PORT = 18730
 
 export default defineConfig({
-    plugins: [svelte()],
-    server: {port: PORT, strictPort: true},
-    // `allowedHosts` lets the Dockerized Playwright suite reach `vite preview` at
-    // http://host.docker.internal:<port> for the pre-deploy pixel smoke. Production is served by Caddy
-    // (the `vite build` output), which has no such host check, so this is a local/CI affordance only.
-    preview: {port: PORT, strictPort: true, allowedHosts: ['host.docker.internal', 'localhost']},
-    build: {outDir: 'dist'},
-});
+  plugins: [svelte()],
+  server: { port: PORT, strictPort: true },
+  // `allowedHosts` lets the Dockerized Playwright suite reach `vite preview` at
+  // http://host.docker.internal:<port> for the pre-deploy pixel smoke. Production is served by Caddy
+  // (the `vite build` output), which has no such host check, so this is a local/CI affordance only.
+  preview: { port: PORT, strictPort: true, allowedHosts: ['host.docker.internal', 'localhost'] },
+  build: { outDir: 'dist' },
+})

@@ -2,5 +2,20 @@ packages:
   - "frontend"
   - "e2e"
 
+# Don't prompt before wiping node_modules when pnpm decides it's stale; the
+# check runner and CI run pnpm non-interactively and there's no human to answer.
+confirmModulesPurge: false
+
 # Block npm packages younger than 3 days (4320 minutes) at install time.
 minimumReleaseAge: 4320
+
+# Refuse to install a package whose npm trust level has dropped since the last
+# successful resolve (mitigates publisher takeovers). pnpm 11 re-verifies the
+# whole lockfile on every install. Vetted exceptions (old versions predating
+# npm's provenance rollout, canonical maintainer confirmed) go in
+# trustPolicyExclude, pinned to exact versions.
+trustPolicy: no-downgrade
+
+# Only direct dependencies may use exotic sources (git repos, tarball URLs);
+# explicit even though pnpm 11 defaults to true.
+blockExoticSubdeps: true

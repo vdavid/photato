@@ -9,12 +9,12 @@
             publisherName: 'fotozasblog.hu',
             originalUrl: 'http://fotozasblog.hu/feher-egyensuly-beallitas-viszlat-sarga-fotok/',
             isOriginalUrlBroken: false,
-        };
+        }
     }
 </script>
 
 <script lang="ts">
-    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte';
+    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte'
 </script>
 
 <FullWidthLocalImage fileName="fotozasblog-feheregyensuly-es-szinhomerseklet.png" altText="" />

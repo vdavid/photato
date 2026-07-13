@@ -1,24 +1,30 @@
 # Frontend (Svelte 5 SPA)
 
-The Photato web app: Svelte 5 (runes), TypeScript strict, vanilla CSS, built with plain Vite (no SvelteKit). It replaced the 2020-era React 17 app in a ground-up rewrite. It's a client-side SPA on purpose — runtime hostname→environment config, localStorage session, client-gated routes, and ~80 lazy-loaded content modules mean there's nothing to prerender, so the build is static files Caddy serves with a `try_files → /index.html` fallback.
+The Photato web app: Svelte 5 (runes), TypeScript strict, vanilla CSS, built with plain Vite (no SvelteKit). It's a client-side SPA on purpose — runtime hostname→environment config, localStorage session, client-gated routes, and ~80 lazy-loaded content modules mean there's nothing to prerender, so the build is static files Caddy serves with a `try_files → /index.html` fallback.
 
 ## Stack and commands
 
-- Svelte 5 + TypeScript strict + Vite. Reactive state via runes, no store library, no framework router.
 - Dev server: `pnpm --filter ./frontend dev` (Vite on port **18730**, `strictPort`, set in `vite.config.ts` — a non-standard high port). Build: `pnpm --filter ./frontend build` → `dist/` (gitignored). Preview: `pnpm --filter ./frontend preview`.
-- **`svelte-check` is the type gate** — Vite strips types without checking, so a type error would otherwise ship. Run `pnpm --filter ./frontend check`; CI runs it before the build. 0 errors is the bar; ~10 a11y **warnings** are intentional (they mirror React DOM patterns kept for pixel parity — non-interactive click handlers, `<figcaption>` placement, empty `href`). Don't "fix" them.
+- **`svelte-check` is the type gate** — Vite strips types without checking, so a type error would otherwise ship. Run `pnpm --filter ./frontend check`. 0 errors is the bar; ~10 a11y **warnings** are intentional (DOM patterns kept for pixel parity — non-interactive click handlers, `<figcaption>` placement, empty `href`). Don't "fix" them.
+
+## Lint and format
+
+- **Lint:** `pnpm --filter ./frontend lint` (`lint:fix` to autofix). ESLint flat config (`eslint.config.js` here): `typescript-eslint` **strictTypeChecked** + `eslint-plugin-svelte`. `no-console` is warn-level; **0 errors is the bar**, warnings don't gate.
+- **Format:** `pnpm --filter ./frontend format` (`format:check` to verify). **oxfmt** owns `.ts`/`.js`/`.json`/`index.html` (root `.oxfmtrc.json`, 2-space); **prettier + prettier-plugin-svelte** owns `.svelte` (root `.prettierrc`, 4-space markup — oxfmt doesn't parse Svelte).
+- Inline disables each carry a `-- reason` (trusted `{@html}` renders, `{@render}` void false-positive, route-table `Component<any>`). Legacy accepted-but-unused props (`alt`, `baseUrl`) destructure to `_`-prefixed locals.
+- **Gotcha:** prettier-plugin-svelte normalizes attribute quotes to double, corrupting values with embedded double quotes. `.prettierignore` (here) excludes `materials/third-party-content/hu/origo-fotozas-az-allatkertben.svelte` for that; keep such values as single-quoted attributes or `{'…'}` expressions.
 
 ## Layout
 
 - `index.html` — Vite entry, loads `/src/main.ts`.
-- `src/` — app code. Folder structure mirrors the old React tree: `website/`, `i18n/`, `auth/`, `materials/`, `challenges/`, `upload/`, `admin/`, `about/`, `faq/`, `contact/`, `bug-report/`, `front-page/`. Plus `config.ts` and `main.ts`.
+- `src/` — app code by feature: `website/`, `i18n/`, `auth/`, `materials/`, `challenges/`, `upload/`, `admin/`, `about/`, `faq/`, `contact/`, `bug-report/`, `front-page/`; plus `config.ts` and `main.ts`.
 - `public/` — static assets served at `/`: emoji SVGs under `website/noto-emojis/`, favicons, fonts, logos, `styles.css`, `robots.txt`, `sitemap.xml`.
 
 ## Patterns
 
-- **Reactive singletons via runes in `.svelte.ts` modules** (replaces React context): `i18n/i18n.svelte.ts` (`__`, `getActiveLocaleCode`; reactive once translations load; HU pinned), `auth/auth.svelte.ts` (session state + magic-link calls), `website/router.svelte.ts` (reactive `location` + `navigate` + `matchPath`). Course timing is a load-time snapshot in `challenges/courseData.ts`.
-- **Framework-agnostic logic stays plain `.ts`**, ported near-verbatim from React: I18n, EmojiReplacer, CourseDateConverter, PhotoUploader, OrientationFixer, the admin repositories.
-- **Routing** is a hand-rolled history router (no dep). `App.svelte` holds a route table (first match wins, like the old `<Switch>`) and gates member/admin routes client-side by `auth.isAuthenticated` / `auth.isAdmin` — **the backend still enforces**; the gate is only UX. Internal links use `website/components/Link.svelte` (the old `NavLink`) and `NavLinkButton.svelte`; a plain `<a href>` stays a full navigation.
+- **Reactive singletons via runes in `.svelte.ts` modules**: `i18n/i18n.svelte.ts` (`__`, `getActiveLocaleCode`; reactive once translations load; HU pinned), `auth/auth.svelte.ts` (session state + magic-link calls), `website/router.svelte.ts` (reactive `location` + `navigate` + `matchPath`). Course timing is a load-time snapshot in `challenges/courseData.ts`.
+- **Framework-agnostic logic stays plain `.ts`**: I18n, EmojiReplacer, CourseDateConverter, PhotoUploader, OrientationFixer, the admin repositories.
+- **Routing** is a hand-rolled history router (no dep). `App.svelte` holds a first-match-wins route table and gates member/admin routes client-side by `auth.isAuthenticated` / `auth.isAdmin` — **the backend still enforces**; the gate is only UX. Internal links use `website/components/Link.svelte` and `NavLinkButton.svelte`; a plain `<a href>` stays a full navigation.
 - **Content modules** (`materials/{own,third-party}-content/hu/*.svelte`, `challenges/content/hu/*.svelte`): a `<script module>` exports `getMetadata()`; the markup is the default component. They load via Vite dynamic-import globs. MaterialsPage loads every article's metadata for the list, so **all content modules must compile**.
 
 ## Pixel-parity gotcha (load-bearing)
@@ -36,4 +42,4 @@ The Photato web app: Svelte 5 (runes), TypeScript strict, vanilla CSS, built wit
 
 ## Deploy
 
-The build is served on the box at the apex `photato.eu` (and `new.photato.eu` alias) by Caddy from `/mnt/HC_Volume_105883537/photato-frontend`. A push to `main` touching `frontend/**` runs the CI gate (`svelte-check` + `vite build`, no browsers), then the deploy webhook builds the bundle on the box (throwaway `node:24-alpine`) and rsyncs `dist/` to the served dir. See `infra/CLAUDE.md`.
+The build is served on the box at the apex `photato.eu` (and `new.photato.eu` alias) by Caddy from `/mnt/HC_Volume_105883537/photato-frontend`. A push to `main` touching `frontend/**` runs the CI gate (`./scripts/check.sh --ci`, no browsers), then the deploy webhook builds the bundle on the box (throwaway `node:24-alpine`) and rsyncs `dist/` to the served dir. See `infra/CLAUDE.md`.

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import FullWidthLocalImage from '../../components/FullWidthLocalImage.svelte';
-    import PhotoUploadLink from '../../components/PhotoUploadLink.svelte';
-    let {formattedDeadline, baseUrl}: {formattedDeadline: string; baseUrl: string} = $props();
+    import FullWidthLocalImage from '../../components/FullWidthLocalImage.svelte'
+    import PhotoUploadLink from '../../components/PhotoUploadLink.svelte'
+    const { formattedDeadline, baseUrl: _baseUrl }: { formattedDeadline: string; baseUrl: string } = $props()
 </script>
 
 <p><strong>Röviden:</strong></p>
@@ -13,16 +13,25 @@
 
 <FullWidthLocalImage fileName="taj-mahal.jpg" altText="Nyugati tér" />
 
-<p>Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, <PhotoUploadLink label="itt tudod feltölteni" />.</p>
+<p>
+    Az e heti feladat épületek, nevezetességek, terek fotózása lesz. A legjobb képedet ${formattedDeadline}-ig, <PhotoUploadLink
+        label="itt tudod feltölteni"
+    />.
+</p>
 
 <p>A múlt héthez hasonlóan most is megpróbáltuk összeszedni nektek a legjobb tippjeinket:</p>
 
-
-<p>Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <PhotoUploadLink label="megteheted" />. 🕚</p>
+<p>
+    Ha még nem küldted be a múlt heti (gasztrofotó) képedet, ma éjfélig még azt is <PhotoUploadLink
+        label="megteheted"
+    />. 🕚
+</p>
 
 <p>Az épületes képeket pedig <PhotoUploadLink label="ide" /> várjuk!</p>
 
 <p>Jó fotózást,</p>
 
-<p>-- <br />
-    a Photato csapata</p>
+<p>
+    -- <br />
+    a Photato csapata
+</p>

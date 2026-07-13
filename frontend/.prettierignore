@@ -1,0 +1,4 @@
+# prettier-plugin-svelte normalizes attribute quotes to double, which corrupts a
+# caption value that contains embedded double quotes (turns valid single-quoted
+# markup into a parse error). Keep this one file as authored.
+src/materials/third-party-content/hu/origo-fotozas-az-allatkertben.svelte

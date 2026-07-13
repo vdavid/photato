@@ -1,5 +1,5 @@
-import type {Action} from 'svelte/action';
-import EmojiReplacer from './EmojiReplacer';
+import type { Action } from 'svelte/action'
+import EmojiReplacer from './EmojiReplacer'
 
 /*
  * `use:twemoji` — walks the element's subtree after mount and replaces emoji characters in text nodes
@@ -10,22 +10,22 @@ import EmojiReplacer from './EmojiReplacer';
  */
 
 const emojiReplacer = new EmojiReplacer({
-    defaultAssetsBaseUrl: '/website/',
-    defaultFileExtension: '.svg',
-    defaultClassName: 'emoji',
-    defaultSize: 'noto-emojis',
-});
+  defaultAssetsBaseUrl: '/website/',
+  defaultFileExtension: '.svg',
+  defaultClassName: 'emoji',
+  defaultSize: 'noto-emojis',
+})
 
 export const twemoji: Action<HTMLElement, boolean | undefined> = (node, enabled = true) => {
-    if (enabled) {
-        emojiReplacer.parse(node);
-    }
-    return {
-        update(newEnabled: boolean | undefined) {
-            /* Re-parse when a route change turns emoji parsing on for the newly shown page. */
-            if (newEnabled) {
-                emojiReplacer.parse(node);
-            }
-        },
-    };
-};
+  if (enabled) {
+    emojiReplacer.parse(node)
+  }
+  return {
+    update(newEnabled: boolean | undefined) {
+      /* Re-parse when a route change turns emoji parsing on for the newly shown page. */
+      if (newEnabled) {
+        emojiReplacer.parse(node)
+      }
+    },
+  }
+}

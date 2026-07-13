@@ -9,12 +9,12 @@
             publisherName: 'fotozasblog.hu',
             originalUrl: 'http://fotozasblog.hu/fotozas-alapjai-iso-fenymeres/',
             isOriginalUrlBroken: true,
-        };
+        }
     }
 </script>
 
 <script lang="ts">
-    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte';
+    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte'
 </script>
 
 <FullWidthLocalImage fileName="fotozasblog-iso-erzekenyseg-fenymeres-beepitett-vaku.png" altText="" />

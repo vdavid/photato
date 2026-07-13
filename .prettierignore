@@ -1,0 +1,10 @@
+# Prettier formats only *.svelte here (oxfmt owns ts/js/json). Prettier doesn't
+# walk up to find .prettierignore from subdirs, so scripts target explicit
+# globs; these patterns cover a root-level run.
+node_modules/
+**/dist/
+**/build/
+**/playwright-report/
+**/test-results/
+**/coverage/
+pnpm-lock.yaml

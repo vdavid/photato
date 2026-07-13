@@ -9,12 +9,12 @@
             publisherName: 'studioeszkozok.hu',
             originalUrl: 'https://studioeszkozok.hu/feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal',
             isOriginalUrlBroken: false,
-        };
+        }
     }
 </script>
 
 <script lang="ts">
-    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte';
+    import FullWidthLocalImage from '../../../challenges/components/FullWidthLocalImage.svelte'
 </script>
 
 <FullWidthLocalImage fileName="studioeszkozok-feheregyensuly-es-szinhomerseklet-a-digitalis-fotoknal.png" altText="" />

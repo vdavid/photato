@@ -9,6 +9,6 @@
             publisherName: 'FotóSarok Blog',
             originalUrl: 'http://blog.fotosarok.hu/tag/101-portrefoto-tipp/page/2/',
             isOriginalUrlBroken: false,
-        };
+        }
     }
 </script>
