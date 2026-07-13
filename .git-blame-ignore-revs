@@ -1,0 +1,12 @@
+# Commits git blame should skip, so `git blame` shows real authorship instead of
+# a mechanical reformat. GitHub honors this file automatically; locally, run once:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# List only commits that are (predominantly) whitespace/formatting churn. Add a
+# full 40-char SHA per line.
+
+# Introduce strict ESLint/oxfmt/prettier and reformat the whole frontend + e2e in
+# one sweep (~108 .svelte files and the .ts tree). This commit also adds the lint
+# configs and a few real edits (a Playwright option removal, preserved-bug flag
+# comments); those are minor and outweighed by keeping 2020-2021 blame intact.
+23ce0a88030ae172341204e8260028aee6915964
