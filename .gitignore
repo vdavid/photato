@@ -25,3 +25,10 @@ s_*.js
 
 # OS
 .DS_Store
+
+# Personal Claude config (shared config lives in .claude/settings.json)
+.claude/settings.local.json
+.claude/hooks/session-start.sh
+# Claude agent workflow state — auto-created when the agent runs, not source of truth
+.claude/scheduled_tasks.lock
+.claude/worktrees/
