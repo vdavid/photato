@@ -84,7 +84,11 @@ the login flow and looked up in the local `sessions` table. Admin gating is
 enforced from `ADMIN_EMAILS`.
 
 - `POST /auth/request-link`: `{email}` → always `200 {ok:true}` (no enumeration);
-  rate-limited; mails a single-use, 15-minute link.
+  rate-limited; mails a single-use, 15-minute link. The per-IP rate-limit bucket
+  comes from `clientIP`, which trusts exactly one proxy hop (`trustedProxyHops`):
+  it reads the **rightmost** `X-Forwarded-For` entry, the one the fronting Caddy
+  appends. If the proxy topology ever changes (more hops, or Caddy stops
+  appending), update `trustedProxyHops` or the leftmost entries become spoofable.
 - `POST /auth/verify`: `{token}` → `{sessionToken, user}` (single-use), or 401.
 - `POST /auth/test-login`: `{email, secret}` e2e backdoor, only when
   `TEST_LOGIN_SECRET` is set (else 404).

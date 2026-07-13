@@ -49,8 +49,20 @@ const (
 // MimeTypeJPEG is the only accepted upload content type.
 const MimeTypeJPEG = "image/jpeg"
 
+// validEnvironments is the closed set of storage environments, matching the
+// frontend config (development/staging/production; see frontend/src/config.ts).
+// It's an allowlist because environment leads the storage path
+// (<environment>/photos/...): without it, an authenticated caller could vary
+// environment freely to mint unbounded distinct paths and fill the volume.
+var validEnvironments = map[string]bool{
+	"development": true,
+	"staging":     true,
+	"production":  true,
+}
+
 // Metadata is a validated set of upload fields (the Go port of PhotoMetadata).
 type Metadata struct {
+	Environment      string // one of development/staging/production
 	EmailAddress     string
 	CourseName       string // e.g. "hu-4", pattern ^[a-z][a-z]-[0-9]$
 	WeekIndex        int    // 0..12
@@ -99,6 +111,11 @@ type Record struct {
 // ErrInvalidMetadata if any field is invalid. Ports PhotoMetadataBuilder's
 // _validateInput field constraints.
 func ParseAndValidate(fields map[string]string) (Metadata, error) {
+	environment := fields["environment"]
+	if !validEnvironments[environment] {
+		return Metadata{}, fmt.Errorf("%w: environment", ErrInvalidMetadata)
+	}
+
 	email := fields["emailAddress"]
 	if email == "" || !emailRE.MatchString(email) {
 		return Metadata{}, fmt.Errorf("%w: emailAddress", ErrInvalidMetadata)
@@ -130,6 +147,7 @@ func ParseAndValidate(fields map[string]string) (Metadata, error) {
 	}
 
 	return Metadata{
+		Environment:      environment,
 		EmailAddress:     email,
 		CourseName:       courseName,
 		WeekIndex:        weekIndex,
@@ -141,8 +159,10 @@ func ParseAndValidate(fields map[string]string) (Metadata, error) {
 
 // BuildUploadPath returns the relative storage path for a photo, matching the
 // legacy layout: "<environment>/photos/<courseName>/week-<weekIndex>/<email>.jpg".
-func BuildUploadPath(environment string, m Metadata) string {
-	return fmt.Sprintf("%s/photos/%s/week-%d/%s.jpg", environment, m.CourseName, m.WeekIndex, m.EmailAddress)
+// m.Environment is part of the validated Metadata, so the path can't be built
+// from an unvalidated environment.
+func BuildUploadPath(m Metadata) string {
+	return fmt.Sprintf("%s/photos/%s/week-%d/%s.jpg", m.Environment, m.CourseName, m.WeekIndex, m.EmailAddress)
 }
 
 // ValidateUploadSize checks that sizeInBytes is within [MinUploadBytes,

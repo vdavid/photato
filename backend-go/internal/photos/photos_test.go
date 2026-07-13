@@ -10,6 +10,7 @@ import (
 // validFields mirrors the legacy PhotoRepository.u.test.js "Uploads image" case.
 func validFields() map[string]string {
 	return map[string]string{
+		"environment":      "development",
 		"emailAddress":     "test@user.com",
 		"courseName":       "xx-1",
 		"weekIndex":        "5",
@@ -78,6 +79,33 @@ func TestParseAndValidateRejectsBadFields(t *testing.T) {
 	}
 }
 
+// TestParseAndValidateRejectsUnknownEnvironment locks the environment allowlist:
+// anything outside {development,staging,production} is rejected, so a caller
+// can't mint unbounded distinct storage paths (an authenticated disk-fill).
+func TestParseAndValidateRejectsUnknownEnvironment(t *testing.T) {
+	for _, env := range []string{"", "bogus", "../../etc", "Production", "prod"} {
+		f := validFields()
+		f["environment"] = env
+		if _, err := ParseAndValidate(f); !errors.Is(err, ErrInvalidMetadata) {
+			t.Errorf("ParseAndValidate(environment=%q) error = %v, want ErrInvalidMetadata", env, err)
+		}
+	}
+}
+
+func TestParseAndValidateAcceptsKnownEnvironments(t *testing.T) {
+	for _, env := range []string{"development", "staging", "production"} {
+		f := validFields()
+		f["environment"] = env
+		m, err := ParseAndValidate(f)
+		if err != nil {
+			t.Errorf("ParseAndValidate(environment=%q) = %v, want nil", env, err)
+		}
+		if m.Environment != env {
+			t.Errorf("Environment = %q, want %q", m.Environment, env)
+		}
+	}
+}
+
 func TestParseAndValidateAllowsEmptyTitleAndBoundaryWeeks(t *testing.T) {
 	for _, week := range []string{"0", "12"} {
 		f := validFields()
@@ -93,12 +121,13 @@ func TestParseAndValidateAllowsEmptyTitleAndBoundaryWeeks(t *testing.T) {
 // from PhotoRepository.u.test.js ("development/photos/xx-1/week-5/...").
 func TestBuildUploadPath(t *testing.T) {
 	m := Metadata{
+		Environment:  "development",
 		EmailAddress: "test@user.com",
 		CourseName:   "xx-1",
 		WeekIndex:    5,
 		MimeType:     "image/jpeg",
 	}
-	got := BuildUploadPath("development", m)
+	got := BuildUploadPath(m)
 	want := "development/photos/xx-1/week-5/test@user.com.jpg"
 	if got != want {
 		t.Fatalf("BuildUploadPath = %q, want %q", got, want)
@@ -106,8 +135,8 @@ func TestBuildUploadPath(t *testing.T) {
 }
 
 func TestBuildUploadPathProduction(t *testing.T) {
-	m := Metadata{EmailAddress: "user@example.com", CourseName: "hu-4", WeekIndex: 2, MimeType: "image/jpeg"}
-	got := BuildUploadPath("production", m)
+	m := Metadata{Environment: "production", EmailAddress: "user@example.com", CourseName: "hu-4", WeekIndex: 2, MimeType: "image/jpeg"}
+	got := BuildUploadPath(m)
 	want := "production/photos/hu-4/week-2/user@example.com.jpg"
 	if got != want {
 		t.Fatalf("BuildUploadPath = %q, want %q", got, want)

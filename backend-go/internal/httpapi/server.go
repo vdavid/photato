@@ -404,14 +404,29 @@ func (s *Server) verifyLink(token string) string {
 	return base + "/login/verify?token=" + url.QueryEscape(token)
 }
 
-// clientIP returns the best-effort client IP: the first X-Forwarded-For entry
-// (Caddy sets it) or the connection's remote host.
+// trustedProxyHops is how many reverse proxies sit in front of this server and
+// append to X-Forwarded-For. Exactly one Caddy fronts the container in
+// production (see infra/CLAUDE.md), and it appends the real client's address as
+// the last XFF entry. Everything to the left of that is client-supplied and must
+// not be trusted.
+const trustedProxyHops = 1
+
+// clientIP returns the rate-limit bucket key: the client IP as seen by the
+// trusted proxy layer. With one trusted proxy in front, that's the entry it
+// appended — the rightmost X-Forwarded-For hop. Taking the leftmost entry
+// instead would let an attacker rotate a spoofed header to get a fresh bucket
+// per request, defeating the per-IP cap. Falls back to the connection's
+// RemoteAddr when the header is absent (or has fewer entries than expected).
 func clientIP(r *http.Request) string {
 	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
-		if first, _, ok := strings.Cut(xff, ","); ok {
-			return strings.TrimSpace(first)
+		parts := strings.Split(xff, ",")
+		// Index in from the right by the number of trusted hops: the trusted
+		// proxy's own appended entry, not any client-supplied ones to its left.
+		if idx := len(parts) - trustedProxyHops; idx >= 0 {
+			if ip := strings.TrimSpace(parts[idx]); ip != "" {
+				return ip
+			}
 		}
-		return strings.TrimSpace(xff)
 	}
 	if h, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
 		return h
@@ -513,6 +528,7 @@ func (s *Server) handleGetSignedURL(w http.ResponseWriter, r *http.Request) {
 	}
 	q := r.URL.Query()
 	meta, err := photos.ParseAndValidate(map[string]string{
+		"environment":      q.Get("environment"),
 		"emailAddress":     q.Get("emailAddress"),
 		"courseName":       q.Get("courseName"),
 		"weekIndex":        q.Get("weekIndex"),
@@ -529,7 +545,7 @@ func (s *Server) handleGetSignedURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	storagePath := photos.BuildUploadPath(q.Get("environment"), meta)
+	storagePath := photos.BuildUploadPath(meta)
 	if err := s.deps.Signatures.CreateValidForPath(storagePath); err != nil {
 		http.Error(w, "failed to sign upload", http.StatusInternalServerError)
 		return

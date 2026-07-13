@@ -564,8 +564,12 @@ func TestListForWeekReturnsAllWeekPhotos(t *testing.T) {
 // --- /get-signed-url ---
 
 func signedURLQuery(email, mimeType string) string {
+	return signedURLQueryEnv("production", email, mimeType)
+}
+
+func signedURLQueryEnv(environment, email, mimeType string) string {
 	v := url.Values{}
-	v.Set("environment", "production")
+	v.Set("environment", environment)
 	v.Set("emailAddress", email)
 	v.Set("courseName", "hu-4")
 	v.Set("weekIndex", "2")
@@ -600,6 +604,20 @@ func TestGetSignedURLRejectsNonJPEG(t *testing.T) {
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusBadRequest {
 		t.Fatalf("status = %d, want 400 for non-jpeg", resp.StatusCode)
+	}
+}
+
+// TestGetSignedURLRejectsBadEnvironment: an unknown environment is rejected with
+// 400 before any signature is minted, closing the authenticated disk-fill vector
+// (varying environment to mint unbounded distinct storage paths).
+func TestGetSignedURLRejectsBadEnvironment(t *testing.T) {
+	ts, _ := testServer(t)
+	for _, env := range []string{"bogus", "../../etc", ""} {
+		resp := do(t, ts, "GET", "/get-signed-url"+signedURLQueryEnv(env, userEmail, "image/jpeg"), userToken, nil)
+		resp.Body.Close()
+		if resp.StatusCode != http.StatusBadRequest {
+			t.Errorf("environment=%q: status = %d, want 400", env, resp.StatusCode)
+		}
 	}
 }
 
@@ -709,6 +727,48 @@ func TestCORSPreflight(t *testing.T) {
 	}
 	if got := resp.Header.Get("Access-Control-Allow-Methods"); got == "" {
 		t.Errorf("preflight missing Access-Control-Allow-Methods")
+	}
+}
+
+// --- clientIP (rate-limit bucket key) ---
+
+// TestClientIPUsesRightmostTrustedHop: with a single trusted proxy (Caddy)
+// appending the real client as the rightmost X-Forwarded-For entry, a spoofed
+// leftmost entry must be ignored and the rightmost (trusted) value returned.
+func TestClientIPUsesRightmostTrustedHop(t *testing.T) {
+	req := httptest.NewRequest("POST", "/auth/request-link", nil)
+	req.Header.Set("X-Forwarded-For", "1.2.3.4, 9.9.9.9")
+	if got := clientIP(req); got != "9.9.9.9" {
+		t.Fatalf("clientIP = %q, want 9.9.9.9 (rightmost trusted hop)", got)
+	}
+}
+
+// TestClientIPIgnoresSpoofedLeftmost: rotating the leftmost XFF entry must not
+// change the derived IP, so an attacker can't mint a fresh rate-limit bucket per
+// request by varying a client-controlled header.
+func TestClientIPIgnoresSpoofedLeftmost(t *testing.T) {
+	derive := func(xff string) string {
+		req := httptest.NewRequest("POST", "/auth/request-link", nil)
+		req.Header.Set("X-Forwarded-For", xff)
+		return clientIP(req)
+	}
+	a := derive("1.1.1.1, 9.9.9.9")
+	b := derive("2.2.2.2, 9.9.9.9")
+	if a != b {
+		t.Fatalf("spoofed leftmost changed the derived IP: %q vs %q", a, b)
+	}
+	if a != "9.9.9.9" {
+		t.Fatalf("derived IP = %q, want 9.9.9.9", a)
+	}
+}
+
+// TestClientIPFallsBackToRemoteAddr: no XFF header → the connection's RemoteAddr
+// host (port stripped).
+func TestClientIPFallsBackToRemoteAddr(t *testing.T) {
+	req := httptest.NewRequest("POST", "/auth/request-link", nil)
+	req.RemoteAddr = "203.0.113.5:54321"
+	if got := clientIP(req); got != "203.0.113.5" {
+		t.Fatalf("clientIP = %q, want 203.0.113.5", got)
 	}
 }
 
