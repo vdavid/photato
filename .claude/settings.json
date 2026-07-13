@@ -6,6 +6,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "bash -c 'r=\"$(git rev-parse --show-toplevel 2>/dev/null)\"; [ -n \"$r\" ] && find \"$r\" -name .mise.toml -not -path \"*/node_modules/*\" -exec mise trust {} \\; >/dev/null 2>&1; true'"
+          },
+          {
+            "type": "command",
             "command": "bash -c 'f=\"$(git rev-parse --show-toplevel)/.claude/hooks/session-start.sh\"; [ -x \"$f\" ] && \"$f\" || true'"
           }
         ]
