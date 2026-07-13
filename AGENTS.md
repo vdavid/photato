@@ -31,10 +31,14 @@ Each area has a colocated `CLAUDE.md` with its own detail. This file is the map.
 
 ## Build and test
 
-- Backend (Go, via mise): `cd backend-go && mise exec -- go test ./...` (`-race` for the detector); `go vet ./...`; `gofmt -l .`. Details in `backend-go/CLAUDE.md`.
-- Frontend: `pnpm --filter ./frontend check` (**`svelte-check` is the type gate** — Vite strips types without checking), then `pnpm --filter ./frontend build`. Dev: `pnpm --filter ./frontend dev` (port 18730). Details in `frontend/CLAUDE.md`.
-- e2e: Docker-only (pixel baselines are Linux-only). `pnpm test:e2e:docker`. Details in `e2e/CLAUDE.md`.
-- CI (`.github/workflows/deploy.yml`) runs the lean subset on push to `main`: Go gofmt/vet/test, then `svelte-check` + `vite build`. No `-race`, no Docker build, no browsers. If any check fails the deploy webhook never fires.
+- **`./scripts/check.sh` (or `pnpm check`) is the canonical entry point.** Run it from the repo root before considering any change done, and read its full output — never pipe it through `tail`/`head`/`grep`/`wc` (it's concise by design; truncating hides failure context, and it's a user-level rule). It runs the whole default lane (Go + frontend + e2e) in parallel; pass an area (`backend`, `frontend`, `e2e`, `scripts`, `go`) or a check name to narrow it. The slow Docker Playwright suite is opt-in via `--include-slow` / `--only-slow`. Details in `scripts/check/CLAUDE.md`.
+  - The auto-fixers reformat tracked files, so the checker **refuses to run in the main clone** and only runs inside a worktree (the solo-dev workflow reformats only there). CI is exempt via `--ci`.
+  - Frontend/e2e checks run the packages' own npm scripts, so the runner does one `pnpm install` up front when any is selected; pure-Go runs skip it.
+- Single-area commands (what the checker wraps), for when you want to run one area directly:
+  - Backend (Go, via mise): `cd backend-go && mise exec -- go test ./...` (`-race` for the detector); `go vet ./...`; `gofmt -l .`. Details in `backend-go/CLAUDE.md`.
+  - Frontend: `pnpm --filter ./frontend check` (**`svelte-check` is the type gate** — Vite strips types without checking), then `pnpm --filter ./frontend build`. Dev: `pnpm --filter ./frontend dev` (port 18730). Details in `frontend/CLAUDE.md`.
+  - e2e: Docker-only (pixel baselines are Linux-only). `pnpm test:e2e:docker`. Details in `e2e/CLAUDE.md`.
+- CI (`.github/workflows/deploy.yml`) runs `./scripts/check.sh --ci` on push to `main` (mise for Go + Node, corepack for pnpm): the full default lane, no `-race`, no Docker, no browsers. If any check fails the deploy webhook never fires.
 
 ## Deploy
 
@@ -65,4 +69,4 @@ These need David (registrar/account access or a decision); agents can't do them.
 
 ## Where instructions go
 
-Project-specific knowledge → this file (repo-wide) or a colocated `CLAUDE.md` (module-specific). Imperatives → `rules/` if the project grows any; otherwise a colocated note. Cross-project preferences already live at user level (`~/.claude/`) and are not restated here.
+Project-specific knowledge → this file (repo-wide) or a colocated `CLAUDE.md` (module-specific). Project imperatives → `.claude/rules/` (currently `docs-maintenance.md` and `git-conventions.md`). Cross-project preferences already live at user level (`~/.claude/`) and are not restated here. Session tooling lives in `.claude/` too: `settings.json` (shared, wires the SessionStart hook), `commands/` (the `plan` and `execute` slash commands), and the gitignored personal `settings.local.json` + `hooks/session-start.sh`.

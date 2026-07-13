@@ -1,0 +1,7 @@
+[tools]
+# Go for the check runner (scripts/check) and any repo-root Go invocation.
+# Kept in sync with backend-go/.mise.toml so both build against one toolchain.
+go = "1.26.4"
+# Node for the frontend/e2e checks (added by their owners) and pnpm workflows.
+# Major 24 matches the node:24-alpine image the deploy builds the frontend in.
+node = "24"

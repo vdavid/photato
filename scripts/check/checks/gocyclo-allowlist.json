@@ -1,0 +1,8 @@
+{
+  "$comment": "Functions here exceed the gocyclo complexity threshold (15) and are accepted as pre-existing debt: their recorded value is a ratchet the function may not exceed, and a new over-threshold function that isn't listed fails the check. Keys are `<module>::<pkg>.<func>`. On a local run the check shrink-wraps this file (removes entries back under the threshold, ratchets shrunk ones down); it never raises a value on its own. These three sit in data-safety-critical migration/upload paths, so simplify them deliberately (with tests green) rather than mechanically.",
+  "functions": {
+    "backend-go::migrate.Run": 22,
+    "backend-go::migrate.Verify": 19,
+    "backend-go::httpapi.(*Server).handleUpload": 18
+  }
+}

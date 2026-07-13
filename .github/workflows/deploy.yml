@@ -1,10 +1,12 @@
 name: Deploy
 
-# Runs on pushes to main that touch the backend, the frontend, or their deploy infra. CI stays lean
-# (Go: gofmt + vet + test, no -race, no docker build; frontend: `svelte-check` + `vite build`, no
-# browser installs — Playwright pixel baselines run in Docker locally, not here). GitHub minutes are limited, so
-# the Hetzner box builds both the backend image and the frontend bundle itself when it gets the signed
-# webhook. If any check fails the webhook is never sent, so a broken commit can't deploy.
+# Runs on pushes to main that touch the backend, the frontend, the check runner, or their deploy
+# infra. The whole gate is the project's own check runner in CI mode: `./scripts/check.sh --ci` runs
+# the default lane (Go gofmt/vet/staticcheck/tests + frontend eslint/format/svelte-check/vite build +
+# e2e eslint/format/typecheck), no `-race`, no Docker, no browsers. The slow Playwright pixel suite is
+# excluded by design (it's Docker-only and runs locally). GitHub minutes are limited, so the Hetzner box
+# builds both the backend image and the frontend bundle itself when it gets the signed webhook. If any
+# check fails the webhook is never sent, so a broken commit can't deploy.
 
 on:
   push:
@@ -13,7 +15,12 @@ on:
       - 'backend-go/**'
       - 'frontend/**'
       - 'infra/**'
+      - 'scripts/**'
       - '.github/workflows/deploy.yml'
+      - '.mise.toml'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       # Docs-only pushes don't deploy (negated pattern — GitHub forbids mixing
       # `paths` with `paths-ignore`). A push mixing .md and code still deploys.
       - '!**/*.md'
@@ -25,63 +32,36 @@ permissions:
 env:
   # Run JavaScript actions on Node 24 (Node 20 is deprecated on the runner).
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  # Trust both .mise.toml files (root + backend-go) without an interactive prompt;
+  # a fresh checkout's configs are untrusted until listed here.
+  MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
 
 jobs:
   test-and-deploy:
     name: Test and trigger deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend-go
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      # --- Backend (Go) checks ---
+      # Go (check runner + backend) and Node (frontend/e2e) come from mise, pinned
+      # in the root .mise.toml. pnpm comes from corepack on the mise-provided Node.
       - name: Install mise
         uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
 
       - name: Install tools with mise
         run: mise install
 
-      - name: Check formatting
-        run: |
-          unformatted="$(mise exec -- gofmt -l .)"
-          if [ -n "$unformatted" ]; then
-            echo "These files need gofmt:"
-            echo "$unformatted"
-            exit 1
-          fi
-
-      - name: Vet
-        run: mise exec -- go vet ./...
-
-      - name: Test
-        run: mise exec -- go test ./...
-
-      # --- Frontend build gate ---
-      # A broken frontend build must block the deploy, same as a failing Go test. This is just the
-      # bundler (no browsers), so it stays cheap. The box rebuilds from source on the webhook; this only
-      # proves the build is green before we fire it.
       - name: Enable pnpm
-        working-directory: .
         run: |
           corepack enable
           corepack prepare pnpm@11.0.9 --activate
 
-      - name: Install frontend deps
-        working-directory: .
-        run: pnpm install --frozen-lockfile --config.confirmModulesPurge=false
-
-      # TypeScript is strict; `svelte-check` is the type gate (Vite strips types without checking, so
-      # a type error would otherwise ship). It type-checks `.svelte` + `.ts`. Cheap, no browsers.
-      - name: Type-check frontend
-        working-directory: .
-        run: pnpm --filter ./frontend check
-
-      - name: Build frontend
-        working-directory: .
-        run: pnpm --filter ./frontend build
+      # The whole gate: the check runner in CI mode. It installs the pnpm workspace
+      # deps (--frozen-lockfile) itself, runs the default lane in parallel, and
+      # auto-fixers become hard failures (`--ci`). No slow checks, no Docker.
+      - name: Run checks
+        run: ./scripts/check.sh --ci
 
       # --- Trigger deploy ---
       - name: Trigger deploy webhook

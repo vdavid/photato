@@ -1,0 +1,9 @@
+{
+  "$comment": "Files under `files` are exempt from the claude-md-length warning up to their recorded word count (plus a 10% growth buffer). Each colocated CLAUDE.md is auto-injected into agent context, so the budget is ~600 words; move deeper detail into a linked doc under docs/. The check shrink-wraps stale entries on local runs: dead entries and files back under the threshold are removed, and entries with more than 10% slack are ratcheted down to the file's current count.",
+  "files": {
+    "backend-go/CLAUDE.md": 1423,
+    "e2e/CLAUDE.md": 1122,
+    "frontend/CLAUDE.md": 714,
+    "infra/CLAUDE.md": 786
+  }
+}
