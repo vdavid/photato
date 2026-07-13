@@ -13,15 +13,18 @@ The task list for reviving Photato for a Swedish audience. David manages this li
 
 - [x] Check runner (`./scripts/check.sh`, 23 checks + slow lane), strict ESLint/oxfmt/prettier, CI gate rewired
 - [x] `.claude/` infra (rules, plan/execute commands, session hook), README, AGENTS.md wiring
+- [x] `.git-blame-ignore-revs` so the reformat commit doesn't mask 2020-2021 blame (verified)
+- [x] Adversarially re-verified the security audit's "solid" list (magic-link, single-use nonce, sessions, admin gating, SQL, path traversal, upload atomicity, CORS, `{@html}`, secrets, body limits): all held under two independent skeptics + owner spot-checks. The only real backend gaps are the four items below (rate-limit hops, `environment`, upload metadata, quota) — the auth/session core is trustworthy going into the fix work.
 
 ## 1. Bug and security fixes (worth doing regardless of the relaunch)
 
 - [ ] Fix `convertObjectToQueryString` (`frontend/src/website/httpHelper.ts`): no URL-encoding, so `+`-addressed emails get 403 on upload and `&`/`=`/`#` in photo titles corrupt the query — switch to `URLSearchParams`
-- [ ] Fix the rate-limit IP bucket (`backend-go/internal/httpapi/server.go` `clientIP`): trusts the leftmost (client-controlled) `X-Forwarded-For` entry, defeating the per-IP cap on login-email sends — use the rightmost hop Caddy appends
-- [ ] Bind upload metadata to the signature (or re-validate on PUT): title/email/contentType on the photo row currently come unverified from the PUT query string (spoofing now, stored-XSS if a title is ever rendered unescaped)
+- [ ] Fix the rate-limit IP bucket (`backend-go/internal/httpapi/server.go` `clientIP`): trusts the leftmost (client-controlled) `X-Forwarded-For` entry, defeating the per-IP cap on login-email sends — use the rightmost hop Caddy appends. (Adversarial follow-up: the per-email cap is also defeatable via plus-address/dot aliases of one mailbox — bucket per canonicalized mailbox, or accept it given SMTP2GO's own throttling.)
+- [ ] Validate the `environment` param on `get-signed-url` against the known set (`{development,staging,production}`) — it's unvalidated and flows straight into the storage path, and there's **no rate limit or quota on `get-signed-url`**, so a logged-in student can mint unbounded distinct paths and PUT a 25 MB file to each: a real authenticated disk-fill on the box (verified). This is the highest-value backend fix.
+- [ ] Bind upload metadata to the signature (or re-validate on PUT): title/email/contentType on the photo row currently come unverified from the PUT query string (spoofing now, stored-XSS if a title is ever rendered unescaped). Confirmed by both adversarial reviewers; not XSS today (admin listing escapes via `{}`)
+- [ ] Consider a per-user upload quota or a `get-signed-url` rate limit: even with `environment` validated, courseName × week still allows ~80 GB/user — the deeper fix for authenticated storage abuse
 - [ ] Sniff magic bytes on upload so stored `.jpg` files are really JPEGs
 - [ ] Store sessions as `SHA256(token)` instead of plaintext (defense in depth for DB/backup leaks)
-- [ ] Validate the `environment` param on `get-signed-url` against the known set
 - [ ] Delete the winter/summer-course concept (`config.ts` `isWinterOrSummerCourse` + the broken `_calculateDates` ternary it feeds — the flagged precedence bug dies with it; compute `liveEventDate` explicitly)
 - [ ] Make `toISODateString`/`toISODateStringWithHHMM` honor their `timeZone` param (`dateTimeHelper.ts`) — directly needed for a Stockholm cohort
 - [ ] Make the `alt` prop real in `SimpleFigure.svelte` and `FullWidthLocalImage.svelte` (currently dropped; the working prop is the oddly-named `altText`, so natural `alt="…"` yields no alt text)
@@ -77,7 +80,14 @@ The task list for reviving Photato for a Swedish audience. David manages this li
 - [ ] Turn `SitemapGeneratorPage` (an admin page that emits XML for a human to paste into `public/sitemap.xml`, with a hardcoded 2020 date) into a build-time step
 - [ ] Refactor the three gocyclo-allowlisted backend functions (`migrate.Run`, `migrate.Verify`, `handleUpload`) when convenient (allowlisted as accepted debt; tests are green)
 
+## CI hygiene (after the first green push — don't perturb the verified config before then)
+
+- [ ] Add Renovate (no config today) so GitHub Action pins stay current — `jdx/mise-action` is v4.0.1 (latest v4.2.0), `actions/checkout` is an older v6 commit
+- [ ] Cache the Go build/module cache and pnpm store in CI to cut the ~1-2 min cold recompile of the check-runner tools + package downloads on every run (relevant to the limited CI-minute budget)
+- [ ] Drop the inert `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` env from `deploy.yml` (both pinned actions already declare node24)
+- [ ] First real push still has to prove what local sim can't: `DEPLOY_WEBHOOK_SECRET` matches the box listener, the `openssl` HMAC format, and runner→`api.photato.eu` reachability
+
 ## Owner actions (from `AGENTS.md`, unrelated to the relaunch but open)
 
 - [ ] Retire the old Netlify site + redundant DNS zone; wipe the AWS account; close the Mongo Atlas subscription
-</content>
+
