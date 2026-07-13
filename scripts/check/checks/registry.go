@@ -48,6 +48,7 @@ var AllChecks = []CheckDefinition{
 	{ID: "frontend-eslint", DisplayName: "eslint", App: AppFrontend, Tech: techSvelte, Run: RunFrontendESLint},
 	{ID: "frontend-format", DisplayName: "format", App: AppFrontend, Tech: techSvelte, DependsOn: []string{"frontend-eslint"}, Run: RunFrontendFormat},
 	{ID: "frontend-svelte-check", DisplayName: "svelte-check", App: AppFrontend, Tech: techSvelte, DependsOn: []string{"frontend-format"}, Run: RunFrontendSvelteCheck},
+	{ID: "frontend-test", DisplayName: "vitest", App: AppFrontend, Tech: techSvelte, DependsOn: []string{"frontend-format"}, Run: RunFrontendTest},
 	{ID: "frontend-build", DisplayName: "vite build", App: AppFrontend, Tech: techSvelte, DependsOn: []string{"frontend-svelte-check"}, Run: RunFrontendBuild},
 
 	// E2E — Playwright suite (e2e package, via pnpm). Same eslint→format

@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 /*
@@ -23,4 +23,6 @@ export default defineConfig({
   // (the `vite build` output), which has no such host check, so this is a local/CI affordance only.
   preview: { port: PORT, strictPort: true, allowedHosts: ['host.docker.internal', 'localhost'] },
   build: { outDir: 'dist' },
+  // Pure-logic unit tests (no DOM needed): the default Node environment is enough.
+  test: { include: ['src/**/*.test.ts'] },
 })
